@@ -1,0 +1,1154 @@
+# Appendix {#append}
+
+
+
+
+## Principal component analysis (PCA) {#PCAapp}
+
+**Principal component analysis (PCA)** is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are linearly driven by a relatively small number of factors. This approach is widely used in data analysis and image compression.
+
+Suppose that we have $T$ observations of a $n$-dimensional random vector $x$, denoted by $x_{1},x_{2},\ldots,x_{T}$. We suppose that each component of $x$ is of mean zero.
+
+Let denote with $X$ the matrix given by $\left[\begin{array}{cccc}
+x_{1} & x_{2} & \ldots & x_{T}\end{array}\right]'$. Denote the $j^{th}$ column of $X$ by $X_{j}$.
+
+We want to find the linear combination of the $x_{i}$'s ($x.u$), with $\left\Vert u\right\Vert =1$, with "maximum variance." That is, we want to solve:
+\begin{equation}
+\begin{array}{clll}
+\underset{u}{\arg\max} & u'X'Xu. \\
+\mbox{s.t. } & \left| u\right| =1
+\end{array}(\#eq:PCA11)
+\end{equation}
+
+Since $X'X$ is a positive definite matrix, it admits the following decomposition:
+\begin{eqnarray*}
+X'X & = & PDP'\\
+& = & P\left[\begin{array}{ccc}
+\lambda_{1}\\
+& \ddots\\
+&  & \lambda_{n}
+\end{array}\right]P',
+\end{eqnarray*}
+where $P$ is an orthogonal matrix whose columns are the eigenvectors of $X'X$.
+
+We can order the eigenvalues such that $\lambda_{1}\geq\ldots\geq\lambda_{n}$. (Since $X'X$ is positive definite, all these eigenvalues are positive.)
+
+Since $P$ is orthogonal, we have $u'X'Xu=u'PDP'u=y'Dy$ where $\left\Vert y\right\Vert =1$. Therefore, we have $y_{i}^{2}\leq 1$ for any $i\leq n$.
+
+As a consequence:
+\[
+y'Dy=\sum_{i=1}^{n}y_{i}^{2}\lambda_{i}\leq\lambda_{1}\sum_{i=1}^{n}y_{i}^{2}=\lambda_{1}.
+\]
+
+It is easily seen that the maximum is reached for $y=\left[1,0,\cdots,0\right]'$. Therefore, the maximum of the optimization program (Eq. \@ref(eq:PCA11)) is obtained for $u=P\left[1,0,\cdots,0\right]'$. That is, $u$ is the eigenvector of $X'X$ that is associated with its larger eigenvalue (first column of $P$).
+
+Let us denote with $F$ the vector that is given by the matrix product $XP$ (note that its last column is equal to $Xu$). The columns of $F$, denoted by $F_{j}$, are called **factors**. We have:
+\[
+F'F=P'X'XP=D.
+\]
+Therefore, in particular, the $F_{j}$'s are orthogonal.
+
+Since $X=FP'$, the $X_{j}$'s are linear combinations of the factors. Let us then denote with $\hat{X}_{i,j}$ the part of $X_{i}$ that is explained by factor $F_{j}$, we have:
+\begin{eqnarray*}
+\hat{X}_{i,j} & = & p_{ij}F_{j}\\
+X_{i} & = & \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
+\end{eqnarray*}
+
+Consider the share of variance that is explained --through the $n$ variables ($X_{1},\ldots,X_{n}$)-- by the first factor $F_{1}$:
+\begin{eqnarray*}
+\frac{\sum_{i}\hat{X}_{i,1}\hat{X}'_{i,1}}{\sum_{i}X_{i}X'_{i}} & = & \frac{\sum_{i}p_{i1}F_{1}F'_{1}p_{i1}}{tr(X'X)} = \frac{\sum_{i}p_{i1}^{2}\lambda_{1}}{tr(X'X)} = \frac{\lambda_{1}}{\sum_{i}\lambda_{i}}.
+\end{eqnarray*}
+
+Intuitively, if the first eigenvalue is large, it means that the first factor embed a large share of the fluctutaions of the $n$ $X_{i}$'s.
+
+Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., @Litterman_Scheinkman_1991). One can typically employ PCA to recover such factors. The data used in the example below are taken from the [Fred database](https://fred.stlouisfed.org) (tickers: "DGS6MO","DGS1", ...). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).
+
+To run a PCA, one simply has to apply function `prcomp` to a matrix of data:
+
+```{r USydsPCA0, warning=FALSE,message=FALSE}
+library(AEC)
+USyields <- USyields[complete.cases(USyields),]
+yds <- USyields[c("Y1","Y2","Y3","Y5","Y7","Y10","Y20","Y30")]
+PCA.yds <- prcomp(yds,center=TRUE,scale. = TRUE)
+```
+
+
+Let us know visualize some results. The first plot of Figure \@ref(fig:USydsPCA1) shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.
+
+```{r USydsPCA1, warning=FALSE,message=FALSE, fig.cap="Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.", fig.align = 'left-aligned'}
+par(mfrow=c(2,2))
+par(plt=c(.1,.95,.2,.8))
+barplot(PCA.yds$sdev^2/sum(PCA.yds$sdev^2),
+        main="Share of variance expl. by PC's")
+axis(1, at=1:dim(yds)[2], labels=colnames(PCA.yds$x))
+nb.PC <- 2
+plot(-PCA.yds$rotation[,1],type="l",lwd=2,ylim=c(-1,1),
+     main="Factor loadings (1st 3 PCs)",xaxt="n",xlab="")
+axis(1, at=1:dim(yds)[2], labels=colnames(yds))
+lines(PCA.yds$rotation[,2],type="l",lwd=2,col="blue")
+lines(PCA.yds$rotation[,3],type="l",lwd=2,col="red")
+Y1.hat <- PCA.yds$x[,1:nb.PC] %*% PCA.yds$rotation["Y1",1:2]
+Y1.hat <- mean(USyields$Y1) + sd(USyields$Y1) * Y1.hat
+plot(USyields$date,USyields$Y1,type="l",lwd=2,
+     main="Fit of 1-year yields (2 PCs)",
+     ylab="Obs (black) / Fitted by 2PCs (dashed blue)")
+lines(USyields$date,Y1.hat,col="blue",lty=2,lwd=2)
+Y10.hat <- PCA.yds$x[,1:nb.PC] %*% PCA.yds$rotation["Y10",1:2]
+Y10.hat <- mean(USyields$Y10) + sd(USyields$Y10) * Y10.hat
+plot(USyields$date,USyields$Y10,type="l",lwd=2,
+     main="Fit of 10-year yields (2 PCs)",
+     ylab="Obs (black) / Fitted by 2PCs (dashed blue)")
+lines(USyields$date,Y10.hat,col="blue",lty=2,lwd=2)
+```
+
+
+## Linear algebra: definitions and results {#LinAlgebra}
+
+:::{.definition #determinant name="Eigenvalues"}
+
+The eigenvalues of of a matrix $M$ are the numbers $\lambda$ for which:
+$$
+|M - \lambda I| = 0,
+$$
+where $| \bullet |$ is the determinant operator.
+:::
+
+:::{.proposition #determinant name="Properties of the determinant"}
+We have:
+
+* $|MN|=|M|\times|N|$.
+* $|M^{-1}|=|M|^{-1}$.
+* If $M$ admits the diagonal representation $M=TDT^{-1}$, where $D$ is a diagonal matrix whose diagonal entries are $\{\lambda_i\}_{i=1,\dots,n}$, then:
+$$
+|M - \lambda I |=\prod_{i=1}^n (\lambda_i - \lambda).
+$$
+:::
+
+:::{.definition #MoorPenrose name="Moore-Penrose inverse"}
+If $M \in \mathbb{R}^{m \times n}$, then its Moore-Penrose pseudo inverse (exists and) is the unique matrix $M^*  \in \mathbb{R}^{n \times m}$ that satisfies:
+
+i. $M M^* M = M$
+ii. $M^* M M^* = M^*$
+iii. $(M M^*)'=M M^*$
+.iv $(M^* M)'=M^* M$.
+:::
+
+:::{.proposition #MoorPenrose name="Properties of the Moore-Penrose inverse"}
+
+* If $M$ is invertible then $M^* = M^{-1}$.
+* The pseudo-inverse of a zero matrix is its transpose.
+*\item* The pseudo-inverse of the pseudo-inverse is the original matrix.
+:::
+
+:::{.definition #idempotent name="Idempotent matrix"}
+Matrix $M$ is idempotent if $M^2=M$.
+
+If $M$ is a symmetric idempotent matrix, then $M'M=M$.
+:::
+
+:::{.proposition #rootsidempotent name="Roots of an idempotent matrix"}
+The eigenvalues of an idempotent matrix are either 1 or 0.
+:::
+:::{.proof}
+If $\lambda$ is an eigenvalue of an idempotent matrix $M$ then $\exists x \ne 0$ s.t. $Mx=\lambda x$. Hence $M^2x=\lambda M x \Rightarrow (1-\lambda)Mx=0$. Either all element of  $Mx$ are zero, in which case $\lambda=0$ or at least one element of $Mx$ is nonzero, in which case $\lambda=1$.
+:::
+
+:::{.proposition #chi2idempotent name="Idempotent matrix and chi-square distribution"}
+The rank of a symmetric idempotent matrix is equal to its trace.
+:::
+:::{.proof}
+The result follows from Prop. \@ref(prp:rootsidempotent), combined with the fact that the rank of a symmetric matrix is equal to the number of its nonzero eigenvalues.
+:::
+
+
+:::{.proposition #constrainedLS name="Constrained least squares"}
+The solution of the following optimisation problem:
+\begin{eqnarray*}
+\underset{\boldsymbol\beta}{\min} && || \bv{y} - \bv{X}\boldsymbol\beta ||^2 \\
+&& \mbox{subject to } \bv{R}\boldsymbol\beta = \bv{q}
+\end{eqnarray*}
+is given by:
+$$
+\boxed{\boldsymbol\beta^r = \boldsymbol\beta_0 - (\bv{X}'\bv{X})^{-1} \bv{R}'\{\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}'\}^{-1}(\bv{R}\boldsymbol\beta_0 - \bv{q}),}
+$$
+where $\boldsymbol\beta_0=(\bv{X}'\bv{X})^{-1}\bv{X}'\bv{y}$.
+:::
+:::{.proof}
+See for instance [Jackman, 2007](http://jackman.stanford.edu/classes/350B/07/ftestforWeb.pdf).
+:::
+
+
+
+:::{.proposition #inversepartitioned name="Inverse of a partitioned matrix"}
+We have:
+\begin{eqnarray*}
+&&\left[ \begin{array}{cc} \bv{A}_{11} & \bv{A}_{12} \\ \bv{A}_{21} & \bv{A}_{22} \end{array}\right]^{-1} = \\
+&&\left[ \begin{array}{cc} (\bv{A}_{11} - \bv{A}_{12}\bv{A}_{22}^{-1}\bv{A}_{21})^{-1} & - \bv{A}_{11}^{-1}\bv{A}_{12}(\bv{A}_{22} - \bv{A}_{21}\bv{A}_{11}^{-1}\bv{A}_{12})^{-1} \\
+-(\bv{A}_{22} - \bv{A}_{21}\bv{A}_{11}^{-1}\bv{A}_{12})^{-1}\bv{A}_{21}\bv{A}_{11}^{-1} & (\bv{A}_{22} - \bv{A}_{21}\bv{A}_{11}^{-1}\bv{A}_{12})^{-1} \end{array} \right].
+\end{eqnarray*}
+:::
+
+
+
+:::{.definition #FOD name="Matrix derivatives"}
+Consider a fonction $f: \mathbb{R}^K \rightarrow \mathbb{R}$. Its first-order derivative is:
+$$
+\frac{\partial f}{\partial \bv{b}}(\bv{b}) =
+\left[\begin{array}{c}
+\frac{\partial f}{\partial b_1}(\bv{b})\\
+\vdots\\
+\frac{\partial f}{\partial b_K}(\bv{b})
+\end{array}
+\right].
+$$
+We use the notation:
+$$
+\frac{\partial f}{\partial \bv{b}'}(\bv{b}) = \left(\frac{\partial f}{\partial \bv{b}}(\bv{b})\right)'.
+$$
+:::
+
+:::{.proposition #partial}
+We have:
+
+* If $f(\bv{b}) = A' \bv{b}$ where $A$ is a $K \times 1$ vector then $\frac{\partial f}{\partial \bv{b}}(\bv{b}) = A$.
+* If $f(\bv{b}) = \bv{b}'A\bv{b}$ where $A$ is a $K \times K$ matrix, then $\frac{\partial f}{\partial \bv{b}}(\bv{b}) = 2A\bv{b}$.
+:::
+
+
+
+:::{.proposition #absMs name="Square and absolute summability"}
+We have:
+$$
+\underbrace{\sum_{i=0}^{\infty}|\theta_i| < + \infty}_{\mbox{Absolute summability}} \Rightarrow \underbrace{\sum_{i=0}^{\infty} \theta_i^2 < + \infty}_{\mbox{Square summability}}.
+$$
+:::
+
+:::{.proof}
+See Appendix 3.A in Hamilton. Idea: Absolute summability implies that there exist $N$ such that, for $j>N$, $|\theta_j| < 1$ (deduced from Cauchy criterion, Theorem \@ref(thm:cauchycritstatic) and therefore $\theta_j^2 < |\theta_j|$.
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Statistical analysis: definitions and results {#variousResults}
+
+### Moments and statistics
+
+:::{.definition #partialcorrel name="Partial correlation"}
+The **partial correlation** between $y$ and $z$, controlling for some variables $\bv{X}$ is the sample correlation between $y^*$ and $z^*$, where the latter two variables are the residuals in regressions of $y$ on $\bv{X}$ and of $z$ on $\bv{X}$, respectively.
+
+This correlation is denoted by $r_{yz}^\bv{X}$. By definition, we have:
+\begin{equation}
+r_{yz}^\bv{X} = \frac{\bv{z^*}'\bv{y^*}}{\sqrt{(\bv{z^*}'\bv{z^*})(\bv{y^*}'\bv{y^*})}}.(\#eq:pc)
+\end{equation}
+:::
+
+:::{.definition #skewnesskurtosis name="Skewness and kurtosis"}
+Let $Y$ be a random variable whose fourth moment exists. The expectation of $Y$ is denoted by $\mu$.
+
+* The skewness of $Y$ is given by:
+$$
+\frac{\mathbb{E}[(Y-\mu)^3]}{\{\mathbb{E}[(Y-\mu)^2]\}^{3/2}}.
+$$
+* The kurtosis of $Y$ is given by:
+$$
+\frac{\mathbb{E}[(Y-\mu)^4]}{\{\mathbb{E}[(Y-\mu)^2]\}^{2}}.
+$$
+:::
+
+
+:::{.theorem #CauchySchwarz name="Cauchy-Schwarz inequality"}
+We have:
+$$
+|\mathbb{C}ov(X,Y)| \le \sqrt{\mathbb{V}ar(X)\mathbb{V}ar(Y)}
+$$
+and, if $X \ne =$ and $Y \ne 0$, the equality holds iff $X$ and $Y$ are the same up to an affine transformation.
+:::
+:::{.proof}
+If $\mathbb{V}ar(X)=0$, this is trivial. If this is not the case, then let's define $Z$ as $Z = Y - \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X$. It is easily seen that $\mathbb{C}ov(X,Z)=0$. Then, the variance of $Y=Z+\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X$ is equal to the sum of the variance of $Z$ and of the variance of $\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X$, that is:
+$$
+\mathbb{V}ar(Y) = \mathbb{V}ar(Z) + \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X) \ge \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X).
+$$
+The equality holds iff $\mathbb{V}ar(Z)=0$, i.e. iff $Y = \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X+cst$.
+:::
+
+
+
+:::{.definition #asmyptlevel name="Asymptotic level"}
+An asymptotic test with critical region $\Omega_n$ has an asymptotic level equal to $\alpha$ if:
+$$
+\underset{\theta \in \Theta}{\mbox{sup}} \quad \underset{n \rightarrow \infty}{\mbox{lim}} \mathbb{P}_\theta (S_n \in \Omega_n) = \alpha,
+$$
+where $S_n$ is the test statistic and $\Theta$ is such that the null hypothesis $H_0$ is equivalent to $\theta \in \Theta$.
+:::
+
+:::{.definition #asmyptconsisttest name="Asymptotically consistent test"}
+An asymptotic test with critical region $\Omega_n$ is consistent if:
+$$
+\forall \theta \in \Theta^c, \quad \mathbb{P}_\theta (S_n \in \Omega_n) \rightarrow 1,
+$$
+where $S_n$ is the test statistic and $\Theta^c$ is such that the null hypothesis $H_0$ is equivalent to $\theta \notin \Theta^c$.
+:::
+
+
+:::{.definition #Kullback name="Kullback discrepancy"}
+Given two p.d.f. $f$ and $f^*$, the Kullback discrepancy is defined by:
+$$
+I(f,f^*) = \mathbb{E}^* \left( \log \frac{f^*(Y)}{f(Y)} \right) = \int \log \frac{f^*(y)}{f(y)} f^*(y) dy.
+$$
+:::
+
+
+:::{.proposition #Kullback name="Properties of the Kullback discrepancy"}
+We have:
+
+i. $I(f,f^*) \ge 0$
+ii. $I(f,f^*) = 0$ iff $f \equiv f^*$.
+:::
+:::{.proof}
+$x \rightarrow -\log(x)$ is a convex function. Therefore $\mathbb{E}^*(-\log f(Y)/f^*(Y)) \ge -\log \mathbb{E}^*(f(Y)/f^*(Y)) = 0$ (proves (i)). Since $x \rightarrow -\log(x)$ is strictly convex, equality in (i) holds if and only if $f(Y)/f^*(Y)$ is constant (proves (ii)).
+:::
+
+
+
+:::{.definition #characteristic name="Characteristic function"}
+For any real-valued random variable $X$, the characteristic function is defined by:
+$$
+\phi_X: u \rightarrow \mathbb{E}[\exp(iuX)].
+$$
+:::
+
+
+
+
+### Standard distributions
+
+:::{.definition #fstatistics name="F distribution"}
+Consider $n=n_1+n_2$ i.i.d. $\mathcal{N}(0,1)$ r.v. $X_i$. If the r.v. $F$ is defined by:
+$$
+F = \frac{\sum_{i=1}^{n_1} X_i^2}{\sum_{j=n_1+1}^{n_1+n_2} X_j^2}\frac{n_2}{n_1}
+$$
+then $F \sim \mathcal{F}(n_1,n_2)$. (See Table \@ref(tab:Fstat) for quantiles.)
+:::
+
+:::{.definition #tStudent name="Student-t distribution"}
+$Z$ follows a Student-t (or $t$) distribution with $\nu$ degrees of freedom (d.f.) if:
+$$
+Z = X_0 \bigg/ \sqrt{\frac{\sum_{i=1}^{\nu}X_i^2}{\nu}}, \quad X_i \sim i.i.d. \mathcal{N}(0,1).
+$$
+We have $\mathbb{E}(Z)=0$, and $\mathbb{V}ar(Z)=\frac{\nu}{\nu-2}$ if $\nu>2$. (See Table \@ref(tab:Student) for quantiles.)
+:::
+
+:::{.definition #chi2 name="Chi-square distribution"}
+$Z$ follows a $\chi^2$ distribution with $\nu$ d.f. if $Z = \sum_{i=1}^{\nu}X_i^2$ where $X_i \sim i.i.d. \mathcal{N}(0,1)$.
+We have $\mathbb{E}(Z)=\nu$. (See Table \@ref(tab:Chi2) for quantiles.)
+:::
+
+:::{.proposition #waldtypeproduct name="Inner product of a multivariate Gaussian variable"}
+Let $X$ be a $n$-dimensional multivariate Gaussian variable: $X \sim \mathcal{N}(0,\Sigma)$. We have:
+$$
+X' \Sigma^{-1}X \sim \chi^2(n).
+$$
+:::
+:::{.proof}
+Because $\Sigma$ is a symmetrical definite positive matrix, it admits the spectral decomposition $PDP'$ where $P$ is an orthogonal matrix (i.e. $PP'=Id$) and D is a diagonal matrix with non-negative entries. Denoting by $\sqrt{D^{-1}}$ the diagonal matrix whose diagonal entries are the inverse of those of $D$, it is easily checked that the covariance matrix of $Y:=\sqrt{D^{-1}}P'X$ is $Id$. Therefore $Y$ is a vector of uncorrelated Gaussian variables. The properties of Gaussian variables imply that the components of $Y$ are then also independent. Hence $Y'Y=\sum_i Y_i^2 \sim \chi^2(n)$.
+
+It remains to note that $Y'Y=X'PD^{-1}P'X=X'\mathbb{V}ar(X)^{-1}X$ to conclude.
+:::
+
+:::{.definition #GEVdistri name="Generalized Extreme Value (GEV) distribution"}
+The vector of disturbances $\boldsymbol\varepsilon=[\varepsilon_{1,1},\dots,\varepsilon_{1,K_1},\dots,\varepsilon_{J,1},\dots,\varepsilon_{J,K_J}]'$ follows the Generalized Extreme Value (GEV) distribution if its c.d.f. is:
+$$
+F(\boldsymbol\varepsilon,\boldsymbol\rho) = \exp(-G(e^{-\varepsilon_{1,1}},\dots,e^{-\varepsilon_{J,K_J}};\boldsymbol\rho))
+$$
+with
+\begin{eqnarray*}
+G(\bv{Y};\boldsymbol\rho) &\equiv&  G(Y_{1,1},\dots,Y_{1,K_1},\dots,Y_{J,1},\dots,Y_{J,K_J};\boldsymbol\rho) \\
+&=& \sum_{j=1}^J\left(\sum_{k=1}^{K_j} Y_{jk}^{1/\rho_j}
+\right)^{\rho_j}
+\end{eqnarray*}
+:::
+
+
+### Stochastic convergences
+
+:::{.proposition #chebychev name="Chebychev's inequality"}
+If $\mathbb{E}(|X|^r)$ is finite for some $r>0$ then:
+$$
+\forall \varepsilon > 0, \quad \mathbb{P}(|X - c|>\varepsilon) \le \frac{\mathbb{E}[|X - c|^r]}{\varepsilon^r}.
+$$
+In particular, for $r=2$:
+$$
+\forall \varepsilon > 0, \quad \mathbb{P}(|X - c|>\varepsilon) \le \frac{\mathbb{E}[(X - c)^2]}{\varepsilon^2}.
+$$
+:::
+:::{.proof}
+Remark that $\varepsilon^r \mathbb{I}_{\{|X| \ge \varepsilon\}} \le |X|^r$ and take the expectation of both sides.
+:::
+
+:::{.definition #convergenceproba name="Convergence in probability"}
+The random variable sequence $x_n$ converges in probability to a constant $c$ if $\forall \varepsilon$, $\lim_{n \rightarrow \infty} \mathbb{P}(|x_n - c|>\varepsilon) = 0$.
+
+It is denoted as: $\mbox{plim } x_n = c$.
+:::
+
+:::{.definition #convergenceLr name="Convergence in the Lr norm"}
+$x_n$ converges in the $r$-th mean (or in the $L^r$-norm) towards $x$, if $\mathbb{E}(|x_n|^r)$ and $\mathbb{E}(|x|^r)$ exist and if
+$$
+\lim_{n \rightarrow \infty} \mathbb{E}(|x_n - x|^r) = 0.
+$$
+It is denoted as: $x_n \overset{L^r}{\rightarrow} c$.
+
+For $r=2$, this convergence is called **mean square convergence**.
+:::
+
+:::{.definition #convergenceAlmost name="Almost sure convergence"}
+The random variable sequence $x_n$ converges almost surely to $c$ if $\mathbb{P}(\lim_{n \rightarrow \infty} x_n = c) = 1$.
+
+It is denoted as: $x_n \overset{a.s.}{\rightarrow} c$.
+:::
+
+:::{.definition #cvgceDistri name="Convergence in distribution"}
+$x_n$ is said to converge in distribution (or in law) to $x$ if
+$$
+\lim_{n \rightarrow \infty} F_{x_n}(s) = F_{x}(s)
+$$
+for all $s$ at which $F_X$ --the cumulative distribution of $X$-- is continuous.
+
+It is denoted as: $x_n \overset{d}{\rightarrow} x$.
+:::
+
+:::{.proposition #Slutsky name="Rules for limiting distributions (Slutsky)"}
+We have:
+
+i. **Slutsky's theorem:** If $x_n \overset{d}{\rightarrow} x$ and $y_n \overset{p}{\rightarrow} c$ then
+\begin{eqnarray*}
+x_n y_n &\overset{d}{\rightarrow}& x c \\
+x_n + y_n &\overset{d}{\rightarrow}& x + c \\
+x_n/y_n &\overset{d}{\rightarrow}& x / c \quad (\mbox{if }c \ne 0)
+\end{eqnarray*}
+
+ii. **Continuous mapping theorem:** If $x_n \overset{d}{\rightarrow} x$ and $g$ is a continuous function then $g(x_n) \overset{d}{\rightarrow} g(x).$ 
+:::
+
+:::{.proposition #implicationsconv name="Implications of stochastic convergences"}
+We have:
+\begin{align*}
+&\boxed{\overset{L^s}{\rightarrow}}& &\underset{1 \le r \le s}{\Rightarrow}& &\boxed{\overset{L^r}{\rightarrow}}&\\
+&& && &\Downarrow&\\
+&\boxed{\overset{a.s.}{\rightarrow}}& &\Rightarrow& &\boxed{\overset{p}{\rightarrow}}& \Rightarrow \qquad \boxed{\overset{d}{\rightarrow}}.
+\end{align*}
+:::
+:::{.proof}
+
+(of the fact that $\left(\overset{p}{\rightarrow}\right) \Rightarrow \left( \overset{d}{\rightarrow}\right)$). Assume that $X_n \overset{p}{\rightarrow} X$. Denoting by $F$ and $F_n$ the c.d.f. of $X$ and $X_n$, respectively:
+\begin{equation}
+F_n(x) = \mathbb{P}(X_n \le x,X\le x+\varepsilon) + \mathbb{P}(X_n \le x,X > x+\varepsilon) \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|>\varepsilon).(\#eq:convgce1)
+\end{equation}
+Besides,
+$$
+F(x-\varepsilon) = \mathbb{P}(X \le x-\varepsilon,X_n \le x) + \mathbb{P}(X \le x-\varepsilon,X_n > x) \le F_n(x) + \mathbb{P}(|X_n - X|>\varepsilon),
+$$
+which implies:
+\begin{equation}
+F(x-\varepsilon) - \mathbb{P}(|X_n - X|>\varepsilon) \le F_n(x).(\#eq:convgce2)
+\end{equation}
+Eqs. \@ref(eq:convgce1) and \@ref(eq:convgce2) imply:
+$$
+F(x-\varepsilon) - \mathbb{P}(|X_n - X|>\varepsilon) \le F_n(x)  \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|>\varepsilon).
+$$
+Taking limits as $n \rightarrow \infty$ yields
+$$
+F(x-\varepsilon) \le \underset{n \rightarrow \infty}{\mbox{lim inf}}\; F_n(x) \le \underset{n \rightarrow \infty}{\mbox{lim sup}}\; F_n(x)  \le F(x+\varepsilon).
+$$
+The result is then obtained by taking limits as $\varepsilon \rightarrow 0$ (if $F$ is continuous at $x$).
+:::
+
+
+:::{.proposition #cvgce11 name="Convergence in distribution to a constant"}
+If $X_n$ converges in distribution to a constant $c$, then $X_n$ converges in probability to $c$.
+:::
+:::{.proof}
+If $\varepsilon>0$, we have $\mathbb{P}(X_n < c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 0$ i.e. $\mathbb{P}(X_n \ge c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1$ and $\mathbb{P}(X_n < c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1$. Therefore $\mathbb{P}(c - \varepsilon \le X_n < c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1$,
+which gives the result.
+:::
+
+
+:::{.example #plimButNotLr name="Convergence in probability but not $L^r$"}
+Let $\{x_n\}_{n \in \mathbb{N}}$ be a series of random variables defined by:
+$$
+x_n = n u_n,
+$$
+where $u_n$ are independent random variables s.t. $u_n \sim \mathcal{B}(1/n)$.
+
+We have $x_n \overset{p}{\rightarrow} 0$ but $x_n \overset{L^r}{\nrightarrow} 0$ because $\mathbb{E}(|X_n-0|)=\mathbb{E}(X_n)=1$.
+:::
+
+:::{.theorem #cauchycritstatic name="Cauchy criterion (non-stochastic case)"}
+We have that $\sum_{i=0}^{T} a_i$ converges ($T \rightarrow \infty$) iff, for any $\eta > 0$, there exists an integer $N$ such that, for all $M\ge N$,
+$$
+\left|\sum_{i=N+1}^{M} a_i\right| < \eta.
+$$
+:::
+
+:::{.theorem #cauchycritstochastic name="Cauchy criterion (stochastic case)"}
+We have that $\sum_{i=0}^{T} \theta_i \varepsilon_{t-i}$ converges in mean square ($T \rightarrow \infty$) to a random variable iff, for any $\eta > 0$, there exists an integer $N$ such that, for all $M\ge N$,
+$$
+\mathbb{E}\left[\left(\sum_{i=N+1}^{M} \theta_i \varepsilon_{t-i}\right)^2\right] < \eta.
+$$
+:::
+
+
+
+
+
+
+### Central limit theorem
+
+:::{.theorem #LLNappendix name="Law of large numbers"}
+The sample mean is a consistent estimator of the population mean.
+:::
+:::{.proof}
+Let's denote by $\phi_{X_i}$ the characteristic function of a r.v. $X_i$. If the mean of $X_i$ is $\mu$ then the Talyor expansion of the characteristic function is:
+$$
+\phi_{X_i}(u) = \mathbb{E}(\exp(iuX)) = 1 + iu\mu + o(u).
+$$
+The properties of the characteristic function (see Def. \@ref(def:characteristic)) imply that:
+$$
+\phi_{\frac{1}{n}(X_1+\dots+X_n)}(u) = \prod_{i=1}^{n} \left(1 + i\frac{u}{n}\mu + o\left(\frac{u}{n}\right) \right) \rightarrow e^{iu\mu}.
+$$
+The facts that (a) $e^{iu\mu}$ is the characteristic function of the constant $\mu$ and (b) that a characteristic function uniquely characterises a distribution imply that the sample mean converges in distribution to the constant $\mu$, which further implies that it converges in probability to $\mu$.
+:::
+
+:::{.theorem #LindbergLevyCLT name="Lindberg-Levy Central limit theorem, CLT"}
+If $x_n$ is an i.i.d. sequence of random variables with mean $\mu$ and variance $\sigma^2$ ($\in ]0,+\infty[$), then:
+$$
+\boxed{\sqrt{n} (\bar{x}_n - \mu) \overset{d}{\rightarrow} \mathcal{N}(0,\sigma^2), \quad \mbox{where} \quad \bar{x}_n = \frac{1}{n} \sum_{i=1}^{n} x_i.}
+$$
+:::
+:::{.proof}
+Let us introduce the r.v. $Y_n:= \sqrt{n}(\bar{X}_n - \mu)$. We have $\phi_{Y_n}(u) = \left[ \mathbb{E}\left( \exp(i \frac{1}{\sqrt{n}} u (X_1 - \mu)) \right) \right]^n$. We have:
+\begin{eqnarray*}
+\left[ \mathbb{E}\left( \exp\left(i \frac{1}{\sqrt{n}} u (X_1 - \mu)\right) \right) \right]^n &=& \left[ \mathbb{E}\left( 1 + i \frac{1}{\sqrt{n}} u (X_1 - \mu) - \frac{1}{2n} u^2 (X_1 - \mu)^2 + o(u^2) \right) \right]^n \\
+&=& \left( 1 - \frac{1}{2n}u^2\sigma^2 + o(u^2)\right)^n.
+\end{eqnarray*}
+Therefore $\phi_{Y_n}(u) \underset{n \rightarrow \infty}{\rightarrow} \exp \left( - \frac{1}{2}u^2\sigma^2 \right)$, which is the characteristic function of $\mathcal{N}(0,\sigma^2)$.
+:::
+
+
+
+
+
+
+
+
+
+
+
+## Some properties of Gaussian variables {#GaussianVar}
+
+
+:::{.proposition #bandsindependent}
+If $\bv{A}$ is idempotent and if $\bv{x}$ is Gaussian, $\bv{L}\bv{x}$ and $\bv{x}'\bv{A}\bv{x}$ are independent if $\bv{L}\bv{A}=\bv{0}$.
+:::
+:::{.proof}
+If $\bv{L}\bv{A}=\bv{0}$, then the two Gaussian vectors $\bv{L}\bv{x}$ and  $\bv{A}\bv{x}$ are independent. This implies the independence of any function of $\bv{L}\bv{x}$ and any function of $\bv{A}\bv{x}$. The results then follows from the observation that $\bv{x}'\bv{A}\bv{x}=(\bv{A}\bv{x})'(\bv{A}\bv{x})$, which is a function of $\bv{A}\bv{x}$.
+:::
+
+
+:::{.proposition #update name="Bayesian update in a vector of Gaussian variables"}
+If
+$$
+\left[
+\begin{array}{c}
+Y_1\\
+Y_2
+\end{array}
+\right]
+\sim \mathcal{N}
+\left(0,
+\left[\begin{array}{cc}
+\Omega_{11} & \Omega_{12}\\
+\Omega_{21} & \Omega_{22}
+\end{array}\right]
+\right),
+$$
+then
+$$
+Y_{2}|Y_{1} \sim \mathcal{N}
+\left(
+\Omega_{21}\Omega_{11}^{-1}Y_{1},\Omega_{22}-\Omega_{21}\Omega_{11}^{-1}\Omega_{12}
+\right).
+$$
+$$
+Y_{1}|Y_{2} \sim \mathcal{N}
+\left(
+\Omega_{12}\Omega_{22}^{-1}Y_{2},\Omega_{11}-\Omega_{12}\Omega_{22}^{-1}\Omega_{21}
+\right).
+$$
+:::
+
+
+
+:::{.proposition #truncated name="Truncated distributions"}
+If $X$ is a random variable distributed according to some p.d.f. $f$, with c.d.f. $F$, with infinite support. Then the p.d.f. of $X|a \le X < b$ is
+$$
+g(x) = \frac{f(x)}{F(b)-F(a)}\mathbb{I}_{\{a \le x < b\}},
+$$
+for any $a<b$.
+
+In partiucular, for a Gaussian variable $X \sim \mathcal{N}(\mu,\sigma^2)$, we have
+$$
+f(X=x|a\le X<b) = \dfrac{\dfrac{1}{\sigma}\phi\left(\dfrac{x - \mu}{\sigma}\right)}{Z}.
+$$
+with $Z = \Phi(\beta)-\Phi(\alpha)$, where $\alpha = \dfrac{a - \mu}{\sigma}$ and $\beta = \dfrac{b - \mu}{\sigma}$.
+
+Moreover:
+\begin{eqnarray}
+\mathbb{E}(X|a\le X<b) &=& \mu - \frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\sigma. (\#eq:Etrunc)
+\end{eqnarray}
+
+We also have:
+\begin{eqnarray}
+&& \mathbb{V}ar(X|a\le X<b) \nonumber\\
+&=& \sigma^2\left[
+1 -  \frac{\beta\phi\left(\beta\right)-\alpha\phi\left(\alpha\right)}{Z} -  \left(\frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\right)^2 \right] (\#eq:Vtrunc)
+\end{eqnarray}
+
+In particular, for $b \rightarrow \infty$, we get:
+\begin{equation}
+\mathbb{V}ar(X|a < X) = \sigma^2\left[1 + \alpha\lambda(-\alpha) - \lambda(-\alpha)^2 \right], (\#eq:Vtrunc2)
+\end{equation}
+with $\lambda(x)=\dfrac{\phi(x)}{\Phi(x)}$ is called the **inverse Mills ratio**.
+:::
+
+
+Consider the case where $a \rightarrow - \infty$ (i.e. the conditioning set is $X<b$) and $\mu=0$, $\sigma=1$. Then Eq. \@ref(eq:Etrunc) gives $\mathbb{E}(X|X<b) = - \lambda(b) = - \dfrac{\phi(b)}{\Phi(b)}$, where $\lambda$ is the function computing the inverse Mills ratio.
+
+```{r inverseMills, echo=FALSE, fig.cap="$\\mathbb{E}(X|X<b)$ as a function of $b$ when $X\\sim \\mathcal{N}(0,1)$ (in black).", fig.align = 'left-aligned'}
+x <- seq(-10,10,by=.01)
+par(mfrow=c(1,1))
+par(plt=c(.15,.95,.25,.95))
+plot(x,-dnorm(x)/pnorm(x),type="l",lwd=2,
+     xlab="b",ylab="inverse Mills ratio",
+     ylim=c(-10,5))
+lines(c(-20,20),c(-20,20),col="red")
+abline(h=0,col="grey")
+lines(x,-dnorm(x)/pnorm(x),lwd=2)
+```
+
+
+:::{.proposition #pdfMultivarGaussian name="p.d.f. of a multivariate Gaussian variable"}
+If $Y \sim \mathcal{N}(\mu,\Omega)$ and if $Y$ is a $n$-dimensional vector, then the density function of $Y$ is:
+$$
+\frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right].
+$$
+:::
+
+
+
+
+
+
+
+
+## Proofs {#AppendixProof}
+
+**Proof of Proposition \@ref(prp:MLEproperties)**
+
+:::{.proof}
+
+Assumptions (i) and (ii) (in the set of Assumptions \@ref(hyp:MLEregularity)) imply that $\boldsymbol\theta_{MLE}$ exists ($=\mbox{argmax}_\theta (1/n)\log \mathcal{L}(\boldsymbol\theta;\bv{y})$).
+
+$(1/n)\log \mathcal{L}(\boldsymbol\theta;\bv{y})$ can be interpreted as the sample mean of the r.v. $\log f(Y_i;\boldsymbol\theta)$ that are i.i.d. Therefore $(1/n)\log \mathcal{L}(\boldsymbol\theta;\bv{y})$ converges to $\mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta))$ -- which exists (Assumption iv).
+
+Because the latter convergence is uniform (Assumption v), the solution $\boldsymbol\theta_{MLE}$ almost surely converges to the solution to the limit problem:
+$$
+\mbox{argmax}_\theta \mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta)) = \mbox{argmax}_\theta \int_{\mathcal{Y}} \log f(y;\boldsymbol\theta)f(y;\boldsymbol\theta_0) dy.
+$$
+
+Properties of the Kullback information measure (see Prop. \@ref(prp:Kullback)), together with the identifiability assumption (ii) implies that the solution to the limit problem is unique and equal to $\boldsymbol\theta_0$.
+
+Consider a r.v. sequence $\boldsymbol\theta$ that converges to $\boldsymbol\theta_0$. The Taylor expansion of the score in a neighborood of $\boldsymbol\theta_0$ yields to:
+$$
+\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\bv{y})}{\partial \boldsymbol\theta} = \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} + \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta - \boldsymbol\theta_0) + o_p(\boldsymbol\theta - \boldsymbol\theta_0)
+$$
+
+$\boldsymbol\theta_{MLE}$ converges to $\boldsymbol\theta_0$ and satisfies the likelihood equation $\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\bv{y})}{\partial \boldsymbol\theta} = \bv{0}$. Therefore:
+$$
+\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \approx - \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0),
+$$
+or equivalently:
+$$
+\frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \approx
+\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right)\sqrt{n}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0),
+$$
+
+By the law of large numbers, we have: $\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right) \overset{}\rightarrow \frac{1}{n} \bv{I}(\boldsymbol\theta_0) = \mathcal{I}_Y(\boldsymbol\theta_0)$.
+
+Besides, we have:
+\begin{eqnarray*}
+\frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} &=& \sqrt{n} \left( \frac{1}{n} \sum_i \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right) \\
+&=& \sqrt{n} \left( \frac{1}{n} \sum_i \left\{ \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} - \mathbb{E}_{\boldsymbol\theta_0} \frac{\partial \log f(Y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right\} \right)
+\end{eqnarray*}
+which converges to $\mathcal{N}(0,\mathcal{I}_Y(\boldsymbol\theta_0))$ by the CLT.
+
+Collecting the preceding results leads to (b). The fact that $\boldsymbol\theta_{MLE}$ achieves the FDCR bound proves (c).
+:::
+
+**Proof of Proposition \@ref(prp:Walddistri)**
+
+:::{.proof}
+We have $\sqrt{n}(\hat{\boldsymbol\theta}_{n} - \boldsymbol\theta_{0}) \overset{d}{\rightarrow} \mathcal{N}(0,\mathcal{I}(\boldsymbol\theta_0)^{-1})$ (Eq. \ref(eq:normMLE)). A Taylor expansion around $\boldsymbol\theta_0$ yields to:
+\begin{equation}
+\sqrt{n}(h(\hat{\boldsymbol\theta}_{n}) - h(\boldsymbol\theta_{0})) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). (\#eq:XXX)
+\end{equation}
+Under $H_0$, $h(\boldsymbol\theta_{0})=0$ therefore:
+\begin{equation}
+\sqrt{n} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). (\#eq:lm10)
+\end{equation}
+Hence
+$$
+\sqrt{n} \left(
+\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}
+\right)^{-1/2} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,Id\right).
+$$
+Taking the quadratic form, we obtain:
+$$
+n h(\hat{\boldsymbol\theta}_{n})'  \left(
+\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}
+\right)^{-1} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \chi^2(r).
+$$
+
+The fact that the test has asymptotic level $\alpha$ directly stems from what precedes. **Consistency of the test**: Consider $\theta_0 \in \Theta$. Because the MLE is consistent, $h(\hat{\boldsymbol\theta}_{n})$ converges to $h(\boldsymbol\theta_0) \ne 0$. Eq. \@ref(eq:XXX) is still valid. It implies that $\xi^W_n$ converges to $+\infty$ and therefore that $\mathbb{P}_{\boldsymbol\theta}(\xi^W_n \ge \chi^2_{1-\alpha}(r)) \rightarrow 1$.
+:::
+
+
+**Proof of Proposition \@ref(prp:LMdistri)**
+
+:::{.proof}
+Notations: "$\approx$" means "equal up to a term that converges to 0 in probability". We are under $H_0$. $\hat{\boldsymbol\theta}^0$ is the constrained ML estimator; $\hat{\boldsymbol\theta}$ denotes the unconstrained one.
+
+We combine the two Taylor expansion: $h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n - \boldsymbol\theta_0)$ and $h(\hat{\boldsymbol\theta}_n^0) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n^0 - \boldsymbol\theta_0)$ and we use $h(\hat{\boldsymbol\theta}_n^0)=0$ (by definition) to get:
+\begin{equation}
+\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}\sqrt{n}(\hat{\boldsymbol\theta}_n - \hat{\boldsymbol\theta}^0_n). (\#eq:lm1)
+\end{equation}
+Besides, we have (using the definition of the information matrix):
+\begin{equation}
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \approx
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) (\#eq:lm29)
+\end{equation}
+and:
+\begin{equation}
+0=\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}_n;\bv{y})}{\partial \boldsymbol\theta} \approx
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).(\#eq:lm30)
+\end{equation}
+Taking the difference and multiplying by $\mathcal{I}(\boldsymbol\theta_0)^{-1}$:
+\begin{equation}
+\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}_n^0) \approx
+\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}
+\mathcal{I}(\boldsymbol\theta_0).(\#eq:lm2)
+\end{equation}
+Eqs. \@ref(eq:lm1) and \@ref(eq:lm2) yield to:
+\begin{equation}
+\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}.(\#eq:lm3)
+\end{equation}
+
+Recall that $\hat{\boldsymbol\theta}^0_n$ is the MLE of $\boldsymbol\theta_0$ under the constraint $h(\boldsymbol\theta)=0$. The vector of Lagrange multipliers $\hat\lambda_n$ associated to this program satisfies:
+\begin{equation}
+\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}+ \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}\hat\lambda_n = 0.(\#eq:multiplier)
+\end{equation}
+Substituting the latter equation in Eq. \@ref(eq:lm3) gives:
+$$
+\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx
+- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}} \approx
+- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}}
+$$
+which yields:
+\begin{equation}
+\frac{\hat\lambda_n}{\sqrt{n}} \approx - \left(
+\dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta}
+\right)^{-1}
+\sqrt{n}h(\hat{\boldsymbol\theta}_n).(\#eq:lm20)
+\end{equation}
+It follows, from Eq. \@ref(eq:lm10), that:
+$$
+\frac{\hat\lambda_n}{\sqrt{n}} \overset{d}{\rightarrow} \mathcal{N}\left(0,\left(
+\dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta}
+\right)^{-1}\right).
+$$
+Taking the quadratic form of the last equation gives:
+$$
+\frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \hat\lambda_n \overset{d}{\rightarrow} \chi^2(r).
+$$
+Using Eq. \@ref(eq:multiplier), it appears that the left-hand side term of the last equation is $\xi^{LM}$ as defined in Eq. \@ref(eq:xiLM). Consistency: see Remark 17.3 in @gourieroux_monfort_1995.
+:::
+
+
+**Proof of Proposition \@ref(prp:equivLRLMW)**
+
+:::{.proof}
+Let us first demonstrate the asymptotic equivalence of $\xi^{LM}$ and $\xi^{LR}$.
+
+The second-order taylor expansions of $\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\bv{y})$ and $\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\bv{y})$ are:
+\begin{eqnarray*}
+\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\bv{y}) &\approx& \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})
++ \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)
+- \frac{n}{2} (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\\
+\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\bv{y}) &\approx& \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})
++ \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)
+- \frac{n}{2} (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0).
+\end{eqnarray*}
+Taking the difference, we obtain:
+$$
+\xi_n^{LR} \approx 2\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})}{\partial \boldsymbol\theta'}
+(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n) + n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).
+$$
+Using $\dfrac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \approx
+\mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)$ (Eq. \@ref(eq:lm30)), we have:
+$$
+\xi_n^{LR} \approx
+2n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)'\mathcal{I}(\boldsymbol\theta_0)
+(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n)
++ n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).
+$$
+In the second of the three terms in the sum, we replace $(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)$ by $(\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n+\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)$ and we develop the associated product. This leads to:
+\begin{equation}
+\xi_n^{LR} \approx n (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n)' \mathcal{I}(\boldsymbol\theta_0)^{-1} (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n). (\#eq:lr10)
+\end{equation}
+The difference between Eqs. \@ref(eq:lm29) and \@ref(eq:lm30) implies:
+$$
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \approx
+\mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n),
+$$
+which, associated to Eq. @\ref(eq:lr10), gives:
+$$
+\xi_n^{LR} \approx \frac{1}{n} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \approx \xi_n^{LM}.
+$$
+Hence $\xi_n^{LR}$ has the same asymptotic distribution as $\xi_n^{LM}$.
+
+
+Let's show that the LR test is consistent. For this, note that:
+$$
+\frac{\log \mathcal{L}(\hat{\boldsymbol\theta},\bv{y}) - \log \mathcal{L}(\hat{\boldsymbol\theta}^0,\bv{y})}{n} = \frac{1}{n} \sum_{i=1}^n[\log f(y_i;\hat{\boldsymbol\theta}_n) - \log f(y_i;\hat{\boldsymbol\theta}_n^0)] \rightarrow \mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)],
+$$
+where $\boldsymbol\theta_\infty$, the pseudo true value, is such that $h(\boldsymbol\theta_\infty) \ne 0$ (by definition of $H_1$). From the Kullback inequality and the asymptotic identifiability of $\boldsymbol\theta_0$, it follows that $\mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)] >0$. Therefore $\xi_n^{LR} \rightarrow + \infty$ under $H_1$.
+
+
+Let us now demonstrate the equivalence of $\xi^{LM} and \xi^{W}$.
+
+We have (using Eq. \ref(eq:multiplier)):
+$$
+\xi^{LM}_n = \frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \hat\lambda_n.
+$$
+Since, under $H_0$, $\hat{\boldsymbol\theta}_n^0\approx\hat{\boldsymbol\theta}_n \approx {\boldsymbol\theta}_0$, Eq. \@ref(eq:lm20) therefore implies that:
+$$
+\xi^{LM} \approx n h(\hat{\boldsymbol\theta}_n)' \left(
+\dfrac{\partial h(\hat{\boldsymbol\theta}_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}_n)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}_n;\bv{y})}{\partial \boldsymbol\theta}
+\right)^{-1}
+h(\hat{\boldsymbol\theta}_n) = \xi^{W},
+$$
+which gives the result.
+:::
+
+
+
+**Proof of Eq. \@ref(eq:TCL2)**
+
+:::{.proof}
+We have:
+\begin{eqnarray*}
+&&T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right]\\
+&=& T\mathbb{E}\left[\left(\frac{1}{T}\sum_{t=1}^T(y_t - \mu)\right)^2\right] = \frac{1}{T} \mathbb{E}\left[\sum_{t=1}^T(y_t - \mu)^2+2\sum_{s<t\le T}(y_t - \mu)(y_s - \mu)\right]\\
+&=& \gamma_0 +\frac{2}{T}\left(\sum_{t=2}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-1} - \mu)\right]\right) +\frac{2}{T}\left(\sum_{t=3}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-2} - \mu)\right]\right) + \dots \\
+&&+ \frac{2}{T}\left(\sum_{t=T-1}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-2)} - \mu)\right]\right) + \frac{2}{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-1)} - \mu)\right]\\
+&=&  \gamma_0 + 2 \frac{T-1}{T}\gamma_1 + \dots + 2 \frac{1}{T}\gamma_{T-1} .
+\end{eqnarray*}
+Therefore:
+\begin{eqnarray*}
+T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j &=& - 2\frac{1}{T}\gamma_1 - 2\frac{2}{T}\gamma_2 - \dots - 2\frac{T-1}{T}\gamma_{T-1} - 2\gamma_T - 2 \gamma_{T+1} + \dots
+\end{eqnarray*}
+And then:
+$$
+\left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| \le 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots
+$$
+
+For any $q \le T$, we have:
+\begin{eqnarray*}
+\left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| &\le& 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{q-1}{T}|\gamma_{q-1}| +2\frac{q}{T}|\gamma_q| +\\
+&&2\frac{q+1}{T}|\gamma_{q+1}| + \dots  + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots\\
+&\le& \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q-1)|\gamma_{q-1}| +q|\gamma_q|\right) +\\
+&&2|\gamma_{q+1}| + \dots  + 2|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots
+\end{eqnarray*}
+
+Consider $\varepsilon > 0$. The fact that the autocovariances are absolutely summable implies that there exists $q_0$ such that (Cauchy criterion, Theorem \@ref(thm:cauchycritstatic)):
+$$
+2|\gamma_{q_0+1}|+2|\gamma_{q_0+2}|+2|\gamma_{q_0+3}|+\dots < \varepsilon/2.
+$$
+Then, if $T > q_0$, it comes that:
+$$
+\left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) + \varepsilon/2.
+$$
+If $T \ge 2\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right)/(\varepsilon/2)$ ($= f(q_0)$, say) then
+$$
+\frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) \le \varepsilon/2.
+$$
+Then, if $T>f(q_0)$ and $T>q_0$, i.e. if $T>\max(f(q_0),q_0)$, we have:
+$$
+\left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \varepsilon.
+$$
+:::
+
+**Proof of Proposition \@ref(prp:smallestMSE)**
+
+:::{.proof}
+We have:
+\begin{eqnarray}
+\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) &=& \mathbb{E}\left([\color{blue}{\{y_{t+1} - \mathbb{E}(y_{t+1}|x_t)\}} + \color{red}{\{\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}\}}]^2\right)\nonumber\\
+&=&  \mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right) + \mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)\nonumber\\
+&& + 2\mathbb{E}\left( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right). (\#eq:1)
+\end{eqnarray}
+Let us focus on the last term. We have:
+\begin{eqnarray*}
+&&\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right)\\
+&=& \mathbb{E}( \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ \underbrace{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}_{\mbox{function of $x_t$}}}|x_t))\\
+&=& \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}|x_t))\\
+&=& \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \color{blue}{\underbrace{[\mathbb{E}(y_{t+1}|x_t) - \mathbb{E}(y_{t+1}|x_t)]}_{=0}})=0.
+\end{eqnarray*}
+
+Therefore, Eq. \@ref(eq:1) becomes:
+\begin{eqnarray*}
+&&\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) \\
+&=&  \underbrace{\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right)}_{\mbox{$\ge 0$ and does not depend on $y^*_{t+1}$}} + \underbrace{\mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)}_{\mbox{$\ge 0$ and depends on $y^*_{t+1}$}}.
+\end{eqnarray*}
+This implies that $\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)$ is always larger than $\color{blue}{\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}$, and is therefore minimized if the second term is equal to zero, that is if $\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}$.
+:::
+
+**Proof of Proposition \@ref(prp:estimVARGaussian)**
+
+:::{.proof}
+Using Proposition \@ref(prp:multivarG) (in Appendix \@ref(XXX)), we obtain that, conditionally on $x_1$, the log-likelihood is given by
+\begin{eqnarray*}
+\log\mathcal{L}(Y_{T};\theta) & = & -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
+&  & -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].
+\end{eqnarray*}
+Let's rewrite the last term of the log-likelihood:
+\begin{eqnarray*}
+\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right] & =\\
+\sum_{t=1}^{T}\left[\left(y_{t}-\hat{\Pi}'x_{t}+\hat{\Pi}'x_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\hat{\Pi}'x_{t}+\hat{\Pi}'x_{t}-\Pi'x_{t}\right)\right] & =\\
+\sum_{t=1}^{T}\left[\left(\hat{\varepsilon}_{t}+(\hat{\Pi}-\Pi)'x_{t}\right)'\Omega^{-1}\left(\hat{\varepsilon}_{t}+(\hat{\Pi}-\Pi)'x_{t}\right)\right],
+\end{eqnarray*}
+where the $j^{th}$ element of the $(n\times1)$ vector $\hat{\varepsilon}_{t}$ is the sample residual, for observation $t$, from an OLS regression of $y_{j,t}$ on $x_{t}$. Expanding the previous equation, we get:
+\begin{eqnarray*}
+&&\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right]  = \sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}\hat{\varepsilon}_{t}\\
+&&+2\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}+\sum_{t=1}^{T}x'_{t}(\hat{\Pi}-\Pi)\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}.
+\end{eqnarray*}
+Let's apply the trace operator on the second term (that is a scalar):
+\begin{eqnarray*}
+\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t} & = & Tr\left(\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}\right)\\
+=  Tr\left(\sum_{t=1}^{T}\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}\hat{\varepsilon}_{t}'\right) & = & Tr\left(\Omega^{-1}(\hat{\Pi}-\Pi)'\sum_{t=1}^{T}x_{t}\hat{\varepsilon}_{t}'\right).
+\end{eqnarray*}
+Given that, by construction (property of OLS estimates), the sample residuals are orthogonal to the explanatory variables, this term is zero. Introducing $\tilde{x}_{t}=(\hat{\Pi}-\Pi)'x_{t}$, we have
+\begin{eqnarray*}
+\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right] =\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}\hat{\varepsilon}_{t}+\sum_{t=1}^{T}\tilde{x}'_{t}\Omega^{-1}\tilde{x}_{t}.
+\end{eqnarray*}
+Since $\Omega$ is a positive definite matrix, $\Omega^{-1}$ is as well. Consequently, the smallest value that the last term can take is obtained for $\tilde{x}_{t}=0$, i.e. when $\Pi=\hat{\Pi}.$
+
+The MLE of $\Omega$ is the matrix $\hat{\Omega}$ that maximizes $\Omega\overset{\ell}{\rightarrow}L(Y_{T};\hat{\Pi},\Omega)$. We have:
+\begin{eqnarray*}
+\log\mathcal{L}(Y_{T};\hat{\Pi},\Omega) & = & -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right| -\frac{1}{2}\sum_{t=1}^{T}\left[\hat{\varepsilon}_{t}'\Omega^{-1}\hat{\varepsilon}_{t}\right].
+\end{eqnarray*}
+
+Matrix $\hat{\Omega}$ is a symmetric positive definite. It is easily checked that the (unrestricted) matrix that maximizes the latter expression is symmetric positive definite matrix. Indeed:
+$$
+\frac{\partial \log\mathcal{L}(Y_{T};\hat{\Pi},\Omega)}{\partial\Omega}=\frac{T}{2}\Omega'-\frac{1}{2}\sum_{t=1}^{T}\hat{\varepsilon}_{t}\hat{\varepsilon}'_{t}\Rightarrow\hat{\Omega}'=\frac{1}{T}\sum_{t=1}^{T}\hat{\varepsilon}_{t}\hat{\varepsilon}'_{t},
+$$
+which leads to the result.
+:::
+
+**Proof of Proposition \@ref(prp:OLSVAR)**
+
+:::{.proof}
+Let us drop the $i$ subscript. Rearranging Eq. \@ref(eq:olsar1), we have:
+$$
+\sqrt{T}(\bv{b}-\boldsymbol{\beta}) =  (X'X/T)^{-1}\sqrt{T}(X'\boldsymbol\varepsilon/T).
+$$
+Let us consider the autocovariances of $\bv{v}_t = x_t \varepsilon_t$, denoted by $\gamma^v_j$. Using the fact that $x_t$ is a linear combination of past $\varepsilon_t$s and that $\varepsilon_t$ is a white noise, we get that $\mathbb{E}(\varepsilon_t x_t)=0$. Therefore
+$$
+\gamma^v_j = \mathbb{E}(\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}').
+$$
+If $j>0$, we have $\mathbb{E}(\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}')=\mathbb{E}(\mathbb{E}[\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}'|\varepsilon_{t-j},x_t,x_{t-j}])=$ $\mathbb{E}(\varepsilon_{t-j}x_tx_{t-j}'\mathbb{E}[\varepsilon_t|\varepsilon_{t-j},x_t,x_{t-j}])=0$. Note that we have $\mathbb{E}[\varepsilon_t|\varepsilon_{t-j},x_t,x_{t-j}]=0$ because $\{\varepsilon_t\}$ is an i.i.d. white noise sequence. If $j=0$, we have:
+$$
+\gamma^v_0 = \mathbb{E}(\varepsilon_t^2x_tx_{t}')= \mathbb{E}(\varepsilon_t^2) \mathbb{E}(x_tx_{t}')=\sigma^2\bv{Q}.
+$$
+The convergence in distribution of $\sqrt{T}(X'\boldsymbol\varepsilon/T)=\sqrt{T}\frac{1}{T}\sum_{t=1}^Tv_t$ results from the Central Limit Theorem for covariance-stationary processes, using the $\gamma_j^v$ computed above.
+:::
+
+
+## Additional codes
+
+### Simulating GEV distributions {#App:GEV}
+
+The following lines of code have been used to generate Figure \@ref(fig:GEV).
+
+```{r #GEV, eval=FALSE}
+n.sim <- 4000
+par(mfrow=c(1,3),
+    plt=c(.2,.95,.2,.85))
+all.rhos <- c(.3,.6,.95)
+for(j in 1:length(all.rhos)){
+  theta <- 1/all.rhos[j]
+  v1 <- runif(n.sim)
+  v2 <- runif(n.sim)
+  w <- rep(.000001,n.sim)
+  # solve for f(w) = w*(1 - log(w)/theta) - v2 = 0
+  for(i in 1:20){
+    f.i <- w * (1 - log(w)/theta) - v2
+    f.prime <- 1 - log(w)/theta - 1/theta
+    w <- w - f.i/f.prime
+  }
+  u1 <- exp(v1^(1/theta) * log(w))
+  u2 <- exp((1-v1)^(1/theta) * log(w))
+
+  # Get eps1 and eps2 using the inverse of
+  # the Gumbel distribution's cdf:
+  eps1 <- -log(-log(u1))
+  eps2 <- -log(-log(u2))
+  cbind(cor(eps1,eps2),1-all.rhos[j]^2)
+  plot(eps1,eps2,pch=19,col="#FF000044",
+       main=paste("rho = ",toString(all.rhos[j]),sep=""),
+       xlab=expression(epsilon[1]),
+       ylab=expression(epsilon[2]),
+       cex.lab=2,cex.main=1.5)
+}
+```
+
+
+### Computing the covariance matrix of IRF using the delta method {#IRFDELTA}
+
+```{r #IRFDELTA, eval=FALSE}
+irf.function <- function(THETA){
+  c <- THETA[1]
+  phi <- THETA[2:(p+1)]
+  if(q>0){
+    theta <- c(1,THETA[(1+p+1):(1+p+q)])
+  }else{
+    theta <- 1
+  }
+  sigma <- THETA[1+p+q+1]
+  r <- dim(Matrix.of.Exog)[2] - 1
+  beta <- THETA[(1+p+q+1+1):(1+p+q+1+(r+1))]
+  
+  irf <- sim.arma(0,phi,beta,sigma=sd(Ramey$ED3_TC,na.rm=TRUE),T=60,
+                  y.0=rep(0,length(x$phi)),nb.sim=1,make.IRF=1,
+                  X=NaN,beta=NaN)
+  return(irf)
+}
+
+IRF.0 <- 100*irf.function(x$THETA)
+eps <- .00000001
+d.IRF <- NULL
+for(i in 1:length(x$THETA)){
+  THETA.i <- x$THETA
+  THETA.i[i] <- THETA.i[i] + eps
+  IRF.i <- 100*irf.function(THETA.i)
+  d.IRF <- cbind(d.IRF,
+                 (IRF.i - IRF.0)/eps
+                 )
+}
+mat.var.cov.IRF <- d.IRF %*% x$I %*% t(d.IRF)
+```
+
+## Statistical Tables
+
+```{r Normal,echo=FALSE}
+columns <- (0:9)/100
+rows    <- (0:30)/10
+
+max <- 3
+table_N01 <- pnorm(seq(0,max-.01,by=.01))
+table_N01 <- matrix(table_N01,ncol=10)
+colnames(table_N01) <- (0:9)/100
+rownames(table_N01) <- seq(0,max-.01,by=.1)
+knitr::kable(table_N01, caption = "Quantiles of the $\\mathcal{N}(0,1)$ distribution. If $a$ and $b$ are respectively the row and column number; then the corresponding cell gives $\\mathbb{P}(0<X\\le a+b)$, where $X \\sim \\mathcal{N}(0,1)$.", digits=4)
+```
+
+
+```{r Student,echo=FALSE}
+all.alpha <- c(.05,.1,.75,.90,.95,.975,.99,.999)
+all.df <- c(1:10,10*(2:10),200,500)
+
+table_Student <- NULL
+i <- 0
+for(df in all.df){
+  i <- i + 1
+  table_Student <- rbind(table_Student,qt(1-(1-all.alpha)/2,df=all.df[i]))
+}
+colnames(table_Student) <- all.alpha
+rownames(table_Student) <- all.df
+knitr::kable(table_Student, caption = "Quantiles of the Student-$t$ distribution. The rows correspond to different degrees of freedom ($\\nu$, say); the columns correspond to different probabilities ($z$, say). The cell gives $q$ that is s.t. $\\mathbb{P}(-q<X<q)=z$, with $X \\sim t(\\nu)$.", digits=3)
+```
+
+
+```{r Chi2,echo=FALSE}
+all.alpha <- c(.05,.1,.75,.90,.95,.975,.99,.999)
+all.df <- c(1:10,10*(2:10),200,500)
+
+table_chi2 <- NULL
+i <- 0
+for(df in all.df){
+  i <- i + 1
+  table_chi2 <- rbind(table_chi2,qchisq(all.alpha,df=all.df[i]))
+}
+colnames(table_chi2) <- all.alpha
+rownames(table_chi2) <- all.df
+knitr::kable(table_chi2, caption = "Quantiles of the $\\chi^2$ distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.", digits=3)
+```
+
+
+```{r Fstat,echo=FALSE}
+all.alpha <- c(.90,.95,.99)
+max.n1 <- 10
+all.n2 <- c(seq(5,20,by=5),50,100,500)
+
+table_F <- matrix(NaN,(length(all.n2)+1)*length(all.alpha),max.n1)
+
+opts <- options(knitr.kable.NA = "") # set options s.t. missing values are not shown
+
+RowNames <- NULL
+i <- 0
+for(alpha in all.alpha){
+  #  table_F[i*(length(all.n2)+1)+1,1] <- alpha
+  table_aux <- NULL
+  for(n1 in 1:max.n1){
+    table_aux <- cbind(table_aux,qf(alpha,df1=n1,df2=all.n2))
+  }
+  table_F[(i*(length(all.n2)+1)+2):((i+1)*(length(all.n2)+1)),] <- table_aux
+  i <- i+1
+  RowNames <- c(RowNames,
+                paste("alpha = ",alpha,sep=""),all.n2)
+}
+colnames(table_F) <- 1:max.n1
+rownames(table_F) <- RowNames
+knitr::kable(table_F, caption = "Quantiles of the $\\mathcal{F}$ distribution. The columns and rows correspond to different degrees of freedom (resp. $n_1$ and $n_2$). The different panels correspond to different probabilities ($\\alpha$) The corresponding cell gives $z$ that is s.t. $\\mathbb{P}(X \\le z)=\\alpha$, with $X \\sim \\mathcal{F}(n_1,n_2)$.", digits=3)
+```
+
+

@@ -1,0 +1,23 @@
+h1:estimation-methods Estimation Methods
+h2:secGMM Generalized Method of Moments (GMM)
+h3:definition-of-the-gmm-estimator Definition of the GMM estimator
+h3:asymptotic-distribution-of-the-gmm-estimator Asymptotic distribution of the GMM estimator
+h3:overidentif Testing hypotheses in the GMM framework
+h3:example-estimation-of-the-stochastic-discount-factor-s.d.f. Example: Estimation of the Stochastic Discount Factor (s.d.f.)
+h2:secMLE Maximum Likelihood Estimation
+h3:intuition Intuition
+fig:MLE1 The red ticks, at the bottom, indicate observations (there are 200 of them). The historgram is based on these 200 observations
+fig:MLE2 Proba. that $y_i-\\varepsilon \\le Y_i < y_i+\\varepsilon$, $i \\in \\{1,2,3,4\\}$. The vertical red line indicates the maximum of the function.
+fig:MLE3 Log-likelihood function associated with the 200 i.i.d. observations. The vertical red line indicates the maximum of the function.
+h3:definition-and-properties Definition and properties
+h3:to-sum-up-mle-in-practice To sum up – MLE in practice
+h3:example-mle-estimation-of-a-mixture-of-gaussian-distribution Example: MLE estimation of a mixture of Gaussian distribution
+fig:smiData Time series of SMI weekly returns (source: Yahoo Finance).
+fig:smidistri Comparison of different estimates of the distribution of returns.
+h3:TestMLE Test procedures
+h2:bayesian-approach Bayesian approach
+h3:introduction Introduction
+h3:monte-carlo-markov-chains Monte-Carlo Markov Chains
+h3:example-ar1-specification Example: AR(1) specification
+fig:MCMC8 The upper line of plot compares prior (black) and posterior (red) distributions. The vertical dashed blue lines indicate the true values of the parameters. The second row of plots show the sequence of $\\boldsymbol\\theta_i$
+

@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Appendix | The Identification of Dynamic Structural Shocks</title>
+<meta name="author" content="Jean-Paul Renne">
+<meta name="description" content="3.1 Principal component analysis (PCA) Principal component analysis (PCA) is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Appendix | The Identification of Dynamic Structural Shocks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="3.1 Principal component analysis (PCA) Principal component analysis (PCA) is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Appendix | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="3.1 Principal component analysis (PCA) Principal component analysis (PCA) is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="my-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
+<li><a class="" href="TS.html"><span class="header-section-number">2</span> Time Series</a></li>
+<li><a class="active" href="append.html"><span class="header-section-number">3</span> Appendix</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="append" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Appendix<a class="anchor" aria-label="anchor" href="#append"><i class="fas fa-link"></i></a>
+</h1>
+<div id="PCAapp" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Principal component analysis (PCA)<a class="anchor" aria-label="anchor" href="#PCAapp"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Principal component analysis (PCA)</strong> is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are linearly driven by a relatively small number of factors. This approach is widely used in data analysis and image compression.</p>
+<p>Suppose that we have <span class="math inline">\(T\)</span> observations of a <span class="math inline">\(n\)</span>-dimensional random vector <span class="math inline">\(x\)</span>, denoted by <span class="math inline">\(x_{1},x_{2},\ldots,x_{T}\)</span>. We suppose that each component of <span class="math inline">\(x\)</span> is of mean zero.</p>
+<p>Let denote with <span class="math inline">\(X\)</span> the matrix given by <span class="math inline">\(\left[\begin{array}{cccc} x_{1} &amp; x_{2} &amp; \ldots &amp; x_{T}\end{array}\right]'\)</span>. Denote the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(X\)</span> by <span class="math inline">\(X_{j}\)</span>.</p>
+<p>We want to find the linear combination of the <span class="math inline">\(x_{i}\)</span>’s (<span class="math inline">\(x.u\)</span>), with <span class="math inline">\(\left\Vert u\right\Vert =1\)</span>, with “maximum variance.” That is, we want to solve:
+<span class="math display" id="eq:PCA11">\[\begin{equation}
+\begin{array}{clll}
+\underset{u}{\arg\max} &amp; u'X'Xu. \\
+\mbox{s.t. } &amp; \left| u\right| =1
+\end{array}\tag{3.1}
+\end{equation}\]</span></p>
+<p>Since <span class="math inline">\(X'X\)</span> is a positive definite matrix, it admits the following decomposition:
+<span class="math display">\[\begin{eqnarray*}
+X'X &amp; = &amp; PDP'\\
+&amp; = &amp; P\left[\begin{array}{ccc}
+\lambda_{1}\\
+&amp; \ddots\\
+&amp;  &amp; \lambda_{n}
+\end{array}\right]P',
+\end{eqnarray*}\]</span>
+where <span class="math inline">\(P\)</span> is an orthogonal matrix whose columns are the eigenvectors of <span class="math inline">\(X'X\)</span>.</p>
+<p>We can order the eigenvalues such that <span class="math inline">\(\lambda_{1}\geq\ldots\geq\lambda_{n}\)</span>. (Since <span class="math inline">\(X'X\)</span> is positive definite, all these eigenvalues are positive.)</p>
+<p>Since <span class="math inline">\(P\)</span> is orthogonal, we have <span class="math inline">\(u'X'Xu=u'PDP'u=y'Dy\)</span> where <span class="math inline">\(\left\Vert y\right\Vert =1\)</span>. Therefore, we have <span class="math inline">\(y_{i}^{2}\leq 1\)</span> for any <span class="math inline">\(i\leq n\)</span>.</p>
+<p>As a consequence:
+<span class="math display">\[
+y'Dy=\sum_{i=1}^{n}y_{i}^{2}\lambda_{i}\leq\lambda_{1}\sum_{i=1}^{n}y_{i}^{2}=\lambda_{1}.
+\]</span></p>
+<p>It is easily seen that the maximum is reached for <span class="math inline">\(y=\left[1,0,\cdots,0\right]'\)</span>. Therefore, the maximum of the optimization program (Eq. <a href="append.html#eq:PCA11">(3.1)</a>) is obtained for <span class="math inline">\(u=P\left[1,0,\cdots,0\right]'\)</span>. That is, <span class="math inline">\(u\)</span> is the eigenvector of <span class="math inline">\(X'X\)</span> that is associated with its larger eigenvalue (first column of <span class="math inline">\(P\)</span>).</p>
+<p>Let us denote with <span class="math inline">\(F\)</span> the vector that is given by the matrix product <span class="math inline">\(XP\)</span> (note that its last column is equal to <span class="math inline">\(Xu\)</span>). The columns of <span class="math inline">\(F\)</span>, denoted by <span class="math inline">\(F_{j}\)</span>, are called <strong>factors</strong>. We have:
+<span class="math display">\[
+F'F=P'X'XP=D.
+\]</span>
+Therefore, in particular, the <span class="math inline">\(F_{j}\)</span>’s are orthogonal.</p>
+<p>Since <span class="math inline">\(X=FP'\)</span>, the <span class="math inline">\(X_{j}\)</span>’s are linear combinations of the factors. Let us then denote with <span class="math inline">\(\hat{X}_{i,j}\)</span> the part of <span class="math inline">\(X_{i}\)</span> that is explained by factor <span class="math inline">\(F_{j}\)</span>, we have:
+<span class="math display">\[\begin{eqnarray*}
+\hat{X}_{i,j} &amp; = &amp; p_{ij}F_{j}\\
+X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
+\end{eqnarray*}\]</span></p>
+<p>Consider the share of variance that is explained –through the <span class="math inline">\(n\)</span> variables (<span class="math inline">\(X_{1},\ldots,X_{n}\)</span>)– by the first factor <span class="math inline">\(F_{1}\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+\frac{\sum_{i}\hat{X}_{i,1}\hat{X}'_{i,1}}{\sum_{i}X_{i}X'_{i}} &amp; = &amp; \frac{\sum_{i}p_{i1}F_{1}F'_{1}p_{i1}}{tr(X'X)} = \frac{\sum_{i}p_{i1}^{2}\lambda_{1}}{tr(X'X)} = \frac{\lambda_{1}}{\sum_{i}\lambda_{i}}.
+\end{eqnarray*}\]</span></p>
+<p>Intuitively, if the first eigenvalue is large, it means that the first factor embed a large share of the fluctutaions of the <span class="math inline">\(n\)</span> <span class="math inline">\(X_{i}\)</span>’s.</p>
+<p>Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., <span class="citation">Litterman and Scheinkman (<a href="references.html#ref-Litterman_Scheinkman_1991" role="doc-biblioref">1991</a>)</span>). One can typically employ PCA to recover such factors. The data used in the example below are taken from the <a href="https://fred.stlouisfed.org">Fred database</a> (tickers: “DGS6MO”,“DGS1”, …). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).</p>
+<p>To run a PCA, one simply has to apply function <code>prcomp</code> to a matrix of data:</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="va">USyields</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">yds</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y1"</span>,<span class="st">"Y2"</span>,<span class="st">"Y3"</span>,<span class="st">"Y5"</span>,<span class="st">"Y7"</span>,<span class="st">"Y10"</span>,<span class="st">"Y20"</span>,<span class="st">"Y30"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">PCA.yds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">yds</span>,center<span class="op">=</span><span class="cn">TRUE</span>,scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Let us know visualize some results. The first plot of Figure <a href="append.html#fig:USydsPCA1">3.1</a> shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.95</span>,<span class="fl">.2</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>        main<span class="op">=</span><span class="st">"Share of variance expl. by PC's"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">nb.PC</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="op">-</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Factor loadings (1st 3 PCs)"</span>,xaxt<span class="op">=</span><span class="st">"n"</span>,xlab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="va">Y1.hat</span> <span class="op">&lt;-</span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">nb.PC</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span><span class="st">"Y1"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">Y1.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span><span class="op">)</span> <span class="op">*</span> <span class="va">Y1.hat</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Fit of 1-year yields (2 PCs)"</span>,</span>
+<span>     ylab<span class="op">=</span><span class="st">"Obs (black) / Fitted by 2PCs (dashed blue)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">Y1.hat</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">Y10.hat</span> <span class="op">&lt;-</span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">nb.PC</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span><span class="st">"Y10"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">Y10.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span><span class="op">)</span> <span class="op">*</span> <span class="va">Y10.hat</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Fit of 10-year yields (2 PCs)"</span>,</span>
+<span>     ylab<span class="op">=</span><span class="st">"Obs (black) / Fitted by 2PCs (dashed blue)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">Y10.hat</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:USydsPCA1"></span>
+<img src="IdentifStructShocks_files/figure-html/USydsPCA1-1.png" alt="Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities." width="672"><p class="caption">
+Figure 3.1: Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.
+</p>
+</div>
+</div>
+<div id="LinAlgebra" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Linear algebra: definitions and results<a class="anchor" aria-label="anchor" href="#LinAlgebra"><i class="fas fa-link"></i></a>
+</h2>
+<div class="definition">
+<p><span id="def:determinant" class="definition"><strong>Definition 3.1  (Eigenvalues) </strong></span>The eigenvalues of of a matrix <span class="math inline">\(M\)</span> are the numbers <span class="math inline">\(\lambda\)</span> for which:
+<span class="math display">\[
+|M - \lambda I| = 0,
+\]</span>
+where <span class="math inline">\(| \bullet |\)</span> is the determinant operator.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:determinant" class="proposition"><strong>Proposition 3.1  (Properties of the determinant) </strong></span>We have:</p>
+<ul>
+<li>
+<span class="math inline">\(|MN|=|M|\times|N|\)</span>.</li>
+<li>
+<span class="math inline">\(|M^{-1}|=|M|^{-1}\)</span>.</li>
+<li>If <span class="math inline">\(M\)</span> admits the diagonal representation <span class="math inline">\(M=TDT^{-1}\)</span>, where <span class="math inline">\(D\)</span> is a diagonal matrix whose diagonal entries are <span class="math inline">\(\{\lambda_i\}_{i=1,\dots,n}\)</span>, then:
+<span class="math display">\[
+|M - \lambda I |=\prod_{i=1}^n (\lambda_i - \lambda).
+\]</span>
+</li>
+</ul>
+</div>
+<div class="definition">
+<p><span id="def:MoorPenrose" class="definition"><strong>Definition 3.2  (Moore-Penrose inverse) </strong></span>If <span class="math inline">\(M \in \mathbb{R}^{m \times n}\)</span>, then its Moore-Penrose pseudo inverse (exists and) is the unique matrix <span class="math inline">\(M^* \in \mathbb{R}^{n \times m}\)</span> that satisfies:</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(M M^* M = M\)</span></li>
+<li><span class="math inline">\(M^* M M^* = M^*\)</span></li>
+<li>
+<span class="math inline">\((M M^*)'=M M^*\)</span>
+.iv <span class="math inline">\((M^* M)'=M^* M\)</span>.</li>
+</ol>
+</div>
+<div class="proposition">
+<ul>
+<li><span id="prp:MoorPenrose" class="proposition"><strong>Proposition 3.2  (Properties of the Moore-Penrose inverse) </strong></span></li>
+<li>If <span class="math inline">\(M\)</span> is invertible then <span class="math inline">\(M^* = M^{-1}\)</span>.</li>
+<li>The pseudo-inverse of a zero matrix is its transpose.
+*
+The pseudo-inverse of the pseudo-inverse is the original matrix.</li>
+</ul>
+</div>
+<div class="definition">
+<p><span id="def:idempotent" class="definition"><strong>Definition 3.3  (Idempotent matrix) </strong></span>Matrix <span class="math inline">\(M\)</span> is idempotent if <span class="math inline">\(M^2=M\)</span>.</p>
+<p>If <span class="math inline">\(M\)</span> is a symmetric idempotent matrix, then <span class="math inline">\(M'M=M\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:rootsidempotent" class="proposition"><strong>Proposition 3.3  (Roots of an idempotent matrix) </strong></span>The eigenvalues of an idempotent matrix are either 1 or 0.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-19" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\lambda\)</span> is an eigenvalue of an idempotent matrix <span class="math inline">\(M\)</span> then <span class="math inline">\(\exists x \ne 0\)</span> s.t. <span class="math inline">\(Mx=\lambda x\)</span>. Hence <span class="math inline">\(M^2x=\lambda M x \Rightarrow (1-\lambda)Mx=0\)</span>. Either all element of <span class="math inline">\(Mx\)</span> are zero, in which case <span class="math inline">\(\lambda=0\)</span> or at least one element of <span class="math inline">\(Mx\)</span> is nonzero, in which case <span class="math inline">\(\lambda=1\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:chi2idempotent" class="proposition"><strong>Proposition 3.4  (Idempotent matrix and chi-square distribution) </strong></span>The rank of a symmetric idempotent matrix is equal to its trace.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-20" class="proof"><em>Proof</em>. </span>The result follows from Prop. <a href="append.html#prp:rootsidempotent">3.3</a>, combined with the fact that the rank of a symmetric matrix is equal to the number of its nonzero eigenvalues.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:constrainedLS" class="proposition"><strong>Proposition 3.5  (Constrained least squares) </strong></span>The solution of the following optimisation problem:
+<span class="math display">\[\begin{eqnarray*}
+\underset{\boldsymbol\beta}{\min} &amp;&amp; || \mathbf{y} - \mathbf{X}\boldsymbol\beta ||^2 \\
+&amp;&amp; \mbox{subject to } \mathbf{R}\boldsymbol\beta = \mathbf{q}
+\end{eqnarray*}\]</span>
+is given by:
+<span class="math display">\[
+\boxed{\boldsymbol\beta^r = \boldsymbol\beta_0 - (\mathbf{X}'\mathbf{X})^{-1} \mathbf{R}'\{\mathbf{R}(\mathbf{X}'\mathbf{X})^{-1}\mathbf{R}'\}^{-1}(\mathbf{R}\boldsymbol\beta_0 - \mathbf{q}),}
+\]</span>
+where <span class="math inline">\(\boldsymbol\beta_0=(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}\)</span>.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-21" class="proof"><em>Proof</em>. </span>See for instance <a href="http://jackman.stanford.edu/classes/350B/07/ftestforWeb.pdf">Jackman, 2007</a>.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:inversepartitioned" class="proposition"><strong>Proposition 3.6  (Inverse of a partitioned matrix) </strong></span>We have:
+<span class="math display">\[\begin{eqnarray*}
+&amp;&amp;\left[ \begin{array}{cc} \mathbf{A}_{11} &amp; \mathbf{A}_{12} \\ \mathbf{A}_{21} &amp; \mathbf{A}_{22} \end{array}\right]^{-1} = \\
+&amp;&amp;\left[ \begin{array}{cc} (\mathbf{A}_{11} - \mathbf{A}_{12}\mathbf{A}_{22}^{-1}\mathbf{A}_{21})^{-1} &amp; - \mathbf{A}_{11}^{-1}\mathbf{A}_{12}(\mathbf{A}_{22} - \mathbf{A}_{21}\mathbf{A}_{11}^{-1}\mathbf{A}_{12})^{-1} \\
+-(\mathbf{A}_{22} - \mathbf{A}_{21}\mathbf{A}_{11}^{-1}\mathbf{A}_{12})^{-1}\mathbf{A}_{21}\mathbf{A}_{11}^{-1} &amp; (\mathbf{A}_{22} - \mathbf{A}_{21}\mathbf{A}_{11}^{-1}\mathbf{A}_{12})^{-1} \end{array} \right].
+\end{eqnarray*}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:FOD" class="definition"><strong>Definition 3.4  (Matrix derivatives) </strong></span>Consider a fonction <span class="math inline">\(f: \mathbb{R}^K \rightarrow \mathbb{R}\)</span>. Its first-order derivative is:
+<span class="math display">\[
+\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b}) =
+\left[\begin{array}{c}
+\frac{\partial f}{\partial b_1}(\mathbf{b})\\
+\vdots\\
+\frac{\partial f}{\partial b_K}(\mathbf{b})
+\end{array}
+\right].
+\]</span>
+We use the notation:
+<span class="math display">\[
+\frac{\partial f}{\partial \mathbf{b}'}(\mathbf{b}) = \left(\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b})\right)'.
+\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:partial" class="proposition"><strong>Proposition 3.7  </strong></span>We have:</p>
+<ul>
+<li>If <span class="math inline">\(f(\mathbf{b}) = A' \mathbf{b}\)</span> where <span class="math inline">\(A\)</span> is a <span class="math inline">\(K \times 1\)</span> vector then <span class="math inline">\(\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b}) = A\)</span>.</li>
+<li>If <span class="math inline">\(f(\mathbf{b}) = \mathbf{b}'A\mathbf{b}\)</span> where <span class="math inline">\(A\)</span> is a <span class="math inline">\(K \times K\)</span> matrix, then <span class="math inline">\(\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b}) = 2A\mathbf{b}\)</span>.</li>
+</ul>
+</div>
+<div class="proposition">
+<p><span id="prp:absMs" class="proposition"><strong>Proposition 3.8  (Square and absolute summability) </strong></span>We have:
+<span class="math display">\[
+\underbrace{\sum_{i=0}^{\infty}|\theta_i| &lt; + \infty}_{\mbox{Absolute summability}} \Rightarrow \underbrace{\sum_{i=0}^{\infty} \theta_i^2 &lt; + \infty}_{\mbox{Square summability}}.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-22" class="proof"><em>Proof</em>. </span>See Appendix 3.A in Hamilton. Idea: Absolute summability implies that there exist <span class="math inline">\(N\)</span> such that, for <span class="math inline">\(j&gt;N\)</span>, <span class="math inline">\(|\theta_j| &lt; 1\)</span> (deduced from Cauchy criterion, Theorem <a href="append.html#thm:cauchycritstatic">3.2</a> and therefore <span class="math inline">\(\theta_j^2 &lt; |\theta_j|\)</span>.</p>
+</div>
+</div>
+<div id="variousResults" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Statistical analysis: definitions and results<a class="anchor" aria-label="anchor" href="#variousResults"><i class="fas fa-link"></i></a>
+</h2>
+<div id="moments-and-statistics" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Moments and statistics<a class="anchor" aria-label="anchor" href="#moments-and-statistics"><i class="fas fa-link"></i></a>
+</h3>
+<div class="definition">
+<p><span id="def:partialcorrel" class="definition"><strong>Definition 3.5  (Partial correlation) </strong></span>The <strong>partial correlation</strong> between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span>, controlling for some variables <span class="math inline">\(\mathbf{X}\)</span> is the sample correlation between <span class="math inline">\(y^*\)</span> and <span class="math inline">\(z^*\)</span>, where the latter two variables are the residuals in regressions of <span class="math inline">\(y\)</span> on <span class="math inline">\(\mathbf{X}\)</span> and of <span class="math inline">\(z\)</span> on <span class="math inline">\(\mathbf{X}\)</span>, respectively.</p>
+<p>This correlation is denoted by <span class="math inline">\(r_{yz}^\mathbf{X}\)</span>. By definition, we have:
+<span class="math display" id="eq:pc">\[\begin{equation}
+r_{yz}^\mathbf{X} = \frac{\mathbf{z^*}'\mathbf{y^*}}{\sqrt{(\mathbf{z^*}'\mathbf{z^*})(\mathbf{y^*}'\mathbf{y^*})}}.\tag{3.2}
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:skewnesskurtosis" class="definition"><strong>Definition 3.6  (Skewness and kurtosis) </strong></span>Let <span class="math inline">\(Y\)</span> be a random variable whose fourth moment exists. The expectation of <span class="math inline">\(Y\)</span> is denoted by <span class="math inline">\(\mu\)</span>.</p>
+<ul>
+<li>The skewness of <span class="math inline">\(Y\)</span> is given by:
+<span class="math display">\[
+\frac{\mathbb{E}[(Y-\mu)^3]}{\{\mathbb{E}[(Y-\mu)^2]\}^{3/2}}.
+\]</span>
+</li>
+<li>The kurtosis of <span class="math inline">\(Y\)</span> is given by:
+<span class="math display">\[
+\frac{\mathbb{E}[(Y-\mu)^4]}{\{\mathbb{E}[(Y-\mu)^2]\}^{2}}.
+\]</span>
+</li>
+</ul>
+</div>
+<div class="theorem">
+<p><span id="thm:CauchySchwarz" class="theorem"><strong>Theorem 3.1  (Cauchy-Schwarz inequality) </strong></span>We have:
+<span class="math display">\[
+|\mathbb{C}ov(X,Y)| \le \sqrt{\mathbb{V}ar(X)\mathbb{V}ar(Y)}
+\]</span>
+and, if <span class="math inline">\(X \ne =\)</span> and <span class="math inline">\(Y \ne 0\)</span>, the equality holds iff <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are the same up to an affine transformation.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-23" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\mathbb{V}ar(X)=0\)</span>, this is trivial. If this is not the case, then let’s define <span class="math inline">\(Z\)</span> as <span class="math inline">\(Z = Y - \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X\)</span>. It is easily seen that <span class="math inline">\(\mathbb{C}ov(X,Z)=0\)</span>. Then, the variance of <span class="math inline">\(Y=Z+\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X\)</span> is equal to the sum of the variance of <span class="math inline">\(Z\)</span> and of the variance of <span class="math inline">\(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X\)</span>, that is:
+<span class="math display">\[
+\mathbb{V}ar(Y) = \mathbb{V}ar(Z) + \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X) \ge \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X).
+\]</span>
+The equality holds iff <span class="math inline">\(\mathbb{V}ar(Z)=0\)</span>, i.e. iff <span class="math inline">\(Y = \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X+cst\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:asmyptlevel" class="definition"><strong>Definition 3.7  (Asymptotic level) </strong></span>An asymptotic test with critical region <span class="math inline">\(\Omega_n\)</span> has an asymptotic level equal to <span class="math inline">\(\alpha\)</span> if:
+<span class="math display">\[
+\underset{\theta \in \Theta}{\mbox{sup}} \quad \underset{n \rightarrow \infty}{\mbox{lim}} \mathbb{P}_\theta (S_n \in \Omega_n) = \alpha,
+\]</span>
+where <span class="math inline">\(S_n\)</span> is the test statistic and <span class="math inline">\(\Theta\)</span> is such that the null hypothesis <span class="math inline">\(H_0\)</span> is equivalent to <span class="math inline">\(\theta \in \Theta\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:asmyptconsisttest" class="definition"><strong>Definition 3.8  (Asymptotically consistent test) </strong></span>An asymptotic test with critical region <span class="math inline">\(\Omega_n\)</span> is consistent if:
+<span class="math display">\[
+\forall \theta \in \Theta^c, \quad \mathbb{P}_\theta (S_n \in \Omega_n) \rightarrow 1,
+\]</span>
+where <span class="math inline">\(S_n\)</span> is the test statistic and <span class="math inline">\(\Theta^c\)</span> is such that the null hypothesis <span class="math inline">\(H_0\)</span> is equivalent to <span class="math inline">\(\theta \notin \Theta^c\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:Kullback" class="definition"><strong>Definition 3.9  (Kullback discrepancy) </strong></span>Given two p.d.f. <span class="math inline">\(f\)</span> and <span class="math inline">\(f^*\)</span>, the Kullback discrepancy is defined by:
+<span class="math display">\[
+I(f,f^*) = \mathbb{E}^* \left( \log \frac{f^*(Y)}{f(Y)} \right) = \int \log \frac{f^*(y)}{f(y)} f^*(y) dy.
+\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:Kullback" class="proposition"><strong>Proposition 3.9  (Properties of the Kullback discrepancy) </strong></span>We have:</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(I(f,f^*) \ge 0\)</span></li>
+<li>
+<span class="math inline">\(I(f,f^*) = 0\)</span> iff <span class="math inline">\(f \equiv f^*\)</span>.</li>
+</ol>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-24" class="proof"><em>Proof</em>. </span><span class="math inline">\(x \rightarrow -\log(x)\)</span> is a convex function. Therefore <span class="math inline">\(\mathbb{E}^*(-\log f(Y)/f^*(Y)) \ge -\log \mathbb{E}^*(f(Y)/f^*(Y)) = 0\)</span> (proves (i)). Since <span class="math inline">\(x \rightarrow -\log(x)\)</span> is strictly convex, equality in (i) holds if and only if <span class="math inline">\(f(Y)/f^*(Y)\)</span> is constant (proves (ii)).</p>
+</div>
+<div class="definition">
+<p><span id="def:characteristic" class="definition"><strong>Definition 3.10  (Characteristic function) </strong></span>For any real-valued random variable <span class="math inline">\(X\)</span>, the characteristic function is defined by:
+<span class="math display">\[
+\phi_X: u \rightarrow \mathbb{E}[\exp(iuX)].
+\]</span></p>
+</div>
+</div>
+<div id="standard-distributions" class="section level3" number="3.3.2">
+<h3>
+<span class="header-section-number">3.3.2</span> Standard distributions<a class="anchor" aria-label="anchor" href="#standard-distributions"><i class="fas fa-link"></i></a>
+</h3>
+<div class="definition">
+<p><span id="def:fstatistics" class="definition"><strong>Definition 3.11  (F distribution) </strong></span>Consider <span class="math inline">\(n=n_1+n_2\)</span> i.i.d. <span class="math inline">\(\mathcal{N}(0,1)\)</span> r.v. <span class="math inline">\(X_i\)</span>. If the r.v. <span class="math inline">\(F\)</span> is defined by:
+<span class="math display">\[
+F = \frac{\sum_{i=1}^{n_1} X_i^2}{\sum_{j=n_1+1}^{n_1+n_2} X_j^2}\frac{n_2}{n_1}
+\]</span>
+then <span class="math inline">\(F \sim \mathcal{F}(n_1,n_2)\)</span>. (See Table <a href="append.html#tab:Fstat">3.4</a> for quantiles.)</p>
+</div>
+<div class="definition">
+<p><span id="def:tStudent" class="definition"><strong>Definition 3.12  (Student-t distribution) </strong></span><span class="math inline">\(Z\)</span> follows a Student-t (or <span class="math inline">\(t\)</span>) distribution with <span class="math inline">\(\nu\)</span> degrees of freedom (d.f.) if:
+<span class="math display">\[
+Z = X_0 \bigg/ \sqrt{\frac{\sum_{i=1}^{\nu}X_i^2}{\nu}}, \quad X_i \sim i.i.d. \mathcal{N}(0,1).
+\]</span>
+We have <span class="math inline">\(\mathbb{E}(Z)=0\)</span>, and <span class="math inline">\(\mathbb{V}ar(Z)=\frac{\nu}{\nu-2}\)</span> if <span class="math inline">\(\nu&gt;2\)</span>. (See Table <a href="append.html#tab:Student">3.2</a> for quantiles.)</p>
+</div>
+<div class="definition">
+<p><span id="def:chi2" class="definition"><strong>Definition 3.13  (Chi-square distribution) </strong></span><span class="math inline">\(Z\)</span> follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(\nu\)</span> d.f. if <span class="math inline">\(Z = \sum_{i=1}^{\nu}X_i^2\)</span> where <span class="math inline">\(X_i \sim i.i.d. \mathcal{N}(0,1)\)</span>.
+We have <span class="math inline">\(\mathbb{E}(Z)=\nu\)</span>. (See Table <a href="append.html#tab:Chi2">3.3</a> for quantiles.)</p>
+</div>
+<div class="proposition">
+<p><span id="prp:waldtypeproduct" class="proposition"><strong>Proposition 3.10  (Inner product of a multivariate Gaussian variable) </strong></span>Let <span class="math inline">\(X\)</span> be a <span class="math inline">\(n\)</span>-dimensional multivariate Gaussian variable: <span class="math inline">\(X \sim \mathcal{N}(0,\Sigma)\)</span>. We have:
+<span class="math display">\[
+X' \Sigma^{-1}X \sim \chi^2(n).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-25" class="proof"><em>Proof</em>. </span>Because <span class="math inline">\(\Sigma\)</span> is a symmetrical definite positive matrix, it admits the spectral decomposition <span class="math inline">\(PDP'\)</span> where <span class="math inline">\(P\)</span> is an orthogonal matrix (i.e. <span class="math inline">\(PP'=Id\)</span>) and D is a diagonal matrix with non-negative entries. Denoting by <span class="math inline">\(\sqrt{D^{-1}}\)</span> the diagonal matrix whose diagonal entries are the inverse of those of <span class="math inline">\(D\)</span>, it is easily checked that the covariance matrix of <span class="math inline">\(Y:=\sqrt{D^{-1}}P'X\)</span> is <span class="math inline">\(Id\)</span>. Therefore <span class="math inline">\(Y\)</span> is a vector of uncorrelated Gaussian variables. The properties of Gaussian variables imply that the components of <span class="math inline">\(Y\)</span> are then also independent. Hence <span class="math inline">\(Y'Y=\sum_i Y_i^2 \sim \chi^2(n)\)</span>.</p>
+<p>It remains to note that <span class="math inline">\(Y'Y=X'PD^{-1}P'X=X'\mathbb{V}ar(X)^{-1}X\)</span> to conclude.</p>
+</div>
+<div class="definition">
+<p><span id="def:GEVdistri" class="definition"><strong>Definition 3.14  (Generalized Extreme Value (GEV) distribution) </strong></span>The vector of disturbances <span class="math inline">\(\boldsymbol\varepsilon=[\varepsilon_{1,1},\dots,\varepsilon_{1,K_1},\dots,\varepsilon_{J,1},\dots,\varepsilon_{J,K_J}]'\)</span> follows the Generalized Extreme Value (GEV) distribution if its c.d.f. is:
+<span class="math display">\[
+F(\boldsymbol\varepsilon,\boldsymbol\rho) = \exp(-G(e^{-\varepsilon_{1,1}},\dots,e^{-\varepsilon_{J,K_J}};\boldsymbol\rho))
+\]</span>
+with
+<span class="math display">\[\begin{eqnarray*}
+G(\mathbf{Y};\boldsymbol\rho) &amp;\equiv&amp;  G(Y_{1,1},\dots,Y_{1,K_1},\dots,Y_{J,1},\dots,Y_{J,K_J};\boldsymbol\rho) \\
+&amp;=&amp; \sum_{j=1}^J\left(\sum_{k=1}^{K_j} Y_{jk}^{1/\rho_j}
+\right)^{\rho_j}
+\end{eqnarray*}\]</span></p>
+</div>
+</div>
+<div id="stochastic-convergences" class="section level3" number="3.3.3">
+<h3>
+<span class="header-section-number">3.3.3</span> Stochastic convergences<a class="anchor" aria-label="anchor" href="#stochastic-convergences"><i class="fas fa-link"></i></a>
+</h3>
+<div class="proposition">
+<p><span id="prp:chebychev" class="proposition"><strong>Proposition 3.11  (Chebychev's inequality) </strong></span>If <span class="math inline">\(\mathbb{E}(|X|^r)\)</span> is finite for some <span class="math inline">\(r&gt;0\)</span> then:
+<span class="math display">\[
+\forall \varepsilon &gt; 0, \quad \mathbb{P}(|X - c|&gt;\varepsilon) \le \frac{\mathbb{E}[|X - c|^r]}{\varepsilon^r}.
+\]</span>
+In particular, for <span class="math inline">\(r=2\)</span>:
+<span class="math display">\[
+\forall \varepsilon &gt; 0, \quad \mathbb{P}(|X - c|&gt;\varepsilon) \le \frac{\mathbb{E}[(X - c)^2]}{\varepsilon^2}.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-26" class="proof"><em>Proof</em>. </span>Remark that <span class="math inline">\(\varepsilon^r \mathbb{I}_{\{|X| \ge \varepsilon\}} \le |X|^r\)</span> and take the expectation of both sides.</p>
+</div>
+<div class="definition">
+<p><span id="def:convergenceproba" class="definition"><strong>Definition 3.15  (Convergence in probability) </strong></span>The random variable sequence <span class="math inline">\(x_n\)</span> converges in probability to a constant <span class="math inline">\(c\)</span> if <span class="math inline">\(\forall \varepsilon\)</span>, <span class="math inline">\(\lim_{n \rightarrow \infty} \mathbb{P}(|x_n - c|&gt;\varepsilon) = 0\)</span>.</p>
+<p>It is denoted as: <span class="math inline">\(\mbox{plim } x_n = c\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:convergenceLr" class="definition"><strong>Definition 3.16  (Convergence in the Lr norm) </strong></span><span class="math inline">\(x_n\)</span> converges in the <span class="math inline">\(r\)</span>-th mean (or in the <span class="math inline">\(L^r\)</span>-norm) towards <span class="math inline">\(x\)</span>, if <span class="math inline">\(\mathbb{E}(|x_n|^r)\)</span> and <span class="math inline">\(\mathbb{E}(|x|^r)\)</span> exist and if
+<span class="math display">\[
+\lim_{n \rightarrow \infty} \mathbb{E}(|x_n - x|^r) = 0.
+\]</span>
+It is denoted as: <span class="math inline">\(x_n \overset{L^r}{\rightarrow} c\)</span>.</p>
+<p>For <span class="math inline">\(r=2\)</span>, this convergence is called <strong>mean square convergence</strong>.</p>
+</div>
+<div class="definition">
+<p><span id="def:convergenceAlmost" class="definition"><strong>Definition 3.17  (Almost sure convergence) </strong></span>The random variable sequence <span class="math inline">\(x_n\)</span> converges almost surely to <span class="math inline">\(c\)</span> if <span class="math inline">\(\mathbb{P}(\lim_{n \rightarrow \infty} x_n = c) = 1\)</span>.</p>
+<p>It is denoted as: <span class="math inline">\(x_n \overset{a.s.}{\rightarrow} c\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:cvgceDistri" class="definition"><strong>Definition 3.18  (Convergence in distribution) </strong></span><span class="math inline">\(x_n\)</span> is said to converge in distribution (or in law) to <span class="math inline">\(x\)</span> if
+<span class="math display">\[
+\lim_{n \rightarrow \infty} F_{x_n}(s) = F_{x}(s)
+\]</span>
+for all <span class="math inline">\(s\)</span> at which <span class="math inline">\(F_X\)</span> –the cumulative distribution of <span class="math inline">\(X\)</span>– is continuous.</p>
+<p>It is denoted as: <span class="math inline">\(x_n \overset{d}{\rightarrow} x\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:Slutsky" class="proposition"><strong>Proposition 3.12  (Rules for limiting distributions (Slutsky)) </strong></span>We have:</p>
+<ol style="list-style-type: lower-roman">
+<li><p><strong>Slutsky’s theorem:</strong> If <span class="math inline">\(x_n \overset{d}{\rightarrow} x\)</span> and <span class="math inline">\(y_n \overset{p}{\rightarrow} c\)</span> then
+<span class="math display">\[\begin{eqnarray*}
+x_n y_n &amp;\overset{d}{\rightarrow}&amp; x c \\
+x_n + y_n &amp;\overset{d}{\rightarrow}&amp; x + c \\
+x_n/y_n &amp;\overset{d}{\rightarrow}&amp; x / c \quad (\mbox{if }c \ne 0)
+\end{eqnarray*}\]</span></p></li>
+<li><p><strong>Continuous mapping theorem:</strong> If <span class="math inline">\(x_n \overset{d}{\rightarrow} x\)</span> and <span class="math inline">\(g\)</span> is a continuous function then <span class="math inline">\(g(x_n) \overset{d}{\rightarrow} g(x).\)</span></p></li>
+</ol>
+</div>
+<div class="proposition">
+<p><span id="prp:implicationsconv" class="proposition"><strong>Proposition 3.13  (Implications of stochastic convergences) </strong></span>We have:
+<span class="math display">\[\begin{align*}
+&amp;\boxed{\overset{L^s}{\rightarrow}}&amp; &amp;\underset{1 \le r \le s}{\Rightarrow}&amp; &amp;\boxed{\overset{L^r}{\rightarrow}}&amp;\\
+&amp;&amp; &amp;&amp; &amp;\Downarrow&amp;\\
+&amp;\boxed{\overset{a.s.}{\rightarrow}}&amp; &amp;\Rightarrow&amp; &amp;\boxed{\overset{p}{\rightarrow}}&amp; \Rightarrow \qquad \boxed{\overset{d}{\rightarrow}}.
+\end{align*}\]</span></p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-27" class="proof"><em>Proof</em>. </span>(of the fact that <span class="math inline">\(\left(\overset{p}{\rightarrow}\right) \Rightarrow \left( \overset{d}{\rightarrow}\right)\)</span>). Assume that <span class="math inline">\(X_n \overset{p}{\rightarrow} X\)</span>. Denoting by <span class="math inline">\(F\)</span> and <span class="math inline">\(F_n\)</span> the c.d.f. of <span class="math inline">\(X\)</span> and <span class="math inline">\(X_n\)</span>, respectively:
+<span class="math display" id="eq:convgce1">\[\begin{equation}
+F_n(x) = \mathbb{P}(X_n \le x,X\le x+\varepsilon) + \mathbb{P}(X_n \le x,X &gt; x+\varepsilon) \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|&gt;\varepsilon).\tag{3.3}
+\end{equation}\]</span>
+Besides,
+<span class="math display">\[
+F(x-\varepsilon) = \mathbb{P}(X \le x-\varepsilon,X_n \le x) + \mathbb{P}(X \le x-\varepsilon,X_n &gt; x) \le F_n(x) + \mathbb{P}(|X_n - X|&gt;\varepsilon),
+\]</span>
+which implies:
+<span class="math display" id="eq:convgce2">\[\begin{equation}
+F(x-\varepsilon) - \mathbb{P}(|X_n - X|&gt;\varepsilon) \le F_n(x).\tag{3.4}
+\end{equation}\]</span>
+Eqs. <a href="append.html#eq:convgce1">(3.3)</a> and <a href="append.html#eq:convgce2">(3.4)</a> imply:
+<span class="math display">\[
+F(x-\varepsilon) - \mathbb{P}(|X_n - X|&gt;\varepsilon) \le F_n(x)  \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|&gt;\varepsilon).
+\]</span>
+Taking limits as <span class="math inline">\(n \rightarrow \infty\)</span> yields
+<span class="math display">\[
+F(x-\varepsilon) \le \underset{n \rightarrow \infty}{\mbox{lim inf}}\; F_n(x) \le \underset{n \rightarrow \infty}{\mbox{lim sup}}\; F_n(x)  \le F(x+\varepsilon).
+\]</span>
+The result is then obtained by taking limits as <span class="math inline">\(\varepsilon \rightarrow 0\)</span> (if <span class="math inline">\(F\)</span> is continuous at <span class="math inline">\(x\)</span>).</p>
+</div>
+<div class="proposition">
+<p><span id="prp:cvgce11" class="proposition"><strong>Proposition 3.14  (Convergence in distribution to a constant) </strong></span>If <span class="math inline">\(X_n\)</span> converges in distribution to a constant <span class="math inline">\(c\)</span>, then <span class="math inline">\(X_n\)</span> converges in probability to <span class="math inline">\(c\)</span>.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-28" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\varepsilon&gt;0\)</span>, we have <span class="math inline">\(\mathbb{P}(X_n &lt; c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 0\)</span> i.e. <span class="math inline">\(\mathbb{P}(X_n \ge c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1\)</span> and <span class="math inline">\(\mathbb{P}(X_n &lt; c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1\)</span>. Therefore <span class="math inline">\(\mathbb{P}(c - \varepsilon \le X_n &lt; c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1\)</span>,
+which gives the result.</p>
+</div>
+<div class="example">
+<p><span id="exm:plimButNotLr" class="example"><strong>Example 3.1  (Convergence in probability but not $L^r$) </strong></span>Let <span class="math inline">\(\{x_n\}_{n \in \mathbb{N}}\)</span> be a series of random variables defined by:
+<span class="math display">\[
+x_n = n u_n,
+\]</span>
+where <span class="math inline">\(u_n\)</span> are independent random variables s.t. <span class="math inline">\(u_n \sim \mathcal{B}(1/n)\)</span>.</p>
+<p>We have <span class="math inline">\(x_n \overset{p}{\rightarrow} 0\)</span> but <span class="math inline">\(x_n \overset{L^r}{\nrightarrow} 0\)</span> because <span class="math inline">\(\mathbb{E}(|X_n-0|)=\mathbb{E}(X_n)=1\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:cauchycritstatic" class="theorem"><strong>Theorem 3.2  (Cauchy criterion (non-stochastic case)) </strong></span>We have that <span class="math inline">\(\sum_{i=0}^{T} a_i\)</span> converges (<span class="math inline">\(T \rightarrow \infty\)</span>) iff, for any <span class="math inline">\(\eta &gt; 0\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that, for all <span class="math inline">\(M\ge N\)</span>,
+<span class="math display">\[
+\left|\sum_{i=N+1}^{M} a_i\right| &lt; \eta.
+\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:cauchycritstochastic" class="theorem"><strong>Theorem 3.3  (Cauchy criterion (stochastic case)) </strong></span>We have that <span class="math inline">\(\sum_{i=0}^{T} \theta_i \varepsilon_{t-i}\)</span> converges in mean square (<span class="math inline">\(T \rightarrow \infty\)</span>) to a random variable iff, for any <span class="math inline">\(\eta &gt; 0\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that, for all <span class="math inline">\(M\ge N\)</span>,
+<span class="math display">\[
+\mathbb{E}\left[\left(\sum_{i=N+1}^{M} \theta_i \varepsilon_{t-i}\right)^2\right] &lt; \eta.
+\]</span></p>
+</div>
+</div>
+<div id="central-limit-theorem" class="section level3" number="3.3.4">
+<h3>
+<span class="header-section-number">3.3.4</span> Central limit theorem<a class="anchor" aria-label="anchor" href="#central-limit-theorem"><i class="fas fa-link"></i></a>
+</h3>
+<div class="theorem">
+<p><span id="thm:LLNappendix" class="theorem"><strong>Theorem 3.4  (Law of large numbers) </strong></span>The sample mean is a consistent estimator of the population mean.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-29" class="proof"><em>Proof</em>. </span>Let’s denote by <span class="math inline">\(\phi_{X_i}\)</span> the characteristic function of a r.v. <span class="math inline">\(X_i\)</span>. If the mean of <span class="math inline">\(X_i\)</span> is <span class="math inline">\(\mu\)</span> then the Talyor expansion of the characteristic function is:
+<span class="math display">\[
+\phi_{X_i}(u) = \mathbb{E}(\exp(iuX)) = 1 + iu\mu + o(u).
+\]</span>
+The properties of the characteristic function (see Def. <a href="append.html#def:characteristic">3.10</a>) imply that:
+<span class="math display">\[
+\phi_{\frac{1}{n}(X_1+\dots+X_n)}(u) = \prod_{i=1}^{n} \left(1 + i\frac{u}{n}\mu + o\left(\frac{u}{n}\right) \right) \rightarrow e^{iu\mu}.
+\]</span>
+The facts that (a) <span class="math inline">\(e^{iu\mu}\)</span> is the characteristic function of the constant <span class="math inline">\(\mu\)</span> and (b) that a characteristic function uniquely characterises a distribution imply that the sample mean converges in distribution to the constant <span class="math inline">\(\mu\)</span>, which further implies that it converges in probability to <span class="math inline">\(\mu\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:LindbergLevyCLT" class="theorem"><strong>Theorem 3.5  (Lindberg-Levy Central limit theorem, CLT) </strong></span>If <span class="math inline">\(x_n\)</span> is an i.i.d. sequence of random variables with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> (<span class="math inline">\(\in ]0,+\infty[\)</span>), then:
+<span class="math display">\[
+\boxed{\sqrt{n} (\bar{x}_n - \mu) \overset{d}{\rightarrow} \mathcal{N}(0,\sigma^2), \quad \mbox{where} \quad \bar{x}_n = \frac{1}{n} \sum_{i=1}^{n} x_i.}
+\]</span></p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-30" class="proof"><em>Proof</em>. </span>Let us introduce the r.v. <span class="math inline">\(Y_n:= \sqrt{n}(\bar{X}_n - \mu)\)</span>. We have <span class="math inline">\(\phi_{Y_n}(u) = \left[ \mathbb{E}\left( \exp(i \frac{1}{\sqrt{n}} u (X_1 - \mu)) \right) \right]^n\)</span>. We have:
+<span class="math display">\[\begin{eqnarray*}
+\left[ \mathbb{E}\left( \exp\left(i \frac{1}{\sqrt{n}} u (X_1 - \mu)\right) \right) \right]^n &amp;=&amp; \left[ \mathbb{E}\left( 1 + i \frac{1}{\sqrt{n}} u (X_1 - \mu) - \frac{1}{2n} u^2 (X_1 - \mu)^2 + o(u^2) \right) \right]^n \\
+&amp;=&amp; \left( 1 - \frac{1}{2n}u^2\sigma^2 + o(u^2)\right)^n.
+\end{eqnarray*}\]</span>
+Therefore <span class="math inline">\(\phi_{Y_n}(u) \underset{n \rightarrow \infty}{\rightarrow} \exp \left( - \frac{1}{2}u^2\sigma^2 \right)\)</span>, which is the characteristic function of <span class="math inline">\(\mathcal{N}(0,\sigma^2)\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="GaussianVar" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Some properties of Gaussian variables<a class="anchor" aria-label="anchor" href="#GaussianVar"><i class="fas fa-link"></i></a>
+</h2>
+<div class="proposition">
+<p><span id="prp:bandsindependent" class="proposition"><strong>Proposition 3.15  </strong></span>If <span class="math inline">\(\mathbf{A}\)</span> is idempotent and if <span class="math inline">\(\mathbf{x}\)</span> is Gaussian, <span class="math inline">\(\mathbf{L}\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{x}'\mathbf{A}\mathbf{x}\)</span> are independent if <span class="math inline">\(\mathbf{L}\mathbf{A}=\mathbf{0}\)</span>.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-31" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\mathbf{L}\mathbf{A}=\mathbf{0}\)</span>, then the two Gaussian vectors <span class="math inline">\(\mathbf{L}\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{A}\mathbf{x}\)</span> are independent. This implies the independence of any function of <span class="math inline">\(\mathbf{L}\mathbf{x}\)</span> and any function of <span class="math inline">\(\mathbf{A}\mathbf{x}\)</span>. The results then follows from the observation that <span class="math inline">\(\mathbf{x}'\mathbf{A}\mathbf{x}=(\mathbf{A}\mathbf{x})'(\mathbf{A}\mathbf{x})\)</span>, which is a function of <span class="math inline">\(\mathbf{A}\mathbf{x}\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span id="prp:update" class="proposition"><strong>Proposition 3.16  (Bayesian update in a vector of Gaussian variables) </strong></span>If
+<span class="math display">\[
+\left[
+\begin{array}{c}
+Y_1\\
+Y_2
+\end{array}
+\right]
+\sim \mathcal{N}
+\left(0,
+\left[\begin{array}{cc}
+\Omega_{11} &amp; \Omega_{12}\\
+\Omega_{21} &amp; \Omega_{22}
+\end{array}\right]
+\right),
+\]</span>
+then
+<span class="math display">\[
+Y_{2}|Y_{1} \sim \mathcal{N}
+\left(
+\Omega_{21}\Omega_{11}^{-1}Y_{1},\Omega_{22}-\Omega_{21}\Omega_{11}^{-1}\Omega_{12}
+\right).
+\]</span>
+<span class="math display">\[
+Y_{1}|Y_{2} \sim \mathcal{N}
+\left(
+\Omega_{12}\Omega_{22}^{-1}Y_{2},\Omega_{11}-\Omega_{12}\Omega_{22}^{-1}\Omega_{21}
+\right).
+\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:truncated" class="proposition"><strong>Proposition 3.17  (Truncated distributions) </strong></span>If <span class="math inline">\(X\)</span> is a random variable distributed according to some p.d.f. <span class="math inline">\(f\)</span>, with c.d.f. <span class="math inline">\(F\)</span>, with infinite support. Then the p.d.f. of <span class="math inline">\(X|a \le X &lt; b\)</span> is
+<span class="math display">\[
+g(x) = \frac{f(x)}{F(b)-F(a)}\mathbb{I}_{\{a \le x &lt; b\}},
+\]</span>
+for any <span class="math inline">\(a&lt;b\)</span>.</p>
+<p>In partiucular, for a Gaussian variable <span class="math inline">\(X \sim \mathcal{N}(\mu,\sigma^2)\)</span>, we have
+<span class="math display">\[
+f(X=x|a\le X&lt;b) = \dfrac{\dfrac{1}{\sigma}\phi\left(\dfrac{x - \mu}{\sigma}\right)}{Z}.
+\]</span>
+with <span class="math inline">\(Z = \Phi(\beta)-\Phi(\alpha)\)</span>, where <span class="math inline">\(\alpha = \dfrac{a - \mu}{\sigma}\)</span> and <span class="math inline">\(\beta = \dfrac{b - \mu}{\sigma}\)</span>.</p>
+<p>Moreover:
+<span class="math display" id="eq:Etrunc">\[\begin{eqnarray}
+\mathbb{E}(X|a\le X&lt;b) &amp;=&amp; \mu - \frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\sigma. \tag{3.5}
+\end{eqnarray}\]</span></p>
+<p>We also have:
+<span class="math display" id="eq:Vtrunc">\[\begin{eqnarray}
+&amp;&amp; \mathbb{V}ar(X|a\le X&lt;b) \nonumber\\
+&amp;=&amp; \sigma^2\left[
+1 -  \frac{\beta\phi\left(\beta\right)-\alpha\phi\left(\alpha\right)}{Z} -  \left(\frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\right)^2 \right] \tag{3.6}
+\end{eqnarray}\]</span></p>
+<p>In particular, for <span class="math inline">\(b \rightarrow \infty\)</span>, we get:
+<span class="math display" id="eq:Vtrunc2">\[\begin{equation}
+\mathbb{V}ar(X|a &lt; X) = \sigma^2\left[1 + \alpha\lambda(-\alpha) - \lambda(-\alpha)^2 \right], \tag{3.7}
+\end{equation}\]</span>
+with <span class="math inline">\(\lambda(x)=\dfrac{\phi(x)}{\Phi(x)}\)</span> is called the <strong>inverse Mills ratio</strong>.</p>
+</div>
+<p>Consider the case where <span class="math inline">\(a \rightarrow - \infty\)</span> (i.e. the conditioning set is <span class="math inline">\(X&lt;b\)</span>) and <span class="math inline">\(\mu=0\)</span>, <span class="math inline">\(\sigma=1\)</span>. Then Eq. <a href="append.html#eq:Etrunc">(3.5)</a> gives <span class="math inline">\(\mathbb{E}(X|X&lt;b) = - \lambda(b) = - \dfrac{\phi(b)}{\Phi(b)}\)</span>, where <span class="math inline">\(\lambda\)</span> is the function computing the inverse Mills ratio.</p>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:inverseMills"></span>
+<img src="IdentifStructShocks_files/figure-html/inverseMills-1.png" alt="$\mathbb{E}(X|X&lt;b)$ as a function of $b$ when $X\sim \mathcal{N}(0,1)$ (in black)." width="672"><p class="caption">
+Figure 3.2: <span class="math inline">\(\mathbb{E}(X|X&lt;b)\)</span> as a function of <span class="math inline">\(b\)</span> when <span class="math inline">\(X\sim \mathcal{N}(0,1)\)</span> (in black).
+</p>
+</div>
+<div class="proposition">
+<p><span id="prp:pdfMultivarGaussian" class="proposition"><strong>Proposition 3.18  (p.d.f. of a multivariate Gaussian variable) </strong></span>If <span class="math inline">\(Y \sim \mathcal{N}(\mu,\Omega)\)</span> and if <span class="math inline">\(Y\)</span> is a <span class="math inline">\(n\)</span>-dimensional vector, then the density function of <span class="math inline">\(Y\)</span> is:
+<span class="math display">\[
+\frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right].
+\]</span></p>
+</div>
+</div>
+<div id="AppendixProof" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Proof of Proposition <a href="#prp:MLEproperties"><strong>??</strong></a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-32" class="proof"><em>Proof</em>. </span>Assumptions (i) and (ii) (in the set of Assumptions <a href="#hyp:MLEregularity"><strong>??</strong></a>) imply that <span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> exists (<span class="math inline">\(=\mbox{argmax}_\theta (1/n)\log \mathcal{L}(\boldsymbol\theta;\mathbf{y})\)</span>).</p>
+<p><span class="math inline">\((1/n)\log \mathcal{L}(\boldsymbol\theta;\mathbf{y})\)</span> can be interpreted as the sample mean of the r.v. <span class="math inline">\(\log f(Y_i;\boldsymbol\theta)\)</span> that are i.i.d. Therefore <span class="math inline">\((1/n)\log \mathcal{L}(\boldsymbol\theta;\mathbf{y})\)</span> converges to <span class="math inline">\(\mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta))\)</span> – which exists (Assumption iv).</p>
+<p>Because the latter convergence is uniform (Assumption v), the solution <span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> almost surely converges to the solution to the limit problem:
+<span class="math display">\[
+\mbox{argmax}_\theta \mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta)) = \mbox{argmax}_\theta \int_{\mathcal{Y}} \log f(y;\boldsymbol\theta)f(y;\boldsymbol\theta_0) dy.
+\]</span></p>
+<p>Properties of the Kullback information measure (see Prop. <a href="append.html#prp:Kullback">3.9</a>), together with the identifiability assumption (ii) implies that the solution to the limit problem is unique and equal to <span class="math inline">\(\boldsymbol\theta_0\)</span>.</p>
+<p>Consider a r.v. sequence <span class="math inline">\(\boldsymbol\theta\)</span> that converges to <span class="math inline">\(\boldsymbol\theta_0\)</span>. The Taylor expansion of the score in a neighborood of <span class="math inline">\(\boldsymbol\theta_0\)</span> yields to:
+<span class="math display">\[
+\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\mathbf{y})}{\partial \boldsymbol\theta} = \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} + \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta - \boldsymbol\theta_0) + o_p(\boldsymbol\theta - \boldsymbol\theta_0)
+\]</span></p>
+<p><span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> converges to <span class="math inline">\(\boldsymbol\theta_0\)</span> and satisfies the likelihood equation <span class="math inline">\(\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\mathbf{y})}{\partial \boldsymbol\theta} = \mathbf{0}\)</span>. Therefore:
+<span class="math display">\[
+\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \approx - \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0),
+\]</span>
+or equivalently:
+<span class="math display">\[
+\frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \approx
+\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right)\sqrt{n}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0),
+\]</span></p>
+<p>By the law of large numbers, we have: <span class="math inline">\(\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right) \overset{}\rightarrow \frac{1}{n} \mathbf{I}(\boldsymbol\theta_0) = \mathcal{I}_Y(\boldsymbol\theta_0)\)</span>.</p>
+<p>Besides, we have:
+<span class="math display">\[\begin{eqnarray*}
+\frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} &amp;=&amp; \sqrt{n} \left( \frac{1}{n} \sum_i \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right) \\
+&amp;=&amp; \sqrt{n} \left( \frac{1}{n} \sum_i \left\{ \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} - \mathbb{E}_{\boldsymbol\theta_0} \frac{\partial \log f(Y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right\} \right)
+\end{eqnarray*}\]</span>
+which converges to <span class="math inline">\(\mathcal{N}(0,\mathcal{I}_Y(\boldsymbol\theta_0))\)</span> by the CLT.</p>
+<p>Collecting the preceding results leads to (b). The fact that <span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> achieves the FDCR bound proves (c).</p>
+</div>
+<p><strong>Proof of Proposition <a href="#prp:Walddistri"><strong>??</strong></a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-33" class="proof"><em>Proof</em>. </span>We have <span class="math inline">\(\sqrt{n}(\hat{\boldsymbol\theta}_{n} - \boldsymbol\theta_{0}) \overset{d}{\rightarrow} \mathcal{N}(0,\mathcal{I}(\boldsymbol\theta_0)^{-1})\)</span> (Eq. (eq:normMLE)). A Taylor expansion around <span class="math inline">\(\boldsymbol\theta_0\)</span> yields to:
+<span class="math display" id="eq:XXX">\[\begin{equation}
+\sqrt{n}(h(\hat{\boldsymbol\theta}_{n}) - h(\boldsymbol\theta_{0})) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). \tag{3.8}
+\end{equation}\]</span>
+Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(h(\boldsymbol\theta_{0})=0\)</span> therefore:
+<span class="math display" id="eq:lm10">\[\begin{equation}
+\sqrt{n} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). \tag{3.9}
+\end{equation}\]</span>
+Hence
+<span class="math display">\[
+\sqrt{n} \left(
+\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}
+\right)^{-1/2} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,Id\right).
+\]</span>
+Taking the quadratic form, we obtain:
+<span class="math display">\[
+n h(\hat{\boldsymbol\theta}_{n})'  \left(
+\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}
+\right)^{-1} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \chi^2(r).
+\]</span></p>
+<p>The fact that the test has asymptotic level <span class="math inline">\(\alpha\)</span> directly stems from what precedes. <strong>Consistency of the test</strong>: Consider <span class="math inline">\(\theta_0 \in \Theta\)</span>. Because the MLE is consistent, <span class="math inline">\(h(\hat{\boldsymbol\theta}_{n})\)</span> converges to <span class="math inline">\(h(\boldsymbol\theta_0) \ne 0\)</span>. Eq. <a href="append.html#eq:XXX">(3.8)</a> is still valid. It implies that <span class="math inline">\(\xi^W_n\)</span> converges to <span class="math inline">\(+\infty\)</span> and therefore that <span class="math inline">\(\mathbb{P}_{\boldsymbol\theta}(\xi^W_n \ge \chi^2_{1-\alpha}(r)) \rightarrow 1\)</span>.</p>
+</div>
+<p><strong>Proof of Proposition <a href="#prp:LMdistri"><strong>??</strong></a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-34" class="proof"><em>Proof</em>. </span>Notations: “<span class="math inline">\(\approx\)</span>” means “equal up to a term that converges to 0 in probability”. We are under <span class="math inline">\(H_0\)</span>. <span class="math inline">\(\hat{\boldsymbol\theta}^0\)</span> is the constrained ML estimator; <span class="math inline">\(\hat{\boldsymbol\theta}\)</span> denotes the unconstrained one.</p>
+<p>We combine the two Taylor expansion: <span class="math inline">\(h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n - \boldsymbol\theta_0)\)</span> and <span class="math inline">\(h(\hat{\boldsymbol\theta}_n^0) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n^0 - \boldsymbol\theta_0)\)</span> and we use <span class="math inline">\(h(\hat{\boldsymbol\theta}_n^0)=0\)</span> (by definition) to get:
+<span class="math display" id="eq:lm1">\[\begin{equation}
+\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}\sqrt{n}(\hat{\boldsymbol\theta}_n - \hat{\boldsymbol\theta}^0_n). \tag{3.10}
+\end{equation}\]</span>
+Besides, we have (using the definition of the information matrix):
+<span class="math display" id="eq:lm29">\[\begin{equation}
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) \tag{3.11}
+\end{equation}\]</span>
+and:
+<span class="math display" id="eq:lm30">\[\begin{equation}
+0=\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).\tag{3.12}
+\end{equation}\]</span>
+Taking the difference and multiplying by <span class="math inline">\(\mathcal{I}(\boldsymbol\theta_0)^{-1}\)</span>:
+<span class="math display" id="eq:lm2">\[\begin{equation}
+\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}_n^0) \approx
+\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}
+\mathcal{I}(\boldsymbol\theta_0).\tag{3.13}
+\end{equation}\]</span>
+Eqs. <a href="append.html#eq:lm1">(3.10)</a> and <a href="append.html#eq:lm2">(3.13)</a> yield to:
+<span class="math display" id="eq:lm3">\[\begin{equation}
+\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}.\tag{3.14}
+\end{equation}\]</span></p>
+<p>Recall that <span class="math inline">\(\hat{\boldsymbol\theta}^0_n\)</span> is the MLE of <span class="math inline">\(\boldsymbol\theta_0\)</span> under the constraint <span class="math inline">\(h(\boldsymbol\theta)=0\)</span>. The vector of Lagrange multipliers <span class="math inline">\(\hat\lambda_n\)</span> associated to this program satisfies:
+<span class="math display" id="eq:multiplier">\[\begin{equation}
+\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}+ \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}\hat\lambda_n = 0.\tag{3.15}
+\end{equation}\]</span>
+Substituting the latter equation in Eq. <a href="append.html#eq:lm3">(3.14)</a> gives:
+<span class="math display">\[
+\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx
+- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}} \approx
+- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}}
+\]</span>
+which yields:
+<span class="math display" id="eq:lm20">\[\begin{equation}
+\frac{\hat\lambda_n}{\sqrt{n}} \approx - \left(
+\dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta}
+\right)^{-1}
+\sqrt{n}h(\hat{\boldsymbol\theta}_n).\tag{3.16}
+\end{equation}\]</span>
+It follows, from Eq. <a href="append.html#eq:lm10">(3.9)</a>, that:
+<span class="math display">\[
+\frac{\hat\lambda_n}{\sqrt{n}} \overset{d}{\rightarrow} \mathcal{N}\left(0,\left(
+\dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
+\frac{\partial h'(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta}
+\right)^{-1}\right).
+\]</span>
+Taking the quadratic form of the last equation gives:
+<span class="math display">\[
+\frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \hat\lambda_n \overset{d}{\rightarrow} \chi^2(r).
+\]</span>
+Using Eq. <a href="append.html#eq:multiplier">(3.15)</a>, it appears that the left-hand side term of the last equation is <span class="math inline">\(\xi^{LM}\)</span> as defined in Eq. <a href="#eq:xiLM">(<strong>??</strong>)</a>. Consistency: see Remark 17.3 in <span class="citation">Gouriéroux and Monfort (<a href="references.html#ref-gourieroux_monfort_1995" role="doc-biblioref">1995</a>)</span>.</p>
+</div>
+<p><strong>Proof of Proposition <a href="#prp:equivLRLMW"><strong>??</strong></a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-35" class="proof"><em>Proof</em>. </span>Let us first demonstrate the asymptotic equivalence of <span class="math inline">\(\xi^{LM}\)</span> and <span class="math inline">\(\xi^{LR}\)</span>.</p>
+<p>The second-order taylor expansions of <span class="math inline">\(\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\mathbf{y})\)</span> and <span class="math inline">\(\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\mathbf{y})\)</span> are:
+<span class="math display">\[\begin{eqnarray*}
+\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\mathbf{y}) &amp;\approx&amp; \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})
++ \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)
+- \frac{n}{2} (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\\
+\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\mathbf{y}) &amp;\approx&amp; \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})
++ \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)
+- \frac{n}{2} (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0).
+\end{eqnarray*}\]</span>
+Taking the difference, we obtain:
+<span class="math display">\[
+\xi_n^{LR} \approx 2\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})}{\partial \boldsymbol\theta'}
+(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n) + n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).
+\]</span>
+Using <span class="math inline">\(\dfrac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \approx \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\)</span> (Eq. <a href="append.html#eq:lm30">(3.12)</a>), we have:
+<span class="math display">\[
+\xi_n^{LR} \approx
+2n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)'\mathcal{I}(\boldsymbol\theta_0)
+(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n)
++ n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).
+\]</span>
+In the second of the three terms in the sum, we replace <span class="math inline">\((\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)\)</span> by <span class="math inline">\((\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n+\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\)</span> and we develop the associated product. This leads to:
+<span class="math display" id="eq:lr10">\[\begin{equation}
+\xi_n^{LR} \approx n (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n)' \mathcal{I}(\boldsymbol\theta_0)^{-1} (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n). \tag{3.17}
+\end{equation}\]</span>
+The difference between Eqs. <a href="append.html#eq:lm29">(3.11)</a> and <a href="append.html#eq:lm30">(3.12)</a> implies:
+<span class="math display">\[
+\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx
+\mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n),
+\]</span>
+which, associated to Eq. @(eq:lr10), gives:
+<span class="math display">\[
+\xi_n^{LR} \approx \frac{1}{n} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx \xi_n^{LM}.
+\]</span>
+Hence <span class="math inline">\(\xi_n^{LR}\)</span> has the same asymptotic distribution as <span class="math inline">\(\xi_n^{LM}\)</span>.</p>
+<p>Let’s show that the LR test is consistent. For this, note that:
+<span class="math display">\[
+\frac{\log \mathcal{L}(\hat{\boldsymbol\theta},\mathbf{y}) - \log \mathcal{L}(\hat{\boldsymbol\theta}^0,\mathbf{y})}{n} = \frac{1}{n} \sum_{i=1}^n[\log f(y_i;\hat{\boldsymbol\theta}_n) - \log f(y_i;\hat{\boldsymbol\theta}_n^0)] \rightarrow \mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)],
+\]</span>
+where <span class="math inline">\(\boldsymbol\theta_\infty\)</span>, the pseudo true value, is such that <span class="math inline">\(h(\boldsymbol\theta_\infty) \ne 0\)</span> (by definition of <span class="math inline">\(H_1\)</span>). From the Kullback inequality and the asymptotic identifiability of <span class="math inline">\(\boldsymbol\theta_0\)</span>, it follows that <span class="math inline">\(\mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)] &gt;0\)</span>. Therefore <span class="math inline">\(\xi_n^{LR} \rightarrow + \infty\)</span> under <span class="math inline">\(H_1\)</span>.</p>
+<p>Let us now demonstrate the equivalence of <span class="math inline">\(\xi^{LM} and \xi^{W}\)</span>.</p>
+<p>We have (using Eq. (eq:multiplier)):
+<span class="math display">\[
+\xi^{LM}_n = \frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \hat\lambda_n.
+\]</span>
+Since, under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\hat{\boldsymbol\theta}_n^0\approx\hat{\boldsymbol\theta}_n \approx {\boldsymbol\theta}_0\)</span>, Eq. <a href="append.html#eq:lm20">(3.16)</a> therefore implies that:
+<span class="math display">\[
+\xi^{LM} \approx n h(\hat{\boldsymbol\theta}_n)' \left(
+\dfrac{\partial h(\hat{\boldsymbol\theta}_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}_n)^{-1}
+\frac{\partial h'(\hat{\boldsymbol\theta}_n;\mathbf{y})}{\partial \boldsymbol\theta}
+\right)^{-1}
+h(\hat{\boldsymbol\theta}_n) = \xi^{W},
+\]</span>
+which gives the result.</p>
+</div>
+<p><strong>Proof of Eq. <a href="TS.html#eq:TCL2">(2.3)</a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-36" class="proof"><em>Proof</em>. </span>We have:
+<span class="math display">\[\begin{eqnarray*}
+&amp;&amp;T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right]\\
+&amp;=&amp; T\mathbb{E}\left[\left(\frac{1}{T}\sum_{t=1}^T(y_t - \mu)\right)^2\right] = \frac{1}{T} \mathbb{E}\left[\sum_{t=1}^T(y_t - \mu)^2+2\sum_{s&lt;t\le T}(y_t - \mu)(y_s - \mu)\right]\\
+&amp;=&amp; \gamma_0 +\frac{2}{T}\left(\sum_{t=2}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-1} - \mu)\right]\right) +\frac{2}{T}\left(\sum_{t=3}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-2} - \mu)\right]\right) + \dots \\
+&amp;&amp;+ \frac{2}{T}\left(\sum_{t=T-1}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-2)} - \mu)\right]\right) + \frac{2}{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-1)} - \mu)\right]\\
+&amp;=&amp;  \gamma_0 + 2 \frac{T-1}{T}\gamma_1 + \dots + 2 \frac{1}{T}\gamma_{T-1} .
+\end{eqnarray*}\]</span>
+Therefore:
+<span class="math display">\[\begin{eqnarray*}
+T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j &amp;=&amp; - 2\frac{1}{T}\gamma_1 - 2\frac{2}{T}\gamma_2 - \dots - 2\frac{T-1}{T}\gamma_{T-1} - 2\gamma_T - 2 \gamma_{T+1} + \dots
+\end{eqnarray*}\]</span>
+And then:
+<span class="math display">\[
+\left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| \le 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots
+\]</span></p>
+<p>For any <span class="math inline">\(q \le T\)</span>, we have:
+<span class="math display">\[\begin{eqnarray*}
+\left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| &amp;\le&amp; 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{q-1}{T}|\gamma_{q-1}| +2\frac{q}{T}|\gamma_q| +\\
+&amp;&amp;2\frac{q+1}{T}|\gamma_{q+1}| + \dots  + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots\\
+&amp;\le&amp; \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q-1)|\gamma_{q-1}| +q|\gamma_q|\right) +\\
+&amp;&amp;2|\gamma_{q+1}| + \dots  + 2|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots
+\end{eqnarray*}\]</span></p>
+<p>Consider <span class="math inline">\(\varepsilon &gt; 0\)</span>. The fact that the autocovariances are absolutely summable implies that there exists <span class="math inline">\(q_0\)</span> such that (Cauchy criterion, Theorem <a href="append.html#thm:cauchycritstatic">3.2</a>):
+<span class="math display">\[
+2|\gamma_{q_0+1}|+2|\gamma_{q_0+2}|+2|\gamma_{q_0+3}|+\dots &lt; \varepsilon/2.
+\]</span>
+Then, if <span class="math inline">\(T &gt; q_0\)</span>, it comes that:
+<span class="math display">\[
+\left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) + \varepsilon/2.
+\]</span>
+If <span class="math inline">\(T \ge 2\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right)/(\varepsilon/2)\)</span> (<span class="math inline">\(= f(q_0)\)</span>, say) then
+<span class="math display">\[
+\frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) \le \varepsilon/2.
+\]</span>
+Then, if <span class="math inline">\(T&gt;f(q_0)\)</span> and <span class="math inline">\(T&gt;q_0\)</span>, i.e. if <span class="math inline">\(T&gt;\max(f(q_0),q_0)\)</span>, we have:
+<span class="math display">\[
+\left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \varepsilon.
+\]</span></p>
+</div>
+<p><strong>Proof of Proposition <a href="TS.html#prp:smallestMSE">2.15</a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-37" class="proof"><em>Proof</em>. </span>We have:
+<span class="math display" id="eq:1">\[\begin{eqnarray}
+\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) &amp;=&amp; \mathbb{E}\left([\color{blue}{\{y_{t+1} - \mathbb{E}(y_{t+1}|x_t)\}} + \color{red}{\{\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}\}}]^2\right)\nonumber\\
+&amp;=&amp;  \mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right) + \mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)\nonumber\\
+&amp;&amp; + 2\mathbb{E}\left( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right). \tag{3.18}
+\end{eqnarray}\]</span>
+Let us focus on the last term. We have:
+<span class="math display">\[\begin{eqnarray*}
+&amp;&amp;\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right)\\
+&amp;=&amp; \mathbb{E}( \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ \underbrace{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}_{\mbox{function of $x_t$}}}|x_t))\\
+&amp;=&amp; \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}|x_t))\\
+&amp;=&amp; \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \color{blue}{\underbrace{[\mathbb{E}(y_{t+1}|x_t) - \mathbb{E}(y_{t+1}|x_t)]}_{=0}})=0.
+\end{eqnarray*}\]</span></p>
+<p>Therefore, Eq. <a href="append.html#eq:1">(3.18)</a> becomes:
+<span class="math display">\[\begin{eqnarray*}
+&amp;&amp;\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) \\
+&amp;=&amp;  \underbrace{\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right)}_{\mbox{$\ge 0$ and does not depend on $y^*_{t+1}$}} + \underbrace{\mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)}_{\mbox{$\ge 0$ and depends on $y^*_{t+1}$}}.
+\end{eqnarray*}\]</span>
+This implies that <span class="math inline">\(\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)\)</span> is always larger than <span class="math inline">\(\color{blue}{\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}\)</span>, and is therefore minimized if the second term is equal to zero, that is if <span class="math inline">\(\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}\)</span>.</p>
+</div>
+<p><strong>Proof of Proposition <a href="TS.html#prp:estimVARGaussian">2.12</a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-38" class="proof"><em>Proof</em>. </span>Using Proposition <a href="#prp:multivarG"><strong>??</strong></a> (in Appendix <a href="#XXX"><strong>??</strong></a>), we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
+<span class="math display">\[\begin{eqnarray*}
+\log\mathcal{L}(Y_{T};\theta) &amp; = &amp; -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
+&amp;  &amp; -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].
+\end{eqnarray*}\]</span>
+Let’s rewrite the last term of the log-likelihood:
+<span class="math display">\[\begin{eqnarray*}
+\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right] &amp; =\\
+\sum_{t=1}^{T}\left[\left(y_{t}-\hat{\Pi}'x_{t}+\hat{\Pi}'x_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\hat{\Pi}'x_{t}+\hat{\Pi}'x_{t}-\Pi'x_{t}\right)\right] &amp; =\\
+\sum_{t=1}^{T}\left[\left(\hat{\varepsilon}_{t}+(\hat{\Pi}-\Pi)'x_{t}\right)'\Omega^{-1}\left(\hat{\varepsilon}_{t}+(\hat{\Pi}-\Pi)'x_{t}\right)\right],
+\end{eqnarray*}\]</span>
+where the <span class="math inline">\(j^{th}\)</span> element of the <span class="math inline">\((n\times1)\)</span> vector <span class="math inline">\(\hat{\varepsilon}_{t}\)</span> is the sample residual, for observation <span class="math inline">\(t\)</span>, from an OLS regression of <span class="math inline">\(y_{j,t}\)</span> on <span class="math inline">\(x_{t}\)</span>. Expanding the previous equation, we get:
+<span class="math display">\[\begin{eqnarray*}
+&amp;&amp;\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right]  = \sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}\hat{\varepsilon}_{t}\\
+&amp;&amp;+2\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}+\sum_{t=1}^{T}x'_{t}(\hat{\Pi}-\Pi)\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}.
+\end{eqnarray*}\]</span>
+Let’s apply the trace operator on the second term (that is a scalar):
+<span class="math display">\[\begin{eqnarray*}
+\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t} &amp; = &amp; Tr\left(\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}\right)\\
+=  Tr\left(\sum_{t=1}^{T}\Omega^{-1}(\hat{\Pi}-\Pi)'x_{t}\hat{\varepsilon}_{t}'\right) &amp; = &amp; Tr\left(\Omega^{-1}(\hat{\Pi}-\Pi)'\sum_{t=1}^{T}x_{t}\hat{\varepsilon}_{t}'\right).
+\end{eqnarray*}\]</span>
+Given that, by construction (property of OLS estimates), the sample residuals are orthogonal to the explanatory variables, this term is zero. Introducing <span class="math inline">\(\tilde{x}_{t}=(\hat{\Pi}-\Pi)'x_{t}\)</span>, we have
+<span class="math display">\[\begin{eqnarray*}
+\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right] =\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\Omega^{-1}\hat{\varepsilon}_{t}+\sum_{t=1}^{T}\tilde{x}'_{t}\Omega^{-1}\tilde{x}_{t}.
+\end{eqnarray*}\]</span>
+Since <span class="math inline">\(\Omega\)</span> is a positive definite matrix, <span class="math inline">\(\Omega^{-1}\)</span> is as well. Consequently, the smallest value that the last term can take is obtained for <span class="math inline">\(\tilde{x}_{t}=0\)</span>, i.e. when <span class="math inline">\(\Pi=\hat{\Pi}.\)</span></p>
+<p>The MLE of <span class="math inline">\(\Omega\)</span> is the matrix <span class="math inline">\(\hat{\Omega}\)</span> that maximizes <span class="math inline">\(\Omega\overset{\ell}{\rightarrow}L(Y_{T};\hat{\Pi},\Omega)\)</span>. We have:
+<span class="math display">\[\begin{eqnarray*}
+\log\mathcal{L}(Y_{T};\hat{\Pi},\Omega) &amp; = &amp; -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right| -\frac{1}{2}\sum_{t=1}^{T}\left[\hat{\varepsilon}_{t}'\Omega^{-1}\hat{\varepsilon}_{t}\right].
+\end{eqnarray*}\]</span></p>
+<p>Matrix <span class="math inline">\(\hat{\Omega}\)</span> is a symmetric positive definite. It is easily checked that the (unrestricted) matrix that maximizes the latter expression is symmetric positive definite matrix. Indeed:
+<span class="math display">\[
+\frac{\partial \log\mathcal{L}(Y_{T};\hat{\Pi},\Omega)}{\partial\Omega}=\frac{T}{2}\Omega'-\frac{1}{2}\sum_{t=1}^{T}\hat{\varepsilon}_{t}\hat{\varepsilon}'_{t}\Rightarrow\hat{\Omega}'=\frac{1}{T}\sum_{t=1}^{T}\hat{\varepsilon}_{t}\hat{\varepsilon}'_{t},
+\]</span>
+which leads to the result.</p>
+</div>
+<p><strong>Proof of Proposition <a href="TS.html#prp:OLSVAR">2.13</a></strong></p>
+<div class="proof">
+<p><span id="unlabeled-div-39" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="TS.html#eq:olsar1">(2.24)</a>, we have:
+<span class="math display">\[
+\sqrt{T}(\mathbf{b}-\boldsymbol{\beta}) =  (X'X/T)^{-1}\sqrt{T}(X'\boldsymbol\varepsilon/T).
+\]</span>
+Let us consider the autocovariances of <span class="math inline">\(\mathbf{v}_t = x_t \varepsilon_t\)</span>, denoted by <span class="math inline">\(\gamma^v_j\)</span>. Using the fact that <span class="math inline">\(x_t\)</span> is a linear combination of past <span class="math inline">\(\varepsilon_t\)</span>s and that <span class="math inline">\(\varepsilon_t\)</span> is a white noise, we get that <span class="math inline">\(\mathbb{E}(\varepsilon_t x_t)=0\)</span>. Therefore
+<span class="math display">\[
+\gamma^v_j = \mathbb{E}(\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}').
+\]</span>
+If <span class="math inline">\(j&gt;0\)</span>, we have <span class="math inline">\(\mathbb{E}(\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}')=\mathbb{E}(\mathbb{E}[\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}'|\varepsilon_{t-j},x_t,x_{t-j}])=\)</span> <span class="math inline">\(\mathbb{E}(\varepsilon_{t-j}x_tx_{t-j}'\mathbb{E}[\varepsilon_t|\varepsilon_{t-j},x_t,x_{t-j}])=0\)</span>. Note that we have <span class="math inline">\(\mathbb{E}[\varepsilon_t|\varepsilon_{t-j},x_t,x_{t-j}]=0\)</span> because <span class="math inline">\(\{\varepsilon_t\}\)</span> is an i.i.d. white noise sequence. If <span class="math inline">\(j=0\)</span>, we have:
+<span class="math display">\[
+\gamma^v_0 = \mathbb{E}(\varepsilon_t^2x_tx_{t}')= \mathbb{E}(\varepsilon_t^2) \mathbb{E}(x_tx_{t}')=\sigma^2\mathbf{Q}.
+\]</span>
+The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\boldsymbol\varepsilon/T)=\sqrt{T}\frac{1}{T}\sum_{t=1}^Tv_t\)</span> results from the Central Limit Theorem for covariance-stationary processes, using the <span class="math inline">\(\gamma_j^v\)</span> computed above.</p>
+</div>
+</div>
+<div id="additional-codes" class="section level2" number="3.6">
+<h2>
+<span class="header-section-number">3.6</span> Additional codes<a class="anchor" aria-label="anchor" href="#additional-codes"><i class="fas fa-link"></i></a>
+</h2>
+<div id="App:GEV" class="section level3" number="3.6.1">
+<h3>
+<span class="header-section-number">3.6.1</span> Simulating GEV distributions<a class="anchor" aria-label="anchor" href="#App:GEV"><i class="fas fa-link"></i></a>
+</h3>
+<p>The following lines of code have been used to generate Figure <a href="#fig:GEV"><strong>??</strong></a>.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n.sim</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,</span>
+<span>    plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.2</span>,<span class="fl">.95</span>,<span class="fl">.2</span>,<span class="fl">.85</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">all.rhos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.3</span>,<span class="fl">.6</span>,<span class="fl">.95</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all.rhos</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="va">all.rhos</span><span class="op">[</span><span class="va">j</span><span class="op">]</span></span>
+<span>  <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n.sim</span><span class="op">)</span></span>
+<span>  <span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n.sim</span><span class="op">)</span></span>
+<span>  <span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">.000001</span>,<span class="va">n.sim</span><span class="op">)</span></span>
+<span>  <span class="co"># solve for f(w) = w*(1 - log(w)/theta) - v2 = 0</span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">f.i</span> <span class="op">&lt;-</span> <span class="va">w</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">/</span><span class="va">theta</span><span class="op">)</span> <span class="op">-</span> <span class="va">v2</span></span>
+<span>    <span class="va">f.prime</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">/</span><span class="va">theta</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="va">theta</span></span>
+<span>    <span class="va">w</span> <span class="op">&lt;-</span> <span class="va">w</span> <span class="op">-</span> <span class="va">f.i</span><span class="op">/</span><span class="va">f.prime</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">u1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">v1</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">theta</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">u2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">v1</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">theta</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Get eps1 and eps2 using the inverse of</span></span>
+<span>  <span class="co"># the Gumbel distribution's cdf:</span></span>
+<span>  <span class="va">eps1</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">u1</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">eps2</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">u2</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">eps1</span>,<span class="va">eps2</span><span class="op">)</span>,<span class="fl">1</span><span class="op">-</span><span class="va">all.rhos</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">eps1</span>,<span class="va">eps2</span>,pch<span class="op">=</span><span class="fl">19</span>,col<span class="op">=</span><span class="st">"#FF000044"</span>,</span>
+<span>       main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"rho = "</span>,<span class="fu"><a href="https://rdrr.io/r/base/toString.html">toString</a></span><span class="op">(</span><span class="va">all.rhos</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,</span>
+<span>       xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>       ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>       cex.lab<span class="op">=</span><span class="fl">2</span>,cex.main<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+</div>
+<div id="IRFDELTA" class="section level3" number="3.6.2">
+<h3>
+<span class="header-section-number">3.6.2</span> Computing the covariance matrix of IRF using the delta method<a class="anchor" aria-label="anchor" href="#IRFDELTA"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">irf.function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">THETA</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">c</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">phi</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">q</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">THETA</span><span class="op">[</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Matrix.of.Exog</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span>  <span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="va">r</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="va">irf</span> <span class="op">&lt;-</span> <span class="fu">sim.arma</span><span class="op">(</span><span class="fl">0</span>,<span class="va">phi</span>,<span class="va">beta</span>,sigma<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Ramey</span><span class="op">$</span><span class="va">ED3_TC</span>,na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,T<span class="op">=</span><span class="fl">60</span>,</span>
+<span>                  y.0<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">phi</span><span class="op">)</span><span class="op">)</span>,nb.sim<span class="op">=</span><span class="fl">1</span>,make.IRF<span class="op">=</span><span class="fl">1</span>,</span>
+<span>                  X<span class="op">=</span><span class="cn">NaN</span>,beta<span class="op">=</span><span class="cn">NaN</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">irf</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">IRF.0</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="fu">irf.function</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">THETA</span><span class="op">)</span></span>
+<span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">.00000001</span></span>
+<span><span class="va">d.IRF</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">THETA</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">THETA.i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">THETA</span></span>
+<span>  <span class="va">THETA.i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">THETA.i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">eps</span></span>
+<span>  <span class="va">IRF.i</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="fu">irf.function</span><span class="op">(</span><span class="va">THETA.i</span><span class="op">)</span></span>
+<span>  <span class="va">d.IRF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">d.IRF</span>,</span>
+<span>                 <span class="op">(</span><span class="va">IRF.i</span> <span class="op">-</span> <span class="va">IRF.0</span><span class="op">)</span><span class="op">/</span><span class="va">eps</span></span>
+<span>                 <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">mat.var.cov.IRF</span> <span class="op">&lt;-</span> <span class="va">d.IRF</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span><span class="op">$</span><span class="va">I</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">d.IRF</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="statistical-tables" class="section level2" number="3.7">
+<h2>
+<span class="header-section-number">3.7</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<caption>
+<span id="tab:Normal">Table 3.1: </span>Quantiles of the <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are respectively the row and column number; then the corresponding cell gives <span class="math inline">\(\mathbb{P}(0&lt;X\le a+b)\)</span>, where <span class="math inline">\(X \sim \mathcal{N}(0,1)\)</span>.</caption>
+<colgroup>
+<col width="5%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">0</th>
+<th align="right">0.01</th>
+<th align="right">0.02</th>
+<th align="right">0.03</th>
+<th align="right">0.04</th>
+<th align="right">0.05</th>
+<th align="right">0.06</th>
+<th align="right">0.07</th>
+<th align="right">0.08</th>
+<th align="right">0.09</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="right">0.5000</td>
+<td align="right">0.6179</td>
+<td align="right">0.7257</td>
+<td align="right">0.8159</td>
+<td align="right">0.8849</td>
+<td align="right">0.9332</td>
+<td align="right">0.9641</td>
+<td align="right">0.9821</td>
+<td align="right">0.9918</td>
+<td align="right">0.9965</td>
+</tr>
+<tr class="even">
+<td align="left">0.1</td>
+<td align="right">0.5040</td>
+<td align="right">0.6217</td>
+<td align="right">0.7291</td>
+<td align="right">0.8186</td>
+<td align="right">0.8869</td>
+<td align="right">0.9345</td>
+<td align="right">0.9649</td>
+<td align="right">0.9826</td>
+<td align="right">0.9920</td>
+<td align="right">0.9966</td>
+</tr>
+<tr class="odd">
+<td align="left">0.2</td>
+<td align="right">0.5080</td>
+<td align="right">0.6255</td>
+<td align="right">0.7324</td>
+<td align="right">0.8212</td>
+<td align="right">0.8888</td>
+<td align="right">0.9357</td>
+<td align="right">0.9656</td>
+<td align="right">0.9830</td>
+<td align="right">0.9922</td>
+<td align="right">0.9967</td>
+</tr>
+<tr class="even">
+<td align="left">0.3</td>
+<td align="right">0.5120</td>
+<td align="right">0.6293</td>
+<td align="right">0.7357</td>
+<td align="right">0.8238</td>
+<td align="right">0.8907</td>
+<td align="right">0.9370</td>
+<td align="right">0.9664</td>
+<td align="right">0.9834</td>
+<td align="right">0.9925</td>
+<td align="right">0.9968</td>
+</tr>
+<tr class="odd">
+<td align="left">0.4</td>
+<td align="right">0.5160</td>
+<td align="right">0.6331</td>
+<td align="right">0.7389</td>
+<td align="right">0.8264</td>
+<td align="right">0.8925</td>
+<td align="right">0.9382</td>
+<td align="right">0.9671</td>
+<td align="right">0.9838</td>
+<td align="right">0.9927</td>
+<td align="right">0.9969</td>
+</tr>
+<tr class="even">
+<td align="left">0.5</td>
+<td align="right">0.5199</td>
+<td align="right">0.6368</td>
+<td align="right">0.7422</td>
+<td align="right">0.8289</td>
+<td align="right">0.8944</td>
+<td align="right">0.9394</td>
+<td align="right">0.9678</td>
+<td align="right">0.9842</td>
+<td align="right">0.9929</td>
+<td align="right">0.9970</td>
+</tr>
+<tr class="odd">
+<td align="left">0.6</td>
+<td align="right">0.5239</td>
+<td align="right">0.6406</td>
+<td align="right">0.7454</td>
+<td align="right">0.8315</td>
+<td align="right">0.8962</td>
+<td align="right">0.9406</td>
+<td align="right">0.9686</td>
+<td align="right">0.9846</td>
+<td align="right">0.9931</td>
+<td align="right">0.9971</td>
+</tr>
+<tr class="even">
+<td align="left">0.7</td>
+<td align="right">0.5279</td>
+<td align="right">0.6443</td>
+<td align="right">0.7486</td>
+<td align="right">0.8340</td>
+<td align="right">0.8980</td>
+<td align="right">0.9418</td>
+<td align="right">0.9693</td>
+<td align="right">0.9850</td>
+<td align="right">0.9932</td>
+<td align="right">0.9972</td>
+</tr>
+<tr class="odd">
+<td align="left">0.8</td>
+<td align="right">0.5319</td>
+<td align="right">0.6480</td>
+<td align="right">0.7517</td>
+<td align="right">0.8365</td>
+<td align="right">0.8997</td>
+<td align="right">0.9429</td>
+<td align="right">0.9699</td>
+<td align="right">0.9854</td>
+<td align="right">0.9934</td>
+<td align="right">0.9973</td>
+</tr>
+<tr class="even">
+<td align="left">0.9</td>
+<td align="right">0.5359</td>
+<td align="right">0.6517</td>
+<td align="right">0.7549</td>
+<td align="right">0.8389</td>
+<td align="right">0.9015</td>
+<td align="right">0.9441</td>
+<td align="right">0.9706</td>
+<td align="right">0.9857</td>
+<td align="right">0.9936</td>
+<td align="right">0.9974</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.5398</td>
+<td align="right">0.6554</td>
+<td align="right">0.7580</td>
+<td align="right">0.8413</td>
+<td align="right">0.9032</td>
+<td align="right">0.9452</td>
+<td align="right">0.9713</td>
+<td align="right">0.9861</td>
+<td align="right">0.9938</td>
+<td align="right">0.9974</td>
+</tr>
+<tr class="even">
+<td align="left">1.1</td>
+<td align="right">0.5438</td>
+<td align="right">0.6591</td>
+<td align="right">0.7611</td>
+<td align="right">0.8438</td>
+<td align="right">0.9049</td>
+<td align="right">0.9463</td>
+<td align="right">0.9719</td>
+<td align="right">0.9864</td>
+<td align="right">0.9940</td>
+<td align="right">0.9975</td>
+</tr>
+<tr class="odd">
+<td align="left">1.2</td>
+<td align="right">0.5478</td>
+<td align="right">0.6628</td>
+<td align="right">0.7642</td>
+<td align="right">0.8461</td>
+<td align="right">0.9066</td>
+<td align="right">0.9474</td>
+<td align="right">0.9726</td>
+<td align="right">0.9868</td>
+<td align="right">0.9941</td>
+<td align="right">0.9976</td>
+</tr>
+<tr class="even">
+<td align="left">1.3</td>
+<td align="right">0.5517</td>
+<td align="right">0.6664</td>
+<td align="right">0.7673</td>
+<td align="right">0.8485</td>
+<td align="right">0.9082</td>
+<td align="right">0.9484</td>
+<td align="right">0.9732</td>
+<td align="right">0.9871</td>
+<td align="right">0.9943</td>
+<td align="right">0.9977</td>
+</tr>
+<tr class="odd">
+<td align="left">1.4</td>
+<td align="right">0.5557</td>
+<td align="right">0.6700</td>
+<td align="right">0.7704</td>
+<td align="right">0.8508</td>
+<td align="right">0.9099</td>
+<td align="right">0.9495</td>
+<td align="right">0.9738</td>
+<td align="right">0.9875</td>
+<td align="right">0.9945</td>
+<td align="right">0.9977</td>
+</tr>
+<tr class="even">
+<td align="left">1.5</td>
+<td align="right">0.5596</td>
+<td align="right">0.6736</td>
+<td align="right">0.7734</td>
+<td align="right">0.8531</td>
+<td align="right">0.9115</td>
+<td align="right">0.9505</td>
+<td align="right">0.9744</td>
+<td align="right">0.9878</td>
+<td align="right">0.9946</td>
+<td align="right">0.9978</td>
+</tr>
+<tr class="odd">
+<td align="left">1.6</td>
+<td align="right">0.5636</td>
+<td align="right">0.6772</td>
+<td align="right">0.7764</td>
+<td align="right">0.8554</td>
+<td align="right">0.9131</td>
+<td align="right">0.9515</td>
+<td align="right">0.9750</td>
+<td align="right">0.9881</td>
+<td align="right">0.9948</td>
+<td align="right">0.9979</td>
+</tr>
+<tr class="even">
+<td align="left">1.7</td>
+<td align="right">0.5675</td>
+<td align="right">0.6808</td>
+<td align="right">0.7794</td>
+<td align="right">0.8577</td>
+<td align="right">0.9147</td>
+<td align="right">0.9525</td>
+<td align="right">0.9756</td>
+<td align="right">0.9884</td>
+<td align="right">0.9949</td>
+<td align="right">0.9979</td>
+</tr>
+<tr class="odd">
+<td align="left">1.8</td>
+<td align="right">0.5714</td>
+<td align="right">0.6844</td>
+<td align="right">0.7823</td>
+<td align="right">0.8599</td>
+<td align="right">0.9162</td>
+<td align="right">0.9535</td>
+<td align="right">0.9761</td>
+<td align="right">0.9887</td>
+<td align="right">0.9951</td>
+<td align="right">0.9980</td>
+</tr>
+<tr class="even">
+<td align="left">1.9</td>
+<td align="right">0.5753</td>
+<td align="right">0.6879</td>
+<td align="right">0.7852</td>
+<td align="right">0.8621</td>
+<td align="right">0.9177</td>
+<td align="right">0.9545</td>
+<td align="right">0.9767</td>
+<td align="right">0.9890</td>
+<td align="right">0.9952</td>
+<td align="right">0.9981</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="right">0.5793</td>
+<td align="right">0.6915</td>
+<td align="right">0.7881</td>
+<td align="right">0.8643</td>
+<td align="right">0.9192</td>
+<td align="right">0.9554</td>
+<td align="right">0.9772</td>
+<td align="right">0.9893</td>
+<td align="right">0.9953</td>
+<td align="right">0.9981</td>
+</tr>
+<tr class="even">
+<td align="left">2.1</td>
+<td align="right">0.5832</td>
+<td align="right">0.6950</td>
+<td align="right">0.7910</td>
+<td align="right">0.8665</td>
+<td align="right">0.9207</td>
+<td align="right">0.9564</td>
+<td align="right">0.9778</td>
+<td align="right">0.9896</td>
+<td align="right">0.9955</td>
+<td align="right">0.9982</td>
+</tr>
+<tr class="odd">
+<td align="left">2.2</td>
+<td align="right">0.5871</td>
+<td align="right">0.6985</td>
+<td align="right">0.7939</td>
+<td align="right">0.8686</td>
+<td align="right">0.9222</td>
+<td align="right">0.9573</td>
+<td align="right">0.9783</td>
+<td align="right">0.9898</td>
+<td align="right">0.9956</td>
+<td align="right">0.9982</td>
+</tr>
+<tr class="even">
+<td align="left">2.3</td>
+<td align="right">0.5910</td>
+<td align="right">0.7019</td>
+<td align="right">0.7967</td>
+<td align="right">0.8708</td>
+<td align="right">0.9236</td>
+<td align="right">0.9582</td>
+<td align="right">0.9788</td>
+<td align="right">0.9901</td>
+<td align="right">0.9957</td>
+<td align="right">0.9983</td>
+</tr>
+<tr class="odd">
+<td align="left">2.4</td>
+<td align="right">0.5948</td>
+<td align="right">0.7054</td>
+<td align="right">0.7995</td>
+<td align="right">0.8729</td>
+<td align="right">0.9251</td>
+<td align="right">0.9591</td>
+<td align="right">0.9793</td>
+<td align="right">0.9904</td>
+<td align="right">0.9959</td>
+<td align="right">0.9984</td>
+</tr>
+<tr class="even">
+<td align="left">2.5</td>
+<td align="right">0.5987</td>
+<td align="right">0.7088</td>
+<td align="right">0.8023</td>
+<td align="right">0.8749</td>
+<td align="right">0.9265</td>
+<td align="right">0.9599</td>
+<td align="right">0.9798</td>
+<td align="right">0.9906</td>
+<td align="right">0.9960</td>
+<td align="right">0.9984</td>
+</tr>
+<tr class="odd">
+<td align="left">2.6</td>
+<td align="right">0.6026</td>
+<td align="right">0.7123</td>
+<td align="right">0.8051</td>
+<td align="right">0.8770</td>
+<td align="right">0.9279</td>
+<td align="right">0.9608</td>
+<td align="right">0.9803</td>
+<td align="right">0.9909</td>
+<td align="right">0.9961</td>
+<td align="right">0.9985</td>
+</tr>
+<tr class="even">
+<td align="left">2.7</td>
+<td align="right">0.6064</td>
+<td align="right">0.7157</td>
+<td align="right">0.8078</td>
+<td align="right">0.8790</td>
+<td align="right">0.9292</td>
+<td align="right">0.9616</td>
+<td align="right">0.9808</td>
+<td align="right">0.9911</td>
+<td align="right">0.9962</td>
+<td align="right">0.9985</td>
+</tr>
+<tr class="odd">
+<td align="left">2.8</td>
+<td align="right">0.6103</td>
+<td align="right">0.7190</td>
+<td align="right">0.8106</td>
+<td align="right">0.8810</td>
+<td align="right">0.9306</td>
+<td align="right">0.9625</td>
+<td align="right">0.9812</td>
+<td align="right">0.9913</td>
+<td align="right">0.9963</td>
+<td align="right">0.9986</td>
+</tr>
+<tr class="even">
+<td align="left">2.9</td>
+<td align="right">0.6141</td>
+<td align="right">0.7224</td>
+<td align="right">0.8133</td>
+<td align="right">0.8830</td>
+<td align="right">0.9319</td>
+<td align="right">0.9633</td>
+<td align="right">0.9817</td>
+<td align="right">0.9916</td>
+<td align="right">0.9964</td>
+<td align="right">0.9986</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:Student">Table 3.2: </span>Quantiles of the Student-<span class="math inline">\(t\)</span> distribution. The rows correspond to different degrees of freedom (<span class="math inline">\(\nu\)</span>, say); the columns correspond to different probabilities (<span class="math inline">\(z\)</span>, say). The cell gives <span class="math inline">\(q\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(-q&lt;X&lt;q)=z\)</span>, with <span class="math inline">\(X \sim t(\nu)\)</span>.</caption>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">0.05</th>
+<th align="right">0.1</th>
+<th align="right">0.75</th>
+<th align="right">0.9</th>
+<th align="right">0.95</th>
+<th align="right">0.975</th>
+<th align="right">0.99</th>
+<th align="right">0.999</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.079</td>
+<td align="right">0.158</td>
+<td align="right">2.414</td>
+<td align="right">6.314</td>
+<td align="right">12.706</td>
+<td align="right">25.452</td>
+<td align="right">63.657</td>
+<td align="right">636.619</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">0.071</td>
+<td align="right">0.142</td>
+<td align="right">1.604</td>
+<td align="right">2.920</td>
+<td align="right">4.303</td>
+<td align="right">6.205</td>
+<td align="right">9.925</td>
+<td align="right">31.599</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.068</td>
+<td align="right">0.137</td>
+<td align="right">1.423</td>
+<td align="right">2.353</td>
+<td align="right">3.182</td>
+<td align="right">4.177</td>
+<td align="right">5.841</td>
+<td align="right">12.924</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.067</td>
+<td align="right">0.134</td>
+<td align="right">1.344</td>
+<td align="right">2.132</td>
+<td align="right">2.776</td>
+<td align="right">3.495</td>
+<td align="right">4.604</td>
+<td align="right">8.610</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">0.066</td>
+<td align="right">0.132</td>
+<td align="right">1.301</td>
+<td align="right">2.015</td>
+<td align="right">2.571</td>
+<td align="right">3.163</td>
+<td align="right">4.032</td>
+<td align="right">6.869</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">0.065</td>
+<td align="right">0.131</td>
+<td align="right">1.273</td>
+<td align="right">1.943</td>
+<td align="right">2.447</td>
+<td align="right">2.969</td>
+<td align="right">3.707</td>
+<td align="right">5.959</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">0.065</td>
+<td align="right">0.130</td>
+<td align="right">1.254</td>
+<td align="right">1.895</td>
+<td align="right">2.365</td>
+<td align="right">2.841</td>
+<td align="right">3.499</td>
+<td align="right">5.408</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">0.065</td>
+<td align="right">0.130</td>
+<td align="right">1.240</td>
+<td align="right">1.860</td>
+<td align="right">2.306</td>
+<td align="right">2.752</td>
+<td align="right">3.355</td>
+<td align="right">5.041</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">0.064</td>
+<td align="right">0.129</td>
+<td align="right">1.230</td>
+<td align="right">1.833</td>
+<td align="right">2.262</td>
+<td align="right">2.685</td>
+<td align="right">3.250</td>
+<td align="right">4.781</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">0.064</td>
+<td align="right">0.129</td>
+<td align="right">1.221</td>
+<td align="right">1.812</td>
+<td align="right">2.228</td>
+<td align="right">2.634</td>
+<td align="right">3.169</td>
+<td align="right">4.587</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">0.063</td>
+<td align="right">0.127</td>
+<td align="right">1.185</td>
+<td align="right">1.725</td>
+<td align="right">2.086</td>
+<td align="right">2.423</td>
+<td align="right">2.845</td>
+<td align="right">3.850</td>
+</tr>
+<tr class="even">
+<td align="left">30</td>
+<td align="right">0.063</td>
+<td align="right">0.127</td>
+<td align="right">1.173</td>
+<td align="right">1.697</td>
+<td align="right">2.042</td>
+<td align="right">2.360</td>
+<td align="right">2.750</td>
+<td align="right">3.646</td>
+</tr>
+<tr class="odd">
+<td align="left">40</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.167</td>
+<td align="right">1.684</td>
+<td align="right">2.021</td>
+<td align="right">2.329</td>
+<td align="right">2.704</td>
+<td align="right">3.551</td>
+</tr>
+<tr class="even">
+<td align="left">50</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.164</td>
+<td align="right">1.676</td>
+<td align="right">2.009</td>
+<td align="right">2.311</td>
+<td align="right">2.678</td>
+<td align="right">3.496</td>
+</tr>
+<tr class="odd">
+<td align="left">60</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.162</td>
+<td align="right">1.671</td>
+<td align="right">2.000</td>
+<td align="right">2.299</td>
+<td align="right">2.660</td>
+<td align="right">3.460</td>
+</tr>
+<tr class="even">
+<td align="left">70</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.160</td>
+<td align="right">1.667</td>
+<td align="right">1.994</td>
+<td align="right">2.291</td>
+<td align="right">2.648</td>
+<td align="right">3.435</td>
+</tr>
+<tr class="odd">
+<td align="left">80</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.159</td>
+<td align="right">1.664</td>
+<td align="right">1.990</td>
+<td align="right">2.284</td>
+<td align="right">2.639</td>
+<td align="right">3.416</td>
+</tr>
+<tr class="even">
+<td align="left">90</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.158</td>
+<td align="right">1.662</td>
+<td align="right">1.987</td>
+<td align="right">2.280</td>
+<td align="right">2.632</td>
+<td align="right">3.402</td>
+</tr>
+<tr class="odd">
+<td align="left">100</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.157</td>
+<td align="right">1.660</td>
+<td align="right">1.984</td>
+<td align="right">2.276</td>
+<td align="right">2.626</td>
+<td align="right">3.390</td>
+</tr>
+<tr class="even">
+<td align="left">200</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.154</td>
+<td align="right">1.653</td>
+<td align="right">1.972</td>
+<td align="right">2.258</td>
+<td align="right">2.601</td>
+<td align="right">3.340</td>
+</tr>
+<tr class="odd">
+<td align="left">500</td>
+<td align="right">0.063</td>
+<td align="right">0.126</td>
+<td align="right">1.152</td>
+<td align="right">1.648</td>
+<td align="right">1.965</td>
+<td align="right">2.248</td>
+<td align="right">2.586</td>
+<td align="right">3.310</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:Chi2">Table 3.3: </span>Quantiles of the <span class="math inline">\(\chi^2\)</span> distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.</caption>
+<colgroup>
+<col width="5%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">0.05</th>
+<th align="right">0.1</th>
+<th align="right">0.75</th>
+<th align="right">0.9</th>
+<th align="right">0.95</th>
+<th align="right">0.975</th>
+<th align="right">0.99</th>
+<th align="right">0.999</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">0.004</td>
+<td align="right">0.016</td>
+<td align="right">1.323</td>
+<td align="right">2.706</td>
+<td align="right">3.841</td>
+<td align="right">5.024</td>
+<td align="right">6.635</td>
+<td align="right">10.828</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">0.103</td>
+<td align="right">0.211</td>
+<td align="right">2.773</td>
+<td align="right">4.605</td>
+<td align="right">5.991</td>
+<td align="right">7.378</td>
+<td align="right">9.210</td>
+<td align="right">13.816</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">0.352</td>
+<td align="right">0.584</td>
+<td align="right">4.108</td>
+<td align="right">6.251</td>
+<td align="right">7.815</td>
+<td align="right">9.348</td>
+<td align="right">11.345</td>
+<td align="right">16.266</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">0.711</td>
+<td align="right">1.064</td>
+<td align="right">5.385</td>
+<td align="right">7.779</td>
+<td align="right">9.488</td>
+<td align="right">11.143</td>
+<td align="right">13.277</td>
+<td align="right">18.467</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">1.145</td>
+<td align="right">1.610</td>
+<td align="right">6.626</td>
+<td align="right">9.236</td>
+<td align="right">11.070</td>
+<td align="right">12.833</td>
+<td align="right">15.086</td>
+<td align="right">20.515</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">1.635</td>
+<td align="right">2.204</td>
+<td align="right">7.841</td>
+<td align="right">10.645</td>
+<td align="right">12.592</td>
+<td align="right">14.449</td>
+<td align="right">16.812</td>
+<td align="right">22.458</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">2.167</td>
+<td align="right">2.833</td>
+<td align="right">9.037</td>
+<td align="right">12.017</td>
+<td align="right">14.067</td>
+<td align="right">16.013</td>
+<td align="right">18.475</td>
+<td align="right">24.322</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">2.733</td>
+<td align="right">3.490</td>
+<td align="right">10.219</td>
+<td align="right">13.362</td>
+<td align="right">15.507</td>
+<td align="right">17.535</td>
+<td align="right">20.090</td>
+<td align="right">26.124</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">3.325</td>
+<td align="right">4.168</td>
+<td align="right">11.389</td>
+<td align="right">14.684</td>
+<td align="right">16.919</td>
+<td align="right">19.023</td>
+<td align="right">21.666</td>
+<td align="right">27.877</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">3.940</td>
+<td align="right">4.865</td>
+<td align="right">12.549</td>
+<td align="right">15.987</td>
+<td align="right">18.307</td>
+<td align="right">20.483</td>
+<td align="right">23.209</td>
+<td align="right">29.588</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">10.851</td>
+<td align="right">12.443</td>
+<td align="right">23.828</td>
+<td align="right">28.412</td>
+<td align="right">31.410</td>
+<td align="right">34.170</td>
+<td align="right">37.566</td>
+<td align="right">45.315</td>
+</tr>
+<tr class="even">
+<td align="left">30</td>
+<td align="right">18.493</td>
+<td align="right">20.599</td>
+<td align="right">34.800</td>
+<td align="right">40.256</td>
+<td align="right">43.773</td>
+<td align="right">46.979</td>
+<td align="right">50.892</td>
+<td align="right">59.703</td>
+</tr>
+<tr class="odd">
+<td align="left">40</td>
+<td align="right">26.509</td>
+<td align="right">29.051</td>
+<td align="right">45.616</td>
+<td align="right">51.805</td>
+<td align="right">55.758</td>
+<td align="right">59.342</td>
+<td align="right">63.691</td>
+<td align="right">73.402</td>
+</tr>
+<tr class="even">
+<td align="left">50</td>
+<td align="right">34.764</td>
+<td align="right">37.689</td>
+<td align="right">56.334</td>
+<td align="right">63.167</td>
+<td align="right">67.505</td>
+<td align="right">71.420</td>
+<td align="right">76.154</td>
+<td align="right">86.661</td>
+</tr>
+<tr class="odd">
+<td align="left">60</td>
+<td align="right">43.188</td>
+<td align="right">46.459</td>
+<td align="right">66.981</td>
+<td align="right">74.397</td>
+<td align="right">79.082</td>
+<td align="right">83.298</td>
+<td align="right">88.379</td>
+<td align="right">99.607</td>
+</tr>
+<tr class="even">
+<td align="left">70</td>
+<td align="right">51.739</td>
+<td align="right">55.329</td>
+<td align="right">77.577</td>
+<td align="right">85.527</td>
+<td align="right">90.531</td>
+<td align="right">95.023</td>
+<td align="right">100.425</td>
+<td align="right">112.317</td>
+</tr>
+<tr class="odd">
+<td align="left">80</td>
+<td align="right">60.391</td>
+<td align="right">64.278</td>
+<td align="right">88.130</td>
+<td align="right">96.578</td>
+<td align="right">101.879</td>
+<td align="right">106.629</td>
+<td align="right">112.329</td>
+<td align="right">124.839</td>
+</tr>
+<tr class="even">
+<td align="left">90</td>
+<td align="right">69.126</td>
+<td align="right">73.291</td>
+<td align="right">98.650</td>
+<td align="right">107.565</td>
+<td align="right">113.145</td>
+<td align="right">118.136</td>
+<td align="right">124.116</td>
+<td align="right">137.208</td>
+</tr>
+<tr class="odd">
+<td align="left">100</td>
+<td align="right">77.929</td>
+<td align="right">82.358</td>
+<td align="right">109.141</td>
+<td align="right">118.498</td>
+<td align="right">124.342</td>
+<td align="right">129.561</td>
+<td align="right">135.807</td>
+<td align="right">149.449</td>
+</tr>
+<tr class="even">
+<td align="left">200</td>
+<td align="right">168.279</td>
+<td align="right">174.835</td>
+<td align="right">213.102</td>
+<td align="right">226.021</td>
+<td align="right">233.994</td>
+<td align="right">241.058</td>
+<td align="right">249.445</td>
+<td align="right">267.541</td>
+</tr>
+<tr class="odd">
+<td align="left">500</td>
+<td align="right">449.147</td>
+<td align="right">459.926</td>
+<td align="right">520.950</td>
+<td align="right">540.930</td>
+<td align="right">553.127</td>
+<td align="right">563.852</td>
+<td align="right">576.493</td>
+<td align="right">603.446</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<caption>
+<span id="tab:Fstat">Table 3.4: </span>Quantiles of the <span class="math inline">\(\mathcal{F}\)</span> distribution. The columns and rows correspond to different degrees of freedom (resp. <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>). The different panels correspond to different probabilities (<span class="math inline">\(\alpha\)</span>) The corresponding cell gives <span class="math inline">\(z\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(X \le z)=\alpha\)</span>, with <span class="math inline">\(X \sim \mathcal{F}(n_1,n_2)\)</span>.</caption>
+<colgroup>
+<col width="15%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+<th align="right">5</th>
+<th align="right">6</th>
+<th align="right">7</th>
+<th align="right">8</th>
+<th align="right">9</th>
+<th align="right">10</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">alpha = 0.9</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">4.060</td>
+<td align="right">3.780</td>
+<td align="right">3.619</td>
+<td align="right">3.520</td>
+<td align="right">3.453</td>
+<td align="right">3.405</td>
+<td align="right">3.368</td>
+<td align="right">3.339</td>
+<td align="right">3.316</td>
+<td align="right">3.297</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="right">3.285</td>
+<td align="right">2.924</td>
+<td align="right">2.728</td>
+<td align="right">2.605</td>
+<td align="right">2.522</td>
+<td align="right">2.461</td>
+<td align="right">2.414</td>
+<td align="right">2.377</td>
+<td align="right">2.347</td>
+<td align="right">2.323</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="right">3.073</td>
+<td align="right">2.695</td>
+<td align="right">2.490</td>
+<td align="right">2.361</td>
+<td align="right">2.273</td>
+<td align="right">2.208</td>
+<td align="right">2.158</td>
+<td align="right">2.119</td>
+<td align="right">2.086</td>
+<td align="right">2.059</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">2.975</td>
+<td align="right">2.589</td>
+<td align="right">2.380</td>
+<td align="right">2.249</td>
+<td align="right">2.158</td>
+<td align="right">2.091</td>
+<td align="right">2.040</td>
+<td align="right">1.999</td>
+<td align="right">1.965</td>
+<td align="right">1.937</td>
+</tr>
+<tr class="even">
+<td align="left">50</td>
+<td align="right">2.809</td>
+<td align="right">2.412</td>
+<td align="right">2.197</td>
+<td align="right">2.061</td>
+<td align="right">1.966</td>
+<td align="right">1.895</td>
+<td align="right">1.840</td>
+<td align="right">1.796</td>
+<td align="right">1.760</td>
+<td align="right">1.729</td>
+</tr>
+<tr class="odd">
+<td align="left">100</td>
+<td align="right">2.756</td>
+<td align="right">2.356</td>
+<td align="right">2.139</td>
+<td align="right">2.002</td>
+<td align="right">1.906</td>
+<td align="right">1.834</td>
+<td align="right">1.778</td>
+<td align="right">1.732</td>
+<td align="right">1.695</td>
+<td align="right">1.663</td>
+</tr>
+<tr class="even">
+<td align="left">500</td>
+<td align="right">2.716</td>
+<td align="right">2.313</td>
+<td align="right">2.095</td>
+<td align="right">1.956</td>
+<td align="right">1.859</td>
+<td align="right">1.786</td>
+<td align="right">1.729</td>
+<td align="right">1.683</td>
+<td align="right">1.644</td>
+<td align="right">1.612</td>
+</tr>
+<tr class="odd">
+<td align="left">alpha = 0.95</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">6.608</td>
+<td align="right">5.786</td>
+<td align="right">5.409</td>
+<td align="right">5.192</td>
+<td align="right">5.050</td>
+<td align="right">4.950</td>
+<td align="right">4.876</td>
+<td align="right">4.818</td>
+<td align="right">4.772</td>
+<td align="right">4.735</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="right">4.965</td>
+<td align="right">4.103</td>
+<td align="right">3.708</td>
+<td align="right">3.478</td>
+<td align="right">3.326</td>
+<td align="right">3.217</td>
+<td align="right">3.135</td>
+<td align="right">3.072</td>
+<td align="right">3.020</td>
+<td align="right">2.978</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="right">4.543</td>
+<td align="right">3.682</td>
+<td align="right">3.287</td>
+<td align="right">3.056</td>
+<td align="right">2.901</td>
+<td align="right">2.790</td>
+<td align="right">2.707</td>
+<td align="right">2.641</td>
+<td align="right">2.588</td>
+<td align="right">2.544</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">4.351</td>
+<td align="right">3.493</td>
+<td align="right">3.098</td>
+<td align="right">2.866</td>
+<td align="right">2.711</td>
+<td align="right">2.599</td>
+<td align="right">2.514</td>
+<td align="right">2.447</td>
+<td align="right">2.393</td>
+<td align="right">2.348</td>
+</tr>
+<tr class="even">
+<td align="left">50</td>
+<td align="right">4.034</td>
+<td align="right">3.183</td>
+<td align="right">2.790</td>
+<td align="right">2.557</td>
+<td align="right">2.400</td>
+<td align="right">2.286</td>
+<td align="right">2.199</td>
+<td align="right">2.130</td>
+<td align="right">2.073</td>
+<td align="right">2.026</td>
+</tr>
+<tr class="odd">
+<td align="left">100</td>
+<td align="right">3.936</td>
+<td align="right">3.087</td>
+<td align="right">2.696</td>
+<td align="right">2.463</td>
+<td align="right">2.305</td>
+<td align="right">2.191</td>
+<td align="right">2.103</td>
+<td align="right">2.032</td>
+<td align="right">1.975</td>
+<td align="right">1.927</td>
+</tr>
+<tr class="even">
+<td align="left">500</td>
+<td align="right">3.860</td>
+<td align="right">3.014</td>
+<td align="right">2.623</td>
+<td align="right">2.390</td>
+<td align="right">2.232</td>
+<td align="right">2.117</td>
+<td align="right">2.028</td>
+<td align="right">1.957</td>
+<td align="right">1.899</td>
+<td align="right">1.850</td>
+</tr>
+<tr class="odd">
+<td align="left">alpha = 0.99</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">16.258</td>
+<td align="right">13.274</td>
+<td align="right">12.060</td>
+<td align="right">11.392</td>
+<td align="right">10.967</td>
+<td align="right">10.672</td>
+<td align="right">10.456</td>
+<td align="right">10.289</td>
+<td align="right">10.158</td>
+<td align="right">10.051</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="right">10.044</td>
+<td align="right">7.559</td>
+<td align="right">6.552</td>
+<td align="right">5.994</td>
+<td align="right">5.636</td>
+<td align="right">5.386</td>
+<td align="right">5.200</td>
+<td align="right">5.057</td>
+<td align="right">4.942</td>
+<td align="right">4.849</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="right">8.683</td>
+<td align="right">6.359</td>
+<td align="right">5.417</td>
+<td align="right">4.893</td>
+<td align="right">4.556</td>
+<td align="right">4.318</td>
+<td align="right">4.142</td>
+<td align="right">4.004</td>
+<td align="right">3.895</td>
+<td align="right">3.805</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">8.096</td>
+<td align="right">5.849</td>
+<td align="right">4.938</td>
+<td align="right">4.431</td>
+<td align="right">4.103</td>
+<td align="right">3.871</td>
+<td align="right">3.699</td>
+<td align="right">3.564</td>
+<td align="right">3.457</td>
+<td align="right">3.368</td>
+</tr>
+<tr class="even">
+<td align="left">50</td>
+<td align="right">7.171</td>
+<td align="right">5.057</td>
+<td align="right">4.199</td>
+<td align="right">3.720</td>
+<td align="right">3.408</td>
+<td align="right">3.186</td>
+<td align="right">3.020</td>
+<td align="right">2.890</td>
+<td align="right">2.785</td>
+<td align="right">2.698</td>
+</tr>
+<tr class="odd">
+<td align="left">100</td>
+<td align="right">6.895</td>
+<td align="right">4.824</td>
+<td align="right">3.984</td>
+<td align="right">3.513</td>
+<td align="right">3.206</td>
+<td align="right">2.988</td>
+<td align="right">2.823</td>
+<td align="right">2.694</td>
+<td align="right">2.590</td>
+<td align="right">2.503</td>
+</tr>
+<tr class="even">
+<td align="left">500</td>
+<td align="right">6.686</td>
+<td align="right">4.648</td>
+<td align="right">3.821</td>
+<td align="right">3.357</td>
+<td align="right">3.054</td>
+<td align="right">2.838</td>
+<td align="right">2.675</td>
+<td align="right">2.547</td>
+<td align="right">2.443</td>
+<td align="right">2.356</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="TS.html"><span class="header-section-number">2</span> Time Series</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#append"><span class="header-section-number">3</span> Appendix</a></li>
+<li><a class="nav-link" href="#PCAapp"><span class="header-section-number">3.1</span> Principal component analysis (PCA)</a></li>
+<li><a class="nav-link" href="#LinAlgebra"><span class="header-section-number">3.2</span> Linear algebra: definitions and results</a></li>
+<li>
+<a class="nav-link" href="#variousResults"><span class="header-section-number">3.3</span> Statistical analysis: definitions and results</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#moments-and-statistics"><span class="header-section-number">3.3.1</span> Moments and statistics</a></li>
+<li><a class="nav-link" href="#standard-distributions"><span class="header-section-number">3.3.2</span> Standard distributions</a></li>
+<li><a class="nav-link" href="#stochastic-convergences"><span class="header-section-number">3.3.3</span> Stochastic convergences</a></li>
+<li><a class="nav-link" href="#central-limit-theorem"><span class="header-section-number">3.3.4</span> Central limit theorem</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#GaussianVar"><span class="header-section-number">3.4</span> Some properties of Gaussian variables</a></li>
+<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">3.5</span> Proofs</a></li>
+<li>
+<a class="nav-link" href="#additional-codes"><span class="header-section-number">3.6</span> Additional codes</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#App:GEV"><span class="header-section-number">3.6.1</span> Simulating GEV distributions</a></li>
+<li><a class="nav-link" href="#IRFDELTA"><span class="header-section-number">3.6.2</span> Computing the covariance matrix of IRF using the delta method</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">3.7</span> Statistical Tables</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Jean-Paul Renne. It was last built on 2022-12-19.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

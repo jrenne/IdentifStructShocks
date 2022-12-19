@@ -1,0 +1,978 @@
+# Panel regressions {#Panel}
+
+## Specification and notations
+
+A standard panel situation is as follows: the sample covers a lot of "entities",  indexed by $i \in \{1,\dots,n\}$, with $n$ large, and, for each entity, we observe different variables over a small number of periods $t \in \{1,\dots,T\}$. This is a *longitudinal dataset*.
+
+The linear panel regression model is:
+\begin{equation}
+y_{i,t} = \bv{x}'_{i,t}\underbrace{\boldsymbol\beta}_{K \times 1} + \underbrace{\bv{z}'_{i}\boldsymbol\alpha}_{\mbox{Individual effects}} + \varepsilon_{i,t}.(\#eq:panel1)
+\end{equation}
+
+When running panel regressions, the usual objective is to estimate $\boldsymbol\beta$.
+
+<!-- \includegraphics[width=.95\linewidth]{../../figures/Figure_Panel_simul0.pdf} -->
+
+Figure \@ref(fig:simulPanel) illustrates a panel-data situation. The model is $y_i = \alpha_i + \beta x_{i,t} + \varepsilon_{i,t}$, $t \in \{1,2\}$. On Panel (b), blue dots are for $t=1$, red dots are for $t=2$. The lines relate the dots associated with the same entity $i$. What is remarkable in the simulated model is that, while the unconditional correlation between $y$ and $x$ is negative, the conditional correlation (conditional on $\alpha_i$) is positive. Indeed, the sign of this conditional correlation is the sign of $\beta$, which is positive in th simulated example ($\beta=5$). In other words, if one did not know the panel nature of the data, that would be tempting to say that $\beta<0$, but this is not the case, due to **fixed effects** (the $\alpha_i$'s) that are negatively correlated to the $x_i$'s.
+
+```{r simulPanel, fig.cap="The data are the same for both panels. On Panel (b), blue dots are for $t=1$, red dots are for $t=2$. The lines relate the dots associated to the same entity $i$.", fig.asp = .6, out.width = "95%", fig.align = 'left-aligned'}
+T <- 2; n <- 12 # 2 periods and 12 entities
+alpha <- 5*rnorm(n) # draw fixed effects
+x.1 <- rnorm(n) - .5*alpha # note: x_i's correlate to alpha_i's
+x.2 <- rnorm(n) - .5*alpha
+beta <- 5; sigma <- .3
+y.1 <- alpha + x.1 + sigma*rnorm(n);y.2 <- alpha + x.2 + sigma*rnorm(n)
+x <- c(x.1,x.2) # pooled x
+y <- c(y.1,y.2) # pooled y
+par(mfrow=c(1,2))
+plot(x,y,col="black",pch=19,xlab="x",ylab="y",main="(a)")
+plot(x,y,col="black",pch=19,xlab="x",ylab="y",main="(b)")
+points(x.1,y.1,col="blue",pch=19);points(x.2,y.2,col="red",pch=19)
+for(i in 1:n){lines(c(x.1[i],x.2[i]),c(y.1[i],y.2[i]))}
+```
+
+Figure \@ref(fig:cigarettes) presents the same type of plot based on the Cigarette Consumption Panel dataset (`CigarettesSW` dataset, used in @Stock_Watson_2003). This dataset documents the average consumption of cigarettes in 48 continental US states for two dates (1985 and 1995).
+
+```{r cigarettes, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Cigarette consumption versus real price in the CigarettesSW panel dataset.", echo=FALSE}
+data("CigarettesSW", package = "AER")
+CigarettesSW$rprice  <- with(CigarettesSW, price/cpi) # compute real price
+par(plt=c(.15,.95,.2,.95))
+plot(packs~rprice,data=CigarettesSW,xlim=c(70,170),ylim=c(50,200),
+     subset = year == 1985,pch=19,col="blue",xlab="real price",ylab="# of packs")
+points(packs~rprice,data=CigarettesSW,subset = year == 1995,pch=19,col="red")
+states <- levels(CigarettesSW$state)
+for(i in 1:length(states)){
+  lines(packs~rprice,data=CigarettesSW,subset = state == states[i])
+}
+```
+
+
+We will make use of the following notations:
+$$
+\bv{y}_i =
+\underbrace{\left[
+\begin{array}{c}
+y_{i,1}\\
+\vdots\\
+y_{i,T}
+\end{array}\right]}_{T \times 1}, \quad
+\boldsymbol\varepsilon_i =
+\underbrace{\left[
+\begin{array}{c}
+\varepsilon_{i,1}\\
+\vdots\\
+\varepsilon_{i,T}
+\end{array}\right]}_{T \times 1}, \quad
+\bv{x}_i =
+\underbrace{\left[
+\begin{array}{c}
+\bv{x}_{i,1}'\\
+\vdots\\
+\bv{x}_{i,T}'
+\end{array}\right]}_{T \times K}, \quad
+\bv{X} =
+\underbrace{\left[
+\begin{array}{c}
+\bv{x}_{1}\\
+\vdots\\
+\bv{x}_{n}
+\end{array}\right]}_{(nT) \times K}.
+$$
+$$
+\tilde{\bv{y}}_i =
+\left[
+\begin{array}{c}
+y_{i,1} - \bar{y}_i\\
+\vdots\\
+y_{i,T} - \bar{y}_i
+\end{array}\right], \quad
+\tilde{\boldsymbol\varepsilon}_i =
+\left[
+\begin{array}{c}
+\varepsilon_{i,1} - \bar{\varepsilon}_i\\
+\vdots\\
+\varepsilon_{i,T} - \bar{\varepsilon}_i
+\end{array}\right],
+$$
+$$
+\tilde{\bv{x}}_i =
+\left[
+\begin{array}{c}
+\bv{x}_{i,1}' - \bar{\bv{x}}_i'\\
+\vdots\\
+\bv{x}_{i,T}' - \bar{\bv{x}}_i'
+\end{array}\right], \quad
+\tilde{\bv{X}} =
+\left[
+\begin{array}{c}
+\tilde{\bv{x}}_{1}\\
+\vdots\\
+\tilde{\bv{x}}_{n}
+\end{array}\right], \quad
+\tilde{\bv{Y}} =
+\left[
+\begin{array}{c}
+\tilde{\bv{y}}_{1}\\
+\vdots\\
+\tilde{\bv{y}}_{n}
+\end{array}\right],
+$$
+where
+$$
+\bar{y}_i = \frac{1}{T} \sum_{t=1}^T y_{i,t}, \quad \bar{\varepsilon}_i = \frac{1}{T}\sum_{t=1}^T \varepsilon_{i,t} \quad \mbox{and} \quad \bar{\bv{x}}_i = \frac{1}{T}\sum_{t=1}^T \bv{x}_{i,t}.
+$$
+
+
+## Three standard cases
+
+There are three typical situations:
+
+* **Pooled regression**: $\bv{z}_i \equiv 1$. This case amounts to the case studied in Chapter \@ref(ChapterLS).
+* **Fixed Effects** (Section \@ref(FixedEffect)): $\bv{z}_i$ is unobserved, but correlates with $\bv{x}_i$ $\Rightarrow$ $\bv{b}$ is biased and inconsistent in the OLS regression of $\bv{y}$ on $\bv{X}$ (omitted variable, see Section \@ref(Omitted)).
+* **Random Effects** (Section \@ref(RandomEffect)): $\bv{z}_i$ is unobserved, but uncorrelated with $\bv{x}_i$. The model writes:
+$$
+y_{i,t} = \bv{x}'_{i,t}\boldsymbol\beta + \alpha +  \underbrace{{\color{blue}u_i + \varepsilon_{i,t}}}_{\mbox{compound error}},
+$$
+where $\alpha = \mathbb{E}(\bv{z}'_{i}\boldsymbol\alpha)$ and $u_i = \bv{z}'_{i}\boldsymbol\alpha - \mathbb{E}(\bv{z}'_{i}\boldsymbol\alpha) \perp \bv{x}_i$. In that case, the OLS is consistent, but not efficient. GLS can be used to gain efficiencies over OLS (see Section \@ref(GLS) for a presentation of the GLS approach).
+
+
+## Estimation of Fixed-Effects Models {#FixedEffect}
+
+
+:::{.hypothesis #FE name="Fixed-effect model"}
+
+We assume that:
+
+i. There is no perfect multicollinearity among the regressors.
+ii. $\mathbb{E}(\varepsilon_{i,t}|\bv{X})=0$, for all $i,t$.
+iii. We have:
+$$
+\mathbb{E}(\varepsilon_{i,t}\varepsilon_{j,s}|\bv{X}) =
+\left\{
+\begin{array}{cl}
+\sigma^2 & \mbox{if $i=j$ and $s=t$},\\
+0 & \mbox{otherwise.}
+\end{array}\right.
+$$
+:::
+
+
+
+These assumptions are analogous to those introduced in the standard linear regression:
+
+(i) $\leftrightarrow$ Hyp. \@ref(hyp:fullrank), (ii) $\leftrightarrow$ Hyp. \@ref(hyp:exogeneity), (iii) $\leftrightarrow$ Hyp. \@ref(hyp:homoskedasticity) + \@ref(hyp:noncorrelResid).
+
+
+In matrix form, for a given $i$, the model writes:
+$$
+\bv{y}_i = \bv{x}_i \boldsymbol\beta + \bv{1}\alpha_i + \boldsymbol\varepsilon_i,
+$$
+where $\bv{1}$ is a $T$-dimensional vector of ones.
+
+This is the **Least Square Dummy Variable (LSDV)** model:
+\begin{equation}
+\bv{y} = [\bv{X} \quad \bv{D}]
+\left[
+\begin{array}{c}
+\boldsymbol\beta\\
+\boldsymbol\alpha
+\end{array}
+\right]
++ \boldsymbol\varepsilon, (\#eq:LSDV)
+\end{equation}
+with:
+$$
+\bv{D} = \underbrace{ \left[\begin{array}{cccc}
+\bv{1}&\bv{0}&\dots&\bv{0}\\
+\bv{0}&\bv{1}&\dots&\bv{0}\\
+&&\vdots&\\
+\bv{0}&\bv{0}&\dots&\bv{1}\\
+\end{array}\right]}_{(nT \times n)}.
+$$
+
+The linear regression (Eq. \@ref(eq:LSDV)) ---with the dummy variables--- satisfies the Gauss-Markov conditions (Theorem \@ref(thm:GaussMarkov)). Hence, in this context, the OLS estimator is the *best linear unbiased estimator* (BLUE).
+
+Denoting by $\bv{Z}$ the matrix $[\bv{X} \quad \bv{D}]$, and by $\bv{b}$ and $\bv{a}$ the respective OLS estimates of $\boldsymbol\beta$ and of $\boldsymbol\alpha$, we have:
+\begin{equation}
+\boxed{
+\left[
+\begin{array}{c}
+\bv{b}\\
+\bv{a}
+\end{array}
+\right]
+= [\bv{Z}'\bv{Z}]^{-1}\bv{Z}'\bv{y}.} (\#eq:bfixedeffects11)
+\end{equation}
+
+The asymptotical distribution of $[\bv{b}',\bv{a}']'$ derives from the standard OLS context: Prop. \@ref(prp:asymptOLS) can be used after having replaced $\bv{X}$ by $\bv{Z}=[\bv{X} \quad \bv{D}]$.
+
+We have:
+\begin{equation}
+\boxed{\left[
+\begin{array}{c}
+\bv{b}\\
+\bv{a}
+\end{array}
+\right] \overset{d}{\rightarrow}
+\mathcal{N}\left(
+\left[
+\begin{array}{c}
+\boldsymbol\beta\\
+\boldsymbol\alpha
+\end{array}
+\right],
+\sigma^2 \frac{Q^{-1}}{nT}
+\right),}
+\end{equation}
+where
+$$
+Q = \mbox{plim}_{nT \rightarrow \infty} \frac{1}{nT} \bv{Z}'\bv{Z},
+$$
+assuming the previous limit exists.
+
+In practice, an estimator of the covariance matrix of $[\bv{b}',\bv{a}']'$ is:
+$$
+s^2 \left( \bv{Z}'\bv{Z}\right)^{-1} \quad with \quad s^2 = \frac{\bv{e}'\bv{e}}{nT - K - n},
+$$
+where $\bv{e}$ is the $(nT) \times 1$ vector of OLS residuals.
+
+There is an alternative way of expressing the LSDV estimators. It involves the residual-maker matrix matrix $\bv{M_D}=\bv{I} - \bv{D}(\bv{D}'\bv{D})^{-1}\bv{D}'$ (see Eq. \@ref(eq:Mres)), which acts as an operator that removes entity-specific means, i.e.:
+$$
+\tilde{\bv{Y}} = \bv{M_D}\bv{Y}, \quad \tilde{\bv{X}} = \bv{M_D}\bv{X} \quad and \quad \tilde{\boldsymbol\varepsilon} = \bv{M_D}\boldsymbol\varepsilon.
+$$
+
+With these notations, using the Frisch-Waugh theorem (Theorem \@ref(thm:FW)), we get another expression for the estimator $\bv{b}$ appearing in Eq. \@ref(eq:bfixedeffects11):
+\begin{equation}
+\boxed{\bv{b} = [\bv{X}'\bv{M_D}\bv{X}]^{-1}\bv{X}'\bv{M_D}\bv{y}.}(\#eq:bfixedeffects)
+\end{equation}
+
+This amounts to regressing the $\tilde{y}_{i,t}$'s ($= y_{i,t} - \bar{y}_i$) on the $\tilde{\bv{x}}_{i,t}$'s ($=\bv{x}_{i,t} - \bar{\bv{x}}_i$).
+
+The estimate of $\boldsymbol\alpha$ is given by:
+\begin{equation}
+\boxed{\bv{a} = (\bv{D}'\bv{D})^{-1}\bv{D}'(\bv{y} - \bv{X}\bv{b}),} (\#eq:a)
+\end{equation}
+which is obtained by developing the second row of
+$$
+\left[
+\begin{array}{cc}
+\bv{X}'\bv{X} & \bv{X}'\bv{D}\\
+\bv{D}'\bv{X} & \bv{D}'\bv{D}
+\end{array}\right]
+\left[
+\begin{array}{c}
+\bv{b}\\
+\bv{a}
+\end{array}\right] =
+\left[
+\begin{array}{c}
+\bv{X}'\bv{Y}\\
+\bv{D}'\bv{Y}
+\end{array}\right],
+$$
+which are the first-order conditions resulting from the least squares problem (see Eq. \@ref(eq:OLSFOC)).
+
+
+
+
+
+<!-- %\begin{frame}{} -->
+<!-- %\begin{scriptsize} -->
+<!-- %Look at: -->
+<!-- %http://www.princeton.edu/~otorres/Panel101R.pdf -->
+<!-- % -->
+<!-- %Nice chart with OLS versus LSDV. -->
+<!-- % -->
+<!-- %Use also Grunfeld data: -->
+<!-- % -->
+<!-- %https://vincentarelbundock.github.io/Rdatasets/doc/plm/Grunfeld.html -->
+<!-- % -->
+<!-- %===> Use Applied Econometrics with R 3.6: If $u_i$ exogen, then random effects more efficient. Hausman test. -->
+<!-- % -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+
+One can use different types of fixed effects in the same regression. Typically, one can have time and entity fixed effects. In that case, the model writes:
+$$
+y_{i,t} = \bv{x}_i'\boldsymbol\beta + \alpha_i + \gamma_t + \varepsilon_{i,t}.
+$$
+
+The LSDV approach (Eq. \@ref(eq:LSDV)) can still be resorted to. It suffices to extend the $\bv{Z}$ matrix with additional columns (then called *time dummies*):
+\begin{equation}
+\bv{y} = [\bv{X} \quad \bv{D} \quad \bv{C}]
+\left[
+\begin{array}{c}
+\boldsymbol\beta\\
+\boldsymbol\alpha\\
+\boldsymbol\gamma
+\end{array}
+\right]
++ \boldsymbol\varepsilon, (\#eq:LSDV2)
+\end{equation}
+with:
+$$
+\bv{C} = \left[\begin{array}{cccc}
+\boldsymbol{\delta}_1&\boldsymbol{\delta}_2&\dots&\boldsymbol{\delta}_{T-1}\\
+\vdots&\vdots&&\vdots\\
+\boldsymbol{\delta}_1&\boldsymbol{\delta}_2&\dots&\boldsymbol{\delta}_{T-1}\\
+\end{array}\right],
+$$
+where the $T$-dimensional vector $\boldsymbol\delta_t$ (the *time dummy*) is
+$$
+[0,\dots,0,\underbrace{1}_{\mbox{t$^{th}$ entry}},0,\dots,0]'.
+$$
+
+Using state and year fixed effects in the `CigarettesSW` panel dataset yields the following results:
+
+```{r cigarettes2,warning=FALSE, message=FALSE}
+CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+eq.pooled <- lm(log(packs)~log(rprice)+log(rincome),data=CigarettesSW)
+eq.LSDV <- lm(log(packs)~log(rprice)+log(rincome)+state,
+              data=CigarettesSW)
+CigarettesSW$year <- as.factor(CigarettesSW$year)
+eq.LSDV2 <- lm(log(packs)~log(rprice)+log(rincome)+state+year,
+               data=CigarettesSW)
+stargazer::stargazer(eq.pooled,eq.LSDV,eq.LSDV2,type="text",no.space = TRUE,
+                     omit=c("state","year"),
+                     add.lines=list(c('State FE','No','Yes','Yes'),
+                                    c('Year FE','No','No','Yes')),
+                     omit.stat=c("f","ser"))
+```
+
+
+
+:::{.example #JSTPanel name="Housing prices and interest rates"}
+
+In this example, we want to estimate the effect of short and long-term interest rate on housing prices. The data come from the @JST_2017 dataset ([see this website](https://www.macrohistory.net)).
+
+```{r JSTpanel, warning=FALSE, message=FALSE}
+library(AEC);library(sandwich)
+data(JST); JST <- subset(JST,year>1950);N <- dim(JST)[1]
+JST$hpreal <- JST$hpnom/JST$cpi # real house price index
+JST$dhpreal <- 100*log(JST$hpreal/c(NaN,JST$hpreal[1:(N-1)]))
+# Put NA's when change in country:
+JST$dhpreal[c(0,JST$iso[2:N]!=JST$iso[1:(N-1)])] <- NaN
+JST$dhpreal[abs(JST$dhpreal)>30] <- NaN # remove extreme price change
+JST$YEAR <- as.factor(JST$year) # to have time fixed effects
+eq1_noFE <- lm(dhpreal ~ stir + ltrate,data=JST)
+eq1_FE   <- lm(dhpreal ~ stir + ltrate + iso + YEAR,data=JST)
+eq2_noFE <- lm(dhpreal ~ I(ltrate-stir),data=JST)
+eq2_FE <- lm(dhpreal ~ I(ltrate-stir) + iso + YEAR,data=JST)
+vcov_cluster1_noFE <- vcovHC(eq1_noFE, cluster = JST[, c("iso","YEAR")])
+vcov_cluster1_FE   <- vcovHC(eq1_FE, cluster = JST[, c("iso","YEAR")])
+vcov_cluster2_noFE <- vcovHC(eq2_noFE, cluster = JST[, c("iso","YEAR")])
+vcov_cluster2_FE   <- vcovHC(eq2_FE, cluster = JST[, c("iso","YEAR")])
+robust_se_FE1_noFE <- sqrt(diag(vcov_cluster1_noFE))
+robust_se_FE1_FE   <- sqrt(diag(vcov_cluster1_FE))
+robust_se_FE2_noFE <- sqrt(diag(vcov_cluster2_noFE))
+robust_se_FE2_FE   <- sqrt(diag(vcov_cluster2_FE))
+stargazer::stargazer(eq1_noFE, eq1_FE, eq2_noFE, eq2_FE, type = "text",
+                     column.labels = c("no FE", "with FE", "no FE","with FE"),
+                     omit = c("iso","YEAR","Constant"),keep.stat = "n",
+                     add.lines=list(c('Country FE','No','Yes','No','Yes'),
+                                    c('Year FE','No','Yes','No','Yes')),
+                     se = list(robust_se_FE1_noFE,robust_se_FE1_FE,
+                               robust_se_FE2_noFE,robust_se_FE2_FE))
+```
+
+:::
+
+
+
+## Estimation of random effects models {#RandomEffect}
+
+Here, the individual effects are assumed to be not correlated to other variables (the $\bv{x}_i$'s). In that context, the OLS estimator is consistent. However, it is not efficient. The GLS approach can be employed to gain efficiency.
+
+**Random-effect models** write:
+$$
+y_{i,t}=\bv{x}'_{it}\boldsymbol\beta + (\alpha + \underbrace{u_i}_{\substack{\text{Random}\\\text{heterogeneity}}}) + \varepsilon_{i,t},
+$$
+with
+\begin{eqnarray*}
+\mathbb{E}(\varepsilon_{i,t}|\bv{X})&=&\mathbb{E}(u_{i}|\bv{X}) =0,\\
+\mathbb{E}(\varepsilon_{i,t}\varepsilon_{j,s}|\bv{X}) &=&
+\left\{
+\begin{array}{cl}
+\sigma_\varepsilon^2 & \mbox{ if $i=j$ and $s=t$},\\
+0 & \mbox{ otherwise.}
+\end{array}
+\right.\\
+\mathbb{E}(u_{i}u_{j}|\bv{X}) &=&
+\left\{
+\begin{array}{cl}
+\sigma_u^2 & \mbox{ if $i=j$},\\
+0 & \mbox{otherwise.}
+\end{array}
+\right.\\
+\mathbb{E}(\varepsilon_{i,t}u_{j}|\bv{X})&=&0 \quad \text{for all $i$, $j$ and $t$}.
+\end{eqnarray*}
+
+Introducing the notations $\eta_{i,t} = u_i + \varepsilon_{i,t}$ and $\boldsymbol\eta_i = [\eta_{i,1},\dots,\eta_{i,T}]'$, we have $\mathbb{E}(\boldsymbol\eta_i |\bv{X}) = \bv{0}$ and $\mathbb{V}ar(\boldsymbol\eta_i | \bv{X}) = \boldsymbol\Gamma$, where
+$$
+\boldsymbol\Gamma = \left[	\begin{array}{ccccc}
+\sigma_\varepsilon^2+\sigma_u^2 & \sigma_u^2 & \sigma_u^2 & \dots & \sigma_u^2\\
+\sigma_u^2 & \sigma_\varepsilon^2+\sigma_u^2 & \sigma_u^2 & \dots & \sigma_u^2\\
+\vdots && \ddots && \vdots \\
+\sigma_u^2 & \sigma_u^2 & \sigma_u^2 & \dots & \sigma_\varepsilon^2+\sigma_u^2\\
+\end{array}
+\right] = \sigma_\varepsilon^2\bv{I} + \sigma_u^2\bv{1}\bv{1}'.
+$$
+
+Denoting by $\boldsymbol\Sigma$ the covariance matrix of $\boldsymbol\eta = [\boldsymbol\eta_1',\dots,\boldsymbol\eta_n']'$, we have:
+$$
+\boldsymbol\Sigma = \bv{I} \otimes \boldsymbol\Gamma.
+$$
+
+If we knew $\boldsymbol\Sigma$, we would apply (feasible) GLS (Eq. \@ref(eq:betaGLS), in Section \@ref(GLS)):
+$$
+\boldsymbol\beta = (\bv{X}'\boldsymbol\Sigma^{-1}\bv{X})^{-1}\bv{X}'\boldsymbol\Sigma^{-1}\bv{y}.
+$$
+(As explained in Section \@ref(GLS), this amounts to regressing ${\boldsymbol\Sigma^{-1/2}}'\bv{y}$ on ${\boldsymbol\Sigma^{-1/2}}'\bv{X}$.)
+
+It can be checked that $\boldsymbol\Sigma^{-1/2} = \bv{I} \otimes (\boldsymbol\Gamma^{-1/2})$ where
+$$
+\boldsymbol\Gamma^{-1/2} = \frac{1}{\sigma_\varepsilon}\left( \bv{I} - \frac{\theta}{T}\bv{1}\bv{1}'\right),\quad \mbox{with}\quad\theta = 1 - \frac{\sigma_\varepsilon}{\sqrt{\sigma_\varepsilon^2+T\sigma_u^2}}.
+$$
+
+Hence, if we knew $\boldsymbol\Sigma$, we would transform the data as follows:
+$$
+\boldsymbol\Gamma^{-1/2}\bv{y}_i = \frac{1}{\sigma_\varepsilon}\left[\begin{array}{c}y_{i,1} - \theta\bar{y}_i\\y_{i,2} - \theta\bar{y}_i\\\vdots\\y_{i,T} - \theta\bar{y}_i\\\end{array}\right].
+$$
+
+What about when $\boldsymbol\Sigma$ is unknown? One can take deviations from group means to remove heterogeneity:
+\begin{equation}
+y_{i,t} - \bar{y}_i = [\bv{x}_{i,t} - \bar{\bv{x}}_i]'\boldsymbol\beta + (\varepsilon_{i,t} - \bar{\varepsilon}_i).(\#eq:OLSRUM)
+\end{equation}
+The previous equation can be consistently estimated by OLS. (Although the residuals are correlated across $t$'s for the observations pertaining to a given entity, the OLS remain consistent; see Prop. \@ref(prp:XXX).)
+
+We have $\mathbb{E}\left[\sum_{i=1}^{T}(\varepsilon_{i,t}-\bar{\varepsilon}_i)^2\right] = (T-1)\sigma_{\varepsilon}^2$.
+
+The $\varepsilon_{i,t}$'s are not observed but $\bv{b}$, the OLS estimator of $\boldsymbol\beta$ in Eq. \@ref(eq:OLSRUM), is a consistent estimator of $\boldsymbol\beta$. Using an adjustment for the degrees of freedom, we can approximate their variance with:
+$$
+\hat{\sigma}_e^2 = \frac{1}{nT-n-K}\sum_{i=1}^{n}\sum_{t=1}^{T}(e_{i,t} - \bar{e}_i)^2.
+$$
+
+What about $\sigma_u^2$? We can exploit the fact that OLS are consistent in the pooled regression:
+$$
+\mbox{plim }s^2_{pooled} = \mbox{plim }\frac{\bv{e}'\bv{e}}{nT-K-1} = \sigma_u^2 + \sigma_\varepsilon^2,
+$$
+and therefore use $s^2_{pooled} - \hat{\sigma}_e^2$ as an approximation to $\sigma_u^2$.
+
+
+Let us come back to Example \@ref(exm:JSTPanel) (relationship between changes in housing prices and interest rates). In the following, we use the random effect specification; and compare the results with those obtained with the pooled regression and with the fixed-effect model. For that, we use the function `plm` of the package of the same name. (Note that `eq.FE` is similar to `eq1` in Example \@ref(exm:JSTPanel).)
+
+```{r JSTpanel2, warning=FALSE,message=FALSE}
+library(plm);library(stargazer)
+eq.RE <- plm(dhpreal ~ stir + ltrate,data=JST,index=c("iso","YEAR"),
+             model="random",effect="twoways")
+eq.FE <- plm(dhpreal ~ stir + ltrate,data=JST,index=c("iso","YEAR"),
+             model="within",effect="twoways")
+eq0   <- plm(dhpreal ~ stir + ltrate,data=JST,index=c("iso","YEAR"),
+             model="pooling") 
+stargazer(eq0, eq.RE, eq.FE, type = "text",no.space = TRUE,
+                     column.labels=c("Pooled","Random Effect","Fixed Effects"),
+                     add.lines=list(c('State FE','No','Yes','Yes'),
+                                    c('Year FE','No','Yes','Yes')),
+                     omit.stat=c("f","ser"))
+```
+
+One can run an @Hausman_1978 test in order to check whether or not the fixed-effect model is needed. Indeed, if this is not the case (i.e., if the covariates are not correlated to the disturbances), then it is preferable to use the random-effect estimation as the latter is more efficient.
+
+```{r JSTpanel3}
+phtest(eq.FE,eq.RE)
+```
+The p-value being high, we do not reject the null hypothesis according to which the covariates and the errors are uncorrelated. We should therefore prefer the random-effect model.
+
+
+
+:::{.example #airbnb name="Spatial data"}
+
+This example makes use of Airbnb prices (Zürich, 22 June 2017), collected from [Tom Slee's website](http://tomslee.net/airbnb-data-collection-get-the-data). The covariates are the number of bedrooms and the number of people that can be accommodated. We consider the use of district fixed effects. Figure \@ref(fig:airbnb) shows the price to explain (the size of the circles is proportional to the prices). The white lines delineate the 12 districts of the city.
+
+```{r airbnb, warning=FALSE, message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Airbnb prices for the Zurich area, 22 June 2017. The size of the circles is proportional to the prices. White lines delineate the 12 districts of the city.", echo=FALSE}
+library(rgdal)
+library(AEC)
+library(sandwich)
+library(RColorBrewer)
+par(mar=c(0,0,0,0))
+plot(zurich_districts,col="gray",border="white")
+for(i in 1:dim(airbnb)[1]){
+  points(airbnb$longitude[i],airbnb$latitude[i],pch=1,cex=(airbnb$price[i]/200))
+}
+```
+
+Let us regress prices on the covariates as well as on district dummies:
+
+```{r airbnb2, warning=FALSE, message=FALSE}
+eq_noFE <- lm(price~bedrooms+accommodates,data=airbnb)
+eq_FE   <- lm(price~bedrooms+accommodates+neighborhood,data=airbnb)
+# Adjust standard errors:
+cov_FE          <- vcovHC(eq_FE, cluster = airbnb[, c("neighborhood")])
+robust_se_FE    <- sqrt(diag(cov_FE))
+cov_noFE        <- vcovHC(eq_noFE, cluster = airbnb[, c("neighborhood")])
+robust_se_noFE  <- sqrt(diag(cov_noFE))
+stargazer::stargazer(eq_FE, eq_noFE, eq_FE, eq_noFE, type = "text",
+                     column.labels = c("FE (no HAC)", "No FE (no HAC)",
+                                       "FE (with HAC)", "No FE (with HAC)"),
+                     omit = c("neighborhood"),no.space = TRUE,
+                     omit.labels = c("District FE"),keep.stat = "n",
+                     se = list(NULL, NULL, robust_se_FE, robust_se_noFE))
+```
+
+
+Figure \@ref(fig:airbnb3) compares the residuals with and without fixed effects. The sizes of the circles are proportional to the absolute values of the residuals, the color indicates the sign (blue for positive).
+
+```{r airbnb3, echo=FALSE, warning=FALSE, message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Regression residuals. The sizes of the circles are proportional to the absolute values of the residuals, the color indicates the sign (blue for negative)."}
+par(mfrow=c(1,2))
+for(j in 1:2){# with/without FE
+  par(plt=c(0,1,0,.8))
+  if(j==1){
+    residuals <- eq_FE$residuals
+    titl <- "(a) With FE"
+  }else{
+    residuals <- eq_noFE$residuals
+    titl <- "(b) Without FE"
+  }
+  plot(zurich_districts,col="gray",border="white",main=titl)
+  # create categories based on residuals:
+  nb_categ <- 11
+  categ <- round((nb_categ-1)*(residuals-min(residuals))/(max(residuals)-min(residuals)))+1
+  colour <- paste(brewer.pal(n = nb_categ, name = "RdBu"),"77",sep="")
+  for(i in 1:dim(airbnb)[1]){
+    points(airbnb$longitude[i],airbnb$latitude[i],pch=19,
+           cex=(abs(residuals[i])/100),col=colour[categ[i]])
+  }
+}
+library(plotfunctions)
+gradientLegend(c(-200,200),col=colour,
+               pos=c(.85,0.1,.9,.3))
+```
+
+With fixed effects, the colors are better balanced within each district.
+
+:::
+
+<!-- %\begin{frame}{} -->
+<!-- %\begin{scriptsize} -->
+<!-- %\begin{itemize} -->
+<!-- %	\item Breusch and Pagan LM test of $H_0: \quad \sigma_u^2=0$ (13.4.3 in Greene) -->
+<!-- %	\item Hausman's specification test 13.4.4. -->
+<!-- %	\item Cluster-robust standard errors (\href{http://cameron.econ.ucdavis.edu/research/Cameron_Miller_Cluster_Robust_October152013.pdf}{nice paper}) + \href{http://www.cemfi.es/~arellano/obes_1987.pdf}{Arellano (1987)} -->
+<!-- %	\item Random versus Fixed effects: uncorrelated errors / LSDV: lose a lot of degrees of freedom. -->
+<!-- %	\item \href{http://econweb.tamu.edu/keli/Hausman\%201978.pdf}{Hausman (1978)} test: $H_0:$ no correlation of random effects and regressors. -->
+<!-- %\end{itemize} -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+
+<!-- %\begin{frame}{} -->
+<!-- %Instrumental Variable estimation of the random effect model -->
+<!-- %\begin{scriptsize} -->
+<!-- %\begin{itemize} -->
+<!-- %	\item Objective: have a specification where the model can contain time-invariant characteristics. Specification: -->
+<!-- %	$$ -->
+<!-- %	y_{i,t} = 	\underbrace{\bv{x}'_{1,i,t} \boldsymbol\beta_1}_{\perp u_i} + -->
+<!-- %			\underbrace{\bv{x}'_{2,i,t} \boldsymbol\beta_2}_{\not\perp u_i} + -->
+<!-- %			\underbrace{\bv{z}'_{1,i} \boldsymbol\alpha_1}_{\perp u_i} + -->
+<!-- %			\underbrace{\bv{z}'_{2,i} \boldsymbol\alpha_2}_{\not\perp u_i} + \varepsilon_{i,t}. -->
+<!-- %	$$ -->
+<!-- %	\item Assumptions: -->
+<!-- %	\begin{eqnarray*} -->
+<!-- %	E(u_i) = E(u_i|\bv{x}_{1,i,t},\bv{z}_{1,i,t}) &=& 0\\ -->
+<!-- %	E(u_i|\bv{x}_{2,i,t},\bv{z}_{2,i,t}) &\ne& 0\\ -->
+<!-- %	\mbox{Var}(u_i|\bv{x}_{1,i,t},\bv{z}_{1,i,t},\bv{x}_{2,i,t},\bv{z}_{2,i,t})&=& \sigma_u^2\\ -->
+<!-- %	\mbox{Cov}(u_i,\varepsilon_{i,t}|\bv{x}_{1,i,t},\bv{z}_{1,i,t},\bv{x}_{2,i,t},\bv{z}_{2,i,t})&=& 0\\ -->
+<!-- %	\mbox{Var}(u_i + \varepsilon_{i,t}|\bv{x}_{1,i,t},\bv{z}_{1,i,t},\bv{x}_{2,i,t},\bv{z}_{2,i,t})&=& \sigma^2 = \sigma_u^2 + \sigma_\varepsilon^2\\ -->
+<!-- %	\mbox{Corr}(u_i + \varepsilon_{i,t},u_i + \varepsilon_{i,s}|\bv{x}_{1,i,t},\bv{z}_{1,i,t},\bv{x}_{2,i,t},\bv{z}_{2,i,t})&=& \rho = \sigma_u^2/\sigma^2 -->
+<!-- %	\end{eqnarray*}	 -->
+<!-- %\end{itemize} -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+<!-- % -->
+<!-- %\begin{frame}{} -->
+<!-- %\begin{scriptsize} -->
+<!-- %\begin{itemize} -->
+<!-- %	\item OLS and GLS inconsistent. -->
+<!-- %	\item \href{http://web.mit.edu/14.33/www/hausman.pdf}{Hausman and Taylor, 1981}. Example cited in the plm package by Baltagi (2001) (with data in the plm package). -->
+<!-- %	\item First: -->
+<!-- %	\begin{equation}\label{eq:13.36} -->
+<!-- %	y_{i,t} - \bar{y}_i = [\bv{x}_{1,i,t} - \bar{\bv{x}}_{1,i}]'\boldsymbol\beta_1 + [\bv{x}_{2,i,t} - \bar{\bv{x}}_{2,i}]'\boldsymbol\beta_2 + (\varepsilon_{i,t} - \bar{\varepsilon}_i) -->
+<!-- %	\end{equation} -->
+<!-- %	\item[$\Rightarrow$] $\boldsymbol\beta$ can consistently be estimated by LS. -->
+<!-- %	\item[Step 1] LSDV of $\boldsymbol\beta$ (Eq. \ref{eq:13.36})  -->
+<!-- %	\item[Step 2] residuals of step 1: $e_{i,t}$. Regress $e_{i}$ on $(\bv{z}_1',\bv{z}_2')'$ with IV $\bv{z}_1$ and $\bv{x}_1$ (assuming $K_1\ge L_2$). NB: time-invariant data are repeated $T$ times. $\Rightarrow$ consistent estimate of $\boldsymbol\alpha$. -->
+<!-- %	\item[Step 3] The residual variance in Step 2 = consistent estimator of $\sigma_u^2 + \sigma^2_\varepsilon/T$. From and from the estimator of $\sigma^2_\varepsilon$ from Step 1, estimator of $\sigma^2_u$. This leads to an estimate $\hat{\theta}$ of: -->
+<!-- %	$$ -->
+<!-- %	\theta = \sqrt{\frac{\sigma^2_\varepsilon}{\sigma^2_\varepsilon + T\sigma^2_u}} -->
+<!-- %	$$ -->
+<!-- %	that can  be used in Feasible GLS. -->
+<!-- %\end{itemize} -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+<!-- % -->
+<!-- %\begin{frame}{} -->
+<!-- %\begin{scriptsize} -->
+<!-- %\begin{itemize} -->
+<!-- %	\item[Step 4] Define $\bv{w}_{i,t} = [\bv{x}_{1,i,t}',\bv{x}_{2,i,t}',\bv{z}_{1,i,t}',\bv{z}_{2,i,t}']$, -->
+<!-- %	$$ -->
+<!-- %	\bv{w}_{i,t}^* = \bv{w}_{i,t} - (1 - \hat{\theta})\bv{w}_i \quad \mbox{and} \quad y_{i,t}^* = y_{i,t} - (1 - \hat\theta) y_i. -->
+<!-- %	$$ -->
+<!-- %	The IVs are: -->
+<!-- %	$$ -->
+<!-- %	\bv{v}_{i,t} = [(\bv{x}_{1,i,t}-\bv{x}_{1,i})',(\bv{x}_{2,i,t}-\bv{x}_{2,i})',\bv{z}_{1,i}',\bv{x}_{1,i}']. -->
+<!-- %	$$ -->
+<!-- %	Finally: -->
+<!-- %	\begin{equation} -->
+<!-- %	(\bv{b}_{iv}',\bv{a}_{iv}')' = [({\bv{W}^*}'\bv{V})(\bv{V}'\bv{V})^{-1}(\bv{V}'{\bv{W}^*})][({\bv{W}^*}'\bv{V})(\bv{V}'\bv{V})^{-1}(\bv{V}'{\bv{y}^*})] -->
+<!-- %	\end{equation} -->
+<!-- %	\item No Asymp Var??? -->
+<!-- %\end{itemize} -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+<!-- % -->
+<!-- %\begin{frame}{} -->
+<!-- %\begin{scriptsize} -->
+<!-- %\begin{itemize} -->
+<!-- %	\item GMM estimation \href{http://people.stern.nyu.edu/wgreene/Econometrics/Arellano-Bond.pdf}{Arellano and Bond (1991)}. plm package does it; see Greene 13.6. -->
+<!-- %\end{itemize} -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+<!-- % -->
+<!-- %\begin{frame}{} -->
+<!-- %\begin{scriptsize} -->
+<!-- %\begin{itemize} -->
+<!-- %	\item XXX -->
+<!-- %\end{itemize} -->
+<!-- %\end{scriptsize} -->
+<!-- %\end{frame} -->
+
+
+## Dynamic Panel Regressions {#DynPanel}
+
+In what precedes, it has been assumed that there is no correlation between the observations indexed by $(i,t)$ and those indexed by $(j,s)$ as long as $j \ne i$ or $t \ne s$. If one suspects that the errors $\varepsilon_{i,t}$ are correlated (across entities $i$ for a given date $t$, or across dates for a given entity, or both), then one should employ a robust covariance matrix (see Section \@ref(Clusters)).
+
+In several cases, auto-correlation in the variable of interest may stem from an auto-regressive specification. That is, Eq. \@ref(eq:panel1) is then replaced by:
+\begin{equation}
+y_{i,t} = \rho y_{i,t-1} + \bv{x}'_{i,t}\underbrace{\boldsymbol\beta}_{K \times 1} + \underbrace{\alpha_i}_{\mbox{Individual effects}} + \varepsilon_{i,t}.(\#eq:paneldyn)
+\end{equation}
+
+In that case, even if the explanatory variables $\bv{x}_{i,t}$  are uncorrelated to the errors $\varepsilon_{i,t}$, we have that the additional *explanatory variable* $y_{i,t-1}$ correlates to the errors $\varepsilon_{i,t-1},\varepsilon_{i,t-2},\dots,\varepsilon_{i,1}$.  As a result, the LSDV estimate of the model parameters $\{\rho,\boldsymbol\beta\}$ may be biased, even if $n$ is large. To see this, notice that the LSDV regression amounts to regressing $\widetilde{\bv{y}}$ on $\widetilde{\bv{X}}$ (see Eq. \@ref(eq:bfixedeffects)), where the elements of $\widetilde{\bv{X}}$ are the explanatory variables to which we subtract their within-sample means. In particular, we have:
+$$
+\tilde{y}_{i,t-1} = y_{i,t-1} - \frac{1}{T} \sum_{s=1}^{T} y_{i,s-1},
+$$
+which correlates to the corresponding error, that is:
+$$
+\tilde{\varepsilon}_{i,t} = \varepsilon_{i,t} - \frac{1}{T} \sum_{s=1}^{T} \varepsilon_{i,s}.
+$$
+
+The previous equation shows that the *within-group* estimator (LSDV) introduces all realizations of the $\varepsilon_{i,t}$ errors into the transformed error term ($\tilde{\varepsilon}_{i,t}$). As a result, in large-$n$ fixed-$T$ panels, it is consistent only if all the right-hand-side variables of the regression are strictly exogenous (i.e., do not correlate to past, present, and future errors $\varepsilon_{i,t}$).[^footnote1] This is not the case when there are lags of $y_{i,t}$ on the right-hand side of the regression formula.
+
+[^footnote1]: Although the bias may vanish for large $T$'s, it does not if $n$ only goes to infinity.
+
+The following simulation illustrate this bias. The $x$-coordinates  of the dots are the fixed effects $\alpha_i$'s, and the $y$-coordinates are their LSDV estimates. The blue line is the 45-degree line.
+
+```{r setseedPLM, echo=FALSE}
+set.seed(1)
+```
+
+```{r dynpanel1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "illustration of the bias pertianing to the LSDV estimation approach in the presence of auto-correlation of the depend variable."}
+n <- 400;T <- 10
+rho <- 0.8;sigma <- .5
+alpha <- rnorm(n)
+y <- alpha /(1-rho) + sigma^2/(1 - rho^2) * rnorm(n)
+all_y <- y
+for(t in 2:T){
+  y <- rho * y + alpha + sigma * rnorm(n)
+  all_y <- rbind(all_y,y)
+}
+y   <- c(all_y[2:T,]);y_1 <- c(all_y[1:(T-1),])
+D <- diag(n) %x% rep(1,T-1)
+Z <- cbind(c(y_1),D)
+b <- solve(t(Z) %*% Z) %*% t(Z) %*% y
+a <- b[2:(n+1)]
+plot(alpha,a)
+lines(c(-10,10),c(-10,10),col="blue")
+```
+
+In the previous example, the estimate of $\rho$ (whose true value is `r rho`) is `r round(b[1],3)`.
+
+To address this, one can resort to instrumental-variable regressions. @Anderson_Hsiao_1982 have, in particular, proposed a first-differenced Two Stage Least Squares (2SLS) estimator (see Eq. \@ref(eq:IV) in Section \@ref(IV)). This estimation is based on the following transformation of the model:
+\begin{equation}
+\Delta y_{i,t} = \rho \Delta y_{i,t-1} + (\Delta \bv{x}_{i,t})'\boldsymbol\beta + \Delta\varepsilon_{i,t}.(\#eq:paneldynFisrtDiff)
+\end{equation}
+The OLS estimates of the parameters are biased because $\varepsilon_{i,t-1}$ ---which is part of the error $\Delta\varepsilon_{i,t}$--- is correlated to $y_{i,t-1}$ ---which is part of the "explanatory variable", namely $\Delta y_{i,t-1}$. But consistent estimates can be obtained using 2SLS with instrumental variables that are correlated with $\Delta y_{i,t}$ but orthogonal to $\Delta\varepsilon_{i,t}$. One can for instance use $\{y_{i,t-2},\bv{x}_{i,t-2}\}$ as instruments. Note that this approach can be implemented only if there are more than 3 time observations per entity $i$.
+
+If the explanatory variables $\bv{x}_{i,t}$ are assumed to be predetermined (i.e., do not contemporaneous correlate with the errors $\varepsilon_{i,t}$), then $\bv{x}_{i,t-1}$ can be added to the instruments associated with $\Delta y_{i,t}$. Further, if these variables (the $\bv{x}_{i,t}$'s) are exogenous (i.e., do not contemporaneous correlate with any of the errors $\varepsilon_{i,s}$, $\forall s$), then $\bv{x}_{i,t}$ also constitute a valid instrument.
+
+Using the previous (simulated) example, this approach consists in the following steps:
+
+```{r dynpanel2}
+Dy   <- c(all_y[3:T,]) - c(all_y[2:(T-1),])
+Dy_1 <- c(all_y[2:(T-1),]) - c(all_y[1:(T-2),])
+y_2  <- c(all_y[1:(T-2),])
+Z <- matrix(y_2,ncol=1)
+Pz <- Z %*% solve(t(Z) %*% Z) %*% t(Z)
+Dy_1hat <- Pz %*% Dy_1
+rho_2SLS <- solve(t(Dy_1hat) %*% Dy_1hat) %*% t(Dy_1hat) %*% Dy
+```
+
+While the OLS estimate of $\rho$ (whose true value is `r rho`) was `r round(b[1],3)`, we obtain here `rho_2SLS` $=$ `r round(rho_2SLS,3)`.
+
+Let us come back to the general case (with covariates $\bv{x}_{i,k}$'s). For $t=3$, $y_{i,1}$ (and $\bv{x}_{i,1}$) is the only possible instrument. However, for $t=4$, one could use $y_{i,2}$ and $y_{i,1}$ (as well as $\bv{x}_{i,2}$ and $\bv{x}_{i,1}$). More generally, defining matrix $Z_i$ as follows:
+$$
+Z_i = \left[
+\begin{array}{ccccccccccccccccc}
+\bv{z}_{i,1}' & 0 & \dots \\
+0 & \bv{z}_{i,1}' & \bv{z}_{i,2}' & 0 & \dots \\
+0 &0 &0 & \bv{z}_{i,1} & \bv{z}_{i,2}' & \bv{z}_{i,3}' & 0 & \dots \\
+\vdots \\
+0 & \dots &&&&&& 0 & \bv{z}_{i,1}' &  \dots &   \bv{z}_{i,T-2}'
+\end{array}
+\right],
+$$
+where $\bv{z}_{i,t} = [y_{i,t},\bv{x}_{i,t}']'$, we have the moment conditions:[^footnote2]
+$$
+\mathbb{E}(Z_i'\Delta  {\boldsymbol\varepsilon}_i)=0,
+$$
+
+with $\Delta{\boldsymbol\varepsilon}_i = [ \Delta \varepsilon_{i,3},\dots,\Delta \varepsilon_{i,T}]'$.
+
+[^footnote2]: If $\bv{x}_{i,t}$ is predetermined (exogenous), we can use $\bv{z}_{i,t} = [y_{i,t},\bv{x}_{i,t+1},\bv{x}_{i,t}']'$ (respectively $\bv{z}_{i,t} = [y_{i,t},\bv{x}_{i,t+2},\bv{x}_{i,t+1},\bv{x}_{i,t}']'$).
+
+These restrictions are used in the GMM approach employed by @Arellano_Bond_1991. Specifically, a GMM estimator of the model parameters is given by:
+$$
+\mbox{argmin}\;\left(\frac{1}{n} \sum_{i=1}^n Z_i' \Delta \boldsymbol\varepsilon_i\right)'W_n\left(\frac{1}{n} \sum_{i=1}^n Z_i' \Delta \boldsymbol\varepsilon_i\right),
+$$
+using the weighting matrix
+$$
+W_n = \left(\frac{1}{n}\sum_{i=1}^n Z_i'\widehat{\Delta\boldsymbol\varepsilon_i}\widehat{\Delta\boldsymbol\varepsilon_i}'Z_i\right)^{-1},
+$$
+where the $\widehat{\Delta\boldsymbol\varepsilon_i}$'s are consistent estimates of the $\Delta\boldsymbol\varepsilon_i$'s that result from a preliminary estimation. In this sense, this estimator is a two-step GMM one.
+
+If the disturbances are homoskedastic, then it can be shown that an asymptotically equivalent (efficient) GMM estimator can  be obtained by using:
+$$
+W_{1,n} = \left(\frac{1}{n}Z_i'HZ_i\right)^{-1},
+$$
+where $H$ is is $(T-2) \times (T-2)$ matrix of the form:
+$$
+H = \left[\begin{array}{ccccccc}
+2 & -1 & 0 & \dots &0 \\
+-1 & 2 & -1 &  & \vdots \\
+0 & \ddots& \ddots & \ddots & 0 \\
+\vdots &  & -1 & 2&-1\\
+0&\dots & 0 & -1 & 2
+\end{array}\right].
+$$
+
+It is straightforward to extend these GMM methods to cases where there is more than one lag of the dependent variable on the right-hand side of the equation or in cases where disturbances feature limited moving-average serial correlation.
+
+The `pdynmc` package allows to run these GMM approaches (see @Fritsch_et_al_2019). The following lines of code allow to replicate the results of @Arellano_Bond_1991:
+
+```{r dynpanel3, warning=FALSE, message=FALSE}
+library(pdynmc)
+data(EmplUK, package = "plm")
+dat <- EmplUK
+dat[,c(4:7)]         <- log(dat[,c(4:7)])
+m1 <- pdynmc(dat = dat, # name of the dataset
+             varname.i = "firm", # name of the cross-section identifier
+             varname.t = "year", # name of the time-series identifiers
+             use.mc.diff = TRUE, # use moment conditions from equations in differences? (i.e. instruments in levels) 
+             use.mc.lev = FALSE, # use moment conditions from equations in levels? (i.e. instruments in differences)
+             use.mc.nonlin = FALSE, # use nonlinear (quadratic) moment conditions?
+             include.y = TRUE, # instruments should be derived from the lags of the dependent variable?
+             varname.y = "emp", # name of the dependent variable in the dataset
+             lagTerms.y = 2, # number of lags of the dependent variable
+             fur.con = TRUE, # further control variables (covariates) are included?
+             fur.con.diff = TRUE, # include further control variables in equations from differences ?
+             fur.con.lev = FALSE, # include further control variables in equations from level?
+             varname.reg.fur = c("wage", "capital", "output"), # covariate(s) -in the dataset- to treat as further controls
+             lagTerms.reg.fur = c(1,2,2), # number of lags of the further controls
+             include.dum = TRUE, # A logical variable indicating whether dummy variables for the time periods are included (defaults to 'FALSE').
+             dum.diff = TRUE, # A logical variable indicating whether dummy variables are included in the equations in first differences (defaults to 'NULL').
+             dum.lev = FALSE, # A logical variable indicating whether dummy variables are included in the equations in levels (defaults to 'NULL').
+             varname.dum = "year",
+             w.mat = "iid.err", # One of the character strings c('"iid.err"', '"identity"', '"zero.cov"') indicating the type of weighting matrix to use (defaults to '"iid.err"')
+             std.err = "corrected",
+             estimation = "onestep", # One of the character strings c('"onestep"', '"twostep"', '"iterative"'). Denotes the number of iterations of the parameter procedure (defaults to '"twostep"').
+             opt.meth = "none" # numerical optimization procedure. When no nonlinear moment conditions are employed in estimation, closed form estimates can be computed by setting the argument to '"none"
+)
+summary(m1,digits=3)
+```
+
+We generate novel results (`m2`) by replacing "`onestep`" with "`twostep`" (in the `estimation` field). The resulting  estimated coefficients are:
+
+```{r dynpanel3bis, echo=FALSE}
+m2 <- pdynmc(dat = dat, # name of the dataset
+             varname.i = "firm", # name of the cross-section identifier
+             varname.t = "year", # name of the time-series identifiers
+             use.mc.diff = TRUE, # use moment conditions from equations in differences? (i.e. instruments in levels) 
+             use.mc.lev = FALSE, # use moment conditions from equations in levels? (i.e. instruments in differences)
+             use.mc.nonlin = FALSE, # use nonlinear (quadratic) moment conditions?
+             include.y = TRUE, # instruments should be derived from the lags of the dependent variable?
+             varname.y = "emp", # name of the dependent variable in the dataset
+             lagTerms.y = 2, # number of lags of the dependent variable
+             fur.con = TRUE, # further control variables (covariates) are included?
+             fur.con.diff = TRUE, # include further control variables in equations from differences ?
+             fur.con.lev = FALSE, # include further control variables in equations from level?
+             varname.reg.fur = c("wage", "capital", "output"), # covariate(s) -in the dataset- to treat as further controls
+             lagTerms.reg.fur = c(1,2,2), # number of lags of the further controls
+             include.dum = TRUE, # A logical variable indicating whether dummy variables for the time periods are included (defaults to 'FALSE').
+             dum.diff = TRUE, # A logical variable indicating whether dummy variables are included in the equations in first differences (defaults to 'NULL').
+             dum.lev = FALSE, # A logical variable indicating whether dummy variables are included in the equations in levels (defaults to 'NULL').
+             varname.dum = "year",
+             w.mat = "iid.err", # One of the character strings c('"iid.err"', '"identity"', '"zero.cov"') indicating the type of weighting matrix to use (defaults to '"iid.err"')
+             std.err = "corrected",
+             estimation = "twostep", # One of the character strings c('"onestep"', '"twostep"', '"iterative"'). Denotes the number of iterations of the parameter procedure (defaults to '"twostep"').
+             opt.meth = "none" # numerical optimization procedure. When no nonlinear moment conditions are employed in estimation, closed form estimates can be computed by setting the argument to '"none"
+)
+coef(m2)
+```
+
+
+@Arellano_Bond_1991 have proposed a specification test. If the model is correctly specified, then the errors of Eq. \@ref(eq:paneldynFisrtDiff) ---that is the first-difference equation--- should feature non-zero first-order auto-correlations, but zero higher-order autocorrelations. 
+
+Function `mtest.fct` of package `pdynmc` implements this test. Here is its result in the present case:
+
+```{r dynpanel4, warning=FALSE, message=FALSE}
+mtest.fct(m1,order=3)
+```
+
+One can also implement the Hansen J-test of the over-identifying restrictions (see Section \@ref(overidentif)):
+
+```{r dynpanel5, warning=FALSE, message=FALSE}
+jtest.fct(m1)
+jtest.fct(m2)
+```
+
+
+
+
+
+## Introduction to program evaluation
+
+This section brielfy introduces the econometrics of program evaluation. Program evaluation refer to the analysis of the causal effects of some "treatments" in a broad sense. These treatment can, e.g., correspond to the implementation (or announcement) of policy measures. A comprehensive review is proposed by @Abadie_Cattaneo_2018. A seminal book on the subject is that of @angrist_mostly_2008.
+
+
+
+### Presentation of the problem
+
+To begin with, let us consider a single entity. To simplify notations, we drop the entity index ($i$). Let us denote by $Y$ the outcome variable (for the variable of interest), by $W$ is a binary variable indicating whether the considered entity has received treatment ($W=1$) or not ($W=0$), and by $X$ a vector of covariates, assumed to be predetermined relative to the treatment. That is, $W$ and $X$ could be correlated, but the values of $X$ have been determined before that of $W$ (in such a way that the realization of $W$ does not affect $X$). Typcally, $X$ contains characteristics of the considered entity.
+
+We are interested in the effect of the treatment, that is:
+$$
+Y_1 - Y_0,
+$$
+where $Y_1$ correspond to the outcome obtained under treatment, while $Y_0$ is the outcome obtained without it. Notice that we have:
+$$
+Y = (1-W) Y_0 + W Y_1.
+$$
+
+The problem is that observing $(Y,W,X)$ is not sufficient to observe the treatment effect $Y_1 - Y_0$. Additional assumptions are needed to estimate it, or, more precisely, its expectations (*average treatment effect*):
+$$
+ATE = \mathbb{E}(Y_1 - Y_0).
+$$
+
+Importantly, $ATE$ is different from the following quantity:
+$$
+\alpha = \underbrace{\mathbb{E}(Y|W=1)}_{=\mathbb{E}(Y_1|W=1)} - \underbrace{\mathbb{E}(Y|W=0)}_{=\mathbb{E}(Y_0|W=0)},
+$$
+that is easier to estimate. Indeed, a consistent estimate of $\alpha$ is the difference between the means of the outcome variables in two sub-samples: one containing only the treated entities (this gives an estimate of $\mathbb{E}(Y_1|W=1)$) and the other containing only the non-treated entities (this gives an estimate of $\mathbb{E}(Y_0|W=0)$). Coming back to $ATE$, the problem is that we won't have direct information regarding $\mathbb{E}(Y_0|W=1)$ and $\mathbb{E}(Y_1|W=0)$. However, these two conditional expectations are part of $ATE$. Indeed, $ATE = \mathbb{E}(Y_1) - \mathbb{E}(Y_0)$, and:
+\begin{eqnarray}
+\mathbb{E}(Y_1) &=& \mathbb{E}(Y_1|W=0)\mathbb{P}(W=0)+\mathbb{E}(Y_1|W=1)\mathbb{P}(W=1) (\#eq:EY1a) \\
+\mathbb{E}(Y_0) &=& \mathbb{E}(Y_0|W=0)\mathbb{P}(W=0)+\mathbb{E}(Y_0|W=1)\mathbb{P}(W=1). (\#eq:EY0a)
+\end{eqnarray}
+
+### Randomized controlled trials (RCTs)
+
+In the context of Randomized controlled trials (RCTs), entities are randomly assigned to receive the treatment. As a result, we have $\mathbb{E}(Y_1) = \mathbb{E}(Y_1|W=0) = \mathbb{E}(Y_1|W=1)$ and $\mathbb{E}(Y_0) = \mathbb{E}(Y_0|W=0) = \mathbb{E}(Y_0|W=1)$. Using this into Eqs. \@ref(eq:EY1a) and \@ref(eq:EY0a) yields $ATE = \alpha$.
+
+Therefore, in this context, estimating $\mathbb{E}(Y_1-Y_0)$ amounts to computing the difference between two sample means, namely (a) the sample mean of the subset of $Y_i$'s corresponding to the entities for which $W_i=1$, and (b) the one for which $W_i=0$.
+
+More accurate estimates can be obtained through regressions. Assume that the model reads:
+$$
+Y_{i} = W_{i} \beta_{1} + X_i'\boldsymbol\beta_z + \varepsilon_i,
+$$
+where $\mathbb{E}(\varepsilon_i|X_i) = 0$ (and $W_i$ is independent from $X_i$ and $\varepsilon_i$). In this case, we obtain a consistent estimate of $\beta_1$ by regressing $\bv{y}$ on $\bv{Z} = [\bv{w},\bv{X}]$.
+
+### Difference-in-Difference (DiD) approach
+
+The DiD approach is a popular methodology implemented in cases where $W$ cannot be considered as an independent variable. It exploits two dimensions: entities ($i$), and time ($t$). To simplify the exposition, we consider only two periods here ($t=0$ and $t=1$).
+
+Consider the following model:
+\begin{equation}
+Y_{i,t} = W_{i,t} \beta_1 + \mu_i + \delta_t + \varepsilon_{i,t}(\#eq:DiD)
+\end{equation}
+
+The parameter of interest is $\beta_{1}$, which is the treatment effect (recall that $W_{i,t} \in \{0,1\}$). Usually, for all entities $i$, we have $W_{i,t=0}=0$. But only some of them are treated on date 1, i.e., $W_{i,1} \in \{0,1\}$.
+
+The disturbance $\varepsilon_{i,t}$ affects the outcome, but we assume that it does not relate to the selection for treatment; therefore, $\mathbb{E}(\varepsilon_{i,t}|W_{i,t})=0$. By contrast, we do not exclude some correlation between $W_{i,t}$ (for $t=1$) and $\mu_i$; hence, $\mu_i$ may constitute a *confounder*. Finally, we suppose that the micro-variables $W_i$ do not affect the time fixed effects $\delta_t$, such that $\mathbb{E}(\delta_t|W_{i,t})=\mathbb{E}(\delta_t)$.
+
+We have:
+
+$$
+\begin{array}{cccccccccc}
+\mathbb{E}(Y_{i,1}|W_{i,1}=1) &=& \beta_1 &+& \mathbb{E}(\mu_i|W_{i,1}=1) &+&\mathbb{E}(\delta_1|W_{i,1}=1) &+& \mathbb{E}(\varepsilon_{i,1}) \\
+\mathbb{E}(Y_{i,0}|W_{i,1}=1) &=&  && \mathbb{E}(\mu_i|W_{i,1}=1) &+&\mathbb{E}(\delta_0|W_{i,1}=1) &+& \mathbb{E}(\varepsilon_{i,0}) \\
+\mathbb{E}(Y_{i,1}|W_{i,1}=0) &=& && \mathbb{E}(\mu_i|W_{i,1}=0) &+&\mathbb{E}(\delta_1|W_{i,1}=0) &+& \mathbb{E}(\varepsilon_{i,1}) \\
+\mathbb{E}(Y_{i,0}|W_{i,1}=0) &=&  && \mathbb{E}(\mu_i|W_{i,1}=0) &+&\mathbb{E}(\delta_0|W_{i,1}=0) &+& \mathbb{E}(\varepsilon_{i,0}).
+\end{array}
+$$
+and, under our assumptions, it can be checked that:
+
+$$
+\beta_1 = \mathbb{E}(\Delta Y_{i,1}|W_{i,1}=1) - \mathbb{E}(\Delta Y_{i,1}|W_{i,1}=0),
+$$
+where $\Delta Y_{i,1}=Y_{i,1}-Y_{i,0}$. Therefore, in this context, the treatment effect appears to be a difference (of two conditionnal expectations) of difference (of the outcome variable, through time).
+
+This is illustrated by Figure \@ref(fig:figAbadie), which represents the generic DiD framework.
+
+```{r figAbadie, fig.align = 'center', out.width = "95%", fig.cap = "Source: Abadie et al., (1998).", echo=FALSE}
+knitr::include_graphics("images/Abadie_et_al_2018.png")
+```
+
+
+In practice, implementing this approach consists in running a linear regression of the type of Eq. \@ref(eq:DiD). These regressions also usually involve controls on top of the fixed effects $\mu_i$. As illustrated in the next subsection, the parameter of interest ($\beta_1$) is often associated with an interaction term.
+
+<!-- Diff-in-Diff: [Card and Krueger (1994)](https://towardsdatascience.com/analyze-causal-effect-using-diff-in-diff-model-85e07b17e7b7) -->
+
+
+### Application of the DiD approach
+
+This example is based on the data used in @Meyer_Viscusi_Durbin_1995. This dataset is part of the `wooldridge` package. This paper examines the effect of workers' compensation for injury on time out of work. It exploits a **natural experiment** approach of comparing individuals injured before and after increases in the maximum weekly benefit amount. Specifically, in 1980, the cap on weekly earnings covered by worker’s compensation was increased in Kentucky and Michigan. Let us check whether this new policy was followed by an increase in the amount of time workers spent unemployed (for example, higher compensation may reduce workers' incentives to avoid injury).
+
+As shown in Figure \@ref(fig:figMeyer), the measure has only affected high-earning workers. The idea exploited by @Meyer_Viscusi_Durbin_1995 was to compare the increase in time out of work before-after 1980 for higher-earnings workers on the one hand (entities who received the treatment) and low-earnings workers on the other hand (control group).
+
+```{r figMeyer, fig.align = 'center', out.width = "90%", fig.cap = "Source: Meyer et al., (1995).", echo=FALSE}
+knitr::include_graphics("images/Figure_Meyer_et_al.png")
+```
+
+
+The next lines of codes replicate some of their results. The dependent variable is the logarithm of the duration of benefits. For more information use `?injury`, after having loaded the `wooldridge` library.
+
+In the table of results below, the parameter of interest is the one associated with the interaction term `afchnge:highearn`. Columns 2 and 3 correspond to the first two column of Table 6 in @Meyer_Viscusi_Durbin_1995.
+
+<!-- See [this page](https://evalf20.classes.andrewheiss.com/example/diff-in-diff/) -->
+
+
+```{r DiD1,warning=FALSE,message=FALSE}
+library(wooldridge)
+data(injury)
+injury <- subset(injury,ky==1)
+injury$indust <- as.factor(injury$indust)
+injury$injtype <- as.factor(injury$injtype)
+#names(injury)
+eq1 <- lm(log(durat) ~ afchnge + highearn + afchnge*highearn,data=injury)
+eq2 <- lm(log(durat) ~ afchnge + highearn + afchnge*highearn +
+            lprewage*highearn + male + married + lage + ltotmed + hosp +
+            indust + injtype,data=injury)
+eq3 <- lm(log(durat) ~ afchnge + highearn + afchnge*highearn +
+            lprewage*highearn + male + married + lage + indust +
+            injtype,data=injury)
+stargazer::stargazer(eq1,eq2,eq3,type="text",
+                     omit=c("indust","injtype","Constant"),no.space = TRUE,
+                     add.lines = list(c("industry dummy","no","yes","yes"),
+                                      c("injury dummy","no","yes","yes")),
+                     order = c(1,2,18,3:17,19,20),omit.stat = c("f","ser"))
+```
+
+
+

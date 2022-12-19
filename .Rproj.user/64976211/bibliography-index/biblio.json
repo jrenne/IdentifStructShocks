@@ -1,0 +1,2943 @@
+{
+    "sources": [
+        {
+            "DOI": "10.1162/003465303772815727",
+            "URL": "https://doi.org/10.1162/003465303772815727",
+            "author": [
+                {
+                    "family": "Rigobon",
+                    "given": "Roberto"
+                }
+            ],
+            "container-title": "The Review of Economics and Statistics",
+            "id": "Rigobon_2003",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003,
+                        11
+                    ]
+                ]
+            },
+            "page": "777-792",
+            "title": "Identification Through Heteroskedasticity",
+            "type": "article-journal",
+            "volume": "85"
+        },
+        {
+            "URL": "https://www.math.nyu.edu/~avellane/Litterman1991.pdf",
+            "author": [
+                {
+                    "family": "Litterman",
+                    "given": "Robert"
+                },
+                {
+                    "family": "Scheinkman",
+                    "given": "Jose"
+                }
+            ],
+            "container-title": "Journal of Fixed Income",
+            "id": "Litterman_Scheinkman_1991",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1991
+                    ]
+                ]
+            },
+            "page": "54-61",
+            "title": "Common Factors Affecting Bond Returns",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.ecosta.2016.05.001",
+            "ISSN": "2452-3062",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S2452306216300223",
+            "author": [
+                {
+                    "family": "Lütkepohl",
+                    "given": "Helmut"
+                },
+                {
+                    "family": "Netšunajev",
+                    "given": "Aleksei"
+                }
+            ],
+            "container-title": "Econometrics and Statistics",
+            "id": "LUTKEPOHL20172",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "2-18",
+            "title": "Structural vector autoregressions with heteroskedasticity: A review of different volatility models",
+            "title-short": "Structural vector autoregressions with heteroskedasticity",
+            "type": "article-journal",
+            "volume": "1"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jedc.2009.08.002",
+            "ISSN": "0165-1889",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0165188909001481",
+            "author": [
+                {
+                    "family": "Lanne",
+                    "given": "Markku"
+                },
+                {
+                    "family": "Lütkepohl",
+                    "given": "Helmut"
+                },
+                {
+                    "family": "Maciejowska",
+                    "given": "Katarzyna"
+                }
+            ],
+            "container-title": "Journal of Economic Dynamics and Control",
+            "id": "LANNE2010121",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "page": "121-131",
+            "title": "Structural vector autoregressions with markov switching",
+            "type": "article-journal",
+            "volume": "34"
+        },
+        {
+            "DOI": "https://doi.org/10.1111/j.1538-4616.2008.00151.x",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4616.2008.00151.x",
+            "author": [
+                {
+                    "family": "Lanne",
+                    "given": "Markku"
+                },
+                {
+                    "family": "Lütkepohl",
+                    "given": "Helmut"
+                }
+            ],
+            "container-title": "Journal of Money, Credit and Banking",
+            "id": "Lanne_Lutkepohl_2008",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "page": "1131-1149",
+            "title": "Identifying monetary policy shocks via changes in volatility",
+            "type": "article-journal",
+            "volume": "40"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jmoneco.2003.11.002",
+            "ISSN": "0304-3932",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0304393204000698",
+            "author": [
+                {
+                    "family": "Normandin",
+                    "given": "Michel"
+                },
+                {
+                    "family": "Phaneuf",
+                    "given": "Louis"
+                }
+            ],
+            "container-title": "Journal of Monetary Economics",
+            "id": "NORMANDIN20041217",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "1217-1243",
+            "title": "Monetary policy shocks:: Testing identification conditions under time-varying conditional volatility",
+            "title-short": "Monetary policy shocks",
+            "type": "article-journal",
+            "volume": "51"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/S0304-3932(01)00055-1",
+            "ISSN": "0304-3932",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0304393201000551",
+            "author": [
+                {
+                    "family": "Kuttner",
+                    "given": "Kenneth N"
+                }
+            ],
+            "container-title": "Journal of Monetary Economics",
+            "id": "KUTTNER2001523",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001
+                    ]
+                ]
+            },
+            "page": "523-544",
+            "title": "Monetary policy surprises and interest rates: Evidence from the fed funds futures market",
+            "title-short": "Monetary policy surprises and interest rates",
+            "type": "article-journal",
+            "volume": "47"
+        },
+        {
+            "DOI": "https://doi.org/10.1111/ecoj.12593",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/ecoj.12593",
+            "author": [
+                {
+                    "family": "Stock",
+                    "given": "James H."
+                },
+                {
+                    "family": "Watson",
+                    "given": "Mark W."
+                }
+            ],
+            "container-title": "The Economic Journal",
+            "id": "Stock_Watson_2018",
+            "issue": "610",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "page": "917-948",
+            "title": "Identification and estimation of dynamic causal effects in macroeconomics using external instruments",
+            "type": "article-journal",
+            "volume": "128"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/aea/aecrev/v94y2004i4p1055-1084.html",
+            "author": [
+                {
+                    "family": "Romer",
+                    "given": "Christina D."
+                },
+                {
+                    "family": "Romer",
+                    "given": "David H."
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Romer_Romer_2004",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "1055-1084",
+            "title": "A New Measure of Monetary Shocks: Derivation and Implications",
+            "type": "article-journal",
+            "volume": "94"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/eee/moneco/v55y2008i4p677-691.html",
+            "author": [
+                {
+                    "family": "Piazzesi",
+                    "given": "Monika"
+                },
+                {
+                    "family": "Swanson",
+                    "given": "Eric T."
+                }
+            ],
+            "container-title": "Journal of Monetary Economics",
+            "id": "Piazzesi_Swanson_2008",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "page": "677-691",
+            "title": "Futures prices as risk-adjusted forecasts of monetary policy",
+            "type": "article-journal",
+            "volume": "55"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/ijc/ijcjou/y2005q2a2.html",
+            "author": [
+                {
+                    "family": "Gürkaynak",
+                    "given": "Refet S"
+                },
+                {
+                    "family": "Sack",
+                    "given": "Brian"
+                },
+                {
+                    "family": "Swanson",
+                    "given": "Eric"
+                }
+            ],
+            "container-title": "International Journal of Central Banking",
+            "id": "Gurkaynak_et_al_2005",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "title": "Do Actions Speak Louder Than Words? The Response of Asset Prices to Monetary Policy Actions and Statements",
+            "type": "article-journal",
+            "volume": "1"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/aea/aecrev/v92y2002i2p90-95.html",
+            "author": [
+                {
+                    "family": "Cochrane",
+                    "given": "John H"
+                },
+                {
+                    "family": "Piazzesi",
+                    "given": "Monika"
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Cochrane_Piazzesi_2002",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2002
+                    ]
+                ]
+            },
+            "page": "90-95",
+            "title": "The Fed and Interest Rates - A High-Frequency Identification",
+            "type": "article-journal",
+            "volume": "92"
+        },
+        {
+            "DOI": "10.1016/bs.hesmac.2016.04",
+            "URL": "https://ideas.repec.org/h/eee/macchp/v2-415.html",
+            "author": [
+                {
+                    "family": "Stock",
+                    "given": "J. H."
+                },
+                {
+                    "family": "Watson",
+                    "given": "M. W."
+                }
+            ],
+            "chapter-number": "0",
+            "collection-title": "Handbook of macroeconomics",
+            "container-title": "Handbook of Macroeconomics",
+            "editor": [
+                {
+                    "family": "Taylor",
+                    "given": "J. B."
+                },
+                {
+                    "family": "Uhlig",
+                    "given": "Harald"
+                }
+            ],
+            "id": "Stock_Watson_2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "page": "415-525",
+            "publisher": "Elsevier",
+            "title": "Dynamic Factor Models, Factor-Augmented Vector Autoregressions, and Structural Vector Autoregressions in Macroeconomics",
+            "type": "chapter",
+            "volume": "2"
+        },
+        {
+            "DOI": "10.1080/07350015.2015.108",
+            "URL": "https://ideas.repec.org/a/taf/jnlbes/v34y2016i4p574-589.html",
+            "author": [
+                {
+                    "family": "McCracken",
+                    "given": "Michael W."
+                },
+                {
+                    "family": "Ng",
+                    "given": "Serena"
+                }
+            ],
+            "container-title": "Journal of Business & Economic Statistics",
+            "id": "McCracken_Ng_2016",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "page": "574-589",
+            "title": "FRED-MD: A Monthly Database for Macroeconomic Research",
+            "type": "article-journal",
+            "volume": "34"
+        },
+        {
+            "URL": "https://EconPapers.repec.org/RePEc:eee:econom:v:29:y:1985:i:3:p:305-325",
+            "author": [
+                {
+                    "family": "MacKinnon",
+                    "given": "James"
+                },
+                {
+                    "family": "White",
+                    "given": "Halbert"
+                }
+            ],
+            "container-title": "Journal of Econometrics",
+            "id": "MacKinnon_White_1985",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1985
+                    ]
+                ]
+            },
+            "page": "305-325",
+            "title": "Some heteroskedasticity-consistent covariance matrix estimators with improved finite sample properties",
+            "type": "article-journal",
+            "volume": "29"
+        },
+        {
+            "DOI": "10.1093/biomet/37.3-4.409",
+            "ISSN": "0006-3444",
+            "URL": "https://doi.org/10.1093/biomet/37.3-4.409",
+            "author": [
+                {
+                    "family": "Durbin",
+                    "given": "J."
+                },
+                {
+                    "family": "Watson",
+                    "given": "G. S."
+                }
+            ],
+            "container-title": "Biometrika",
+            "id": "Durbin_Watson_1950",
+            "issue": "3-4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1950,
+                        12
+                    ]
+                ]
+            },
+            "page": "409-428",
+            "title": "Testing for Serial Correlation in Least Squares Regression. I",
+            "type": "article-journal",
+            "volume": "37"
+        },
+        {
+            "DOI": "10.1093/biomet/38.1-2.159",
+            "ISSN": "0006-3444",
+            "URL": "https://doi.org/10.1093/biomet/38.1-2.159",
+            "author": [
+                {
+                    "family": "Durbin",
+                    "given": "J."
+                },
+                {
+                    "family": "Watson",
+                    "given": "G. S."
+                }
+            ],
+            "container-title": "Biometrika",
+            "id": "Durbin_Watson_1951",
+            "issue": "1-2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1951,
+                        6
+                    ]
+                ]
+            },
+            "page": "159-178",
+            "title": "Testing for Serial Correlation in Least Squares Regression. II",
+            "type": "article-journal",
+            "volume": "38"
+        },
+        {
+            "ISSN": "00129682, 14680262",
+            "URL": "http://www.jstor.org/stable/1912934",
+            "abstract": "This paper presents a parameter covariance matrix estimator which is consistent even when the disturbances of a linear regression model are heteroskedastic. This estimator does not depend on a formal model of the structure of the heteroskedasticity. By comparing the elements of the new estimator to those of the usual covariance estimator, one obtains a direct test for heteroskedasticity, since in the absence of heteroskedasticity, the two estimators will be approximately equal, but will generally diverge otherwise. The test has an appealing least squares interpretation.",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        9
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "White",
+                    "given": "Halbert"
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "White_1980",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1980
+                    ]
+                ]
+            },
+            "page": "817-838",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "A heteroskedasticity-consistent covariance matrix estimator and a direct test for heteroskedasticity",
+            "type": "article-journal",
+            "volume": "48"
+        },
+        {
+            "DOI": "10.1080/01621459.1949.10483290",
+            "URL": "https://doi.org/10.1080/01621459.1949.10483290",
+            "author": [
+                {
+                    "family": "Cochrane",
+                    "given": "D."
+                },
+                {
+                    "family": "Orcutt",
+                    "given": "G. H."
+                }
+            ],
+            "container-title": "Journal of the American Statistical Association",
+            "id": "Cochrane_Orcutt_1949",
+            "issue": "245",
+            "issued": {
+                "date-parts": [
+                    [
+                        1949
+                    ]
+                ]
+            },
+            "page": "32-61",
+            "publisher": "Taylor & Francis",
+            "title": "Application of least squares regression to relationships containing auto-correlated error terms",
+            "type": "article-journal",
+            "volume": "44"
+        },
+        {
+            "URL": "http://pages.stern.nyu.edu/~wgreene/Text/econometricanalysis.htm",
+            "author": [
+                {
+                    "family": "Greene",
+                    "given": "William H."
+                }
+            ],
+            "edition": "Fifth",
+            "id": "Greene2003Econometric",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "keyword": "textbook statistics economics",
+            "publisher": "Pearson Education",
+            "title": "Econometric analysis",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1017/CBO9780511614491.006",
+            "author": [
+                {
+                    "family": "Stock",
+                    "given": "James H."
+                },
+                {
+                    "family": "Yogo",
+                    "given": "Motohiro"
+                }
+            ],
+            "container-title": "Identification and inference for econometric models: Essays in honor of thomas rothenberg",
+            "editor": [
+                {
+                    "family": "Andrews",
+                    "given": "Donald W. K."
+                },
+                {
+                    "family": "Stock",
+                    "given": "James H.Editors"
+                }
+            ],
+            "id": "stock_yogo_2005",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "80-108",
+            "publisher": "Cambridge University Press",
+            "title": "Testing for weak instruments in linear IV regression",
+            "type": "chapter"
+        },
+        {
+            "URL": "https://ideas.repec.org/p/ecm/nawm04/636.html",
+            "author": [
+                {
+                    "family": "Uhlig",
+                    "given": "Harald"
+                }
+            ],
+            "genre": "Econometric Society 2004 North American Winter Meetings",
+            "id": "Uhlig_2004",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004,
+                        8
+                    ]
+                ]
+            },
+            "number": "636",
+            "publisher": "Econometric Society",
+            "title": "What moves GNP?",
+            "type": "report"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jpubeco.2003.11.002",
+            "ISSN": "0047-2727",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0047272703002068",
+            "author": [
+                {
+                    "family": "Dee",
+                    "given": "Thomas S."
+                }
+            ],
+            "container-title": "Journal of Public Economics",
+            "id": "DEE20041697",
+            "issue": "9",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "1697-1720",
+            "title": "Are there civic returns to education?",
+            "type": "article-journal",
+            "volume": "88"
+        },
+        {
+            "DOI": "https://doi.org/10.3982/ECTA14468",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA14468",
+            "author": [
+                {
+                    "family": "Arias",
+                    "given": "Jonas E."
+                },
+                {
+                    "family": "Rubio-Ramírez",
+                    "given": "Juan F."
+                },
+                {
+                    "family": "Waggoner",
+                    "given": "Daniel F."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Arias_et_al_2018",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "page": "685-720",
+            "title": "Inference based on structural vector autoregressions identified with sign and zero restrictions: Theory and applications",
+            "title-short": "Inference based on structural vector autoregressions identified with sign and zero restrictions",
+            "type": "article-journal",
+            "volume": "86"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jmoneco.2004.05.007",
+            "ISSN": "0304-3932",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0304393205000073",
+            "author": [
+                {
+                    "family": "Uhlig",
+                    "given": "Harald"
+                }
+            ],
+            "container-title": "Journal of Monetary Economics",
+            "id": "Uhlig_2005",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "381-419",
+            "title": "What are the effects of monetary policy on output? Results from an agnostic identification procedure",
+            "type": "article-journal",
+            "volume": "52"
+        },
+        {
+            "author": [
+                {
+                    "family": "Box",
+                    "given": "George.E. P."
+                },
+                {
+                    "family": "Jenkins",
+                    "given": "Gwilym M."
+                }
+            ],
+            "id": "boxjen76",
+            "issued": {
+                "date-parts": [
+                    [
+                        1976
+                    ]
+                ]
+            },
+            "publisher": "Holden-Day",
+            "title": "Time series analysis: Forecasting and control",
+            "title-short": "Time series analysis",
+            "type": "book"
+        },
+        {
+            "URL": "https://EconPapers.repec.org/RePEc:tpr:restat:v:72:y:1990:i:1:p:116-25",
+            "author": [
+                {
+                    "family": "Lütkepohl",
+                    "given": "Helmut"
+                }
+            ],
+            "container-title": "The Review of Economics and Statistics",
+            "id": "Lutkepohl_1990",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1990
+                    ]
+                ]
+            },
+            "page": "116-25",
+            "title": "Asymptotic distributions of impulse response functions and forecast error variance decompositions of vector autoregressive models",
+            "type": "article-journal",
+            "volume": "72"
+        },
+        {
+            "URL": "https://www.worldcat.org/title/time-series-analysis/oclc/1194970663&referer=brief_results",
+            "author": [
+                {
+                    "family": "Hamilton",
+                    "given": "James Douglas"
+                }
+            ],
+            "id": "Hamilton_1994",
+            "issued": {
+                "date-parts": [
+                    [
+                        1994
+                    ]
+                ]
+            },
+            "keyword": "62-01-statistics-instructional-exposition 62m10-time-series-auto-correlation-regression 62m15-inference-from-stochastic-processes-and-spectral-analysis 62p20-applications-of-statistics-to-economics",
+            "publisher": "Princeton University Press",
+            "title": "Time series analysis",
+            "type": "book"
+        },
+        {
+            "URL": "https://EconPapers.repec.org/RePEc:bes:jnlbes:v:13:y:1995:i:3:p:253-63",
+            "author": [
+                {
+                    "family": "Diebold",
+                    "given": "Francis"
+                },
+                {
+                    "family": "Mariano",
+                    "given": "Roberto"
+                }
+            ],
+            "container-title": "Journal of Business & Economic Statistics",
+            "id": "Diebold_Mariano_1995",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "page": "253-63",
+            "title": "Comparing predictive accuracy",
+            "type": "article-journal",
+            "volume": "13"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=stargazer",
+            "author": [
+                {
+                    "family": "Hlavac",
+                    "given": "Marek"
+                }
+            ],
+            "id": "Stargazer",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 5.2.3",
+            "publisher": "Social Policy Institute",
+            "publisher-place": "Bratislava, Slovakia",
+            "title": "Stargazer: Well-formatted regression and summary statistics tables",
+            "title-short": "Stargazer",
+            "type": "book"
+        },
+        {
+            "URL": "https://www.jstatsoft.org/v27/i04/",
+            "author": [
+                {
+                    "family": "Pfaff",
+                    "given": "Bernhard"
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "vars",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "title": "VAR, SVAR and SVEC models: Implementation within R package vars",
+            "title-short": "VAR, SVAR and SVEC models",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/0167-2231(86)90037-0",
+            "ISSN": "0167-2231",
+            "URL": "https://www.sciencedirect.com/science/article/pii/0167223186900370",
+            "author": [
+                {
+                    "family": "Bernanke",
+                    "given": "Ben S."
+                }
+            ],
+            "container-title": "Carnegie-Rochester Conference Series on Public Policy",
+            "id": "BERNANKE198649",
+            "issued": {
+                "date-parts": [
+                    [
+                        1986
+                    ]
+                ]
+            },
+            "page": "49-99",
+            "title": "Alternative explanations of the money-income correlation",
+            "type": "article-journal",
+            "volume": "25"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/2109845",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        3
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Christiano",
+                    "given": "Lawrence J."
+                },
+                {
+                    "family": "Eichenbaum",
+                    "given": "Martin"
+                },
+                {
+                    "family": "Evans",
+                    "given": "Charles"
+                }
+            ],
+            "container-title": "The Review of Economics and Statistics",
+            "id": "Christiano_Eichenbaum_Evans_1996",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1996
+                    ]
+                ]
+            },
+            "page": "16-34",
+            "publisher": "The MIT Press",
+            "title": "The effects of monetary policy shocks: Evidence from the flow of funds",
+            "title-short": "The effects of monetary policy shocks",
+            "type": "article-journal",
+            "volume": "78"
+        },
+        {
+            "URL": "https://doi.org/10.1162/154247605775012860",
+            "author": [
+                {
+                    "family": "Erceg",
+                    "given": "Christopher J."
+                },
+                {
+                    "family": "Guerrieri",
+                    "given": "Luca"
+                },
+                {
+                    "family": "Gust",
+                    "given": "Christopher"
+                }
+            ],
+            "container-title": "Journal of the European Economic Association",
+            "id": "Erceg_et_al_2005",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005,
+                        12
+                    ]
+                ]
+            },
+            "page": "1237-1278",
+            "title": "Can Long-Run Restrictions Identify Technology Shocks?",
+            "type": "article-journal",
+            "volume": "3"
+        },
+        {
+            "ISSN": "0014-2921",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0014292103001569",
+            "author": [
+                {
+                    "family": "Dedola",
+                    "given": "Luca"
+                },
+                {
+                    "family": "Lippi",
+                    "given": "Francesco"
+                }
+            ],
+            "container-title": "European Economic Review",
+            "id": "DEDOLA20051543",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "1543-1569",
+            "title": "The monetary transmission mechanism: Evidence from the industries of five OECD countries",
+            "title-short": "The monetary transmission mechanism",
+            "type": "article-journal",
+            "volume": "49"
+        },
+        {
+            "URL": "https://ideas.repec.org/p/cpr/ceprdp/1219.html",
+            "author": [
+                {
+                    "family": "Gerlach",
+                    "given": "Stefan"
+                },
+                {
+                    "family": "Smets",
+                    "given": "Frank"
+                }
+            ],
+            "genre": "CEPR Discussion Papers",
+            "id": "Gerlach_Smets_1995",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "number": "1219",
+            "publisher": "C.E.P.R. Discussion Papers",
+            "title": "The Monetary Transmission Mechanism: Evidence from the G-7 Countries",
+            "type": "report"
+        },
+        {
+            "URL": "http://www.nber.org/chapters/c11177",
+            "author": [
+                {
+                    "family": "Christiano",
+                    "given": "Lawrence J."
+                },
+                {
+                    "family": "Eichenbaum",
+                    "given": "Martin"
+                },
+                {
+                    "family": "Vigfusson",
+                    "given": "Robert"
+                }
+            ],
+            "container-author": [
+                {
+                    "family": "Acemoglu",
+                    "given": "Daron"
+                },
+                {
+                    "family": "Rogoff",
+                    "given": "Kenneth"
+                },
+                {
+                    "family": "Woodford",
+                    "given": "Michael"
+                }
+            ],
+            "container-title": "NBER macroeconomics annual 2006, volume 21",
+            "genre": "Book",
+            "id": "NBERc11177",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007,
+                        5
+                    ]
+                ]
+            },
+            "page": "1-106",
+            "publisher": "National Bureau of Economic Research; MIT Press",
+            "title": "Assessing structural VARs",
+            "type": "chapter"
+        },
+        {
+            "URL": "https://www.nber.org/books-and-chapters/nber-macroeconomics-annual-2006-volume-21",
+            "author": [
+                {
+                    "family": "Acemoglu",
+                    "given": "Daron"
+                },
+                {
+                    "family": "Rogoff",
+                    "given": "Kenneth"
+                },
+                {
+                    "family": "Woodford",
+                    "given": "Michael"
+                }
+            ],
+            "genre": "Book",
+            "id": "NBERacem06-1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "publisher": "National Bureau of Economic Research; MIT Press",
+            "title": "NBER macroeconomics annual 2006, volume 21",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1257/aer.89.1.249",
+            "URL": "https://www.aeaweb.org/articles?id=10.1257/aer.89.1.249",
+            "author": [
+                {
+                    "family": "Galí",
+                    "given": "Jordi"
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Gali_1999",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1999
+                    ]
+                ]
+            },
+            "page": "249-271",
+            "title": "Technology, employment, and the business cycle: Do technology shocks explain aggregate fluctuations?",
+            "title-short": "Technology, employment, and the business cycle",
+            "type": "article-journal",
+            "volume": "89"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jmoneco.2011.03.001",
+            "ISSN": "0304-3932",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0304393211000158",
+            "author": [
+                {
+                    "family": "Barsky",
+                    "given": "Robert B."
+                },
+                {
+                    "family": "Sims",
+                    "given": "Eric R."
+                }
+            ],
+            "container-title": "Journal of Monetary Economics",
+            "id": "BARSKY2011273",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "page": "273-289",
+            "title": "News shocks and business cycles",
+            "type": "article-journal",
+            "volume": "58"
+        },
+        {
+            "URL": "https://www.tandfonline.com/doi/abs/10.1080/07350015.1997.10524712",
+            "author": [
+                {
+                    "family": "Faust",
+                    "given": "Jon"
+                },
+                {
+                    "family": "Leeper",
+                    "given": "Eric M."
+                }
+            ],
+            "container-title": "Journal of Business & Economic Statistics",
+            "id": "Faust_Leeper_1997",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1997
+                    ]
+                ]
+            },
+            "page": "345-353",
+            "publisher": "Taylor & Francis",
+            "title": "When do long-run identifying restrictions give reliable results?",
+            "type": "article-journal",
+            "volume": "15"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.ijforecast.2006.01.001",
+            "ISSN": "0169-2070",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0169207006000021",
+            "author": [
+                {
+                    "family": "De Gooijer",
+                    "given": "Jan G."
+                },
+                {
+                    "family": "Hyndman",
+                    "given": "Rob J."
+                }
+            ],
+            "container-title": "International Journal of Forecasting",
+            "id": "DEGOOIJER2006443",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "note": "Twenty five years of forecasting",
+            "page": "443-473",
+            "title": "25 years of time series forecasting",
+            "type": "article-journal",
+            "volume": "22"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=VAR.etp",
+            "author": [
+                {
+                    "family": "Kim",
+                    "given": "Jae. H."
+                }
+            ],
+            "id": "VARetp",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 1.0",
+            "title": "VAR.etp: VAR modelling: Estimation, testing, and prediction",
+            "title-short": "VAR.etp",
+            "type": "book"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/2646633",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        3
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Kilian",
+                    "given": "Lutz"
+                }
+            ],
+            "container-title": "The Review of Economics and Statistics",
+            "id": "Kilian_1998",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1998
+                    ]
+                ]
+            },
+            "page": "218-230",
+            "publisher": "The MIT Press",
+            "title": "Small-sample confidence intervals for impulse response functions",
+            "type": "article-journal",
+            "volume": "80"
+        },
+        {
+            "URL": "https://EconPapers.repec.org/RePEc:ucp:jpolec:v:85:y:1977:i:1:p:191-205",
+            "author": [
+                {
+                    "family": "Fischer",
+                    "given": "Stanley"
+                }
+            ],
+            "container-title": "Journal of Political Economy",
+            "id": "Fischer_1977",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1977
+                    ]
+                ]
+            },
+            "page": "191-205",
+            "title": "Long-term contracts, rational expectations, and the optimal money supply rule",
+            "type": "article-journal",
+            "volume": "85"
+        },
+        {
+            "URL": "https://ideas.repec.org/p/pra/mprapa/68429.html",
+            "author": [
+                {
+                    "family": "Danne",
+                    "given": "Christian"
+                }
+            ],
+            "genre": "MPRA Paper",
+            "id": "Danne_2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        12
+                    ]
+                ]
+            },
+            "number": "68429",
+            "publisher": "University Library of Munich, Germany",
+            "title": "VARsignR: Estimating VARs using sign restrictions in R",
+            "type": "report"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/aea/aecrev/v79y1989i4p655-73.html",
+            "author": [
+                {
+                    "family": "Blanchard",
+                    "given": "Olivier Jean"
+                },
+                {
+                    "family": "Quah",
+                    "given": "Danny"
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Blanchard_Quah_1989",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1989
+                    ]
+                ]
+            },
+            "page": "655-673",
+            "title": "The Dynamic Effects of Aggregate Demand and Supply Disturbances",
+            "type": "article-journal",
+            "volume": "79"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/40587642",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        3
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Ruibio-Ramírez",
+                    "given": "Juan F."
+                },
+                {
+                    "family": "Waggoner",
+                    "given": "Daniel F."
+                },
+                {
+                    "family": "Zha",
+                    "given": "Tao"
+                }
+            ],
+            "container-title": "The Review of Economic Studies",
+            "id": "RubioRamirez_et_al_2010",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "page": "665-696",
+            "publisher": "[Oxford University Press, Review of Economic Studies, Ltd.]",
+            "title": "Structural vector autoregressions: Theory of identification and algorithms for inference",
+            "title-short": "Structural vector autoregressions",
+            "type": "article-journal",
+            "volume": "77"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/2118487",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        3
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Galí",
+                    "given": "Jordi"
+                }
+            ],
+            "container-title": "The Quarterly Journal of Economics",
+            "id": "Gali_1992",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1992
+                    ]
+                ]
+            },
+            "page": "709-738",
+            "publisher": "Oxford University Press",
+            "title": "How well does the IS-LM model fit postwar u.s. data?",
+            "type": "article-journal",
+            "volume": "107"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/fip/fedmqr/y1986iwinp2-16nv.10no.1.html",
+            "author": [
+                {
+                    "family": "Sims",
+                    "given": "Christopher A."
+                }
+            ],
+            "container-title": "Quarterly Review",
+            "id": "Sims_1986",
+            "issue": "Win",
+            "issued": {
+                "date-parts": [
+                    [
+                        1986
+                    ]
+                ]
+            },
+            "keyword": "Forecasting; Economic policy",
+            "page": "2-16",
+            "title": "Are forecasting models usable for policy analysis?",
+            "type": "article-journal",
+            "volume": "10"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/eee/econom/v135y2006i1-2p499-526.html",
+            "author": [
+                {
+                    "family": "Marcellino",
+                    "given": "Massimiliano"
+                },
+                {
+                    "family": "Stock",
+                    "given": "James H."
+                },
+                {
+                    "family": "Watson",
+                    "given": "Mark W."
+                }
+            ],
+            "container-title": "Journal of Econometrics",
+            "id": "Marcellino_et_al_2006",
+            "issue": "1-2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "page": "499-526",
+            "title": "A comparison of direct and iterated multistep AR methods for forecasting macroeconomic time series",
+            "type": "article-journal",
+            "volume": "135"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/aea/aecrev/v95y2005i1p161-182.html",
+            "author": [
+                {
+                    "family": "Jordà",
+                    "given": "Òscar"
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Jorda_2005",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "161-182",
+            "title": "Estimation and Inference of Impulse Responses by Local Projections",
+            "type": "article-journal",
+            "volume": "95"
+        },
+        {
+            "DOI": "10.1162/0033553053327452",
+            "URL": "https://doi.org/10.1162/0033553053327452",
+            "author": [
+                {
+                    "family": "Bernanke",
+                    "given": "Ben S."
+                },
+                {
+                    "family": "Boivin",
+                    "given": "Jean"
+                },
+                {
+                    "family": "Eliasz",
+                    "given": "Piotr"
+                }
+            ],
+            "container-title": "The Quarterly Journal of Economics",
+            "id": "Bernanke_Boivin_Eliasz_2005",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005,
+                        2
+                    ]
+                ]
+            },
+            "page": "387-422",
+            "title": "Measuring the Effects of Monetary Policy: A Factor-Augmented Vector Autoregressive (FAVAR) Approach*",
+            "type": "article-journal",
+            "volume": "120"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1912791",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        3
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Granger",
+                    "given": "C. W. J."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Granger_1969",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1969
+                    ]
+                ]
+            },
+            "page": "424-438",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "Investigating causal relations by econometric models and cross-spectral methods",
+            "type": "article-journal",
+            "volume": "37"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1912017",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        3
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Sims",
+                    "given": "Christopher A."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Sims_1980",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1980
+                    ]
+                ]
+            },
+            "page": "1-48",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "Macroeconomics and reality",
+            "type": "article-journal",
+            "volume": "48"
+        },
+        {
+            "DOI": "10.1002/jae.1271",
+            "author": [
+                {
+                    "family": "Korobilis",
+                    "given": "D."
+                }
+            ],
+            "container-title": "Journal of Applied Econometrics",
+            "id": "bvartools",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "page": "204-230",
+            "title": "VAR forecasting using bayesian variable selection",
+            "type": "article-journal",
+            "volume": "28"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/oup/restud/v87y2020i4p1915-1953..html",
+            "author": [
+                {
+                    "family": "Gouriéroux",
+                    "given": "Christian"
+                },
+                {
+                    "family": "Monfort",
+                    "given": "Alain"
+                },
+                {
+                    "family": "Renne",
+                    "given": "Jean-Paul"
+                }
+            ],
+            "container-title": "Review of Economic Studies",
+            "id": "Gourieroux_Monfort_Renne_2020",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "keyword": "Structural VARMA; Fundamental Representation; Identification; Structural Shocks; Impulse Response Fu",
+            "page": "1915-1953",
+            "title": "Identification and Estimation in Non-Fundamental Structural VARMA Models",
+            "type": "article-journal",
+            "volume": "87"
+        },
+        {
+            "URL": "https://onlinelibrary.wiley.com/doi/book/10.1002/0471221317",
+            "author": [
+                {
+                    "family": "Hyvärinen",
+                    "given": "A."
+                },
+                {
+                    "family": "Karhunen",
+                    "given": "J."
+                },
+                {
+                    "family": "Oja",
+                    "given": "E."
+                }
+            ],
+            "edition": "Wiley, New York",
+            "id": "Hyvarinen_Karhunen_Oja_2001",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001
+                    ]
+                ]
+            },
+            "title": "Independent Component Analysis",
+            "type": "book"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jeconom.2016.09.007",
+            "ISSN": "0304-4076",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0304407616301749",
+            "author": [
+                {
+                    "family": "Gouriéroux",
+                    "given": "Christian"
+                },
+                {
+                    "family": "Monfort",
+                    "given": "Alain"
+                },
+                {
+                    "family": "Renne",
+                    "given": "Jean-Paul"
+                }
+            ],
+            "container-title": "Journal of Econometrics",
+            "id": "Gourieroux_Monfort_Renne_2017",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "111-126",
+            "title": "Statistical inference for independent component analysis: Application to structural VAR models",
+            "title-short": "Statistical inference for independent component analysis",
+            "type": "article-journal",
+            "volume": "196"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/aea/aejmac/v7y2015i1p44-76.html",
+            "author": [
+                {
+                    "family": "Gertler",
+                    "given": "Mark"
+                },
+                {
+                    "family": "Karadi",
+                    "given": "Peter"
+                }
+            ],
+            "container-title": "American Economic Journal: Macroeconomics",
+            "id": "Gertler_Karadi_2015",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "page": "44-76",
+            "title": "Monetary Policy Surprises, Credit Costs, and Economic Activity",
+            "type": "article-journal",
+            "volume": "7"
+        },
+        {
+            "URL": "https://ideas.repec.org/p/nbr/nberwo/21978.html",
+            "author": [
+                {
+                    "family": "Ramey",
+                    "given": "Valerie A."
+                }
+            ],
+            "genre": "NBER Working Papers",
+            "id": "Ramey_2016_NBER",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016,
+                        2
+                    ]
+                ]
+            },
+            "number": "21978",
+            "publisher": "National Bureau of Economic Research, Inc",
+            "title": "Macroeconomic Shocks and Their Propagation",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "Stock",
+                    "given": "James"
+                },
+                {
+                    "family": "Watson",
+                    "given": "Mark W."
+                }
+            ],
+            "id": "Stock_Watson_2003",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "publisher": "Prentice Hall; Prentice Hall",
+            "publisher-place": "New York",
+            "title": "Introduction to econometrics",
+            "type": "book"
+        },
+        {
+            "ISSN": "00129682, 14680262",
+            "URL": "http://www.jstor.org/stable/1913610",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        9,
+                        1
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Newey",
+                    "given": "Whitney K."
+                },
+                {
+                    "family": "West",
+                    "given": "Kenneth D."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Newey_West_1987",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1987
+                    ]
+                ]
+            },
+            "page": "703-708",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix",
+            "type": "article-journal",
+            "volume": "55"
+        },
+        {
+            "URL": "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118186428",
+            "author": [
+                {
+                    "family": "Anderson",
+                    "given": "T. W."
+                }
+            ],
+            "id": "Anderson_1971",
+            "issued": {
+                "date-parts": [
+                    [
+                        1971
+                    ]
+                ]
+            },
+            "publisher": "Wiley",
+            "title": "The statistical analysis of time series",
+            "type": "book"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1391852",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        31
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Duan",
+                    "given": "Naihua"
+                },
+                {
+                    "family": "Manning",
+                    "given": "Willard G."
+                },
+                {
+                    "family": "Morris",
+                    "given": "Carl N."
+                },
+                {
+                    "family": "Newhouse",
+                    "given": "Joseph P."
+                }
+            ],
+            "container-title": "Journal of Business & Economic Statistics",
+            "id": "Duan_et_al_1983",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1983
+                    ]
+                ]
+            },
+            "page": "115-126",
+            "publisher": "[American Statistical Association, Taylor & Francis, Ltd.]",
+            "title": "A comparison of alternative models for the demand for medical care",
+            "type": "article-journal",
+            "volume": "1"
+        },
+        {
+            "ISSN": "00129682, 14680262",
+            "URL": "http://www.jstor.org/stable/1911029",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        31
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Mroz",
+                    "given": "Thomas A."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Mroz_1987",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1987
+                    ]
+                ]
+            },
+            "page": "765-799",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "The sensitivity of an empirical model of married women’s hours of work to economic and statistical assumptions",
+            "type": "article-journal",
+            "volume": "55"
+        },
+        {
+            "URL": "https://EconPapers.repec.org/RePEc:cwl:cwldpp:3r",
+            "author": [
+                {
+                    "family": "Tobin",
+                    "given": "James"
+                }
+            ],
+            "genre": "Cowles Foundation Discussion Papers",
+            "id": "Tobin_1956",
+            "issued": {
+                "date-parts": [
+                    [
+                        1956
+                    ]
+                ]
+            },
+            "number": "3R",
+            "publisher": "Cowles Foundation for Research in Economics, Yale University",
+            "title": "Estimation of relationships for limited dependent variables",
+            "type": "report"
+        },
+        {
+            "URL": "https://www.stata-journal.com/article.html?article=st0017",
+            "author": [
+                {
+                    "family": "Heiss",
+                    "given": "F."
+                }
+            ],
+            "container-title": "Stata Journal",
+            "id": "Heiss_2002",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2002
+                    ]
+                ]
+            },
+            "page": "227-252(26)",
+            "publisher": "Stata Press",
+            "publisher-place": "College Station, TX",
+            "title": "Structural choice analysis with nested logit models",
+            "type": "article-journal",
+            "volume": "2"
+        },
+        {
+            "URL": "https://doi.org/10.1016/S0191-2615(00)00035-7",
+            "author": [
+                {
+                    "family": "Hensher",
+                    "given": "David"
+                },
+                {
+                    "family": "Greene",
+                    "given": "William"
+                }
+            ],
+            "container-title": "Transportation Research Part B: Methodological",
+            "id": "Hensher_Greene_2002",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2002
+                    ]
+                ]
+            },
+            "page": "1-17",
+            "title": "Specification and estimation of the nested logit model: Alternative normalisations",
+            "title-short": "Specification and estimation of the nested logit model",
+            "type": "article-journal",
+            "volume": "36"
+        },
+        {
+            "ISSN": "00384038",
+            "URL": "http://www.jstor.org/stable/1057152",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        29
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Nakosteen",
+                    "given": "Robert A."
+                },
+                {
+                    "family": "Zimmer",
+                    "given": "Michael"
+                }
+            ],
+            "container-title": "Southern Economic Journal",
+            "id": "Nakosteen_Zimmer_1980",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1980
+                    ]
+                ]
+            },
+            "page": "840-851",
+            "publisher": "Southern Economic Association",
+            "title": "Migration and income: The question of self-selection",
+            "title-short": "Migration and income",
+            "type": "article-journal",
+            "volume": "46"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/aea/aecrev/v85y1995i3p322-40.html",
+            "author": [
+                {
+                    "family": "Meyer",
+                    "given": "Bruce D"
+                },
+                {
+                    "family": "Viscusi",
+                    "given": "W Kip"
+                },
+                {
+                    "family": "Durbin",
+                    "given": "David L"
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "Meyer_Viscusi_Durbin_1995",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "page": "322-340",
+            "title": "Workers’ Compensation and Injury Duration: Evidence from a Natural Experiment",
+            "type": "article-journal",
+            "volume": "85"
+        },
+        {
+            "ISSN": "10505164",
+            "URL": "http://www.jstor.org/stable/2245134",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        24
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Roberts",
+                    "given": "G. O."
+                },
+                {
+                    "family": "Gelman",
+                    "given": "A."
+                },
+                {
+                    "family": "Gilks",
+                    "given": "W. R."
+                }
+            ],
+            "container-title": "The Annals of Applied Probability",
+            "id": "Roberts_Gelman_Gilks_1997",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1997
+                    ]
+                ]
+            },
+            "page": "110-120",
+            "publisher": "Institute of Mathematical Statistics",
+            "title": "Weak convergence and optimal scaling of random walk metropolis algorithms",
+            "type": "article-journal",
+            "volume": "7"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/bla/jorssb/v73y2011i3p273-282.html",
+            "author": [
+                {
+                    "family": "Tibshirani",
+                    "given": "Robert"
+                }
+            ],
+            "container-title": "Journal of the Royal Statistical Society Series B",
+            "id": "Tibshirani_2011",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "page": "273-282",
+            "title": "Regression shrinkage and selection via the lasso: a retrospective",
+            "type": "article-journal",
+            "volume": "73"
+        },
+        {
+            "DOI": "10.1017/CBO9780511751967",
+            "URL": "http://cameron.econ.ucdavis.edu/mmabook/mma.html",
+            "author": [
+                {
+                    "family": "Cameron",
+                    "given": "A. Colin"
+                },
+                {
+                    "family": "Trivedi",
+                    "given": "Pravin K."
+                }
+            ],
+            "id": "Cameron_Trivedi_2005",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "publisher": "Cambridge University Press",
+            "title": "Microeconometrics: Methods and applications",
+            "title-short": "Microeconometrics",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1017/CBO9780511751967",
+            "author": [
+                {
+                    "family": "Gouriéroux",
+                    "given": "Christian"
+                },
+                {
+                    "family": "Monfort",
+                    "given": "Alain"
+                }
+            ],
+            "collection-title": "Themes in modern econometrics",
+            "id": "gourieroux_monfort_1995",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "publisher": "Cambridge University Press",
+            "title": "Statistics and econometric models",
+            "type": "book",
+            "volume": "1"
+        },
+        {
+            "URL": "https://ideas.repec.org/p/zbw/upadbr/b3919.html",
+            "author": [
+                {
+                    "family": "Fritsch",
+                    "given": "Markus"
+                },
+                {
+                    "family": "Pua",
+                    "given": "Andrew Adrian Yu"
+                },
+                {
+                    "family": "Schnurbus",
+                    "given": "Joachim"
+                }
+            ],
+            "genre": "Passauer Diskussionspapiere, Betriebswirtschaftliche Reihe",
+            "id": "Fritsch_et_al_2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "number": "B-39-19",
+            "publisher": "University of Passau, Faculty of Business; Economics",
+            "title": "Pdynmc - An R-package for estimating linear dynamic panel data models based on linear and nonlinear moment conditions",
+            "type": "report"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/oup/restud/v58y1991i2p277-297..html",
+            "author": [
+                {
+                    "family": "Arellano",
+                    "given": "Manuel"
+                },
+                {
+                    "family": "Bond",
+                    "given": "Stephen"
+                }
+            ],
+            "container-title": "Review of Economic Studies",
+            "id": "Arellano_Bond_1991",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1991
+                    ]
+                ]
+            },
+            "page": "277-297",
+            "title": "Some Tests of Specification for Panel Data: Monte Carlo Evidence and an Application to Employment Equations",
+            "type": "article-journal",
+            "volume": "58"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/eee/econom/v18y1982i1p47-82.html",
+            "author": [
+                {
+                    "family": "Anderson",
+                    "given": "T. W."
+                },
+                {
+                    "family": "Hsiao",
+                    "given": "Cheng"
+                }
+            ],
+            "container-title": "Journal of Econometrics",
+            "id": "Anderson_Hsiao_1982",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1982
+                    ]
+                ]
+            },
+            "page": "47-82",
+            "title": "Formulation and estimation of dynamic models using panel data",
+            "type": "article-journal",
+            "volume": "18"
+        },
+        {
+            "URL": "https://www.statlearning.com",
+            "author": [
+                {
+                    "family": "James",
+                    "given": "Gareth"
+                },
+                {
+                    "family": "Witten",
+                    "given": "Daniela"
+                },
+                {
+                    "family": "Hastie",
+                    "given": "Trevor"
+                },
+                {
+                    "family": "Tibshirani",
+                    "given": "Robert"
+                }
+            ],
+            "id": "James2013",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "keyword": "general_machine_learning",
+            "publisher": "Springer",
+            "title": "An introduction to statistical learning: With applications in r",
+            "title-short": "An introduction to statistical learning",
+            "type": "book"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/ucp/macann/doi10.1086-690241.html",
+            "author": [
+                {
+                    "family": "Jordà",
+                    "given": "Òscar"
+                },
+                {
+                    "family": "Schularick",
+                    "given": "Moritz"
+                },
+                {
+                    "family": "Taylor",
+                    "given": "Alan M."
+                }
+            ],
+            "container-title": "NBER Macroeconomics Annual",
+            "id": "JST_2017",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "page": "213-263",
+            "title": "Macrofinancial History and the New Business Cycle Facts",
+            "type": "article-journal",
+            "volume": "31"
+        },
+        {
+            "URL": "http://yihui.name/knitr/",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "edition": "2nd",
+            "id": "xie2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1498716963",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "Dynamic documents with R and knitr",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Dungey",
+                    "given": "Mardi"
+                },
+                {
+                    "family": "Pagan",
+                    "given": "Adrian"
+                }
+            ],
+            "container-title": "Economic Record",
+            "id": "dungey2009extending",
+            "issue": "268",
+            "issued": {
+                "date-parts": [
+                    [
+                        2009
+                    ]
+                ]
+            },
+            "page": "1-20",
+            "publisher": "Wiley Online Library",
+            "title": "Extending a SVAR model of the australian economy",
+            "type": "article-journal",
+            "volume": "85"
+        },
+        {
+            "DOI": "https://doi.org/10.1016/j.jeconom.2022.04.001",
+            "ISSN": "0304-4076",
+            "URL": "https://www.sciencedirect.com/science/article/pii/S0304407622000781",
+            "author": [
+                {
+                    "family": "MacKinnon",
+                    "given": "James G."
+                },
+                {
+                    "family": "Nielsen",
+                    "given": "Morten Ørregaard"
+                },
+                {
+                    "family": "Webb",
+                    "given": "Matthew D."
+                }
+            ],
+            "container-title": "Journal of Econometrics",
+            "id": "MACKINNON2022",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "title": "Cluster-robust inference: A guide to empirical practice",
+            "title-short": "Cluster-robust inference",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "https://doi.org/10.3368/jhr.50.2.317",
+            "ISSN": "317-372",
+            "URL": "http://jhr.uwpress.org/content/50/2/317.refs#cited-by",
+            "author": [
+                {
+                    "family": "Cameron",
+                    "given": "A. Colin"
+                },
+                {
+                    "family": "Miller",
+                    "given": "Douglas L."
+                }
+            ],
+            "container-title": "The Journal of Human Resources",
+            "id": "Cameron_Miller_2014",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "title": "A practitioner’s guide to cluster-robust inference",
+            "type": "article-journal",
+            "volume": "50"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1907619",
+            "author": [
+                {
+                    "family": "Sargan",
+                    "given": "J. D."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Sargan_1958",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1958
+                    ]
+                ]
+            },
+            "page": "393-415",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "The estimation of economic relationships using instrumental variables",
+            "type": "article-journal",
+            "volume": "26"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1912775",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        5
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Hansen",
+                    "given": "Lars Peter"
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Hansen_1982",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1982
+                    ]
+                ]
+            },
+            "page": "1029-1054",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "Large sample properties of generalized method of moments estimators",
+            "type": "article-journal",
+            "volume": "50"
+        },
+        {
+            "DOI": "10.1146/annurev-economics-080218-025643",
+            "URL": "https://doi.org/10.1146/annurev-economics-080218-025643",
+            "author": [
+                {
+                    "family": "Andrews",
+                    "given": "Isaiah"
+                },
+                {
+                    "family": "Stock",
+                    "given": "James H."
+                },
+                {
+                    "family": "Sun",
+                    "given": "Liyang"
+                }
+            ],
+            "container-title": "Annual Review of Economics",
+            "id": "Andrews_Stock_Sun_2019",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "page": "727-753",
+            "title": "Weak instruments in instrumental variables regression: Theory and practice",
+            "title-short": "Weak instruments in instrumental variables regression",
+            "type": "article-journal",
+            "volume": "11"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1401917",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        5
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Durbin",
+                    "given": "J."
+                }
+            ],
+            "container-title": "Revue de l’Institut International de Statistique / Review of the International Statistical Institute",
+            "id": "Durbin_1954",
+            "issue": "1/3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1954
+                    ]
+                ]
+            },
+            "page": "23-32",
+            "publisher": "[International Statistical Institute (ISI), Wiley]",
+            "title": "Errors in variables",
+            "type": "article-journal",
+            "volume": "22"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1914093",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        5
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Wu",
+                    "given": "De-Min"
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Wu_1973",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1973
+                    ]
+                ]
+            },
+            "page": "733-750",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "Alternative tests of independence between stochastic regressors and disturbances",
+            "type": "article-journal",
+            "volume": "41"
+        },
+        {
+            "URL": "http://www.jstor.org/stable/1913827",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2022,
+                        8,
+                        5
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Hausman",
+                    "given": "J. A."
+                }
+            ],
+            "container-title": "Econometrica",
+            "id": "Hausman_1978",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        1978
+                    ]
+                ]
+            },
+            "page": "1251-1271",
+            "publisher": "[Wiley, Econometric Society]",
+            "title": "Specification tests in econometrics",
+            "type": "article-journal",
+            "volume": "46"
+        },
+        {
+            "ISBN": "0691120358",
+            "URL": "https://www.mostlyharmlesseconometrics.com",
+            "author": [
+                {
+                    "family": "Angrist",
+                    "given": "Joshua D."
+                },
+                {
+                    "family": "Pischke",
+                    "given": "Jörn-Steffen"
+                }
+            ],
+            "id": "angrist_mostly_2008",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008,
+                        12
+                    ]
+                ]
+            },
+            "keyword": "imported",
+            "publisher": "Princeton University Press",
+            "title": "Mostly harmless econometrics: An empiricist’s companion",
+            "title-short": "Mostly harmless econometrics",
+            "type": "book"
+        },
+        {
+            "URL": "https://ideas.repec.org/a/anr/reveco/v10y2018p465-503.html",
+            "author": [
+                {
+                    "family": "Abadie",
+                    "given": "Alberto"
+                },
+                {
+                    "family": "Cattaneo",
+                    "given": "Matias D."
+                }
+            ],
+            "container-title": "Annual Review of Economics",
+            "id": "Abadie_Cattaneo_2018",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "page": "465-503",
+            "title": "Econometric Methods for Program Evaluation",
+            "type": "article-journal",
+            "volume": "10"
+        },
+        {
+            "URL": "https://www.R-project.org/",
+            "author": [
+                {
+                    "literal": "R Core Team"
+                }
+            ],
+            "id": "R-base",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "publisher": "R Foundation for Statistical Computing",
+            "publisher-place": "Vienna, Austria",
+            "title": "R: A language and environment for statistical computing",
+            "title-short": "R",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=bookdown",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "id": "R-bookdown",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 0.27",
+            "title": "Bookdown: Authoring books and technical documents with r markdown",
+            "title-short": "Bookdown",
+            "type": "book"
+        },
+        {
+            "URL": "https://yihui.org/knitr/",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "id": "R-knitr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 1.39",
+            "title": "Knitr: A general-purpose package for dynamic report generation in r",
+            "title-short": "Knitr",
+            "type": "book"
+        },
+        {
+            "URL": "https://CRAN.R-project.org/package=rmarkdown",
+            "author": [
+                {
+                    "family": "Allaire",
+                    "given": "JJ"
+                },
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                },
+                {
+                    "family": "McPherson",
+                    "given": "Jonathan"
+                },
+                {
+                    "family": "Luraschi",
+                    "given": "Javier"
+                },
+                {
+                    "family": "Ushey",
+                    "given": "Kevin"
+                },
+                {
+                    "family": "Atkins",
+                    "given": "Aron"
+                },
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Cheng",
+                    "given": "Joe"
+                },
+                {
+                    "family": "Chang",
+                    "given": "Winston"
+                },
+                {
+                    "family": "Iannone",
+                    "given": "Richard"
+                }
+            ],
+            "id": "R-rmarkdown",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "note": "R package version 2.14",
+            "title": "Rmarkdown: Dynamic documents for r",
+            "title-short": "Rmarkdown",
+            "type": "book"
+        },
+        {
+            "URL": "https://bookdown.org/yihui/bookdown",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "id": "bookdown2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1138700109",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "Bookdown: Authoring books and technical documents with R markdown",
+            "title-short": "Bookdown",
+            "type": "book"
+        },
+        {
+            "URL": "https://yihui.org/knitr/",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "edition": "2nd",
+            "id": "knitr2015",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1498716963",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "Dynamic documents with R and knitr",
+            "type": "book"
+        },
+        {
+            "URL": "http://www.crcpress.com/product/isbn/9781466561595",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                }
+            ],
+            "container-title": "Implementing reproducible computational research",
+            "editor": [
+                {
+                    "family": "Stodden",
+                    "given": "Victoria"
+                },
+                {
+                    "family": "Leisch",
+                    "given": "Friedrich"
+                },
+                {
+                    "family": "Peng",
+                    "given": "Roger D."
+                }
+            ],
+            "id": "knitr2014",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "note": "ISBN 978-1466561595",
+            "publisher": "Chapman; Hall/CRC",
+            "title": "Knitr: A comprehensive tool for reproducible research in R",
+            "title-short": "Knitr",
+            "type": "chapter"
+        },
+        {
+            "URL": "https://bookdown.org/yihui/rmarkdown",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                },
+                {
+                    "family": "Allaire",
+                    "given": "J. J."
+                },
+                {
+                    "family": "Grolemund",
+                    "given": "Garrett"
+                }
+            ],
+            "id": "rmarkdown2018",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "note": "ISBN 9781138359338",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "R markdown: The definitive guide",
+            "title-short": "R markdown",
+            "type": "book"
+        },
+        {
+            "URL": "https://bookdown.org/yihui/rmarkdown-cookbook",
+            "author": [
+                {
+                    "family": "Xie",
+                    "given": "Yihui"
+                },
+                {
+                    "family": "Dervieux",
+                    "given": "Christophe"
+                },
+                {
+                    "family": "Riederer",
+                    "given": "Emily"
+                }
+            ],
+            "id": "rmarkdown2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "note": "ISBN 9780367563837",
+            "publisher": "Chapman; Hall/CRC",
+            "publisher-place": "Boca Raton, Florida",
+            "title": "R markdown cookbook",
+            "type": "book"
+        }
+    ],
+    "project_biblios": [
+        "book.bib",
+        "packages.bib"
+    ]
+}

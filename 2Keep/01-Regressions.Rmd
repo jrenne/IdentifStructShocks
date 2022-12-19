@@ -1,0 +1,1612 @@
+# Linear Regressions {#ChapterLS}
+
+<!-- This chapter covers linear regressions. It is organized as followed: Section \@ref(specif) -->
+
+
+::: {.definition #essai}
+A linear regression model is of the form:
+\begin{equation}
+y_i = \boldsymbol\beta'\bv{x}_{i} + \varepsilon_i,(\#eq:linearspecif)
+\end{equation}
+where $\bv{x}_{i}=[x_{i,1},\dots,x_{i,K}]'$ is a vector of dimension $K \times 1$.
+:::
+
+
+For entity $i$, the $x_{i,k}$'s, for $k \in \{1,\dots,K\}$, are explanatory variables, regressors, or covariates. The variable of interest, $y_i$, is often called dependent variable, or regressand. The last term of the specification, namely $\varepsilon_i$, is called error, or disturbance.
+
+The researcher is usually interested in the components of vector $\boldsymbol\beta$, denoted by $\beta_k$, $k \in \{1,\dots,K\}$. She usually aims at estimating these coefficients based on observations of $\{y_i,\bv{x}_{i}\}$, $i \in \{1,\dots,n\}$, which constitutes a *sample*. In the following, we will denote the sample length by $n$.
+
+To have an intercept in the specification \@ref(eq:linearspecif), one has to set $x_{i,1}=1$ for all $i$; $\beta_1$ then corresponds to the intercept.
+
+
+
+## Hypotheses {#linearHyp}
+
+In this section, we introduce different assumptions regarding the covariates and/or the errors. The properties of the estimators used by the researcher depend on which of these assumptions are satisfied.
+
+::: {.hypothesis #fullrank name="Full rank"}
+There is no exact linear relationship among the independent variables (the $x_{i,k}$'s, for a given $i \in \{1,\dots,n\}$).
+:::
+
+Intuitively, when Hypothesis \@ref(hyp:fullrank) is satisfied, then the estimation of the model parameters is unfeasible since, for any value of $\boldsymbol\beta$, some changes in the explanatory variables will be exactly compensated by other changes in another set of explanatory variables, preventing the identification of these effects.
+
+
+Let us denote by $\bv{X}$ the matrix containing all explanatory variables, of dimension $n \times K$. (That is, row $i$ of $\bv{X}$ is $\bv{x}_i'$.) The following hypothesis concerns the relationship between the errors (gathered in $\boldsymbol\varepsilon$, a $n$-dimensional vector) and the explanatory variables $\bv{X}$:
+
+::: {.hypothesis #exogeneity name="Conditional mean-zero assumption"}
+\begin{equation}
+\mathbb{E}(\boldsymbol\varepsilon|\bv{X}) = 0.
+\end{equation}
+:::
+
+Hypothesis \@ref(hyp:exogeneity) has important implications:
+
+::: {.proposition #implicationExog}
+Under Hypothesis \@ref(hyp:exogeneity):
+
+i. $\mathbb{E}(\varepsilon_{i})=0$;
+ii. The $x_{ij}$'s and the $\varepsilon_{i}$'s are uncorrelated, i.e. $\forall i,\,j \quad \mathbb{C}orr(x_{ij},\varepsilon_{i})=0$.
+:::
+::: {.proof}
+Let us prove (i) and (ii):
+
+i. By the law of iterated expectations:
+$$
+\mathbb{E}(\boldsymbol\varepsilon)=\mathbb{E}(\mathbb{E}(\boldsymbol\varepsilon|\bv{X}))=\mathbb{E}(0)=0.
+$$
+ii. $\mathbb{E}(x_{ij}\varepsilon_i)=\mathbb{E}(\mathbb{E}(x_{ij}\varepsilon_i|\bv{X}))=\mathbb{E}(x_{ij}\underbrace{\mathbb{E}(\varepsilon_i|\bv{X})}_{=0})=0$.
+:::
+
+The next two hypotheses (\@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid)) concern the stochastic properties of the errors $\varepsilon_i$:
+
+::: {.hypothesis #homoskedasticity name="Homoskedasticity"}
+$$
+\forall i, \quad \mathbb{V}ar(\varepsilon_i|\bv{X}) = \sigma^2.
+$$
+:::
+
+The following lines of code generate a figure comparing two situations: Panel (a) of Figure \@ref(fig:heteroskedasticity) corresponds to a situation of homoskedasticity, and Panel (b) corresponds to a situation of heteroskedasticity. Let us be more specific. In the two plots, we have $X_i \sim \mathcal{N}(0,1)$ and $\varepsilon^*_i \sim \mathcal{N}(0,1)$. In Panel (a) (homoskedasticity):
+$$
+Y_i = 2 + 2X_i + \varepsilon^*_i.
+$$
+In Panel (b) (heteroskedasticity):
+$$
+Y_i = 2 + 2X_i + \left(2\mathbb{I}_{\{X_i<0\}}+0.2\mathbb{I}_{\{X_i\ge0\}}\right)\varepsilon^*_i$$.
+
+```{r heteroskedasticity, fig.cap="Homoskedasticity vs heteroskedasticity. See text for the exact specifications.", fig.asp = .6, out.width = "90%", fig.align = 'left-aligned'}
+N <- 200
+X <- rnorm(N);eps <- rnorm(N)
+par(mfrow=c(1,2),plt=c(.2,.95,.2,.8))
+Y <- 2 + 2*X + eps
+plot(X,Y,pch=19,main="(a) Homoskedasticity",
+     las=1,cex.lab=.8,cex.axis=.8,cex.main=.8,)
+Y <- 2 + 2*X + eps*( (X<0)*2 + (X>=0)*.2 )
+plot(X,Y,pch=19,main="(b) Heteroskedasticity",
+     las=1,cex.lab=.8,cex.axis=.8,cex.main=.8,)
+```
+
+
+Figure \@ref(fig:exmpSalarayPhDSHP) shows a real-data situation of heteroskedasticity, based on data taken from the [Swiss Household Panel](https://forscenter.ch/projects/swiss-household-panel/). The sample is restricted to persons (i) that are younger than 35 year in 2019, and (ii) that have completed at least 19 years of study. The figure shows that the dispersion of yearly income increases with age.
+
+```{r exmpSalarayPhDSHP, fig.cap="Income versus age. Data are from the Swiss Household Panel. The sample is restricted to persons that have completed at least 19 years of study. The figure shows that the dispersion of yearly income increases with age.", fig.asp = .6, out.width = "95%", fig.align = "left-aligned"}
+library(AEC)
+table(shp$edyear19)
+shp_higherEd <- subset(shp,(edyear19>18)&age19<35)
+plot(i19wyg/1000~age19,data=shp_higherEd,pch=19,las=1,
+     xlab="Age",ylab="Yearly work income")
+abline(lm(i19wyg/1000~age19,data=shp_higherEd),col="red",lwd=2)
+```
+<!-- x -->
+<!-- ```{r exmpSalarayPhD, fig.cap="Salary versus years after PhD", fig.asp = .6, out.width = "90%", fig.align = 'left-aligned'} -->
+<!-- # load data into R -->
+<!-- data(Salaries, package = "carData") -->
+<!-- # first six rows of the data -->
+<!-- head(Salaries) -->
+<!-- # Regression: -->
+<!-- eq <- lm(salary~.,data=Salaries) -->
+<!-- summary(eq) -->
+<!-- par(mfrow=c(1,1)) -->
+<!-- par(plt=c(.2,.95,.2,.95)) -->
+<!-- plot(salary/1000~yrs.since.phd,pch=19,xlab="years since PhD",ylab="Salary",data=Salaries,las=1) -->
+<!-- abline(lm(salary/1000~yrs.since.phd,data=Salaries),col="red",lwd=2) -->
+<!-- ``` -->
+
+
+The next assumption concerns the correlation of the errors across entities.
+
+::: {.hypothesis #noncorrelResid name="Uncorrelated errors"}
+$$
+\forall i \ne j, \quad \mathbb{C}ov(\varepsilon_i,\varepsilon_j|\bv{X})=0.
+$$
+:::
+
+
+We will often need to work with the covariance matrix of the errors. Proposition \@ref(prp:Sigma) give the specific form of the covariance matrix of the errors ---conditional on $\bv{X}$--- when both Hypotheses \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid) are satisfied:
+
+::: {.proposition #Sigma}
+If Hypotheses \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid) hold, then:
+$$
+\mathbb{V}ar(\boldsymbol\varepsilon|\bv{X})= \sigma^2 Id,
+$$
+where $Id$ is the $n \times n$ identity matrix.
+:::
+
+We will sometimes assume that errors are Gaussian---or normal. We will then invoke Hypothesis \@ref(hyp:normality):
+
+::: {.hypothesis #normality name="Normal distribution"}
+$$
+\forall i, \quad \varepsilon_i \sim \mathcal{N}(0,\sigma^2).
+$$
+:::
+
+
+## Least square estimation {#LSquares}
+
+### Derivation of the OLS formula
+
+In this section, we will present and study the properties of the most popular estimation approach, namely the **Ordinary Least Squares (OLS)** approach. As suggested by its name, the OLS estimator of $\boldsymbol\beta$ is defined as the vector $\bv{b}$ that minimizes the sum of squared residuals. (The *residuals* are the estimates of the *errors* $\varepsilon_i$.)
+
+For a given vector of coefficients $\bv{b}=[b_1,\dots,b_K]'$, the sum of squared residuals is:
+$$
+f(\bv{b}) =\sum_{i=1}^n \left(y_i - \sum_{j=1}^K x_{i,j} b_j \right)^2 = \sum_{i=1}^n (y_i - \bv{x}_i' \bv{b})^2.
+$$
+Minimizing this sum amounts to minimizing:
+$$
+f(\bv{b}) = (\bv{y} - \bv{X}\bv{b})'(\bv{y} - \bv{X}\bv{b}).
+$$
+
+Since (see Def. \@ref(def:FOC) and Proposition \@ref(prp:partial)):
+$$
+\frac{\partial f}{\partial \bv{b}}(\bv{b}) = - 2 \bv{X}'\bv{y} + 2 \bv{X}'\bv{X}\bv{b},
+$$
+it comes that a necessary first-order condition (FOC) is:
+\begin{equation}
+\bv{X}'\bv{X}\bv{b} = \bv{X}'\bv{y}.(\#eq:OLSFOC)
+\end{equation}
+Under Assumption \@ref(hyp:fullrank), $\bv{X}'\bv{X}$ is invertible. Hence:
+$$
+\boxed{\bv{b} = (\bv{X}'\bv{X})^{-1} \bv{X}'\bv{y}.}
+$$
+Vector $\bv{b}$ minimizes the sum of squared residuals. ($f$ is a non-negative quadratic function, it therefore admits a minimum.)
+
+
+
+We  have:
+$$
+\bv{y} = \underbrace{\bv{X}\bv{b}}_{\mbox{fitted values } (\hat{\bv{y}})} + \underbrace{\bv{e}}_{\mbox{residuals}}
+$$
+
+
+The estimated residuals are:
+\begin{equation}
+\bv{e} = \bv{y} - \bv{X} (\bv{X}'\bv{X})^{-1} \bv{X}' \bv{y} = \bv{M} \bv{y},(\#eq:Mres)
+\end{equation}
+where $\bv{M} := \bv{I} - \bv{X} (\bv{X}'\bv{X})^{-1} \bv{X}'$ is called the **residual maker** matrix. 
+
+Moreover, the fitted values $\hat{\bv{y}}$ are given by:
+\begin{equation}
+\hat{\bv{y}}=\bv{X} (\bv{X}'\bv{X})^{-1} \bv{X}' \bv{y} = \bv{P} \bv{y},(\#eq:Proj)
+\end{equation}
+where $\bv{P}=\bv{X} (\bv{X}'\bv{X})^{-1} \bv{X}'$ is a **projection matrix**.
+
+These matrices $\bv{M}$ and $\bv{P}$ are such that:
+
+* $\bv{M} \bv{X} = \bv{0}$: if one regresses one of the explanatory variables on $\bv{X}$, the residuals are null.
+* $\bv{M}\bv{y}=\bv{M}\boldsymbol\varepsilon$ (because $\bv{y} = \bv{X}\boldsymbol\beta + \boldsymbol\varepsilon$ and $\bv{M} \bv{X} = \bv{0}$).
+
+Here are some additional properties of $\bv{M}$ and $\bv{P}$:
+
+* $\bv{M}$ is symmetric ($\bv{M} = \bv{M}'$) and idempotent ($\bv{M} = \bv{M}^2 = \bv{M}^k$ for $k>0$).
+* $\bv{P}$ is symmetric and idempotent.
+* $\bv{P}\bv{X} = \bv{X}$.
+* $\bv{P} \bv{M} = \bv{M} \bv{P} = 0$.
+* $\bv{y} = \bv{P}\bv{y} + \bv{M}\bv{y}$ (decomposition of $\bv{y}$ into two orthogonal parts).
+
+It is easily checked that $\bv{X}'\bv{e}=0$. Each column of $\bv{X}$ is therefore orthogonal to $\bv{e}$. In particular, if an intercept is included in the regression ($x_{i,1} \equiv 1$ for all $i$'s, i.e., the first column of $\bv{X}$ is filled with ones), the average of the residuals is null.
+
+
+
+:::{.example #bivar name="Bivariate case"}
+
+Consider a bivariate situation, where we regress $y_i$ on a constant and an explanatory variable $w_i$. We have $K=2$, and $\bv{X}$ is a $n \times 2$ matrix whose $i^{th}$ row is $[x_{i,1},x_{i,2}]$, with $x_{i,1}=1$ (to account for the intercept) and with $w_i = x_{i,2}$ (say).
+
+We have:
+\begin{eqnarray*}
+\bv{X}'\bv{X} &=& 
+\left[\begin{array}{cc}
+n & \sum_i w_i \\
+\sum_i w_i & \sum_i w_i^2
+\end{array}
+\right],\\
+(\bv{X}'\bv{X})^{-1} &=& 
+\frac{1}{n\sum_i w_i^2-(\sum_i w_i)^2}
+\left[\begin{array}{cc}
+\sum_i w_i^2 & -\sum_i w_i \\
+-\sum_i w_i & n
+\end{array}
+\right],\\
+(\bv{X}'\bv{X})^{-1}\bv{X}'\bv{y} &=& 
+\frac{1}{n\sum_i w_i^2-(\sum_i w_i)^2}
+\left[\begin{array}{c}
+\sum_i w_i^2\sum_i y_i -\sum_i w_i \sum_i w_iy_i \\
+-\sum_i w_i \sum_i y_i + n \sum_i w_i y_i
+\end{array}
+\right]\\
+&=& \frac{1}{\frac{1}{n}\sum_i(w_i - \bar{w})^2}
+\left[\begin{array}{c}
+\frac{\bar{y}}{n}\sum_i w_i^2 -\frac{\bar{w}}{n}\sum_i w_iy_i \\
+\frac{1}{n}\sum_i (w_i-\bar{w})(y_i-\bar{y})
+\end{array}
+\right].
+\end{eqnarray*}
+
+It can be seen that the second element of $\bv{b}=(\bv{X}'\bv{X})^{-1}\bv{X}'\bv{y}$ is:
+$$
+b_2 = \frac{\overline{\mathbb{C}ov(W,Y)}}{\overline{\mathbb{V}ar(W)}},
+$$
+where $\overline{\mathbb{C}ov(W,Y)}$ and $\overline{\mathbb{V}ar(W)}$ are sample estimates.
+
+Since there is a constant in the regression, we have $b_1 = \bar{y} - b_2 \bar{w}$.
+:::
+
+
+
+### Properties of the OLS estimate (small sample)
+
+The OLS properties stated in Proposition \@ref(prp:propOLS) are valid for any sample size $n$:
+
+::: {.proposition #propOLS name="Properties of the OLS estimator"}
+
+We have:
+
+i. Under Assumptions \@ref(hyp:fullrank) and \@ref(hyp:exogeneity), the OLS estimator is linear and unbiased.
+
+ii. Under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), the conditional covariance matrix of $\bv{b}$ is: $\mathbb{V}ar(\bv{b}|\bv{X}) = \sigma^2 (\bv{X}'\bv{X})^{-1}$.
+:::
+::: {.proof}
+Under Hypothesis \@ref(hyp:fullrank), $\bv{X}'\bv{X}$ can be inverted. We have:
+$$
+\bv{b} = (\bv{X}'\bv{X})^{-1} \bv{X}'\bv{y} = \boldsymbol\beta + (\bv{X}'\bv{X})^{-1} \bv{X}' \bv{\varepsilon}.
+$$
+
+i. Let us consider the expectation of the last term, i.e. $\mathbb{E}((\bv{X}'\bv{X})^{-1} \bv{X}' \bv{\varepsilon})$. Using the law of iterated expectations, we obtain:
+$$
+\mathbb{E}((\bv{X}'\bv{X})^{-1} \bv{X}' \bv{\varepsilon}) = \mathbb{E}(\mathbb{E}[(\bv{X}'\bv{X})^{-1} \bv{X}' \bv{\varepsilon}|\bv{X}]) = \mathbb{E}((\bv{X}'\bv{X})^{-1} \bv{X}'\mathbb{E}[\bv{\varepsilon}|\bv{X}]).
+$$
+By Hypothesis \@ref(hyp:exogeneity), we have $\mathbb{E}[\bv{\varepsilon}|\bv{X}]=0$. Hence $\mathbb{E}((\bv{X}'\bv{X})^{-1} \bv{X}' \bv{\varepsilon}) =0$ and result (i) follows.
+ii. $\mathbb{V}ar(\bv{b}|\bv{X}) = (\bv{X}'\bv{X})^{-1} \bv{X}' \mathbb{E}(\boldsymbol\varepsilon\boldsymbol\varepsilon'|\bv{X}) \bv{X} (\bv{X}'\bv{X})^{-1}$.
+By Prop. \@ref(prp:Sigma), if \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid) hold, then we have $\mathbb{E}(\boldsymbol\varepsilon\boldsymbol\varepsilon'|\bv{X})=\mathbb{V}ar(\boldsymbol\varepsilon|\bv{X})=\sigma^2 Id$.
+:::
+
+
+Together, Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid) form the so-called Gauss-Markov set of assumptions. Under these assumptions, the OLS estimator feature the lowest possible variance within the family of linear unbiased estimates of $\boldsymbol\beta$:
+
+:::{.theorem #GaussMarkov name="Gauss-Markov Theorem"}
+
+Under Assumptions \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), for any vector $w$, the minimum-variance linear unbiased estimator of $w' \boldsymbol\beta$ is $w' \bv{b}$, where $\bv{b}$ is the least squares estimator. (BLUE: Best Linear Unbiased Estimator.)
+:::
+:::{.proof}
+Consider $\bv{b}^* = C \bv{y}$, another linear unbiased estimator of $\boldsymbol\beta$. Since it is unbiased, we must have $\mathbb{E}(C\bv{y}|\bv{X}) = \mathbb{E}(C\bv{X}\boldsymbol\beta + C\boldsymbol\varepsilon|\bv{X}) = \boldsymbol\beta$. We have $\mathbb{E}(C\boldsymbol\varepsilon|\bv{X})=C\mathbb{E}(\boldsymbol\varepsilon|\bv{X})=0$ (by \@ref(hyp:exogeneity)). Therefore $\bv{b}^*$ is unbiased if $\mathbb{E}(C\bv{X})\boldsymbol\beta=\boldsymbol\beta$. This has to be the case for any	$\boldsymbol\beta$, which implies that we must have $C\bv{X}=\bv{I}$. Let us compute $\mathbb{V}ar(\bv{b^*}|\bv{X})$. For this, we introduce $D = C - (\bv{X}'\bv{X})^{-1}\bv{X}'$, which is such that $D\bv{y}=\bv{b}^*-\bv{b}$. The fact that $C\bv{X}=\bv{I}$ implies that $D\bv{X} = \bv{0}$. We have $\mathbb{V}ar(\bv{b^*}|\bv{X}) = \mathbb{V}ar(C \bv{y}|\bv{X}) =\mathbb{V}ar(C \boldsymbol\varepsilon|\bv{X}) = \sigma^2CC'$ (by Assumptions \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid), see Prop. \@ref(prp:Sigma)). Using $C=D+(\bv{X}'\bv{X})^{-1}\bv{X}'$ and exploiting the fact that $D\bv{X} = \bv{0}$ leads to:
+$$
+\mathbb{V}ar(\bv{b^*}|\bv{X}) =\sigma^2\left[(D+(\bv{X}'\bv{X})^{-1}\bv{X}')(D+(\bv{X}'\bv{X})^{-1}\bv{X}')'\right] = \mathbb{V}ar(\bv{b}|\bv{X}) + \sigma^2 \bv{D}\bv{D}'.
+$$
+Therefore, we have
+\begin{eqnarray*}
+&&\mathbb{V}ar(w'\bv{b^*}|\bv{X})=w'\mathbb{V}ar(\bv{b}|\bv{X})w + \sigma^2 w'\bv{D}\bv{D}'w\\
+&\ge& w'\mathbb{V}ar(\bv{b}|\bv{X})w=\mathbb{V}ar(w'\bv{b}|\bv{X}).
+\end{eqnarray*}
+:::
+
+The Frish-Waugh theorem (Theorem \@ref(thm:FW)) reveals the relationship between the OLS estimator and the notion of partial correlation coefficient. Consider the linear least square regression of $\bv{y}$ on $\bv{X}$. We introduce the notations:
+
+* $\bv{b}^{\bv{y}/\bv{X}}$: OLS estimates of $\boldsymbol\beta$,
+* $\bv{M}^{\bv{X}}$: residual-maker matrix of any regression on $\bv{X}$ (given by $\bv{I} - \bv{X} (\bv{X}'\bv{X})^{-1} \bv{X}'$),
+* $\bv{P}^{\bv{X}}$: projection matrix of any regression on $\bv{X}$ (given by $\bv{X} (\bv{X}'\bv{X})^{-1} \bv{X}'$).
+
+Let us split the set of explanatory variables into two: $\bv{X} = [\bv{X}_1,\bv{X}_2]$. With obvious notations: $\bv{b}^{\bv{y}/\bv{X}}=[\bv{b}_1',\bv{b}_2']'$.
+
+::: {.theorem #FW name="Frisch-Waugh Theorem"}
+We have:
+$$
+\bv{b}_2 = \bv{b}^{\bv{M^{\bv{X}_1}y}/\bv{M^{\bv{X}_1}\bv{X}_2}}.
+$$
+:::
+::: {.proof}
+The minimization of the least squares leads to (these are first-order conditions, see Eq. \@ref(eq:OLSFOC)):
+$$
+\left[ \begin{array}{cc} \bv{X}_1'\bv{X}_1 & \bv{X}_1'\bv{X}_2 \\ \bv{X}_2'\bv{X}_1 & \bv{X}_2'\bv{X}_2\end{array}\right]
+\left[ \begin{array}{c} \bv{b}_1 \\ \bv{b}_2\end{array}\right] =
+\left[ \begin{array}{c} \bv{X}_1' \bv{y} \\ \bv{X}_2' \bv{y} \end{array}\right].
+$$
+Use the first-row block of equations to solve for $\bv{b}_1$ first; it comes as a function of $\bv{b}_2$. Then use the second set of equations to solve for $\bv{b}_2$, which leads to:
+\begin{eqnarray*}
+\bv{b}_2 &=& [\bv{X}_2'\bv{X}_2 - \bv{X}_2'\bv{X}_1(\bv{X}_1'\bv{X}_1)\bv{X}_1'\bv{X}_2]^{-1}\bv{X}_2'(Id - \bv{X}_1(\bv{X}_1'\bv{X}_1)\bv{X}_1')\bv{y}\\
+&=& [\bv{X}_2' \bv{M}^{\bv{X}_1}\bv{X}_2]^{-1}\bv{X}_2'\bv{M}^{\bv{X}_1}\bv{y}.
+\end{eqnarray*}
+Using the fact that $\bv{M}^{\bv{X}_1}$ is idempotent and symmetric leads to the result.
+:::
+
+This suggests a second way of estimating $\bv{b}_2$:
+
+1. Regress $Y$ on $X_1$, regress $X_2$ on $X_1$.
+2. Regress the residuals associated with the former regression on those associated with the latter regressions.	
+
+This is illustrated by the following code, where we run different regressions involving the number of Google searches for "parapluie" (*umbrella* in French). In the broad specification, we regress it on French precipitations and month dummies. Next, we deseasonalize both the dependent variable and the precipitations by regressing them on the month dummies. As stated by Theorem \@ref(thm:FW), regressing deseasonalized Google searches on deseasonalized precipitations give the same coefficient as in the baseline regression.
+
+```{r FW, message=FALSE, warning=FALSE}
+library(AEC)
+dummies <- as.matrix(parapluie[,4:14])
+eq_all <- lm(parapluie~dummies+precip,data=parapluie)
+deseas_parapluie <- lm(parapluie~dummies,data=parapluie)$residuals
+deseas_precip    <- lm(precip~dummies,data=parapluie)$residuals
+eq_frac <- lm(deseas_parapluie~deseas_precip-1)
+stargazer::stargazer(eq_all,eq_frac,omit=c(1:11,"Constant"),type="text",
+                     omit.stat = c("f","ser"),digits=5,
+                     add.lines=list(c('Monthly dummy','Yes','No')))
+```
+
+When $b_2$ is scalar (and then $\bv{X}_2$ is of dimension $n \times 1$), Theorem \@ref(thm:FW) gives the expression of the **partial regression coefficient** $b_2$:
+$$
+b_2 = \frac{\bv{X}_2'M^{\bv{X}_1}\bv{y}}{\bv{X}_2'M^{\bv{X}_1}\bv{X}_2}.
+$$
+
+
+### Goodness of fit
+
+Define the total variation in $y$ as the sum of squared deviations (from the sample mean):
+$$
+TSS = \sum_{i=1}^{n} (y_i - \bar{y})^2.
+$$
+We have:
+$$
+\bv{y} = \bv{X}\bv{b} + \bv{e} = \hat{\bv{y}} + \bv{e}
+$$
+In the following, we assume that the regression includes a constant (i.e. for all $i$, $x_{i,1}=1$). Denote by $\bv{M}^0$ the matrix that transforms observations into deviations from sample means. Using that $\bv{M}^0 \bv{e} = \bv{e}$ and that $\bv{X}' \bv{e}=0$, we have:
+\begin{eqnarray*}
+\underbrace{\bv{y}'\bv{M}^0\bv{y}}_{\mbox{Total sum of sq.}} &=& (\bv{X}\bv{b} + \bv{e})' \bv{M}^0 (\bv{X}\bv{b} + \bv{e})\\
+&=& \underbrace{\bv{b}' \bv{X}' \bv{M}^0 \bv{X}\bv{b}}_{\mbox{"Explained" sum of sq.}} + \underbrace{\bv{e}'\bv{e}}_{\mbox{Sum of sq. residuals}}\\
+TSS &=& Expl.SS + SSR.
+\end{eqnarray*}
+
+We can now define the coefficient of determination:
+\begin{equation}
+\boxed{\mbox{Coefficient of determination} = \frac{Expl.SS}{TSS} = 1 - \frac{SSR}{TSS} = 1 - \frac{\bv{e}'\bv{e}}{\bv{y}'\bv{M}^0\bv{y}}.}(\#eq:RR2)
+\end{equation}
+
+It can be shown (@Greene2003Econometric, Section 3.5) that:
+$$
+\mbox{Coefficient of determination} = \frac{[\sum_{i=1}^n(y_i - \bar{y})(\hat{y_i} - \bar{y})]^2}{\sum_{i=1}^n(y_i - \bar{y})^2 \sum_{i=1}^n(\hat{y_i} - \bar{y})^2}.
+$$
+That is, the $R^2$ is the sample squared correlation between $y$ and the (regression-implied) $y$'s predictions.
+
+<!-- Figure \@ref(fig:R2) compares two situations: in Panel XXXX -->
+
+<!-- ```{r R2} -->
+<!-- par(mfrow=c(1,2)) -->
+<!-- par(plt=c(.3,.95,.2,.85)) -->
+<!-- N <- 100 -->
+<!-- eps <- rnorm(N);X <- rnorm(N) -->
+<!-- Y <- 1 + X + eps -->
+<!-- plot(X,Y,pch=19,main="(a) Low R2") -->
+<!-- Y <- 1 + X + .1*eps -->
+<!-- plot(X,Y,pch=19,main="(b) High R2") -->
+<!-- ``` -->
+
+The hgher the $R^2$, the higher the goodness of fit of a model. One however has to be cautious with $R^2$. Indeed, it is easy to increase it: it suffices to add explanatory variables. As stated by Proposition \@ref(prp:chgeInR2), adding an explanatory variable (even if it does not truly relate to the dependent variable) mechanically results in an increase in the $R^2$. In the limit, taking any set of $n$ non-linearly-dependent explanatory variables (i.e., variables satisfying Hypothesis \@ref(hyp:fullrank)) results in a $R^2$ equal to one.
+
+
+:::{.proposition #chgeR2 name="Change in SSR when a variable is added"}
+We have:
+\begin{equation}
+\bv{u}'\bv{u} = \bv{e}'\bv{e} - c^2(\bv{z^*}'\bv{z^*}) \qquad (\le \bv{e}'\bv{e}) (\#eq:uu)
+\end{equation}
+where (i) $\bv{u}$ and $\bv{e}$ are the residuals in the regressions of $\bv{y}$ on $[\bv{X},\bv{z}]$ and of $\bv{y}$ on $\bv{X}$, respectively, (ii) $c$ is the regression coefficient on $\bv{z}$ in the former regression and where $\bv{z}^*$ are the residuals in the regression of $\bv{z}$ on $\bv{X}$.
+:::
+::: {.proof}
+The OLS estimates $[\bv{d}',\bv{c}]'$ in the regression of $\bv{y}$ on $[\bv{X},\bv{z}]$ satisfies (first-order cond., Eq. \@ref(eq:OLSFOC)):
+$$
+\left[ \begin{array}{cc} \bv{X}'\bv{X} & \bv{X}'\bv{z} \\ \bv{z}'\bv{X} & \bv{z}'\bv{z}\end{array}\right]
+\left[ \begin{array}{c} \bv{d} \\ c\end{array}\right] =
+\left[ \begin{array}{c} \bv{X}' \bv{y} \\ \bv{z}' \bv{y} \end{array}\right].
+$$
+Hence, in particular $\bv{d} = \bv{b} - (\bv{X}'\bv{X})^{-1}\bv{X}'\bv{z}c$, where $\bv{b}$ is the OLS of $\bv{y}$ on $\bv{X}$. Substituting in $\bv{u} = \bv{y} - \bv{X}\bv{d} - \bv{z}c$, we get $\bv{u} = \bv{e} - \bv{z}^*c$. We therefore have:
+\begin{equation}
+\bv{u}'\bv{u} = (\bv{e} - \bv{z}^*c)(\bv{e} - \bv{z}^*c)= \bv{e}'\bv{e} + c^2(\bv{z^*}'\bv{z^*}) - 2 c\bv{z^*}'\bv{e}.(\#eq:uuu)
+\end{equation}
+Now $\bv{z^*}'\bv{e} = \bv{z^*}'(\bv{y} - \bv{X}\bv{b}) = \bv{z^*}'\bv{y}$ because $\bv{z}^*$ are the residuals in an OLS regression on $\bv{X}$. Since $c = (\bv{z^*}'\bv{z^*})^{-1}\bv{z^*}'\bv{y^*}$ (by an application of Theorem \@ref(thm:FW)), we have $(\bv{z^*}'\bv{z^*})c = \bv{z^*}'\bv{y^*}$ and, therefore, $\bv{z^*}'\bv{e} = (\bv{z^*}'\bv{z^*})c$. Inserting this in Eq. \@ref(eq:uuu) leads to the results.
+:::
+
+
+::: {.proposition #chgeInR2 name="Change in the coefficient of determination when a variable is added"}
+Denoting by $R_W^2$ the coefficient of determination in the regression of $\bv{y}$ on some variable $\bv{W}$, we have:
+$$
+R_{\bv{X},\bv{z}}^2 = R_{\bv{X}}^2 + (1-R_{\bv{X}}^2)(r_{yz}^\bv{X})^2,
+$$
+where $r_{yz}^\bv{X}$ is the coefficient of partial correlation (see Definition \@ref(def:partialcorrel)).
+:::
+:::{.proof}
+Let's use the same notations as in Prop. \@ref(prp:chgeR2). Theorem \@ref(thm:FW) implies that $c = (\bv{z^*}'\bv{z^*})^{-1}\bv{z^*}'\bv{y^*}$. Using this in Eq. \@ref(eq:uu) gives $\bv{u}'\bv{u} = \bv{e}'\bv{e} - (\bv{z^*}'\bv{y^*})^2/(\bv{z^*}'\bv{z^*})$. Using the definition of the partial correlation (Eq. \@ref(eq:pc)), we get $\bv{u}'\bv{u} = \bv{e}'\bv{e}\left(1 - (r_{yz}^\bv{X})^2\right)$. The results is obtained by dividing both sides of the previous equation by $\bv{y}'\bv{M}_0\bv{y}$.
+:::
+
+Figure \@ref(fig:R2issue), below, illustrates the fact that one can obtain an $R^2$ of one by regressing a sample of length $n$ on any set of $n$ linearly-independent variables.
+
+```{r setseed1, echo=FALSE}
+set.seed(1)
+```
+
+```{r R2issue, echo=TRUE, fig.cap="This figure illustrates the monotonous increase in the $R^2$ as a function of the number of explanatory variables. In the true model, there is no explanatory variables, i.e., $y_i = \\varepsilon_i$. We then take (independent) regressors and regress $y$ on the latter, progressively increasing the set of regressors.", fig.asp = .6, out.width = "90%", fig.align = 'left-aligned'}
+n <- 30;Y <- rnorm(n);X <- matrix(rnorm(n^2),n,n)
+all_R2 <- NULL;all_adjR2 <- NULL
+for(j in 0:(n-1)){
+  if(j==0){eq <- lm(Y~1)}else{eq <- lm(Y~X[,1:j])}
+  all_R2 <- c(all_R2,summary(eq)$r.squared)
+  all_adjR2 <- c(all_adjR2,summary(eq)$adj.r.squared)
+}
+par(plt=c(.15,.95,.25,.95))
+plot(all_R2,pch=19,ylim=c(min(all_adjR2,na.rm = TRUE),1),
+     xlab="number of regressors",ylab="R2")
+points(all_adjR2,pch=3);abline(h=0,col="light grey",lwd=2)
+legend("topleft",c("R2","Adjusted R2"),
+       lty=NaN,col=c("black"),pch=c(19,3),lwd=2)
+```
+
+In order to address the risk of adding irrelevant explanatory variables, measures of **adjusted $R^2$** have been proposed. Compared to the standard $R^2$, these measures add penalties that depend on the number of covariates employed in the regression. A common adjusted $R^2$ measure, denoted by $\bar{R}^2$, is the following:
+\begin{equation*}
+\boxed{\bar{R}^2 = 1 - \frac{\bv{e}'\bv{e}/(n-K)}{\bv{y}'\bv{M}^0\bv{y}/(n-1)} = 1 - \frac{n-1}{n-K}(1-R^2).}
+\end{equation*}
+
+
+
+### Inference and confidence intervals (in small sample)
+
+Under the normality assumption (Assumption \@ref(hyp:normality)), we know the distribution of $\bv{b}$ (conditional on $\bv{X}$). Indeed, $\bv{b} = \boldsymbol\beta + (\bv{X}'\bv{X})^{-1} \bv{X}'\boldsymbol\varepsilon$. Therefore, conditional on $\bv{X}$, vector $\bv{b}$ is an affine combination of Gaussian variables---the components of $\boldsymbol\varepsilon$. As a result, it is also Gaussian. Its distribution is therefore completely characterized by its mean and variance, and we have:
+\begin{equation}
+\bv{b}|\bv{X} \sim \mathcal{N}(\boldsymbol\beta,\sigma^2(\bv{X}'\bv{X})^{-1}).(\#eq:distriBcondi)
+\end{equation}
+
+Eq. \@ref(eq:distriBcondi) can be used to conduct inference and tests. However, in practice, we do not know $\sigma^2$ (which is a population parameter). The following proposition gives an unbiased estimate of $\sigma^2$.
+
+:::{.proposition #expects2}
+Under \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), an unbiased estimate of $\sigma^2$ is given by:
+\begin{equation}
+s^2 = \frac{\bv{e}'\bv{e}}{n-K}.(\#eq:s2)
+\end{equation}
+(It is sometimes denoted by $\sigma^2_{OLS}$.)
+:::
+:::{.proof}
+We have:
+\begin{eqnarray*}
+\mathbb{E}(\bv{e}'\bv{e}|\bv{X})&=&\mathbb{E}(\boldsymbol{\varepsilon}'\bv{M}\boldsymbol{\varepsilon}|\bv{X})=\mathbb{E}(\mbox{Tr}(\boldsymbol{\varepsilon}'\bv{M}\boldsymbol{\varepsilon})|\bv{X}))\\
+&=&\mbox{Tr}(\bv{M}\mathbb{E}(\boldsymbol{\varepsilon}\boldsymbol{\varepsilon}'|\bv{X}))=\sigma^2 \mbox{Tr}(\bv{M}).
+\end{eqnarray*}
+(Note that we have $\mathbb{E}(\boldsymbol{\varepsilon}\boldsymbol{\varepsilon}'|\bv{X})=\sigma^2Id$ by Assumptions \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid), see Prop. \@ref(prp:Sigma).) Moreover:
+\begin{eqnarray*}
+\mbox{Tr}(\bv{M})&=&n-\mbox{Tr}(\bv{X}(\bv{X}'\bv{X})^{-1}\bv{X}')\\
+&=&n-\mbox{Tr}((\bv{X}'\bv{X})^{-1}\bv{X}'\bv{X})=n-\mbox{Tr}(Id_{K \times K}),
+\end{eqnarray*}
+which leads to the result.
+:::
+
+Two results will prove important to produce inference:
+
+i. We know the conditional distribution of $s^2$ (Prop. \@ref(prp:s2distri)). 
+ii. $s^2$ and $\bv{b}$ are independent random variables (Prop. \@ref(prp:indeps2b)). 
+
+::: {.proposition #s2distri}
+Under \@ref(hyp:fullrank) to \@ref(hyp:normality), we have: $\dfrac{s^2}{\sigma^2} | \bv{X} \sim \frac{1}{n-K}\chi^2(n-K)$.
+:::
+:::{.proof}
+We have $\bv{e}'\bv{e}=\boldsymbol\varepsilon'\bv{M}\boldsymbol\varepsilon$. $\bv{M}$ is an idempotent symmetric matrix. Therefore it can be decomposed as $PDP'$ where $D$ is a diagonal matrix and $P$ is an orthogonal matrix. As a result $\bv{e}'\bv{e} = (P'\boldsymbol\varepsilon)'D(P'\boldsymbol\varepsilon)$, i.e. $\bv{e}'\bv{e}$ is a weighted sum of independent squared Gaussian variables (the entries of $P'\boldsymbol\varepsilon$ are independent because they are Gaussian ---under \@ref(hyp:normality)--- and uncorrelated). The variance of each of these i.i.d. Gaussian variable is $\sigma^2$. Because $\bv{M}$ is an idempotent symmetric matrix, its eigenvalues are either 0 or 1, and its rank equals its trace (see Propositions \@ref(prp:rootsidempotent) and \@ref(prp:chi2idempotent)). Further, its trace is equal to $n-K$ (see proof of Eq. \@ref(eq:s2)). Therefore $D$ has $n-K$ entries equal to 1 and $K$ equal to 0. Hence,  $\bv{e}'\bv{e} = (P'\boldsymbol\varepsilon)'D(P'\boldsymbol\varepsilon)$ is a sum of $n-K$ squared independent Gaussian variables of variance $\sigma^2$. Therefore $\frac{\bv{e}'\bv{e}}{\sigma^2} = (n-K)\frac{s^2}{\sigma^2}$ is a sum of $n-k$ squared i.i.d. standard normal  variables. The result follows by the definition of the chi-square distribution (see Def. \@ref(def:chi2)).
+:::
+
+
+::: {.proposition #indeps2b}
+Under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:normality), $\bv{b}$ and $s^2$ are independent.
+:::
+:::{.proof}
+We have $\bv{b}=\boldsymbol\beta + [\bv{X}'{\bv{X}}]^{-1}\bv{X}\boldsymbol\varepsilon$ and $s^2 = \boldsymbol\varepsilon' \bv{M} \boldsymbol\varepsilon/(n-K)$. Hence $\bv{b}$ is an affine combination of $\boldsymbol\varepsilon$ and $s^2$ is a quadratic combination of the same Gaussian shocks. One can write $s^2$ as $s^2 = (\bv{M}\boldsymbol\varepsilon)' \bv{M} \boldsymbol\varepsilon/(n-K)$ and $\bv{b}$ as $\boldsymbol\beta + \bv{T}\boldsymbol\varepsilon$. Since $\bv{T}\bv{M}=0$, $\bv{T}\boldsymbol\varepsilon$ and $\bv{M}\boldsymbol\varepsilon$ are independent (because two uncorrelated Gaussian variables are independent), therefore $\bv{b}$ and $s^2$, which are functions of two sets of independent variables, are independent.
+:::
+
+
+Consistently with Eq. \@ref(eq:distriBcondi), under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:normality), the $k^{th}$ entry of $\bv{b}$ satisfies:
+$$
+b_k | \bv{X} \sim \mathcal{N}(\beta_k,\sigma^2 v_k),
+$$
+where $v_k$ is the k$^{th}$ component of the diagonal of $(\bv{X}'\bv{X})^{-1}$.
+
+Moreover, we have (Prop. \@ref(prp:s2distri)):
+$$
+\frac{(n-K)s^2}{\sigma^2} | \bv{X} \sim \chi ^2 (n-K).
+$$
+
+As a result (using Propositions \@ref(prp:s2distri) and \@ref(prp:indeps2b)), we have:
+\begin{equation}
+\boxed{t_k = \frac{\frac{b_k - \beta_k}{\sqrt{\sigma^2 v_k}}}{\sqrt{\frac{(n-K)s^2}{\sigma^2(n-K)}}} = \frac{b_k - \beta_k}{\sqrt{s^2v_k}} \sim t(n-K),}(\#eq:resultstudentt)
+\end{equation}
+where $t(n-K)$ denotes a Student $t$ distribution with $n-K$ degrees of freedom (see Def. \@ref(def:tStudent)).[^FootnoteMarginal]
+
+[^FootnoteMarginal]: We have $\frac{b_k - \beta_k}{\sqrt{\sigma^2 v_k}} | \bv{X} \sim \mathcal{N}(0,1)$ and $\frac{(n-K)s^2}{\sigma^2} | \bv{X} \sim \chi ^2 (n-K)$. These two distributions do not depend on $\bv{X}$ $\Rightarrow$ the *marginal distribution* of $t_k$ is also $t$.
+
+
+Note that $s^2 v_k$ is not exactly the conditional variance of $b_k$: The variance of $b_k$ conditional on $\bv{X}$ is $\sigma^2 v_k$. However $s^2 v_k$ is an unbiased estimate of $\sigma^2 v_k$ (by Prop. \@ref(prp:expects2)).
+
+The previous result (Eq. \@ref(eq:resultstudentt)) can be extended to any linear combinations of elements of $\bv{b}$. (Eq. \@ref(eq:resultstudentt) is for its $k^{th}$ component only.) Let us consider $\boldsymbol\alpha'\bv{b}$, the OLS estimate of $\boldsymbol\alpha'\boldsymbol\beta$. From Eq. \@ref(eq:distriBcondi), we have:
+$$
+\boldsymbol\alpha'\bv{b} | \bv{X} \sim \mathcal{N}(\boldsymbol\alpha'\boldsymbol\beta,\sigma^2 \boldsymbol\alpha'(\bv{X}'\bv{X})^{-1}\boldsymbol\alpha).
+$$
+Therefore:
+$$
+\frac{\boldsymbol\alpha'\bv{b} - \boldsymbol\alpha'\boldsymbol\beta}{\sqrt{\sigma^2 \boldsymbol\alpha'(\bv{X}'\bv{X})^{-1}\boldsymbol\alpha}} | \bv{X} \sim \mathcal{N}(0,1).
+$$
+Using the same approach as the one used to derive Eq. \@ref(eq:resultstudentt), one can show that Props. \@ref(prp:s2distri) and \@ref(prp:indeps2b) also imply that:
+\begin{equation}
+\boxed{\frac{\boldsymbol\alpha'\bv{b} - \boldsymbol\alpha'\boldsymbol\beta}{\sqrt{s^2\boldsymbol\alpha'(\bv{X}'\bv{X})^{-1}\boldsymbol\alpha}} \sim t(n-K).}(\#eq:resultstudentt2)
+\end{equation}
+
+```{r chartStudent, echo=FALSE, fig.cap="The higher the degree of freedom, the closer the distribution of $t(\\nu)$ gets to the normal distribution. (Convergence in distribution.)"}
+par(plt=c(.2,.95,.2,.95))
+xx <- seq(-3.5,3.5,by=.01)
+plot(xx,dnorm(xx),xlab="X",ylab="",type="l",lwd=2)
+lines(xx,dt(xx,df=3),col="red",lwd=2)
+lines(xx,dt(xx,df=7),col="red",lwd=2,lty=2)
+lines(xx,dt(xx,df=20),col="blue",lwd=3,lty=3)
+legend("topright",
+       c("N(0,1)","t(3)","t(7)","t(20)"),
+       lty=c(1,1,2,3), # gives the legend appropriate symbols (lines)       
+       lwd=c(2,2,2,3), # line width
+       col=c("black","red","red","blue"))
+```
+
+
+What precedes is widely exploited for statistical inference in the context of linear regressions. Indeed, Eq. \@ref(eq:resultstudentt) gives a sense of the distances between $b_k$ and $\beta_k$ that can be deemed as "likely" (or, conversely, "unlikely"). For instance, it implies that, if $\sqrt{v_k s^2}$ is equal to 1 (say), then the probability to obtain $b_k$ smaller than $\beta_k-$ `r round(qt(.9995,df=10),3)` $\times \sqrt{v_k s^2}$ or  larger than $\beta_k+$ `r round(qt(.9995,df=10),3)` $\times \sqrt{v_k s^2}$ is equal to 0.1\% when $n-K=10$.
+
+That means for instance that, under the assumption that $\beta_k=0$, it would be extremely unlikely to have obtained $b_k/\sqrt{v_k s^2}$ smaller than `r -round(qt(.9995,df=10),3)` or  larger than `r round(qt(.9995,df=10),3)`. More generally, this shows that the **t-statistic**, i.e., the ratio $b_k/\sqrt{v_k s^2}$, is the test statistic associated with the null hypothesis:
+$$
+H_0: \beta_k=0.
+$$
+Under the null hypothesis, the test statistic follows a Student-t distribution with $n-K$ degrees of freedom. The **t-statistic** is therefore of particular importance, and, as a result, it  is routinely reported in regression outputs (see Example \@ref(exm:SHP0001)). 
+
+:::{.example #SHP0001 name="Education and income"}
+Consider regression that aims at determining covariates of households' income. This example makes use of data from the [Swiss Household Panel (SHP)](https://forscenter.ch/projects/swiss-household-panel/); `edyear19` is the number of years of education and `age19` is the age of the respondent, as of 2019. 
+
+```{r shp1,warning=FALSE,message=FALSE}
+library(AEC)
+library(sandwich)
+shp$income <- shp$i19ptotn/1000
+shp$female <- 1*(shp$sex19==2)
+eq <- lm(income ~ edyear19 + age19 + I(age19^2) + female,data=shp)
+lmtest::coeftest(eq)
+```
+:::
+
+The last two columns of the previous table give the t-statistic and the p-values associated with t-tests, whose size-$\alpha$ critical region is:
+$$
+\left]-\infty,-\Phi^{-1}_{t(n-K)}\left(1-\frac{\alpha}{2}\right)\right] \cup \left[\Phi^{-1}_{t(n-K)}\left(1-\frac{\alpha}{2}\right),+\infty\right[.
+$$
+
+We recall that the **p-value** is defined as the probability that $|Z| > |t|$, where $t$ is the (computed) t-statistics and where $Z \sim t(n-K)$. That is, in the context of the t-test, the p-value is given by $2(1 - \Phi_{t(n-K)}(|t_k|))$. See [this webpage](https://jrenne.shinyapps.io/tests/) for details regarding the link between critical regions, p-value, and test outcomes.
+
+
+Now, suppose we want to compute a (symmetrical) *confidence interval* $[I_{d,1-\alpha},I_{u,1-\alpha}]$ that is such that $\mathbb{P}(\beta_k \in [I_{d,1-\alpha},I_{u,1-\alpha}])=1-\alpha$. That is, we want to have: $\mathbb{P}(\beta_k < I_{d,1-\alpha})=\frac{\alpha}{2}$ and $\mathbb{P}(\beta_k > I_{u,1-\alpha})=\frac{\alpha}{2}$. Let us focus on $I_{d,1-\alpha}$ to start with. Using Eq. \@ref(eq:resultstudentt), i.e., $t_k = \frac{b_k - \beta_k}{\sqrt{s^2v_k}} \sim t(n-K)$, we have:
+\begin{eqnarray*}
+\mathbb{P}(\beta_k < I_{d,1-\alpha})=\frac{\alpha}{2} &\Leftrightarrow& \\
+\mathbb{P}\left(\frac{b_k - \beta_k}{\sqrt{s^2v_k}} > \frac{b_k - I_{d,1-\alpha}}{\sqrt{s^2v_k}}\right)=\frac{\alpha}{2} &\Leftrightarrow& \mathbb{P}\left(t_k > \frac{b_k - I_{d,1-\alpha}}{\sqrt{s^2v_k}}\right)=\frac{\alpha}{2} \Leftrightarrow\\
+1 - \mathbb{P}\left(t_k \le \frac{b_k - I_{d,1-\alpha}}{\sqrt{s^2v_k}}\right)=\frac{\alpha}{2} &\Leftrightarrow& \frac{b_k - I_{d,1-\alpha}}{\sqrt{s^2v_k}} = \Phi^{-1}_{t(n-K)}\left(1-\frac{\alpha}{2}\right),
+\end{eqnarray*}
+where $\Phi_{t(n-K)}(\alpha)$ is the c.d.f. of the $t(n-K)$ distribution (Table \@ref(tab:Student)).
+
+Doing the same for $I_{u,1-\alpha}$, we obtain:
+\begin{eqnarray*}
+&&[I_{d,1-\alpha},I_{u,1-\alpha}] =\\
+&&\left[b_k - \Phi^{-1}_{t(n-K)}\left(1-\frac{\alpha}{2}\right)\sqrt{s^2v_k},b_k + \Phi^{-1}_{t(n-K)}\left(1-\frac{\alpha}{2}\right)\sqrt{s^2v_k}\right].
+\end{eqnarray*}
+
+Using the results presented in Example \@ref(exm:SHP0001), we can compute lower and upper bounds of 95\% confidence intervals for the estimated parameters as follows:
+
+```{r shp1bis}
+n <- length(eq$residuals); K <- length(eq$coefficients)
+lower.b <- eq$coefficients + qt(.025,df=n-K)*sqrt(diag(vcov(eq)))
+upper.b <- eq$coefficients + qt(.975,df=n-K)*sqrt(diag(vcov(eq)))
+cbind(lower.b,upper.b)
+```
+
+
+### Testing a set of linear restrictions {#Ftest}
+
+We sometimes want to test if a set of restrictions are *jointly* consistent with the data at hand. Let us formalize such a set of ($J$) linear restrictions:
+\begin{equation}\label{eq:restrictions}
+\begin{array}{ccc}
+r_{1,1} \beta_1 + \dots + r_{1,K} \beta_K &=& q_1\\
+\vdots && \vdots\\
+r_{J,1} \beta_1 + \dots + r_{J,K} \beta_K &=& q_J.
+\end{array}
+\end{equation}
+In matrix form, we get:
+\begin{equation}
+\bv{R}\boldsymbol\beta = \bv{q}.
+\end{equation}
+
+Define the *discrepancy vector* $\bv{m} = \bv{R}\bv{b} - \bv{q}$. Under the null hypothesis:
+\begin{eqnarray*}
+\mathbb{E}(\bv{m}|\bv{X}) &=& \bv{R}\boldsymbol\beta - \bv{q} = 0 \quad \mbox{and} \\
+\mathbb{V}ar(\bv{m}|\bv{X}) &=& \bv{R} \mathbb{V}ar(\bv{b}|\bv{X}) \bv{R}'.
+\end{eqnarray*}
+
+With these notations, the assumption to test is:
+\begin{equation}
+\boxed{H_0: \bv{R}\boldsymbol\beta - \bv{q} = 0 \mbox{ against } H_1: \bv{R}\boldsymbol\beta - \bv{q} \ne 0.}(\#eq:H0Ftest)
+\end{equation}
+
+Under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), we have $\mathbb{V}ar(\bv{m}|\bv{X}) = \sigma^2 \bv{R} (\bv{X}'\bv{X})^{-1} \bv{R}'$ (see Prop. \@ref(prp:propOLS)). If we add the normality assumption (Hypothesis \@ref(hyp:normality)), we have:
+\begin{equation}
+W = \bv{m}'\mathbb{V}ar(\bv{m}|\bv{X})^{-1}\bv{m} \sim \chi^2(J). (\#eq:W1)
+\end{equation}
+
+If $\sigma^2$ was known, we could then conduct a *Wald test* (directly exploiting Eq. \@ref(eq:W1)). But this is not the case in practice and we cannot compute $W$. We can, however, approximate it be replacing $\sigma^2$ by $s^2$ (given in Eq. \@ref(eq:s2)). The distribution of this new statistic is not $\chi^2(J)$ any more; it is an *$\mathcal{F}$ distribution* (whose quantiles are shown in Table \@ref(tab:Fstat)), and the test is called *$F$ test*.
+
+:::{.proposition #Ftest1}
+Under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:normality) and if Eq. \@ref(eq:H0Ftest) holds, we have:
+\begin{equation}
+F = \frac{W}{J}\frac{\sigma^2}{s^2} = \frac{\bv{m}'(\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}')^{-1}\bv{m}}{s^2J} \sim \mathcal{F}(J,n-K),(\#eq:defFstatistics)
+\end{equation}
+where $\mathcal{F}$ is the distribution of the F-statistic (see Def. \@ref(def:fstatistics)).
+:::
+:::{.proof}
+According to Eq. \@ref(eq:W1), $W/J \sim \chi^2(J)/J$. Moreover, the denominator ($s^2/\sigma^2$) is $\sim \chi^2(n-K)$. Therefore, $F$ is the ratio of a r.v. distributed as $\chi^2(J)/J$ and another distributed as $\chi^2(n-K)/(n-K)$. It remains to verify that these r.v. are independent. Under $H_0$, we have $\bv{m} =  \bv{R}(\bv{b}-\boldsymbol\beta) = \bv{R}(\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon$.
+Therefore $\bv{m}'(\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}')^{-1}\bv{m}$ is of the form $\boldsymbol\varepsilon'\bv{T}\boldsymbol\varepsilon$ with $\bv{T}=\bv{D}'\bv{C}\bv{D}$ where $\bv{D}=\bv{R}(\bv{X}'\bv{X})^{-1}\bv{X}'$ and $\bv{C}=(\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}')^{-1}$. Under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), the covariance between $\bv{T}\boldsymbol\varepsilon$ and $\bv{M}\boldsymbol\varepsilon$ is $\sigma^2\bv{T}\bv{M} = \bv{0}$. Therefore, under \@ref(hyp:normality), these variables are Gaussian variables with 0 covariance. Hence they are independent.
+:::
+
+For large $n-K$, the $\mathcal{F}_{J,n-K}$ distribution converges to $\mathcal{F}_{J,\infty}=\chi^2(J)/J$. This implies that, in large samples, the F-statistic approximately has a $\chi^2$ distribution. In other words, one can approximately employ Eq. \@ref(eq:W1) to perform a Wald test (one just has to replace $\sigma^2$ with $s^2$ when computing $\mathbb{V}ar(\bv{m}|\bv{X})$).
+
+The following proposition proposes another equivalent computation of the F-statistic, based on the $R^2$ of the restricted and unrestricted linear models.
+
+:::{.proposition #Ftest}
+The F-statistic defined by Eq. \@ref(eq:defFstatistics) is also equal to:
+\begin{equation}
+F = \frac{(R^2-R_*^2)/J}{(1-R^2)/(n-K)} =  \frac{(SSR_{restr}-SSR_{unrestr})/J}{SSR_{unrestr}/(n-K)},(\#eq:defFstatistics2)
+\end{equation}
+where $R_*^2$ is the coef. of determination (Eq. \@ref(eq:RR2)) of the "restricted regression"  *(SSR: sum of squared residuals.)*
+:::
+:::{.proof}
+Let's denote by $\bv{e}_*=\bv{y}-\bv{X}\bv{b}_*$ the vector of residuals associated to the *restricted regression* (i.e. $\bv{R}\bv{b}_*=\bv{q}$).
+We have $\bv{e}_*=\bv{e} - \bv{X}(\bv{b}_*-\bv{b})$. Using $\bv{e}'\bv{X}=0$, we get $\bv{e}_*'\bv{e}_*=\bv{e}'\bv{e} + (\bv{b}_*-\bv{b})'\bv{X}'\bv{X}(\bv{b}_*-\bv{b}) \ge \bv{e}'\bv{e}$. 
+
+By Proposition \@ref(prp:constrainedLS) (in Appendix \@ref(LinAlgebra)), we have: $\bv{b}_*-\bv{b}=-(\bv{X}'\bv{X})^{-1} \bv{R}'\{\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}'\}^{-1}(\bv{R}\bv{b} - \bv{q})$. Therefore:
+$$
+\bv{e}_*'\bv{e}_* - \bv{e}'\bv{e} = (\bv{R}\bv{b} - \bv{q})'[\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}']^{-1}(\bv{R}\bv{b} - \bv{q}).
+$$
+This implies that the F statistic defined in Prop. \@ref(prp:Ftest1) is also equal to:
+$$
+\frac{(\bv{e}_*'\bv{e}_* - \bv{e}'\bv{e})/J}{\bv{e}'\bv{e}/(n-K)},
+$$
+which leads to the result.
+:::
+
+The null hypothesis $H_0$ (Eq. \@ref(eq:H0Ftest)) of the F-test is rejected if $F$ ---defined by Eq. \@ref(eq:defFstatistics) or \@ref(eq:defFstatistics2)--- is higher than $\mathcal{F}_{1-\alpha}(J,n-K)$. (Hence, this test is a one-sided test.)
+
+
+### Large Sample Properties {#largeSample}
+
+Even if we relax the normality assumption (Hypothesis \@ref(hyp:normality)), we can approximate the finite-sample behavior of the estimators by using *large-sample* or *asymptotic properties*.
+
+To begin with, we proceed under Hypothesis \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid). (We will see, later on, how to deal with ---partial--- relaxations of Hypothesis \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid).)
+
+Under regularity assumptions, and under Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), even if the residuals are not normally-distributed, the least square estimators can be *asymptotically normal* and inference can be performed in the same way as in small samples when Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:normality) hold. This derives from Prop. \@ref(prp:asymptOLS) (below). The F-test (Prop. \@ref(prp:Ftest)) and the t-test (Eq. \@ref(eq:resultstudentt)) can then be performed.
+
+:::{.proposition #asymptOLS}
+Under Assumptions \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid), and assuming further that:
+\begin{equation}
+Q = \mbox{plim}_{n \rightarrow \infty} \frac{\bv{X}'\bv{X}}{n},(\#eq:Qasympt)
+\end{equation}
+and that the $(\bv{x}_i,\varepsilon_i)$'s are independent (across entities $i$), we have:
+\begin{equation}
+\sqrt{n}(\bv{b} - \boldsymbol\beta)\overset{d} {\rightarrow} \mathcal{N}\left(0,\sigma^2Q^{-1}\right).(\#eq:convgceOLS)
+\end{equation}
+:::
+:::{.proof}
+Since $\bv{b} = \boldsymbol\beta + \left( \frac{\bv{X}'\bv{X}}{n}\right)^{-1}\left(\frac{\bv{X}'\boldsymbol\varepsilon}{n}\right)$, we have: $\sqrt{n}(\bv{b} - \boldsymbol\beta) = \left( \frac{\bv{X}'\bv{X}}{n}\right)^{-1} \left(\frac{1}{\sqrt{n}}\right)\bv{X}'\boldsymbol\varepsilon$. Since $f:A \rightarrow A^{-1}$ is a continuous function (for $A \ne \bv{0}$), $\mbox{plim}_{n \rightarrow \infty} \left(\frac{\bv{X}'\bv{X}}{n}\right)^{-1} = \bv{Q}^{-1}$ (see Prop. \@ref(prp:Slutsky)). Let us denote by $V_i$ the vector $\bv{x}_i \varepsilon_i$. Because the $(\bv{x}_i,\varepsilon_i)$'s are independent, the $V_i$'s are independent as well. Their covariance matrix is $\sigma^2\mathbb{E}(\bv{x}_i \bv{x}_i')=\sigma^2Q$. Applying the multivariate central limit theorem on vectors $V_i$ gives $\sqrt{n}\left(\frac{1}{n}\sum_{i=1}^n \bv{x}_i \varepsilon_i\right) = \left(\frac{1}{\sqrt{n}}\right)\bv{X}'\boldsymbol\varepsilon \overset{d}{\rightarrow} \mathcal{N}(0,\sigma^2Q)$. An application of Slutsky's theorem (Prop. \@ref(prp:Slutsky)) then leads to the results.
+:::
+
+In practice, $\sigma^2$ is approximated by $s^2=\frac{\bv{e}'\bv{e}}{n-K}$ (Eq. \@ref(eq:s2)) and $\bv{Q}^{-1}$ by $\left(\frac{\bv{X}'\bv{X}}{n}\right)^{-1}$. That is, the covariance matrix of the estimator is approximated by:
+\begin{equation}
+\boxed{\widehat{\mathbb{V}ar}(\bv{b}) = s^2 (\bv{X}'\bv{X})^{-1}.}(\#eq:sXX)
+\end{equation}
+
+Eqs. \@ref(eq:Qasympt) and \@ref(eq:convgceOLS) respectively correspond to convergences in probability and in distribution (see Definitions \@ref(def:convergenceproba) and \@ref(def:cvgceDistri), respectively).
+
+
+
+## Common pitfalls in linear regressions {#CommonPitfalls}
+
+### Multicollinearity
+
+Consider the model: $y_i = \beta_1 x_{i,1} + \beta_2 x_{i,2} + \varepsilon_i$, where all variables are zero-mean and $\mathbb{V}ar(\varepsilon_i)=\sigma^2$. We have:
+$$
+\bv{X}'\bv{X} = \left[ \begin{array}{cc}
+\sum_i x_{i,1}^2 & \sum_i x_{i,1} x_{i,2} \\
+\sum_i x_{i,1} x_{i,2} & \sum_i x_{i,2}^2
+\end{array}\right],
+$$
+therefore:
+\begin{eqnarray*}
+(\bv{X}'\bv{X})^{-1} &=& \frac{1}{\sum_i x_{i,1}^2\sum_i x_{i,2}^2 - (\sum_i x_{i,1} x_{i,2})^2} \left[ \begin{array}{cc}
+\sum_i x_{i,2}^2 & -\sum_i x_{i,1} x_{i,2} \\
+-\sum_i x_{i,1} x_{i,2} & \sum_i x_{i,1}^2
+\end{array}\right].
+\end{eqnarray*}
+The inverse of the upper-left parameter of $(\bv{X}'\bv{X})^{-1}$ is:
+\begin{equation}
+\sum_i x_{i,1}^2 - \frac{(\sum_i x_{i,1} x_{i,2})^2}{\sum_i x_{i,2}^2} = \sum_i x_{i,1}^2(1 - correl_{1,2}^2),(\#eq:multicollin)
+\end{equation}
+where $correl_{1,2}$ is the sample correlation between $\bv{x}_{1}$ and $\bv{x}_{2}$.
+
+Hence, the closer to one $correl_{1,2}$, the higher the variance of $b_1$ (recall that the variance of $b_1$ is the upper-left component of $\sigma^2(\bv{X}'\bv{X})^{-1}$). That is, if some of our regressors are close to a linear conbination of the other ones, then the confidence intervals will tend to be wide, which typically reduces the power of the t-test (we tend to fail to reject the null hypothesis that the coefficients are different from zero).
+
+### Omitted variables {#Omitted}
+
+Consider the following model (the "True model"):
+$$
+\bv{y} = \underbrace{\bv{X}_1}_{n \times K_1}\underbrace{\boldsymbol\beta_1}_{K_1 \times 1} + \underbrace{\bv{X}_2}_{n\times K_2}\underbrace{\boldsymbol\beta_2}_{K_2 \times 1} + \boldsymbol\varepsilon
+$$
+If one computes $\bv{b}_1$ by regressing $\bv{y}$ on $\bv{X}_1$ only, one gets:
+$$
+\bv{b}_1 = (\bv{X}_1'\bv{X}_1)^{-1}\bv{X}_1'\bv{y} = \boldsymbol\beta_1 + (\bv{X}_1'\bv{X}_1)^{-1}\bv{X}_1'\bv{X}_2\boldsymbol\beta_2 + 
+(\bv{X}_1'\bv{X}_1)^{-1}\bv{X}_1'\boldsymbol\varepsilon.
+$$
+
+This results in the omitted-variable formula:
+$$
+\mathbb{E}(\bv{b}_1|\bv{X}) = \boldsymbol\beta_1 + \underbrace{(\bv{X}_1'\bv{X}_1)^{-1}(\bv{X}_1'\bv{X}_2)}_{K_1 \times K_2}\boldsymbol\beta_2.
+$$
+(Each column of $(\bv{X}_1'\bv{X}_1)^{-1}(\bv{X}_1'\bv{X}_2)$ are the OLS regressors obtained when regressing the columns of $\bv{X}_2$ on $\bv{X}_1$.) Unless the variables included in $\bv{X}_1$ are orthogonal to those in $\bv{X}_2$, we obtain a bias. A way to address this potential pitfall is to introduce "controls" in the specification.
+
+<!-- XXXXX -->
+<!-- :::{.example #wageeduc} -->
+<!-- Consider the "true model": -->
+<!-- \begin{equation} -->
+<!-- wage_i = \beta_0 +\beta_1 edu_i + \beta_2 ability_i + \varepsilon_i, \quad \varepsilon_i \sim i.i.d.\,\mathcal{N}(0,\sigma_\varepsilon^2) -->
+<!-- \end{equation} -->
+<!-- Further, we assume that the $edu$ variable is correlated to the $ability$. Specifically: -->
+<!-- $$ -->
+<!-- edu_i = \alpha_0 +\alpha_1 ability_i + \eta_i, \quad \eta_i \sim i.i.d.\,\mathcal{N}(0,\sigma_\eta^2). -->
+<!-- $$ -->
+<!-- Assume we mistakingly run the regression omitting the $ability$ variable: -->
+<!-- \begin{equation} -->
+<!-- wage_i = \gamma_0 +\gamma_1 edu_i + \xi_i. -->
+<!-- \end{equation} -->
+<!-- It can be seen that $\xi_i = \varepsilon_i - (\beta_2/\alpha_1) \eta_i \sim i.i.d.\,\mathcal{N}(0,\sigma_\varepsilon^2+(\beta_2/\alpha_1)^2\sigma_\eta^2)$ and that the population regression coefficient is $\gamma_1 = \beta_1 + \beta_2/\alpha_1 \ne \beta_1$. -->
+<!-- ::: -->
+
+
+:::{.example #CASchools}
+
+Let us use the [California Test Score dataset](https://rdrr.io/cran/AER/man/CASchools.html) (in the package `AER`). Assume we want to measure the effect of the students-to-teacher ratio (`str`) on student test scores (`testscr`). The following regressions show that the effect is lower when  controls are added.
+
+```{r #CASchools, message = FALSE,warning=FALSE}
+library(AER); data("CASchools")
+CASchools$str <- CASchools$students/CASchools$teachers
+CASchools$testscr <- .5 * (CASchools$math + CASchools$read)
+eq1 <- lm(testscr~str,data=CASchools)
+eq2 <- lm(testscr~str+lunch,data=CASchools)
+eq3 <- lm(testscr~str+lunch+english,data=CASchools)
+stargazer::stargazer(eq1,eq2,eq3,type="text",
+                     no.space = TRUE,omit.stat=c("f","ser"))
+```
+:::
+
+### Irrelevant variable {#irrelevant}
+
+Consider the *true model*:
+$$
+\bv{y} = \bv{X}_1\boldsymbol\beta_1 + \boldsymbol\varepsilon,
+$$
+while the *estimated model* is:
+$$
+\bv{y} = \bv{X}_1\boldsymbol\beta_1 + \bv{X}_2\boldsymbol\beta_2 + \boldsymbol\varepsilon
+$$
+
+The estimates are unbiased. However, adding irrelevant explanatory variables increases the variance of the estimate of $\boldsymbol\beta_1$ (compared to the case where one uses the correct explanatory variables). This is the case unless the correlation between $\bv{X}_1$ and $\bv{X}_2$ is null, see Eq. \@ref(eq:multicollin).
+
+In other words, the estimator is *inefficient*, i.e., there exists an alternative consistent estimator whose variance is lower. The inefficiency problem can have serious consequences when testing hypotheses such as $H_0: \beta_1 = 0$. Due to the loss of power, we might wrongly infer that the $\bv{X}_1$ variables are not "relevant" (*Type-II error, False Negative*).
+
+
+
+## Instrumental Variables {#IV}
+
+<!-- [Nice of interpretation of tests](http://www.learneconometrics.com/class/6243/notes/IVtests.pdf) -->
+
+The conditional mean zero assumption (Hypothesis \@ref(hyp:exogeneity)), according to which $\mathbb{E}(\boldsymbol\varepsilon|\bv{X})=0$ ---which implies in particular that $\bv{x}_i$ and $\varepsilon_i$ are uncorrelated--- is sometimes not consistent with the considered economic framework. When it is the case, the parameters of interest may still be estimated consistently by resorting to instrumental variable techniques.
+
+Consider the following model:
+\begin{equation}
+y_i = \bv{x_i}'\boldsymbol\beta + \varepsilon_i, \quad \mbox{where } \mathbb{E}(\varepsilon_i)=0  \mbox{ and } \bv{x_i}\not\perp \varepsilon_i.(\#eq:modelIV)
+\end{equation}
+
+Let us illustrate how this situation may result in biased OLS estimate. Consider for instance the situation where:
+\begin{equation}
+\mathbb{E}(\varepsilon_i)=0 \quad \mbox{and} \quad \mathbb{E}(\varepsilon_i \bv{x_i})=\boldsymbol\gamma,(\#eq:exmIV)
+\end{equation}
+in which case we have $\bv{x}_i\not\perp \varepsilon_i$ (consistently with Eq. \@ref(eq:modelIV)).
+
+By the law of large numbers, $\mbox{plim}_{n \rightarrow \infty} \bv{X}'\boldsymbol\varepsilon / n = \boldsymbol\gamma$. If $\bv{Q}_{xx} := \mbox{plim } \bv{X}'\bv{X}/n$, the OLS estimator is not consistent because
+$$
+\bv{b} = \boldsymbol\beta + (\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon \overset{p}{\rightarrow} \boldsymbol\beta + \bv{Q}_{xx}^{-1}\boldsymbol\gamma \ne \boldsymbol\beta.
+$$
+
+Let us now introduce the notion of instruments.
+
+:::{.definition #instruments name="Instrumental variables"}
+The $L$-dimensional random variable $\bv{z}_i$ is a valid set of instruments if:
+
+a. $\bv{z}_i$ is correlated to $\bv{x}_i$;
+b. we have $\mathbb{E}(\boldsymbol\varepsilon|\bv{Z})=0$ and
+c. the orthogonal projections of the $\bv{x}_i$'s on the $\bv{z}_i$'s are not multicollinear.
+:::
+
+Point c implies in particular that the dimension of $\bv{z}_i$ has to be at least as large as that of $\bv{x}_i$. If $\bv{z}_i$ is a valid set of instruments, we have:
+$$
+\mbox{plim}\left( \frac{\bv{Z}'\bv{y}}{n} \right) =\mbox{plim}\left( \frac{\bv{Z}'(\bv{X}\boldsymbol\beta + \boldsymbol\varepsilon)}{n} \right) = \mbox{plim}\left( \frac{\bv{Z}'\bv{X}}{n} \right)\boldsymbol\beta.
+$$
+Indeed, by the law of large numbers, $\frac{\bv{Z}'\boldsymbol\varepsilon}{n} \overset{p}{\rightarrow}\mathbb{E}(\bv{z}_i\varepsilon_i)=0$.
+
+If $L = K$, the matrix $\frac{\bv{Z}'\bv{X}}{n}$ is of dimension $K \times K$ and we have:
+$$
+\left[\mbox{plim }\left( \frac{\bv{Z}'\bv{X}}{n} \right)\right]^{-1}\mbox{plim }\left( \frac{\bv{Z}'\bv{y}}{n} \right) = \boldsymbol\beta.
+$$
+By continuity of the inverse function (everywhere but at 0): $\left[\mbox{plim }\left( \frac{\bv{Z}'\bv{X}}{n} \right)\right]^{-1}=\mbox{plim }\left( \frac{\bv{Z}'\bv{X}}{n} \right)^{-1}$.
+The Slutsky Theorem (Prop. \@ref(prp:Slutsky)) further implies that:
+$$
+\mbox{plim }\left( \frac{\bv{Z}'\bv{X}}{n} \right)^{-1} \mbox{plim }\left( \frac{\bv{Z}'\bv{y}}{n} \right)  = \mbox{plim }\left( \left( \frac{\bv{Z}'\bv{X}}{n} \right)^{-1} \frac{\bv{Z}'\bv{y}}{n} \right).
+$$
+Hence $\bv{b}_{iv}$ is consistent if it is defined by:
+$$
+\boxed{\bv{b}_{iv} = (\bv{Z}'\bv{X})^{-1}\bv{Z}'\bv{y}.}
+$$
+
+
+:::{.proposition #IV name="Asymptotic distribution of the IV estimator"}
+If $\bv{z}_i$ is a $L$-dimensional random variable that constitutes a valid set of instruments (see Def. \@ref(def:instruments)) and if $L=K$, then the asymptotic distribution of $\bv{b}_{iv}$ is:
+$$
+\bv{b}_{iv} \overset{d}{\rightarrow} \mathcal{N}\left(\boldsymbol\beta,\frac{\sigma^2}{n}\left[Q_{xz}Q_{zz}^{-1}Q_{zx}\right]^{-1}\right)
+$$
+where $\mbox{plim } \bv{Z}'\bv{Z}/n =: \bv{Q}_{zz}$, $\mbox{plim } \bv{Z}'\bv{X}/n =: \bv{Q}_{zx}$, $\mbox{plim } \bv{X}'\bv{Z}/n =: \bv{Q}_{xz}$.
+:::
+:::{.proof}
+The proof is very similar to that of Prop. \@ref(prp:asymptOLS), the starting point being that $\bv{b}_{iv} = \boldsymbol\beta + (\bv{Z}'\bv{X})^{-1}\bv{Z}'\boldsymbol\varepsilon$.
+:::
+
+When $L=K$, we have:
+$$
+\left[Q_{xz}Q_{zz}^{-1}Q_{zx}\right]^{-1}=Q_{zx}^{-1}Q_{zz}Q_{xz}^{-1}.
+$$
+In practice, to estimate $\mathbb{V}ar(\bv{b}_{iv}) = \frac{\sigma^2}{n}Q_{zx}^{-1}Q_{zz}Q_{xz}^{-1}$, we replace $\sigma^2$ by:
+$$
+s_{iv}^2 = \frac{1}{n}\sum_{i=1}^{n} (y_i - \bv{x}_i'\bv{b}_{iv})^2.
+$$
+
+What about when $L > K$? In this case, we proceed as follows:
+
+1. Regress $\bv{X}$ on the space spanned by $\bv{Z}$ and
+2. Regress $\bv{y}$ on the fitted values $\hat{\bv{X}}:=\bv{Z}(\bv{Z}'\bv{Z})^{-1}\bv{Z}'\bv{X}$.
+
+These two-step approach is called **Two-Stage Least Squares (2SLS)**. It results in:
+\begin{equation}
+\boxed{\bv{b}_{iv} = [\bv{X}'\bv{Z}(\bv{Z}'\bv{Z})^{-1}\bv{Z}'\bv{X}]^{-1}\bv{X}'\bv{Z}(\bv{Z}'\bv{Z})^{-1}\bv{Z}'\bv{Y}.} (\#eq:IV)
+\end{equation}
+
+In this case, Prop. \@ref(prp:IV) still holds, with $\bv{b}_{iv}$ given by Eq. \@ref(eq:IV).
+
+If the instruments do not properly satisfy Condition (a) in Def. \@ref(def:instruments) (i.e. if $\bv{x}_i$ and $\bv{z}_i$ are only loosely related), the instruments are said to be **weak** (see, e.g., @stock_yogo_2005, available [here](http://scholar.harvard.edu/files/stock/files/testing_for_weak_instruments_in_linear_iv_regression.pdf) or @Andrews_Stock_Sun_2019). A simple standard way to test for weak instruments consist in looking at the F-statistic associated with the first stage of the estimation. The easier it is to reject the null hypothesis (large test statistic), the less weak ---or the stronger--- the instruments.
+
+The Durbin-Wu-Hausman test (@Durbin_1954, @Wu_1973, @Hausman_1978) can be used to test if IV necessary. (IV techniques are required if  $\mbox{plim}_{n \rightarrow \infty} \bv{X}'\boldsymbol\varepsilon / n \ne 0$.) [Hausman (1978)](http://www.jstor.org/stable/1913827?seq=1\#page_scan_tab_contents) proposes a test of the efficiency of estimators. Under the null hypothesis two estimators, $\bv{b}_0$ and $\bv{b}_1$, are consistent but $\bv{b}_0$ is (asymptotically) efficient relative to $\bv{b}_1$. Under the alternative hypothesis, $\bv{b}_1$ (IV in the present case) remains consistent but not $\bv{b}_0$ (OLS in the present case). That is, when we reject the null hypothesis, it means that the OLS estimator is not consistent, potentially due to endogeneity issue. 
+
+The test statistic is:
+$$
+H = (\bv{b}_1 - \bv{b}_0)' MPI(\mathbb{V}ar(\bv{b}_1) - \mathbb{V}ar(\bv{b}_0))(\bv{b}_1 - \bv{b}_0),
+$$
+where $MPI$ is the Moore-Penrose pseudo-inverse. Under the null hypothesis, $H \sim \chi^2(q)$, where $q$ is the rank of $\mathbb{V}ar(\bv{b}_1) - \mathbb{V}ar(\bv{b}_0)$.
+
+:::{.example #priceElasticity name="Estimation of price elasticity"}
+
+See e.g. [WHO and estimation of tobacco price elasticity of demand](http://www.who.int/tobacco/economics/2_2estimatingpriceincomeelasticities.pdf?ua=1).
+
+We want to estimate what is the effect on demand of an *exogenous increase* in prices of cigarettes (say).
+
+The model is:
+\begin{eqnarray*}
+\underbrace{q^d_t}_{\mbox{log(demand)}} &=& \alpha_0 + \alpha_1 \underbrace{\times p_t}_{\mbox{log(price)}} + \alpha_2 \underbrace{\times w_t}_{\mbox{income}} + \varepsilon_t^d\\
+\underbrace{q^s_t}_{\mbox{log(supply)}} &=& \gamma_0 + \gamma_1 \times p_t + \gamma_2 \underbrace{\times \bv{y}_t}_{\mbox{cost factors}} + \varepsilon_t^s,
+\end{eqnarray*}
+where $\bv{y}_t$, $w_t$, $\varepsilon_t^s \sim \mathcal{N}(0,\sigma^2_s)$ and $\varepsilon_t^d \sim \mathcal{N}(0,\sigma^2_d)$ are independent.
+
+Equilibrium: $q^d_t = q^s_t$. This implies that prices are **endogenous**:
+$$
+p_t = \frac{\alpha_0 + \alpha_2 w_t + \varepsilon_t^d - \gamma_0 - \gamma_2 \bv{y}_t - \varepsilon_t^s}{\gamma_1 - \alpha_1}.
+$$
+In particular we have $\mathbb{E}(p_t \varepsilon_t^d) = \frac{\sigma^2_d}{\gamma_1 - \alpha_1} \ne 0$ $\Rightarrow$ Regressing by OLS $q_t^d$ on $p_t$ gives biased estimates (see Eq. \@ref(eq:exmIV)).
+
+```{r figureIV, echo=FALSE,fig.cap="This figure illustrates the situation prevailing when estimating a price-elasticity (and the price is endogenous)."}
+nb.points <- 4
+w <- 1 + .4*rnorm(nb.points)
+y <- 1 + .4*rnorm(nb.points)
+alpha.0 <- 1
+gamma.0 <- -1
+alpha.1 <- -1
+gamma.1 <- 1
+alpha.2 <- 1
+gamma.2 <- 1
+vec.p <- seq(0,2,by=.1)
+
+par(mfrow=c(1,1))
+par(plt=c(.15,.95,.2,.95))
+for(i in 1:nb.points){
+  q.d <- alpha.0 + alpha.1 * vec.p + alpha.2 * w[i]
+  q.s <- gamma.0 + gamma.1 * vec.p + gamma.2 * y[i]
+  sol.p <- ((alpha.0 + alpha.2 * w[i])-(gamma.0 + gamma.2 * y[i]))/(gamma.1-alpha.1)
+  sol.q <- alpha.0 + alpha.1 * sol.p + alpha.2 * w[i]
+  if(i==1){
+    plot(vec.p,q.d,lwd=2,type="l",col=i,xlim=c(0,2.5),ylim=c(-.5,3),xlab="log(price)",ylab="log(quantities)")
+  }else{
+    lines(vec.p,q.d,lwd=2,col=i,lty=1)
+  }
+  lines(vec.p,q.s,lwd=2,type="l",col=i,lty=2)
+  points(sol.p,sol.q,pch=19)
+  text(x=2,y=q.s[length(q.s)],paste("Supply",toString(i)),pos=4,col=i)
+  text(x=2,y=q.d[length(q.s)],paste("Demand",toString(i)),pos=4,col=i)
+}
+```
+
+Let us use IV regressions to estimate the price elasticity of cigarette demand. For that purpose, we use the `CigarettesSW` dataset of package `AER` (these data are used by @Stock_Watson_2003). This panel dataset documents cigarette consumption for the 48 continental US States from 1985–1995. The instrument is the real tax on cigarettes arising from the state’s general sales tax. The rationale is that larger general sales tax drives cigarette prices up, but the general tax is not determined by other forces affecting $\varepsilon_t^d$.
+
+```{r #PriceElasticity, message = FALSE,warning=FALSE}
+data("CigarettesSW", package = "AER")
+CigarettesSW$rprice  <- with(CigarettesSW, price/cpi)
+CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
+CigarettesSW$tdiff   <- with(CigarettesSW, (taxs - tax)/cpi)
+
+## model 
+eq.IV1 <- ivreg(log(packs) ~ log(rprice) + log(rincome) |
+                  log(rincome) + tdiff + I(tax/cpi),
+                data = CigarettesSW, subset = year == "1995")
+eq.IV2 <- ivreg(log(packs) ~ log(rprice) | tdiff,
+                data = CigarettesSW, subset = year == "1995")
+eq.no.IV <- lm(log(packs) ~ log(rprice) + log(rincome),
+               data = CigarettesSW, subset = year == "1995")
+stargazer::stargazer(eq.no.IV,eq.IV1,eq.IV2,type="text",no.space = TRUE,
+                     omit.stat=c("f","ser"))
+summary(eq.IV1,diagnostics = TRUE)$diagnostics
+```
+
+The last three tests are interpreted as follows:
+
+* Since the p-value of the first test is small, we reject the null hypothesis according to which the instrument is weak. 
+* The small p-value of the Wu-Hausman test implies that we reject the null hypothesis according to which the OLS estimates are consistent (at the 10\% level only, though).
+* No over-identification (misspecification) is detected by the Sargan test (large p-value).
+
+:::
+
+
+
+:::{.example #IVCollegeDistance name="Education and wage"}
+In this example, we make use of another dataset proposed by @Stock_Watson_2003, namely the `CollegeDistance` dataset.[^FootnoteCollege] the objective is to estimate the effect of education on wages. Education choice is suspected to be an endogenous variable, which calls for an IV strategy. The instrumental variable is the distance to college (see, e.g., @DEE20041697).
+
+[^FootnoteCollege]: Cross-section data from the High School and Beyond survey conducted by the Department of Education in the 80s. The survey includes students from approximately 1,100 high schools.
+
+```{r #CollegeDistance, message = FALSE}
+library(sem)
+data("CollegeDistance", package = "AER")
+eq.1st.stage <- lm(education ~ urban + gender + ethnicity + unemp + distance,
+                   data = CollegeDistance)
+CollegeDistance$ed.pred<- predict(eq.1st.stage)
+eq.2nd.stage <- lm(wage ~ urban + gender + ethnicity + unemp + ed.pred,
+                   data = CollegeDistance)
+eqOLS <- lm(wage ~ urban + gender + ethnicity + unemp + education,
+            data=CollegeDistance)
+eq2SLS <- ivreg(wage ~ urban + gender + ethnicity + unemp + education|
+                  urban + gender + ethnicity + unemp + distance,
+                data=CollegeDistance)
+stargazer::stargazer(eq.1st.stage,eq.2nd.stage,eq2SLS,eqOLS,
+                     type="text",no.space = TRUE,omit.stat = c("f","ser"))
+```
+:::
+
+
+## General Regression Model (GRM) and robust covariance matrices
+
+The statistical inference presented above relies on strong assumptions regarding the stochastic properties of the errors. Namely, they are assumed to be mutually uncorrelated (Hypothesis \@ref(hyp:noncorrelResid)) and homoskedastic (Hypothesis \@ref(hyp:homoskedasticity)). 
+
+The objective of this section is to present approaches aimed at adjusting the estimate of the covariance matrix of the OLS estimator ($(\bv{X}'\bv{X})^{-1}s^2$, see Eq. \@ref(eq:sXX)), when the previous hypotheses do not hold.
+
+### Presentation of the General Regression Model (GRM)
+
+It will prove useful to introduce the following notation:
+\begin{eqnarray}
+\mathbb{V}ar(\boldsymbol\varepsilon | \bv{X}) = \mathbb{E}(\boldsymbol\varepsilon \boldsymbol\varepsilon'| \bv{X}) &=& \boldsymbol\Sigma. (\#eq:assumGLS2)
+\end{eqnarray}
+
+Note that Eq. \@ref(eq:assumGLS2) is more general than Hypothesis \@ref(hyp:homoskedasticity) and \@ref(hyp:noncorrelResid) because the diagonal entries of $\boldsymbol\Sigma$ may be different (as opposed to under Hypothesis \@ref(hyp:homoskedasticity)), and the non-diagonal entries of $\boldsymbol\Sigma$ can be non-null (as opposed to under Hypothesis \@ref(hyp:noncorrelResid)).
+
+:::{.definition #GRM name="General Regression Model (GRM)"}
+Hypothesis \@ref(hyp:fullrank) and \@ref(hyp:exogeneity), together with Eq. \@ref(eq:assumGLS2), form the General Regression Model (GRM) framework.
+:::
+
+Naturally,  a regression model where Hypotheses \@ref(hyp:fullrank) to \@ref(hyp:noncorrelResid) hold is a specific case of the GRM framework.
+
+The GRM context notably encompasses situations of heteroskedasticity and autocorrelation:
+
+* Heteroskedasticity:
+\begin{equation}
+\boldsymbol\Sigma =	\left[	\begin{array}{cccc}
+\sigma_1^2 & 0 & \dots & 0 \\
+0 & \sigma_2^2 &  & 0 \\
+\vdots && \ddots& \vdots \\
+0 & \dots & 0 & \sigma_n^2
+\end{array} \right]. (\#eq:heteroskedasticity)
+\end{equation}
+
+* Autocorrelation:
+\begin{equation}
+\boldsymbol\Sigma = \sigma^2 \left[	\begin{array}{cccc}
+1 & \rho_{2,1} & \dots & \rho_{n,1} \\
+\rho_{2,1} & 1 &  & \vdots \\
+\vdots && \ddots& \rho_{n,n-1} \\
+\rho_{n,1} & \rho_{n,2} & \dots & 1
+\end{array} \right]. (\#eq:autocorrelation)
+\end{equation}
+
+:::{.example #autocorrelaaa name="Auto-regressive processes"}
+Autocorrelation is common in time-series contexts (see Section \@ref(TS)). In a time-series context, subscript $i$ refers to a date.
+
+Assume for instance that:
+\begin{equation}
+y_i = \bv{x}_i' \boldsymbol\beta + \varepsilon_i (\#eq:usual)
+\end{equation}
+with
+\begin{equation}
+\varepsilon_i = \rho \varepsilon_{i-1} + v_i, \quad v_i \sim \mathcal{N}(0,\sigma_v^2).(\#eq:usual2)
+\end{equation}
+In this case, we are in the GRM context, with:
+\begin{equation}
+\boldsymbol\Sigma =\frac{ \sigma_v^2}{1 - \rho^2} \left[	\begin{array}{cccc}
+1 & \rho & \dots & \rho^{n-1} \\
+\rho & 1 &  & \vdots \\
+\vdots && \ddots& \rho \\
+\rho^{n-1} & \rho^{n-2} & \dots & 1
+\end{array} \right].(\#eq:SigmaAutocorrel)
+\end{equation}
+:::
+
+In some cases ---in particular when one assumes a parametric formulation for $\boldsymbol\Sigma$--- one can determine a better (more accurate) estimator than the OLS one. This approach is called Generalized Least Squares (GLS), which we present below.
+
+### Generalized Least Squares {#GLS}
+
+Assume $\boldsymbol\Sigma$ is known ("feasible GLS"). Because $\boldsymbol\Sigma$ is symmetric positive, it admits a spectral decomposition of the form $\boldsymbol\Sigma = \bv{C} \boldsymbol\Lambda \bv{C}'$, where $\bv{C}$ is an orthogonal matrix (i.e. $\bv{C}\bv{C}'=Id$) and $\boldsymbol\Lambda$ is a diagonal matrix (the diagonal entries are the eigenvalues of $\boldsymbol\Sigma$).
+
+We have $\boldsymbol\Sigma = (\bv{P}\bv{P}')^{-1}$ with $\bv{P} = \bv{C}\boldsymbol\Lambda^{-1/2}$. Consider the transformed model:
+$$
+\bv{P}'\bv{y} = \bv{P}'\bv{X}\boldsymbol\beta + \bv{P}'\boldsymbol\varepsilon \quad \mbox{or} \quad \bv{y}^* = \bv{X}^*\boldsymbol\beta + \boldsymbol\varepsilon^*.
+$$
+The variance of $\boldsymbol\varepsilon^*$ is the identity matrix $Id$. In the transformed model, OLS is BLUE (Gauss-Markow Theorem \@ref(thm:GaussMarkov)).
+
+The **Generalized least squares** estimator of $\boldsymbol\beta$ is:
+\begin{equation}
+\boxed{\bv{b}_{GLS} = (\bv{X}'\boldsymbol\Sigma^{-1}\bv{X})^{-1}\bv{X}'\boldsymbol\Sigma^{-1}\bv{y}.}(\#eq:betaGLS)
+\end{equation}
+We have:
+$$
+\mathbb{V}ar(\bv{b}_{GLS}|\bv{X}) = (\bv{X}'\boldsymbol\Sigma^{-1}\bv{X})^{-1}.
+$$
+
+However, in general, $\boldsymbol\Sigma$ is unknown. The GLS estimator is then said to be *infeasible*. Some structure is required. Assume $\boldsymbol\Sigma$ admits a parametric form $\boldsymbol\Sigma(\theta)$. The estimation becomes *feasible* (FGLS) if one replaces $\boldsymbol\Sigma(\theta)$ by $\boldsymbol\Sigma(\hat\theta)$, where $\hat\theta$ is a consistent estimator of $\theta$. In that case, the FGLS is asymptotically efficient (see Example \@ref(exm:autocorrelaaa2)).
+
+When $\boldsymbol\Sigma$ has no obvious structure: the OLS (or IV) is the only estimator available. Under regularity assumptions, it remains unbiased, consistent, and asymptotically normally distributed, but not efficient. Standard inference procedures are no longer appropriate.
+
+:::{.example #autocorrelaaa2 name="GLS in the auto-correlation case"}
+Consider the case presented in Example \@ref(exm:autocorrelaaa). Because the OLS estimate $\bv{b}$ of $\boldsymbol\beta$ is consistent, the estimates $e_i$ of the $\varepsilon_i$'s also are. Consistent estimators of $\rho$ and $\sigma_v$ are then obtained by regressing  the $e_i$'s on  the $e_{i-1}$'s. Using these estimates in Eq. \@ref(eq:SigmaAutocorrel) provides a consistent estimate of $\boldsymbol\Sigma$. Applying these steps recursively gives an efficient estimator of $\boldsymbol\beta$ (@Cochrane_Orcutt_1949).
+:::
+
+
+### Asymptotic properties of the OLS estimator in the GRM framework
+
+<!-- the OLS is not efficient. However, it is asymptotically consistent and normal (Props. \@ref(prp:XXX) and \@ref(prp:AsymptGRM), respectively). -->
+Since $\bv{b} = \boldsymbol\beta + \left(\bv{X}'\bv{X}\right)^{-1} \bv{X}'\boldsymbol\varepsilon$ and $\mathbb{V}ar(\boldsymbol\varepsilon|\bv{X})=\boldsymbol\Sigma$, we have:
+\begin{equation}
+\mathbb{V}ar(\bv{b}|\bv{X}) = \frac{1}{n}\left(\frac{1}{n}\bv{X}'\bv{X}\right)^{-1}\left(\frac{1}{n}\bv{X}'\boldsymbol\Sigma\bv{X}\right)\left(\frac{1}{n}\bv{X}'\bv{X}\right)^{-1}.(\#eq:xsx)
+\end{equation}
+
+<!-- Under Hypothesis \@ref(hyp:normality), since $\bv{b}$ is linear in $\boldsymbol\varepsilon$, we have: -->
+<!-- \begin{equation} -->
+<!-- \bv{b}|\bv{X} \sim \mathcal{N}\left(\boldsymbol\beta,\left(\bv{X}'\bv{X}\right)^{-1}\left(\bv{X}'\boldsymbol\Sigma\bv{X}\right)\left(\bv{X}'\bv{X}\right)^{-1}\right). -->
+<!-- \end{equation} -->
+
+Therefore, the conditional covariance matrix of the OLS estimator is not $\sigma^2 (\bv{X}'\bv{X})^{-1}$ any longer, and using $s^2 (\bv{X}'\bv{X})^{-1}$ for inference may be misleading. Below, we will see how to construct appropriate estimates of the covariance matrix of $\bv{b}$. Before that, let us prove that the OLS estimator remains consistent in the GRM framework.
+
+:::{.proposition #XXX name="Consistency of the OLS estimator in the GRM framework"}
+If $\mbox{plim }(\bv{X}'\bv{X}/n)$ and $\mbox{plim }(\bv{X}'\boldsymbol\Sigma\bv{X}/n)$ are finite positive definite matrices, then $\mbox{plim }(\bv{b})=\boldsymbol\beta$.
+:::
+:::{.proof}
+We have $\mathbb{V}ar(\bv{b})=\mathbb{E}[\mathbb{V}ar(\bv{b}|\bv{X})]+\mathbb{V}ar[\mathbb{E}(\bv{b}|\bv{X})]$. Since $\mathbb{E}(\bv{b}|\bv{X})=\boldsymbol\beta$, $\mathbb{V}ar[\mathbb{E}(\bv{b}|\bv{X})]=0$. Eq. \@ref(eq:xsx) implies that $\mathbb{V}ar(\bv{b}|\bv{X}) \rightarrow 0$. Hence $\bv{b}$ converges in mean square, and therefore in probability (see Prop. \@ref(prp:implicationsconv)).
+:::
+
+Prop. \@ref(prp:AsymptGRM) gives the asymptotic distribution of the OLS estimator in the GRM framework.
+
+:::{.proposition #AsymptGRM name="Asymptotic distribution of the OLS estimator in the GRM framework"}
+If $Q_{xx}=\mbox{plim }(\bv{X}'\bv{X}/n)$ and $Q_{x\boldsymbol\Sigma x}=\mbox{plim }(\bv{X}'\boldsymbol\Sigma\bv{X}/n)$ are finite positive definite matrices, then:
+$$
+\sqrt{n}(\bv{b}-\boldsymbol\beta) \overset{d}{\rightarrow} \mathcal{N}(0,Q_{xx}^{-1}Q_{x\boldsymbol\Sigma x}Q_{xx}^{-1}).
+$$
+:::
+
+The IV estimator also features a normal asymptotic distribution:
+
+:::{.proposition #AsymptIVGRM name="Asymptotic distribution of the IV estimator in the GRM framework"}
+If regressors and IV variables are "well-behaved", then:
+$$
+\bv{b}_{iv} \overset{a}{\sim} \mathcal{N}(\boldsymbol\beta,\bv{V}_{iv}),
+$$
+where
+$$
+\bv{V}_{iv} = \frac{1}{n}(\bv{Q}^*)\mbox{ plim }\left(\frac{1}{n} \bv{Z}'\boldsymbol\Sigma \bv{Z}\right)(\bv{Q}^*)',
+$$
+with
+$$
+\bv{Q}^* = [\bv{Q}_{xz}\bv{Q}_{zz}^{-1}\bv{Q}_{zx}]^{-1}\bv{Q}_{xz}\bv{Q}_{zz}^{-1}.
+$$
+:::
+
+
+For practical purposes, one needs to have estimates of $\boldsymbol\Sigma$ in Props. \@ref(prp:AsymptGRM) or \@ref(prp:AsymptIVGRM). The complication comes from the fact that $\boldsymbol\Sigma$ is of dimension $n \times n$, and its estimation ---based on a sample of length $n$--- is therefore infeasible in the general case. Notwithstanding, looking at Eq. \@ref(eq:xsx), it appears that one can focus on the estimation of $Q_{x\boldsymbol\Sigma x}=\mbox{plim }(\bv{X}'\boldsymbol\Sigma\bv{X}/n)$ (or $\mbox{plim }\left(\frac{1}{n} \bv{Z}'\boldsymbol\Sigma \bv{Z}\right)$ in the IV case). This matrix being of dimension $K \times K$, its estimation is easier.
+
+We have:
+\begin{equation}
+\frac{1}{n}\bv{X}'\boldsymbol\Sigma\bv{X} = \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}\sigma_{i,j}\bv{x}_i\bv{x}'_j. (\#eq:GeneralXSigmaX)
+\end{equation}
+
+The so-called **robust covariance matrices** are estimates of the previous matrix. Their computation is based on the fact that if $\bv{b}$ is consistent, then the $e_i$'s are consistent estimators of the $\varepsilon_i$'s. 
+
+In the following sections (\@ref(HAC) and \@ref(Clusters)), we present two types of robust covariance matrices.
+
+
+### HAC-robust covariance matrices {#HAC}
+
+When only heteroskedasticity prevails, i.e., when matrix $\boldsymbol\Sigma$ is as in Eq. \@ref(eq:heteroskedasticity), then one can use the formula proposed by @White_1980 to estimate $\frac{1}{n}\bv{X}'\boldsymbol\Sigma\bv{X}$ (see Example \@ref(exm:HCheteroskedasticity)). When the residuals feature both heteroskedasticity and auto-correlation, then one can use the @Newey_West_1987 approach (see Example \@ref(exm:HCheterAC)).
+
+:::{.example #HCheteroskedasticity name="Heteroskedasticity"}
+
+This is the case of Eq. \@ref(eq:heteroskedasticity). We have $\sigma_{i,j}=0$ for $i \ne j$. Hence, in this case, we then need to estimate $\frac{1}{n}\sum_{i=1}^{n}\sigma_{i}^2\bv{x}_i\bv{x}'_i$. @White_1980 has shown that, under general conditions:
+\begin{equation}
+\mbox{plim}\left( \frac{1}{n}\sum_{i=1}^{n}\sigma_{i}^2\bv{x}_i\bv{x}'_i \right) = 
+\mbox{plim}\left( \frac{1}{n}\sum_{i=1}^{n}e_{i}^2\bv{x}_i\bv{x}'_i \right). (\#eq:white)
+\end{equation}
+The estimator of $\frac{1}{n}\bv{X}'\boldsymbol\Sigma\bv{X}$ therefore is:
+\begin{equation}
+M_{HC0} = \frac{1}{n}\bv{X}'
+\left[
+\begin{array}{cccc}
+e_1^2 & 0 & \dots & 0 \\
+0 & e_2^2 &  \\
+\vdots & & \ddots&0 \\
+0 & \dots & 0 & e_n^2
+\end{array}
+\right]
+\bv{X}.(\#eq:White)
+\end{equation}
+where the $e_i$ are the OLS residuals of the regression. The previous estimator is often called **HC0**. The **HC1** estimator, due to @MacKinnon_White_1985, is obtained by applying an adjustment factor $n/(n-K)$ for the number of degrees of freedom (as in Prop. \@ref(prp:expects2)). That is:
+\begin{equation}
+M_{HC1} = \frac{n}{n-K}M_{HC0}.(\#eq:WhiteHC1)
+\end{equation}
+
+We can illustrate the influence of heteroskedasticity using simulations. Consider the following model:
+$$
+y_i = x_i + \varepsilon_i, \quad \varepsilon_i \sim \mathcal{N}(0,x_i^2),
+$$
+where the $x_i$'s are i.i.d. $t(6)$.
+
+Here is a simulated sample ($n=200$) of this model:
+
+```{r simulHeterosk, echo=TRUE, fig.cap="Situation of heteroskedasticity. The model is $y_i = x_i + \\varepsilon_i, \\quad \\varepsilon_i \\sim \\mathcal{N}(0,x_i^2)$, where the $x_i$'s are i.i.d. $t(6)$.", fig.asp = .6, out.width = "90%", fig.align = "left-aligned"}
+n <- 200
+x <- rt(n,df=6)
+y <- x + x*rnorm(n)
+par(plt=c(.1,.95,.1,.95))
+plot(x,y,pch=19)
+```
+
+
+We simulate 1000 samples of the same model with $n=200$. For each sample, we compute the OLS estimate of $\beta$ ($=1$). For each of the 1000 OLS estimations, we employ (a) the standard OLS variance formula ($s^2 (\bv{X}'\bv{X})^{-1}$) and (b) the White formula to estimate the variance of $b$. For each formula, we compute the average of the 1000 resulting standard deviations and compare these with the standard deviation of the 1000 OLS estimate of $\beta$. 
+
+```{r simulHeterosk2, echo=TRUE, fig.cap="The model is $y_i = x_i + \\varepsilon_i, \\quad \\varepsilon_i \\sim \\mathcal{N}(0,x_i^2)$, where the $x_i$'s are i.i.d. $t(6)$. Comparison between the true distribution (in red) of the OLS estimate of $\\boldsymbol\\beta$ ($=1$) and the one obtained when using the standard formula for the standard deviation of $\\bv{b}$ (in blue).", fig.asp = .6, out.width = "90%", fig.align = "left-aligned"}
+n <- 200 # sample size
+N <- 1000 # number of simulated samples
+XX <- matrix(rt(n*N,df=6),n,N)
+YY <- matrix(XX + XX*rnorm(n),n,N)
+all_b       <- NULL;all_V_OLS   <- NULL;all_V_White <- NULL
+for(j in 1:N){
+  Y <- matrix(YY[,j],ncol=1)
+  X <- matrix(XX[,j],ncol=1)
+  b <- solve(t(X)%*%X) %*% t(X)%*%Y
+  e <- Y - X %*% b
+  S <- 1/n * t(X) %*% diag(c(e^2)) %*% X
+  V_OLS   <- solve(t(X)%*%X) * var(e)
+  V_White <- 1/n * (solve(1/n*t(X)%*%X)) %*% S %*% (solve(1/n*t(X)%*%X))
+  all_b       <- c(all_b,b)
+  all_V_OLS   <- c(all_V_OLS,V_OLS)
+  all_V_White <- c(all_V_White,V_White)
+}
+c(sd(all_b),mean(sqrt(all_V_OLS)),mean(sqrt(all_V_White)))
+```
+
+The results show that the White formula yields, on average, an estimated standard deviation that is much closer to the "true" value than the standard OLS formula. The latter underestimate the standard deviation of $b$.
+:::
+
+In the following example, we regress GDP growth rates from the @JST_2017 database on a systemic financial crisis dummy. We compute the HC0- and HC1-based standard deviations of the parameter estimate, and compare it to the one based on the standard OLS formula. The adjusted standard deviations are close to the one provided by the non-adjusted OLS formula.
+
+```{r JSTcrises1}
+library(lmtest)
+library(sandwich)
+nT <- dim(JST)[1]
+JST$growth <- NaN
+JST$growth[2:nT] <- log(JST$rgdpbarro[2:nT]/JST$rgdpbarro[1:(nT-1)])
+JST.red <- subset(JST,year>1950)
+JST.red$iso <- as.factor(JST.red$iso)
+JST.red$year <- as.factor(JST.red$year)
+eq <- lm(growth~crisisJST+iso,data=JST.red)
+rbind(coeftest(eq)[2,],
+      coeftest(eq, vcov = vcovHC(eq, type = "HC0"))[2,],
+      coeftest(eq, vcov = vcovHC(eq, type = "HC1"))[2,])
+```
+
+
+:::{.example #HCheterAC name="Heteroskedasticity and Autocorrelation (HAC)"}
+
+@Newey_West_1987 have proposed a formula to address both heteroskedasticity and auto-correlation of the residuals (Eqs. \@ref(eq:heteroskedasticity) and \@ref(eq:autocorrelation)). They show that, if the correlation between terms $i$ and $j$ gets sufficiently small when $|i-j|$ increases:
+\begin{eqnarray}
+&&\mbox{plim} \left( \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}\sigma_{i,j}\bv{x}_i\bv{x}'_j \right) \approx  \\
+&&\mbox{plim} \left( \frac{1}{n}\sum_{t=1}^{n}e_{t}^2\bv{x}_t\bv{x}'_t +
+\frac{1}{n}\sum_{\ell=1}^{L}\sum_{t=\ell+1}^{n}w_\ell e_{t}e_{t-\ell}(\bv{x}_t\bv{x}'_{t-\ell} + \bv{x}_{t-\ell}\bv{x}'_{t})
+\right), \nonumber (\#eq:NW)
+\end{eqnarray}
+where $w_\ell = 1 - \ell/(L+1)$ (with $L$ large).
+
+Let us illustrate the influence of autocorrelation using simulations. We consider the following model:
+\begin{equation}
+y_i = x_i + \varepsilon_i, \quad \varepsilon_i \sim \mathcal{N}(0,x_i^2),(\#eq:simul11)
+\end{equation}
+where the $x_i$'s and the $\varepsilon_i$'s are such that:
+\begin{equation}
+x_i = 0.8 x_{i-1} + u_i \quad and \quad \varepsilon_i = 0.8 \varepsilon_{i-1} + v_i, (\#eq:simul22)
+\end{equation}
+where the $u_i$'s and the $v_i$'s are i.i.d. $\mathcal{N}(0,1)$.
+
+We simulate 500 samples of the same model with $n=200$. For each sample, we compute the OLS estimate of $\beta$ (=1). For each of the 1000 OLS estimations, we employ (a) the standard OLS variance formula ($s^2 (\bv{X}'\bv{X})^{-1}$), (b) the White formula, and (c) the Newey-West formula to estimate the variance of $b$. For each formula, we compute the average of the 500 resulting standard  deviations and compare these with the standard deviation of the 500 OLS estimate of $\beta$. 
+
+```{r regressNW}
+library(AEC)
+n <- 100 # sample length
+nb.sim <- 500 # number of simulated samples
+all.b <- NULL;all.OLS.stdv.b <- NULL
+all.Whi.stdv.b <- NULL;all.NW.stdv.b <- NULL
+for(i in 1:nb.sim){
+  eps <- rnorm(n);x <- rnorm(n)
+  for(i in 2:n){
+    eps[i] <- eps[i] + .8*eps[i-1]
+    x[i]   <- x[i]   + .8*x[i-1]
+  }
+  y <- x + eps
+  eq <- lm(y~x)
+  all.b <- c(all.b,eq$coefficients[2])
+  all.OLS.stdv.b <- c(all.OLS.stdv.b,summary(eq)$coefficients[2,2])
+  X <- cbind(rep(1,n),x)
+  XX <- t(X) %*% X;XX_1 <- solve(XX)
+  E2 <- diag(eq$residuals^2)
+  White.V <- XX_1 %*% (t(X) %*% E2 %*% X) %*% XX_1
+  all.Whi.stdv.b <- c(all.Whi.stdv.b,sqrt(White.V[2,2]))
+  # HAC:
+  U <- X * cbind(eq$residuals,eq$residuals)
+  XSigmaX <- NW.LongRunVariance(U,5)
+  NW.V <- 1/n * (n*XX_1) %*% XSigmaX %*% (n*XX_1)
+  all.NW.stdv.b <- c(all.NW.stdv.b,sqrt(NW.V[2,2]))
+}
+cbind(sd(all.b),mean(all.OLS.stdv.b),
+      mean(all.Whi.stdv.b),mean(all.NW.stdv.b))
+```
+
+The results show that the Newey-West formula yields, on average, an estimated standard deviation that is closer to the "true" value than the standard OLS formula. The latter underestimate the standard deviation of $b$.
+:::
+
+
+
+What precedes suggest that, when the residuals feature autocorrelation, it is important to use appropriately adjusted covariance matrices to make statistical inference. How to detect autocorrelation in residuals? A popular test has been proposed by @Durbin_Watson_1950 and @Durbin_Watson_1951. The Durbin-Watson test statistic is:
+$$
+DW = \frac{\sum_{i=2}^{n}(e_i - e_{i-1})^2}{\sum_{i=1}^{n}e_i^2}= 2(1 - r) - \underbrace{\frac{e_1^2 + e_n^2}{\sum_{i=1}^{n}e_i^2}}_{\overset{p}{\rightarrow} 0},
+$$
+where $r$ is the slope in the regression of the $e_i$'s on the $e_{i-1}$'s, i.e.:
+$$
+r = \frac{\sum_{i=2}^{n}e_i e_{i-1}}{\sum_{i=1}^{n-1}e_i^2}.
+$$
+($r$ is a consistent estimator of $\mathbb{C}or(\varepsilon_i,\varepsilon_{i-1})$, i.e. $\rho$ in Eq. \@ref(eq:usual2).)
+
+The one-sided test for $H_0$: $\rho=0$ against $H_1$: $\rho>0$ is carried out by comparing $DW$ to values $d_L(T, K)$ and $d_U(T, K)$:
+$$
+\left\{
+\begin{array}{ll}
+\mbox{If $DW < d_L$,}&\mbox{ the null hypothesis is rejected;}\\
+\mbox{if $DW > d_U$,}&\mbox{ the hypothesis is not rejected;}\\
+\mbox{If $d_L \le DW \le d_U$,} &\mbox{ no conclusion is drawn.}
+\end{array}
+\right.
+$$
+
+:::{.example #DurbinWats name="Durbin-Watson test"}
+We regress the short-term nominal US interest rate on inflation. We then employ the Durbin-Watson test to see whether the residuals are auto-correlated (which is  quite obviously the case).
+
+```{r DB}
+library(car)
+data <- subset(JST,iso=="USA");T <- dim(data)[1]
+data$infl <- c(NaN,100*log(data$cpi[2:T]/data$cpi[1:(T-1)]))
+data$infl[(data$infl< -5)|(data$infl>10)] <- NaN
+par(mfrow=c(1,2))
+plot(data$year,data$stir,ylim=c(-10,20),type="l",lwd=2,xlab="",
+     ylab="",main="Nominal rate and inflation")
+lines(data$year,data$infl,col="red",lwd=2)
+eq <- lm(stir~infl,data=data)
+plot(eq$residuals,type="l",col="blue",main="Residuals",xlab="",ylab="")
+durbinWatsonTest(eq)
+```
+:::
+
+<!-- ## Summary -->
+
+
+<!-- |                                                      | Under Assumptions \@ref(hyp:fullrank)+ | $\bv{b}$ normal in small sample (Eq. \@ref(eq:distriBcondi)) | $\bv{b}$ is BLUE (Thm \@ref(thm:GaussMarkov)) | $\bv{b}$ unbiased in small sample (Prop. \@ref(prp:propOLS)) | $\bv{b}$ consistent (Prop. \@ref(prp:XXX))$^*$ | $\bv{b}$ $\sim$ normal in large sample (Prop. \@ref(prp:AsymptGRM))$^*$ | -->
+<!-- |------------------------------------------------------|-----------------------------------------|-------------------------------------------------------------|----------------------------------------------|--------------------------------------------------------------|------------------------------------------------|--------------------------------------------------------------------------| -->
+<!-- | \rotatebox[origin=c]{90}{ Condit. mean-zero}         | \@ref(hyp:exogeneity)                  | X                                                           | X                                            | X                                                            | X                                              | X                                                                        | -->
+<!-- | \rotatebox[origin=c]{90}{ Homoskedasticity}          | \@ref(hyp:homoskedasticity)            | X                                                           | X                                            |                                                              |                                                |                                                                          | -->
+<!-- | \rotatebox[origin=c]{90}{Uncorrelated residuals}     | \@ref(hyp:noncorrelResid)             | X                                                           | X                                            |                                                              |                                                |                                                                          | -->
+<!-- | \rotatebox[origin=c]{90}{ Normality of disturbances} | \@ref(hyp:normality)                   | X                                                           |                                              |                                                              |                                                |                                                                          | -->
+
+
+<!-- $^*$: see however Prop. \@ref(prp:XXX) and Prop. \@ref(prp:AsymptGRM) for additional hypotheses. Specifically $\bv{X}'\bv{X}/n$ and $\bv{X}'\boldsymbol{\Sigma}\bv{X}/n$ must converge in proba. to finite positive definite matrices ($\boldsymbol\Sigma$ is defined in Eq. \@ref(eq:assumGLS2)). -->
+
+
+
+### Cluster-robust covariance matrices {#Clusters}
+
+The present section is based on @MACKINNON2022; another useful reference is @Cameron_Miller_2014. We will see how one can approximate $Q_{x\boldsymbol\Sigma x}=\mbox{plim }(\bv{X}'\boldsymbol\Sigma\bv{X}/n)$ (see Prop. \@ref(prp:AsymptGRM)) when the dataset can be decomposed into *clusters*. These clusters constitute a partition of the sample, and they are such that the error terms may be correlated within a given cluster, but not across different clusters. A cluster may, e.g., gathers entities from a given geographical area, from the same industry, or same age cohort. 
+
+The OLS estimator satisfies:
+\begin{equation}
+\bv{b} = \boldsymbol\beta + (\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon.(\#eq:BBB)
+\end{equation}
+Consider a set $\{n_1,n_2,\dots,n_G\}$ s.t. $n=\sum_g n_g$, on which is based the following decomposition of $\bv{X}$:
+$$
+\bv{X} = \left[
+\begin{array}{c}
+\bv{X}_1 \\
+\bv{X}_1 \\
+\vdots\\
+\bv{X}_G
+\end{array}
+\right].
+$$
+With these notations, Eq. \@ref(eq:BBB) rewrites:
+\begin{equation}
+\bv{b} - \boldsymbol\beta = \left(\sum_{g=1}^G \bv{X}_g'\bv{X}_g\right)^{-1}\sum_{g=1}^G \bv{s}_g,(\#eq:cluster1)
+\end{equation}
+where
+\begin{equation}
+\bv{s}_g = \bv{X}_g'\boldsymbol\varepsilon_g (\#eq:definiS)
+\end{equation}
+denotes the score vector (of dimension $K \times 1$) associated with the $g^{th}$ cluster.
+
+If the model is correctly specified then $\mathbb{E}(\bv{s}_g)=0$ for all clusters $g$. Note that Eq. \@ref(eq:cluster1) is valid for any partition of $\{1,\dots,n\}$. Dividing the sample into clusters becomes meaningful if we further assume that the following hypothesis holds:
+
+:::{.hypothesis #cluster name="Clusters"}
+We have:
+$$
+(i)\; \mathbb{E}(\bv{s}_g\bv{s}_g')=\Sigma_g,\quad (ii)\; \mathbb{E}(\bv{s}_g\bv{s}_q')=0,\;g \ne q,
+$$
+where $s_g$ is defined in Eq. \@ref(eq:definiS).
+:::
+
+The real assumption here is $(ii)$; the first one simply gives a notation for the covariance matrix of the score associated with the $g^{th}$ cluster. Remark that these covariance matrices can differ across clusters. That is, *cluster-based inference is robust against both heteroskedasticity and intra-cluster dependence without imposing any restrictions on the (unknown) form of either of them*.
+
+<!-- While the choice of clustering structure ---i.e., which entity is in which cluster--- is sometimes debatable, the structure is generally assumed known in both theoretical and applied work.  -->
+
+Naturally, matrix $\Sigma_g$ depends on the covariance structure of the $\varepsilon$'s. In particular, if $\Omega_g = \mathbb{E}(\boldsymbol\varepsilon_g\boldsymbol\varepsilon_g'|\bv{X}_g)$, then we have $\Sigma_g = \mathbb{E}(\bv{X}_g'\Omega_g\bv{X}_g)$.
+
+Under Hypothesis \@ref(hyp:cluster), it comes that the conditional covariance matrix of $\bv{b}$ is:
+\begin{equation}
+\left(\bv{X}'\bv{X}\right)^{-1}\left(\sum_{g=1}^G \Sigma_g\right)\left(\bv{X}'\bv{X}\right)^{-1}(\#eq:cluster2)
+\end{equation}
+
+Let us denote by $\varepsilon_{g,i}$ the error associated with the $i^{th}$ component of vector $\boldsymbol\varepsilon_g$. Consider the special case where $\mathbb{E}(\varepsilon_{g,i} \varepsilon_{g,j}|\bv{X}_g)=\sigma^2\mathbb{I}_{\{i=j\}}$, then Eq. \@ref(eq:cluster2) gives the standard expression $\sigma^2\left(\bv{X}'\bv{X}\right)^{-1}$ (see Eq. \@ref(eq:distriBcondi)).
+
+If we have $\mathbb{E}(\varepsilon_{gi} \varepsilon_{gj}|\bv{X}_g)=\sigma_{gi}^2\mathbb{I}_{\{i=j\}}$, then we fall in the case addressed by the White formula (see Example \@ref(exm:HCheteroskedasticity)). That is, in this case, the conditional covariance matrix of $\bv{b}$ is:
+$$
+\left(\bv{X}'\bv{X}\right)^{-1}\left(\bv{X}'\left[	\begin{array}{cccc}
+\sigma_1^2 & 0 & \dots & 0 \\
+0 & \sigma_2^2 &  & 0 \\
+\vdots && \ddots& \vdots \\
+0 & \dots & 0 & \sigma_n^2
+\end{array} \right]\bv{X}\right)\left(\bv{X}'\bv{X}\right)^{-1}.
+$$
+As in @White_1980, the natural way to approach the conditional covariance given in Eq. \@ref(eq:cluster2) consists in replacing the $\Sigma_g$ matrices by their sample equivalent, i.e. $\widehat{\Sigma}_g=\bv{X}_g'\bv{e}_g\bv{e}_g'\bv{X}_g$. Adding corrections for the number of degrees of freedom, this leads to the following estimate of the covariance matrix of $\bv{b}$:
+\begin{equation}
+\frac{G(n-1)}{(G-1)(n-K)}\left(\bv{X}'\bv{X}\right)^{-1}\left(\sum_{g=1}^G\widehat{\Sigma}_g\right) \left(\bv{X}'\bv{X}\right)^{-1}. (\#eq:AsymptCL)
+\end{equation}
+The previous estimate is CRCV1 in @MACKINNON2022. Note that we indeed find the White-MacKinnon estimator (Eq. \@ref(eq:WhiteHC1)) when $G=n$.
+
+
+
+Remark that if there was only one cluster ($G=1$), and neglecting the degree-of-freedom correction, we would have:
+$$
+\left(\bv{X}'\bv{X}\right)^{-1}\left(\bv{X}'\bv{e}\bv{e}'\bv{X}\right) \left(\bv{X}'\bv{X}\right)^{-1} = 0
+$$
+because $\bv{X}'\bv{e}=0$. Hence, having large clusters does not necessarily increase variance.
+
+
+Often, when working with panel data (see Chapter \@ref(Panel)), we want to cluster in different dimensions. A typical case is when the data are indexed by both individuals ($i$) and time ($t$). In that case, we may indeed suspect that: (a) the residuals  are correlated across clusters of dates (e.g., with monthly data, a cluster may be one year) and (b) the residuals are correlated across clusters of individuals (e.g., with data at the county level a cluster may be a state). In this case, one can employ  **two-way clustering**.
+
+Formally, consider two distinct partitions of the data: one through index $g$, with $g \in \{1,\dots,G\}$, and the other through index $h$, with $h \in \{1,\dots,H\}$. Accordingly, we denote by $\bv{X}_{g,h}$ the submatrix of $\bv{X}$ that contains the explanatory variables corresponding to clusters $g$ and $h$ (e.g., the firms of a given country $g$ at a given date $h$). We also denote by $\bv{X}_{g,\bullet}$ (respectively $\bv{X}_{\bullet,h}$) the submatrix of $\bv{X}$ containing all explanatory variables pertaining to cluster $g$, for all possible values of $h$ (resp. to cluster $h$, for all possible values of $g$).
+
+We will make the following assumption:
+
+:::{.hypothesis #twowaycluster name="Two-way clusters"}
+We have:
+\begin{eqnarray*}
+&&\mathbb{E}(\bv{s}_{g,\bullet}\bv{s}_{g,\bullet}')=\Sigma_g,\quad \mathbb{E}(\bv{s}_{\bullet,h}\bv{s}_{\bullet,h}')=\Sigma^*_h,\quad \mathbb{E}(\bv{s}_{g,h}\bv{s}_{g,h}')=\Sigma_{g,h},\\ &&\mathbb{E}(\bv{s}_{g,h}\bv{s}_{q,k}')=0\;\mbox{if }g\neq q\mbox{ and }h \ne k.
+\end{eqnarray*}
+:::
+
+:::{.proposition #twoWayCov name="Covariance of scores in the two-way-cluster setup"}
+Under this assumption, the matrix of covariance of the scores is given by:
+$$
+\Sigma = \sum_{g=1}^G \Sigma_{g} + \sum_{h=1}^H \Sigma^*_{h} - \sum_{g=1}^G\sum_{h=1}^H \Sigma_{g,h}.
+$$
+(The last term on the right-hand side must be subtracted in order to avoid double counting.)
+:::
+:::{.proof}
+We have:
+\begin{eqnarray*}
+\Sigma &=& \sum_{g=1}^G\sum_{q=1}^G\sum_{h=1}^H\sum_{k=1}^H \bv{s}_{g,h}\bv{s}_{q,k}'\\
+&=& \sum_{g=1}^G\underbrace{\left(\sum_{h=1}^H\sum_{k=1}^H \bv{s}_{g,h}\bv{s}_{g,k}'\right)}_{=\Sigma_g}+\sum_{h=1}^H\underbrace{\left(\sum_{g=1}^G\sum_{q=1}^G \bv{s}_{g,h}\bv{s}_{q,h}'\right)}_{=\Sigma^*_h}-\sum_{g=1}^G\sum_{h=1}^H \bv{s}_{g,h}\bv{s}_{g,h}',
+\end{eqnarray*}
+which gives the result.
+:::
+
+The asymptotic theory can be based on two different approaches: (i) large number of clusters (common case), and (ii) fixed number of clusters but large number of observations in each cluster (see Subsections 4.1 and 4.2 in @MACKINNON2022). The more variable the $N_g$'s (clusters' sizes are heterogeneous in terms of size), the less reliable asymptotic inference based on Eq. \@ref(eq:AsymptCL), especially when a very few clusters are unusually large, or when the distribution of the data is heavy-tailed. These issues are somehow mitigated when the clusters have an approximate factor structure.
+
+In practice, $\Sigma$ is estimated by:
+$$
+\widehat{\Sigma} = \sum_{g=1}^G \widehat{\bv{s}}_{g,\bullet}\widehat{\bv{s}}_{g,\bullet}' + \sum_{h=1}^H \widehat{\bv{s}}_{\bullet,h}\widehat{\bv{s}}_{\bullet,h} - \sum_{g=1}^G\sum_{h=1}^H \widehat{\bv{s}}_{g,h}\widehat{\bv{s}}_{g,h}',
+$$
+and we use:
+$$
+\widehat{\mathbb{V}ar}(\bv{b}) = \left(\bv{X}'\bv{X}\right)^{-1}\widehat{\Sigma}\left(\bv{X}'\bv{X}\right)^{-1}.
+$$
+
+As an alternative to the asymptotic approximation to the distribution of a statistic of interest, one can resort to bootstrap approximation (see Section 5 of @MACKINNON2022). In R, the package `fwildclusterboot` allows to implement such approaches.[^FootWildCluster]
+
+[^FootWildCluster]: See, e.g., [this tutorial by Alexander Fischer](https://cran.r-project.org/web/packages/fwildclusterboot/vignettes/fwildclusterboot.html).
+
+Let us come back to the analysis of the effect of systemic financial crises on GDP growth. Clustering the data at the country level and, further, at both the country and time levels gives the following:
+
+```{r JSTcrises2,warning=FALSE}
+eq <- lm(growth~crisisJST+iso,data=JST.red)
+rbind(coeftest(eq)[2,],
+      coeftest(eq, vcov = vcovHC(eq, type = "HC1"))[2,],
+      coeftest(eq, vcov = vcovCL(eq, cluster = JST.red[, c("iso")]))[2,],
+      coeftest(eq, vcov = vcovCL(eq, cluster = JST.red[, c("iso","year")]))[2,])
+```
+
+
+
+## Shrinkage methods
+
+Chosing the appropriate explanatory variables is often complicated, especially in the presence of many potentially relevant covariates. Keeping a large number of covariates results in large standard deviations for the estimated parameters (see Section \@ref(irrelevant)). In order to address this issue, shrinkage methods have been designed. The objective of these methods is to help select a limited number of variables by shrinking the regression coefficients of the less useful variables towards zero. The two best-known shrinkage techniques are **ridge regression** and the **lasso** approach.[^FootnoteLASSO] In both cases (ridge and lasso), the OLS minimization problem (see Section \@ref(LSquares)), i.e.,
+\begin{equation}
+\bv{b} = \underset{\boldsymbol\beta}{\mbox{argmin}}\; \sum_{i=1}^n(y_i - \bv{x}_i'\boldsymbol\beta)^2
+\end{equation}
+is replaced with the following:
+\begin{equation}
+\bv{b}_\lambda = \underset{\boldsymbol\beta}{\mbox{argmin}}\; \sum_{i=1}^n(y_i - \bv{x}_i'\boldsymbol\beta)^2 + \lambda f(\boldsymbol\beta),(\#eq:minLasso)
+\end{equation}
+where $\lambda f(\boldsymbol\beta)$ is a penalty term that positively depends on the "size" of the components of $\boldsymbol\beta$. This term is called the *shrinkage penalty* term.
+
+[^FootnoteLASSO]: See @Tibshirani_2011 for a review of the lasso approach. See also Section 6.2 of @James2013.
+
+Specifically, assuming that the vector  $\bv{x}_i$ of potential covariates is of dimension $K \times 1$, we have:
+\begin{eqnarray*}
+f(\boldsymbol\beta) & = & \sum_{j=1}^K \beta_j^2 \quad \mbox{in the ridge case ($\ell_2$ norm)},\\
+f(\boldsymbol\beta) & = & \sum_{j=1}^K |\beta_j| \quad \mbox{in the lasso case ($\ell_1$ norm)}.
+\end{eqnarray*}
+
+In most cases, we do not want to involve the intercept in the set of parameters to shrink, and the preceding equations are respectively replaced with:
+\begin{eqnarray*}
+f(\boldsymbol\beta) & = & \sum_{j=2}^K \beta_j^2 \quad \mbox{(ridge)},\\
+f(\boldsymbol\beta) & = & \sum_{j=2}^K |\beta_j| \quad \mbox{(lasso)}.
+\end{eqnarray*}
+
+The nature of the penalty ---based on either the $\ell_1$ or the $\ell_2$ norm--- implies a different behaviour of the parameter estimates when $\lambda$ ---the *tuning parameter*--- grows. In the ridge regression, coefficient estimates go to zero (shrinkage); in the lasso case, some coefficients reach zero when $\lambda$ reach some values. In other words, while ridge regression achieve shrinkage, lasso regressions achieve shrinkage *and* variable selection.
+
+Parameter $\lambda$ has to be determined separately from the minimization problem of Eq. \@ref(eq:minLasso). One can combine standard criteria (e.g., BIC or Akaike) for this purpose.
+
+In R, one can use the `glmnet` package to run ridge and lasso regressions. In the following example, we employ this package to model interest rates proposed to debtors, using data extracted from the [Lending Club](https://www.kaggle.com/datasets/ethon0426/lending-club-20072020q1) platform.
+
+To begin with, let us define the variables we want to consider:
+
+```{r lasso1, warning=FALSE, message=FALSE}
+library(AEC)
+library(glmnet)
+credit$owner <- 1*(credit$home_ownership=="OWN")
+credit$renter <- 1*(credit$home_ownership=="MORTGAGE")
+credit$verification_status <- 1*(credit$verification_status=="Not Verified")
+credit$emp_length_10 <- 1*(credit$emp_length_10)
+credit$log_annual_inc <- log(credit$annual_inc)
+credit$log_funded_amnt <- log(credit$funded_amnt)
+credit$annual_inc2 <- (credit$annual_inc)^2
+credit$funded_amnt2 <- (credit$funded_amnt)^2
+x <- subset(credit,
+            select = c(delinq_2yrs,annual_inc,annual_inc2,log_annual_inc,
+                       dti,installment,verification_status,funded_amnt,
+                       funded_amnt2,log_funded_amnt,pub_rec,emp_length_10,
+                       owner,renter,pub_rec_bankruptcies,revol_util,revol_bal))
+```
+
+Let us standardize the data:
+
+```{r lasso2}
+y <- scale(credit$int_rate)
+x <- scale(x)
+```
+Next, we define the set of $\lambda$ we will use, and run the ridge and lasso regressions:
+
+```{r lasso3}
+grid.lambda <- seq(0,.2,by=.005)
+result.ridge <- glmnet(x, y, alpha = 0, lambda = grid.lambda)
+result.lasso <- glmnet(x, y, alpha = 1, lambda = grid.lambda)
+```
+
+The following figure shows how estimated parameters depend on $\lambda$:
+
+```{r lasso4}
+variab <- 6
+plot(result.ridge$lambda,coef(result.ridge)[variab,],type="l",
+     ylim=c(min(coef(result.ridge)[variab,],coef(result.lasso)[variab,]),
+            max(coef(result.ridge)[variab,],coef(result.lasso)[variab,])),
+     xlab=expression(lambda),ylab="Estimated parameter",lwd=2)
+lines(result.lasso$lambda,coef(result.lasso)[variab,],col="red",lwd=2)
+```
+
+Let us take two values of $\lambda$ and see the associated estimated parameters in the context of lasso regressions:
+
+```{r lasso5}
+i <- 20; j <- 40
+cbind(result.lasso$lambda[i],result.lasso$lambda[j])
+cbind(coef(result.lasso)[,i],coef(result.lasso)[,j])
+# Compute values of y predicted by the model, for all lambdas:
+pred1 <- predict(result.lasso,as.matrix(x))
+# Compute values of y predicted by the model, for a specific value:
+pred2 <- predict(result.lasso,as.matrix(x),s=0.085)
+```
+
+The `glmnet` package (see [Hastie et al. (2021)](https://glmnet.stanford.edu/articles/glmnet.html)) also offers tools to implement cross-validation:
+
+```{r lasso6}
+# cross validation (cv):
+cvglmnet <- cv.glmnet(as.matrix(x),y)
+plot(cvglmnet)
+# lambda.min: lambda that gives minimum mean cross-validated error
+cvglmnet$lambda.min 
+# lambda.1se: largest lambda s.t. cost within the one-std-dev cv-based band
+cvglmnet$lambda.1se
+coef(cvglmnet, s = "lambda.min") # associated parameters
+# predicted values of y for specific values of x:
+predict(cvglmnet, newx = as.matrix(x)[1:5,], s = "lambda.min") 
+```
+
+
+
+
+

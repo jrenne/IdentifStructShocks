@@ -1,0 +1,26 @@
+h1:ChapterLS Linear Regressions
+h2:linearHyp Hypotheses
+fig:heteroskedasticity Homoskedasticity vs heteroskedasticity. See text for the exact specifications.
+fig:exmpSalarayPhDSHP Income versus age. Data are from the Swiss Household Panel. The sample is restricted to persons that have completed at least 19 years of study. The figure shows that the dispersion of yearly income increases with age.
+h2:LSquares Least square estimation
+h3:derivation-of-the-ols-formula Derivation of the OLS formula
+h3:properties-of-the-ols-estimate-small-sample Properties of the OLS estimate (small sample)
+h3:goodness-of-fit Goodness of fit
+fig:R2issue This figure illustrates the monotonous increase in the $R^2$ as a function of the number of explanatory variables. In the true model, there is no explanatory variables, i.e., $y_i = \\varepsilon_i$. We then take (independent) regressors and regress $y$ on the latter, progressively increasing the set of regressors.
+h3:inference-and-confidence-intervals-in-small-sample Inference and confidence intervals (in small sample)
+fig:chartStudent The higher the degree of freedom, the closer the distribution of $t(\\nu)$ gets to the normal distribution. (Convergence in distribution.)
+h3:Ftest Testing a set of linear restrictions
+h3:largeSample Large Sample Properties
+h2:CommonPitfalls Common pitfalls in linear regressions
+h3:multicollinearity Multicollinearity
+h3:Omitted Omitted variables
+h3:irrelevant Irrelevant variable
+h2:IV Instrumental Variables
+h2:general-regression-model-grm-and-robust-covariance-matrices General Regression Model (GRM) and robust covariance matrices
+h3:presentation-of-the-general-regression-model-grm Presentation of the General Regression Model (GRM)
+h3:GLS Generalized Least Squares
+h3:asymptotic-properties-of-the-ols-estimator-in-the-grm-framework Asymptotic properties of the OLS estimator in the GRM framework
+h3:HAC HAC-robust covariance matrices
+h3:Clusters Cluster-robust covariance matrices
+h2:shrinkage-methods Shrinkage methods
+

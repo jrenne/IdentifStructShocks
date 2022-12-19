@@ -1,0 +1,31 @@
+h1:microeconometrics Microeconometrics
+h2:binary-choice-models Binary-choice models
+fig:LPM Fitting a binary variable with a linear model (Linear Probability Model, LPM). The model is $\\mathbb{P}(y_i=1|x_i)=\\Phi(0.5+2x_i)$, where $\\Phi$ is the c.d.f. of the normal distribution and where $x_i \\sim \\,i.i.d.\\,\\mathcal{N}(0,1)$.
+tab:foo This table provides examples of function , s.t. . The LPM case (last row) is given for comparison but, again, it does not satisfy  for any value of .
+fig:ProbLogit Probit, Logit, and Log-log functions.
+fig:LPM2 The model is $\\mathbb{P}(y_i=1|x_i)=\\Phi(0.5+2x_i)$, where $\\Phi$ is the c.d.f. of the normal distribution and where $x_i \\sim \\,i.i.d.\\,\\mathcal{N}(0,1)$. Crosses give the model-implied probabilities of having $y_i=1$ (conditional on $x_i$).
+h3:latent Interpretation in terms of latent variable, and utility-based models
+fig:Latent Distribution of $y_i^*$ conditional on $\\bv{x}_i$.
+h3:Avregressors Alternative-Varying Regressors
+h3:estimation Estimation
+h3:marginalFX Marginal effects
+h3:goodness-of-fit Goodness of fit
+h3:predictions-and-roc-curves Predictions and ROC curves
+h2:multiple-choice-models Multiple Choice Models
+h3:ordered-case Ordered case
+h3:MNL General multinomial logit model
+fig:Gumbel C.d.f. of the Gumbel distribution ($F(x)=\\exp(-\\exp(-x))$).
+h3:nested-logits Nested logits
+fig:GEV GEV simulations.
+h2:tobit Tobit models
+fig:tobit1 Bias in the case of sample selection. The grey line represents the population regression line. The model is $y_i = x_i + \\varepsilon_i$, with $\\varepsilon_{i,t} \\sim \\mathcal{N}(0,1)$. The red line is the OLS regression line based on black dots only.
+fig:tobit2 Censored dataset with heteroskedasticitiy. The model is $y_i = x_i + \\varepsilon_i$, with $\\varepsilon_{i,t} \\sim \\mathcal{N}(0,\\sigma_i^2)$ where $\\sigma_i = \\exp(-1 + x_i)$.
+fig:tobit3 Conditional means of $y$ in Tobit models. The model is $y_i = x_i + \\varepsilon_i$, with $\\varepsilon_i \\sim \\mathcal{N}(0,1)$.
+h2:SSM Sample Selection Models
+fig:SampleSelec Probability of observing $y_2$ depending on its value, for different values of conditional correlation between $y_2$ and $y_1^*$.
+h2:models-of-count-data Models of Count Data
+h3:poisson-model Poisson model
+h3:negative-binomial-model Negative binomial model
+h3:hurdle-model Hurdle model
+h3:zero-inflated-model Zero-inflated model
+

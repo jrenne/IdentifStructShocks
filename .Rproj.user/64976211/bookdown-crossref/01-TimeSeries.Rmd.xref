@@ -1,0 +1,49 @@
+h1:TS Time Series
+h2:introduction-to-time-series Introduction to time series
+fig:nonstat1 Example of a process that is not covariance stationary ($y_t = 0.1t + \\varepsilon_t$, where $\\varepsilon_t \\sim \\mathcal{N}(0,1)$).
+fig:nonstat2 Example of a process that is covariance stationary but not strictly stationary. The red lines delineate the 99\\% confidence interval of the standard normal distribution ($\\pm 2.58$).
+fig:autocov Annual growth rate of Swiss GDP, based on the Jorda-Schularick-Taylor Macrohistory Database.
+fig:autocov2 For order $j$, the slope of the blue line is, approximately, $\\hat{\\gamma}_j/\\widehat{\\mathbb{V}ar}(y_t)$, where hats indicate sample moments.
+fig:TVTCL The three samples have been simulated using the following data generating process: $x_t = \\mu + \\rho (x_{t-1}-\\mu) + \\sqrt{1-\\rho^2}\\varepsilon_t$, where $\\varepsilon_t \\sim \\mathcal{N}(0,1)$. Case A: $\\rho = 0$;  Case B: $\\rho = 0.7$;  Case C: $\\rho = 0.999$. In the three cases, $\\mathbb{E}(x_t)=\\mu=2$ and $\\mathbb{V}ar(x_t)=1$.
+h2:univariate-processes Univariate processes
+h3:moving-average-ma-processes Moving Average (MA) processes
+fig:simMA Simulation of MA processes.
+h3:ARsection Auto-Regressive (AR) processes
+h3:ar-ma-processes AR-MA processes
+h3:PACFapproach PACF approach to identify AR/MA processes
+fig:pacf ACF/PACF analysis of two processes (MA process on the left, AR on the right).
+h3:wold-decomposition Wold decomposition
+h3:impulse-response-functions-irfs-in-arma-models Impulse Response Functions (IRFs) in ARMA models
+fig:IRFarma IRFs associated with the three processes. Process 1 (MA(2)): $y_t = \\varepsilon_t + \\varepsilon_{t-1} + \\varepsilon_{t-2}$. Process 2 (ARMA(1,1)): $y_{t}=0.6y_{t-1} + \\varepsilon_t + 0.5\\varepsilon_{t-1}$. Process 3 (ARMA(4,2)): $y_{t}=0.5y_{t-3} + 0.4y_{t-4} + \\varepsilon_t + \\varepsilon_{t-1} + \\varepsilon_{t-2}$.
+fig:IRFgdp1 (P)ACF analysis of Swiss GDP growth.
+fig:IRFgdp2 Dynamic response of Swiss annual growth to a shock on the innovation $\\varepsilon_t$ at date $t=0$. The solid line corresponds to an AR(1) specification; the dashed line corresponds to a MA(2) specification.
+h3:ARMAIRF ARMA processes with exogenous variables (ARMA-X)
+h3:estimARMA Maximum Likelihood Estimation of ARMA processes
+h3:specification-choice Specification choice
+h2:VAR Multivariate models
+h3:definition-of-vars-and-svarma-models Definition of VARs (and SVARMA) models
+h3:IRFSVARMA IRFs in SVARMA
+h3:covariance-stationary-varma-models Covariance-stationary VARMA models
+h3:estimVAR VAR estimation
+h3:BlockGranger Block exogeneity and Granger causality
+h3:identification-problem-and-standard-identification-techniques Identification problem and standard identification techniques
+fig:CEE Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).
+fig:BQ4 IRF of GDP and unemployment to demand and supply shocks.
+h3:Signs Sign restrictions
+fig:signrestr1 IRF associated with a monetary policy shock; sign-restriction approach.
+h3:forecast-error-variance-maximization Forecast error variance maximization
+h3:NonGaussian Identification based on non-normality of the shocks
+fig:preMadeFigureICA This figure compares the distributions of two Gaussian bivariate vectors, $B \\eta_t$ and $BQ\\eta_t$, where $\\eta_{t} \\sim \\mathcal{N}(0,Id)$ (therefore $\\eta_{1,t}$ and $\\eta_{2,t}$ are independent), and $Q$  is an orthogonal matrix.
+fig:preMadeFigureICA2 This figure shows that the impulse response functions associated with an impulse matrix equal to $B$ (black line) or $BQ$ (red line) are different (even if $BB
+fig:preMadeFigureICAGaussianStudent This figure compares the distributions of two Gaussian bivariate vectors, $B \\eta_t$ and $BQ\\eta_t$, where $\\eta_t{1,t} \\sim \\mathcal{N}(0,1)$, $\\eta_t{2,t} \\sim t(5)$, and $Q$  is an orthogonal matrix.
+fig:ThreePlots The three plots represent the bivariate distributions of $\\eta_t$ (black) and of $B\\eta_t$ (red), where the two components of $\\eta_t$ are independent, of unit variance, and $B$ is orthogonal. Hence, for each of the three plots, $\\mathbb{V}ar(B\\eta_t)=Id$.
+tab:distriICA This table reports usual p.d.f. and their derivatives.
+h3:factor-augmented-var-favar Factor-Augmented VAR (FAVAR)
+fig:FAVAR Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.
+h3:Projections Projection Methods
+fig:essaiIV0 Gertler-Karadi monthly shocks, fed funds futures 3 months.
+fig:essaiIV1 Reponses to a monetary-policy shock, SVAR-IV approach.
+fig:essaiIV Reponses to a monetary-policy shock, LP-IV approach.
+h3:Inference Inference
+h2:forecasting Forecasting
+
