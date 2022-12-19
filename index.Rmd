@@ -20,11 +20,15 @@ css: "my-style.css"
 
 # Before starting {#intro}
 
+WORK IN PROGRESS
+
 <!-- # Before starting {#intro .unlisted .unnumbered} -->
 
-This course covers various econometric topics, including linear regression models, discrete-choice models, and time series analysis. It provides examples or simulations based on R codes.
+The identification and estimation of dynamic responses to structural shocks is one of the principal goals of macroeconometrics. These responses correspond to the effect, over time, of an exogenous intervention that propagates through the economy, as modelled by a system of simultaneous equations.
 
-The R codes use various packages that can be obtained from [CRAN](https://cran.r-project.org). Several pieces of code also involve procedures and data from a companion package (`AEC`). Some of these procedures ---those pertaining to VAR models--- as well as the associated presentation (in Section \@ref(VAR)) have been prepared jointly with [Kenza Benhima](https://sites.google.com/site/benhimakenza/). This `AEC` package is available on GitHub. To install it, one need to employ the `devtools` library:
+Over the last decades, several methodologies have been proposed so as to estimate these responses. The objective of this course, developed by [Kenza Benhima](https://sites.google.com/site/benhimakenza/) and [Jean-Paul Renne](https://sites.google.com/site/jeanpaulrenne/home), is to provide an exhaustive view of these methodologies and to provide students with tools enabling them to implement them in various contexts.
+
+Codes associated with this course are part of the `AEC` package, which is available on GitHub. To install it, one need to employ the `devtools` library:
 
 ```{r installAEC, eval=FALSE}
 library(devtools)

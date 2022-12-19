@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Time Series | The Identification of Dynamic Structural Shocks</title>
-<meta name="author" content="Jean-Paul Renne">
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="2.1 Introduction to time series A time series is an infinite sequence of random variables indexed by time: \(\{y_t\}_{t=-\infty}^{+\infty}=\{\dots, y_{-2},y_{-1},y_{0},y_{1},\dots,y_t,\dots\}\),...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Time Series | The Identification of Dynamic Structural Shocks">
@@ -3615,10 +3615,10 @@ If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <s
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">+</span><span class="va">corrected</span><span class="op">$</span><span class="va">Bias</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="va">noncorrec</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">inv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3299835 0.1101304 1.062096 -0.1404889 0.1090471 1.0439081 -0.02043249
-## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199</code></pre>
+<pre><code>##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3239808 0.1462410 0.9157203 -0.1398299 0.1785468 0.9125583 -0.01693370
+## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199</code></pre>
 </div>
 </div>
 <div id="forecasting" class="section level2" number="2.4">
@@ -3939,7 +3939,7 @@ where <span class="math inline">\(\Phi\)</span> is the c.d.f. of the standard no
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Jean-Paul Renne. It was last built on 2022-12-19.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2022-12-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
