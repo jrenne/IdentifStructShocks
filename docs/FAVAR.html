@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks</title>
+<title>Chapter 8 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes. In the case where one suspects that the \(y_{i,t}\)’s are mainly...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks">
+<meta property="og:title" content="Chapter 8 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes. In the case where one suspects that the \(y_{i,t}\)’s are mainly...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:title" content="Chapter 8 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks">
 <meta name="twitter:description" content="VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes. In the case where one suspects that the \(y_{i,t}\)’s are mainly...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -65,13 +65,16 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
-<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
-<li><a class="active" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
-<li><a class="" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
-<li><a class="" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
-<li><a class="" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
+<li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">5</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">7</span> Inference</a></li>
+<li><a class="active" href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">9</span> Appendix</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -80,15 +83,15 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="FAVAR" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="FAVAR" class="section level1" number="8">
 <h1>
-<span class="header-section-number">4</span> Factor-Augmented VAR<a class="anchor" aria-label="anchor" href="#FAVAR"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Factor-Augmented VAR<a class="anchor" aria-label="anchor" href="#FAVAR"><i class="fas fa-link"></i></a>
 </h1>
 <p>VAR models are subject to the curse of dimensionality: If <span class="math inline">\(n\)</span>, is large, then the number of parameters (in <span class="math inline">\(n^2\)</span>) explodes.</p>
-<p>In the case where one suspects that the <span class="math inline">\(y_{i,t}\)</span>’s are mainly driven by a small number of random sources, a factor structure may be imposed, and <strong>principal component analysis</strong> (PCA, see Appendix <a href="FAVAR.html#PCAapp">4.1</a>) can be employed to estimate the relevant factors (<span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span>).</p>
-<div id="PCAapp" class="section level2" number="4.1">
+<p>In the case where one suspects that the <span class="math inline">\(y_{i,t}\)</span>’s are mainly driven by a small number of random sources, a factor structure may be imposed, and <strong>principal component analysis</strong> (PCA, see Appendix <a href="FAVAR.html#PCAapp">8.1</a>) can be employed to estimate the relevant factors (<span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span>).</p>
+<div id="PCAapp" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">4.1</span> Principal component analysis (PCA)<a class="anchor" aria-label="anchor" href="#PCAapp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Principal component analysis (PCA)<a class="anchor" aria-label="anchor" href="#PCAapp"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Principal component analysis (PCA)</strong> is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are linearly driven by a relatively small number of factors. This approach is widely used in data analysis and image compression.</p>
 <p>Suppose that we have <span class="math inline">\(T\)</span> observations of a <span class="math inline">\(n\)</span>-dimensional random vector <span class="math inline">\(x\)</span>, denoted by <span class="math inline">\(x_{1},x_{2},\ldots,x_{T}\)</span>. We suppose that each component of <span class="math inline">\(x\)</span> is of mean zero.</p>
@@ -98,7 +101,7 @@
 \begin{array}{clll}
 \underset{u}{\arg\max} &amp; u'X'Xu. \\
 \mbox{s.t. } &amp; \left| u\right| =1
-\end{array}\tag{4.1}
+\end{array}\tag{8.1}
 \end{equation}\]</span></p>
 <p>Since <span class="math inline">\(X'X\)</span> is a positive definite matrix, it admits the following decomposition:
 <span class="math display">\[\begin{eqnarray*}
@@ -116,7 +119,7 @@ where <span class="math inline">\(P\)</span> is an orthogonal matrix whose colum
 <span class="math display">\[
 y'Dy=\sum_{i=1}^{n}y_{i}^{2}\lambda_{i}\leq\lambda_{1}\sum_{i=1}^{n}y_{i}^{2}=\lambda_{1}.
 \]</span></p>
-<p>It is easily seen that the maximum is reached for <span class="math inline">\(y=\left[1,0,\cdots,0\right]'\)</span>. Therefore, the maximum of the optimization program (Eq. <a href="FAVAR.html#eq:PCA11">(4.1)</a>) is obtained for <span class="math inline">\(u=P\left[1,0,\cdots,0\right]'\)</span>. That is, <span class="math inline">\(u\)</span> is the eigenvector of <span class="math inline">\(X'X\)</span> that is associated with its larger eigenvalue (first column of <span class="math inline">\(P\)</span>).</p>
+<p>It is easily seen that the maximum is reached for <span class="math inline">\(y=\left[1,0,\cdots,0\right]'\)</span>. Therefore, the maximum of the optimization program (Eq. <a href="FAVAR.html#eq:PCA11">(8.1)</a>) is obtained for <span class="math inline">\(u=P\left[1,0,\cdots,0\right]'\)</span>. That is, <span class="math inline">\(u\)</span> is the eigenvector of <span class="math inline">\(X'X\)</span> that is associated with its larger eigenvalue (first column of <span class="math inline">\(P\)</span>).</p>
 <p>Let us denote with <span class="math inline">\(F\)</span> the vector that is given by the matrix product <span class="math inline">\(XP\)</span> (note that its last column is equal to <span class="math inline">\(Xu\)</span>). The columns of <span class="math inline">\(F\)</span>, denoted by <span class="math inline">\(F_{j}\)</span>, are called <strong>factors</strong>. We have:
 <span class="math display">\[
 F'F=P'X'XP=D.
@@ -134,13 +137,13 @@ X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
 <p>Intuitively, if the first eigenvalue is large, it means that the first factor embed a large share of the fluctutaions of the <span class="math inline">\(n\)</span> <span class="math inline">\(X_{i}\)</span>’s.</p>
 <p>Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., <span class="citation">Litterman and Scheinkman (<a href="references.html#ref-Litterman_Scheinkman_1991" role="doc-biblioref">1991</a>)</span>). One can typically employ PCA to recover such factors. The data used in the example below are taken from the <a href="https://fred.stlouisfed.org">Fred database</a> (tickers: “DGS6MO”,“DGS1”, …). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).</p>
 <p>To run a PCA, one simply has to apply function <code>prcomp</code> to a matrix of data:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
 <span><span class="va">USyields</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">yds</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y1"</span>,<span class="st">"Y2"</span>,<span class="st">"Y3"</span>,<span class="st">"Y5"</span>,<span class="st">"Y7"</span>,<span class="st">"Y10"</span>,<span class="st">"Y20"</span>,<span class="st">"Y30"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">PCA.yds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">yds</span>,center<span class="op">=</span><span class="cn">TRUE</span>,scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Let us know visualize some results. The first plot of Figure <a href="FAVAR.html#fig:USydsPCA1">4.1</a> shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<p>Let us know visualize some results. The first plot of Figure <a href="FAVAR.html#fig:USydsPCA1">8.1</a> shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.95</span>,<span class="fl">.2</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,</span>
@@ -167,13 +170,13 @@ X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:USydsPCA1"></span>
 <img src="IdentifStructShocks_files/figure-html/USydsPCA1-1.png" alt="Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities." width="672"><p class="caption">
-Figure 4.1: Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.
+Figure 8.1: Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.
 </p>
 </div>
 </div>
-<div id="favar-models" class="section level2" number="4.2">
+<div id="favar-models" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">4.2</span> FAVAR models<a class="anchor" aria-label="anchor" href="#favar-models"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> FAVAR models<a class="anchor" aria-label="anchor" href="#favar-models"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us denote by <span class="math inline">\(F_t\)</span> a <span class="math inline">\(k\)</span>-dimensional vector of latent factors accounting for important shares of the variances of the <span class="math inline">\(y_{i,t}\)</span>’s (with <span class="math inline">\(K \ll n\)</span>) and by <span class="math inline">\(x_t\)</span> is a small <span class="math inline">\(M\)</span>-dimensional subset of <span class="math inline">\(y_t\)</span> (with <span class="math inline">\(M \ll n\)</span>). The following factor structure is posited:
 <span class="math display">\[
@@ -182,13 +185,13 @@ y_t = \Lambda^f F_t + \Lambda^x x_t + e_t,
 where the <span class="math inline">\(e_t\)</span> are “small” serially and mutually i.i.d. error terms. That is <span class="math inline">\(F_t\)</span> and <span class="math inline">\(x_t\)</span> are supposed to drive most of the fluctuations of <span class="math inline">\(y_t\)</span>’s components.</p>
 <p>The model is complemented by positing a VAR dynamics for <span class="math inline">\([F_t',x_t']'\)</span>:
 <span class="math display" id="eq:FAVAR">\[\begin{equation}
-\left[\begin{array}{c}F_t\\x_t\end{array}\right] = \Phi(L)\left[\begin{array}{c}F_{t-1}\\ x_{t-1}\end{array}\right] + v_t.\tag{4.2}
+\left[\begin{array}{c}F_t\\x_t\end{array}\right] = \Phi(L)\left[\begin{array}{c}F_{t-1}\\ x_{t-1}\end{array}\right] + v_t.\tag{8.2}
 \end{equation}\]</span></p>
-<p>Standard identification techniques of structural shocks can be employed in Eq. <a href="FAVAR.html#eq:FAVAR">(4.2)</a>: Cholesky approach can be used for instance if the last component of <span class="math inline">\(x_t\)</span> is the short-term interest rate and if it is assumed that a MP shock has no contemporaneous impact on other macro-variables (in <span class="math inline">\(x_t\)</span>).</p>
+<p>Standard identification techniques of structural shocks can be employed in Eq. <a href="FAVAR.html#eq:FAVAR">(8.2)</a>: Cholesky approach can be used for instance if the last component of <span class="math inline">\(x_t\)</span> is the short-term interest rate and if it is assumed that a MP shock has no contemporaneous impact on other macro-variables (in <span class="math inline">\(x_t\)</span>).</p>
 <p>In their identification procedure, <span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span> exploit the fact that macro-finance variables can be decomposed in two sets —fast-moving and slow-moving variables— and that only the former reacts contemporaneously to monetary-policy shocks. Now, how to estimate the (unobserved) factors <span class="math inline">\(F_t\)</span>? <span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span> note that the first <span class="math inline">\(K+M\)</span> PCA of the whole dataset (<span class="math inline">\(y_t\)</span>), that they denote by <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> should span the same space as <span class="math inline">\(F_t\)</span> and <span class="math inline">\(x_t)\)</span>. To get an estimate of <span class="math inline">\(F_t\)</span>, the dependence of <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> in <span class="math inline">\(x_t)\)</span> has to be removed. This is done by regressing, by OLS, <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> on <span class="math inline">\(x_t)\)</span> and on <span class="math inline">\(\hat{C}^*(F_t)\)</span>, where the latter is an estimate of the common components other than <span class="math inline">\(x_t\)</span>. To proxy for <span class="math inline">\(\hat{C}^*(F_t)\)</span>, <span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span> take principal components from the set of slow-moving variables, that are not comtemporaneously correlated to <span class="math inline">\(x_t\)</span>. Vector <span class="math inline">\(\hat{F}_t\)</span> is then computed as <span class="math inline">\(\hat{C}(F_t,x_t) - b_x x_t\)</span>, where <span class="math inline">\(b_x\)</span> are the coefficients coming from the previous OLS regressions.</p>
 <p>Note that this approach implies that the vectorial space spanned by <span class="math inline">\((\hat{F}_t,x_t)\)</span> is the same as that spanned by <span class="math inline">\(\hat{C}(F_t,x_t)\)</span>.</p>
 <p>Below, we employ this method on the dataset built by <span class="citation">McCracken and Ng (<a href="references.html#ref-McCracken_Ng_2016" role="doc-biblioref">2016</a>)</span> —the <a href="https://research.stlouisfed.org/wp/more/2015-012">FRED:MD</a> database— that includes 119 time series.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nk027/bvar">BVAR</a></span><span class="op">)</span><span class="co"># contains the fred_md dataset</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
@@ -236,21 +239,21 @@ where the <span class="math inline">\(e_t\)</span> are “small” serially and 
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:FAVAR"></span>
 <img src="IdentifStructShocks_files/figure-html/FAVAR-1.png" alt="Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset." width="95%"><p class="caption">
-Figure 4.2: Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.
+Figure 8.2: Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.
 </p>
 </div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></div>
-<div class="next"><a href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></div>
+<div class="prev"><a href="Inference.html"><span class="header-section-number">7</span> Inference</a></div>
+<div class="next"><a href="append.html"><span class="header-section-number">9</span> Appendix</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#FAVAR"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
-<li><a class="nav-link" href="#PCAapp"><span class="header-section-number">4.1</span> Principal component analysis (PCA)</a></li>
-<li><a class="nav-link" href="#favar-models"><span class="header-section-number">4.2</span> FAVAR models</a></li>
+<li><a class="nav-link" href="#FAVAR"><span class="header-section-number">8</span> Factor-Augmented VAR</a></li>
+<li><a class="nav-link" href="#PCAapp"><span class="header-section-number">8.1</span> Principal component analysis (PCA)</a></li>
+<li><a class="nav-link" href="#favar-models"><span class="header-section-number">8.2</span> FAVAR models</a></li>
 </ul>
 
       <div class="book-extra">
@@ -267,7 +270,7 @@ Figure 4.2: Responses of a monetary-policy shock. FAVAR approach of Bernanke, Bo
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

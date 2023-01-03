@@ -1,6 +1,6 @@
 # Local projection methods {#Projections}
 
-## Projection Methods
+## Overview of the approach
 
 Consider the infinite MA representation of $y_t$ (Eq. \@ref(eq:InfMA)):
 $$
@@ -8,15 +8,18 @@ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.
 $$
 As seen in Section \@ref(IRFSVARMA), the entries $(i,j)$ of the sequence of the $\Psi_h$ matrices define the IRF of $\eta_{j,t}$ on $y_{i,t}$.
 
+
 Assume that you observe $\eta_{j,t}$, then a consistent estimate of $\Psi_{i,j,h}$ is simply obtained by the OLS regression of $y_{i,t+h}$ on $\eta_{j,t}$:
 \begin{equation}
 y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.(\#eq:OLS1)
 \end{equation}
-Because the residuals $u_{i,j,t+h}$ are autocorrelated (for $h>0$), estimates of the covariance of the OLS estimators of the $\Psi_{i,j,h}$ then have to be based on robust estimators (e.g. Newey-West, see Eq. \@ref(eq:NW)). This is the core idea of the **local projection approach** proposed by @Jorda_2005.
+Because the residuals $u_{i,j,t+h}$ are autocorrelated (for $h>0$), estimates of the covariance of the OLS estimators of the $\Psi_{i,j,h}$ then have to be based on robust estimators (e.g. @Newey_West_1987). This is the core idea of the **local projection approach** proposed by @Jorda_2005.
 
 Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations.
 
-**Situation A: Without IV**
+
+
+## Situation A: Without IV
 
 This corresponds to the original @Jorda_2005's approach. 
 
@@ -52,7 +55,9 @@ This approach closely relates to the SVAR Cholesky-based identification approach
 [^FootnoteIteratedFcst]: This is reminiscent of the distinction betweem direct forecasting --based on regressions of $y_{t+h}$ on $\{y_t,y_{t-1},\dots\}$-- and iterated forecasting --based on a recursive model where $y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}$, see @Marcellino_et_al_2006. 
 
 
-**Situation B: IV approach**
+## Situation B: IV approach
+
+### Instruments (proxies for structural shocks)
 
 Consider now that we have a valid instrument $z_t$ for $\eta_{1,t}$ (with $\mathbb{E}(z_t)=0$). That is:
 \begin{equation}
@@ -122,7 +127,7 @@ If the VAR adequately captures the DGP, then the IV-SVAR is optimal for all hori
 
 
 
-**Situation B.1: SVAR-IV approach**
+### Situation B.1: SVAR-IV approach
 
 Assume you have consistent estimates of $\varepsilon_t = B\eta_t$, these estimates ($\hat\varepsilon_{t}$) coming from the estimation of a VAR model. You have, for $i \in \{1,\dots,n\}$:
 \begin{eqnarray}
@@ -226,8 +231,7 @@ res.svar.iv <-
 
 
 
-
-**Situation B.2: LP-IV**
+### Situation B.2: LP-IV
 
 If you do not want to posit a VAR-type dynamics for $y_t$ --e.g. because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the $\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}$ (that are the IRFs of $\tilde\eta_{1,t}$ on $y_{i,t}$).
 

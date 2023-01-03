@@ -24,8 +24,10 @@ As was the case for univariate models, VARs can be extended with MA terms in $\e
 Let $y_{t}$ denote a $n \times1$ vector of random variables. Process $y_{t}$ follows a VARMA model of order (p,q) if, for all $t$, we have
 \begin{eqnarray}
 \begin{array}{rllll}
-VARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q ,\\
-SVARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + B_0 \eta_t+ B_1 \eta_{t-1} + \dots +  B_q \eta_{t-q},
+VARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
+&&&\varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q ,\\
+SVARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
+&&& B_0 \eta_t+ B_1 \eta_{t-1} + \dots +  B_q \eta_{t-q},
 \end{array}(\#eq:yVARMA)
 \end{eqnarray}
 with $\varepsilon_t = B_0\eta_t$ (and $B_j = \Theta_j B_0$, for $j \ge 0$), where $\{\eta_{t}\}$ is a white noise sequence whose components are are mutually and serially independent.
@@ -56,19 +58,34 @@ $$
 $$
 (effect on $y_{i,t+h}$ of a one-unit shock on $\eta_{j,t}$).
 
-If the dynamics of process $y_t$ can be described as a VARMA model, and if $y_t$ is covariance stationary (see Def. \@ref(def:covstat)), then $y_t$ admits the following infinite MA representation (MA($\infty$)):
+If the dynamics of process $y_t$ can be described as a VARMA model, and if $y_t$ is covariance stationary (see Def. \@ref(def:covstat)), then $y_t$ admits the following infinite MA representation (MA($\infty$)):^[This is also the Wold decomposition of process $\{y_t\}$.]
 \begin{equation}
 y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.(\#eq:InfMA)
 \end{equation}
-This is also the Wold decomposition of process $\{y_t\}$ (see Theorem \@ref(thm:Wold)).
+
 
 Estimating IRFs amounts to estimating the $\Psi_{h}$'s. In general, there exist three main approaches for that:
 
 * Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at the first order (linearization). The solution takes the form of Eq. \@ref(eq:InfMA).
 * Directly estimate the $\Psi_{h}$ based on **projection approaches** (see Section \@ref(Projections)).
-* Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. **VAR(MA) models** (see Section \@ref(estimVAR)). Once a (Structural) VARMA representation is obtained, Eq. \@ref(eq:InfMA) is easily deduced. For that, one can use the same recursive algorithm as for univariate processes (see Prop. \@ref(prp:computPsi)).
+* Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. **VAR(MA) models** (see Section \@ref(estimVAR)). Once a (Structural) VARMA representation is obtained, Eq. \@ref(eq:InfMA) is easily deduced using the following proposition:
 
-Typically, consider the AR(2) case. The first steps of the algorithm mentioned in the last bullet point are as follows:
+:::{.proposition #computPsi name="IRF of an ARMA(p,q) process"}
+If $y_t$ follows the VARMA model described in Def. \ref(def:SVARMA), then the matrices $\Psi_h$ appearing in Eq. \@ref(eq:InfMA) can be computed recursively as follows:
+
+1. Set $\Psi_{-1}=\dots=\Psi_{-p}=0$.
+2. For $h \ge 0$, (recursively) apply:
+$$
+\Psi_h = \Phi_1 \Psi_{h-1} + \dots + \Phi_p \Psi_{h-p} + \Theta_h,
+$$
+with $\Theta_0 = Id$ and $\Theta_h = 0$ for $h>q$.
+:::
+
+:::{.proof}
+This is obtained by applying the operator $\frac{\partial}{\partial \varepsilon_{t}}$ on both sides of Eq. \@ref(eq:yVARMA).
+:::
+
+Typically, consider the VAR(2) case. The first steps of the algorithm mentioned in the last bullet point are as follows:
 \begin{eqnarray*}
 y_t &=& \Phi_1 {\color{blue}y_{t-1}} + \Phi_2 y_{t-2} + B \eta_t  \\
 &=& \Phi_1 \color{blue}{(\Phi_1 y_{t-2} + \Phi_2 y_{t-3} + B \eta_{t-1})} + \Phi_2 y_{t-2} + B \eta_t  \\
@@ -171,7 +188,7 @@ For $y_t$ to be covariance-stationary (and ergodic for the mean), it has to be t
 \end{equation}
 where $\|A\|$ denotes a norm of the matrix $A$ (e.g. $\|A\|=\sqrt{tr(AA')}$). This notably implies that if $y_t$ is stationary (and ergodic for the mean), then $\|\Psi_h\|\rightarrow 0$ when $h$ gets large.
 
-What should be satisfied by $\Phi_k$'s and $\Theta_k$'s for a VARMA-based process (Eq. \@ref(eq:VARMAstd)) to be stationary? The conditions will be similar to that we had in the univariate case (see Prop. \@ref(prp:stability)). Let us introduce the following notations:
+What should be satisfied by $\Phi_k$'s and $\Theta_k$'s for a VARMA-based process (Eq. \@ref(eq:yVARMA)) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
 \begin{eqnarray}
 y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  (\#eq:VARMA2)\\
 &&\underbrace{B \eta_t+ \Theta_1 B \eta_{t-1}+ \dots+ \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
@@ -186,7 +203,7 @@ I & 0 & \cdots & 0\\
 0 & \ddots & 0 & 0\\
 0 & 0 & I & 0\end{array}\right](\#eq:matrixPHI)
 \end{equation}
-lie strictly within the unit circle. Hence, as was the case for univariate processes, the covariance-stationarity of a VARMA model depends only on the specification of its AR part.
+lie strictly within the unit circle. Hence, as is the case for univariate processes, the covariance-stationarity of a VARMA model depends only on the specification of its AR part.
 
 Let's derive the first two unconditional moments of a (covariance-stationary) VARMA process.
 
@@ -221,23 +238,11 @@ $$
 \mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'}_{\mbox{Contribution of $\eta_{i,t}$}}.
 $$
 
-Let us now turn to the estimation of VAR(MA) models.
-
-
-
-If there is a MA component, OLS regressions yield biased estimates (even for asymptotically large samples).
-
-Assume $y_t$ follows a VARMA(1,1) model. We have:
+Let us now turn to the estimation of VAR models. Note that if there is an MA component (i.e., if we consider a VARMA model), then OLS regressions yield biased estimates (even for asymptotically large samples). Assume for instance that $y_t$ follows a VARMA(1,1) model:
 $$
 y_{i,t} = \phi_i y_{t-1} + \varepsilon_{i,t},
 $$
-where $\phi_i$ is the $i^{th}$ row of $\Phi_1$, and where $\varepsilon_{i,t}$ is a linear combination of $\eta_t$ and $\eta_{t-1}$.
-
-Since $y_{t-1}$ (the regressor) is correlated to $\eta_{t-1}$, it is also correlated to $\varepsilon_{i,t}$.
-
-The OLS regression of $y_{i,t}$ on $y_{t-1}$ yields a biased estimator of $\phi_i$. Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models.
-
-
+where $\phi_i$ is the $i^{th}$ row of $\Phi_1$, and where $\varepsilon_{i,t}$ is a linear combination of $\eta_t$ and $\eta_{t-1}$. Since $y_{t-1}$ (the regressor) is correlated to $\eta_{t-1}$, it is also correlated to $\varepsilon_{i,t}$. The OLS regression of $y_{i,t}$ on $y_{t-1}$ yields a biased estimator of $\phi_i$. Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of $y_t$ as instruments, see, e.g., @Gourieroux_Monfort_Renne_2020).
 
 
 ## VAR estimation {#estimVAR}
@@ -373,7 +378,7 @@ Under the null hypothesis ($H_0$: $p=p_0$), we have:
 
 What precedes can be used to help determine the appropriate number of lags to use in the specification. In a VAR, using too many lags consumes numerous degrees of freedom: with $p$ lags, each of the $n$ equations in the VAR contains $n\times p$ coefficients plus the intercept term. Adding lags improve in-sample fit, but is likely to result in over-parameterization and affect the **out-of-sample** prediction performance.
 
-To select appropriate lag length, **selection criteria** can be used (see Definition \@ref(def:infocriteria)).  In the context of VAR models, using Eq. \@ref(eq:optimzedLogL), we have:
+To select appropriate lag length, **selection criteria** can be used.  In the context of VAR models, using Eq. \@ref(eq:optimzedLogL), we have for instance:
 \begin{eqnarray*}
 AIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{2}{T}N\\
 BIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,

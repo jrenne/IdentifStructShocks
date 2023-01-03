@@ -1,0 +1,261 @@
+# Sign restrictions {#Signs}
+
+To identifiy the structural shocks, we need to find a matrix $B$ that satisfies $\Omega = BB'$ (with $\Omega = \mathbb{V}ar(\varepsilon_t)$) and other restrictions. Indeed, as explained above, $\Omega = BB'$ is not sufficient to identify $B$ since, if we take any orthogonal matrix $Q$ (see Def. \@ref(def:orthogonal)), then $\mathcal{P}=BQ$ also satisfies $\Omega = \mathcal{P}\mathcal{P}'$.
+
+:::{.definition #orthogonal name="Orthogonal matrix"}
+An orthogonal matrix $Q$ is a matrix such that $QQ' = I,$ i.e., all columns (rows) of $Q$ are are
+orthogonal and unit vectors:
+\[q_i'q_j=0\text{ if }i\neq j\text{ and }q_i'q_j=1\text{ if }i= j,\]
+where $q_i$ is the $i^{th}$ column of $Q$.
+:::
+
+## The approach
+
+The idea behind the sign-restriction approach is to "draw" random matrices $\mathcal{P}$ that satisfy $\Omega = \mathcal{P}\mathcal{P}'$, and then to constitute a set of admissible matrices, keeping in this set only the simulated $\mathcal{P}$ matrices that satisfy some predefined sign-based restriction. An example of restriction is "*after one year, a contractionary monetary-policy shocks has a negative impact on inflation*".
+
+As suggested above, if $B$ is any matrix that satisfies $\Omega = BB'$ (for instance, $B$ can be based on the Cholesky decomposition of $\Omega$), then we also have $\Omega = \mathcal{P}\mathcal{P}'$ as soon as $\mathcal{P}=BQ$, where $Q$ is an orthogonal matrix. Therefore, to draw $\mathcal{P}$ matrices, it suffices to draw in the set of orthogonal matrices.
+
+To fix ideas, consider dimension 2. In that case, the orthogonal matrices are rotation matrices, and the set of orthogonal matrices can be parameterized by the angle $x$, with:
+$$
+Q_x=\begin{pmatrix}\cos(x)&\cos\left(x+\frac{\pi}{2}\right)\\
+\sin(x)&\sin\left(x+\frac{\pi}{2}\right)\end{pmatrix}=\begin{pmatrix}\cos(x)&-\sin(x)\\
+\sin(x)&\cos(x)\end{pmatrix}.
+$$
+(This is an angle-$x$ counter-clockwise rotation.) Hence, in that case, by drawing $x$ randomly from $[0,2\pi]$, we draw randomly from the set of $2\times2$ rotation matrices. For high-dimensional VAR, we lose this simple geometrical representation, though. It is not always possible to parametrize a rotation matrix (high-dimentional VARs).
+
+How to proceed, then? @Arias_et_al_2018 provide a procedure. Their approach is based on the so-called $QR$ decomposition: any square matrix $X$ may be decomposed as $X=QR$ where $Q$ is an orthogonal matrix and $R$ is an upper diagonal matrix. With this in mind, they propose a two-step approach:
+
+i. Draw a random matrix $X$ by drawing each element from independent standard normal distribution.
+ii. Let $X = QR$ be the $QR$ decomposition of $X$ with the diagonal of $R$ normalized to be
+positive. The random matrix $Q$ is orthogonal and is a draw from the uniform distribution over the set of orthogonal matrices.
+
+Equipped with this procedure, the sign-restriction is based on the following algorithm:
+
+1. Draw a random orthogonal matrix $Q$ (using step i. and ii. described above).
+2. Compute $B = PQ$ where $P$ is the Cholesky decomposition of the reduced form residuals $\Omega_{\varepsilon}$.
+3. Compute the impulse response associated with $B$ $y_{t,t+k}=\Phi^kB$ or the cumulated response $\bar y_{t,t+k}=\sum_{j=0}^{k}\Phi^jB$.
+4. Are the sign restrictions satisfied?
+a. **Yes**. Store the impulse response in the set of admissible response.
+b. **No**. Discard the impulse response.
+5. Perform $N$ replications and report the median impulse response (and its "confidence" intervals).
+
+Note: to take into account the uncertainty in $B$ and $\Phi$, you can draw $B$ and $\Phi$ in Steps 2 and 3 using an inference method (see Section \@ref(Inference)).
+
+The sign-restriction approach method has the advantage of being relatively agnostic. Moreover, it is fairly flexible, as one can impose sign restrictions on any variable, at any horizon.
+
+
+## An example
+
+A prominent example is @Uhlig_2005. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.
+
+According to conventional wisdom, monetary contractions should:[^Footnote:Puzzles]
+
+* Raise the federal funds rate,
+* Lower prices,
+* Decrease non-borrowed reserves,
+* Reduce real output.
+
+[^Footnote:Puzzles]: Standard identification schemes often fail to achieve these 4 points Two puzzles regularly arise: *liquidity puzzle*: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; *price puzzle*: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.
+
+The restricitons considered by @Uhlig_2005 are as follows: an expansionary monetary policy shock leads to:
+
+* Increases in prices
+* Increase in nonborrowed reserves
+* Decreases in the federal funds rate
+
+What about output? Since is the response of interest, we leave it un-restricted.
+
+
+```{r signrestr1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.",warning=FALSE}
+library(AEC);library(vars);library(Matrix)
+data("USmonthly")
+First.date <- "1965-01-01"
+Last.date <- "1995-06-01"
+indic.first <- which(USmonthly$DATES==First.date)
+indic.last  <- which(USmonthly$DATES==Last.date)
+USmonthly   <- USmonthly[indic.first:indic.last,]
+considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
+n <- length(considered.variables)
+y <- as.matrix(USmonthly[considered.variables])
+sign.restrictions <- list()
+horizon <- list()
+#Define sign restrictions and horizon for restrictions
+for(i in 1:n){
+  sign.restrictions[[i]] <- matrix(0,n,n)
+  horizon[[i]] <- 1
+}
+sign.restrictions[[1]][1,3] <- 1
+sign.restrictions[[1]][2,5] <- -1
+sign.restrictions[[1]][3,6] <- 1
+horizon[[1]] <- 1:5
+res.svar.signs <- 
+  svar.signs(y,p=3,
+             nb.shocks = 1, #number of identified shocks
+             nb.periods.IRF = 20,
+             bootstrap.replications = 1, # = 0 if no bootstrap
+             confidence.interval = 0.80, # expressed in pp.
+             indic.plot = 1, # Plots are displayed if = 1.
+             nb.draws = 10000, # number of draws
+             sign.restrictions,
+             horizon,
+             recursive =1 #  =0 <- draw Q directly, =1 <- draw q recursively
+  )
+```
+
+<!-- Another approach -->
+
+<!-- If $B$ satisfies $BB'=\Omega_\varepsilon$, the vectors of $B$ are called **impulse vectors** -->
+
+<!-- Let $b$ be en impulse vector, there exists a unit-length vector $q$ (i.e. $q'q=1$) so that \[b=Pq\] -->
+
+<!-- $b$ describes the response of the variables to a shock that is a linear combination (with weights given by $q$) of the shocks associated to the Cholesky decomposition. It's a "candidate shock" for the sign restrictions. -->
+
+<!-- Note that $b$ is associated to a unique unit-length vector $q$. To span the -->
+<!-- potential $b$s, it is enough to span the $q$s. -->
+
+<!-- Let $\psi_k^i$ be the vector response at horizon $k$ to the $i^{th}$ shock in the -->
+<!-- Cholesky decomposition of $\Omega_\varepsilon$. The $\psi_k^i$ are the columns of $\Psi_k$, defined as follows: -->
+<!-- \[\Psi_k=\Phi^kP.\] -->
+
+<!-- The impulse response $\psi_k(q)$ associated to $q$ is then given by -->
+<!-- \[\psi_k(q)=\sum_{i=1}^m q_i\psi_k^i=\Psi_kq\] -->
+
+<!-- 1. Compute $\Psi_k=\Phi^kP$ (or $\sum_{j=0}^k\Psi_k$) using $P$, -->
+<!-- the Cholesky decomposition of $\Omega_\varepsilon$. -->
+<!-- 2. Draw a random orthogonal vector $q$ -->
+<!-- 3. Compute the impulse response associated with $q$ \[ y_{t,t+k}=\Psi_kq\] or the cumulated response \[\bar y_{t,t+k}=\left(\sum_{j=0}^k\Psi_k\right)q\] -->
+<!-- 4. Are the sign restrictions satisfied? -->
+
+<!-- a. **Yes**. Store the impulse response -->
+<!-- b. **No**. Discard the impulse response -->
+
+<!-- 5. Perform N times (starting from 2.) and report the median impulse response (and its confidence intervals) -->
+
+<!-- How to draw a unit-length vector? -->
+
+
+<!-- 1. Draw a vector $u$ from the standard normal distribution on -->
+<!-- $\mathbb{R}^m$. -->
+<!-- 2. Compute $q = u/||u||$. -->
+
+<!-- What if we identify $l>1$ shocks? We need to draw $q_1$,...,$q_l$ that are orthogonal. -->
+
+<!-- * For $1\le j\le l$, draw $u_j\in \mathbb{R}^{m+1-j}$ from a standard normal distribution and set $w_j = u_j/||u_j||$.  -->
+<!-- * Define $\begin{pmatrix}q_1&...&q_l\end{pmatrix}$ recursively by $q_j = K_jw_j$ for any matrix $K_j$ whose columns form an orthogonal basis for the null space of the matrix \[M_j = \begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}'\] ($q_j$ will be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$) -->
+
+It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Also, we say that this approach is set-identified, not point-identified.
+
+
+## The penalty-function approach (PFA)
+
+An alternative approach is the so-called **penalty-function approach** (PFA, @Uhlig_2005, present in @Danne_2015's package). This approach relies on a *penalty function*:
+$$
+\begin{array}{llll}f(x)&=&x&\text{ if }x\le0\\
+&&100.x&\text{ if }x>0\end{array}
+$$
+which penalizes positive responses and rewards negative responses.
+
+Let $\psi_k^j(q)$ be the impulse response of variable $j$. The $\psi_k^j(q)$'s are the elements of $\psi_k(q)=\Psi_kq$.
+
+Let $\sigma_j$ be the standard deviation of variable $j$. Let $\iota_{j,k}=1$ if we restrict the response of variable $j$ at the $k^th$ horizon to be negative, $\iota_{j,k}=-1$ if we restrict it to be positive, and $\iota_{j,k}=0$ if there is no restriction. The total penalty is given by $$
+\mathbf{P}(q)=\sum_{j=1}^m\sum_{k=0}^Kf\left(\iota_{j,k}\frac{\psi_k^j(q)}{\sigma_j}\right).
+$$
+
+We are looking for a solution to
+\[\begin{array}{ll}&\min_q \mathbf{P}(q)\\
+&\\
+\text{s.t. }&q'q=1.\end{array}\]
+
+The problem is solved numerically.
+
+
+
+## Combining different approaches
+
+Sometimes we need to combine different restriction approaches. For instance:
+
+* One shock satisfies both zero and sign restrictions.
+* Some shocks can be identified with zero restrictions (SR or LR), others with sign restrictions.
+* Some shocks satisfy the same zero restrictions (e.g. no LR effect on output) but can be distinguished from each other through sign restrictions.
+
+In such instances, we must make independent draws from the set of all structural parameters satisfying the zero restrictions. How to do that? @Arias_et_al_2018 propose to impose the zero restrictions on $B$, and then check signs. Remember, $\mathcal{P}=BQ$ is a candidate impact IRF. For each structural shock $j$, define the $m$-column matrices $Z_j$ (zero restrictions) and $S_j$ (sign restrictions). Each row of $Z_j$ (resp. $S_j$) defines a zero (resp. sign) restriction. $Z_j$ has $m-j$ rows at most (i.e., $m-j$ zero restriction at most).
+
+Example: In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
+\[Z_1 = \begin{pmatrix}1 & 0 & 0 & 0\end{pmatrix}, \]
+\[S_1 = \begin{pmatrix}0 & 1 & 0 & 0\\
+0 & 0 & -1 & 0\end{pmatrix}. \]
+
+For both zero and sign restrictions to be satisfied, we must have
+$$
+Z_jb_j=0 \quad \mbox{and} \quad S_jb_j>0,
+$$
+where $b_j$ is the $j^{th}$ column of $B$, i.e. the impact effect of the $j^{th}$ structural shock.
+
+The algorithm is as follows:
+
+1. For $1\le j\le m$, draw $u_j\in \mathbb{R}^{m+1-j-z_j}$ from a standard normal distribution ($z_j$ is the number of zero restrictions imposed on the $j^{th}$ shock) and set $w_j = u_j/||u_j||$.
+2. Define $Q= \begin{pmatrix}q_1&...&q_m\end{pmatrix}$ recursively by $q_j = K_jw_j$ for any matrix $K_j$ whose columns form an orthogonal basis for the null space of the matrix \[M_j =
+\begin{pmatrix} q_1&...&q_{j-1}&\color{blue}{(Z_jP)'}\end{pmatrix}'.\] (Vector $q_j$ will then be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$ and satisfy the zero restriction.)
+3. Set $B=PQ$.
+4. Check sign restrictions ($S_jb_j>0$ for all $j$?).
+
+Perform $N$ replications and report the median impulse response (and its confidence intervals).
+
+Function `svar.signs` can run this algorithm. It is called as follows:^[Note that outputs are not reported here; just copy-paste in Rstudio to get the 6 sets of IRFs.]
+
+```{r signrestr2, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.", eval=FALSE}
+sign.restrictions <- list()
+SR.restrictions <- list()
+horizon <- list()
+#Define sign restrictions and horizon for restrictions
+for(i in 1:n){
+  sign.restrictions[[i]] <- matrix(0,n,n)
+  horizon[[i]] <- 1
+}
+sign.restrictions[[1]][1,6] <- 1
+sign.restrictions[[2]][1,7] <- 1
+sign.restrictions[[3]][1,1] <- 1
+sign.restrictions[[3]][2,5] <- 1
+sign.restrictions[[4]][1,2] <- -1
+sign.restrictions[[4]][2,5] <- 1
+sign.restrictions[[5]][1,3] <- 1
+sign.restrictions[[5]][2,5] <- 1
+sign.restrictions[[6]][1,5] <- -1
+sign.restrictions[[6]][2,3] <- 1
+sign.restrictions[[6]][3,6] <- 1
+horizon[[6]] <- 1:5
+#Define zero restrictions
+SR.restrictions[[1]] <- array(0,c(1,n))
+SR.restrictions[[1]][1,5] <- 1
+SR.restrictions[[2]] <- array(0,c(1,n))
+SR.restrictions[[2]][1,5] <- 1
+for(i in 3:n){
+  SR.restrictions[[i]] <- array(0,c(0,n))
+}
+res.svar.signs.zeros <- svar.signs(y,p=3,
+                                  nb.shocks = 6, #number of identified shocks
+                                  nb.periods.IRF = 20,
+                                  bootstrap.replications = 100, # = 0 or 1
+                                  confidence.interval = 0.90, # expressed in pp.
+                                  indic.plot = 1, # Plots are displayed if = 1.
+                                  nb.draws = 10000, # number of draws
+                                  sign.restrictions,
+                                  horizon,
+                                  recursive =0,
+                                  SR.restrictions)
+
+IRFs.signs <- res.svar.signs.zeros$IRFs.signs
+nb.rotations <- res.svar.signs.zeros$xx
+```
+
+
+## Narrative sign restrictions {#NarrativeSign}
+
+A related approach, introduced by @AntolinDiaz_RubioRamirez_2018, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).^[See also Section \@ref(NarrativeHistDecomp).] For instance, @AntolinDiaz_RubioRamirez_2018 argue that one should rule out structural parameters that disagree with the view that "a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990."
+
+Suppose we want to impose the restriction that, at dates $\{t_1,\dots,t_J\}$, the signs of the $j^{th}$ shock are all positive. Then, the narrative sign restrictions are simply imposed by:
+$$
+\hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) > 0,
+$$
+where $\hat\eta_{t}(B)$ is the vector of structural shock associated with a given matrix $B$ (and where $e_j$ is the $j^{th}$ column of the $n \times n$ identity matrix).
+

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 Appendix | The Identification of Dynamic Structural Shocks</title>
+<title>Chapter 9 Appendix | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
-<meta name="description" content="7.1 Proofs                                                                                                                         Proof of Proposition 2.1 Proof. Using Proposition ?? (in Appendix...">
+<meta name="description" content="9.1 Definitions and statistical results  Definition 9.1 (Covariance stationarity) The process \(y_t\) is covariance stationary —or weakly stationary— if, for all \(t\) and \(j\), \[...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 7 Appendix | The Identification of Dynamic Structural Shocks">
+<meta property="og:title" content="Chapter 9 Appendix | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
-<meta property="og:description" content="7.1 Proofs                                                                                                                         Proof of Proposition 2.1 Proof. Using Proposition ?? (in Appendix...">
+<meta property="og:description" content="9.1 Definitions and statistical results  Definition 9.1 (Covariance stationarity) The process \(y_t\) is covariance stationary —or weakly stationary— if, for all \(t\) and \(j\), \[...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 Appendix | The Identification of Dynamic Structural Shocks">
-<meta name="twitter:description" content="7.1 Proofs                                                                                                                         Proof of Proposition 2.1 Proof. Using Proposition ?? (in Appendix...">
+<meta name="twitter:title" content="Chapter 9 Appendix | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="9.1 Definitions and statistical results  Definition 9.1 (Covariance stationarity) The process \(y_t\) is covariance stationary —or weakly stationary— if, for all \(t\) and \(j\), \[...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -65,13 +65,16 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
-<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
-<li><a class="" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
-<li><a class="" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
-<li><a class="" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
-<li><a class="active" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
+<li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">5</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">7</span> Inference</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></li>
+<li><a class="active" href="append.html"><span class="header-section-number">9</span> Appendix</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -80,10 +83,37 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="append" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="append" class="section level1" number="9">
 <h1>
-<span class="header-section-number">7</span> Appendix<a class="anchor" aria-label="anchor" href="#append"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Appendix<a class="anchor" aria-label="anchor" href="#append"><i class="fas fa-link"></i></a>
 </h1>
+<div id="definitions-and-statistical-results" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Definitions and statistical results<a class="anchor" aria-label="anchor" href="#definitions-and-statistical-results"><i class="fas fa-link"></i></a>
+</h2>
+<div class="definition">
+<p><span id="def:covstat" class="definition"><strong>Definition 9.1  (Covariance stationarity) </strong></span>The process <span class="math inline">\(y_t\)</span> is covariance stationary —or weakly stationary— if, for all <span class="math inline">\(t\)</span> and <span class="math inline">\(j\)</span>,
+<span class="math display">\[
+\mathbb{E}(y_t) = \mu \quad \mbox{and} \quad \mathbb{E}\{(y_t - \mu)(y_{t-j} - \mu)\} = \gamma_j.
+\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:LR" class="definition"><strong>Definition 9.2  (Likelihood Ratio test statistics) </strong></span>The likelihood ratio associated to a restriction of the form <span class="math inline">\(H_0: h({\boldsymbol\theta})=0\)</span> (where <span class="math inline">\(h({\boldsymbol\theta})\)</span> is a <span class="math inline">\(r\)</span>-dimensional vector) is given by:
+<span class="math display">\[
+LR = \frac{\mathcal{L}_R(\boldsymbol\theta;\mathbf{y})}{\mathcal{L}_U(\boldsymbol\theta;\mathbf{y})} \quad (\in [0,1]),
+\]</span>
+where <span class="math inline">\(\mathcal{L}_R\)</span> (respectively <span class="math inline">\(\mathcal{L}_U\)</span>) is the likelihood function that imposes (resp. that does not impose) the restriction. The likelihood ratio test statistic is given by <span class="math inline">\(-2\log(LR)\)</span>, that is:
+<span class="math display">\[
+\boxed{\xi^{LR}= 2 (\log\mathcal{L}_U(\boldsymbol\theta;\mathbf{y})-\log\mathcal{L}_R(\boldsymbol\theta;\mathbf{y})).}
+\]</span>
+Under regularity assumptions and under the null hypothesis, the test statistic follows a chi-square distribution with <span class="math inline">\(r\)</span> degrees of freedom (see Table <a href="append.html#tab:Chi2">9.3</a>).</p>
+</div>
+<div class="proposition">
+<p><span id="prp:pdfMultivarGaussian" class="proposition"><strong>Proposition 9.1  (p.d.f. of a multivariate Gaussian variable) </strong></span>If <span class="math inline">\(Y \sim \mathcal{N}(\mu,\Omega)\)</span> and if <span class="math inline">\(Y\)</span> is a <span class="math inline">\(n\)</span>-dimensional vector, then the density function of <span class="math inline">\(Y\)</span> is:
+<span class="math display">\[
+\frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right].
+\]</span></p>
+</div>
 <!-- ## Linear algebra: definitions and results {#LinAlgebra} -->
 <!-- :::{.definition #determinant name="Eigenvalues"} -->
 <!-- The eigenvalues of of a matrix $M$ are the numbers $\lambda$ for which: -->
@@ -509,9 +539,10 @@
 <!-- \frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right]. -->
 <!-- $$ -->
 <!-- ::: -->
-<div id="AppendixProof" class="section level2" number="7.1">
+</div>
+<div id="AppendixProof" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">7.1</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
 </h2>
 <!-- **Proof of Proposition \@ref(prp:MLEproperties)** -->
 <!-- :::{.proof} -->
@@ -753,9 +784,9 @@
 <!-- \end{eqnarray*} -->
 <!-- This implies that $\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)$ is always larger than $\color{blue}{\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}$, and is therefore minimized if the second term is equal to zero, that is if $\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}$. -->
 <!-- ::: -->
-<p><strong>Proof of Proposition <a href="basics.html#prp:estimVARGaussian">2.1</a></strong></p>
+<p><strong>Proof of Proposition <a href="basics.html#prp:estimVARGaussian">1.2</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-5" class="proof"><em>Proof</em>. </span>Using Proposition <a href="#prp:multivarG"><strong>??</strong></a> (in Appendix <a href="#XXX"><strong>??</strong></a>), we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
+<p><span id="unlabeled-div-6" class="proof"><em>Proof</em>. </span>Using Proposition <a href="#prp:multivarG"><strong>??</strong></a>, we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
 <span class="math display">\[\begin{eqnarray*}
 \log\mathcal{L}(Y_{T};\theta) &amp; = &amp; -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
 &amp;  &amp; -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].
@@ -791,9 +822,9 @@ Since <span class="math inline">\(\Omega\)</span> is a positive definite matrix,
 \]</span>
 which leads to the result.</p>
 </div>
-<p><strong>Proof of Proposition <a href="basics.html#prp:OLSVAR">2.2</a></strong></p>
+<p><strong>Proof of Proposition <a href="basics.html#prp:OLSVAR">1.3</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-6" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(2.11)</a>, we have:
+<p><span id="unlabeled-div-7" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(1.11)</a>, we have:
 <span class="math display">\[
 \sqrt{T}(\mathbf{b}-\boldsymbol{\beta}) =  (X'X/T)^{-1}\sqrt{T}(X'\boldsymbol\varepsilon/T).
 \]</span>
@@ -808,13 +839,13 @@ If <span class="math inline">\(j&gt;0\)</span>, we have <span class="math inline
 The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\boldsymbol\varepsilon/T)=\sqrt{T}\frac{1}{T}\sum_{t=1}^Tv_t\)</span> results from the Central Limit Theorem for covariance-stationary processes, using the <span class="math inline">\(\gamma_j^v\)</span> computed above.</p>
 </div>
 </div>
-<div id="statistical-tables" class="section level2" number="7.2">
+<div id="statistical-tables" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">7.2</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <caption>
-<span id="tab:Normal">Table 7.1: </span>Quantiles of the <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are respectively the row and column number; then the corresponding cell gives <span class="math inline">\(\mathbb{P}(0&lt;X\le a+b)\)</span>, where <span class="math inline">\(X \sim \mathcal{N}(0,1)\)</span>.</caption>
+<span id="tab:Normal">Table 9.1: </span>Quantiles of the <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are respectively the row and column number; then the corresponding cell gives <span class="math inline">\(\mathbb{P}(0&lt;X\le a+b)\)</span>, where <span class="math inline">\(X \sim \mathcal{N}(0,1)\)</span>.</caption>
 <colgroup>
 <col width="5%">
 <col width="9%">
@@ -1236,7 +1267,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </table></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Student">Table 7.2: </span>Quantiles of the Student-<span class="math inline">\(t\)</span> distribution. The rows correspond to different degrees of freedom (<span class="math inline">\(\nu\)</span>, say); the columns correspond to different probabilities (<span class="math inline">\(z\)</span>, say). The cell gives <span class="math inline">\(q\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(-q&lt;X&lt;q)=z\)</span>, with <span class="math inline">\(X \sim t(\nu)\)</span>.</caption>
+<span id="tab:Student">Table 9.2: </span>Quantiles of the Student-<span class="math inline">\(t\)</span> distribution. The rows correspond to different degrees of freedom (<span class="math inline">\(\nu\)</span>, say); the columns correspond to different probabilities (<span class="math inline">\(z\)</span>, say). The cell gives <span class="math inline">\(q\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(-q&lt;X&lt;q)=z\)</span>, with <span class="math inline">\(X \sim t(\nu)\)</span>.</caption>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="right">0.05</th>
@@ -1484,7 +1515,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </table></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Chi2">Table 7.3: </span>Quantiles of the <span class="math inline">\(\chi^2\)</span> distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.</caption>
+<span id="tab:Chi2">Table 9.3: </span>Quantiles of the <span class="math inline">\(\chi^2\)</span> distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.</caption>
 <colgroup>
 <col width="5%">
 <col width="11%">
@@ -1743,7 +1774,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </table></div>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <caption>
-<span id="tab:Fstat">Table 7.4: </span>Quantiles of the <span class="math inline">\(\mathcal{F}\)</span> distribution. The columns and rows correspond to different degrees of freedom (resp. <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>). The different panels correspond to different probabilities (<span class="math inline">\(\alpha\)</span>) The corresponding cell gives <span class="math inline">\(z\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(X \le z)=\alpha\)</span>, with <span class="math inline">\(X \sim \mathcal{F}(n_1,n_2)\)</span>.</caption>
+<span id="tab:Fstat">Table 9.4: </span>Quantiles of the <span class="math inline">\(\mathcal{F}\)</span> distribution. The columns and rows correspond to different degrees of freedom (resp. <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>). The different panels correspond to different probabilities (<span class="math inline">\(\alpha\)</span>) The corresponding cell gives <span class="math inline">\(z\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(X \le z)=\alpha\)</span>, with <span class="math inline">\(X \sim \mathcal{F}(n_1,n_2)\)</span>.</caption>
 <colgroup>
 <col width="15%">
 <col width="8%">
@@ -2088,14 +2119,15 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="Inference.html"><span class="header-section-number">6</span> Inference</a></div>
+<div class="prev"><a href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></div>
 <div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#append"><span class="header-section-number">7</span> Appendix</a></li>
-<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">7.1</span> Proofs</a></li>
-<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">7.2</span> Statistical Tables</a></li>
+<li><a class="nav-link" href="#append"><span class="header-section-number">9</span> Appendix</a></li>
+<li><a class="nav-link" href="#definitions-and-statistical-results"><span class="header-section-number">9.1</span> Definitions and statistical results</a></li>
+<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">9.2</span> Proofs</a></li>
+<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">9.3</span> Statistical Tables</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2112,7 +2144,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -18,9 +18,8 @@ css: "my-style.css"
 <!-- Declare new latex code: -->
 \newcommand{\bv}[1]{\mathbf{#1}} 
 
-# Before starting {#intro}
+# The Identification of Dynamic Structural Shocks {#intro .unlisted .unnumbered}
 
-WORK IN PROGRESS
 
 <!-- # Before starting {#intro .unlisted .unnumbered} -->
 
@@ -28,9 +27,10 @@ The identification and estimation of dynamic responses to structural shocks is o
 
 Over the last decades, several methodologies have been proposed so as to estimate these responses. The objective of this course, developed by [Kenza Benhima](https://sites.google.com/site/benhimakenza/) and [Jean-Paul Renne](https://sites.google.com/site/jeanpaulrenne/home), is to provide an exhaustive view of these methodologies and to provide students with tools enabling them to implement them in various contexts.
 
-Codes associated with this course are part of the `AEC` package, which is available on GitHub. To install it, one need to employ the `devtools` library:
+Codes associated with this course are part of the `AEC` package, which is available on GitHub. To load a  package from GitHub, you need to use function `install_github` from the `devtools` package:
 
 ```{r installAEC, eval=FALSE}
+install.packages("devtools") # in case you do not have already loaded this package.
 library(devtools)
 install_github("jrenne/AEC")
 library(AEC)

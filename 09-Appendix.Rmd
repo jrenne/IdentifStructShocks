@@ -2,6 +2,34 @@
 
 
 
+## Definitions and statistical results
+
+:::{.definition #covstat name="Covariance stationarity"}
+The process $y_t$ is covariance stationary ---or weakly stationary--- if, for all $t$ and $j$,
+$$
+\mathbb{E}(y_t) = \mu \quad \mbox{and} \quad \mathbb{E}\{(y_t - \mu)(y_{t-j} - \mu)\} = \gamma_j.
+$$
+:::
+
+:::{.definition #LR name="Likelihood Ratio test statistics"}
+The likelihood ratio associated to a restriction of the form $H_0: h({\boldsymbol\theta})=0$ (where $h({\boldsymbol\theta})$ is a $r$-dimensional vector) is given by:
+$$
+LR = \frac{\mathcal{L}_R(\boldsymbol\theta;\bv{y})}{\mathcal{L}_U(\boldsymbol\theta;\bv{y})} \quad (\in [0,1]),
+$$
+where $\mathcal{L}_R$ (respectively $\mathcal{L}_U$) is the likelihood function that imposes (resp. that does not impose) the restriction. The likelihood ratio test statistic is given by $-2\log(LR)$, that is:
+$$
+\boxed{\xi^{LR}= 2 (\log\mathcal{L}_U(\boldsymbol\theta;\bv{y})-\log\mathcal{L}_R(\boldsymbol\theta;\bv{y})).}
+$$
+Under regularity assumptions and under the null hypothesis, the test statistic follows a chi-square distribution with $r$ degrees of freedom (see Table \@ref(tab:Chi2)).
+:::
+
+
+:::{.proposition #pdfMultivarGaussian name="p.d.f. of a multivariate Gaussian variable"}
+If $Y \sim \mathcal{N}(\mu,\Omega)$ and if $Y$ is a $n$-dimensional vector, then the density function of $Y$ is:
+$$
+\frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right].
+$$
+:::
 
 
 
@@ -842,7 +870,7 @@
 **Proof of Proposition \@ref(prp:estimVARGaussian)**
 
 :::{.proof}
-Using Proposition \@ref(prp:multivarG) (in Appendix \@ref(XXX)), we obtain that, conditionally on $x_1$, the log-likelihood is given by
+Using Proposition \@ref(prp:multivarG), we obtain that, conditionally on $x_1$, the log-likelihood is given by
 \begin{eqnarray*}
 \log\mathcal{L}(Y_{T};\theta) & = & -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
 &  & -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].

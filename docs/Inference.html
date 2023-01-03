@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Inference | The Identification of Dynamic Structural Shocks</title>
+<title>Chapter 7 Inference | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Inference | The Identification of Dynamic Structural Shocks">
+<meta property="og:title" content="Chapter 7 Inference | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Inference | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:title" content="Chapter 7 Inference | The Identification of Dynamic Structural Shocks">
 <meta name="twitter:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -65,13 +65,16 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
-<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
-<li><a class="" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
-<li><a class="" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
-<li><a class="active" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
-<li><a class="" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
+<li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">5</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></li>
+<li><a class="active" href="Inference.html"><span class="header-section-number">7</span> Inference</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">9</span> Appendix</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -80,14 +83,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Inference" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Inference" class="section level1" number="7">
 <h1>
-<span class="header-section-number">6</span> Inference<a class="anchor" aria-label="anchor" href="#Inference"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Inference<a class="anchor" aria-label="anchor" href="#Inference"><i class="fas fa-link"></i></a>
 </h1>
 <p>Consider the following SVAR model:
 <span class="math display">\[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]</span>
 with <span class="math inline">\(\varepsilon_t=B\eta_t\)</span>, <span class="math inline">\(\Omega_\varepsilon=BB'\)</span>.</p>
-<p>The corresponding infinite MA representation (Eq. <a href="basics.html#eq:InfMA">(2.3)</a>, or Wold theorem, Theorem <a href="#thm:Wold"><strong>??</strong></a>) is:
+<p>The corresponding infinite MA representation (Eq. <a href="basics.html#eq:InfMA">(1.3)</a>, or Wold theorem, Theorem <a href="#thm:Wold"><strong>??</strong></a>) is:
 <span class="math display">\[
 y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
 \]</span>
@@ -95,7 +98,7 @@ where <span class="math inline">\(\Psi_0=B\)</span> and for <span class="math in
 <span class="math display">\[
 \Psi_h = \sum_{j=1}^h\Psi_{h-j}\Phi_j,
 \]</span>
-with <span class="math inline">\(\Phi_j=0\)</span> for <span class="math inline">\(j&gt;p\)</span> (see Prop. <a href="#prp:computPsi"><strong>??</strong></a> for this recursive computation of the <span class="math inline">\(\Psi_j\)</span>’s).</p>
+with <span class="math inline">\(\Phi_j=0\)</span> for <span class="math inline">\(j&gt;p\)</span> (see Prop. <a href="basics.html#prp:computPsi">1.1</a> for this recursive computation of the <span class="math inline">\(\Psi_j\)</span>’s).</p>
 <p>Inference on the VAR coefficients <span class="math inline">\(\{\Phi_j\}_{j=1,...,p}\)</span> is straightforward (standard OLS inference). But inference is more complicated regarding IRF. Indeed, as shown by the previous equation, the (infinite) MA coefficients <span class="math inline">\(\{\Psi_j\}_{j=1,...}\)</span> are non-linear functions of the <span class="math inline">\(\{\Phi_j\}_{j=1,...,p}\)</span> and of <span class="math inline">\(\Omega_\varepsilon\)</span>. An other issue pertain to small sample bias: typically, for persistent process, auto-regressive parameters are known to be downward biased.</p>
 <p>The main inference methods are the following:</p>
 <ul>
@@ -103,9 +106,9 @@ with <span class="math inline">\(\Phi_j=0\)</span> for <span class="math inline"
 <li>Asymptotic normal approximation (<span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990" role="doc-biblioref">1990</a>)</span>), or Delta method</li>
 <li>Bootstrap method (Kilian_1998)</li>
 </ul>
-<div id="monte-carlo-method" class="section level2" number="6.1">
+<div id="monte-carlo-method" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">6.1</span> Monte Carlo method<a class="anchor" aria-label="anchor" href="#monte-carlo-method"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Monte Carlo method<a class="anchor" aria-label="anchor" href="#monte-carlo-method"><i class="fas fa-link"></i></a>
 </h2>
 <p>We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the <span class="math inline">\(\Psi_j\)</span>’s) but which is a function of another variable whose distribution is known (here, the <span class="math inline">\(\Phi_j\)</span>’s).</p>
 <p>For instance, suppose we know the distribution of a random variable <span class="math inline">\(X\)</span>, which takes values in <span class="math inline">\(\mathbb{R}\)</span>, with density function <span class="math inline">\(p\)</span>. Assume we want to compute the mean of <span class="math inline">\(\varphi(X)\)</span>. We have:
@@ -117,19 +120,19 @@ Suppose that the above integral does not have a simple expression. We cannot com
 \mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
 \]</span>
 where <span class="math inline">\(\{X^{(i)}\}_{i=1,...,N}\)</span> are <span class="math inline">\(N\)</span> independent draws of <span class="math inline">\(X\)</span>. More generally, the distribution of <span class="math inline">\(\varphi(X)\)</span> can be approximated by the empirical distribution of the <span class="math inline">\(\varphi(X^{(i)}\)</span>’s. Typically, if 10’000 values of <span class="math inline">\(\varphi(X^{(i)}\)</span> are drawn, the <span class="math inline">\(5^{th}\)</span> percentile of the p.d.f. of <span class="math inline">\(\varphi(X)\)</span> can be approximated by the <span class="math inline">\(500^{th}\)</span> value of the 10’000 draws of <span class="math inline">\(\varphi(X^{(i)}\)</span> (after arranging these values in ascending order).</p>
-<p>As regards the computation of confidence intervals around IRFs, one has to think of <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,...,p}\)</span>, and of <span class="math inline">\(\widehat{\Omega}\)</span> as <span class="math inline">\(X\)</span> and <span class="math inline">\(\{\widehat{\Psi}_j\}_{j=1,...}\)</span> as <span class="math inline">\(\varphi(X)\)</span>. (Proposition <a href="basics.html#prp:OLSVAR2">2.3</a> provides us with the asymptotic distribution of the “<span class="math inline">\(X\)</span>.”)</p>
+<p>As regards the computation of confidence intervals around IRFs, one has to think of <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,...,p}\)</span>, and of <span class="math inline">\(\widehat{\Omega}\)</span> as <span class="math inline">\(X\)</span> and <span class="math inline">\(\{\widehat{\Psi}_j\}_{j=1,...}\)</span> as <span class="math inline">\(\varphi(X)\)</span>. (Proposition <a href="basics.html#prp:OLSVAR2">1.4</a> provides us with the asymptotic distribution of the “<span class="math inline">\(X\)</span>.”)</p>
 <p>To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach:</p>
 <p>For each iteration <span class="math inline">\(k\)</span>:</p>
 <ol style="list-style-type: decimal">
-<li>Draw <span class="math inline">\(\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}\)</span> and <span class="math inline">\(\widehat{\Omega}^{(k)}\)</span> from their asymptotic distribution (using Proposition <a href="basics.html#prp:OLSVAR2">2.3</a>).</li>
+<li>Draw <span class="math inline">\(\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}\)</span> and <span class="math inline">\(\widehat{\Omega}^{(k)}\)</span> from their asymptotic distribution (using Proposition <a href="basics.html#prp:OLSVAR2">1.4</a>).</li>
 <li>Compute the matrix <span class="math inline">\(B^{(k)}\)</span> so that <span class="math inline">\(\widehat{\Omega}^{(k)}=B^{(k)}B^{(k)'}\)</span>, according to your identification strategy.</li>
 <li>Compute the associated IRFs <span class="math inline">\(\{\widehat{\Psi}_j\}^{(k)}\)</span>.</li>
 </ol>
 <p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
 </div>
-<div id="delta-method" class="section level2" number="6.2">
+<div id="delta-method" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">6.2</span> Delta method<a class="anchor" aria-label="anchor" href="#delta-method"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Delta method<a class="anchor" aria-label="anchor" href="#delta-method"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose <span class="math inline">\(\beta\)</span> is a vector of parameters and <span class="math inline">\(\beta\)</span> is an estimator such that
 <span class="math display">\[
@@ -141,7 +144,7 @@ where <span class="math inline">\(d\)</span> denotes convergence in distribution
 \sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
 \]</span>
 Using this property, <span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990" role="doc-biblioref">1990</a>)</span> provides the asymptotic distributions of the <span class="math inline">\(\Psi_j\)</span>’s. The following lines of code can be used to get approximate confidence intervals for IRFs.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">irf.function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">THETA</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">c</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span>  <span class="va">phi</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
@@ -174,9 +177,9 @@ Using this property, <span class="citation">Lütkepohl (<a href="references.html
 <span><span class="va">mat.var.cov.IRF</span> <span class="op">&lt;-</span> <span class="va">d.IRF</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span><span class="op">$</span><span class="va">I</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">d.IRF</span><span class="op">)</span></span></code></pre></div>
 <p>A limit of the last two approaches (Monte Carlo and the Delta method) is that they critically rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.</p>
 </div>
-<div id="bootstrap" class="section level2" number="6.3">
+<div id="bootstrap" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">6.3</span> Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
 </h2>
 <p>IRFs’ confidence intervals are intervals where 90% (or 95%,75%,…) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (<span class="math inline">\(T\)</span> observations). We obviously cannot do this, because we have only one sample: <span class="math inline">\(\{y_t\}_{t=1,..,T}\)</span>. But we can try to <em>construct</em> such samples.</p>
 <p>Bootstrapping consists in:</p>
@@ -202,9 +205,9 @@ with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^
 </ol>
 <p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
 </div>
-<div id="bootstrap-after-bootstrap" class="section level2" number="6.4">
+<div id="bootstrap-after-bootstrap" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">6.4</span> Bootstrap-after-bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap-after-bootstrap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Bootstrap-after-bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap-after-bootstrap"><i class="fas fa-link"></i></a>
 </h2>
 <p>The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the <em>small sample bias</em>, stemming, in particular, from small-sample bias associated with OLS coefficient estimates <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}\)</span>. The main idea of the bootstrap-after-bootstrap of <span class="citation">Kilian (<a href="references.html#ref-Kilian_1998" role="doc-biblioref">1998</a>)</span> is to run two consecutive boostraps: the objective of the first is to compute the bias, which can further be used to correct the initial estimates of the <span class="math inline">\(\Phi_i\)</span>’s. Further, these corrected estimates are used —in the second boostrap— to compute a set of IRFs (as in the standard boostrap).</p>
 <p>More formally, the algorithm is as follows:</p>
@@ -246,7 +249,7 @@ y_t^{(k)}=\widetilde{\Phi}_1 y_{t-1}^{(k)} + \dots + \widetilde{\Phi}_p y_{t-p}^
 <p>In step 5, check if the largest eigenvalue of <span class="math inline">\(\tilde\Phi\)</span> is of modulus &lt;1.
 If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <span class="math inline">\(\widehat{\Theta}_j^{(i+1)}=\delta_{i+1}\widehat{\Theta}_j^{(i)}\)</span>, with <span class="math inline">\(\delta_{i+1}=\delta_i-0.01\)</span>, starting with <span class="math inline">\(\delta_1=1\)</span> and <span class="math inline">\(\widehat{\Theta}_j^{(1)} =\widehat{\Theta}_j\)</span>, and compute <span class="math inline">\(\widetilde{\Phi}_j^{(i+1)}=\widehat{\Phi}_j-\widehat{\Theta}_j^{(i+1)}\)</span> until the largest eigenvalue of <span class="math inline">\(\tilde\Phi^{(i+1)}\)</span> has modulus &lt;1.</p>
 <p>Function <code>VAR.Boot</code> of package <code>VAR.etp</code> (<span class="citation">Kim (<a href="references.html#ref-VARetp" role="doc-biblioref">2022</a>)</span>) can be used to operate the bias-correction approach of <span class="citation">Kilian (<a href="references.html#ref-Kilian_1998" role="doc-biblioref">1998</a>)</span>:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">VAR.etp</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span> <span class="co">#standard VAR models</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># part of VAR.etp package</span></span>
@@ -255,24 +258,24 @@ If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <s
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">+</span><span class="va">corrected</span><span class="op">$</span><span class="va">Bias</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="va">noncorrec</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">inv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##         inv(-1)   inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const
-## [1,] -0.3238652 0.1274398 1.063355 -0.1326763 0.07234888 0.9911598 -0.01878210
-## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199</code></pre>
+<pre><code>##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3171369 0.1973857 1.063584 -0.1533084 0.1427639 1.0591108 -0.02327451
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199</code></pre>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></div>
-<div class="next"><a href="append.html"><span class="header-section-number">7</span> Appendix</a></div>
+<div class="prev"><a href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></div>
+<div class="next"><a href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#Inference"><span class="header-section-number">6</span> Inference</a></li>
-<li><a class="nav-link" href="#monte-carlo-method"><span class="header-section-number">6.1</span> Monte Carlo method</a></li>
-<li><a class="nav-link" href="#delta-method"><span class="header-section-number">6.2</span> Delta method</a></li>
-<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">6.3</span> Bootstrap</a></li>
-<li><a class="nav-link" href="#bootstrap-after-bootstrap"><span class="header-section-number">6.4</span> Bootstrap-after-bootstrap</a></li>
+<li><a class="nav-link" href="#Inference"><span class="header-section-number">7</span> Inference</a></li>
+<li><a class="nav-link" href="#monte-carlo-method"><span class="header-section-number">7.1</span> Monte Carlo method</a></li>
+<li><a class="nav-link" href="#delta-method"><span class="header-section-number">7.2</span> Delta method</a></li>
+<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">7.3</span> Bootstrap</a></li>
+<li><a class="nav-link" href="#bootstrap-after-bootstrap"><span class="header-section-number">7.4</span> Bootstrap-after-bootstrap</a></li>
 </ul>
 
       <div class="book-extra">
@@ -289,7 +292,7 @@ If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <s
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
