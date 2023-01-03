@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks</title>
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
+<meta name="description" content="VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes. In the case where one suspects that the \(y_{i,t}\)’s are mainly...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes. In the case where one suspects that the \(y_{i,t}\)’s are mainly...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes. In the case where one suspects that the \(y_{i,t}\)’s are mainly...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="my-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
+<li><a class="active" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="FAVAR" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Factor-Augmented VAR<a class="anchor" aria-label="anchor" href="#FAVAR"><i class="fas fa-link"></i></a>
+</h1>
+<p>VAR models are subject to the curse of dimensionality: If <span class="math inline">\(n\)</span>, is large, then the number of parameters (in <span class="math inline">\(n^2\)</span>) explodes.</p>
+<p>In the case where one suspects that the <span class="math inline">\(y_{i,t}\)</span>’s are mainly driven by a small number of random sources, a factor structure may be imposed, and <strong>principal component analysis</strong> (PCA, see Appendix <a href="FAVAR.html#PCAapp">4.1</a>) can be employed to estimate the relevant factors (<span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span>).</p>
+<div id="PCAapp" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Principal component analysis (PCA)<a class="anchor" aria-label="anchor" href="#PCAapp"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Principal component analysis (PCA)</strong> is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are linearly driven by a relatively small number of factors. This approach is widely used in data analysis and image compression.</p>
+<p>Suppose that we have <span class="math inline">\(T\)</span> observations of a <span class="math inline">\(n\)</span>-dimensional random vector <span class="math inline">\(x\)</span>, denoted by <span class="math inline">\(x_{1},x_{2},\ldots,x_{T}\)</span>. We suppose that each component of <span class="math inline">\(x\)</span> is of mean zero.</p>
+<p>Let denote with <span class="math inline">\(X\)</span> the matrix given by <span class="math inline">\(\left[\begin{array}{cccc} x_{1} &amp; x_{2} &amp; \ldots &amp; x_{T}\end{array}\right]'\)</span>. Denote the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(X\)</span> by <span class="math inline">\(X_{j}\)</span>.</p>
+<p>We want to find the linear combination of the <span class="math inline">\(x_{i}\)</span>’s (<span class="math inline">\(x.u\)</span>), with <span class="math inline">\(\left\Vert u\right\Vert =1\)</span>, with “maximum variance.” That is, we want to solve:
+<span class="math display" id="eq:PCA11">\[\begin{equation}
+\begin{array}{clll}
+\underset{u}{\arg\max} &amp; u'X'Xu. \\
+\mbox{s.t. } &amp; \left| u\right| =1
+\end{array}\tag{4.1}
+\end{equation}\]</span></p>
+<p>Since <span class="math inline">\(X'X\)</span> is a positive definite matrix, it admits the following decomposition:
+<span class="math display">\[\begin{eqnarray*}
+X'X &amp; = &amp; PDP'\\
+&amp; = &amp; P\left[\begin{array}{ccc}
+\lambda_{1}\\
+&amp; \ddots\\
+&amp;  &amp; \lambda_{n}
+\end{array}\right]P',
+\end{eqnarray*}\]</span>
+where <span class="math inline">\(P\)</span> is an orthogonal matrix whose columns are the eigenvectors of <span class="math inline">\(X'X\)</span>.</p>
+<p>We can order the eigenvalues such that <span class="math inline">\(\lambda_{1}\geq\ldots\geq\lambda_{n}\)</span>. (Since <span class="math inline">\(X'X\)</span> is positive definite, all these eigenvalues are positive.)</p>
+<p>Since <span class="math inline">\(P\)</span> is orthogonal, we have <span class="math inline">\(u'X'Xu=u'PDP'u=y'Dy\)</span> where <span class="math inline">\(\left\Vert y\right\Vert =1\)</span>. Therefore, we have <span class="math inline">\(y_{i}^{2}\leq 1\)</span> for any <span class="math inline">\(i\leq n\)</span>.</p>
+<p>As a consequence:
+<span class="math display">\[
+y'Dy=\sum_{i=1}^{n}y_{i}^{2}\lambda_{i}\leq\lambda_{1}\sum_{i=1}^{n}y_{i}^{2}=\lambda_{1}.
+\]</span></p>
+<p>It is easily seen that the maximum is reached for <span class="math inline">\(y=\left[1,0,\cdots,0\right]'\)</span>. Therefore, the maximum of the optimization program (Eq. <a href="FAVAR.html#eq:PCA11">(4.1)</a>) is obtained for <span class="math inline">\(u=P\left[1,0,\cdots,0\right]'\)</span>. That is, <span class="math inline">\(u\)</span> is the eigenvector of <span class="math inline">\(X'X\)</span> that is associated with its larger eigenvalue (first column of <span class="math inline">\(P\)</span>).</p>
+<p>Let us denote with <span class="math inline">\(F\)</span> the vector that is given by the matrix product <span class="math inline">\(XP\)</span> (note that its last column is equal to <span class="math inline">\(Xu\)</span>). The columns of <span class="math inline">\(F\)</span>, denoted by <span class="math inline">\(F_{j}\)</span>, are called <strong>factors</strong>. We have:
+<span class="math display">\[
+F'F=P'X'XP=D.
+\]</span>
+Therefore, in particular, the <span class="math inline">\(F_{j}\)</span>’s are orthogonal.</p>
+<p>Since <span class="math inline">\(X=FP'\)</span>, the <span class="math inline">\(X_{j}\)</span>’s are linear combinations of the factors. Let us then denote with <span class="math inline">\(\hat{X}_{i,j}\)</span> the part of <span class="math inline">\(X_{i}\)</span> that is explained by factor <span class="math inline">\(F_{j}\)</span>, we have:
+<span class="math display">\[\begin{eqnarray*}
+\hat{X}_{i,j} &amp; = &amp; p_{ij}F_{j}\\
+X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
+\end{eqnarray*}\]</span></p>
+<p>Consider the share of variance that is explained –through the <span class="math inline">\(n\)</span> variables (<span class="math inline">\(X_{1},\ldots,X_{n}\)</span>)– by the first factor <span class="math inline">\(F_{1}\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+\frac{\sum_{i}\hat{X}_{i,1}\hat{X}'_{i,1}}{\sum_{i}X_{i}X'_{i}} &amp; = &amp; \frac{\sum_{i}p_{i1}F_{1}F'_{1}p_{i1}}{tr(X'X)} = \frac{\sum_{i}p_{i1}^{2}\lambda_{1}}{tr(X'X)} = \frac{\lambda_{1}}{\sum_{i}\lambda_{i}}.
+\end{eqnarray*}\]</span></p>
+<p>Intuitively, if the first eigenvalue is large, it means that the first factor embed a large share of the fluctutaions of the <span class="math inline">\(n\)</span> <span class="math inline">\(X_{i}\)</span>’s.</p>
+<p>Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., <span class="citation">Litterman and Scheinkman (<a href="references.html#ref-Litterman_Scheinkman_1991" role="doc-biblioref">1991</a>)</span>). One can typically employ PCA to recover such factors. The data used in the example below are taken from the <a href="https://fred.stlouisfed.org">Fred database</a> (tickers: “DGS6MO”,“DGS1”, …). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).</p>
+<p>To run a PCA, one simply has to apply function <code>prcomp</code> to a matrix of data:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="va">USyields</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">yds</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y1"</span>,<span class="st">"Y2"</span>,<span class="st">"Y3"</span>,<span class="st">"Y5"</span>,<span class="st">"Y7"</span>,<span class="st">"Y10"</span>,<span class="st">"Y20"</span>,<span class="st">"Y30"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">PCA.yds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">yds</span>,center<span class="op">=</span><span class="cn">TRUE</span>,scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Let us know visualize some results. The first plot of Figure <a href="FAVAR.html#fig:USydsPCA1">4.1</a> shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.95</span>,<span class="fl">.2</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>        main<span class="op">=</span><span class="st">"Share of variance expl. by PC's"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">nb.PC</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="op">-</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Factor loadings (1st 3 PCs)"</span>,xaxt<span class="op">=</span><span class="st">"n"</span>,xlab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="va">Y1.hat</span> <span class="op">&lt;-</span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">nb.PC</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span><span class="st">"Y1"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">Y1.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span><span class="op">)</span> <span class="op">*</span> <span class="va">Y1.hat</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Fit of 1-year yields (2 PCs)"</span>,</span>
+<span>     ylab<span class="op">=</span><span class="st">"Obs (black) / Fitted by 2PCs (dashed blue)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">Y1.hat</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">Y10.hat</span> <span class="op">&lt;-</span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">nb.PC</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span><span class="st">"Y10"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">Y10.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span><span class="op">)</span> <span class="op">*</span> <span class="va">Y10.hat</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
+<span>     main<span class="op">=</span><span class="st">"Fit of 10-year yields (2 PCs)"</span>,</span>
+<span>     ylab<span class="op">=</span><span class="st">"Obs (black) / Fitted by 2PCs (dashed blue)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">Y10.hat</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:USydsPCA1"></span>
+<img src="IdentifStructShocks_files/figure-html/USydsPCA1-1.png" alt="Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities." width="672"><p class="caption">
+Figure 4.1: Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.
+</p>
+</div>
+</div>
+<div id="favar-models" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> FAVAR models<a class="anchor" aria-label="anchor" href="#favar-models"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us denote by <span class="math inline">\(F_t\)</span> a <span class="math inline">\(k\)</span>-dimensional vector of latent factors accounting for important shares of the variances of the <span class="math inline">\(y_{i,t}\)</span>’s (with <span class="math inline">\(K \ll n\)</span>) and by <span class="math inline">\(x_t\)</span> is a small <span class="math inline">\(M\)</span>-dimensional subset of <span class="math inline">\(y_t\)</span> (with <span class="math inline">\(M \ll n\)</span>). The following factor structure is posited:
+<span class="math display">\[
+y_t = \Lambda^f F_t + \Lambda^x x_t + e_t,
+\]</span>
+where the <span class="math inline">\(e_t\)</span> are “small” serially and mutually i.i.d. error terms. That is <span class="math inline">\(F_t\)</span> and <span class="math inline">\(x_t\)</span> are supposed to drive most of the fluctuations of <span class="math inline">\(y_t\)</span>’s components.</p>
+<p>The model is complemented by positing a VAR dynamics for <span class="math inline">\([F_t',x_t']'\)</span>:
+<span class="math display" id="eq:FAVAR">\[\begin{equation}
+\left[\begin{array}{c}F_t\\x_t\end{array}\right] = \Phi(L)\left[\begin{array}{c}F_{t-1}\\ x_{t-1}\end{array}\right] + v_t.\tag{4.2}
+\end{equation}\]</span></p>
+<p>Standard identification techniques of structural shocks can be employed in Eq. <a href="FAVAR.html#eq:FAVAR">(4.2)</a>: Cholesky approach can be used for instance if the last component of <span class="math inline">\(x_t\)</span> is the short-term interest rate and if it is assumed that a MP shock has no contemporaneous impact on other macro-variables (in <span class="math inline">\(x_t\)</span>).</p>
+<p>In their identification procedure, <span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span> exploit the fact that macro-finance variables can be decomposed in two sets —fast-moving and slow-moving variables— and that only the former reacts contemporaneously to monetary-policy shocks. Now, how to estimate the (unobserved) factors <span class="math inline">\(F_t\)</span>? <span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span> note that the first <span class="math inline">\(K+M\)</span> PCA of the whole dataset (<span class="math inline">\(y_t\)</span>), that they denote by <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> should span the same space as <span class="math inline">\(F_t\)</span> and <span class="math inline">\(x_t)\)</span>. To get an estimate of <span class="math inline">\(F_t\)</span>, the dependence of <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> in <span class="math inline">\(x_t)\)</span> has to be removed. This is done by regressing, by OLS, <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> on <span class="math inline">\(x_t)\)</span> and on <span class="math inline">\(\hat{C}^*(F_t)\)</span>, where the latter is an estimate of the common components other than <span class="math inline">\(x_t\)</span>. To proxy for <span class="math inline">\(\hat{C}^*(F_t)\)</span>, <span class="citation">Bernanke, Boivin, and Eliasz (<a href="references.html#ref-Bernanke_Boivin_Eliasz_2005" role="doc-biblioref">2005</a>)</span> take principal components from the set of slow-moving variables, that are not comtemporaneously correlated to <span class="math inline">\(x_t\)</span>. Vector <span class="math inline">\(\hat{F}_t\)</span> is then computed as <span class="math inline">\(\hat{C}(F_t,x_t) - b_x x_t\)</span>, where <span class="math inline">\(b_x\)</span> are the coefficients coming from the previous OLS regressions.</p>
+<p>Note that this approach implies that the vectorial space spanned by <span class="math inline">\((\hat{F}_t,x_t)\)</span> is the same as that spanned by <span class="math inline">\(\hat{C}(F_t,x_t)\)</span>.</p>
+<p>Below, we employ this method on the dataset built by <span class="citation">McCracken and Ng (<a href="references.html#ref-McCracken_Ng_2016" role="doc-biblioref">2016</a>)</span> —the <a href="https://research.stlouisfed.org/wp/more/2015-012">FRED:MD</a> database— that includes 119 time series.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nk027/bvar">BVAR</a></span><span class="op">)</span><span class="co"># contains the fred_md dataset</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BVAR/man/fred_transform.html">fred_transform</a></span><span class="op">(</span><span class="va">fred_md</span>,na.rm <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="st">"fred_md"</span><span class="op">)</span></span>
+<span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1959-02-01"</span></span>
+<span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2020-01-01"</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">&gt;</span><span class="va">First.date</span><span class="op">)</span><span class="op">&amp;</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">&lt;</span><span class="va">Last.date</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">variables.with.na</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">data</span>,<span class="fl">2</span>,<span class="va">sum</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>,<span class="op">-</span><span class="va">variables.with.na</span><span class="op">]</span></span>
+<span><span class="va">data.values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">data</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">data_scaled</span> <span class="op">&lt;-</span> <span class="va">data</span></span>
+<span><span class="va">data_scaled</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,<span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">data.values</span></span>
+<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">PCA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">data_scaled</span><span class="op">)</span> <span class="co"># implies that PCA$x %*% t(PCA$rotation) = data</span></span>
+<span><span class="va">C.hat</span> <span class="op">&lt;-</span> <span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">K</span><span class="op">+</span><span class="va">M</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">fast_moving</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HOUST"</span>,<span class="st">"HOUSTNE"</span>,<span class="st">"HOUSTMW"</span>,<span class="st">"HOUSTS"</span>,<span class="st">"HOUSTW"</span>,<span class="st">"HOUSTS"</span>,<span class="st">"AMDMNOx"</span>,</span>
+<span>                 <span class="st">"FEDFUNDS"</span>,<span class="st">"CP3Mx"</span>,<span class="st">"TB3MS"</span>,<span class="st">"TB6MS"</span>,<span class="st">"GS1"</span>,<span class="st">"GS5"</span>,<span class="st">"GS10"</span>,</span>
+<span>                 <span class="st">"COMPAPFFx"</span>,<span class="st">"TB3SMFFM"</span>,<span class="st">"TB6SMFFM"</span>,<span class="st">"T1YFFM"</span>,<span class="st">"T5YFFM"</span>,<span class="st">"T10YFFM"</span>,</span>
+<span>                 <span class="st">"AAAFFM"</span>,<span class="st">"EXSZUSx"</span>,<span class="st">"EXJPUSx"</span>,<span class="st">"EXUSUKx"</span>,<span class="st">"EXCAUSx"</span><span class="op">)</span></span>
+<span><span class="va">data.slow</span> <span class="op">&lt;-</span> <span class="va">data_scaled</span><span class="op">[</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">fast_moving</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">PCA.star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">data.slow</span><span class="op">)</span> <span class="co"># implies that PCA$x %*% t(PCA$rotation) = data</span></span>
+<span><span class="va">C.hat.star</span> <span class="op">&lt;-</span> <span class="va">PCA.star</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">K</span><span class="op">]</span></span>
+<span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">FEDFUNDS</span>,<span class="va">C.hat.star</span><span class="op">)</span></span>
+<span><span class="va">b.x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html">solve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">D</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">C.hat</span></span>
+<span><span class="va">F.hat</span> <span class="op">&lt;-</span> <span class="va">C.hat</span> <span class="op">-</span> <span class="va">data</span><span class="op">$</span><span class="va">FEDFUNDS</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">b.x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">data_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">F.hat</span>, FEDFUNDS <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">FEDFUNDS</span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">data_var</span>, <span class="va">p</span><span class="op">)</span></span>
+<span><span class="va">Omega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/chol.html">chol</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">D</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">F.hat</span>,<span class="va">data</span><span class="op">$</span><span class="va">FEDFUNDS</span><span class="op">)</span></span>
+<span><span class="va">loadings</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html">solve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">D</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">data_scaled</span><span class="op">)</span></span>
+<span><span class="va">irf</span> <span class="op">&lt;-</span> <span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">(</span><span class="va">K</span><span class="op">+</span><span class="va">M</span><span class="op">)</span><span class="op">*</span><span class="va">p</span><span class="op">)</span>,Phi<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">var</span><span class="op">)</span>,<span class="va">B</span>,nb.sim<span class="op">=</span><span class="fl">120</span>,</span>
+<span>                 y0.star<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">(</span><span class="va">K</span><span class="op">+</span><span class="va">M</span><span class="op">)</span><span class="op">*</span><span class="va">p</span><span class="op">)</span>,indic.IRF <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                 u.shock <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">K</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">irf.all</span> <span class="op">&lt;-</span> <span class="va">irf</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">loadings</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">variables.2.plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FEDFUNDS"</span>,<span class="st">"INDPRO"</span>,<span class="st">"UNRATE"</span>,<span class="st">"CPIAUCSL"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.2</span>,<span class="fl">.95</span>,<span class="fl">.3</span>,<span class="fl">.95</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">variables.2.plot</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">irf.all</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">variables.2.plot</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
+<span>       type<span class="op">=</span><span class="st">"l"</span>,xlab<span class="op">=</span><span class="st">"months after shock"</span>,ylab<span class="op">=</span><span class="va">variables.2.plot</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:FAVAR"></span>
+<img src="IdentifStructShocks_files/figure-html/FAVAR-1.png" alt="Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset." width="95%"><p class="caption">
+Figure 4.2: Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.
+</p>
+</div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></div>
+<div class="next"><a href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#FAVAR"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
+<li><a class="nav-link" href="#PCAapp"><span class="header-section-number">4.1</span> Principal component analysis (PCA)</a></li>
+<li><a class="nav-link" href="#favar-models"><span class="header-section-number">4.2</span> FAVAR models</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

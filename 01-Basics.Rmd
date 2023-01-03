@@ -1,0 +1,506 @@
+# Vector Auto-Regressive (VAR) models: the basics {#basics}
+
+
+## Definition of VARs (and SVARMA) models
+
+:::{.definition #SVAR name="(S)VAR model"}
+Let $y_{t}$ denote a $n \times1$ vector of random variables. Process $y_{t}$ follows a $p^{th}$-order (S)VAR if, for all $t$, we have
+\begin{eqnarray}
+\begin{array}{rllll}
+VAR:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t,\\
+SVAR:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + B \eta_t,
+\end{array}(\#eq:yVAR)
+\end{eqnarray}
+with $\varepsilon_t = B\eta_t$, where $\{\eta_{t}\}$ is a white noise sequence whose components are mutually and serially independent.
+:::
+
+The first line of Eq. \@ref(eq:yVAR) corresponds to the **reduced-form** of the VAR model (**structural form** for the second line).
+
+While the structural shocks (the components of $\eta_t$) are mutually uncorrelated, this is not the case of the *innovations*, that are the components of $\varepsilon_t$. However, in boths cases, vectors $\eta_t$ and $\varepsilon_t$ are serially correlated (through time).
+
+As was the case for univariate models, VARs can be extended with MA terms in $\eta_t$:
+
+:::{.definition #SVARMA name="(S)VARMA model"}
+Let $y_{t}$ denote a $n \times1$ vector of random variables. Process $y_{t}$ follows a VARMA model of order (p,q) if, for all $t$, we have
+\begin{eqnarray}
+\begin{array}{rllll}
+VARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q ,\\
+SVARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + B_0 \eta_t+ B_1 \eta_{t-1} + \dots +  B_q \eta_{t-q},
+\end{array}(\#eq:yVARMA)
+\end{eqnarray}
+with $\varepsilon_t = B_0\eta_t$ (and $B_j = \Theta_j B_0$, for $j \ge 0$), where $\{\eta_{t}\}$ is a white noise sequence whose components are are mutually and serially independent.
+:::
+
+
+## IRFs in SVARMA {#IRFSVARMA}
+
+One of the main objectives of macro-econometrics is to derive IRFs, that represent the dynamic effects of structural shocks (components of $\eta_t$) though the system of variables $y_t$.
+
+<!-- As illustrated by Figure \@ref(fig:NgramIRF), that makes use of Google Ngram data, there is a close link between the development of "macroeconomic analysis" and the concept ofimpulse response functions. -->
+
+<!-- ```{r NgramIRF, echo=FALSE,fig.cap="Source: Google Ngram. Fraction of books containing the blue and red keywords."} -->
+<!-- library(ngramr) -->
+<!-- keyw <- c("impulse response function","macroeconomic analysis") -->
+<!-- res1 <- ngram(keyw[1],year_start = 1900);res2 <- ngram(keyw[2],year_start = 1900) -->
+<!-- plot(res1$Year,res1$Frequency,type="l",lwd=2,xlab="",ylab="",col="blue",las=1) -->
+<!-- lines(res2$Year,res2$Frequency,type="l",lwd=2,col="red") -->
+<!-- legend("topleft", -->
+<!--        keyw,lty=c(1),lwd=c(2), -->
+<!--        col=c("blue","red")) -->
+<!-- ``` -->
+
+
+Formally, an IRF is a difference in conditional expectations:
+$$
+\boxed{\Psi_{i,j,h} = \mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) - \mathbb{E}(y_{i,t+h})}
+$$
+(effect on $y_{i,t+h}$ of a one-unit shock on $\eta_{j,t}$).
+
+If the dynamics of process $y_t$ can be described as a VARMA model, and if $y_t$ is covariance stationary (see Def. \@ref(def:covstat)), then $y_t$ admits the following infinite MA representation (MA($\infty$)):
+\begin{equation}
+y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.(\#eq:InfMA)
+\end{equation}
+This is also the Wold decomposition of process $\{y_t\}$ (see Theorem \@ref(thm:Wold)).
+
+Estimating IRFs amounts to estimating the $\Psi_{h}$'s. In general, there exist three main approaches for that:
+
+* Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at the first order (linearization). The solution takes the form of Eq. \@ref(eq:InfMA).
+* Directly estimate the $\Psi_{h}$ based on **projection approaches** (see Section \@ref(Projections)).
+* Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. **VAR(MA) models** (see Section \@ref(estimVAR)). Once a (Structural) VARMA representation is obtained, Eq. \@ref(eq:InfMA) is easily deduced. For that, one can use the same recursive algorithm as for univariate processes (see Prop. \@ref(prp:computPsi)).
+
+Typically, consider the AR(2) case. The first steps of the algorithm mentioned in the last bullet point are as follows:
+\begin{eqnarray*}
+y_t &=& \Phi_1 {\color{blue}y_{t-1}} + \Phi_2 y_{t-2} + B \eta_t  \\
+&=& \Phi_1 \color{blue}{(\Phi_1 y_{t-2} + \Phi_2 y_{t-3} + B \eta_{t-1})} + \Phi_2 y_{t-2} + B \eta_t  \\
+&=& B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) \color{red}{y_{t-2}} + \Phi_1\Phi_2 y_{t-3}  \\
+&=& B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) \color{red}{(\Phi_1 y_{t-3} + \Phi_2 y_{t-4} + B \eta_{t-2})} + \Phi_1\Phi_2 y_{t-3} \\
+&=& \underbrace{B}_{=\Psi_0} \eta_t + \underbrace{\Phi_1 B}_{=\Psi_1} \eta_{t-1} + \underbrace{(\Phi_2 + \Phi_1^2)B}_{=\Psi_2} \eta_{t-2} + f(y_{t-3},y_{t-4}).
+\end{eqnarray*}
+
+In particular, we have $B = \Psi_0$. Matrix $B$ indeed captures the contemporaneous impact of $\eta_t$ on $y_t$. That is why matrix $B$ is sometimes called *impulse matrix*.
+
+:::{.example #IRFVARMA name="IRFs of an SVARMA model"}
+
+Consider the following VARMA(1,1) model:
+\begin{eqnarray}
+\quad y_t &=&
+\underbrace{\left[\begin{array}{cc}
+0.5 & 0.3 \\
+-0.4 & 0.7
+\end{array}\right]}_{\Phi_1}
+y_{t-1} +  
+\underbrace{\left[\begin{array}{cc}
+1 & 2 \\
+-1 & 1
+\end{array}\right]}_{B}\eta_t + \underbrace{\left[\begin{array}{cc}
+2 & 0 \\
+1 & 0.5
+\end{array}\right]}_{\Theta_1} \underbrace{\left[\begin{array}{cc}
+1 & 2 \\
+-1 & 1
+\end{array}\right]}_{B}\eta_{t-1}.(\#eq:VARMA111)
+\end{eqnarray}
+
+We can use function `simul.VARMA` of package `AEC` to produce IRFs (using `indic.IRF=1` in the list of arguments):
+
+```{r simVAR, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Impulse response functions"}
+library(AEC)
+distri <- list(type=c("gaussian","gaussian"),df=c(4,4))
+n <- length(distri$type) # dimension of y_t
+nb.sim <- 30
+eps <- simul.distri(distri,nb.sim)
+Phi <- array(NaN,c(n,n,1))
+Phi[,,1] <- matrix(c(.5,-.4,.3,.7),2,2)
+p <- dim(Phi)[3]
+Theta <- array(NaN,c(n,n,1))
+Theta[,,1] <- -matrix(c(2,1,0,.5),2,2)
+q <- dim(Theta)[3]
+Mu <- rep(0,n)
+C <- matrix(c(1,-1,2,1),2,2)
+Model <- list(
+  Mu = Mu,Phi = Phi,Theta = Theta,C = C,distri = distri)
+Y0 <- rep(0,n)
+eta0 <- c(1,0)
+res.sim.1 <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
+eta0 <- c(0,1)
+res.sim.2 <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
+par(plt=c(.15,.95,.25,.8))
+par(mfrow=c(2,2))
+plot(res.sim.1$Y[1,],las=1,
+     type="l",lwd=3,xlab="",ylab="",
+     main=expression(paste("Response of ",y[1,"*,*",t],
+                           " to a one-unit increase in ",eta[1],sep="")))
+abline(h=0,col="grey",lty=3)
+plot(res.sim.2$Y[1,],las=1,
+     type="l",lwd=3,xlab="",ylab="",
+     main=expression(paste("Response of ",y[1,"*,*",t],
+                           " to a one-unit increase in ",eta[2],sep="")))
+abline(h=0,col="grey",lty=3)
+plot(res.sim.1$Y[2,],las=1,
+     type="l",lwd=3,xlab="",ylab="",
+     main=expression(paste("Response of ",y[2,"*,*",t],
+                           " to a one-unit increase in ",eta[1],sep="")))
+abline(h=0,col="grey",lty=3)
+plot(res.sim.2$Y[2,],las=1,
+     type="l",lwd=3,xlab="",ylab="",
+     main=expression(paste("Response of ",y[2,"*,*",t],
+                           " to a one-unit increase in ",eta[2],sep="")))
+abline(h=0,col="grey",lty=3)
+```
+:::
+
+<!-- \includegraphics[width=.9\linewidth]{figures/RcodesFigure_illustrIRF.pdf} -->
+
+<!-- \begin{defn}[Autocovariance of order $j$] -->
+<!-- The autocovariance of order $j$ of $y_t$ is $\mathbb{C}ov(y_t,y_{t-j})$. -->
+<!-- \end{defn} -->
+
+<!-- \begin{defn}[Covariance-stationary process] -->
+<!-- Process $y_t$ is covariance-stationary if $\mathbb{E}(y_t)$ and all autocovariances of $y_t$ are finite and do not depend on $t$. -->
+<!-- \end{defn} -->
+
+## Covariance-stationary VARMA models
+
+Let's come back to the infinite MA case (Eq. \@ref(eq:InfMA)):
+$$
+y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.
+$$
+For $y_t$ to be covariance-stationary (and ergodic for the mean), it has to be the case that
+\begin{equation}
+\sum_{i=0}^\infty \|\Psi_i\| < \infty,(\#eq:condiInfiniteMA)
+\end{equation}
+where $\|A\|$ denotes a norm of the matrix $A$ (e.g. $\|A\|=\sqrt{tr(AA')}$). This notably implies that if $y_t$ is stationary (and ergodic for the mean), then $\|\Psi_h\|\rightarrow 0$ when $h$ gets large.
+
+What should be satisfied by $\Phi_k$'s and $\Theta_k$'s for a VARMA-based process (Eq. \@ref(eq:VARMAstd)) to be stationary? The conditions will be similar to that we had in the univariate case (see Prop. \@ref(prp:stability)). Let us introduce the following notations:
+\begin{eqnarray}
+y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  (\#eq:VARMA2)\\
+&&\underbrace{B \eta_t+ \Theta_1 B \eta_{t-1}+ \dots+ \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
+&\Leftrightarrow& \underbrace{(I - \Phi_1 L - \dots - \Phi_p L^p)}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
+\end{eqnarray}
+
+Process $y_t$ is stationary iff the roots of $\det(\Phi(z))=0$ are strictly outside the unit circle or, equivalently, iff the eigenvalues of 
+\begin{equation}
+\Phi = \left[\begin{array}{cccc}
+\Phi_{1} & \Phi_{2} & \cdots & \Phi_{p}\\
+I & 0 & \cdots & 0\\
+0 & \ddots & 0 & 0\\
+0 & 0 & I & 0\end{array}\right](\#eq:matrixPHI)
+\end{equation}
+lie strictly within the unit circle. Hence, as was the case for univariate processes, the covariance-stationarity of a VARMA model depends only on the specification of its AR part.
+
+Let's derive the first two unconditional moments of a (covariance-stationary) VARMA process.
+
+Based on Eq. \@ref(eq:VARMA2), we have $\mathbb{E}(\Phi(L)y_t)=c$, which gives $\Phi(1)\mathbb{E}(y_t)=c$, or::
+$$
+\mathbb{E}(y_t) = (I - \Phi_1 - \dots - \Phi_p)^{-1}c.
+$$
+The autocovariances of $y_t$ can be deduced from the infinite MA representation (Eq. \@ref(eq:InfMA)). We have:
+$$
+\gamma_j \equiv \mathbb{C}ov(y_t,y_{t-j}) = \sum_{i=j}^\infty \Psi_i \Psi_{i-j}'.
+$$
+(Note that this infinite sum exists as soon as Eq. \@ref(eq:condiInfiniteMA) is satisfied.)
+
+Conditional means and autocovariances can also be deduced from Eq. \@ref(eq:InfMA). For $0 \le h$ and $0 \le h_1 \le h_2$:
+\begin{eqnarray*}
+\mathbb{E}_t(y_{t+h}) &=& \mu + \sum_{k=0}^\infty \Psi_{k+h} \eta_{t-k} \\
+\mathbb{C}ov_t(y_{t+1+h_1},y_{t+1+h_2}) &=& \sum_{k=0}^{h_1} \Psi_{k}\Psi_{k+h_2-h_1}'.
+\end{eqnarray*}
+
+The previous formula implies in particular that the forecasting error $y_{t+h} - \mathbb{E}_t(y_{t+h})$ has a variance equal to:
+$$
+\mathbb{V}ar_t(y_{t+h}) = \sum_{k=1}^{h} \Psi_{k}\Psi_{k}'.
+$$
+Because the $\eta_t$ are mutually and serially independent (and therefore uncorrelated), we have:
+$$
+\mathbb{V}ar(\Psi_k \eta_{t-k}) = \mathbb{V}ar\left(\sum_{i=1}^n \psi_{k,i} \eta_{i,t-k}\right)  = \sum_{i=1}^n \psi_{k,i}\psi_{k,i}',
+$$
+where $\psi_{k,i}$ denotes the $i^{th}$ column of $\Psi_k$.
+
+This suggests the following decomposition of the variance of the forecast error (called  **variance decomposition**):
+$$
+\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'}_{\mbox{Contribution of $\eta_{i,t}$}}.
+$$
+
+Let us now turn to the estimation of VAR(MA) models.
+
+
+
+If there is a MA component, OLS regressions yield biased estimates (even for asymptotically large samples).
+
+Assume $y_t$ follows a VARMA(1,1) model. We have:
+$$
+y_{i,t} = \phi_i y_{t-1} + \varepsilon_{i,t},
+$$
+where $\phi_i$ is the $i^{th}$ row of $\Phi_1$, and where $\varepsilon_{i,t}$ is a linear combination of $\eta_t$ and $\eta_{t-1}$.
+
+Since $y_{t-1}$ (the regressor) is correlated to $\eta_{t-1}$, it is also correlated to $\varepsilon_{i,t}$.
+
+The OLS regression of $y_{i,t}$ on $y_{t-1}$ yields a biased estimator of $\phi_i$. Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models.
+
+
+
+
+## VAR estimation {#estimVAR}
+
+This section discusses the estimation of VAR models. (The estimation of SVARMA models is more challenging, see, e.g., @Gourieroux_Monfort_Renne_2020.) Eq. \@ref(eq:yVAR) can be written:
+$$
+y_{t}=c+\Phi(L)y_{t-1}+\varepsilon_{t},
+$$
+with $\Phi(L) = \Phi_1 + \Phi_2 L + \dots + \Phi_p L^{p-1}$.
+
+Consequently:
+$$
+y_{t}\mid y_{t-1},y_{t-2},\ldots,y_{-p+1}\sim \mathcal{N}(c+\Phi_{1}y_{t-1}+\ldots\Phi_{p}y_{t-p},\Omega).
+$$
+
+Using @Hamilton_1994's notations, denote with $\Pi$ the matrix $\left[\begin{array}{ccccc}
+c & \Phi_{1} & \Phi_{2} & \ldots & \Phi_{p}\end{array}\right]'$ and with $x_{t}$ the vector $\left[\begin{array}{ccccc}
+1 & y'_{t-1} & y'_{t-2} & \ldots & y'_{t-p}\end{array}\right]'$, we have:
+\begin{equation}
+y_{t}= \Pi'x_{t} + \varepsilon_{t}. (\#eq:PIVAR)
+\end{equation}
+The previous representation is convenient to discuss the estimation of the VAR model, as parameters are gathered in two matrices only: $\Pi$ and $\Omega$.
+
+Let us start with the case where the shocks are Gaussian.
+
+:::{.proposition #estimVARGaussian name="MLE of a Gaussian VAR"}
+If $y_t$ follows a VAR(p) (see Definition \@ref(def:SVAR)), and if $\varepsilon_t \sim \,i.i.d.\,\mathcal{N}(0,\Omega)$, then the ML estimate of $\Pi$, denoted by $\hat{\Pi}$ (see Eq. \@ref(eq:PIVAR)), is given by
+\begin{equation}
+\hat{\Pi}=\left[\sum_{t=1}^{T}x_{t}x'_{t}\right]^{-1}\left[\sum_{t=1}^{T}y_{t}'x_{t}\right]= (\bv{X}'\bv{X})^{-1}\bv{X}'\bv{y},(\#eq:Pi)
+\end{equation}
+where $\bv{X}$ is the $T \times (np)$ matrix whose $t^{th}$ row is $x_t$ and where $\bv{y}$ is the $T \times n$ matrix whose $t^{th}$ row is $y_{t}'$.
+
+That is, the $i^{th}$ column of $\hat{\Pi}$ ($b_i$, say) is the OLS estimate of $\beta_i$, where:
+\begin{equation}
+y_{i,t} = \beta_i'x_t + \varepsilon_{i,t},(\#eq:betayx)
+\end{equation}
+(i.e., $\beta_i' = [c_i,\phi_{i,1}',\dots,\phi_{i,p}']'$).
+
+The ML estimate of $\Omega$, denoted by $\hat{\Omega}$, coincides with the sample covariance matrix of the $n$ series of the OLS residuals in Eq. \@ref(eq:betayx), i.e.:
+\begin{equation}
+\hat{\Omega} = \frac{1}{T} \sum_{i=1}^T \hat{\varepsilon}_t\hat{\varepsilon}_t',\quad\mbox{with } \hat{\varepsilon}_t= y_t - \hat{\Pi}'x_t.
+\end{equation}
+
+The asymptotic distributions of these estimators are the ones resulting from standard OLS formula.
+:::
+:::{.proof}
+See Appendix \@ref(AppendixProof).
+:::
+
+As stated by Proposition \@ref(prp:OLSVAR), when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since $x_t$ correlates to $\varepsilon_s$ for $s<t$, the OLS estimator $\bv{b}_i$ of $\boldsymbol\beta_i$ is biased in small sample. (That is also the case for the ML estimator.)
+
+Indeed, denoting by $\boldsymbol\varepsilon_i$ the $T \times 1$ vector of $\varepsilon_{i,t}$'s, and using the notations of $b_i$ and $\beta_i$ introduced in Proposition \@ref(prp:estimVARGaussian), we have:
+\begin{equation}
+\bv{b}_i = \beta_i + (\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i.(\#eq:olsar1)
+\end{equation}
+We have non-zero correlation between $x_t$ and $\varepsilon_{i,s}$ for $s<t$ and, therefore, $\mathbb{E}[(\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i] \ne 0$.
+
+However, when $y_t$ is covariance stationary, then $\frac{1}{n}\bv{X}'\bv{X}$ converges to a positive definite matrix $\bv{Q}$, and $\frac{1}{n}X'\boldsymbol\varepsilon_i$ converges to 0. Hence $\bv{b}_i \overset{p}{\rightarrow} \beta_i$. More precisely:
+
+:::{.proposition #OLSVAR name="Asymptotic distribution of the OLS estimate of $\beta_i$"}
+If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
+$$
+\sqrt{T}(\bv{b}_i-\beta_i) =  \underbrace{\left[\frac{1}{T}\sum_{t=p}^T x_t x_t' \right]^{-1}}_{\overset{p}{\rightarrow} \bv{Q}^{-1}}
+\underbrace{\sqrt{T} \left[\frac{1}{T}\sum_{t=1}^T x_t\varepsilon_{i,t} \right]}_{\overset{d}{\rightarrow} \mathcal{N}(0,\sigma_i^2\bv{Q})},
+$$
+where $\sigma_i = \mathbb{V}ar(\varepsilon_{i,t})$ and where $\bv{Q} = \mbox{plim }\frac{1}{T}\sum_{t=p}^T x_t x_t'$ is given by:
+\begin{equation}
+\bv{Q} = \left[
+\begin{array}{ccccc}
+1 & \mu' &\mu' & \dots & \mu' \\
+\mu & \gamma_0 + \mu\mu' & \gamma_1 + \mu\mu' & \dots & \gamma_{p-1} + \mu\mu'\\
+\mu & \gamma_1 + \mu\mu' & \gamma_0 + \mu\mu' & \dots & \gamma_{p-2} + \mu\mu'\\
+\vdots &\vdots &\vdots &\dots &\vdots \\
+\mu & \gamma_{p-1} + \mu\mu' & \gamma_{p-2} + \mu\mu' & \dots & \gamma_{0} + \mu\mu'
+\end{array}
+\right].(\#eq:Qols)
+\end{equation}
+:::
+:::{.proof}
+See Appendix \@ref(AppendixProof).
+:::
+
+The following proposition extends the previous proposition and includes covariances between different $\beta_i$'s as well as the asymptotic distribution of the ML estimates of $\Omega$.
+
+:::{.proposition #OLSVAR2 name="Asymptotic distribution of the OLS estimates"}
+If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
+\begin{equation}
+\sqrt{T}\left[
+\begin{array}{c}
+vec(\hat\Pi - \Pi)\\
+vec(\hat\Omega - \Omega)
+\end{array}
+\right]
+\sim \mathcal{N}\left(0,
+\left[
+\begin{array}{cc}
+\Omega \otimes \bv{Q}^{-1} & 0\\
+0 & \Sigma_{22}
+\end{array}
+\right]\right),(\#eq:asymptPi)
+\end{equation}
+where the component of $\Sigma_{22}$ corresponding to the covariance between $\hat\sigma_{i,j}$ and $\hat\sigma_{k,l}$ (for $i,j,l,m \in \{1,\dots,n\}^4$) is equal to $\sigma_{i,l}\sigma_{j,m}+\sigma_{i,m}\sigma_{j,l}$.
+:::
+:::{.proof}
+See @Hamilton_1994, Appendix of Chapter 11.
+:::
+
+Naturally, in practice, $\Omega$ is replaced with $\hat{\Omega}$, $\bv{Q}$ is replaced with $\hat{\bv{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'$ and $\Sigma$ with the matrix whose components are of the form $\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}$, where the $\hat\sigma_{i,l}$'s are the components of $\hat\Omega$.
+
+The simplicity of the VAR framework and the tractability of its MLE open the way to convenient econometric testing. Let's illustrate this with the likelihood ratio test (see Def. \@ref(def:LR)). The maximum value achieved by the MLE is
+$$
+\log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega}) = -\frac{Tn}{2}\log(2\pi)+\frac{T}{2}\log\left|\hat{\Omega}^{-1}\right| -\frac{1}{2}\sum_{t=1}^{T}\left[\hat{\varepsilon}_{t}'\hat{\Omega}^{-1}\hat{\varepsilon}_{t}\right].
+$$
+The last term is:
+\begin{eqnarray*}
+\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\hat{\Omega}^{-1}\hat{\varepsilon}_{t} &=& \mbox{Tr}\left[\sum_{t=1}^{T}\hat{\varepsilon}_{t}'\hat{\Omega}^{-1}\hat{\varepsilon}_{t}\right] = \mbox{Tr}\left[\sum_{t=1}^{T}\hat{\Omega}^{-1}\hat{\varepsilon}_{t}\hat{\varepsilon}_{t}'\right]\\
+&=&\mbox{Tr}\left[\hat{\Omega}^{-1}\sum_{t=1}^{T}\hat{\varepsilon}_{t}\hat{\varepsilon}_{t}'\right] = \mbox{Tr}\left[\hat{\Omega}^{-1}\left(T\hat{\Omega}\right)\right]=Tn.
+\end{eqnarray*}
+Therefore, the optimized log-likelihood is simply obtained by:
+\begin{equation}
+\log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega})=-(Tn/2)\log(2\pi)+(T/2)\log\left|\hat{\Omega}^{-1}\right|-Tn/2.(\#eq:optimzedLogL)
+\end{equation}
+
+Assume that we want to test the null hypothesis that a set of variables follows a VAR($p_{0}$) against the alternative
+specification of $p_{1}$ ($>p_{0}$).
+
+Let us denote by $\hat{L}_{0}$ and $\hat{L}_{1}$ the maximum log-likelihoods obtained with $p_{0}$ and $p_{1}$ lags, respectively.
+
+Under the null hypothesis ($H_0$: $p=p_0$), we have:
+\begin{eqnarray*}
+2\left(\hat{L}_{1}-\hat{L}_{0}\right)&=&T\left(\log\left|\hat{\Omega}_{1}^{-1}\right|-\log\left|\hat{\Omega}_{0}^{-1}\right|\right)  \sim \chi^2(n^{2}(p_{1}-p_{0})).
+\end{eqnarray*}
+
+What precedes can be used to help determine the appropriate number of lags to use in the specification. In a VAR, using too many lags consumes numerous degrees of freedom: with $p$ lags, each of the $n$ equations in the VAR contains $n\times p$ coefficients plus the intercept term. Adding lags improve in-sample fit, but is likely to result in over-parameterization and affect the **out-of-sample** prediction performance.
+
+To select appropriate lag length, **selection criteria** can be used (see Definition \@ref(def:infocriteria)).  In the context of VAR models, using Eq. \@ref(eq:optimzedLogL), we have:
+\begin{eqnarray*}
+AIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{2}{T}N\\
+BIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,
+\end{eqnarray*}
+where $N=p \times n^{2}$.
+
+
+## Block exogeneity and Granger causality {#BlockGranger}
+
+### Block exogeneity
+
+Let's decompose $y_t$ into two subvectors $y^{(1)}_{t}$ ($n_1 \times 1$) and $y^{(2)}_{t}$ ($n_2 \times 1$), with $y_t' = [{y^{(1)}_{t}}',{y^{(2)}_{t}}']$ (and therefore $n=n_1 +n_2$), such that:
+$$
+\left[
+\begin{array}{c}
+y^{(1)}_{t}\\
+y^{(2)}_{t}
+\end{array}
+\right] = \left[
+\begin{array}{cc}
+\Phi^{(1,1)} & \Phi^{(1,2)}\\
+\Phi^{(2,1)} & \Phi^{(2,2)}
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+y^{(1)}_{t-1}\\
+y^{(2)}_{t-1}
+\end{array}
+\right] + \varepsilon_t.
+$$
+Using, e.g., a likelihood ratio test (see Def. \@ref(def:LR)), one can easily test for block exogeneity of $y_t^{(2)}$ (say). The null assumption can be expressed as $\Phi^{(2,1)}=0$.
+
+
+<!-- **Companion Form and Stability of a VAR process** -->
+
+<!-- Let us introduce vector $y_{t}^{*}$, whihc stacks the last $p$ values of $y_t$: -->
+<!-- $$ -->
+<!-- y_{t}^{*}=\left[\begin{array}{cccc} -->
+<!-- y'_{t} & y'_{t-1} & \ldots & y'_{t-p+1}\end{array}\right]^{'}, -->
+<!-- $$ -->
+<!-- Eq. \@ref(eq:yVAR) can then be rewritten in its companion form: -->
+<!-- \begin{equation} -->
+<!-- y_{t}^{*} = -->
+<!-- \underbrace{\left[\begin{array}{c} -->
+<!-- c\\ -->
+<!-- 0\\ -->
+<!-- \vdots\\ -->
+<!-- 0\end{array}\right]}_{=c^*}+ -->
+<!-- \underbrace{\left[\begin{array}{cccc} -->
+<!-- \Phi_{1} & \Phi_{2} & \cdots & \Phi_{p}\\ -->
+<!-- I & 0 & \cdots & 0\\ -->
+<!-- 0 & \ddots & 0 & 0\\ -->
+<!-- 0 & 0 & I & 0\end{array}\right]}_{=\Phi} -->
+<!-- y_{t-1}^{*}+ -->
+<!-- \underbrace{\left[\begin{array}{c} -->
+<!-- \varepsilon_{t}\\ -->
+<!-- 0\\ -->
+<!-- \vdots\\ -->
+<!-- 0\end{array}\right]}_{\varepsilon_t^*}(\#eq:ystarVAR) -->
+<!-- \end{equation} -->
+
+<!-- Matrices $\Phi$ and $\Sigma^* = \mathbb{V}ar(\varepsilon_t^*)$ are of dimension $np \times np$. $\Sigma^*$ is filled with zeros, except the $n\times n$ upper-left block that is equal to $\Sigma = \mathbb{V}ar(\varepsilon_t)$. -->
+
+<!-- We then have: -->
+<!-- \begin{eqnarray*} -->
+<!-- y_{t}^{*} & = & c^{*}+\Phi\left(c^{*}+\Phi y_{t-2}^{*}+\varepsilon_{t-1}^{*}\right)+\varepsilon_{t}^{*} \nonumber \\ -->
+<!-- & = & c^{*}+\varepsilon_{t}^{*}+\Phi(c^{*}+\varepsilon_{t-1}^{*})+\ldots+\Phi^{k}(c^{*}+\varepsilon_{t-k}^{*})+\Phi^k y_{t-k}^{*}. -->
+<!-- \end{eqnarray*} -->
+
+<!-- If the eigenvalues of $\Phi$ are strictly within the unit circle, then $\Phi^k$ geometrically decays to the zero matrix and we get the following Wold decomposition for $y_t$: -->
+<!-- \begin{eqnarray} -->
+<!-- y_{t}^{*}  & = & c^{*}+\varepsilon_{t}^{*}+\Phi(c^{*}+\varepsilon_{t-1}^{*})+\ldots+\Phi^{k}(c^{*}+\varepsilon_{t-k}^{*})+\ldots \nonumber \\ -->
+<!-- & = & \mu^{*} +\varepsilon_{t}^{*}+\Phi\varepsilon_{t-1}^{*}+\ldots+\Phi^{k}\varepsilon_{t-k}^{*}+\ldots,(\#eq:VARstar) -->
+<!-- \end{eqnarray} -->
+<!-- where $\mu^* = (I - \Phi)^{-1} c^*$. -->
+
+<!-- (It can also be seen that $\mu^{*} = [\mu',\dots,\mu']'$, where $\mu = (I - \Phi_1 - \dots - \Phi_p)^{-1}c$). -->
+
+<!-- The unconditional variance of $y_t$ can be derived from Eq. \@ref(eq:VARstar), exploiting the fact that the $\varepsilon_{t}^{*}$ are serially uncorrelated: -->
+<!-- $$ -->
+<!-- \mathbb{V}ar(y_t^*)=\Omega^*+\Phi\Omega^*\Phi'+\ldots+\Phi^{k}\Omega^*\Phi'^{k}+\ldots, -->
+<!-- $$ -->
+<!-- with $\mathbb{V}ar(\varepsilon_t^*)=\Omega^*$. -->
+
+<!-- The unconditional variance of $y_t$ is the upper-left $n\times n$ block of matrix $\mathbb{V}ar(y_t^*)$. -->
+
+<!-- Eq. \@ref(eq:VARstar) also implies that the $\Psi_k$ matrices defining the IRFs  (see Eq. \@ref(eq:InfMA)) are given by: $\Psi_k = \widetilde{\Phi^k}B$, where $\widetilde{\Phi^k}$ is the upper-left matrix block of $\Phi^k$. -->
+
+
+### Granger Causality
+
+@Granger_1969 developed a method to explore **causal relationships** among variables. The approach consists in determining whether the past values of $y_{1,t}$ can help explain the current $y_{2,t}$ (beyond the information already included in the past values of $y_{2,t}$).
+
+Formally, let us denote three information sets:
+\begin{eqnarray*}
+\mathcal{I}_{1,t} & = & \left\{ y_{1,t},y_{1,t-1},\ldots\right\} \\
+\mathcal{I}_{2,t} & = & \left\{ y_{2,t},y_{2,t-1},\ldots\right\} \\
+\mathcal{I}_{t} & = & \left\{ y_{1,t},y_{1,t-1},\ldots y_{2,t},y_{2,t-1},\ldots\right\}.
+\end{eqnarray*}
+We say that $y_{1,t}$ Granger-causes $y_{2,t}$ if
+$$
+\mathbb{E}\left[y_{2,t}\mid \mathcal{I}_{2,t-1}\right]\neq \mathbb{E}\left[y_{2,t}\mid \mathcal{I}_{t-1}\right].
+$$
+
+To get the intuition behind the testing procedure, consider the following
+bivariate VAR($p$) process:
+\begin{eqnarray*}
+y_{1,t} & = & c_1+\Sigma_{i=1}^{p}\Phi_i^{(11)}y_{1,t-i}+\Sigma_{i=1}^{p}\Phi_i^{(12)}y_{2,t-i}+\varepsilon_{1,t}\\
+y_{2,t} & = & c_2+\Sigma_{i=1}^{p}\Phi_i^{(21)}y_{1,t-i}+\Sigma_{i=1}^{p}\Phi_i^{(22)}y_{2,t-i}+\varepsilon_{2,t},
+\end{eqnarray*}
+where $\Phi_k^{(ij)}$ denotes the element $(i,j)$ of $\Phi_k$.
+
+Then, $y_{1,t}$ is said not to Granger-cause $y_{2,t}$ if
+$$
+\Phi_1^{(21)}=\Phi_2^{(21)}=\ldots=\Phi_p^{(21)}=0.
+$$
+Therefore the hypothesis testing is
+$$
+\begin{cases}
+H_{0}: & \Phi_1^{(21)}=\Phi_2^{(21)}=\ldots=\Phi_p^{(21)}=0\\
+H_{1}: & \Phi_1^{(21)}\neq0\mbox{ or }\Phi_2^{(21)}\neq0\mbox{ or}\ldots\Phi_p^{(21)}\neq0.\end{cases}
+$$
+Loosely speaking, we reject $H_{0}$ if some of the coefficients on the lagged $y_{1,t}$'s are statistically significant. Formally, this can be tested using the $F$-test or asymptotic chi-square test. The $F$-statistic is
+$$
+F=\frac{(RSS-USS)/p}{USS/(T-2p-1)},
+$$
+where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under $H_{0}$, the $F$-statistic is distributed as $\mathcal{F}(p,T-2p-1)$. (We have $pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)$.)
+
+

@@ -1,6 +1,34 @@
 {
     "sources": [
         {
+            "DOI": "10.1257/aer.20161852",
+            "URL": "https://www.aeaweb.org/articles?id=10.1257/aer.20161852",
+            "author": [
+                {
+                    "family": "Antolín-Díaz",
+                    "given": "Juan"
+                },
+                {
+                    "family": "Rubio-Ramírez",
+                    "given": "Juan F."
+                }
+            ],
+            "container-title": "American Economic Review",
+            "id": "AntolinDiaz_RubioRamirez_2018",
+            "issue": "10",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "page": "2802-29",
+            "title": "Narrative sign restrictions for SVARs",
+            "type": "article-journal",
+            "volume": "108"
+        },
+        {
             "DOI": "10.1162/003465303772815727",
             "URL": "https://doi.org/10.1162/003465303772815727",
             "author": [

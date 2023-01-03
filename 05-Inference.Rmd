@@ -1,0 +1,180 @@
+# Inference {#Inference}
+
+Consider the following SVAR model:
+\[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
+with $\varepsilon_t=B\eta_t$, $\Omega_\varepsilon=BB'$.
+
+The corresponding infinite MA representation (Eq. \@ref(eq:InfMA), or Wold theorem, Theorem \@ref(thm:Wold)) is:
+$$
+y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
+$$
+where $\Psi_0=B$ and for $h=1,2,\dots$:
+$$
+\Psi_h = \sum_{j=1}^h\Psi_{h-j}\Phi_j,
+$$
+with $\Phi_j=0$ for $j>p$ (see Prop. \@ref(prp:computPsi) for this recursive computation of the $\Psi_j$'s).
+
+Inference on the VAR coefficients $\{\Phi_j\}_{j=1,...,p}$ is straightforward (standard OLS inference). But inference is more complicated regarding IRF. Indeed, as shown by the previous equation, the (infinite) MA coefficients $\{\Psi_j\}_{j=1,...}$ are non-linear functions of the $\{\Phi_j\}_{j=1,...,p}$ and of $\Omega_\varepsilon$. An other issue pertain to small sample bias: typically, for persistent process, auto-regressive parameters are known to be downward biased.
+
+The main inference methods are the following:
+
+* Monte Carlo method (@Hamilton_1994)
+* Asymptotic normal approximation (@Lutkepohl_1990), or Delta method
+* Bootstrap method (Kilian_1998)
+
+
+
+## Monte Carlo method
+
+We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the $\Psi_j$'s) but which is a function of another variable whose distribution is known (here, the $\Phi_j$'s).
+
+For instance, suppose we know the distribution of a random variable $X$, which takes values in $\mathbb{R}$, with density function $p$. Assume we want to compute the mean of $\varphi(X)$. We have:
+$$
+\mathbb{E}(\varphi(X))=\int_{-\infty}^{+\infty}\varphi(x)p(x)dx
+$$
+Suppose that the above integral does not have a simple expression. We cannot compute $\mathbb{E}(\varphi(X))$ but, by virtue of the law of large numbers (Theorem \@ref(LLNappendix)), we can approximate it as follows:
+$$
+\mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
+$$
+where $\{X^{(i)}\}_{i=1,...,N}$ are $N$ independent draws of $X$. More generally, the distribution of $\varphi(X)$ can be approximated by the empirical distribution of the $\varphi(X^{(i)}$'s. Typically, if 10'000 values of $\varphi(X^{(i)}$ are drawn, the $5^{th}$ percentile of the p.d.f. of $\varphi(X)$ can be approximated by the $500^{th}$ value of the 10'000 draws of $\varphi(X^{(i)}$ (after arranging these values in ascending order).
+
+As regards the computation of confidence intervals around IRFs, one has to think of $\{\widehat{\Phi}_j\}_{j=1,...,p}$, and of $\widehat{\Omega}$ as $X$ and $\{\widehat{\Psi}_j\}_{j=1,...}$ as $\varphi(X)$. (Proposition \@ref(prp:OLSVAR2) provides us with the asymptotic distribution of the "$X$.")
+
+To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach:
+
+For each iteration $k$:
+
+1. Draw $\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}$ and $\widehat{\Omega}^{(k)}$ from their asymptotic distribution (using Proposition \@ref(prp:OLSVAR2)).
+2. Compute the matrix $B^{(k)}$ so that $\widehat{\Omega}^{(k)}=B^{(k)}B^{(k)'}$, according to your identification strategy.
+4. Compute the associated IRFs $\{\widehat{\Psi}_j\}^{(k)}$.
+
+Perform $N$ replications and report the median impulse response (and its confidence intervals).
+
+
+
+## Delta method
+
+Suppose $\beta$ is a vector of parameters and $\beta$ is an estimator such that
+$$
+\sqrt{T}(\hat\beta-\beta)\overset{d}{\rightarrow}\mathcal{N}(0,\Sigma_\beta),
+$$
+where $d$ denotes convergence in distribution, $N(0,\Sigma_\beta)$ denotes the multivariate normal distribution with mean vector 0 and covariance matrix $\Sigma_\beta$ and $T$ is the sample size used for estimation.
+
+Let $g(\beta) = (g_l(\beta),..., g_m(\beta))'$ be a continuously differentiable function with values in $\mathbb{R}^m$, and assume that $\partial g_i/\partial
+\beta' = (\partial g_i/\partial \beta_j)$ is nonzero at $\beta$ for $i = 1,\dots, m$. Then
+$$
+\sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
+$$
+Using this property, @Lutkepohl_1990 provides the asymptotic distributions of the $\Psi_j$'s. The following lines of code can be used to get approximate confidence intervals for IRFs.
+
+
+```{r #IRFDELTA, eval=FALSE}
+irf.function <- function(THETA){
+  c <- THETA[1]
+  phi <- THETA[2:(p+1)]
+  if(q>0){
+    theta <- c(1,THETA[(1+p+1):(1+p+q)])
+  }else{
+    theta <- 1
+  }
+  sigma <- THETA[1+p+q+1]
+  r <- dim(Matrix.of.Exog)[2] - 1
+  beta <- THETA[(1+p+q+1+1):(1+p+q+1+(r+1))]
+  
+  irf <- sim.arma(0,phi,beta,sigma=sd(Ramey$ED3_TC,na.rm=TRUE),T=60,
+                  y.0=rep(0,length(x$phi)),nb.sim=1,make.IRF=1,
+                  X=NaN,beta=NaN)
+  return(irf)
+}
+
+IRF.0 <- 100*irf.function(x$THETA)
+eps <- .00000001
+d.IRF <- NULL
+for(i in 1:length(x$THETA)){
+  THETA.i <- x$THETA
+  THETA.i[i] <- THETA.i[i] + eps
+  IRF.i <- 100*irf.function(THETA.i)
+  d.IRF <- cbind(d.IRF,
+                 (IRF.i - IRF.0)/eps
+                 )
+}
+mat.var.cov.IRF <- d.IRF %*% x$I %*% t(d.IRF)
+```
+
+
+A limit of the last two approaches (Monte Carlo and the Delta method) is that they critically rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.
+
+
+## Bootstrap
+
+IRFs' confidence intervals are intervals where 90\% (or 95\%,75\%,...) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions ($T$ observations). We obviously cannot do this, because we have only one sample: $\{y_t\}_{t=1,..,T}$. But we can try to *construct* such samples.
+
+Bootstrapping consists in:
+
+* re-sampling $N$ times, i.e., constructing $N$ samples of $T$ observations, using the estimated
+VAR coefficients and
+
+a. a sample of residuals from the distribution $N(0,BB')$ (**parametric approach**), or
+b. a sample of residuals drawn randomly from the set of the actual estimated residuals $\{\hat\varepsilon_t\}_{t=1,..,T}$. (**non-parametric approach**).
+
+* re-estimating the SVAR $N$ times.
+
+Here is the algorithm:
+
+1. Construct a sample
+$$
+y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
+$$
+with $\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}$, where $\{s_1^{(k)},..,s_T^{(k)}\}$ is a random set from $\{1,..,T\}^T$.
+2. Re-estimate the SVAR and compute the IRFs $\{\widehat{\Psi}_j\}^{(k)}$.
+
+Perform $N$ replications and report the median impulse response (and its confidence intervals).
+
+
+## Bootstrap-after-bootstrap
+
+The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the *small sample bias*, stemming, in particular, from small-sample bias associated with OLS coefficient estimates $\{\widehat{\Phi}_j\}_{j=1,..,p}$. The main idea of the bootstrap-after-bootstrap of @Kilian_1998 is to run two consecutive boostraps: the objective of the first is to compute the bias, which can further be used to correct the initial estimates of the $\Phi_i$'s. Further, these corrected estimates are used ---in the second boostrap--- to compute a set of IRFs (as in the standard boostrap).
+
+More formally, the algorithm is as follows:
+
+1. Estimate the SVAR coefficients $\{\widehat{\Phi}_j\}_{j=1,..,p}$ and $\widehat{\Omega}$
+2. **First bootstrap.** For each iteration $k$:
+a. Construct a sample
+$$
+y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
+$$
+with $\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}$, where $\{s_1^{(k)},..,s_T^{(k)}\}$ is a random set from $\{1,..,T\}^T$.
+b. Re-estimate the VAR and compute the coefficients $\{\widehat{\Phi}_j\}_{j=1,..,p}^{(k)}$.
+
+3. Perform $N$ replications and compute the median coefficients $\{\widehat{\Phi}_j\}_{j=1,..,p}^*$.
+4. Approximate the bias terms by $\widehat{\Theta}_j=\widehat{\Phi}_j^*-\widehat{\Phi}_j$.
+5. Construct the bias-corrected terms $\widetilde{\Phi}_j=\widehat{\Phi}_j-\widehat{\Theta}_j$.
+6. **Second bootstrap.** For each iteration $k$:
+a. Construct a sample now from
+$$
+y_t^{(k)}=\widetilde{\Phi}_1 y_{t-1}^{(k)} + \dots + \widetilde{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)}.
+$$
+b. Re-estimate the VAR and compute the coefficients $\{\widehat{\Phi}^*_j\}_{j=1,..,p}^{(k)}$.
+c. Construct the bias-corrected estimates $\widetilde{\Phi}_j^{*(k)}=\widehat{\Phi}_j^{*(k)}-\widehat{\Theta}_j$.
+d. Compute the associated IRFs $\{\widetilde{\Psi}_j^{*(k)}\}_{j\ge 1}$.
+
+7. Perform $N$ replications and compute the median and the confidence interval of the set of IRFs.
+
+It should be noted that correcting for the bias can generate non-stationary results ($\tilde \Phi$ with eigenvalue with modulus $>1$). Solution (@Kilian_1998):
+
+In step 5, check if the largest eigenvalue of $\tilde\Phi$ is of modulus <1.
+If not, shrink the bias: for all $j$s, set $\widehat{\Theta}_j^{(i+1)}=\delta_{i+1}\widehat{\Theta}_j^{(i)}$, with $\delta_{i+1}=\delta_i-0.01$, starting with $\delta_1=1$ and $\widehat{\Theta}_j^{(1)} =\widehat{\Theta}_j$, and compute $\widetilde{\Phi}_j^{(i+1)}=\widehat{\Phi}_j-\widehat{\Theta}_j^{(i+1)}$ until the largest eigenvalue of $\tilde\Phi^{(i+1)}$ has modulus <1.
+
+Function `VAR.Boot` of package `VAR.etp` (@VARetp) can be used to operate the bias-correction approach of @Kilian_1998:
+
+```{r VARBoot, message=FALSE, warning=FALSE}
+library(VAR.etp)
+library(vars) #standard VAR models
+data(dat) # part of VAR.etp package
+corrected <- VAR.Boot(dat,p=2,nb=200,type="const")
+noncorrec <- VAR(dat,p=2)
+rbind(corrected$coef[1,],
+      (corrected$coef+corrected$Bias)[1,],
+      noncorrec$varresult$inv$coefficients)
+```
+

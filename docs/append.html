@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Appendix | The Identification of Dynamic Structural Shocks</title>
+<title>Chapter 7 Appendix | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
-<meta name="description" content="3.1 Principal component analysis (PCA) Principal component analysis (PCA) is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are...">
+<meta name="description" content="7.1 Proofs                                                                                                                         Proof of Proposition 2.1 Proof. Using Proposition ?? (in Appendix...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Appendix | The Identification of Dynamic Structural Shocks">
+<meta property="og:title" content="Chapter 7 Appendix | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
-<meta property="og:description" content="3.1 Principal component analysis (PCA) Principal component analysis (PCA) is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are...">
+<meta property="og:description" content="7.1 Proofs                                                                                                                         Proof of Proposition 2.1 Proof. Using Proposition ?? (in Appendix...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Appendix | The Identification of Dynamic Structural Shocks">
-<meta name="twitter:description" content="3.1 Principal component analysis (PCA) Principal component analysis (PCA) is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are...">
+<meta name="twitter:title" content="Chapter 7 Appendix | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="7.1 Proofs                                                                                                                         Proof of Proposition 2.1 Proof. Using Proposition ?? (in Appendix...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -66,8 +66,12 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
-<li><a class="" href="TS.html"><span class="header-section-number">2</span> Time Series</a></li>
-<li><a class="active" href="append.html"><span class="header-section-number">3</span> Appendix</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
+<li><a class="active" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -76,812 +80,682 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="append" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="append" class="section level1" number="7">
 <h1>
-<span class="header-section-number">3</span> Appendix<a class="anchor" aria-label="anchor" href="#append"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Appendix<a class="anchor" aria-label="anchor" href="#append"><i class="fas fa-link"></i></a>
 </h1>
-<div id="PCAapp" class="section level2" number="3.1">
+<!-- ## Linear algebra: definitions and results {#LinAlgebra} -->
+<!-- :::{.definition #determinant name="Eigenvalues"} -->
+<!-- The eigenvalues of of a matrix $M$ are the numbers $\lambda$ for which: -->
+<!-- $$ -->
+<!-- |M - \lambda I| = 0, -->
+<!-- $$ -->
+<!-- where $| \bullet |$ is the determinant operator. -->
+<!-- ::: -->
+<!-- :::{.proposition #determinant name="Properties of the determinant"} -->
+<!-- We have: -->
+<!-- * $|MN|=|M|\times|N|$. -->
+<!-- * $|M^{-1}|=|M|^{-1}$. -->
+<!-- * If $M$ admits the diagonal representation $M=TDT^{-1}$, where $D$ is a diagonal matrix whose diagonal entries are $\{\lambda_i\}_{i=1,\dots,n}$, then: -->
+<!-- $$ -->
+<!-- |M - \lambda I |=\prod_{i=1}^n (\lambda_i - \lambda). -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.definition #MoorPenrose name="Moore-Penrose inverse"} -->
+<!-- If $M \in \mathbb{R}^{m \times n}$, then its Moore-Penrose pseudo inverse (exists and) is the unique matrix $M^*  \in \mathbb{R}^{n \times m}$ that satisfies: -->
+<!-- i. $M M^* M = M$ -->
+<!-- ii. $M^* M M^* = M^*$ -->
+<!-- iii. $(M M^*)'=M M^*$ -->
+<!-- .iv $(M^* M)'=M^* M$. -->
+<!-- ::: -->
+<!-- :::{.proposition #MoorPenrose name="Properties of the Moore-Penrose inverse"} -->
+<!-- * If $M$ is invertible then $M^* = M^{-1}$. -->
+<!-- * The pseudo-inverse of a zero matrix is its transpose. -->
+<!-- *\item* The pseudo-inverse of the pseudo-inverse is the original matrix. -->
+<!-- ::: -->
+<!-- :::{.definition #idempotent name="Idempotent matrix"} -->
+<!-- Matrix $M$ is idempotent if $M^2=M$. -->
+<!-- If $M$ is a symmetric idempotent matrix, then $M'M=M$. -->
+<!-- ::: -->
+<!-- :::{.proposition #rootsidempotent name="Roots of an idempotent matrix"} -->
+<!-- The eigenvalues of an idempotent matrix are either 1 or 0. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- If $\lambda$ is an eigenvalue of an idempotent matrix $M$ then $\exists x \ne 0$ s.t. $Mx=\lambda x$. Hence $M^2x=\lambda M x \Rightarrow (1-\lambda)Mx=0$. Either all element of  $Mx$ are zero, in which case $\lambda=0$ or at least one element of $Mx$ is nonzero, in which case $\lambda=1$. -->
+<!-- ::: -->
+<!-- :::{.proposition #chi2idempotent name="Idempotent matrix and chi-square distribution"} -->
+<!-- The rank of a symmetric idempotent matrix is equal to its trace. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- The result follows from Prop. \@ref(prp:rootsidempotent), combined with the fact that the rank of a symmetric matrix is equal to the number of its nonzero eigenvalues. -->
+<!-- ::: -->
+<!-- :::{.proposition #constrainedLS name="Constrained least squares"} -->
+<!-- The solution of the following optimisation problem: -->
+<!-- \begin{eqnarray*} -->
+<!-- \underset{\boldsymbol\beta}{\min} && || \bv{y} - \bv{X}\boldsymbol\beta ||^2 \\ -->
+<!-- && \mbox{subject to } \bv{R}\boldsymbol\beta = \bv{q} -->
+<!-- \end{eqnarray*} -->
+<!-- is given by: -->
+<!-- $$ -->
+<!-- \boxed{\boldsymbol\beta^r = \boldsymbol\beta_0 - (\bv{X}'\bv{X})^{-1} \bv{R}'\{\bv{R}(\bv{X}'\bv{X})^{-1}\bv{R}'\}^{-1}(\bv{R}\boldsymbol\beta_0 - \bv{q}),} -->
+<!-- $$ -->
+<!-- where $\boldsymbol\beta_0=(\bv{X}'\bv{X})^{-1}\bv{X}'\bv{y}$. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- See for instance [Jackman, 2007](http://jackman.stanford.edu/classes/350B/07/ftestforWeb.pdf). -->
+<!-- ::: -->
+<!-- :::{.proposition #inversepartitioned name="Inverse of a partitioned matrix"} -->
+<!-- We have: -->
+<!-- \begin{eqnarray*} -->
+<!-- &&\left[ \begin{array}{cc} \bv{A}_{11} & \bv{A}_{12} \\ \bv{A}_{21} & \bv{A}_{22} \end{array}\right]^{-1} = \\ -->
+<!-- &&\left[ \begin{array}{cc} (\bv{A}_{11} - \bv{A}_{12}\bv{A}_{22}^{-1}\bv{A}_{21})^{-1} & - \bv{A}_{11}^{-1}\bv{A}_{12}(\bv{A}_{22} - \bv{A}_{21}\bv{A}_{11}^{-1}\bv{A}_{12})^{-1} \\ -->
+<!-- -(\bv{A}_{22} - \bv{A}_{21}\bv{A}_{11}^{-1}\bv{A}_{12})^{-1}\bv{A}_{21}\bv{A}_{11}^{-1} & (\bv{A}_{22} - \bv{A}_{21}\bv{A}_{11}^{-1}\bv{A}_{12})^{-1} \end{array} \right]. -->
+<!-- \end{eqnarray*} -->
+<!-- ::: -->
+<!-- :::{.definition #FOD name="Matrix derivatives"} -->
+<!-- Consider a fonction $f: \mathbb{R}^K \rightarrow \mathbb{R}$. Its first-order derivative is: -->
+<!-- $$ -->
+<!-- \frac{\partial f}{\partial \bv{b}}(\bv{b}) = -->
+<!-- \left[\begin{array}{c} -->
+<!-- \frac{\partial f}{\partial b_1}(\bv{b})\\ -->
+<!-- \vdots\\ -->
+<!-- \frac{\partial f}{\partial b_K}(\bv{b}) -->
+<!-- \end{array} -->
+<!-- \right]. -->
+<!-- $$ -->
+<!-- We use the notation: -->
+<!-- $$ -->
+<!-- \frac{\partial f}{\partial \bv{b}'}(\bv{b}) = \left(\frac{\partial f}{\partial \bv{b}}(\bv{b})\right)'. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proposition #partial} -->
+<!-- We have: -->
+<!-- * If $f(\bv{b}) = A' \bv{b}$ where $A$ is a $K \times 1$ vector then $\frac{\partial f}{\partial \bv{b}}(\bv{b}) = A$. -->
+<!-- * If $f(\bv{b}) = \bv{b}'A\bv{b}$ where $A$ is a $K \times K$ matrix, then $\frac{\partial f}{\partial \bv{b}}(\bv{b}) = 2A\bv{b}$. -->
+<!-- ::: -->
+<!-- :::{.proposition #absMs name="Square and absolute summability"} -->
+<!-- We have: -->
+<!-- $$ -->
+<!-- \underbrace{\sum_{i=0}^{\infty}|\theta_i| < + \infty}_{\mbox{Absolute summability}} \Rightarrow \underbrace{\sum_{i=0}^{\infty} \theta_i^2 < + \infty}_{\mbox{Square summability}}. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- See Appendix 3.A in Hamilton. Idea: Absolute summability implies that there exist $N$ such that, for $j>N$, $|\theta_j| < 1$ (deduced from Cauchy criterion, Theorem \@ref(thm:cauchycritstatic) and therefore $\theta_j^2 < |\theta_j|$. -->
+<!-- ::: -->
+<!-- ## Statistical analysis: definitions and results {#variousResults} -->
+<!-- ### Moments and statistics -->
+<!-- :::{.definition #partialcorrel name="Partial correlation"} -->
+<!-- The **partial correlation** between $y$ and $z$, controlling for some variables $\bv{X}$ is the sample correlation between $y^*$ and $z^*$, where the latter two variables are the residuals in regressions of $y$ on $\bv{X}$ and of $z$ on $\bv{X}$, respectively. -->
+<!-- This correlation is denoted by $r_{yz}^\bv{X}$. By definition, we have: -->
+<!-- \begin{equation} -->
+<!-- r_{yz}^\bv{X} = \frac{\bv{z^*}'\bv{y^*}}{\sqrt{(\bv{z^*}'\bv{z^*})(\bv{y^*}'\bv{y^*})}}.(\#eq:pc) -->
+<!-- \end{equation} -->
+<!-- ::: -->
+<!-- :::{.definition #skewnesskurtosis name="Skewness and kurtosis"} -->
+<!-- Let $Y$ be a random variable whose fourth moment exists. The expectation of $Y$ is denoted by $\mu$. -->
+<!-- * The skewness of $Y$ is given by: -->
+<!-- $$ -->
+<!-- \frac{\mathbb{E}[(Y-\mu)^3]}{\{\mathbb{E}[(Y-\mu)^2]\}^{3/2}}. -->
+<!-- $$ -->
+<!-- * The kurtosis of $Y$ is given by: -->
+<!-- $$ -->
+<!-- \frac{\mathbb{E}[(Y-\mu)^4]}{\{\mathbb{E}[(Y-\mu)^2]\}^{2}}. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.theorem #CauchySchwarz name="Cauchy-Schwarz inequality"} -->
+<!-- We have: -->
+<!-- $$ -->
+<!-- |\mathbb{C}ov(X,Y)| \le \sqrt{\mathbb{V}ar(X)\mathbb{V}ar(Y)} -->
+<!-- $$ -->
+<!-- and, if $X \ne =$ and $Y \ne 0$, the equality holds iff $X$ and $Y$ are the same up to an affine transformation. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- If $\mathbb{V}ar(X)=0$, this is trivial. If this is not the case, then let's define $Z$ as $Z = Y - \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X$. It is easily seen that $\mathbb{C}ov(X,Z)=0$. Then, the variance of $Y=Z+\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X$ is equal to the sum of the variance of $Z$ and of the variance of $\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X$, that is: -->
+<!-- $$ -->
+<!-- \mathbb{V}ar(Y) = \mathbb{V}ar(Z) + \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X) \ge \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X). -->
+<!-- $$ -->
+<!-- The equality holds iff $\mathbb{V}ar(Z)=0$, i.e. iff $Y = \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X+cst$. -->
+<!-- ::: -->
+<!-- :::{.definition #asmyptlevel name="Asymptotic level"} -->
+<!-- An asymptotic test with critical region $\Omega_n$ has an asymptotic level equal to $\alpha$ if: -->
+<!-- $$ -->
+<!-- \underset{\theta \in \Theta}{\mbox{sup}} \quad \underset{n \rightarrow \infty}{\mbox{lim}} \mathbb{P}_\theta (S_n \in \Omega_n) = \alpha, -->
+<!-- $$ -->
+<!-- where $S_n$ is the test statistic and $\Theta$ is such that the null hypothesis $H_0$ is equivalent to $\theta \in \Theta$. -->
+<!-- ::: -->
+<!-- :::{.definition #asmyptconsisttest name="Asymptotically consistent test"} -->
+<!-- An asymptotic test with critical region $\Omega_n$ is consistent if: -->
+<!-- $$ -->
+<!-- \forall \theta \in \Theta^c, \quad \mathbb{P}_\theta (S_n \in \Omega_n) \rightarrow 1, -->
+<!-- $$ -->
+<!-- where $S_n$ is the test statistic and $\Theta^c$ is such that the null hypothesis $H_0$ is equivalent to $\theta \notin \Theta^c$. -->
+<!-- ::: -->
+<!-- :::{.definition #Kullback name="Kullback discrepancy"} -->
+<!-- Given two p.d.f. $f$ and $f^*$, the Kullback discrepancy is defined by: -->
+<!-- $$ -->
+<!-- I(f,f^*) = \mathbb{E}^* \left( \log \frac{f^*(Y)}{f(Y)} \right) = \int \log \frac{f^*(y)}{f(y)} f^*(y) dy. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proposition #Kullback name="Properties of the Kullback discrepancy"} -->
+<!-- We have: -->
+<!-- i. $I(f,f^*) \ge 0$ -->
+<!-- ii. $I(f,f^*) = 0$ iff $f \equiv f^*$. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- $x \rightarrow -\log(x)$ is a convex function. Therefore $\mathbb{E}^*(-\log f(Y)/f^*(Y)) \ge -\log \mathbb{E}^*(f(Y)/f^*(Y)) = 0$ (proves (i)). Since $x \rightarrow -\log(x)$ is strictly convex, equality in (i) holds if and only if $f(Y)/f^*(Y)$ is constant (proves (ii)). -->
+<!-- ::: -->
+<!-- :::{.definition #characteristic name="Characteristic function"} -->
+<!-- For any real-valued random variable $X$, the characteristic function is defined by: -->
+<!-- $$ -->
+<!-- \phi_X: u \rightarrow \mathbb{E}[\exp(iuX)]. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- ### Standard distributions -->
+<!-- :::{.definition #fstatistics name="F distribution"} -->
+<!-- Consider $n=n_1+n_2$ i.i.d. $\mathcal{N}(0,1)$ r.v. $X_i$. If the r.v. $F$ is defined by: -->
+<!-- $$ -->
+<!-- F = \frac{\sum_{i=1}^{n_1} X_i^2}{\sum_{j=n_1+1}^{n_1+n_2} X_j^2}\frac{n_2}{n_1} -->
+<!-- $$ -->
+<!-- then $F \sim \mathcal{F}(n_1,n_2)$. (See Table \@ref(tab:Fstat) for quantiles.) -->
+<!-- ::: -->
+<!-- :::{.definition #tStudent name="Student-t distribution"} -->
+<!-- $Z$ follows a Student-t (or $t$) distribution with $\nu$ degrees of freedom (d.f.) if: -->
+<!-- $$ -->
+<!-- Z = X_0 \bigg/ \sqrt{\frac{\sum_{i=1}^{\nu}X_i^2}{\nu}}, \quad X_i \sim i.i.d. \mathcal{N}(0,1). -->
+<!-- $$ -->
+<!-- We have $\mathbb{E}(Z)=0$, and $\mathbb{V}ar(Z)=\frac{\nu}{\nu-2}$ if $\nu>2$. (See Table \@ref(tab:Student) for quantiles.) -->
+<!-- ::: -->
+<!-- :::{.definition #chi2 name="Chi-square distribution"} -->
+<!-- $Z$ follows a $\chi^2$ distribution with $\nu$ d.f. if $Z = \sum_{i=1}^{\nu}X_i^2$ where $X_i \sim i.i.d. \mathcal{N}(0,1)$. -->
+<!-- We have $\mathbb{E}(Z)=\nu$. (See Table \@ref(tab:Chi2) for quantiles.) -->
+<!-- ::: -->
+<!-- :::{.proposition #waldtypeproduct name="Inner product of a multivariate Gaussian variable"} -->
+<!-- Let $X$ be a $n$-dimensional multivariate Gaussian variable: $X \sim \mathcal{N}(0,\Sigma)$. We have: -->
+<!-- $$ -->
+<!-- X' \Sigma^{-1}X \sim \chi^2(n). -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- Because $\Sigma$ is a symmetrical definite positive matrix, it admits the spectral decomposition $PDP'$ where $P$ is an orthogonal matrix (i.e. $PP'=Id$) and D is a diagonal matrix with non-negative entries. Denoting by $\sqrt{D^{-1}}$ the diagonal matrix whose diagonal entries are the inverse of those of $D$, it is easily checked that the covariance matrix of $Y:=\sqrt{D^{-1}}P'X$ is $Id$. Therefore $Y$ is a vector of uncorrelated Gaussian variables. The properties of Gaussian variables imply that the components of $Y$ are then also independent. Hence $Y'Y=\sum_i Y_i^2 \sim \chi^2(n)$. -->
+<!-- It remains to note that $Y'Y=X'PD^{-1}P'X=X'\mathbb{V}ar(X)^{-1}X$ to conclude. -->
+<!-- ::: -->
+<!-- :::{.definition #GEVdistri name="Generalized Extreme Value (GEV) distribution"} -->
+<!-- The vector of disturbances $\boldsymbol\varepsilon=[\varepsilon_{1,1},\dots,\varepsilon_{1,K_1},\dots,\varepsilon_{J,1},\dots,\varepsilon_{J,K_J}]'$ follows the Generalized Extreme Value (GEV) distribution if its c.d.f. is: -->
+<!-- $$ -->
+<!-- F(\boldsymbol\varepsilon,\boldsymbol\rho) = \exp(-G(e^{-\varepsilon_{1,1}},\dots,e^{-\varepsilon_{J,K_J}};\boldsymbol\rho)) -->
+<!-- $$ -->
+<!-- with -->
+<!-- \begin{eqnarray*} -->
+<!-- G(\bv{Y};\boldsymbol\rho) &\equiv&  G(Y_{1,1},\dots,Y_{1,K_1},\dots,Y_{J,1},\dots,Y_{J,K_J};\boldsymbol\rho) \\ -->
+<!-- &=& \sum_{j=1}^J\left(\sum_{k=1}^{K_j} Y_{jk}^{1/\rho_j} -->
+<!-- \right)^{\rho_j} -->
+<!-- \end{eqnarray*} -->
+<!-- ::: -->
+<!-- ### Stochastic convergences -->
+<!-- :::{.proposition #chebychev name="Chebychev's inequality"} -->
+<!-- If $\mathbb{E}(|X|^r)$ is finite for some $r>0$ then: -->
+<!-- $$ -->
+<!-- \forall \varepsilon > 0, \quad \mathbb{P}(|X - c|>\varepsilon) \le \frac{\mathbb{E}[|X - c|^r]}{\varepsilon^r}. -->
+<!-- $$ -->
+<!-- In particular, for $r=2$: -->
+<!-- $$ -->
+<!-- \forall \varepsilon > 0, \quad \mathbb{P}(|X - c|>\varepsilon) \le \frac{\mathbb{E}[(X - c)^2]}{\varepsilon^2}. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- Remark that $\varepsilon^r \mathbb{I}_{\{|X| \ge \varepsilon\}} \le |X|^r$ and take the expectation of both sides. -->
+<!-- ::: -->
+<!-- :::{.definition #convergenceproba name="Convergence in probability"} -->
+<!-- The random variable sequence $x_n$ converges in probability to a constant $c$ if $\forall \varepsilon$, $\lim_{n \rightarrow \infty} \mathbb{P}(|x_n - c|>\varepsilon) = 0$. -->
+<!-- It is denoted as: $\mbox{plim } x_n = c$. -->
+<!-- ::: -->
+<!-- :::{.definition #convergenceLr name="Convergence in the Lr norm"} -->
+<!-- $x_n$ converges in the $r$-th mean (or in the $L^r$-norm) towards $x$, if $\mathbb{E}(|x_n|^r)$ and $\mathbb{E}(|x|^r)$ exist and if -->
+<!-- $$ -->
+<!-- \lim_{n \rightarrow \infty} \mathbb{E}(|x_n - x|^r) = 0. -->
+<!-- $$ -->
+<!-- It is denoted as: $x_n \overset{L^r}{\rightarrow} c$. -->
+<!-- For $r=2$, this convergence is called **mean square convergence**. -->
+<!-- ::: -->
+<!-- :::{.definition #convergenceAlmost name="Almost sure convergence"} -->
+<!-- The random variable sequence $x_n$ converges almost surely to $c$ if $\mathbb{P}(\lim_{n \rightarrow \infty} x_n = c) = 1$. -->
+<!-- It is denoted as: $x_n \overset{a.s.}{\rightarrow} c$. -->
+<!-- ::: -->
+<!-- :::{.definition #cvgceDistri name="Convergence in distribution"} -->
+<!-- $x_n$ is said to converge in distribution (or in law) to $x$ if -->
+<!-- $$ -->
+<!-- \lim_{n \rightarrow \infty} F_{x_n}(s) = F_{x}(s) -->
+<!-- $$ -->
+<!-- for all $s$ at which $F_X$ --the cumulative distribution of $X$-- is continuous. -->
+<!-- It is denoted as: $x_n \overset{d}{\rightarrow} x$. -->
+<!-- ::: -->
+<!-- :::{.proposition #Slutsky name="Rules for limiting distributions (Slutsky)"} -->
+<!-- We have: -->
+<!-- i. **Slutsky's theorem:** If $x_n \overset{d}{\rightarrow} x$ and $y_n \overset{p}{\rightarrow} c$ then -->
+<!-- \begin{eqnarray*} -->
+<!-- x_n y_n &\overset{d}{\rightarrow}& x c \\ -->
+<!-- x_n + y_n &\overset{d}{\rightarrow}& x + c \\ -->
+<!-- x_n/y_n &\overset{d}{\rightarrow}& x / c \quad (\mbox{if }c \ne 0) -->
+<!-- \end{eqnarray*} -->
+<!-- ii. **Continuous mapping theorem:** If $x_n \overset{d}{\rightarrow} x$ and $g$ is a continuous function then $g(x_n) \overset{d}{\rightarrow} g(x).$  -->
+<!-- ::: -->
+<!-- :::{.proposition #implicationsconv name="Implications of stochastic convergences"} -->
+<!-- We have: -->
+<!-- \begin{align*} -->
+<!-- &\boxed{\overset{L^s}{\rightarrow}}& &\underset{1 \le r \le s}{\Rightarrow}& &\boxed{\overset{L^r}{\rightarrow}}&\\ -->
+<!-- && && &\Downarrow&\\ -->
+<!-- &\boxed{\overset{a.s.}{\rightarrow}}& &\Rightarrow& &\boxed{\overset{p}{\rightarrow}}& \Rightarrow \qquad \boxed{\overset{d}{\rightarrow}}. -->
+<!-- \end{align*} -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- (of the fact that $\left(\overset{p}{\rightarrow}\right) \Rightarrow \left( \overset{d}{\rightarrow}\right)$). Assume that $X_n \overset{p}{\rightarrow} X$. Denoting by $F$ and $F_n$ the c.d.f. of $X$ and $X_n$, respectively: -->
+<!-- \begin{equation} -->
+<!-- F_n(x) = \mathbb{P}(X_n \le x,X\le x+\varepsilon) + \mathbb{P}(X_n \le x,X > x+\varepsilon) \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|>\varepsilon).(\#eq:convgce1) -->
+<!-- \end{equation} -->
+<!-- Besides, -->
+<!-- $$ -->
+<!-- F(x-\varepsilon) = \mathbb{P}(X \le x-\varepsilon,X_n \le x) + \mathbb{P}(X \le x-\varepsilon,X_n > x) \le F_n(x) + \mathbb{P}(|X_n - X|>\varepsilon), -->
+<!-- $$ -->
+<!-- which implies: -->
+<!-- \begin{equation} -->
+<!-- F(x-\varepsilon) - \mathbb{P}(|X_n - X|>\varepsilon) \le F_n(x).(\#eq:convgce2) -->
+<!-- \end{equation} -->
+<!-- Eqs. \@ref(eq:convgce1) and \@ref(eq:convgce2) imply: -->
+<!-- $$ -->
+<!-- F(x-\varepsilon) - \mathbb{P}(|X_n - X|>\varepsilon) \le F_n(x)  \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|>\varepsilon). -->
+<!-- $$ -->
+<!-- Taking limits as $n \rightarrow \infty$ yields -->
+<!-- $$ -->
+<!-- F(x-\varepsilon) \le \underset{n \rightarrow \infty}{\mbox{lim inf}}\; F_n(x) \le \underset{n \rightarrow \infty}{\mbox{lim sup}}\; F_n(x)  \le F(x+\varepsilon). -->
+<!-- $$ -->
+<!-- The result is then obtained by taking limits as $\varepsilon \rightarrow 0$ (if $F$ is continuous at $x$). -->
+<!-- ::: -->
+<!-- :::{.proposition #cvgce11 name="Convergence in distribution to a constant"} -->
+<!-- If $X_n$ converges in distribution to a constant $c$, then $X_n$ converges in probability to $c$. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- If $\varepsilon>0$, we have $\mathbb{P}(X_n < c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 0$ i.e. $\mathbb{P}(X_n \ge c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1$ and $\mathbb{P}(X_n < c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1$. Therefore $\mathbb{P}(c - \varepsilon \le X_n < c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1$, -->
+<!-- which gives the result. -->
+<!-- ::: -->
+<!-- :::{.example #plimButNotLr name="Convergence in probability but not $L^r$"} -->
+<!-- Let $\{x_n\}_{n \in \mathbb{N}}$ be a series of random variables defined by: -->
+<!-- $$ -->
+<!-- x_n = n u_n, -->
+<!-- $$ -->
+<!-- where $u_n$ are independent random variables s.t. $u_n \sim \mathcal{B}(1/n)$. -->
+<!-- We have $x_n \overset{p}{\rightarrow} 0$ but $x_n \overset{L^r}{\nrightarrow} 0$ because $\mathbb{E}(|X_n-0|)=\mathbb{E}(X_n)=1$. -->
+<!-- ::: -->
+<!-- :::{.theorem #cauchycritstatic name="Cauchy criterion (non-stochastic case)"} -->
+<!-- We have that $\sum_{i=0}^{T} a_i$ converges ($T \rightarrow \infty$) iff, for any $\eta > 0$, there exists an integer $N$ such that, for all $M\ge N$, -->
+<!-- $$ -->
+<!-- \left|\sum_{i=N+1}^{M} a_i\right| < \eta. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.theorem #cauchycritstochastic name="Cauchy criterion (stochastic case)"} -->
+<!-- We have that $\sum_{i=0}^{T} \theta_i \varepsilon_{t-i}$ converges in mean square ($T \rightarrow \infty$) to a random variable iff, for any $\eta > 0$, there exists an integer $N$ such that, for all $M\ge N$, -->
+<!-- $$ -->
+<!-- \mathbb{E}\left[\left(\sum_{i=N+1}^{M} \theta_i \varepsilon_{t-i}\right)^2\right] < \eta. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- ### Central limit theorem -->
+<!-- :::{.theorem #LLNappendix name="Law of large numbers"} -->
+<!-- The sample mean is a consistent estimator of the population mean. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- Let's denote by $\phi_{X_i}$ the characteristic function of a r.v. $X_i$. If the mean of $X_i$ is $\mu$ then the Talyor expansion of the characteristic function is: -->
+<!-- $$ -->
+<!-- \phi_{X_i}(u) = \mathbb{E}(\exp(iuX)) = 1 + iu\mu + o(u). -->
+<!-- $$ -->
+<!-- The properties of the characteristic function (see Def. \@ref(def:characteristic)) imply that: -->
+<!-- $$ -->
+<!-- \phi_{\frac{1}{n}(X_1+\dots+X_n)}(u) = \prod_{i=1}^{n} \left(1 + i\frac{u}{n}\mu + o\left(\frac{u}{n}\right) \right) \rightarrow e^{iu\mu}. -->
+<!-- $$ -->
+<!-- The facts that (a) $e^{iu\mu}$ is the characteristic function of the constant $\mu$ and (b) that a characteristic function uniquely characterises a distribution imply that the sample mean converges in distribution to the constant $\mu$, which further implies that it converges in probability to $\mu$. -->
+<!-- ::: -->
+<!-- :::{.theorem #LindbergLevyCLT name="Lindberg-Levy Central limit theorem, CLT"} -->
+<!-- If $x_n$ is an i.i.d. sequence of random variables with mean $\mu$ and variance $\sigma^2$ ($\in ]0,+\infty[$), then: -->
+<!-- $$ -->
+<!-- \boxed{\sqrt{n} (\bar{x}_n - \mu) \overset{d}{\rightarrow} \mathcal{N}(0,\sigma^2), \quad \mbox{where} \quad \bar{x}_n = \frac{1}{n} \sum_{i=1}^{n} x_i.} -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- Let us introduce the r.v. $Y_n:= \sqrt{n}(\bar{X}_n - \mu)$. We have $\phi_{Y_n}(u) = \left[ \mathbb{E}\left( \exp(i \frac{1}{\sqrt{n}} u (X_1 - \mu)) \right) \right]^n$. We have: -->
+<!-- \begin{eqnarray*} -->
+<!-- \left[ \mathbb{E}\left( \exp\left(i \frac{1}{\sqrt{n}} u (X_1 - \mu)\right) \right) \right]^n &=& \left[ \mathbb{E}\left( 1 + i \frac{1}{\sqrt{n}} u (X_1 - \mu) - \frac{1}{2n} u^2 (X_1 - \mu)^2 + o(u^2) \right) \right]^n \\ -->
+<!-- &=& \left( 1 - \frac{1}{2n}u^2\sigma^2 + o(u^2)\right)^n. -->
+<!-- \end{eqnarray*} -->
+<!-- Therefore $\phi_{Y_n}(u) \underset{n \rightarrow \infty}{\rightarrow} \exp \left( - \frac{1}{2}u^2\sigma^2 \right)$, which is the characteristic function of $\mathcal{N}(0,\sigma^2)$. -->
+<!-- ::: -->
+<!-- ## Some properties of Gaussian variables {#GaussianVar} -->
+<!-- :::{.proposition #bandsindependent} -->
+<!-- If $\bv{A}$ is idempotent and if $\bv{x}$ is Gaussian, $\bv{L}\bv{x}$ and $\bv{x}'\bv{A}\bv{x}$ are independent if $\bv{L}\bv{A}=\bv{0}$. -->
+<!-- ::: -->
+<!-- :::{.proof} -->
+<!-- If $\bv{L}\bv{A}=\bv{0}$, then the two Gaussian vectors $\bv{L}\bv{x}$ and  $\bv{A}\bv{x}$ are independent. This implies the independence of any function of $\bv{L}\bv{x}$ and any function of $\bv{A}\bv{x}$. The results then follows from the observation that $\bv{x}'\bv{A}\bv{x}=(\bv{A}\bv{x})'(\bv{A}\bv{x})$, which is a function of $\bv{A}\bv{x}$. -->
+<!-- ::: -->
+<!-- :::{.proposition #update name="Bayesian update in a vector of Gaussian variables"} -->
+<!-- If -->
+<!-- $$ -->
+<!-- \left[ -->
+<!-- \begin{array}{c} -->
+<!-- Y_1\\ -->
+<!-- Y_2 -->
+<!-- \end{array} -->
+<!-- \right] -->
+<!-- \sim \mathcal{N} -->
+<!-- \left(0, -->
+<!-- \left[\begin{array}{cc} -->
+<!-- \Omega_{11} & \Omega_{12}\\ -->
+<!-- \Omega_{21} & \Omega_{22} -->
+<!-- \end{array}\right] -->
+<!-- \right), -->
+<!-- $$ -->
+<!-- then -->
+<!-- $$ -->
+<!-- Y_{2}|Y_{1} \sim \mathcal{N} -->
+<!-- \left( -->
+<!-- \Omega_{21}\Omega_{11}^{-1}Y_{1},\Omega_{22}-\Omega_{21}\Omega_{11}^{-1}\Omega_{12} -->
+<!-- \right). -->
+<!-- $$ -->
+<!-- $$ -->
+<!-- Y_{1}|Y_{2} \sim \mathcal{N} -->
+<!-- \left( -->
+<!-- \Omega_{12}\Omega_{22}^{-1}Y_{2},\Omega_{11}-\Omega_{12}\Omega_{22}^{-1}\Omega_{21} -->
+<!-- \right). -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- :::{.proposition #truncated name="Truncated distributions"} -->
+<!-- If $X$ is a random variable distributed according to some p.d.f. $f$, with c.d.f. $F$, with infinite support. Then the p.d.f. of $X|a \le X < b$ is -->
+<!-- $$ -->
+<!-- g(x) = \frac{f(x)}{F(b)-F(a)}\mathbb{I}_{\{a \le x < b\}}, -->
+<!-- $$ -->
+<!-- for any $a<b$. -->
+<!-- In partiucular, for a Gaussian variable $X \sim \mathcal{N}(\mu,\sigma^2)$, we have -->
+<!-- $$ -->
+<!-- f(X=x|a\le X<b) = \dfrac{\dfrac{1}{\sigma}\phi\left(\dfrac{x - \mu}{\sigma}\right)}{Z}. -->
+<!-- $$ -->
+<!-- with $Z = \Phi(\beta)-\Phi(\alpha)$, where $\alpha = \dfrac{a - \mu}{\sigma}$ and $\beta = \dfrac{b - \mu}{\sigma}$. -->
+<!-- Moreover: -->
+<!-- \begin{eqnarray} -->
+<!-- \mathbb{E}(X|a\le X<b) &=& \mu - \frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\sigma. (\#eq:Etrunc) -->
+<!-- \end{eqnarray} -->
+<!-- We also have: -->
+<!-- \begin{eqnarray} -->
+<!-- && \mathbb{V}ar(X|a\le X<b) \nonumber\\ -->
+<!-- &=& \sigma^2\left[ -->
+<!-- 1 -  \frac{\beta\phi\left(\beta\right)-\alpha\phi\left(\alpha\right)}{Z} -  \left(\frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\right)^2 \right] (\#eq:Vtrunc) -->
+<!-- \end{eqnarray} -->
+<!-- In particular, for $b \rightarrow \infty$, we get: -->
+<!-- \begin{equation} -->
+<!-- \mathbb{V}ar(X|a < X) = \sigma^2\left[1 + \alpha\lambda(-\alpha) - \lambda(-\alpha)^2 \right], (\#eq:Vtrunc2) -->
+<!-- \end{equation} -->
+<!-- with $\lambda(x)=\dfrac{\phi(x)}{\Phi(x)}$ is called the **inverse Mills ratio**. -->
+<!-- ::: -->
+<!-- Consider the case where $a \rightarrow - \infty$ (i.e. the conditioning set is $X<b$) and $\mu=0$, $\sigma=1$. Then Eq. \@ref(eq:Etrunc) gives $\mathbb{E}(X|X<b) = - \lambda(b) = - \dfrac{\phi(b)}{\Phi(b)}$, where $\lambda$ is the function computing the inverse Mills ratio. -->
+<!-- ```{r inverseMills, echo=FALSE, fig.cap="$\\mathbb{E}(X|X<b)$ as a function of $b$ when $X\\sim \\mathcal{N}(0,1)$ (in black).", fig.align = 'left-aligned'} -->
+<!-- x <- seq(-10,10,by=.01) -->
+<!-- par(mfrow=c(1,1)) -->
+<!-- par(plt=c(.15,.95,.25,.95)) -->
+<!-- plot(x,-dnorm(x)/pnorm(x),type="l",lwd=2, -->
+<!--      xlab="b",ylab="inverse Mills ratio", -->
+<!--      ylim=c(-10,5)) -->
+<!-- lines(c(-20,20),c(-20,20),col="red") -->
+<!-- abline(h=0,col="grey") -->
+<!-- lines(x,-dnorm(x)/pnorm(x),lwd=2) -->
+<!-- ``` -->
+<!-- :::{.proposition #pdfMultivarGaussian name="p.d.f. of a multivariate Gaussian variable"} -->
+<!-- If $Y \sim \mathcal{N}(\mu,\Omega)$ and if $Y$ is a $n$-dimensional vector, then the density function of $Y$ is: -->
+<!-- $$ -->
+<!-- \frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right]. -->
+<!-- $$ -->
+<!-- ::: -->
+<div id="AppendixProof" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">3.1</span> Principal component analysis (PCA)<a class="anchor" aria-label="anchor" href="#PCAapp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
 </h2>
-<p><strong>Principal component analysis (PCA)</strong> is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are linearly driven by a relatively small number of factors. This approach is widely used in data analysis and image compression.</p>
-<p>Suppose that we have <span class="math inline">\(T\)</span> observations of a <span class="math inline">\(n\)</span>-dimensional random vector <span class="math inline">\(x\)</span>, denoted by <span class="math inline">\(x_{1},x_{2},\ldots,x_{T}\)</span>. We suppose that each component of <span class="math inline">\(x\)</span> is of mean zero.</p>
-<p>Let denote with <span class="math inline">\(X\)</span> the matrix given by <span class="math inline">\(\left[\begin{array}{cccc} x_{1} &amp; x_{2} &amp; \ldots &amp; x_{T}\end{array}\right]'\)</span>. Denote the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(X\)</span> by <span class="math inline">\(X_{j}\)</span>.</p>
-<p>We want to find the linear combination of the <span class="math inline">\(x_{i}\)</span>’s (<span class="math inline">\(x.u\)</span>), with <span class="math inline">\(\left\Vert u\right\Vert =1\)</span>, with “maximum variance.” That is, we want to solve:
-<span class="math display" id="eq:PCA11">\[\begin{equation}
-\begin{array}{clll}
-\underset{u}{\arg\max} &amp; u'X'Xu. \\
-\mbox{s.t. } &amp; \left| u\right| =1
-\end{array}\tag{3.1}
-\end{equation}\]</span></p>
-<p>Since <span class="math inline">\(X'X\)</span> is a positive definite matrix, it admits the following decomposition:
-<span class="math display">\[\begin{eqnarray*}
-X'X &amp; = &amp; PDP'\\
-&amp; = &amp; P\left[\begin{array}{ccc}
-\lambda_{1}\\
-&amp; \ddots\\
-&amp;  &amp; \lambda_{n}
-\end{array}\right]P',
-\end{eqnarray*}\]</span>
-where <span class="math inline">\(P\)</span> is an orthogonal matrix whose columns are the eigenvectors of <span class="math inline">\(X'X\)</span>.</p>
-<p>We can order the eigenvalues such that <span class="math inline">\(\lambda_{1}\geq\ldots\geq\lambda_{n}\)</span>. (Since <span class="math inline">\(X'X\)</span> is positive definite, all these eigenvalues are positive.)</p>
-<p>Since <span class="math inline">\(P\)</span> is orthogonal, we have <span class="math inline">\(u'X'Xu=u'PDP'u=y'Dy\)</span> where <span class="math inline">\(\left\Vert y\right\Vert =1\)</span>. Therefore, we have <span class="math inline">\(y_{i}^{2}\leq 1\)</span> for any <span class="math inline">\(i\leq n\)</span>.</p>
-<p>As a consequence:
-<span class="math display">\[
-y'Dy=\sum_{i=1}^{n}y_{i}^{2}\lambda_{i}\leq\lambda_{1}\sum_{i=1}^{n}y_{i}^{2}=\lambda_{1}.
-\]</span></p>
-<p>It is easily seen that the maximum is reached for <span class="math inline">\(y=\left[1,0,\cdots,0\right]'\)</span>. Therefore, the maximum of the optimization program (Eq. <a href="append.html#eq:PCA11">(3.1)</a>) is obtained for <span class="math inline">\(u=P\left[1,0,\cdots,0\right]'\)</span>. That is, <span class="math inline">\(u\)</span> is the eigenvector of <span class="math inline">\(X'X\)</span> that is associated with its larger eigenvalue (first column of <span class="math inline">\(P\)</span>).</p>
-<p>Let us denote with <span class="math inline">\(F\)</span> the vector that is given by the matrix product <span class="math inline">\(XP\)</span> (note that its last column is equal to <span class="math inline">\(Xu\)</span>). The columns of <span class="math inline">\(F\)</span>, denoted by <span class="math inline">\(F_{j}\)</span>, are called <strong>factors</strong>. We have:
-<span class="math display">\[
-F'F=P'X'XP=D.
-\]</span>
-Therefore, in particular, the <span class="math inline">\(F_{j}\)</span>’s are orthogonal.</p>
-<p>Since <span class="math inline">\(X=FP'\)</span>, the <span class="math inline">\(X_{j}\)</span>’s are linear combinations of the factors. Let us then denote with <span class="math inline">\(\hat{X}_{i,j}\)</span> the part of <span class="math inline">\(X_{i}\)</span> that is explained by factor <span class="math inline">\(F_{j}\)</span>, we have:
-<span class="math display">\[\begin{eqnarray*}
-\hat{X}_{i,j} &amp; = &amp; p_{ij}F_{j}\\
-X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
-\end{eqnarray*}\]</span></p>
-<p>Consider the share of variance that is explained –through the <span class="math inline">\(n\)</span> variables (<span class="math inline">\(X_{1},\ldots,X_{n}\)</span>)– by the first factor <span class="math inline">\(F_{1}\)</span>:
-<span class="math display">\[\begin{eqnarray*}
-\frac{\sum_{i}\hat{X}_{i,1}\hat{X}'_{i,1}}{\sum_{i}X_{i}X'_{i}} &amp; = &amp; \frac{\sum_{i}p_{i1}F_{1}F'_{1}p_{i1}}{tr(X'X)} = \frac{\sum_{i}p_{i1}^{2}\lambda_{1}}{tr(X'X)} = \frac{\lambda_{1}}{\sum_{i}\lambda_{i}}.
-\end{eqnarray*}\]</span></p>
-<p>Intuitively, if the first eigenvalue is large, it means that the first factor embed a large share of the fluctutaions of the <span class="math inline">\(n\)</span> <span class="math inline">\(X_{i}\)</span>’s.</p>
-<p>Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., <span class="citation">Litterman and Scheinkman (<a href="references.html#ref-Litterman_Scheinkman_1991" role="doc-biblioref">1991</a>)</span>). One can typically employ PCA to recover such factors. The data used in the example below are taken from the <a href="https://fred.stlouisfed.org">Fred database</a> (tickers: “DGS6MO”,“DGS1”, …). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).</p>
-<p>To run a PCA, one simply has to apply function <code>prcomp</code> to a matrix of data:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
-<span><span class="va">USyields</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">)</span>,<span class="op">]</span></span>
-<span><span class="va">yds</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y1"</span>,<span class="st">"Y2"</span>,<span class="st">"Y3"</span>,<span class="st">"Y5"</span>,<span class="st">"Y7"</span>,<span class="st">"Y10"</span>,<span class="st">"Y20"</span>,<span class="st">"Y30"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">PCA.yds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">yds</span>,center<span class="op">=</span><span class="cn">TRUE</span>,scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Let us know visualize some results. The first plot of Figure <a href="append.html#fig:USydsPCA1">3.1</a> shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.95</span>,<span class="fl">.2</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>        main<span class="op">=</span><span class="st">"Share of variance expl. by PC's"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">nb.PC</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="op">-</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"Factor loadings (1st 3 PCs)"</span>,xaxt<span class="op">=</span><span class="st">"n"</span>,xlab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span><span class="fl">1</span>, at<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">yds</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
-<span><span class="va">Y1.hat</span> <span class="op">&lt;-</span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">nb.PC</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span><span class="st">"Y1"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">Y1.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span><span class="op">)</span> <span class="op">*</span> <span class="va">Y1.hat</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">USyields</span><span class="op">$</span><span class="va">Y1</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"Fit of 1-year yields (2 PCs)"</span>,</span>
-<span>     ylab<span class="op">=</span><span class="st">"Obs (black) / Fitted by 2PCs (dashed blue)"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">Y1.hat</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">Y10.hat</span> <span class="op">&lt;-</span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="va">nb.PC</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">PCA.yds</span><span class="op">$</span><span class="va">rotation</span><span class="op">[</span><span class="st">"Y10"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">Y10.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span><span class="op">)</span> <span class="op">*</span> <span class="va">Y10.hat</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">USyields</span><span class="op">$</span><span class="va">Y10</span>,type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">2</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"Fit of 10-year yields (2 PCs)"</span>,</span>
-<span>     ylab<span class="op">=</span><span class="st">"Obs (black) / Fitted by 2PCs (dashed blue)"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">$</span><span class="va">date</span>,<span class="va">Y10.hat</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="fl">2</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: left-aligned">
-<span style="display:block;" id="fig:USydsPCA1"></span>
-<img src="IdentifStructShocks_files/figure-html/USydsPCA1-1.png" alt="Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities." width="672"><p class="caption">
-Figure 3.1: Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.
-</p>
-</div>
-</div>
-<div id="LinAlgebra" class="section level2" number="3.2">
-<h2>
-<span class="header-section-number">3.2</span> Linear algebra: definitions and results<a class="anchor" aria-label="anchor" href="#LinAlgebra"><i class="fas fa-link"></i></a>
-</h2>
-<div class="definition">
-<p><span id="def:determinant" class="definition"><strong>Definition 3.1  (Eigenvalues) </strong></span>The eigenvalues of of a matrix <span class="math inline">\(M\)</span> are the numbers <span class="math inline">\(\lambda\)</span> for which:
-<span class="math display">\[
-|M - \lambda I| = 0,
-\]</span>
-where <span class="math inline">\(| \bullet |\)</span> is the determinant operator.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:determinant" class="proposition"><strong>Proposition 3.1  (Properties of the determinant) </strong></span>We have:</p>
-<ul>
-<li>
-<span class="math inline">\(|MN|=|M|\times|N|\)</span>.</li>
-<li>
-<span class="math inline">\(|M^{-1}|=|M|^{-1}\)</span>.</li>
-<li>If <span class="math inline">\(M\)</span> admits the diagonal representation <span class="math inline">\(M=TDT^{-1}\)</span>, where <span class="math inline">\(D\)</span> is a diagonal matrix whose diagonal entries are <span class="math inline">\(\{\lambda_i\}_{i=1,\dots,n}\)</span>, then:
-<span class="math display">\[
-|M - \lambda I |=\prod_{i=1}^n (\lambda_i - \lambda).
-\]</span>
-</li>
-</ul>
-</div>
-<div class="definition">
-<p><span id="def:MoorPenrose" class="definition"><strong>Definition 3.2  (Moore-Penrose inverse) </strong></span>If <span class="math inline">\(M \in \mathbb{R}^{m \times n}\)</span>, then its Moore-Penrose pseudo inverse (exists and) is the unique matrix <span class="math inline">\(M^* \in \mathbb{R}^{n \times m}\)</span> that satisfies:</p>
-<ol style="list-style-type: lower-roman">
-<li><span class="math inline">\(M M^* M = M\)</span></li>
-<li><span class="math inline">\(M^* M M^* = M^*\)</span></li>
-<li>
-<span class="math inline">\((M M^*)'=M M^*\)</span>
-.iv <span class="math inline">\((M^* M)'=M^* M\)</span>.</li>
-</ol>
-</div>
-<div class="proposition">
-<ul>
-<li><span id="prp:MoorPenrose" class="proposition"><strong>Proposition 3.2  (Properties of the Moore-Penrose inverse) </strong></span></li>
-<li>If <span class="math inline">\(M\)</span> is invertible then <span class="math inline">\(M^* = M^{-1}\)</span>.</li>
-<li>The pseudo-inverse of a zero matrix is its transpose.
-*
-The pseudo-inverse of the pseudo-inverse is the original matrix.</li>
-</ul>
-</div>
-<div class="definition">
-<p><span id="def:idempotent" class="definition"><strong>Definition 3.3  (Idempotent matrix) </strong></span>Matrix <span class="math inline">\(M\)</span> is idempotent if <span class="math inline">\(M^2=M\)</span>.</p>
-<p>If <span class="math inline">\(M\)</span> is a symmetric idempotent matrix, then <span class="math inline">\(M'M=M\)</span>.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:rootsidempotent" class="proposition"><strong>Proposition 3.3  (Roots of an idempotent matrix) </strong></span>The eigenvalues of an idempotent matrix are either 1 or 0.</p>
-</div>
+<!-- **Proof of Proposition \@ref(prp:MLEproperties)** -->
+<!-- :::{.proof} -->
+<!-- Assumptions (i) and (ii) (in the set of Assumptions \@ref(hyp:MLEregularity)) imply that $\boldsymbol\theta_{MLE}$ exists ($=\mbox{argmax}_\theta (1/n)\log \mathcal{L}(\boldsymbol\theta;\bv{y})$). -->
+<!-- $(1/n)\log \mathcal{L}(\boldsymbol\theta;\bv{y})$ can be interpreted as the sample mean of the r.v. $\log f(Y_i;\boldsymbol\theta)$ that are i.i.d. Therefore $(1/n)\log \mathcal{L}(\boldsymbol\theta;\bv{y})$ converges to $\mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta))$ -- which exists (Assumption iv). -->
+<!-- Because the latter convergence is uniform (Assumption v), the solution $\boldsymbol\theta_{MLE}$ almost surely converges to the solution to the limit problem: -->
+<!-- $$ -->
+<!-- \mbox{argmax}_\theta \mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta)) = \mbox{argmax}_\theta \int_{\mathcal{Y}} \log f(y;\boldsymbol\theta)f(y;\boldsymbol\theta_0) dy. -->
+<!-- $$ -->
+<!-- Properties of the Kullback information measure (see Prop. \@ref(prp:Kullback)), together with the identifiability assumption (ii) implies that the solution to the limit problem is unique and equal to $\boldsymbol\theta_0$. -->
+<!-- Consider a r.v. sequence $\boldsymbol\theta$ that converges to $\boldsymbol\theta_0$. The Taylor expansion of the score in a neighborood of $\boldsymbol\theta_0$ yields to: -->
+<!-- $$ -->
+<!-- \frac{\partial \log \mathcal{L}(\boldsymbol\theta;\bv{y})}{\partial \boldsymbol\theta} = \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} + \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta - \boldsymbol\theta_0) + o_p(\boldsymbol\theta - \boldsymbol\theta_0) -->
+<!-- $$ -->
+<!-- $\boldsymbol\theta_{MLE}$ converges to $\boldsymbol\theta_0$ and satisfies the likelihood equation $\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\bv{y})}{\partial \boldsymbol\theta} = \bv{0}$. Therefore: -->
+<!-- $$ -->
+<!-- \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \approx - \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0), -->
+<!-- $$ -->
+<!-- or equivalently: -->
+<!-- $$ -->
+<!-- \frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \approx -->
+<!-- \left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right)\sqrt{n}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0), -->
+<!-- $$ -->
+<!-- By the law of large numbers, we have: $\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right) \overset{}\rightarrow \frac{1}{n} \bv{I}(\boldsymbol\theta_0) = \mathcal{I}_Y(\boldsymbol\theta_0)$. -->
+<!-- Besides, we have: -->
+<!-- \begin{eqnarray*} -->
+<!-- \frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} &=& \sqrt{n} \left( \frac{1}{n} \sum_i \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right) \\ -->
+<!-- &=& \sqrt{n} \left( \frac{1}{n} \sum_i \left\{ \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} - \mathbb{E}_{\boldsymbol\theta_0} \frac{\partial \log f(Y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right\} \right) -->
+<!-- \end{eqnarray*} -->
+<!-- which converges to $\mathcal{N}(0,\mathcal{I}_Y(\boldsymbol\theta_0))$ by the CLT. -->
+<!-- Collecting the preceding results leads to (b). The fact that $\boldsymbol\theta_{MLE}$ achieves the FDCR bound proves (c). -->
+<!-- ::: -->
+<!-- **Proof of Proposition \@ref(prp:Walddistri)** -->
+<!-- :::{.proof} -->
+<!-- We have $\sqrt{n}(\hat{\boldsymbol\theta}_{n} - \boldsymbol\theta_{0}) \overset{d}{\rightarrow} \mathcal{N}(0,\mathcal{I}(\boldsymbol\theta_0)^{-1})$ (Eq. \ref(eq:normMLE)). A Taylor expansion around $\boldsymbol\theta_0$ yields to: -->
+<!-- \begin{equation} -->
+<!-- \sqrt{n}(h(\hat{\boldsymbol\theta}_{n}) - h(\boldsymbol\theta_{0})) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). (\#eq:XXX) -->
+<!-- \end{equation} -->
+<!-- Under $H_0$, $h(\boldsymbol\theta_{0})=0$ therefore: -->
+<!-- \begin{equation} -->
+<!-- \sqrt{n} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). (\#eq:lm10) -->
+<!-- \end{equation} -->
+<!-- Hence -->
+<!-- $$ -->
+<!-- \sqrt{n} \left( -->
+<!-- \frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta} -->
+<!-- \right)^{-1/2} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,Id\right). -->
+<!-- $$ -->
+<!-- Taking the quadratic form, we obtain: -->
+<!-- $$ -->
+<!-- n h(\hat{\boldsymbol\theta}_{n})'  \left( -->
+<!-- \frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta} -->
+<!-- \right)^{-1} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \chi^2(r). -->
+<!-- $$ -->
+<!-- The fact that the test has asymptotic level $\alpha$ directly stems from what precedes. **Consistency of the test**: Consider $\theta_0 \in \Theta$. Because the MLE is consistent, $h(\hat{\boldsymbol\theta}_{n})$ converges to $h(\boldsymbol\theta_0) \ne 0$. Eq. \@ref(eq:XXX) is still valid. It implies that $\xi^W_n$ converges to $+\infty$ and therefore that $\mathbb{P}_{\boldsymbol\theta}(\xi^W_n \ge \chi^2_{1-\alpha}(r)) \rightarrow 1$. -->
+<!-- ::: -->
+<!-- **Proof of Proposition \@ref(prp:LMdistri)** -->
+<!-- :::{.proof} -->
+<!-- Notations: "$\approx$" means "equal up to a term that converges to 0 in probability". We are under $H_0$. $\hat{\boldsymbol\theta}^0$ is the constrained ML estimator; $\hat{\boldsymbol\theta}$ denotes the unconstrained one. -->
+<!-- We combine the two Taylor expansion: $h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n - \boldsymbol\theta_0)$ and $h(\hat{\boldsymbol\theta}_n^0) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n^0 - \boldsymbol\theta_0)$ and we use $h(\hat{\boldsymbol\theta}_n^0)=0$ (by definition) to get: -->
+<!-- \begin{equation} -->
+<!-- \sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}\sqrt{n}(\hat{\boldsymbol\theta}_n - \hat{\boldsymbol\theta}^0_n). (\#eq:lm1) -->
+<!-- \end{equation} -->
+<!-- Besides, we have (using the definition of the information matrix): -->
+<!-- \begin{equation} -->
+<!-- \frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \approx -->
+<!-- \frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) (\#eq:lm29) -->
+<!-- \end{equation} -->
+<!-- and: -->
+<!-- \begin{equation} -->
+<!-- 0=\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}_n;\bv{y})}{\partial \boldsymbol\theta} \approx -->
+<!-- \frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).(\#eq:lm30) -->
+<!-- \end{equation} -->
+<!-- Taking the difference and multiplying by $\mathcal{I}(\boldsymbol\theta_0)^{-1}$: -->
+<!-- \begin{equation} -->
+<!-- \sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}_n^0) \approx -->
+<!-- \mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} -->
+<!-- \mathcal{I}(\boldsymbol\theta_0).(\#eq:lm2) -->
+<!-- \end{equation} -->
+<!-- Eqs. \@ref(eq:lm1) and \@ref(eq:lm2) yield to: -->
+<!-- \begin{equation} -->
+<!-- \sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}.(\#eq:lm3) -->
+<!-- \end{equation} -->
+<!-- Recall that $\hat{\boldsymbol\theta}^0_n$ is the MLE of $\boldsymbol\theta_0$ under the constraint $h(\boldsymbol\theta)=0$. The vector of Lagrange multipliers $\hat\lambda_n$ associated to this program satisfies: -->
+<!-- \begin{equation} -->
+<!-- \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}+ \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta}\hat\lambda_n = 0.(\#eq:multiplier) -->
+<!-- \end{equation} -->
+<!-- Substituting the latter equation in Eq. \@ref(eq:lm3) gives: -->
+<!-- $$ -->
+<!-- \sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx -->
+<!-- - \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} -->
+<!-- \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}} \approx -->
+<!-- - \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} -->
+<!-- \frac{\partial h'(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}} -->
+<!-- $$ -->
+<!-- which yields: -->
+<!-- \begin{equation} -->
+<!-- \frac{\hat\lambda_n}{\sqrt{n}} \approx - \left( -->
+<!-- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} -->
+<!-- \frac{\partial h'(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} -->
+<!-- \right)^{-1} -->
+<!-- \sqrt{n}h(\hat{\boldsymbol\theta}_n).(\#eq:lm20) -->
+<!-- \end{equation} -->
+<!-- It follows, from Eq. \@ref(eq:lm10), that: -->
+<!-- $$ -->
+<!-- \frac{\hat\lambda_n}{\sqrt{n}} \overset{d}{\rightarrow} \mathcal{N}\left(0,\left( -->
+<!-- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} -->
+<!-- \frac{\partial h'(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} -->
+<!-- \right)^{-1}\right). -->
+<!-- $$ -->
+<!-- Taking the quadratic form of the last equation gives: -->
+<!-- $$ -->
+<!-- \frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1} -->
+<!-- \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \hat\lambda_n \overset{d}{\rightarrow} \chi^2(r). -->
+<!-- $$ -->
+<!-- Using Eq. \@ref(eq:multiplier), it appears that the left-hand side term of the last equation is $\xi^{LM}$ as defined in Eq. \@ref(eq:xiLM). Consistency: see Remark 17.3 in @gourieroux_monfort_1995. -->
+<!-- ::: -->
+<!-- **Proof of Proposition \@ref(prp:equivLRLMW)** -->
+<!-- :::{.proof} -->
+<!-- Let us first demonstrate the asymptotic equivalence of $\xi^{LM}$ and $\xi^{LR}$. -->
+<!-- The second-order taylor expansions of $\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\bv{y})$ and $\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\bv{y})$ are: -->
+<!-- \begin{eqnarray*} -->
+<!-- \log \mathcal{L}(\hat{\boldsymbol\theta}_n,\bv{y}) &\approx& \log \mathcal{L}(\boldsymbol\theta_0,\bv{y}) -->
+<!-- + \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0) -->
+<!-- - \frac{n}{2} (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\\ -->
+<!-- \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\bv{y}) &\approx& \log \mathcal{L}(\boldsymbol\theta_0,\bv{y}) -->
+<!-- + \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) -->
+<!-- - \frac{n}{2} (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0). -->
+<!-- \end{eqnarray*} -->
+<!-- Taking the difference, we obtain: -->
+<!-- $$ -->
+<!-- \xi_n^{LR} \approx 2\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\bv{y})}{\partial \boldsymbol\theta'} -->
+<!-- (\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n) + n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0). -->
+<!-- $$ -->
+<!-- Using $\dfrac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\bv{y})}{\partial \boldsymbol\theta} \approx -->
+<!-- \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)$ (Eq. \@ref(eq:lm30)), we have: -->
+<!-- $$ -->
+<!-- \xi_n^{LR} \approx -->
+<!-- 2n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)'\mathcal{I}(\boldsymbol\theta_0) -->
+<!-- (\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n) -->
+<!-- + n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0). -->
+<!-- $$ -->
+<!-- In the second of the three terms in the sum, we replace $(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)$ by $(\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n+\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)$ and we develop the associated product. This leads to: -->
+<!-- \begin{equation} -->
+<!-- \xi_n^{LR} \approx n (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n)' \mathcal{I}(\boldsymbol\theta_0)^{-1} (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n). (\#eq:lr10) -->
+<!-- \end{equation} -->
+<!-- The difference between Eqs. \@ref(eq:lm29) and \@ref(eq:lm30) implies: -->
+<!-- $$ -->
+<!-- \frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \approx -->
+<!-- \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n), -->
+<!-- $$ -->
+<!-- which, associated to Eq. @\ref(eq:lr10), gives: -->
+<!-- $$ -->
+<!-- \xi_n^{LR} \approx \frac{1}{n} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \approx \xi_n^{LM}. -->
+<!-- $$ -->
+<!-- Hence $\xi_n^{LR}$ has the same asymptotic distribution as $\xi_n^{LM}$. -->
+<!-- Let's show that the LR test is consistent. For this, note that: -->
+<!-- $$ -->
+<!-- \frac{\log \mathcal{L}(\hat{\boldsymbol\theta},\bv{y}) - \log \mathcal{L}(\hat{\boldsymbol\theta}^0,\bv{y})}{n} = \frac{1}{n} \sum_{i=1}^n[\log f(y_i;\hat{\boldsymbol\theta}_n) - \log f(y_i;\hat{\boldsymbol\theta}_n^0)] \rightarrow \mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)], -->
+<!-- $$ -->
+<!-- where $\boldsymbol\theta_\infty$, the pseudo true value, is such that $h(\boldsymbol\theta_\infty) \ne 0$ (by definition of $H_1$). From the Kullback inequality and the asymptotic identifiability of $\boldsymbol\theta_0$, it follows that $\mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)] >0$. Therefore $\xi_n^{LR} \rightarrow + \infty$ under $H_1$. -->
+<!-- Let us now demonstrate the equivalence of $\xi^{LM} and \xi^{W}$. -->
+<!-- We have (using Eq. \ref(eq:multiplier)): -->
+<!-- $$ -->
+<!-- \xi^{LM}_n = \frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1} -->
+<!-- \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\bv{y})}{\partial \boldsymbol\theta} \hat\lambda_n. -->
+<!-- $$ -->
+<!-- Since, under $H_0$, $\hat{\boldsymbol\theta}_n^0\approx\hat{\boldsymbol\theta}_n \approx {\boldsymbol\theta}_0$, Eq. \@ref(eq:lm20) therefore implies that: -->
+<!-- $$ -->
+<!-- \xi^{LM} \approx n h(\hat{\boldsymbol\theta}_n)' \left( -->
+<!-- \dfrac{\partial h(\hat{\boldsymbol\theta}_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}_n)^{-1} -->
+<!-- \frac{\partial h'(\hat{\boldsymbol\theta}_n;\bv{y})}{\partial \boldsymbol\theta} -->
+<!-- \right)^{-1} -->
+<!-- h(\hat{\boldsymbol\theta}_n) = \xi^{W}, -->
+<!-- $$ -->
+<!-- which gives the result. -->
+<!-- ::: -->
+<!-- **Proof of Eq. \@ref(eq:TCL2)** -->
+<!-- :::{.proof} -->
+<!-- We have: -->
+<!-- \begin{eqnarray*} -->
+<!-- &&T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right]\\ -->
+<!-- &=& T\mathbb{E}\left[\left(\frac{1}{T}\sum_{t=1}^T(y_t - \mu)\right)^2\right] = \frac{1}{T} \mathbb{E}\left[\sum_{t=1}^T(y_t - \mu)^2+2\sum_{s<t\le T}(y_t - \mu)(y_s - \mu)\right]\\ -->
+<!-- &=& \gamma_0 +\frac{2}{T}\left(\sum_{t=2}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-1} - \mu)\right]\right) +\frac{2}{T}\left(\sum_{t=3}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-2} - \mu)\right]\right) + \dots \\ -->
+<!-- &&+ \frac{2}{T}\left(\sum_{t=T-1}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-2)} - \mu)\right]\right) + \frac{2}{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-1)} - \mu)\right]\\ -->
+<!-- &=&  \gamma_0 + 2 \frac{T-1}{T}\gamma_1 + \dots + 2 \frac{1}{T}\gamma_{T-1} . -->
+<!-- \end{eqnarray*} -->
+<!-- Therefore: -->
+<!-- \begin{eqnarray*} -->
+<!-- T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j &=& - 2\frac{1}{T}\gamma_1 - 2\frac{2}{T}\gamma_2 - \dots - 2\frac{T-1}{T}\gamma_{T-1} - 2\gamma_T - 2 \gamma_{T+1} + \dots -->
+<!-- \end{eqnarray*} -->
+<!-- And then: -->
+<!-- $$ -->
+<!-- \left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| \le 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots -->
+<!-- $$ -->
+<!-- For any $q \le T$, we have: -->
+<!-- \begin{eqnarray*} -->
+<!-- \left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| &\le& 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{q-1}{T}|\gamma_{q-1}| +2\frac{q}{T}|\gamma_q| +\\ -->
+<!-- &&2\frac{q+1}{T}|\gamma_{q+1}| + \dots  + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots\\ -->
+<!-- &\le& \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q-1)|\gamma_{q-1}| +q|\gamma_q|\right) +\\ -->
+<!-- &&2|\gamma_{q+1}| + \dots  + 2|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots -->
+<!-- \end{eqnarray*} -->
+<!-- Consider $\varepsilon > 0$. The fact that the autocovariances are absolutely summable implies that there exists $q_0$ such that (Cauchy criterion, Theorem \@ref(thm:cauchycritstatic)): -->
+<!-- $$ -->
+<!-- 2|\gamma_{q_0+1}|+2|\gamma_{q_0+2}|+2|\gamma_{q_0+3}|+\dots < \varepsilon/2. -->
+<!-- $$ -->
+<!-- Then, if $T > q_0$, it comes that: -->
+<!-- $$ -->
+<!-- \left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) + \varepsilon/2. -->
+<!-- $$ -->
+<!-- If $T \ge 2\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right)/(\varepsilon/2)$ ($= f(q_0)$, say) then -->
+<!-- $$ -->
+<!-- \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) \le \varepsilon/2. -->
+<!-- $$ -->
+<!-- Then, if $T>f(q_0)$ and $T>q_0$, i.e. if $T>\max(f(q_0),q_0)$, we have: -->
+<!-- $$ -->
+<!-- \left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \varepsilon. -->
+<!-- $$ -->
+<!-- ::: -->
+<!-- **Proof of Proposition \@ref(prp:smallestMSE)** -->
+<!-- :::{.proof} -->
+<!-- We have: -->
+<!-- \begin{eqnarray} -->
+<!-- \mathbb{E}([y_{t+1} - y^*_{t+1}]^2) &=& \mathbb{E}\left([\color{blue}{\{y_{t+1} - \mathbb{E}(y_{t+1}|x_t)\}} + \color{red}{\{\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}\}}]^2\right)\nonumber\\ -->
+<!-- &=&  \mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right) + \mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)\nonumber\\ -->
+<!-- && + 2\mathbb{E}\left( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right). (\#eq:1) -->
+<!-- \end{eqnarray} -->
+<!-- Let us focus on the last term. We have: -->
+<!-- \begin{eqnarray*} -->
+<!-- &&\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right)\\ -->
+<!-- &=& \mathbb{E}( \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ \underbrace{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}_{\mbox{function of $x_t$}}}|x_t))\\ -->
+<!-- &=& \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}|x_t))\\ -->
+<!-- &=& \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \color{blue}{\underbrace{[\mathbb{E}(y_{t+1}|x_t) - \mathbb{E}(y_{t+1}|x_t)]}_{=0}})=0. -->
+<!-- \end{eqnarray*} -->
+<!-- Therefore, Eq. \@ref(eq:1) becomes: -->
+<!-- \begin{eqnarray*} -->
+<!-- &&\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) \\ -->
+<!-- &=&  \underbrace{\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right)}_{\mbox{$\ge 0$ and does not depend on $y^*_{t+1}$}} + \underbrace{\mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)}_{\mbox{$\ge 0$ and depends on $y^*_{t+1}$}}. -->
+<!-- \end{eqnarray*} -->
+<!-- This implies that $\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)$ is always larger than $\color{blue}{\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}$, and is therefore minimized if the second term is equal to zero, that is if $\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}$. -->
+<!-- ::: -->
+<p><strong>Proof of Proposition <a href="basics.html#prp:estimVARGaussian">2.1</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-19" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\lambda\)</span> is an eigenvalue of an idempotent matrix <span class="math inline">\(M\)</span> then <span class="math inline">\(\exists x \ne 0\)</span> s.t. <span class="math inline">\(Mx=\lambda x\)</span>. Hence <span class="math inline">\(M^2x=\lambda M x \Rightarrow (1-\lambda)Mx=0\)</span>. Either all element of <span class="math inline">\(Mx\)</span> are zero, in which case <span class="math inline">\(\lambda=0\)</span> or at least one element of <span class="math inline">\(Mx\)</span> is nonzero, in which case <span class="math inline">\(\lambda=1\)</span>.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:chi2idempotent" class="proposition"><strong>Proposition 3.4  (Idempotent matrix and chi-square distribution) </strong></span>The rank of a symmetric idempotent matrix is equal to its trace.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-20" class="proof"><em>Proof</em>. </span>The result follows from Prop. <a href="append.html#prp:rootsidempotent">3.3</a>, combined with the fact that the rank of a symmetric matrix is equal to the number of its nonzero eigenvalues.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:constrainedLS" class="proposition"><strong>Proposition 3.5  (Constrained least squares) </strong></span>The solution of the following optimisation problem:
-<span class="math display">\[\begin{eqnarray*}
-\underset{\boldsymbol\beta}{\min} &amp;&amp; || \mathbf{y} - \mathbf{X}\boldsymbol\beta ||^2 \\
-&amp;&amp; \mbox{subject to } \mathbf{R}\boldsymbol\beta = \mathbf{q}
-\end{eqnarray*}\]</span>
-is given by:
-<span class="math display">\[
-\boxed{\boldsymbol\beta^r = \boldsymbol\beta_0 - (\mathbf{X}'\mathbf{X})^{-1} \mathbf{R}'\{\mathbf{R}(\mathbf{X}'\mathbf{X})^{-1}\mathbf{R}'\}^{-1}(\mathbf{R}\boldsymbol\beta_0 - \mathbf{q}),}
-\]</span>
-where <span class="math inline">\(\boldsymbol\beta_0=(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-21" class="proof"><em>Proof</em>. </span>See for instance <a href="http://jackman.stanford.edu/classes/350B/07/ftestforWeb.pdf">Jackman, 2007</a>.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:inversepartitioned" class="proposition"><strong>Proposition 3.6  (Inverse of a partitioned matrix) </strong></span>We have:
-<span class="math display">\[\begin{eqnarray*}
-&amp;&amp;\left[ \begin{array}{cc} \mathbf{A}_{11} &amp; \mathbf{A}_{12} \\ \mathbf{A}_{21} &amp; \mathbf{A}_{22} \end{array}\right]^{-1} = \\
-&amp;&amp;\left[ \begin{array}{cc} (\mathbf{A}_{11} - \mathbf{A}_{12}\mathbf{A}_{22}^{-1}\mathbf{A}_{21})^{-1} &amp; - \mathbf{A}_{11}^{-1}\mathbf{A}_{12}(\mathbf{A}_{22} - \mathbf{A}_{21}\mathbf{A}_{11}^{-1}\mathbf{A}_{12})^{-1} \\
--(\mathbf{A}_{22} - \mathbf{A}_{21}\mathbf{A}_{11}^{-1}\mathbf{A}_{12})^{-1}\mathbf{A}_{21}\mathbf{A}_{11}^{-1} &amp; (\mathbf{A}_{22} - \mathbf{A}_{21}\mathbf{A}_{11}^{-1}\mathbf{A}_{12})^{-1} \end{array} \right].
-\end{eqnarray*}\]</span></p>
-</div>
-<div class="definition">
-<p><span id="def:FOD" class="definition"><strong>Definition 3.4  (Matrix derivatives) </strong></span>Consider a fonction <span class="math inline">\(f: \mathbb{R}^K \rightarrow \mathbb{R}\)</span>. Its first-order derivative is:
-<span class="math display">\[
-\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b}) =
-\left[\begin{array}{c}
-\frac{\partial f}{\partial b_1}(\mathbf{b})\\
-\vdots\\
-\frac{\partial f}{\partial b_K}(\mathbf{b})
-\end{array}
-\right].
-\]</span>
-We use the notation:
-<span class="math display">\[
-\frac{\partial f}{\partial \mathbf{b}'}(\mathbf{b}) = \left(\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b})\right)'.
-\]</span></p>
-</div>
-<div class="proposition">
-<p><span id="prp:partial" class="proposition"><strong>Proposition 3.7  </strong></span>We have:</p>
-<ul>
-<li>If <span class="math inline">\(f(\mathbf{b}) = A' \mathbf{b}\)</span> where <span class="math inline">\(A\)</span> is a <span class="math inline">\(K \times 1\)</span> vector then <span class="math inline">\(\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b}) = A\)</span>.</li>
-<li>If <span class="math inline">\(f(\mathbf{b}) = \mathbf{b}'A\mathbf{b}\)</span> where <span class="math inline">\(A\)</span> is a <span class="math inline">\(K \times K\)</span> matrix, then <span class="math inline">\(\frac{\partial f}{\partial \mathbf{b}}(\mathbf{b}) = 2A\mathbf{b}\)</span>.</li>
-</ul>
-</div>
-<div class="proposition">
-<p><span id="prp:absMs" class="proposition"><strong>Proposition 3.8  (Square and absolute summability) </strong></span>We have:
-<span class="math display">\[
-\underbrace{\sum_{i=0}^{\infty}|\theta_i| &lt; + \infty}_{\mbox{Absolute summability}} \Rightarrow \underbrace{\sum_{i=0}^{\infty} \theta_i^2 &lt; + \infty}_{\mbox{Square summability}}.
-\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-22" class="proof"><em>Proof</em>. </span>See Appendix 3.A in Hamilton. Idea: Absolute summability implies that there exist <span class="math inline">\(N\)</span> such that, for <span class="math inline">\(j&gt;N\)</span>, <span class="math inline">\(|\theta_j| &lt; 1\)</span> (deduced from Cauchy criterion, Theorem <a href="append.html#thm:cauchycritstatic">3.2</a> and therefore <span class="math inline">\(\theta_j^2 &lt; |\theta_j|\)</span>.</p>
-</div>
-</div>
-<div id="variousResults" class="section level2" number="3.3">
-<h2>
-<span class="header-section-number">3.3</span> Statistical analysis: definitions and results<a class="anchor" aria-label="anchor" href="#variousResults"><i class="fas fa-link"></i></a>
-</h2>
-<div id="moments-and-statistics" class="section level3" number="3.3.1">
-<h3>
-<span class="header-section-number">3.3.1</span> Moments and statistics<a class="anchor" aria-label="anchor" href="#moments-and-statistics"><i class="fas fa-link"></i></a>
-</h3>
-<div class="definition">
-<p><span id="def:partialcorrel" class="definition"><strong>Definition 3.5  (Partial correlation) </strong></span>The <strong>partial correlation</strong> between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span>, controlling for some variables <span class="math inline">\(\mathbf{X}\)</span> is the sample correlation between <span class="math inline">\(y^*\)</span> and <span class="math inline">\(z^*\)</span>, where the latter two variables are the residuals in regressions of <span class="math inline">\(y\)</span> on <span class="math inline">\(\mathbf{X}\)</span> and of <span class="math inline">\(z\)</span> on <span class="math inline">\(\mathbf{X}\)</span>, respectively.</p>
-<p>This correlation is denoted by <span class="math inline">\(r_{yz}^\mathbf{X}\)</span>. By definition, we have:
-<span class="math display" id="eq:pc">\[\begin{equation}
-r_{yz}^\mathbf{X} = \frac{\mathbf{z^*}'\mathbf{y^*}}{\sqrt{(\mathbf{z^*}'\mathbf{z^*})(\mathbf{y^*}'\mathbf{y^*})}}.\tag{3.2}
-\end{equation}\]</span></p>
-</div>
-<div class="definition">
-<p><span id="def:skewnesskurtosis" class="definition"><strong>Definition 3.6  (Skewness and kurtosis) </strong></span>Let <span class="math inline">\(Y\)</span> be a random variable whose fourth moment exists. The expectation of <span class="math inline">\(Y\)</span> is denoted by <span class="math inline">\(\mu\)</span>.</p>
-<ul>
-<li>The skewness of <span class="math inline">\(Y\)</span> is given by:
-<span class="math display">\[
-\frac{\mathbb{E}[(Y-\mu)^3]}{\{\mathbb{E}[(Y-\mu)^2]\}^{3/2}}.
-\]</span>
-</li>
-<li>The kurtosis of <span class="math inline">\(Y\)</span> is given by:
-<span class="math display">\[
-\frac{\mathbb{E}[(Y-\mu)^4]}{\{\mathbb{E}[(Y-\mu)^2]\}^{2}}.
-\]</span>
-</li>
-</ul>
-</div>
-<div class="theorem">
-<p><span id="thm:CauchySchwarz" class="theorem"><strong>Theorem 3.1  (Cauchy-Schwarz inequality) </strong></span>We have:
-<span class="math display">\[
-|\mathbb{C}ov(X,Y)| \le \sqrt{\mathbb{V}ar(X)\mathbb{V}ar(Y)}
-\]</span>
-and, if <span class="math inline">\(X \ne =\)</span> and <span class="math inline">\(Y \ne 0\)</span>, the equality holds iff <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are the same up to an affine transformation.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-23" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\mathbb{V}ar(X)=0\)</span>, this is trivial. If this is not the case, then let’s define <span class="math inline">\(Z\)</span> as <span class="math inline">\(Z = Y - \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X\)</span>. It is easily seen that <span class="math inline">\(\mathbb{C}ov(X,Z)=0\)</span>. Then, the variance of <span class="math inline">\(Y=Z+\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X\)</span> is equal to the sum of the variance of <span class="math inline">\(Z\)</span> and of the variance of <span class="math inline">\(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X\)</span>, that is:
-<span class="math display">\[
-\mathbb{V}ar(Y) = \mathbb{V}ar(Z) + \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X) \ge \left(\frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}\right)^2\mathbb{V}ar(X).
-\]</span>
-The equality holds iff <span class="math inline">\(\mathbb{V}ar(Z)=0\)</span>, i.e. iff <span class="math inline">\(Y = \frac{\mathbb{C}ov(X,Y)}{\mathbb{V}ar(X)}X+cst\)</span>.</p>
-</div>
-<div class="definition">
-<p><span id="def:asmyptlevel" class="definition"><strong>Definition 3.7  (Asymptotic level) </strong></span>An asymptotic test with critical region <span class="math inline">\(\Omega_n\)</span> has an asymptotic level equal to <span class="math inline">\(\alpha\)</span> if:
-<span class="math display">\[
-\underset{\theta \in \Theta}{\mbox{sup}} \quad \underset{n \rightarrow \infty}{\mbox{lim}} \mathbb{P}_\theta (S_n \in \Omega_n) = \alpha,
-\]</span>
-where <span class="math inline">\(S_n\)</span> is the test statistic and <span class="math inline">\(\Theta\)</span> is such that the null hypothesis <span class="math inline">\(H_0\)</span> is equivalent to <span class="math inline">\(\theta \in \Theta\)</span>.</p>
-</div>
-<div class="definition">
-<p><span id="def:asmyptconsisttest" class="definition"><strong>Definition 3.8  (Asymptotically consistent test) </strong></span>An asymptotic test with critical region <span class="math inline">\(\Omega_n\)</span> is consistent if:
-<span class="math display">\[
-\forall \theta \in \Theta^c, \quad \mathbb{P}_\theta (S_n \in \Omega_n) \rightarrow 1,
-\]</span>
-where <span class="math inline">\(S_n\)</span> is the test statistic and <span class="math inline">\(\Theta^c\)</span> is such that the null hypothesis <span class="math inline">\(H_0\)</span> is equivalent to <span class="math inline">\(\theta \notin \Theta^c\)</span>.</p>
-</div>
-<div class="definition">
-<p><span id="def:Kullback" class="definition"><strong>Definition 3.9  (Kullback discrepancy) </strong></span>Given two p.d.f. <span class="math inline">\(f\)</span> and <span class="math inline">\(f^*\)</span>, the Kullback discrepancy is defined by:
-<span class="math display">\[
-I(f,f^*) = \mathbb{E}^* \left( \log \frac{f^*(Y)}{f(Y)} \right) = \int \log \frac{f^*(y)}{f(y)} f^*(y) dy.
-\]</span></p>
-</div>
-<div class="proposition">
-<p><span id="prp:Kullback" class="proposition"><strong>Proposition 3.9  (Properties of the Kullback discrepancy) </strong></span>We have:</p>
-<ol style="list-style-type: lower-roman">
-<li><span class="math inline">\(I(f,f^*) \ge 0\)</span></li>
-<li>
-<span class="math inline">\(I(f,f^*) = 0\)</span> iff <span class="math inline">\(f \equiv f^*\)</span>.</li>
-</ol>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-24" class="proof"><em>Proof</em>. </span><span class="math inline">\(x \rightarrow -\log(x)\)</span> is a convex function. Therefore <span class="math inline">\(\mathbb{E}^*(-\log f(Y)/f^*(Y)) \ge -\log \mathbb{E}^*(f(Y)/f^*(Y)) = 0\)</span> (proves (i)). Since <span class="math inline">\(x \rightarrow -\log(x)\)</span> is strictly convex, equality in (i) holds if and only if <span class="math inline">\(f(Y)/f^*(Y)\)</span> is constant (proves (ii)).</p>
-</div>
-<div class="definition">
-<p><span id="def:characteristic" class="definition"><strong>Definition 3.10  (Characteristic function) </strong></span>For any real-valued random variable <span class="math inline">\(X\)</span>, the characteristic function is defined by:
-<span class="math display">\[
-\phi_X: u \rightarrow \mathbb{E}[\exp(iuX)].
-\]</span></p>
-</div>
-</div>
-<div id="standard-distributions" class="section level3" number="3.3.2">
-<h3>
-<span class="header-section-number">3.3.2</span> Standard distributions<a class="anchor" aria-label="anchor" href="#standard-distributions"><i class="fas fa-link"></i></a>
-</h3>
-<div class="definition">
-<p><span id="def:fstatistics" class="definition"><strong>Definition 3.11  (F distribution) </strong></span>Consider <span class="math inline">\(n=n_1+n_2\)</span> i.i.d. <span class="math inline">\(\mathcal{N}(0,1)\)</span> r.v. <span class="math inline">\(X_i\)</span>. If the r.v. <span class="math inline">\(F\)</span> is defined by:
-<span class="math display">\[
-F = \frac{\sum_{i=1}^{n_1} X_i^2}{\sum_{j=n_1+1}^{n_1+n_2} X_j^2}\frac{n_2}{n_1}
-\]</span>
-then <span class="math inline">\(F \sim \mathcal{F}(n_1,n_2)\)</span>. (See Table <a href="append.html#tab:Fstat">3.4</a> for quantiles.)</p>
-</div>
-<div class="definition">
-<p><span id="def:tStudent" class="definition"><strong>Definition 3.12  (Student-t distribution) </strong></span><span class="math inline">\(Z\)</span> follows a Student-t (or <span class="math inline">\(t\)</span>) distribution with <span class="math inline">\(\nu\)</span> degrees of freedom (d.f.) if:
-<span class="math display">\[
-Z = X_0 \bigg/ \sqrt{\frac{\sum_{i=1}^{\nu}X_i^2}{\nu}}, \quad X_i \sim i.i.d. \mathcal{N}(0,1).
-\]</span>
-We have <span class="math inline">\(\mathbb{E}(Z)=0\)</span>, and <span class="math inline">\(\mathbb{V}ar(Z)=\frac{\nu}{\nu-2}\)</span> if <span class="math inline">\(\nu&gt;2\)</span>. (See Table <a href="append.html#tab:Student">3.2</a> for quantiles.)</p>
-</div>
-<div class="definition">
-<p><span id="def:chi2" class="definition"><strong>Definition 3.13  (Chi-square distribution) </strong></span><span class="math inline">\(Z\)</span> follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(\nu\)</span> d.f. if <span class="math inline">\(Z = \sum_{i=1}^{\nu}X_i^2\)</span> where <span class="math inline">\(X_i \sim i.i.d. \mathcal{N}(0,1)\)</span>.
-We have <span class="math inline">\(\mathbb{E}(Z)=\nu\)</span>. (See Table <a href="append.html#tab:Chi2">3.3</a> for quantiles.)</p>
-</div>
-<div class="proposition">
-<p><span id="prp:waldtypeproduct" class="proposition"><strong>Proposition 3.10  (Inner product of a multivariate Gaussian variable) </strong></span>Let <span class="math inline">\(X\)</span> be a <span class="math inline">\(n\)</span>-dimensional multivariate Gaussian variable: <span class="math inline">\(X \sim \mathcal{N}(0,\Sigma)\)</span>. We have:
-<span class="math display">\[
-X' \Sigma^{-1}X \sim \chi^2(n).
-\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-25" class="proof"><em>Proof</em>. </span>Because <span class="math inline">\(\Sigma\)</span> is a symmetrical definite positive matrix, it admits the spectral decomposition <span class="math inline">\(PDP'\)</span> where <span class="math inline">\(P\)</span> is an orthogonal matrix (i.e. <span class="math inline">\(PP'=Id\)</span>) and D is a diagonal matrix with non-negative entries. Denoting by <span class="math inline">\(\sqrt{D^{-1}}\)</span> the diagonal matrix whose diagonal entries are the inverse of those of <span class="math inline">\(D\)</span>, it is easily checked that the covariance matrix of <span class="math inline">\(Y:=\sqrt{D^{-1}}P'X\)</span> is <span class="math inline">\(Id\)</span>. Therefore <span class="math inline">\(Y\)</span> is a vector of uncorrelated Gaussian variables. The properties of Gaussian variables imply that the components of <span class="math inline">\(Y\)</span> are then also independent. Hence <span class="math inline">\(Y'Y=\sum_i Y_i^2 \sim \chi^2(n)\)</span>.</p>
-<p>It remains to note that <span class="math inline">\(Y'Y=X'PD^{-1}P'X=X'\mathbb{V}ar(X)^{-1}X\)</span> to conclude.</p>
-</div>
-<div class="definition">
-<p><span id="def:GEVdistri" class="definition"><strong>Definition 3.14  (Generalized Extreme Value (GEV) distribution) </strong></span>The vector of disturbances <span class="math inline">\(\boldsymbol\varepsilon=[\varepsilon_{1,1},\dots,\varepsilon_{1,K_1},\dots,\varepsilon_{J,1},\dots,\varepsilon_{J,K_J}]'\)</span> follows the Generalized Extreme Value (GEV) distribution if its c.d.f. is:
-<span class="math display">\[
-F(\boldsymbol\varepsilon,\boldsymbol\rho) = \exp(-G(e^{-\varepsilon_{1,1}},\dots,e^{-\varepsilon_{J,K_J}};\boldsymbol\rho))
-\]</span>
-with
-<span class="math display">\[\begin{eqnarray*}
-G(\mathbf{Y};\boldsymbol\rho) &amp;\equiv&amp;  G(Y_{1,1},\dots,Y_{1,K_1},\dots,Y_{J,1},\dots,Y_{J,K_J};\boldsymbol\rho) \\
-&amp;=&amp; \sum_{j=1}^J\left(\sum_{k=1}^{K_j} Y_{jk}^{1/\rho_j}
-\right)^{\rho_j}
-\end{eqnarray*}\]</span></p>
-</div>
-</div>
-<div id="stochastic-convergences" class="section level3" number="3.3.3">
-<h3>
-<span class="header-section-number">3.3.3</span> Stochastic convergences<a class="anchor" aria-label="anchor" href="#stochastic-convergences"><i class="fas fa-link"></i></a>
-</h3>
-<div class="proposition">
-<p><span id="prp:chebychev" class="proposition"><strong>Proposition 3.11  (Chebychev's inequality) </strong></span>If <span class="math inline">\(\mathbb{E}(|X|^r)\)</span> is finite for some <span class="math inline">\(r&gt;0\)</span> then:
-<span class="math display">\[
-\forall \varepsilon &gt; 0, \quad \mathbb{P}(|X - c|&gt;\varepsilon) \le \frac{\mathbb{E}[|X - c|^r]}{\varepsilon^r}.
-\]</span>
-In particular, for <span class="math inline">\(r=2\)</span>:
-<span class="math display">\[
-\forall \varepsilon &gt; 0, \quad \mathbb{P}(|X - c|&gt;\varepsilon) \le \frac{\mathbb{E}[(X - c)^2]}{\varepsilon^2}.
-\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-26" class="proof"><em>Proof</em>. </span>Remark that <span class="math inline">\(\varepsilon^r \mathbb{I}_{\{|X| \ge \varepsilon\}} \le |X|^r\)</span> and take the expectation of both sides.</p>
-</div>
-<div class="definition">
-<p><span id="def:convergenceproba" class="definition"><strong>Definition 3.15  (Convergence in probability) </strong></span>The random variable sequence <span class="math inline">\(x_n\)</span> converges in probability to a constant <span class="math inline">\(c\)</span> if <span class="math inline">\(\forall \varepsilon\)</span>, <span class="math inline">\(\lim_{n \rightarrow \infty} \mathbb{P}(|x_n - c|&gt;\varepsilon) = 0\)</span>.</p>
-<p>It is denoted as: <span class="math inline">\(\mbox{plim } x_n = c\)</span>.</p>
-</div>
-<div class="definition">
-<p><span id="def:convergenceLr" class="definition"><strong>Definition 3.16  (Convergence in the Lr norm) </strong></span><span class="math inline">\(x_n\)</span> converges in the <span class="math inline">\(r\)</span>-th mean (or in the <span class="math inline">\(L^r\)</span>-norm) towards <span class="math inline">\(x\)</span>, if <span class="math inline">\(\mathbb{E}(|x_n|^r)\)</span> and <span class="math inline">\(\mathbb{E}(|x|^r)\)</span> exist and if
-<span class="math display">\[
-\lim_{n \rightarrow \infty} \mathbb{E}(|x_n - x|^r) = 0.
-\]</span>
-It is denoted as: <span class="math inline">\(x_n \overset{L^r}{\rightarrow} c\)</span>.</p>
-<p>For <span class="math inline">\(r=2\)</span>, this convergence is called <strong>mean square convergence</strong>.</p>
-</div>
-<div class="definition">
-<p><span id="def:convergenceAlmost" class="definition"><strong>Definition 3.17  (Almost sure convergence) </strong></span>The random variable sequence <span class="math inline">\(x_n\)</span> converges almost surely to <span class="math inline">\(c\)</span> if <span class="math inline">\(\mathbb{P}(\lim_{n \rightarrow \infty} x_n = c) = 1\)</span>.</p>
-<p>It is denoted as: <span class="math inline">\(x_n \overset{a.s.}{\rightarrow} c\)</span>.</p>
-</div>
-<div class="definition">
-<p><span id="def:cvgceDistri" class="definition"><strong>Definition 3.18  (Convergence in distribution) </strong></span><span class="math inline">\(x_n\)</span> is said to converge in distribution (or in law) to <span class="math inline">\(x\)</span> if
-<span class="math display">\[
-\lim_{n \rightarrow \infty} F_{x_n}(s) = F_{x}(s)
-\]</span>
-for all <span class="math inline">\(s\)</span> at which <span class="math inline">\(F_X\)</span> –the cumulative distribution of <span class="math inline">\(X\)</span>– is continuous.</p>
-<p>It is denoted as: <span class="math inline">\(x_n \overset{d}{\rightarrow} x\)</span>.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:Slutsky" class="proposition"><strong>Proposition 3.12  (Rules for limiting distributions (Slutsky)) </strong></span>We have:</p>
-<ol style="list-style-type: lower-roman">
-<li><p><strong>Slutsky’s theorem:</strong> If <span class="math inline">\(x_n \overset{d}{\rightarrow} x\)</span> and <span class="math inline">\(y_n \overset{p}{\rightarrow} c\)</span> then
-<span class="math display">\[\begin{eqnarray*}
-x_n y_n &amp;\overset{d}{\rightarrow}&amp; x c \\
-x_n + y_n &amp;\overset{d}{\rightarrow}&amp; x + c \\
-x_n/y_n &amp;\overset{d}{\rightarrow}&amp; x / c \quad (\mbox{if }c \ne 0)
-\end{eqnarray*}\]</span></p></li>
-<li><p><strong>Continuous mapping theorem:</strong> If <span class="math inline">\(x_n \overset{d}{\rightarrow} x\)</span> and <span class="math inline">\(g\)</span> is a continuous function then <span class="math inline">\(g(x_n) \overset{d}{\rightarrow} g(x).\)</span></p></li>
-</ol>
-</div>
-<div class="proposition">
-<p><span id="prp:implicationsconv" class="proposition"><strong>Proposition 3.13  (Implications of stochastic convergences) </strong></span>We have:
-<span class="math display">\[\begin{align*}
-&amp;\boxed{\overset{L^s}{\rightarrow}}&amp; &amp;\underset{1 \le r \le s}{\Rightarrow}&amp; &amp;\boxed{\overset{L^r}{\rightarrow}}&amp;\\
-&amp;&amp; &amp;&amp; &amp;\Downarrow&amp;\\
-&amp;\boxed{\overset{a.s.}{\rightarrow}}&amp; &amp;\Rightarrow&amp; &amp;\boxed{\overset{p}{\rightarrow}}&amp; \Rightarrow \qquad \boxed{\overset{d}{\rightarrow}}.
-\end{align*}\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-27" class="proof"><em>Proof</em>. </span>(of the fact that <span class="math inline">\(\left(\overset{p}{\rightarrow}\right) \Rightarrow \left( \overset{d}{\rightarrow}\right)\)</span>). Assume that <span class="math inline">\(X_n \overset{p}{\rightarrow} X\)</span>. Denoting by <span class="math inline">\(F\)</span> and <span class="math inline">\(F_n\)</span> the c.d.f. of <span class="math inline">\(X\)</span> and <span class="math inline">\(X_n\)</span>, respectively:
-<span class="math display" id="eq:convgce1">\[\begin{equation}
-F_n(x) = \mathbb{P}(X_n \le x,X\le x+\varepsilon) + \mathbb{P}(X_n \le x,X &gt; x+\varepsilon) \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|&gt;\varepsilon).\tag{3.3}
-\end{equation}\]</span>
-Besides,
-<span class="math display">\[
-F(x-\varepsilon) = \mathbb{P}(X \le x-\varepsilon,X_n \le x) + \mathbb{P}(X \le x-\varepsilon,X_n &gt; x) \le F_n(x) + \mathbb{P}(|X_n - X|&gt;\varepsilon),
-\]</span>
-which implies:
-<span class="math display" id="eq:convgce2">\[\begin{equation}
-F(x-\varepsilon) - \mathbb{P}(|X_n - X|&gt;\varepsilon) \le F_n(x).\tag{3.4}
-\end{equation}\]</span>
-Eqs. <a href="append.html#eq:convgce1">(3.3)</a> and <a href="append.html#eq:convgce2">(3.4)</a> imply:
-<span class="math display">\[
-F(x-\varepsilon) - \mathbb{P}(|X_n - X|&gt;\varepsilon) \le F_n(x)  \le F(x+\varepsilon) + \mathbb{P}(|X_n - X|&gt;\varepsilon).
-\]</span>
-Taking limits as <span class="math inline">\(n \rightarrow \infty\)</span> yields
-<span class="math display">\[
-F(x-\varepsilon) \le \underset{n \rightarrow \infty}{\mbox{lim inf}}\; F_n(x) \le \underset{n \rightarrow \infty}{\mbox{lim sup}}\; F_n(x)  \le F(x+\varepsilon).
-\]</span>
-The result is then obtained by taking limits as <span class="math inline">\(\varepsilon \rightarrow 0\)</span> (if <span class="math inline">\(F\)</span> is continuous at <span class="math inline">\(x\)</span>).</p>
-</div>
-<div class="proposition">
-<p><span id="prp:cvgce11" class="proposition"><strong>Proposition 3.14  (Convergence in distribution to a constant) </strong></span>If <span class="math inline">\(X_n\)</span> converges in distribution to a constant <span class="math inline">\(c\)</span>, then <span class="math inline">\(X_n\)</span> converges in probability to <span class="math inline">\(c\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-28" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\varepsilon&gt;0\)</span>, we have <span class="math inline">\(\mathbb{P}(X_n &lt; c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 0\)</span> i.e. <span class="math inline">\(\mathbb{P}(X_n \ge c - \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1\)</span> and <span class="math inline">\(\mathbb{P}(X_n &lt; c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1\)</span>. Therefore <span class="math inline">\(\mathbb{P}(c - \varepsilon \le X_n &lt; c + \varepsilon) \underset{n \rightarrow \infty}{\rightarrow} 1\)</span>,
-which gives the result.</p>
-</div>
-<div class="example">
-<p><span id="exm:plimButNotLr" class="example"><strong>Example 3.1  (Convergence in probability but not $L^r$) </strong></span>Let <span class="math inline">\(\{x_n\}_{n \in \mathbb{N}}\)</span> be a series of random variables defined by:
-<span class="math display">\[
-x_n = n u_n,
-\]</span>
-where <span class="math inline">\(u_n\)</span> are independent random variables s.t. <span class="math inline">\(u_n \sim \mathcal{B}(1/n)\)</span>.</p>
-<p>We have <span class="math inline">\(x_n \overset{p}{\rightarrow} 0\)</span> but <span class="math inline">\(x_n \overset{L^r}{\nrightarrow} 0\)</span> because <span class="math inline">\(\mathbb{E}(|X_n-0|)=\mathbb{E}(X_n)=1\)</span>.</p>
-</div>
-<div class="theorem">
-<p><span id="thm:cauchycritstatic" class="theorem"><strong>Theorem 3.2  (Cauchy criterion (non-stochastic case)) </strong></span>We have that <span class="math inline">\(\sum_{i=0}^{T} a_i\)</span> converges (<span class="math inline">\(T \rightarrow \infty\)</span>) iff, for any <span class="math inline">\(\eta &gt; 0\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that, for all <span class="math inline">\(M\ge N\)</span>,
-<span class="math display">\[
-\left|\sum_{i=N+1}^{M} a_i\right| &lt; \eta.
-\]</span></p>
-</div>
-<div class="theorem">
-<p><span id="thm:cauchycritstochastic" class="theorem"><strong>Theorem 3.3  (Cauchy criterion (stochastic case)) </strong></span>We have that <span class="math inline">\(\sum_{i=0}^{T} \theta_i \varepsilon_{t-i}\)</span> converges in mean square (<span class="math inline">\(T \rightarrow \infty\)</span>) to a random variable iff, for any <span class="math inline">\(\eta &gt; 0\)</span>, there exists an integer <span class="math inline">\(N\)</span> such that, for all <span class="math inline">\(M\ge N\)</span>,
-<span class="math display">\[
-\mathbb{E}\left[\left(\sum_{i=N+1}^{M} \theta_i \varepsilon_{t-i}\right)^2\right] &lt; \eta.
-\]</span></p>
-</div>
-</div>
-<div id="central-limit-theorem" class="section level3" number="3.3.4">
-<h3>
-<span class="header-section-number">3.3.4</span> Central limit theorem<a class="anchor" aria-label="anchor" href="#central-limit-theorem"><i class="fas fa-link"></i></a>
-</h3>
-<div class="theorem">
-<p><span id="thm:LLNappendix" class="theorem"><strong>Theorem 3.4  (Law of large numbers) </strong></span>The sample mean is a consistent estimator of the population mean.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-29" class="proof"><em>Proof</em>. </span>Let’s denote by <span class="math inline">\(\phi_{X_i}\)</span> the characteristic function of a r.v. <span class="math inline">\(X_i\)</span>. If the mean of <span class="math inline">\(X_i\)</span> is <span class="math inline">\(\mu\)</span> then the Talyor expansion of the characteristic function is:
-<span class="math display">\[
-\phi_{X_i}(u) = \mathbb{E}(\exp(iuX)) = 1 + iu\mu + o(u).
-\]</span>
-The properties of the characteristic function (see Def. <a href="append.html#def:characteristic">3.10</a>) imply that:
-<span class="math display">\[
-\phi_{\frac{1}{n}(X_1+\dots+X_n)}(u) = \prod_{i=1}^{n} \left(1 + i\frac{u}{n}\mu + o\left(\frac{u}{n}\right) \right) \rightarrow e^{iu\mu}.
-\]</span>
-The facts that (a) <span class="math inline">\(e^{iu\mu}\)</span> is the characteristic function of the constant <span class="math inline">\(\mu\)</span> and (b) that a characteristic function uniquely characterises a distribution imply that the sample mean converges in distribution to the constant <span class="math inline">\(\mu\)</span>, which further implies that it converges in probability to <span class="math inline">\(\mu\)</span>.</p>
-</div>
-<div class="theorem">
-<p><span id="thm:LindbergLevyCLT" class="theorem"><strong>Theorem 3.5  (Lindberg-Levy Central limit theorem, CLT) </strong></span>If <span class="math inline">\(x_n\)</span> is an i.i.d. sequence of random variables with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> (<span class="math inline">\(\in ]0,+\infty[\)</span>), then:
-<span class="math display">\[
-\boxed{\sqrt{n} (\bar{x}_n - \mu) \overset{d}{\rightarrow} \mathcal{N}(0,\sigma^2), \quad \mbox{where} \quad \bar{x}_n = \frac{1}{n} \sum_{i=1}^{n} x_i.}
-\]</span></p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-30" class="proof"><em>Proof</em>. </span>Let us introduce the r.v. <span class="math inline">\(Y_n:= \sqrt{n}(\bar{X}_n - \mu)\)</span>. We have <span class="math inline">\(\phi_{Y_n}(u) = \left[ \mathbb{E}\left( \exp(i \frac{1}{\sqrt{n}} u (X_1 - \mu)) \right) \right]^n\)</span>. We have:
-<span class="math display">\[\begin{eqnarray*}
-\left[ \mathbb{E}\left( \exp\left(i \frac{1}{\sqrt{n}} u (X_1 - \mu)\right) \right) \right]^n &amp;=&amp; \left[ \mathbb{E}\left( 1 + i \frac{1}{\sqrt{n}} u (X_1 - \mu) - \frac{1}{2n} u^2 (X_1 - \mu)^2 + o(u^2) \right) \right]^n \\
-&amp;=&amp; \left( 1 - \frac{1}{2n}u^2\sigma^2 + o(u^2)\right)^n.
-\end{eqnarray*}\]</span>
-Therefore <span class="math inline">\(\phi_{Y_n}(u) \underset{n \rightarrow \infty}{\rightarrow} \exp \left( - \frac{1}{2}u^2\sigma^2 \right)\)</span>, which is the characteristic function of <span class="math inline">\(\mathcal{N}(0,\sigma^2)\)</span>.</p>
-</div>
-</div>
-</div>
-<div id="GaussianVar" class="section level2" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> Some properties of Gaussian variables<a class="anchor" aria-label="anchor" href="#GaussianVar"><i class="fas fa-link"></i></a>
-</h2>
-<div class="proposition">
-<p><span id="prp:bandsindependent" class="proposition"><strong>Proposition 3.15  </strong></span>If <span class="math inline">\(\mathbf{A}\)</span> is idempotent and if <span class="math inline">\(\mathbf{x}\)</span> is Gaussian, <span class="math inline">\(\mathbf{L}\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{x}'\mathbf{A}\mathbf{x}\)</span> are independent if <span class="math inline">\(\mathbf{L}\mathbf{A}=\mathbf{0}\)</span>.</p>
-</div>
-<div class="proof">
-<p><span id="unlabeled-div-31" class="proof"><em>Proof</em>. </span>If <span class="math inline">\(\mathbf{L}\mathbf{A}=\mathbf{0}\)</span>, then the two Gaussian vectors <span class="math inline">\(\mathbf{L}\mathbf{x}\)</span> and <span class="math inline">\(\mathbf{A}\mathbf{x}\)</span> are independent. This implies the independence of any function of <span class="math inline">\(\mathbf{L}\mathbf{x}\)</span> and any function of <span class="math inline">\(\mathbf{A}\mathbf{x}\)</span>. The results then follows from the observation that <span class="math inline">\(\mathbf{x}'\mathbf{A}\mathbf{x}=(\mathbf{A}\mathbf{x})'(\mathbf{A}\mathbf{x})\)</span>, which is a function of <span class="math inline">\(\mathbf{A}\mathbf{x}\)</span>.</p>
-</div>
-<div class="proposition">
-<p><span id="prp:update" class="proposition"><strong>Proposition 3.16  (Bayesian update in a vector of Gaussian variables) </strong></span>If
-<span class="math display">\[
-\left[
-\begin{array}{c}
-Y_1\\
-Y_2
-\end{array}
-\right]
-\sim \mathcal{N}
-\left(0,
-\left[\begin{array}{cc}
-\Omega_{11} &amp; \Omega_{12}\\
-\Omega_{21} &amp; \Omega_{22}
-\end{array}\right]
-\right),
-\]</span>
-then
-<span class="math display">\[
-Y_{2}|Y_{1} \sim \mathcal{N}
-\left(
-\Omega_{21}\Omega_{11}^{-1}Y_{1},\Omega_{22}-\Omega_{21}\Omega_{11}^{-1}\Omega_{12}
-\right).
-\]</span>
-<span class="math display">\[
-Y_{1}|Y_{2} \sim \mathcal{N}
-\left(
-\Omega_{12}\Omega_{22}^{-1}Y_{2},\Omega_{11}-\Omega_{12}\Omega_{22}^{-1}\Omega_{21}
-\right).
-\]</span></p>
-</div>
-<div class="proposition">
-<p><span id="prp:truncated" class="proposition"><strong>Proposition 3.17  (Truncated distributions) </strong></span>If <span class="math inline">\(X\)</span> is a random variable distributed according to some p.d.f. <span class="math inline">\(f\)</span>, with c.d.f. <span class="math inline">\(F\)</span>, with infinite support. Then the p.d.f. of <span class="math inline">\(X|a \le X &lt; b\)</span> is
-<span class="math display">\[
-g(x) = \frac{f(x)}{F(b)-F(a)}\mathbb{I}_{\{a \le x &lt; b\}},
-\]</span>
-for any <span class="math inline">\(a&lt;b\)</span>.</p>
-<p>In partiucular, for a Gaussian variable <span class="math inline">\(X \sim \mathcal{N}(\mu,\sigma^2)\)</span>, we have
-<span class="math display">\[
-f(X=x|a\le X&lt;b) = \dfrac{\dfrac{1}{\sigma}\phi\left(\dfrac{x - \mu}{\sigma}\right)}{Z}.
-\]</span>
-with <span class="math inline">\(Z = \Phi(\beta)-\Phi(\alpha)\)</span>, where <span class="math inline">\(\alpha = \dfrac{a - \mu}{\sigma}\)</span> and <span class="math inline">\(\beta = \dfrac{b - \mu}{\sigma}\)</span>.</p>
-<p>Moreover:
-<span class="math display" id="eq:Etrunc">\[\begin{eqnarray}
-\mathbb{E}(X|a\le X&lt;b) &amp;=&amp; \mu - \frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\sigma. \tag{3.5}
-\end{eqnarray}\]</span></p>
-<p>We also have:
-<span class="math display" id="eq:Vtrunc">\[\begin{eqnarray}
-&amp;&amp; \mathbb{V}ar(X|a\le X&lt;b) \nonumber\\
-&amp;=&amp; \sigma^2\left[
-1 -  \frac{\beta\phi\left(\beta\right)-\alpha\phi\left(\alpha\right)}{Z} -  \left(\frac{\phi\left(\beta\right)-\phi\left(\alpha\right)}{Z}\right)^2 \right] \tag{3.6}
-\end{eqnarray}\]</span></p>
-<p>In particular, for <span class="math inline">\(b \rightarrow \infty\)</span>, we get:
-<span class="math display" id="eq:Vtrunc2">\[\begin{equation}
-\mathbb{V}ar(X|a &lt; X) = \sigma^2\left[1 + \alpha\lambda(-\alpha) - \lambda(-\alpha)^2 \right], \tag{3.7}
-\end{equation}\]</span>
-with <span class="math inline">\(\lambda(x)=\dfrac{\phi(x)}{\Phi(x)}\)</span> is called the <strong>inverse Mills ratio</strong>.</p>
-</div>
-<p>Consider the case where <span class="math inline">\(a \rightarrow - \infty\)</span> (i.e. the conditioning set is <span class="math inline">\(X&lt;b\)</span>) and <span class="math inline">\(\mu=0\)</span>, <span class="math inline">\(\sigma=1\)</span>. Then Eq. <a href="append.html#eq:Etrunc">(3.5)</a> gives <span class="math inline">\(\mathbb{E}(X|X&lt;b) = - \lambda(b) = - \dfrac{\phi(b)}{\Phi(b)}\)</span>, where <span class="math inline">\(\lambda\)</span> is the function computing the inverse Mills ratio.</p>
-<div class="figure" style="text-align: left-aligned">
-<span style="display:block;" id="fig:inverseMills"></span>
-<img src="IdentifStructShocks_files/figure-html/inverseMills-1.png" alt="$\mathbb{E}(X|X&lt;b)$ as a function of $b$ when $X\sim \mathcal{N}(0,1)$ (in black)." width="672"><p class="caption">
-Figure 3.2: <span class="math inline">\(\mathbb{E}(X|X&lt;b)\)</span> as a function of <span class="math inline">\(b\)</span> when <span class="math inline">\(X\sim \mathcal{N}(0,1)\)</span> (in black).
-</p>
-</div>
-<div class="proposition">
-<p><span id="prp:pdfMultivarGaussian" class="proposition"><strong>Proposition 3.18  (p.d.f. of a multivariate Gaussian variable) </strong></span>If <span class="math inline">\(Y \sim \mathcal{N}(\mu,\Omega)\)</span> and if <span class="math inline">\(Y\)</span> is a <span class="math inline">\(n\)</span>-dimensional vector, then the density function of <span class="math inline">\(Y\)</span> is:
-<span class="math display">\[
-\frac{1}{(2 \pi)^{n/2}|\Omega|^{1/2}}\exp\left[-\frac{1}{2}\left(Y-\mu\right)'\Omega^{-1}\left(Y-\mu\right)\right].
-\]</span></p>
-</div>
-</div>
-<div id="AppendixProof" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
-</h2>
-<p><strong>Proof of Proposition <a href="#prp:MLEproperties"><strong>??</strong></a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-32" class="proof"><em>Proof</em>. </span>Assumptions (i) and (ii) (in the set of Assumptions <a href="#hyp:MLEregularity"><strong>??</strong></a>) imply that <span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> exists (<span class="math inline">\(=\mbox{argmax}_\theta (1/n)\log \mathcal{L}(\boldsymbol\theta;\mathbf{y})\)</span>).</p>
-<p><span class="math inline">\((1/n)\log \mathcal{L}(\boldsymbol\theta;\mathbf{y})\)</span> can be interpreted as the sample mean of the r.v. <span class="math inline">\(\log f(Y_i;\boldsymbol\theta)\)</span> that are i.i.d. Therefore <span class="math inline">\((1/n)\log \mathcal{L}(\boldsymbol\theta;\mathbf{y})\)</span> converges to <span class="math inline">\(\mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta))\)</span> – which exists (Assumption iv).</p>
-<p>Because the latter convergence is uniform (Assumption v), the solution <span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> almost surely converges to the solution to the limit problem:
-<span class="math display">\[
-\mbox{argmax}_\theta \mathbb{E}_{\boldsymbol\theta_0}(\log f(Y;\boldsymbol\theta)) = \mbox{argmax}_\theta \int_{\mathcal{Y}} \log f(y;\boldsymbol\theta)f(y;\boldsymbol\theta_0) dy.
-\]</span></p>
-<p>Properties of the Kullback information measure (see Prop. <a href="append.html#prp:Kullback">3.9</a>), together with the identifiability assumption (ii) implies that the solution to the limit problem is unique and equal to <span class="math inline">\(\boldsymbol\theta_0\)</span>.</p>
-<p>Consider a r.v. sequence <span class="math inline">\(\boldsymbol\theta\)</span> that converges to <span class="math inline">\(\boldsymbol\theta_0\)</span>. The Taylor expansion of the score in a neighborood of <span class="math inline">\(\boldsymbol\theta_0\)</span> yields to:
-<span class="math display">\[
-\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\mathbf{y})}{\partial \boldsymbol\theta} = \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} + \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta - \boldsymbol\theta_0) + o_p(\boldsymbol\theta - \boldsymbol\theta_0)
-\]</span></p>
-<p><span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> converges to <span class="math inline">\(\boldsymbol\theta_0\)</span> and satisfies the likelihood equation <span class="math inline">\(\frac{\partial \log \mathcal{L}(\boldsymbol\theta;\mathbf{y})}{\partial \boldsymbol\theta} = \mathbf{0}\)</span>. Therefore:
-<span class="math display">\[
-\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \approx - \frac{\partial^2 \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta \partial \boldsymbol\theta'}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0),
-\]</span>
-or equivalently:
-<span class="math display">\[
-\frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \approx
-\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right)\sqrt{n}(\boldsymbol\theta_{MLE} - \boldsymbol\theta_0),
-\]</span></p>
-<p>By the law of large numbers, we have: <span class="math inline">\(\left(- \frac{1}{n} \sum_{i=1}^n \frac{\partial^2 \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta \partial \boldsymbol\theta'} \right) \overset{}\rightarrow \frac{1}{n} \mathbf{I}(\boldsymbol\theta_0) = \mathcal{I}_Y(\boldsymbol\theta_0)\)</span>.</p>
-<p>Besides, we have:
-<span class="math display">\[\begin{eqnarray*}
-\frac{1}{\sqrt{n}} \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} &amp;=&amp; \sqrt{n} \left( \frac{1}{n} \sum_i \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right) \\
-&amp;=&amp; \sqrt{n} \left( \frac{1}{n} \sum_i \left\{ \frac{\partial \log f(y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} - \mathbb{E}_{\boldsymbol\theta_0} \frac{\partial \log f(Y_i;\boldsymbol\theta_0)}{\partial \boldsymbol\theta} \right\} \right)
-\end{eqnarray*}\]</span>
-which converges to <span class="math inline">\(\mathcal{N}(0,\mathcal{I}_Y(\boldsymbol\theta_0))\)</span> by the CLT.</p>
-<p>Collecting the preceding results leads to (b). The fact that <span class="math inline">\(\boldsymbol\theta_{MLE}\)</span> achieves the FDCR bound proves (c).</p>
-</div>
-<p><strong>Proof of Proposition <a href="#prp:Walddistri"><strong>??</strong></a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-33" class="proof"><em>Proof</em>. </span>We have <span class="math inline">\(\sqrt{n}(\hat{\boldsymbol\theta}_{n} - \boldsymbol\theta_{0}) \overset{d}{\rightarrow} \mathcal{N}(0,\mathcal{I}(\boldsymbol\theta_0)^{-1})\)</span> (Eq. (eq:normMLE)). A Taylor expansion around <span class="math inline">\(\boldsymbol\theta_0\)</span> yields to:
-<span class="math display" id="eq:XXX">\[\begin{equation}
-\sqrt{n}(h(\hat{\boldsymbol\theta}_{n}) - h(\boldsymbol\theta_{0})) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). \tag{3.8}
-\end{equation}\]</span>
-Under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(h(\boldsymbol\theta_{0})=0\)</span> therefore:
-<span class="math display" id="eq:lm10">\[\begin{equation}
-\sqrt{n} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}\right). \tag{3.9}
-\end{equation}\]</span>
-Hence
-<span class="math display">\[
-\sqrt{n} \left(
-\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}
-\right)^{-1/2} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \mathcal{N}\left(0,Id\right).
-\]</span>
-Taking the quadratic form, we obtain:
-<span class="math display">\[
-n h(\hat{\boldsymbol\theta}_{n})'  \left(
-\frac{\partial h(\boldsymbol\theta_{0})}{\partial \boldsymbol\theta'}\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{\partial h(\boldsymbol\theta_{0})'}{\partial \boldsymbol\theta}
-\right)^{-1} h(\hat{\boldsymbol\theta}_{n}) \overset{d}{\rightarrow} \chi^2(r).
-\]</span></p>
-<p>The fact that the test has asymptotic level <span class="math inline">\(\alpha\)</span> directly stems from what precedes. <strong>Consistency of the test</strong>: Consider <span class="math inline">\(\theta_0 \in \Theta\)</span>. Because the MLE is consistent, <span class="math inline">\(h(\hat{\boldsymbol\theta}_{n})\)</span> converges to <span class="math inline">\(h(\boldsymbol\theta_0) \ne 0\)</span>. Eq. <a href="append.html#eq:XXX">(3.8)</a> is still valid. It implies that <span class="math inline">\(\xi^W_n\)</span> converges to <span class="math inline">\(+\infty\)</span> and therefore that <span class="math inline">\(\mathbb{P}_{\boldsymbol\theta}(\xi^W_n \ge \chi^2_{1-\alpha}(r)) \rightarrow 1\)</span>.</p>
-</div>
-<p><strong>Proof of Proposition <a href="#prp:LMdistri"><strong>??</strong></a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-34" class="proof"><em>Proof</em>. </span>Notations: “<span class="math inline">\(\approx\)</span>” means “equal up to a term that converges to 0 in probability”. We are under <span class="math inline">\(H_0\)</span>. <span class="math inline">\(\hat{\boldsymbol\theta}^0\)</span> is the constrained ML estimator; <span class="math inline">\(\hat{\boldsymbol\theta}\)</span> denotes the unconstrained one.</p>
-<p>We combine the two Taylor expansion: <span class="math inline">\(h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n - \boldsymbol\theta_0)\)</span> and <span class="math inline">\(h(\hat{\boldsymbol\theta}_n^0) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n^0 - \boldsymbol\theta_0)\)</span> and we use <span class="math inline">\(h(\hat{\boldsymbol\theta}_n^0)=0\)</span> (by definition) to get:
-<span class="math display" id="eq:lm1">\[\begin{equation}
-\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'}\sqrt{n}(\hat{\boldsymbol\theta}_n - \hat{\boldsymbol\theta}^0_n). \tag{3.10}
-\end{equation}\]</span>
-Besides, we have (using the definition of the information matrix):
-<span class="math display" id="eq:lm29">\[\begin{equation}
-\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx
-\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) \tag{3.11}
-\end{equation}\]</span>
-and:
-<span class="math display" id="eq:lm30">\[\begin{equation}
-0=\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx
-\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} - \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).\tag{3.12}
-\end{equation}\]</span>
-Taking the difference and multiplying by <span class="math inline">\(\mathcal{I}(\boldsymbol\theta_0)^{-1}\)</span>:
-<span class="math display" id="eq:lm2">\[\begin{equation}
-\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}_n^0) \approx
-\mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}
-\mathcal{I}(\boldsymbol\theta_0).\tag{3.13}
-\end{equation}\]</span>
-Eqs. <a href="append.html#eq:lm1">(3.10)</a> and <a href="append.html#eq:lm2">(3.13)</a> yield to:
-<span class="math display" id="eq:lm3">\[\begin{equation}
-\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}.\tag{3.14}
-\end{equation}\]</span></p>
-<p>Recall that <span class="math inline">\(\hat{\boldsymbol\theta}^0_n\)</span> is the MLE of <span class="math inline">\(\boldsymbol\theta_0\)</span> under the constraint <span class="math inline">\(h(\boldsymbol\theta)=0\)</span>. The vector of Lagrange multipliers <span class="math inline">\(\hat\lambda_n\)</span> associated to this program satisfies:
-<span class="math display" id="eq:multiplier">\[\begin{equation}
-\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}+ \frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta}\hat\lambda_n = 0.\tag{3.15}
-\end{equation}\]</span>
-Substituting the latter equation in Eq. <a href="append.html#eq:lm3">(3.14)</a> gives:
-<span class="math display">\[
-\sqrt{n}h(\hat{\boldsymbol\theta}_n) \approx
-- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
-\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}} \approx
-- \dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
-\frac{\partial h'(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \frac{\hat\lambda_n}{\sqrt{n}}
-\]</span>
-which yields:
-<span class="math display" id="eq:lm20">\[\begin{equation}
-\frac{\hat\lambda_n}{\sqrt{n}} \approx - \left(
-\dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
-\frac{\partial h'(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta}
-\right)^{-1}
-\sqrt{n}h(\hat{\boldsymbol\theta}_n).\tag{3.16}
-\end{equation}\]</span>
-It follows, from Eq. <a href="append.html#eq:lm10">(3.9)</a>, that:
-<span class="math display">\[
-\frac{\hat\lambda_n}{\sqrt{n}} \overset{d}{\rightarrow} \mathcal{N}\left(0,\left(
-\dfrac{\partial h(\boldsymbol\theta_0)}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1}
-\frac{\partial h'(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta}
-\right)^{-1}\right).
-\]</span>
-Taking the quadratic form of the last equation gives:
-<span class="math display">\[
-\frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1}
-\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \hat\lambda_n \overset{d}{\rightarrow} \chi^2(r).
-\]</span>
-Using Eq. <a href="append.html#eq:multiplier">(3.15)</a>, it appears that the left-hand side term of the last equation is <span class="math inline">\(\xi^{LM}\)</span> as defined in Eq. <a href="#eq:xiLM">(<strong>??</strong>)</a>. Consistency: see Remark 17.3 in <span class="citation">Gouriéroux and Monfort (<a href="references.html#ref-gourieroux_monfort_1995" role="doc-biblioref">1995</a>)</span>.</p>
-</div>
-<p><strong>Proof of Proposition <a href="#prp:equivLRLMW"><strong>??</strong></a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-35" class="proof"><em>Proof</em>. </span>Let us first demonstrate the asymptotic equivalence of <span class="math inline">\(\xi^{LM}\)</span> and <span class="math inline">\(\xi^{LR}\)</span>.</p>
-<p>The second-order taylor expansions of <span class="math inline">\(\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\mathbf{y})\)</span> and <span class="math inline">\(\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\mathbf{y})\)</span> are:
-<span class="math display">\[\begin{eqnarray*}
-\log \mathcal{L}(\hat{\boldsymbol\theta}_n,\mathbf{y}) &amp;\approx&amp; \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})
-+ \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)
-- \frac{n}{2} (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\\
-\log \mathcal{L}(\hat{\boldsymbol\theta}^0_n,\mathbf{y}) &amp;\approx&amp; \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})
-+ \frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})}{\partial \boldsymbol\theta'}(\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)
-- \frac{n}{2} (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0).
-\end{eqnarray*}\]</span>
-Taking the difference, we obtain:
-<span class="math display">\[
-\xi_n^{LR} \approx 2\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0,\mathbf{y})}{\partial \boldsymbol\theta'}
-(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n) + n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).
-\]</span>
-Using <span class="math inline">\(\dfrac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\boldsymbol\theta_0;\mathbf{y})}{\partial \boldsymbol\theta} \approx \mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\)</span> (Eq. <a href="append.html#eq:lm30">(3.12)</a>), we have:
-<span class="math display">\[
-\xi_n^{LR} \approx
-2n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)'\mathcal{I}(\boldsymbol\theta_0)
-(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n)
-+ n (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0) - n (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)' \mathcal{I}(\boldsymbol\theta_0) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0).
-\]</span>
-In the second of the three terms in the sum, we replace <span class="math inline">\((\hat{\boldsymbol\theta}^0_n-\boldsymbol\theta_0)\)</span> by <span class="math inline">\((\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n+\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\)</span> and we develop the associated product. This leads to:
-<span class="math display" id="eq:lr10">\[\begin{equation}
-\xi_n^{LR} \approx n (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n)' \mathcal{I}(\boldsymbol\theta_0)^{-1} (\hat{\boldsymbol\theta}^0_n-\hat{\boldsymbol\theta}_n). \tag{3.17}
-\end{equation}\]</span>
-The difference between Eqs. <a href="append.html#eq:lm29">(3.11)</a> and <a href="append.html#eq:lm30">(3.12)</a> implies:
-<span class="math display">\[
-\frac{1}{\sqrt{n}}\frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx
-\mathcal{I}(\boldsymbol\theta_0)\sqrt{n}(\hat{\boldsymbol\theta}_n-\hat{\boldsymbol\theta}^0_n),
-\]</span>
-which, associated to Eq. @(eq:lr10), gives:
-<span class="math display">\[
-\xi_n^{LR} \approx \frac{1}{n} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta'} \mathcal{I}(\boldsymbol\theta_0)^{-1} \frac{\partial \log \mathcal{L}(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \approx \xi_n^{LM}.
-\]</span>
-Hence <span class="math inline">\(\xi_n^{LR}\)</span> has the same asymptotic distribution as <span class="math inline">\(\xi_n^{LM}\)</span>.</p>
-<p>Let’s show that the LR test is consistent. For this, note that:
-<span class="math display">\[
-\frac{\log \mathcal{L}(\hat{\boldsymbol\theta},\mathbf{y}) - \log \mathcal{L}(\hat{\boldsymbol\theta}^0,\mathbf{y})}{n} = \frac{1}{n} \sum_{i=1}^n[\log f(y_i;\hat{\boldsymbol\theta}_n) - \log f(y_i;\hat{\boldsymbol\theta}_n^0)] \rightarrow \mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)],
-\]</span>
-where <span class="math inline">\(\boldsymbol\theta_\infty\)</span>, the pseudo true value, is such that <span class="math inline">\(h(\boldsymbol\theta_\infty) \ne 0\)</span> (by definition of <span class="math inline">\(H_1\)</span>). From the Kullback inequality and the asymptotic identifiability of <span class="math inline">\(\boldsymbol\theta_0\)</span>, it follows that <span class="math inline">\(\mathbb{E}_0[\log f(Y;\boldsymbol\theta_0) - \log f(Y;\boldsymbol\theta_\infty)] &gt;0\)</span>. Therefore <span class="math inline">\(\xi_n^{LR} \rightarrow + \infty\)</span> under <span class="math inline">\(H_1\)</span>.</p>
-<p>Let us now demonstrate the equivalence of <span class="math inline">\(\xi^{LM} and \xi^{W}\)</span>.</p>
-<p>We have (using Eq. (eq:multiplier)):
-<span class="math display">\[
-\xi^{LM}_n = \frac{1}{n}\hat\lambda_n' \dfrac{\partial h(\hat{\boldsymbol\theta}^0_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}^0_n)^{-1}
-\frac{\partial h'(\hat{\boldsymbol\theta}^0_n;\mathbf{y})}{\partial \boldsymbol\theta} \hat\lambda_n.
-\]</span>
-Since, under <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\hat{\boldsymbol\theta}_n^0\approx\hat{\boldsymbol\theta}_n \approx {\boldsymbol\theta}_0\)</span>, Eq. <a href="append.html#eq:lm20">(3.16)</a> therefore implies that:
-<span class="math display">\[
-\xi^{LM} \approx n h(\hat{\boldsymbol\theta}_n)' \left(
-\dfrac{\partial h(\hat{\boldsymbol\theta}_n)}{\partial \boldsymbol\theta'} \mathcal{I}(\hat{\boldsymbol\theta}_n)^{-1}
-\frac{\partial h'(\hat{\boldsymbol\theta}_n;\mathbf{y})}{\partial \boldsymbol\theta}
-\right)^{-1}
-h(\hat{\boldsymbol\theta}_n) = \xi^{W},
-\]</span>
-which gives the result.</p>
-</div>
-<p><strong>Proof of Eq. <a href="TS.html#eq:TCL2">(2.3)</a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-36" class="proof"><em>Proof</em>. </span>We have:
-<span class="math display">\[\begin{eqnarray*}
-&amp;&amp;T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right]\\
-&amp;=&amp; T\mathbb{E}\left[\left(\frac{1}{T}\sum_{t=1}^T(y_t - \mu)\right)^2\right] = \frac{1}{T} \mathbb{E}\left[\sum_{t=1}^T(y_t - \mu)^2+2\sum_{s&lt;t\le T}(y_t - \mu)(y_s - \mu)\right]\\
-&amp;=&amp; \gamma_0 +\frac{2}{T}\left(\sum_{t=2}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-1} - \mu)\right]\right) +\frac{2}{T}\left(\sum_{t=3}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-2} - \mu)\right]\right) + \dots \\
-&amp;&amp;+ \frac{2}{T}\left(\sum_{t=T-1}^{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-2)} - \mu)\right]\right) + \frac{2}{T}\mathbb{E}\left[(y_t - \mu)(y_{t-(T-1)} - \mu)\right]\\
-&amp;=&amp;  \gamma_0 + 2 \frac{T-1}{T}\gamma_1 + \dots + 2 \frac{1}{T}\gamma_{T-1} .
-\end{eqnarray*}\]</span>
-Therefore:
-<span class="math display">\[\begin{eqnarray*}
-T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j &amp;=&amp; - 2\frac{1}{T}\gamma_1 - 2\frac{2}{T}\gamma_2 - \dots - 2\frac{T-1}{T}\gamma_{T-1} - 2\gamma_T - 2 \gamma_{T+1} + \dots
-\end{eqnarray*}\]</span>
-And then:
-<span class="math display">\[
-\left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| \le 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots
-\]</span></p>
-<p>For any <span class="math inline">\(q \le T\)</span>, we have:
-<span class="math display">\[\begin{eqnarray*}
-\left|T\mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right| &amp;\le&amp; 2\frac{1}{T}|\gamma_1| + 2\frac{2}{T}|\gamma_2| + \dots + 2\frac{q-1}{T}|\gamma_{q-1}| +2\frac{q}{T}|\gamma_q| +\\
-&amp;&amp;2\frac{q+1}{T}|\gamma_{q+1}| + \dots  + 2\frac{T-1}{T}|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots\\
-&amp;\le&amp; \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q-1)|\gamma_{q-1}| +q|\gamma_q|\right) +\\
-&amp;&amp;2|\gamma_{q+1}| + \dots  + 2|\gamma_{T-1}| + 2|\gamma_T| + 2 |\gamma_{T+1}| + \dots
-\end{eqnarray*}\]</span></p>
-<p>Consider <span class="math inline">\(\varepsilon &gt; 0\)</span>. The fact that the autocovariances are absolutely summable implies that there exists <span class="math inline">\(q_0\)</span> such that (Cauchy criterion, Theorem <a href="append.html#thm:cauchycritstatic">3.2</a>):
-<span class="math display">\[
-2|\gamma_{q_0+1}|+2|\gamma_{q_0+2}|+2|\gamma_{q_0+3}|+\dots &lt; \varepsilon/2.
-\]</span>
-Then, if <span class="math inline">\(T &gt; q_0\)</span>, it comes that:
-<span class="math display">\[
-\left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) + \varepsilon/2.
-\]</span>
-If <span class="math inline">\(T \ge 2\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right)/(\varepsilon/2)\)</span> (<span class="math inline">\(= f(q_0)\)</span>, say) then
-<span class="math display">\[
-\frac{2}{T}\left(|\gamma_1| + 2|\gamma_2| + \dots + (q_0-1)|\gamma_{q_0-1}| +q_0|\gamma_{q_0}|\right) \le \varepsilon/2.
-\]</span>
-Then, if <span class="math inline">\(T&gt;f(q_0)\)</span> and <span class="math inline">\(T&gt;q_0\)</span>, i.e. if <span class="math inline">\(T&gt;\max(f(q_0),q_0)\)</span>, we have:
-<span class="math display">\[
-\left|T \mathbb{E}\left[(\bar{y}_T - \mu)^2\right] - \sum_{j=-\infty}^{+\infty} \gamma_j\right|\le \varepsilon.
-\]</span></p>
-</div>
-<p><strong>Proof of Proposition <a href="TS.html#prp:smallestMSE">2.15</a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-37" class="proof"><em>Proof</em>. </span>We have:
-<span class="math display" id="eq:1">\[\begin{eqnarray}
-\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) &amp;=&amp; \mathbb{E}\left([\color{blue}{\{y_{t+1} - \mathbb{E}(y_{t+1}|x_t)\}} + \color{red}{\{\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}\}}]^2\right)\nonumber\\
-&amp;=&amp;  \mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right) + \mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)\nonumber\\
-&amp;&amp; + 2\mathbb{E}\left( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right). \tag{3.18}
-\end{eqnarray}\]</span>
-Let us focus on the last term. We have:
-<span class="math display">\[\begin{eqnarray*}
-&amp;&amp;\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right)\\
-&amp;=&amp; \mathbb{E}( \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ \underbrace{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}_{\mbox{function of $x_t$}}}|x_t))\\
-&amp;=&amp; \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}|x_t))\\
-&amp;=&amp; \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \color{blue}{\underbrace{[\mathbb{E}(y_{t+1}|x_t) - \mathbb{E}(y_{t+1}|x_t)]}_{=0}})=0.
-\end{eqnarray*}\]</span></p>
-<p>Therefore, Eq. <a href="append.html#eq:1">(3.18)</a> becomes:
-<span class="math display">\[\begin{eqnarray*}
-&amp;&amp;\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) \\
-&amp;=&amp;  \underbrace{\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right)}_{\mbox{$\ge 0$ and does not depend on $y^*_{t+1}$}} + \underbrace{\mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)}_{\mbox{$\ge 0$ and depends on $y^*_{t+1}$}}.
-\end{eqnarray*}\]</span>
-This implies that <span class="math inline">\(\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)\)</span> is always larger than <span class="math inline">\(\color{blue}{\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}\)</span>, and is therefore minimized if the second term is equal to zero, that is if <span class="math inline">\(\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}\)</span>.</p>
-</div>
-<p><strong>Proof of Proposition <a href="TS.html#prp:estimVARGaussian">2.12</a></strong></p>
-<div class="proof">
-<p><span id="unlabeled-div-38" class="proof"><em>Proof</em>. </span>Using Proposition <a href="#prp:multivarG"><strong>??</strong></a> (in Appendix <a href="#XXX"><strong>??</strong></a>), we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
+<p><span id="unlabeled-div-5" class="proof"><em>Proof</em>. </span>Using Proposition <a href="#prp:multivarG"><strong>??</strong></a> (in Appendix <a href="#XXX"><strong>??</strong></a>), we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
 <span class="math display">\[\begin{eqnarray*}
 \log\mathcal{L}(Y_{T};\theta) &amp; = &amp; -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
 &amp;  &amp; -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].
@@ -917,9 +791,9 @@ Since <span class="math inline">\(\Omega\)</span> is a positive definite matrix,
 \]</span>
 which leads to the result.</p>
 </div>
-<p><strong>Proof of Proposition <a href="TS.html#prp:OLSVAR">2.13</a></strong></p>
+<p><strong>Proof of Proposition <a href="basics.html#prp:OLSVAR">2.2</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-39" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="TS.html#eq:olsar1">(2.24)</a>, we have:
+<p><span id="unlabeled-div-6" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(2.11)</a>, we have:
 <span class="math display">\[
 \sqrt{T}(\mathbf{b}-\boldsymbol{\beta}) =  (X'X/T)^{-1}\sqrt{T}(X'\boldsymbol\varepsilon/T).
 \]</span>
@@ -934,90 +808,13 @@ If <span class="math inline">\(j&gt;0\)</span>, we have <span class="math inline
 The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\boldsymbol\varepsilon/T)=\sqrt{T}\frac{1}{T}\sum_{t=1}^Tv_t\)</span> results from the Central Limit Theorem for covariance-stationary processes, using the <span class="math inline">\(\gamma_j^v\)</span> computed above.</p>
 </div>
 </div>
-<div id="additional-codes" class="section level2" number="3.6">
+<div id="statistical-tables" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">3.6</span> Additional codes<a class="anchor" aria-label="anchor" href="#additional-codes"><i class="fas fa-link"></i></a>
-</h2>
-<div id="App:GEV" class="section level3" number="3.6.1">
-<h3>
-<span class="header-section-number">3.6.1</span> Simulating GEV distributions<a class="anchor" aria-label="anchor" href="#App:GEV"><i class="fas fa-link"></i></a>
-</h3>
-<p>The following lines of code have been used to generate Figure <a href="#fig:GEV"><strong>??</strong></a>.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n.sim</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,</span>
-<span>    plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.2</span>,<span class="fl">.95</span>,<span class="fl">.2</span>,<span class="fl">.85</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">all.rhos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.3</span>,<span class="fl">.6</span>,<span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">all.rhos</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="va">all.rhos</span><span class="op">[</span><span class="va">j</span><span class="op">]</span></span>
-<span>  <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n.sim</span><span class="op">)</span></span>
-<span>  <span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n.sim</span><span class="op">)</span></span>
-<span>  <span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">.000001</span>,<span class="va">n.sim</span><span class="op">)</span></span>
-<span>  <span class="co"># solve for f(w) = w*(1 - log(w)/theta) - v2 = 0</span></span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">f.i</span> <span class="op">&lt;-</span> <span class="va">w</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">/</span><span class="va">theta</span><span class="op">)</span> <span class="op">-</span> <span class="va">v2</span></span>
-<span>    <span class="va">f.prime</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">/</span><span class="va">theta</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="va">theta</span></span>
-<span>    <span class="va">w</span> <span class="op">&lt;-</span> <span class="va">w</span> <span class="op">-</span> <span class="va">f.i</span><span class="op">/</span><span class="va">f.prime</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="va">u1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">v1</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">theta</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">u2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">v1</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="va">theta</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co"># Get eps1 and eps2 using the inverse of</span></span>
-<span>  <span class="co"># the Gumbel distribution's cdf:</span></span>
-<span>  <span class="va">eps1</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">u1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">eps2</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">u2</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">eps1</span>,<span class="va">eps2</span><span class="op">)</span>,<span class="fl">1</span><span class="op">-</span><span class="va">all.rhos</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">eps1</span>,<span class="va">eps2</span>,pch<span class="op">=</span><span class="fl">19</span>,col<span class="op">=</span><span class="st">"#FF000044"</span>,</span>
-<span>       main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"rho = "</span>,<span class="fu"><a href="https://rdrr.io/r/base/toString.html">toString</a></span><span class="op">(</span><span class="va">all.rhos</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,</span>
-<span>       xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>       ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">epsilon</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>       cex.lab<span class="op">=</span><span class="fl">2</span>,cex.main<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-</div>
-<div id="IRFDELTA" class="section level3" number="3.6.2">
-<h3>
-<span class="header-section-number">3.6.2</span> Computing the covariance matrix of IRF using the delta method<a class="anchor" aria-label="anchor" href="#IRFDELTA"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">irf.function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">THETA</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">c</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
-<span>  <span class="va">phi</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="va">q</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">THETA</span><span class="op">[</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
-<span>    <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span></span>
-<span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Matrix.of.Exog</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span>  <span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="va">r</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span>  </span>
-<span>  <span class="va">irf</span> <span class="op">&lt;-</span> <span class="fu">sim.arma</span><span class="op">(</span><span class="fl">0</span>,<span class="va">phi</span>,<span class="va">beta</span>,sigma<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Ramey</span><span class="op">$</span><span class="va">ED3_TC</span>,na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,T<span class="op">=</span><span class="fl">60</span>,</span>
-<span>                  y.0<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">phi</span><span class="op">)</span><span class="op">)</span>,nb.sim<span class="op">=</span><span class="fl">1</span>,make.IRF<span class="op">=</span><span class="fl">1</span>,</span>
-<span>                  X<span class="op">=</span><span class="cn">NaN</span>,beta<span class="op">=</span><span class="cn">NaN</span><span class="op">)</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">irf</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">IRF.0</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="fu">irf.function</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">THETA</span><span class="op">)</span></span>
-<span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">.00000001</span></span>
-<span><span class="va">d.IRF</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">THETA</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">THETA.i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">THETA</span></span>
-<span>  <span class="va">THETA.i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">THETA.i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">eps</span></span>
-<span>  <span class="va">IRF.i</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="fu">irf.function</span><span class="op">(</span><span class="va">THETA.i</span><span class="op">)</span></span>
-<span>  <span class="va">d.IRF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">d.IRF</span>,</span>
-<span>                 <span class="op">(</span><span class="va">IRF.i</span> <span class="op">-</span> <span class="va">IRF.0</span><span class="op">)</span><span class="op">/</span><span class="va">eps</span></span>
-<span>                 <span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span><span class="va">mat.var.cov.IRF</span> <span class="op">&lt;-</span> <span class="va">d.IRF</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span><span class="op">$</span><span class="va">I</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">d.IRF</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div id="statistical-tables" class="section level2" number="3.7">
-<h2>
-<span class="header-section-number">3.7</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <caption>
-<span id="tab:Normal">Table 3.1: </span>Quantiles of the <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are respectively the row and column number; then the corresponding cell gives <span class="math inline">\(\mathbb{P}(0&lt;X\le a+b)\)</span>, where <span class="math inline">\(X \sim \mathcal{N}(0,1)\)</span>.</caption>
+<span id="tab:Normal">Table 7.1: </span>Quantiles of the <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution. If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are respectively the row and column number; then the corresponding cell gives <span class="math inline">\(\mathbb{P}(0&lt;X\le a+b)\)</span>, where <span class="math inline">\(X \sim \mathcal{N}(0,1)\)</span>.</caption>
 <colgroup>
 <col width="5%">
 <col width="9%">
@@ -1439,7 +1236,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </table></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Student">Table 3.2: </span>Quantiles of the Student-<span class="math inline">\(t\)</span> distribution. The rows correspond to different degrees of freedom (<span class="math inline">\(\nu\)</span>, say); the columns correspond to different probabilities (<span class="math inline">\(z\)</span>, say). The cell gives <span class="math inline">\(q\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(-q&lt;X&lt;q)=z\)</span>, with <span class="math inline">\(X \sim t(\nu)\)</span>.</caption>
+<span id="tab:Student">Table 7.2: </span>Quantiles of the Student-<span class="math inline">\(t\)</span> distribution. The rows correspond to different degrees of freedom (<span class="math inline">\(\nu\)</span>, say); the columns correspond to different probabilities (<span class="math inline">\(z\)</span>, say). The cell gives <span class="math inline">\(q\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(-q&lt;X&lt;q)=z\)</span>, with <span class="math inline">\(X \sim t(\nu)\)</span>.</caption>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="right">0.05</th>
@@ -1687,7 +1484,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </table></div>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:Chi2">Table 3.3: </span>Quantiles of the <span class="math inline">\(\chi^2\)</span> distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.</caption>
+<span id="tab:Chi2">Table 7.3: </span>Quantiles of the <span class="math inline">\(\chi^2\)</span> distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.</caption>
 <colgroup>
 <col width="5%">
 <col width="11%">
@@ -1946,7 +1743,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </table></div>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <caption>
-<span id="tab:Fstat">Table 3.4: </span>Quantiles of the <span class="math inline">\(\mathcal{F}\)</span> distribution. The columns and rows correspond to different degrees of freedom (resp. <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>). The different panels correspond to different probabilities (<span class="math inline">\(\alpha\)</span>) The corresponding cell gives <span class="math inline">\(z\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(X \le z)=\alpha\)</span>, with <span class="math inline">\(X \sim \mathcal{F}(n_1,n_2)\)</span>.</caption>
+<span id="tab:Fstat">Table 7.4: </span>Quantiles of the <span class="math inline">\(\mathcal{F}\)</span> distribution. The columns and rows correspond to different degrees of freedom (resp. <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>). The different panels correspond to different probabilities (<span class="math inline">\(\alpha\)</span>) The corresponding cell gives <span class="math inline">\(z\)</span> that is s.t. <span class="math inline">\(\mathbb{P}(X \le z)=\alpha\)</span>, with <span class="math inline">\(X \sim \mathcal{F}(n_1,n_2)\)</span>.</caption>
 <colgroup>
 <col width="15%">
 <col width="8%">
@@ -2291,31 +2088,14 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="TS.html"><span class="header-section-number">2</span> Time Series</a></div>
+<div class="prev"><a href="Inference.html"><span class="header-section-number">6</span> Inference</a></div>
 <div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#append"><span class="header-section-number">3</span> Appendix</a></li>
-<li><a class="nav-link" href="#PCAapp"><span class="header-section-number">3.1</span> Principal component analysis (PCA)</a></li>
-<li><a class="nav-link" href="#LinAlgebra"><span class="header-section-number">3.2</span> Linear algebra: definitions and results</a></li>
-<li>
-<a class="nav-link" href="#variousResults"><span class="header-section-number">3.3</span> Statistical analysis: definitions and results</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#moments-and-statistics"><span class="header-section-number">3.3.1</span> Moments and statistics</a></li>
-<li><a class="nav-link" href="#standard-distributions"><span class="header-section-number">3.3.2</span> Standard distributions</a></li>
-<li><a class="nav-link" href="#stochastic-convergences"><span class="header-section-number">3.3.3</span> Stochastic convergences</a></li>
-<li><a class="nav-link" href="#central-limit-theorem"><span class="header-section-number">3.3.4</span> Central limit theorem</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#GaussianVar"><span class="header-section-number">3.4</span> Some properties of Gaussian variables</a></li>
-<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">3.5</span> Proofs</a></li>
-<li>
-<a class="nav-link" href="#additional-codes"><span class="header-section-number">3.6</span> Additional codes</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#App:GEV"><span class="header-section-number">3.6.1</span> Simulating GEV distributions</a></li>
-<li><a class="nav-link" href="#IRFDELTA"><span class="header-section-number">3.6.2</span> Computing the covariance matrix of IRF using the delta method</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">3.7</span> Statistical Tables</a></li>
+<li><a class="nav-link" href="#append"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">7.1</span> Proofs</a></li>
+<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">7.2</span> Statistical Tables</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2332,7 +2112,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2022-12-19.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Inference | The Identification of Dynamic Structural Shocks</title>
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
+<meta name="description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Inference | The Identification of Dynamic Structural Shocks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Inference | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="my-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
+<li><a class="active" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Inference" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Inference<a class="anchor" aria-label="anchor" href="#Inference"><i class="fas fa-link"></i></a>
+</h1>
+<p>Consider the following SVAR model:
+<span class="math display">\[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]</span>
+with <span class="math inline">\(\varepsilon_t=B\eta_t\)</span>, <span class="math inline">\(\Omega_\varepsilon=BB'\)</span>.</p>
+<p>The corresponding infinite MA representation (Eq. <a href="basics.html#eq:InfMA">(2.3)</a>, or Wold theorem, Theorem <a href="#thm:Wold"><strong>??</strong></a>) is:
+<span class="math display">\[
+y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
+\]</span>
+where <span class="math inline">\(\Psi_0=B\)</span> and for <span class="math inline">\(h=1,2,\dots\)</span>:
+<span class="math display">\[
+\Psi_h = \sum_{j=1}^h\Psi_{h-j}\Phi_j,
+\]</span>
+with <span class="math inline">\(\Phi_j=0\)</span> for <span class="math inline">\(j&gt;p\)</span> (see Prop. <a href="#prp:computPsi"><strong>??</strong></a> for this recursive computation of the <span class="math inline">\(\Psi_j\)</span>’s).</p>
+<p>Inference on the VAR coefficients <span class="math inline">\(\{\Phi_j\}_{j=1,...,p}\)</span> is straightforward (standard OLS inference). But inference is more complicated regarding IRF. Indeed, as shown by the previous equation, the (infinite) MA coefficients <span class="math inline">\(\{\Psi_j\}_{j=1,...}\)</span> are non-linear functions of the <span class="math inline">\(\{\Phi_j\}_{j=1,...,p}\)</span> and of <span class="math inline">\(\Omega_\varepsilon\)</span>. An other issue pertain to small sample bias: typically, for persistent process, auto-regressive parameters are known to be downward biased.</p>
+<p>The main inference methods are the following:</p>
+<ul>
+<li>Monte Carlo method (<span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994" role="doc-biblioref">1994</a>)</span>)</li>
+<li>Asymptotic normal approximation (<span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990" role="doc-biblioref">1990</a>)</span>), or Delta method</li>
+<li>Bootstrap method (Kilian_1998)</li>
+</ul>
+<div id="monte-carlo-method" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Monte Carlo method<a class="anchor" aria-label="anchor" href="#monte-carlo-method"><i class="fas fa-link"></i></a>
+</h2>
+<p>We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the <span class="math inline">\(\Psi_j\)</span>’s) but which is a function of another variable whose distribution is known (here, the <span class="math inline">\(\Phi_j\)</span>’s).</p>
+<p>For instance, suppose we know the distribution of a random variable <span class="math inline">\(X\)</span>, which takes values in <span class="math inline">\(\mathbb{R}\)</span>, with density function <span class="math inline">\(p\)</span>. Assume we want to compute the mean of <span class="math inline">\(\varphi(X)\)</span>. We have:
+<span class="math display">\[
+\mathbb{E}(\varphi(X))=\int_{-\infty}^{+\infty}\varphi(x)p(x)dx
+\]</span>
+Suppose that the above integral does not have a simple expression. We cannot compute <span class="math inline">\(\mathbb{E}(\varphi(X))\)</span> but, by virtue of the law of large numbers (Theorem <a href="#LLNappendix"><strong>??</strong></a>), we can approximate it as follows:
+<span class="math display">\[
+\mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
+\]</span>
+where <span class="math inline">\(\{X^{(i)}\}_{i=1,...,N}\)</span> are <span class="math inline">\(N\)</span> independent draws of <span class="math inline">\(X\)</span>. More generally, the distribution of <span class="math inline">\(\varphi(X)\)</span> can be approximated by the empirical distribution of the <span class="math inline">\(\varphi(X^{(i)}\)</span>’s. Typically, if 10’000 values of <span class="math inline">\(\varphi(X^{(i)}\)</span> are drawn, the <span class="math inline">\(5^{th}\)</span> percentile of the p.d.f. of <span class="math inline">\(\varphi(X)\)</span> can be approximated by the <span class="math inline">\(500^{th}\)</span> value of the 10’000 draws of <span class="math inline">\(\varphi(X^{(i)}\)</span> (after arranging these values in ascending order).</p>
+<p>As regards the computation of confidence intervals around IRFs, one has to think of <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,...,p}\)</span>, and of <span class="math inline">\(\widehat{\Omega}\)</span> as <span class="math inline">\(X\)</span> and <span class="math inline">\(\{\widehat{\Psi}_j\}_{j=1,...}\)</span> as <span class="math inline">\(\varphi(X)\)</span>. (Proposition <a href="basics.html#prp:OLSVAR2">2.3</a> provides us with the asymptotic distribution of the “<span class="math inline">\(X\)</span>.”)</p>
+<p>To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach:</p>
+<p>For each iteration <span class="math inline">\(k\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Draw <span class="math inline">\(\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}\)</span> and <span class="math inline">\(\widehat{\Omega}^{(k)}\)</span> from their asymptotic distribution (using Proposition <a href="basics.html#prp:OLSVAR2">2.3</a>).</li>
+<li>Compute the matrix <span class="math inline">\(B^{(k)}\)</span> so that <span class="math inline">\(\widehat{\Omega}^{(k)}=B^{(k)}B^{(k)'}\)</span>, according to your identification strategy.</li>
+<li>Compute the associated IRFs <span class="math inline">\(\{\widehat{\Psi}_j\}^{(k)}\)</span>.</li>
+</ol>
+<p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
+</div>
+<div id="delta-method" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Delta method<a class="anchor" aria-label="anchor" href="#delta-method"><i class="fas fa-link"></i></a>
+</h2>
+<p>Suppose <span class="math inline">\(\beta\)</span> is a vector of parameters and <span class="math inline">\(\beta\)</span> is an estimator such that
+<span class="math display">\[
+\sqrt{T}(\hat\beta-\beta)\overset{d}{\rightarrow}\mathcal{N}(0,\Sigma_\beta),
+\]</span>
+where <span class="math inline">\(d\)</span> denotes convergence in distribution, <span class="math inline">\(N(0,\Sigma_\beta)\)</span> denotes the multivariate normal distribution with mean vector 0 and covariance matrix <span class="math inline">\(\Sigma_\beta\)</span> and <span class="math inline">\(T\)</span> is the sample size used for estimation.</p>
+<p>Let <span class="math inline">\(g(\beta) = (g_l(\beta),..., g_m(\beta))'\)</span> be a continuously differentiable function with values in <span class="math inline">\(\mathbb{R}^m\)</span>, and assume that <span class="math inline">\(\partial g_i/\partial \beta' = (\partial g_i/\partial \beta_j)\)</span> is nonzero at <span class="math inline">\(\beta\)</span> for <span class="math inline">\(i = 1,\dots, m\)</span>. Then
+<span class="math display">\[
+\sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
+\]</span>
+Using this property, <span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990" role="doc-biblioref">1990</a>)</span> provides the asymptotic distributions of the <span class="math inline">\(\Psi_j\)</span>’s. The following lines of code can be used to get approximate confidence intervals for IRFs.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">irf.function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">THETA</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">c</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">phi</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">q</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">THETA</span><span class="op">[</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>    <span class="va">theta</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Matrix.of.Exog</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span></span>
+<span>  <span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">THETA</span><span class="op">[</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">p</span><span class="op">+</span><span class="va">q</span><span class="op">+</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="va">r</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="va">irf</span> <span class="op">&lt;-</span> <span class="fu">sim.arma</span><span class="op">(</span><span class="fl">0</span>,<span class="va">phi</span>,<span class="va">beta</span>,sigma<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Ramey</span><span class="op">$</span><span class="va">ED3_TC</span>,na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,T<span class="op">=</span><span class="fl">60</span>,</span>
+<span>                  y.0<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">phi</span><span class="op">)</span><span class="op">)</span>,nb.sim<span class="op">=</span><span class="fl">1</span>,make.IRF<span class="op">=</span><span class="fl">1</span>,</span>
+<span>                  X<span class="op">=</span><span class="cn">NaN</span>,beta<span class="op">=</span><span class="cn">NaN</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">irf</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">IRF.0</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="fu">irf.function</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">THETA</span><span class="op">)</span></span>
+<span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">.00000001</span></span>
+<span><span class="va">d.IRF</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">THETA</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">THETA.i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">THETA</span></span>
+<span>  <span class="va">THETA.i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">THETA.i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">eps</span></span>
+<span>  <span class="va">IRF.i</span> <span class="op">&lt;-</span> <span class="fl">100</span><span class="op">*</span><span class="fu">irf.function</span><span class="op">(</span><span class="va">THETA.i</span><span class="op">)</span></span>
+<span>  <span class="va">d.IRF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">d.IRF</span>,</span>
+<span>                 <span class="op">(</span><span class="va">IRF.i</span> <span class="op">-</span> <span class="va">IRF.0</span><span class="op">)</span><span class="op">/</span><span class="va">eps</span></span>
+<span>                 <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">mat.var.cov.IRF</span> <span class="op">&lt;-</span> <span class="va">d.IRF</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">x</span><span class="op">$</span><span class="va">I</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">d.IRF</span><span class="op">)</span></span></code></pre></div>
+<p>A limit of the last two approaches (Monte Carlo and the Delta method) is that they critically rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.</p>
+</div>
+<div id="bootstrap" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+</h2>
+<p>IRFs’ confidence intervals are intervals where 90% (or 95%,75%,…) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (<span class="math inline">\(T\)</span> observations). We obviously cannot do this, because we have only one sample: <span class="math inline">\(\{y_t\}_{t=1,..,T}\)</span>. But we can try to <em>construct</em> such samples.</p>
+<p>Bootstrapping consists in:</p>
+<ul>
+<li>re-sampling <span class="math inline">\(N\)</span> times, i.e., constructing <span class="math inline">\(N\)</span> samples of <span class="math inline">\(T\)</span> observations, using the estimated
+VAR coefficients and</li>
+</ul>
+<ol style="list-style-type: lower-alpha">
+<li>a sample of residuals from the distribution <span class="math inline">\(N(0,BB')\)</span> (<strong>parametric approach</strong>), or</li>
+<li>a sample of residuals drawn randomly from the set of the actual estimated residuals <span class="math inline">\(\{\hat\varepsilon_t\}_{t=1,..,T}\)</span>. (<strong>non-parametric approach</strong>).</li>
+</ol>
+<ul>
+<li>re-estimating the SVAR <span class="math inline">\(N\)</span> times.</li>
+</ul>
+<p>Here is the algorithm:</p>
+<ol style="list-style-type: decimal">
+<li>Construct a sample
+<span class="math display">\[
+y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
+\]</span>
+with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\)</span>, where <span class="math inline">\(\{s_1^{(k)},..,s_T^{(k)}\}\)</span> is a random set from <span class="math inline">\(\{1,..,T\}^T\)</span>.</li>
+<li>Re-estimate the SVAR and compute the IRFs <span class="math inline">\(\{\widehat{\Psi}_j\}^{(k)}\)</span>.</li>
+</ol>
+<p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
+</div>
+<div id="bootstrap-after-bootstrap" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Bootstrap-after-bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap-after-bootstrap"><i class="fas fa-link"></i></a>
+</h2>
+<p>The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the <em>small sample bias</em>, stemming, in particular, from small-sample bias associated with OLS coefficient estimates <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}\)</span>. The main idea of the bootstrap-after-bootstrap of <span class="citation">Kilian (<a href="references.html#ref-Kilian_1998" role="doc-biblioref">1998</a>)</span> is to run two consecutive boostraps: the objective of the first is to compute the bias, which can further be used to correct the initial estimates of the <span class="math inline">\(\Phi_i\)</span>’s. Further, these corrected estimates are used —in the second boostrap— to compute a set of IRFs (as in the standard boostrap).</p>
+<p>More formally, the algorithm is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Estimate the SVAR coefficients <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}\)</span> and <span class="math inline">\(\widehat{\Omega}\)</span>
+</li>
+<li>
+<strong>First bootstrap.</strong> For each iteration <span class="math inline">\(k\)</span>:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Construct a sample
+<span class="math display">\[
+y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
+\]</span>
+with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\)</span>, where <span class="math inline">\(\{s_1^{(k)},..,s_T^{(k)}\}\)</span> is a random set from <span class="math inline">\(\{1,..,T\}^T\)</span>.</li>
+<li>Re-estimate the VAR and compute the coefficients <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}^{(k)}\)</span>.</li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>Perform <span class="math inline">\(N\)</span> replications and compute the median coefficients <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}^*\)</span>.</li>
+<li>Approximate the bias terms by <span class="math inline">\(\widehat{\Theta}_j=\widehat{\Phi}_j^*-\widehat{\Phi}_j\)</span>.</li>
+<li>Construct the bias-corrected terms <span class="math inline">\(\widetilde{\Phi}_j=\widehat{\Phi}_j-\widehat{\Theta}_j\)</span>.</li>
+<li>
+<strong>Second bootstrap.</strong> For each iteration <span class="math inline">\(k\)</span>:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Construct a sample now from
+<span class="math display">\[
+y_t^{(k)}=\widetilde{\Phi}_1 y_{t-1}^{(k)} + \dots + \widetilde{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)}.
+\]</span>
+</li>
+<li>Re-estimate the VAR and compute the coefficients <span class="math inline">\(\{\widehat{\Phi}^*_j\}_{j=1,..,p}^{(k)}\)</span>.</li>
+<li>Construct the bias-corrected estimates <span class="math inline">\(\widetilde{\Phi}_j^{*(k)}=\widehat{\Phi}_j^{*(k)}-\widehat{\Theta}_j\)</span>.</li>
+<li>Compute the associated IRFs <span class="math inline">\(\{\widetilde{\Psi}_j^{*(k)}\}_{j\ge 1}\)</span>.</li>
+</ol>
+<ol start="7" style="list-style-type: decimal">
+<li>Perform <span class="math inline">\(N\)</span> replications and compute the median and the confidence interval of the set of IRFs.</li>
+</ol>
+<p>It should be noted that correcting for the bias can generate non-stationary results (<span class="math inline">\(\tilde \Phi\)</span> with eigenvalue with modulus <span class="math inline">\(&gt;1\)</span>). Solution (<span class="citation">Kilian (<a href="references.html#ref-Kilian_1998" role="doc-biblioref">1998</a>)</span>):</p>
+<p>In step 5, check if the largest eigenvalue of <span class="math inline">\(\tilde\Phi\)</span> is of modulus &lt;1.
+If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <span class="math inline">\(\widehat{\Theta}_j^{(i+1)}=\delta_{i+1}\widehat{\Theta}_j^{(i)}\)</span>, with <span class="math inline">\(\delta_{i+1}=\delta_i-0.01\)</span>, starting with <span class="math inline">\(\delta_1=1\)</span> and <span class="math inline">\(\widehat{\Theta}_j^{(1)} =\widehat{\Theta}_j\)</span>, and compute <span class="math inline">\(\widetilde{\Phi}_j^{(i+1)}=\widehat{\Phi}_j-\widehat{\Theta}_j^{(i+1)}\)</span> until the largest eigenvalue of <span class="math inline">\(\tilde\Phi^{(i+1)}\)</span> has modulus &lt;1.</p>
+<p>Function <code>VAR.Boot</code> of package <code>VAR.etp</code> (<span class="citation">Kim (<a href="references.html#ref-VARetp" role="doc-biblioref">2022</a>)</span>) can be used to operate the bias-correction approach of <span class="citation">Kilian (<a href="references.html#ref-Kilian_1998" role="doc-biblioref">1998</a>)</span>:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">VAR.etp</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span> <span class="co">#standard VAR models</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># part of VAR.etp package</span></span>
+<span><span class="va">corrected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VAR.etp/man/VAR.Boot.html">VAR.Boot</a></span><span class="op">(</span><span class="va">dat</span>,p<span class="op">=</span><span class="fl">2</span>,nb<span class="op">=</span><span class="fl">200</span>,type<span class="op">=</span><span class="st">"const"</span><span class="op">)</span></span>
+<span><span class="va">noncorrec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">dat</span>,p<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
+<span>      <span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">+</span><span class="va">corrected</span><span class="op">$</span><span class="va">Bias</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
+<span>      <span class="va">noncorrec</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">inv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         inv(-1)   inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const
+## [1,] -0.3238652 0.1274398 1.063355 -0.1326763 0.07234888 0.9911598 -0.01878210
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199</code></pre>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></div>
+<div class="next"><a href="append.html"><span class="header-section-number">7</span> Appendix</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#Inference"><span class="header-section-number">6</span> Inference</a></li>
+<li><a class="nav-link" href="#monte-carlo-method"><span class="header-section-number">6.1</span> Monte Carlo method</a></li>
+<li><a class="nav-link" href="#delta-method"><span class="header-section-number">6.2</span> Delta method</a></li>
+<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">6.3</span> Bootstrap</a></li>
+<li><a class="nav-link" href="#bootstrap-after-bootstrap"><span class="header-section-number">6.4</span> Bootstrap-after-bootstrap</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

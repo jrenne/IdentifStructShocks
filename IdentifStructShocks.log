@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.5)  19 DEC 2022 18:35
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.5)  2 JAN 2023 15:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -444,17 +444,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \c@example=\count325
 \c@exercise=\count326
 \c@hypothesis=\count327
-(./IdentifStructShocks.aux
-
-LaTeX Warning: Label `eq:dynmultX' multiply defined.
-
-
-LaTeX Warning: Label `eq:olsar1' multiply defined.
-
-
-LaTeX Warning: Label `eq:Qols' multiply defined.
-
-)
+(./IdentifStructShocks.aux)
 \openout1 = `IdentifStructShocks.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 153.
@@ -816,332 +806,232 @@ Underfull \hbox (badness 10000) in paragraph at lines 202--204
 
 ]
 Chapter 2.
+
+LaTeX Warning: Reference `def:covstat' on page 7 undefined on input line 253.
+
+
+LaTeX Warning: Reference `thm:Wold' on page 7 undefined on input line 257.
+
 [7]
-File: IdentifStructShocks_files/figure-latex/nonstat1-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/nonstat1-1.pdf>
-File: IdentifStructShocks_files/figure-latex/nonstat2-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/nonstat2-1.pdf>
+
+LaTeX Warning: Reference `prp:computPsi' on page 8 undefined on input line 268.
+
 [8]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 340.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 340.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 340.
-File: IdentifStructShocks_files/figure-latex/autocov-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/autocov-1.pdf>
-File: IdentifStructShocks_files/figure-latex/autocov2-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/autocov2-1.pdf>
-[9] [10]
-File: IdentifStructShocks_files/figure-latex/TVTCL-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/TVTCL-1.pdf>
-[11] [12]
-File: IdentifStructShocks_files/figure-latex/simMA-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/simMA-1.pdf>
-[13] [14]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 8.4pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 6.0pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 12.0011pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 8.40076pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 6.00055pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 11.99872pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 8.3991pt on input line 624.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 5.99936pt on input line 624.
-[15] [16] [17]
-File: IdentifStructShocks_files/figure-latex/pacf-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/pacf-1.pdf>
-[18] [19]
-File: IdentifStructShocks_files/figure-latex/IRFarma-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/IRFarma-1.pdf>
-File: IdentifStructShocks_files/figure-latex/IRFgdp1-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/IRFgdp1-1.pdf>
-[20]
-File: IdentifStructShocks_files/figure-latex/IRFgdp2-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/IRFgdp2-1.pdf>
-[21] [22]
-File: IdentifStructShocks_files/figure-latex/freez-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/freez-1.pdf>
-
-Underfull \vbox (badness 4144) has occurred while \output is active []
-
-[23]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1138.
-[24] [25]
-File: IdentifStructShocks_files/figure-latex/freez4-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/freez4-1.pdf>
-File: IdentifStructShocks_files/figure-latex/Ramey1fig-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/Ramey1fig-1.pdf>
-[26]
-
-LaTeX Warning: Reference `eq:DeltaMethod' on page 27 undefined on input line 1320.
-
-File: IdentifStructShocks_files/figure-latex/Ramey3-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/Ramey3-1.pdf>
-
-LaTeX Warning: Reference `secMLE' on page 27 undefined on input line 1331.
-
-
-LaTeX Warning: Reference `def:MC' on page 27 undefined on input line 1336.
-
-
-Underfull \hbox (badness 3009) in paragraph at lines 1339--1340
-[][]\TU/lmr/bx/n/12 Definition 2.19 \TU/lmr/m/n/12 (Markovian process)\TU/lmr/bx/n/12 . []\TU/lmr/m/n/12 Process $[][]$ is Markovian of order one if
- []
-
-[27] [28] [29]
-Overfull \hbox (2.51427pt too wide) in alignment at lines 1501--1504
- [][][] []
- []
-
-[30] [31] [32]
-
-LaTeX Warning: Reference `def:LR' on page 33 undefined on input line 1691.
-
-
-Overfull \hbox (18.64902pt too wide) in paragraph at lines 1694--1696
-\TU/lmr/m/n/12 If $[][] [][][][] [] []$, we have: $[][] [] [] [] [][][][][] []
- []
-
-[33] [34] [35]
 File: IdentifStructShocks_files/figure-latex/simVAR-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/simVAR-1.pdf>
 
-LaTeX Warning: Reference `eq:VARMAstd' on page 36 undefined on input line 1919.
-
-[36] [37] [38] [39]
-
-LaTeX Warning: Reference `def:LR' on page 40 undefined on input line 2092.
+LaTeX Warning: Reference `eq:VARMAstd' on page 9 undefined on input line 373.
 
 
-LaTeX Warning: Reference `def:LR' on page 40 undefined on input line 2150.
+LaTeX Warning: Reference `prp:stability' on page 9 undefined on input line 373.
 
-[40] [41] [42] [43]
+[9] [10]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 8.4pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 6.0pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 12.0011pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 8.40076pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 6.00055pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 11.99872pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 8.3991pt on input line 484.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 5.99936pt on input line 484.
+[11]
+
+LaTeX Warning: Reference `def:LR' on page 12 undefined on input line 546.
+
+[12]
+
+LaTeX Warning: Reference `def:infocriteria' on page 13 undefined on input line 572.
+
+
+LaTeX Warning: Reference `def:LR' on page 13 undefined on input line 605.
+
+[13] [14]
+Chapter 3.
+[15
+
+] [16]
 File: IdentifStructShocks_files/figure-latex/CEE-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/CEE-1.pdf>
-[44]
+
+Overfull \hbox (16.43584pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/12 3.1.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES \TU/lmr/m/n/12 17
+ []
+
+[17]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 922.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00046pt on input line 922.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 922.
+[18]
 File: IdentifStructShocks_files/figure-latex/BQ1-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/BQ1-1.pdf>
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 959.
 
-Underfull \vbox (badness 1590) has occurred while \output is active []
+Overfull \hbox (16.43584pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/12 3.1.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES \TU/lmr/m/n/12 19
+ []
 
-[45] [46]
+[19]
 File: IdentifStructShocks_files/figure-latex/BQ4-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/BQ4-1.pdf>
-[47] [48]
+[20] [21]
 File: IdentifStructShocks_files/figure-latex/signrestr1-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/signrestr1-1.pdf>
-[49] [50]
+[22] [23] [24]
 File: images/Figure_A.pdf Graphic file (type pdf)
 <use images/Figure_A.pdf>
-[51]
 File: IdentifStructShocks_files/figure-latex/preMadeFigureICA2-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/preMadeFigureICA2-1.pdf>
-[52]
 File: images/Figure_C.pdf Graphic file (type pdf)
 <use images/Figure_C.pdf>
 Missing character: There is no 𝜂 (U+1D702) in font [lmroman12-regular]:mapping=tex-text;!
 Missing character: There is no 𝜀 (U+1D700) in font [lmroman12-regular]:mapping=tex-text;!
+[25] [26]
 File: images/Figure_E.pdf Graphic file (type pdf)
 <use images/Figure_E.pdf>
-[53]
-Overfull \hbox (9.64821pt too wide) in paragraph at lines 2919--2919
+[27]
+Overfull \hbox (9.64821pt too wide) in paragraph at lines 1378--1378
 []|\TU/lmr/m/n/12 Gaussian|  
  []
 
 
-Overfull \hbox (3.24022pt too wide) in paragraph at lines 2920--2920
+Overfull \hbox (3.24022pt too wide) in paragraph at lines 1379--1379
 []|\TU/lmr/m/n/12 Student 
  []
 
 
-Overfull \hbox (19.22421pt too wide) in paragraph at lines 2921--2921
+Overfull \hbox (19.22421pt too wide) in paragraph at lines 1380--1380
 []|\TU/lmr/m/n/12 Hyperbolic 
  []
 
 
-Overfull \hbox (25.89621pt too wide) in paragraph at lines 2922--2922
+Overfull \hbox (25.89621pt too wide) in paragraph at lines 1381--1381
 []|\TU/lmr/m/n/12 Subgaussian|  
  []
 
-[54] [55] [56]
+[28] [29] [30]
 File: IdentifStructShocks_files/figure-latex/ICAFigIRF-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/ICAFigIRF-1.pdf>
-[57] [58] [59]
+[31] [32]
+Chapter 4.
+[33
+
+] [34]
+File: IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf Graphic file (type pdf)
+<use IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf>
+[35]
 File: IdentifStructShocks_files/figure-latex/FAVAR-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/FAVAR-1.pdf>
+[36] [37] [38
 
-LaTeX Warning: Reference `eq:NW' on page 60 undefined on input line 3218.
+]
+Chapter 5.
 
-[60]
-Overfull \hbox (7.32959pt too wide) in paragraph at lines 3251--3252
+LaTeX Warning: Reference `eq:NW' on page 39 undefined on input line 1794.
+
+[39]
+Overfull \hbox (7.32959pt too wide) in paragraph at lines 1827--1828
 []\TU/lmr/m/n/12 The IRFs can be estimated by LP, taking $[][] [] [][]$ and $[][] [] [][][][][][][] [][][] [][][][][][] [][][] [][][][]$. 
  []
 
-[61]
 File: images/GSS2005_HFI.pdf Graphic file (type pdf)
 <use images/GSS2005_HFI.pdf>
-[62] [63]
+[40] [41]
 File: IdentifStructShocks_files/figure-latex/essaiIV0-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/essaiIV0-1.pdf>
 File: IdentifStructShocks_files/figure-latex/essaiIV1-1.pdf Graphic file (type pdf)
 <use IdentifStructShocks_files/figure-latex/essaiIV1-1.pdf>
-[64]
+[42] [43]
 
-LaTeX Warning: Reference `eq:NW' on page 65 undefined on input line 3485.
+LaTeX Warning: Reference `eq:NW' on page 44 undefined on input line 2061.
 
-[65]
+[44]
+Chapter 6.
 
-LaTeX Warning: Reference `LLNappendix' on page 66 undefined on input line 3545.
+LaTeX Warning: Reference `thm:Wold' on page 45 undefined on input line 2089.
 
-[66]
 
-LaTeX Warning: Reference `eq:DeltaMethod' on page 67 undefined on input line 3582.
+LaTeX Warning: Reference `prp:computPsi' on page 45 undefined on input line 2097.
 
-[67] [68]
-Overfull \hbox (30.8248pt too wide) in paragraph at lines 3723--3723
-[]\TU/lmtt/m/n/12 ##         inv(-1)   inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const[] 
+
+LaTeX Warning: Reference `LLNappendix' on page 45 undefined on input line 2122.
+
+[45
+
+] [46] [47]
+Overfull \hbox (24.6448pt too wide) in paragraph at lines 2337--2337
+[]\TU/lmtt/m/n/12 ##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const[] 
  []
 
 
-Overfull \hbox (30.71695pt too wide) in paragraph at lines 3723--3723
-[]\TU/lmtt/m/n/12 ## [1,] -0.3142137 0.1231657 1.076604 -0.1410342 0.07061601 1.0397597 -0.01983903[] 
+Overfull \hbox (24.58492pt too wide) in paragraph at lines 2337--2337
+[]\TU/lmtt/m/n/12 ## [1,] -0.3062354 0.1512293 1.001596 -0.1353031 0.1380013 1.0140437 -0.02035653[] 
  []
 
 
-Overfull \hbox (30.65694pt too wide) in paragraph at lines 3723--3723
-[]\TU/lmtt/m/n/12 ## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199[] 
+Overfull \hbox (24.48894pt too wide) in paragraph at lines 2337--2337
+[]\TU/lmtt/m/n/12 ## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199[] 
  []
 
 
-Overfull \hbox (30.65694pt too wide) in paragraph at lines 3723--3723
-[]\TU/lmtt/m/n/12 ## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199[] 
+Overfull \hbox (24.48894pt too wide) in paragraph at lines 2337--2337
+[]\TU/lmtt/m/n/12 ## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199[] 
  []
 
-[69] [70]
+[48]
+Chapter 7.
 
-LaTeX Warning: Reference `prp:chgeR2' on page 71 undefined on input line 3927.
+LaTeX Warning: Reference `prp:multivarG' on page 49 undefined on input line 2348.
 
 
-LaTeX Warning: Reference `prp:chgeInR2' on page 71 undefined on input line 3927.
+LaTeX Warning: Reference `XXX' on page 49 undefined on input line 2348.
 
-[71]
-
-LaTeX Warning: Reference `def:NW' on page 72 undefined on input line 3962.
-
-[72] [73] [74
+[49
 
 ]
-Chapter 3.
-[75]
-File: IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf>
-[76] [77] [78]
-Underfull \hbox (badness 2237) in paragraph at lines 4409--4410
-[]$[] [] [] [][][][]$ \TU/lmr/m/n/12 is a convex function. Therefore $[][][][] [] [][][][][][][][][][][] []
- []
-
-[79] [80] [81] [82]
-Overfull \hbox (31.16508pt too wide) in paragraph at lines 4632--4633
-[]\TU/lmr/m/n/12 Let us introduce the r.v. $[][] [][] [][][] [] [][]$. We have $[][][][][] [] [][]$.
- []
-
-
-Overfull \hbox (2.44241pt too wide) in alignment at lines 4633--4636
- [][][] []
- []
-
-[83]
-File: IdentifStructShocks_files/figure-latex/inverseMills-1.pdf Graphic file (type pdf)
-<use IdentifStructShocks_files/figure-latex/inverseMills-1.pdf>
-
-LaTeX Warning: Reference `prp:MLEproperties' on page 84 undefined on input line 4731.
-
-
-LaTeX Warning: Reference `hyp:MLEregularity' on page 84 undefined on input line 4734.
-
-[84]
-
-LaTeX Warning: Reference `prp:Walddistri' on page 85 undefined on input line 4772.
-
-
-LaTeX Warning: Reference `(' on page 85 undefined on input line 4775.
-
-
-LaTeX Warning: Reference `prp:LMdistri' on page 85 undefined on input line 4799.
-
-[85]
-
-LaTeX Warning: Reference `eq:xiLM' on page 86 undefined on input line 4861.
-
-
-LaTeX Warning: Reference `prp:equivLRLMW' on page 86 undefined on input line 4864.
-
-
-LaTeX Warning: Reference `(' on page 86 undefined on input line 4899.
-
-[86]
-Overfull \hbox (16.5456pt too wide) detected at line 4908
-[] [] [] [][][] [][][][][] [][][] [] [] [][][][][] [][][][] [] [][][][] [][][][] [][][] [] [] [][][][] [][][][][]
- []
-
-
-LaTeX Warning: Reference `(' on page 87 undefined on input line 4913.
-
-[87]
-
-LaTeX Warning: Reference `prp:multivarG' on page 88 undefined on input line 5003.
-
-
-LaTeX Warning: Reference `XXX' on page 88 undefined on input line 5003.
-
-[88] [89]
-Overfull \hbox (58.59421pt too wide) in paragraph at lines 5052--5054
+Overfull \hbox (58.59421pt too wide) in paragraph at lines 2397--2399
 \TU/lmr/m/n/12 If $[] [] []$, we have $[][][][][][][][][][][] [] [][][][][][][][][][][][][][][][] [][][] [][][][] []$ $[][][][][][][][][][][][][][][][] [][][] [][][][] []
  []
 
 
-LaTeX Warning: Reference `fig:GEV' on page 90 undefined on input line 5066.
-
-[90]
-Overfull \hbox (7.9091pt too wide) in paragraph at lines 5147--5212
+Overfull \hbox (7.9091pt too wide) in paragraph at lines 2412--2477
  [][] 
  []
 
 
-Overfull \hbox (58.83711pt too wide) in paragraph at lines 5324--5377
+Overfull \hbox (58.83711pt too wide) in paragraph at lines 2589--2642
  [][] 
  []
 
-(./IdentifStructShocks.bbl [91] [92] [93] [94] [95
+(./IdentifStructShocks.bbl [50] [51] [52] [53] [54
 
-] [96]) [97] (./IdentifStructShocks.aux)
+] [55] [56]) [57] (./IdentifStructShocks.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `IdentifStructShocks.out' has not changed.
-(rerunfilecheck)             Checksum: 2405CB9F439584C048E3BF7BC5FE1F66;2336.
+(rerunfilecheck)             Checksum: 455F340DB3D1733BF1D9EB86901FABD3;4645.
  ) 
 Here is how much of TeX's memory you used:
- 18816 strings out of 477640
- 352928 string characters out of 5840332
- 947135 words of memory out of 5000000
- 39661 multiletter control sequences out of 15000+600000
- 478235 words of font info for 109 fonts, out of 8000000 for 9000
+ 18470 strings out of 477640
+ 341886 string characters out of 5840332
+ 910260 words of memory out of 5000000
+ 39332 multiletter control sequences out of 15000+600000
+ 478227 words of font info for 108 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,13n,121p,1183b,564s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,13n,121p,1183b,511s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on IdentifStructShocks.pdf (97 pages).
+Output written on IdentifStructShocks.pdf (57 pages).

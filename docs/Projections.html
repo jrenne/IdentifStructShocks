@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Local projection methods | The Identification of Dynamic Structural Shocks</title>
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
+<meta name="description" content="5.1 Projection Methods Consider the infinite MA representation of \(y_t\) (Eq. (2.3)): \[ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}. \] As seen in Section 2.2, the entries \((i,j)\) of the...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Local projection methods | The Identification of Dynamic Structural Shocks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Projection Methods Consider the infinite MA representation of \(y_t\) (Eq. (2.3)): \[ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}. \] As seen in Section 2.2, the entries \((i,j)\) of the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Local projection methods | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="5.1 Projection Methods Consider the infinite MA representation of \(y_t\) (Eq. (2.3)): \[ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}. \] As seen in Section 2.2, the entries \((i,j)\) of the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="my-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Before starting</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">2</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">3</span> Identifying structural shocks</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></li>
+<li><a class="active" href="Projections.html"><span class="header-section-number">5</span> Local projection methods</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">6</span> Inference</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">7</span> Appendix</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Projections" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Local projection methods<a class="anchor" aria-label="anchor" href="#Projections"><i class="fas fa-link"></i></a>
+</h1>
+<div id="projection-methods" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Projection Methods<a class="anchor" aria-label="anchor" href="#projection-methods"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consider the infinite MA representation of <span class="math inline">\(y_t\)</span> (Eq. <a href="basics.html#eq:InfMA">(2.3)</a>):
+<span class="math display">\[
+y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.
+\]</span>
+As seen in Section <a href="basics.html#IRFSVARMA">2.2</a>, the entries <span class="math inline">\((i,j)\)</span> of the sequence of the <span class="math inline">\(\Psi_h\)</span> matrices define the IRF of <span class="math inline">\(\eta_{j,t}\)</span> on <span class="math inline">\(y_{i,t}\)</span>.</p>
+<p>Assume that you observe <span class="math inline">\(\eta_{j,t}\)</span>, then a consistent estimate of <span class="math inline">\(\Psi_{i,j,h}\)</span> is simply obtained by the OLS regression of <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(\eta_{j,t}\)</span>:
+<span class="math display" id="eq:OLS1">\[\begin{equation}
+y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.\tag{5.1}
+\end{equation}\]</span>
+Because the residuals <span class="math inline">\(u_{i,j,t+h}\)</span> are autocorrelated (for <span class="math inline">\(h&gt;0\)</span>), estimates of the covariance of the OLS estimators of the <span class="math inline">\(\Psi_{i,j,h}\)</span> then have to be based on robust estimators (e.g. Newey-West, see Eq. <a href="#eq:NW">(<strong>??</strong>)</a>). This is the core idea of the <strong>local projection approach</strong> proposed by <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005" role="doc-biblioref">2005</a>)</span>.</p>
+<p>Now, how to proceed in the (usual) case where <span class="math inline">\(\eta_{j,t}\)</span> is not observed? We consider two situations.</p>
+<p><strong>Situation A: Without IV</strong></p>
+<p>This corresponds to the original <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005" role="doc-biblioref">2005</a>)</span>’s approach.</p>
+<p>Assume that the structural shock of interest (<span class="math inline">\(\eta_{1,t}\)</span>, say) can be consistently obtained as the residual of a regression of a variable <span class="math inline">\(x_t\)</span> on a set of control variables <span class="math inline">\(w_t\)</span> independent from <span class="math inline">\(\eta_{1,t}\)</span>:
+<span class="math display" id="eq:xetaw">\[\begin{equation}
+\eta_{1,t} = x_t - \mathbb{E}(x_t|w_t),\tag{5.2}
+\end{equation}\]</span>
+where <span class="math inline">\(\mathbb{E}(x_t|w_t)\)</span> is affine in <span class="math inline">\(w_t\)</span> and where <span class="math inline">\(w_t\)</span> is an affine transformation of <span class="math inline">\(\eta_{2:n,t}\)</span> and of past shocks <span class="math inline">\(\eta_{t-1},\eta_{t-2},\dots\)</span>.</p>
+<p>Eq. <a href="Projections.html#eq:xetaw">(5.2)</a> implies that, conditional on <span class="math inline">\(w_t\)</span>, the additional knowledge of <span class="math inline">\(x_t\)</span> is useful only when it comes to forecast something that depends on <span class="math inline">\(\eta_{1,t}\)</span>. Hence, given that <span class="math inline">\(u_{i,1,t+h}\)</span> (see Eq. <a href="Projections.html#eq:OLS1">(5.1)</a>) is independent from <span class="math inline">\(\eta_{1,t}\)</span> (it depends on <span class="math inline">\(\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)</span>), it comes that
+<span class="math display">\[
+\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).
+\]</span>
+This is the <em>conditional mean independence</em> case.</p>
+<p>Let’s rewrite Eq. <a href="Projections.html#eq:OLS1">(5.1)</a> as follows:
+<span class="math display">\[\begin{eqnarray*}
+y_{i,t+h} &amp;=&amp; \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
+&amp;=&amp;  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
+\end{eqnarray*}\]</span></p>
+<p>What precedes implies that the expectation of the blue term, conditional on <span class="math inline">\(x_t\)</span> and <span class="math inline">\(w_t\)</span>, is linear in <span class="math inline">\(w_t\)</span>. Standard results in the conditional mean independence case imply that the regression of <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(x_t\)</span>, controlling for <span class="math inline">\(w_t\)</span>, provides a consistent estimate of <span class="math inline">\(\Psi_{i,1,h}\)</span>:
+<span class="math display">\[\begin{equation}
+y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
+\end{equation}\]</span></p>
+<p>This is for instance consistent with the case where <span class="math inline">\([\Delta GDP_t, \pi_t,i_t]'\)</span> follows a VAR(1) and the monetary-policy shock do not contemporaneously affect <span class="math inline">\(\Delta GDP_t\)</span> and <span class="math inline">\(\pi_t\)</span>.</p>
+<p>The IRFs can be estimated by LP, taking <span class="math inline">\(x_t = i_t\)</span> and <span class="math inline">\(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\)</span>.</p>
+<p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is reminiscent of the distinction betweem direct forecasting –based on regressions of &lt;span class="math inline"&gt;\(y_{t+h}\)&lt;/span&gt; on &lt;span class="math inline"&gt;\(\{y_t,y_{t-1},\dots\}\)&lt;/span&gt;– and iterated forecasting –based on a recursive model where &lt;span class="math inline"&gt;\(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\)&lt;/span&gt;, see &lt;span class="citation"&gt;Marcellino, Stock, and Watson (&lt;a href="references.html#ref-Marcellino_et_al_2006" role="doc-biblioref"&gt;2006&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;'><sup>3</sup></a></p>
+<p><strong>Situation B: IV approach</strong></p>
+<p>Consider now that we have a valid instrument <span class="math inline">\(z_t\)</span> for <span class="math inline">\(\eta_{1,t}\)</span> (with <span class="math inline">\(\mathbb{E}(z_t)=0\)</span>). That is:
+<span class="math display" id="eq:IV1">\[\begin{equation}
+\left\{
+\begin{array}{llll}
+(IV.i) &amp; \mathbb{E}(z_t \eta_{1,t}) &amp;\ne 0 &amp; \mbox{(relevance condition)} \\
+(IV.ii) &amp; \mathbb{E}(z_t \eta_{j,t}) &amp;= 0 \quad \mbox{for } j&gt;1 &amp; \mbox{(exogeneity condition)}
+\end{array}\right.\tag{5.3}
+\end{equation}\]</span>
+The instrument <span class="math inline">\(z_t\)</span> can be used to identify the structural shock. Eq. <a href="Projections.html#eq:IV1">(5.3)</a> implies that there exist <span class="math inline">\(\rho \ne 0\)</span> and a mean-zero variable <span class="math inline">\(\xi_t\)</span> such that:
+<span class="math display">\[
+\eta_{1,t} = \rho z_t + \xi_t,
+\]</span>
+where <span class="math inline">\(\xi_t\)</span> is correlated neither to <span class="math inline">\(z_t\)</span>, nor to <span class="math inline">\(\eta_{j,t}\)</span>, <span class="math inline">\(j\ge2\)</span>.</p>
+<div class="proof">
+<p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>Define <span class="math inline">\(\rho = \frac{\mathbb{E}(\eta_{1,t}z_t)}{\mathbb{V}ar(z_t)}\)</span> and <span class="math inline">\(\xi_t = \eta_{1,t} - \rho z_t\)</span>. It is easily seen that <span class="math inline">\(\xi_t\)</span> satisfies the moment restrictions given above.</p>
+</div>
+<p><span class="citation">Ramey (<a href="references.html#ref-Ramey_2016_NBER" role="doc-biblioref">2016</a>)</span> reviews the different approaches employed to construct monetary policy-shocks (the two main approaches are presented in <a href="Projections.html#exm:HighFreq">5.1</a> and <a href="Projections.html#exm:RomerRomer">5.2</a> below). She has also collected time series of such shocks, see <a href="https://econweb.ucsd.edu/~vramey/research.html#mon">her website</a>.</p>
+<div class="example">
+<p><span id="exm:HighFreq" class="example"><strong>Example 5.1  (Identification of Monetary-Policy Shocks Based on High-Frequency Data) </strong></span>Instruments for monetary-policy shocks can be extracted from high-frequency market data associated with interest-rate products.</p>
+<p>The quotes of all interest-rate-related financial products are sensitive to monetary-policy announcements. That is because these quotes mainly depends on investors’ expectations regarding future short-term rates: <span class="math inline">\(\mathbb{E}_t(i_{t+s})\)</span>. Typically, if agents were risk-neutral, the maturity-<span class="math inline">\(h\)</span> interest rate would approximatively be given by:
+<span class="math display">\[
+i_{t,h} \approx \mathbb{E}_t\left(\frac{1}{h}\int_{0}^{h} i_{t+s} ds\right) = \frac{1}{h}\int_{0}^{h} \mathbb{E}_t\left(i_{t+s}\right) ds.
+\]</span>
+In general, changes in <span class="math inline">\(\mathbb{E}_t(i_{t+s})\)</span>, for <span class="math inline">\(s&gt;0\)</span>, can be affected by all types of shocks that may trigger a reaction by the central bank.</p>
+<p>However, if a MP announcement takes place between <span class="math inline">\(t\)</span> and <span class="math inline">\(t+\epsilon\)</span>, then most of <span class="math inline">\(\mathbb{E}_{t+\epsilon}(i_{t+s})-\mathbb{E}_t(i_{t+s})\)</span> is to be attributed to the MP shock (see Figure <a href="Projections.html#fig:HighFreq">5.1</a>, from <span class="citation">Gürkaynak, Sack, and Swanson (<a href="references.html#ref-Gurkaynak_et_al_2005" role="doc-biblioref">2005</a>)</span>). Hence, a monthly time series of MP shocks can be obtained by summing, over each month, the changes <span class="math inline">\(i_{t+ \epsilon,h} - i_{t,h}\)</span> associated with a given interest rate (T-bills, futures, swaps) and a given maturity <span class="math inline">\(h\)</span>.</p>
+<p>See among others: <span class="citation">Kuttner (<a href="references.html#ref-KUTTNER2001523" role="doc-biblioref">2001</a>)</span>, <span class="citation">Cochrane and Piazzesi (<a href="references.html#ref-Cochrane_Piazzesi_2002" role="doc-biblioref">2002</a>)</span>,<span class="citation">Gürkaynak, Sack, and Swanson (<a href="references.html#ref-Gurkaynak_et_al_2005" role="doc-biblioref">2005</a>)</span>, <span class="citation">Piazzesi and Swanson (<a href="references.html#ref-Piazzesi_Swanson_2008" role="doc-biblioref">2008</a>)</span>, <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015" role="doc-biblioref">2015</a>)</span>.</p>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:HighFreq"></span>
+<img src="images/GSS2005_HFI.png" alt="Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\% to 1\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself." width="95%"><p class="caption">
+Figure 5.1: Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25% to 1%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself.
+</p>
+</div>
+</div>
+<div class="example">
+<p><span id="exm:RomerRomer" class="example"><strong>Example 5.2  (Identification of Monetary-Policy Shocks Based on the Narrative Approach) </strong></span><span class="citation">Romer and Romer (<a href="references.html#ref-Romer_Romer_2004" role="doc-biblioref">2004</a>)</span> propose a two-step approach:</p>
+<ol style="list-style-type: lower-alpha">
+<li>derive a series for Federal Reserve intentions for the federal funds rate (the explicit target of the Fed) around FOMC meetings,</li>
+<li>control for Federal Reserve forecasts.</li>
+</ol>
+<p>This gives a measure of intended monetary policy actions not driven by information about future economic developments.
+a. “intentions” are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and “Blue Books”.
+b. Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve’s internal forecasts (inflation, real output and unemployment), “Greenbook’s forecasts” – usually issued 6 days before the FOMC meeting.</p>
+<p>The shock measure is the residual series in the linear regression of (a) on (b).</p>
+</div>
+<p>There are two main IV approaches to estimate IRFs see <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>:</p>
+<ol style="list-style-type: lower-alpha">
+<li>The LP-IV approach, where <span class="math inline">\(y_t\)</span>’s DGP is left unspecified,</li>
+<li>The SVAR-IV approach.</li>
+</ol>
+<p>The LP-IV approach is based on a set of IV regressions (for each variable of interest, one for each forecast horizon). The SVAR-IV approach is based on IV regressions of VAR innovations only (one for each series of VAR innovations).</p>
+<p>If the VAR adequately captures the DGP, then the IV-SVAR is optimal for all horizons. However, if the VAR is misspecified, then specification errors are compounded at each horizon and a local projection method would lead to better results.</p>
+<p><strong>Situation B.1: SVAR-IV approach</strong></p>
+<p>Assume you have consistent estimates of <span class="math inline">\(\varepsilon_t = B\eta_t\)</span>, these estimates (<span class="math inline">\(\hat\varepsilon_{t}\)</span>) coming from the estimation of a VAR model. You have, for <span class="math inline">\(i \in \{1,\dots,n\}\)</span>:
+<span class="math display">\[\begin{eqnarray}
+\varepsilon_{i,t} &amp;=&amp; b_{i,1} \eta_{1,t} + u_{i,t} (\#eq:eps_rho)\\
+&amp;=&amp; b_{i,1} \rho z_t + \underbrace{b_{i,1}\xi_t + u_{i,t}}_{\perp z_t}. \nonumber
+\end{eqnarray}\]</span>
+(<span class="math inline">\(u_{i,t}\)</span> is a linear combination of the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j\ge2\)</span>).</p>
+<p>Hence, up to a multiplicative factor (<span class="math inline">\(\rho\)</span>), the (OLS) regressions of the <span class="math inline">\(\hat\varepsilon_{i,t}\)</span>’s on <span class="math inline">\(z_t\)</span> provide consistent estimates of the <span class="math inline">\(b_{i,1}\)</span>’s.</p>
+<p>Combined with the estimated VAR (the <span class="math inline">\(\Phi_k\)</span> matrices), this provides consistent estimates of the IRFs of <span class="math inline">\(\eta_{1,t}\)</span> on <span class="math inline">\(y_t\)</span>, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (“unit-effect normalisation”, see <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>). Let us consider <span class="math inline">\(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\)</span>; by construction, <span class="math inline">\(\tilde\eta_{1,t}\)</span> has a one-unit contemporaneous effect on <span class="math inline">\(y_{1,t}\)</span>. Denoting by <span class="math inline">\(\tilde{B}_{i,1}\)</span> the contemporaneous impact of <span class="math inline">\(\tilde\eta_{1,t}\)</span>, we get:
+<span class="math display">\[
+\tilde{B}_{1} = \frac{1}{b_{1,1}} {B}_{1},
+\]</span>
+where <span class="math inline">\(B_{1}\)</span> denotes the <span class="math inline">\(1^{st}\)</span> column of <span class="math inline">\(B\)</span> and <span class="math inline">\(\tilde{B}_{1}=[1,\tilde{B}_{2,1},\dots,\tilde{B}_{n,1}]'\)</span>.</p>
+<p>Eq. @ref(eq:eps_rho) gives:
+<span class="math display">\[\begin{eqnarray*}
+\varepsilon_{1,t} &amp;=&amp; \tilde\eta_{1,t} + u_{1,t}\\
+\varepsilon_{i,t} &amp;=&amp; \tilde{B}_{i,1} \tilde\eta_{1,t} + u_{i,t}.
+\end{eqnarray*}\]</span>
+This suggests that <span class="math inline">\(\tilde{B}_{i,1}\)</span> can be estimated by regressing <span class="math inline">\(\varepsilon_{i,t}\)</span> on <span class="math inline">\(\varepsilon_{1,t}\)</span>, using <span class="math inline">\(z_t\)</span> as an instrument.</p>
+<p>What about inference? Once cannot use the usual TSLS standard deviations because the <span class="math inline">\(\varepsilon_{i,t}\)</span>’s are not directly observed. Bootstrap procedures can be resorted to. <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span> propose, in particular, a Gaussian parametric bootstrap:</p>
+<p>Assume you have estimated <span class="math inline">\(\{\widehat{\Phi}_1,\dots,\widehat{\Phi}_p,\widehat{B}_1\}\)</span> using the SVAR-IV approach based on a size-<span class="math inline">\(T\)</span> sample. Generate <span class="math inline">\(N\)</span> (where <span class="math inline">\(N\)</span> is large) size-<span class="math inline">\(T\)</span> samples from the following VAR:
+<span class="math display">\[
+\left[
+\begin{array}{cc}
+\widehat{\Phi}(L) &amp; 0 \\
+0 &amp; \widehat{\rho}(L)
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+y_t \\
+z_t
+\end{array}
+\right] =
+\left[
+\begin{array}{c}
+\varepsilon_t \\
+e_t
+\end{array}
+\right],
+\]</span>
+<span class="math display">\[
+\mbox{where} \quad \left[
+\begin{array}{c}
+\varepsilon_t \\
+e_t
+\end{array}
+\right]\sim \, i.i.d.\,\mathcal{N}\left(\left[\begin{array}{c}0\\0\end{array}\right],
+\left[\begin{array}{cc}
+\Omega &amp; S'_{\varepsilon,e}\\
+S_{\varepsilon,e}&amp; \sigma^2_{e}
+\end{array}\right]
+\right),
+\]</span>
+where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="math inline">\(\sigma^2_{e}\)</span> result from the estimation of an AR process for <span class="math inline">\(z_t\)</span>, and where <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S_{\varepsilon,e}\)</span> are sample covariances for the VAR/AR residuals.</p>
+<p>For each simulated sample (of <span class="math inline">\(\tilde{y}_t\)</span> and <span class="math inline">\(\tilde{z}_t\)</span>, say), estimate <span class="math inline">\(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\)</span> and associated <span class="math inline">\(\widetilde{\Psi}_{i,1,h}\)</span>. This provides e.g. a sequence of <span class="math inline">\(N\)</span> estimates of <span class="math inline">\(\Psi_{i,1,h}\)</span>, from which quantiles and conf. intervals can be deduced.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load vars package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
+<span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1990-05-01"</span></span>
+<span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2012-6-01"</span></span>
+<span><span class="va">indic.first</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">First.date</span><span class="op">)</span></span>
+<span><span class="va">indic.last</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">Last.date</span><span class="op">)</span></span>
+<span><span class="va">USmonthly</span>   <span class="op">&lt;-</span> <span class="va">USmonthly</span><span class="op">[</span><span class="va">indic.first</span><span class="op">:</span><span class="va">indic.last</span>,<span class="op">]</span></span>
+<span><span class="va">shock.name</span> <span class="op">&lt;-</span> <span class="st">"FF4_TC"</span> <span class="co">#"FF4_TC", "ED2_TC", "ff1_vr", "rrshock83b"</span></span>
+<span><span class="va">indic.shock.name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">)</span><span class="op">==</span><span class="va">shock.name</span><span class="op">)</span></span>
+<span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">[</span>,<span class="va">indic.shock.name</span><span class="op">]</span>,ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.1</span>,<span class="fl">.95</span>,<span class="fl">.1</span>,<span class="fl">.95</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span>,<span class="va">Z</span>,type<span class="op">=</span><span class="st">"l"</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:essaiIV0"></span>
+<img src="IdentifStructShocks_files/figure-html/essaiIV0-1.png" alt="Gertler-Karadi monthly shocks, fed funds futures 3 months." width="95%"><p class="caption">
+Figure 5.2: Gertler-Karadi monthly shocks, fed funds futures 3 months.
+</p>
+</div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">considered.variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GS1"</span>,<span class="st">"LIP"</span>,<span class="st">"LCPI"</span>,<span class="st">"EBP"</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">[</span>,<span class="va">considered.variables</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">considered.variables</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">considered.variables</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.15</span>,<span class="fl">.95</span>,<span class="fl">.15</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">res.svar.iv</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu">svar.iv</span><span class="op">(</span><span class="va">y</span>,<span class="va">Z</span>,p <span class="op">=</span> <span class="fl">4</span>,names.of.variables<span class="op">=</span><span class="va">considered.variables</span>,</span>
+<span>          nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>          z.AR.order<span class="op">=</span><span class="fl">1</span>, </span>
+<span>          nb.bootstrap.replications <span class="op">=</span> <span class="fl">100</span>, </span>
+<span>          confidence.interval <span class="op">=</span> <span class="fl">0.90</span>,</span>
+<span>          indic.plot<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:essaiIV1"></span>
+<img src="IdentifStructShocks_files/figure-html/essaiIV1-1.png" alt="Reponses to a monetary-policy shock, SVAR-IV approach." width="95%"><p class="caption">
+Figure 5.3: Reponses to a monetary-policy shock, SVAR-IV approach.
+</p>
+</div>
+<p><strong>Situation B.2: LP-IV</strong></p>
+<p>If you do not want to posit a VAR-type dynamics for <span class="math inline">\(y_t\)</span> –e.g. because you suspect that the true generating model may be a non-invertible VARMA model– you can directly proceed by IV-projection methods to obtain the <span class="math inline">\(\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}\)</span> (that are the IRFs of <span class="math inline">\(\tilde\eta_{1,t}\)</span> on <span class="math inline">\(y_{i,t}\)</span>).</p>
+<p>However, Assumptions (IV.i) and (IV.ii) (Eq. <a href="Projections.html#eq:IV1">(5.3)</a>) have to be complemented with (IV.iii):
+<span class="math display">\[\begin{equation*}
+\begin{array}{llll}
+(IV.iii) &amp; \mathbb{E}(z_t \eta_{j,t+h}) &amp;= 0 \, \mbox{ for } h \ne 0 &amp; \mbox{(lead-lag exogeneity)}
+\end{array}
+\end{equation*}\]</span></p>
+<p>When (IV.i), (IV.ii) and (IV.iii) are satisfied, <span class="math inline">\(\tilde\Psi_{i,1,h}\)</span> can be estimated by regressing <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(y_{1,t}\)</span>, using <span class="math inline">\(z_t\)</span> as an instrument, i.e. by considering the TSLS estimation of:
+<span class="math display" id="eq:regIV1">\[\begin{equation}
+y_{i,t+h} = \alpha_i + \tilde\Psi_{i,1,h}y_{1,t} + \nu_{i,t+h},\tag{5.4}
+\end{equation}\]</span>
+where <span class="math inline">\(\nu_{i,t+h}\)</span> is correlated to <span class="math inline">\(y_{1,t}\)</span>, but not to <span class="math inline">\(z_t\)</span>.</p>
+<p>We have indeed:
+<span class="math display">\[\begin{eqnarray*}
+y_{1,t} &amp;=&amp; \alpha_1 + \tilde\eta_{1,t} + v_{1,t}\\
+y_{i,t+h} &amp;=&amp; \alpha_i + \tilde\Psi_{i,1,h}\tilde\eta_{1,t} + v_{i,t+h},
+\end{eqnarray*}\]</span>
+where the <span class="math inline">\(v_{i,t+h}\)</span>’s are uncorrelated to <span class="math inline">\(z_t\)</span> under (IV.i), (IV.ii) and (IV.iii).</p>
+<p>Note again that, for <span class="math inline">\(h&gt;0\)</span>, the <span class="math inline">\(v_{i,t+h}\)</span> (and <span class="math inline">\(\nu_{i,t+h}\)</span>) are auto-correlated. Newey-West corrections therefore have to be used to compute std errors of the <span class="math inline">\(\tilde\Psi_{i,1,h}\)</span>’s estimates.</p>
+<p>Consider the linear regression:
+<span class="math display">\[
+\mathbf{Y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon,
+\]</span>
+where <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon)=0\)</span>, but where the explicative variables <span class="math inline">\(\mathbf{X}\)</span> are supposed to be correlated to the residuals <span class="math inline">\(\boldsymbol\varepsilon\)</span>.</p>
+<p>Moreover, the <span class="math inline">\(\boldsymbol\varepsilon\)</span> are supposed to be possibly heteroskedastic and auto-correlated.</p>
+<p>We consider the instruments <span class="math inline">\(\mathbf{Z}\)</span>, with <span class="math inline">\(\mathbb{E}(\mathbf{X}'\mathbf{Z}) \ne 0\)</span> but <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon'\mathbf{Z}) = 0\)</span>.</p>
+<p>The IV estimator of <span class="math inline">\(\boldsymbol\beta\)</span> is obtained by regressing <span class="math inline">\(\hat{\mathbf{Y}}\)</span> on <span class="math inline">\(\hat{\mathbf{X}}\)</span>, where <span class="math inline">\(\hat{\mathbf{Y}}\)</span> and <span class="math inline">\(\hat{\mathbf{X}}\)</span> are the respective residuals of the regressions of <span class="math inline">\(\mathbf{Y}\)</span> and <span class="math inline">\(\mathbf{X}\)</span> on <span class="math inline">\(\mathbf{Z}\)</span>.
+<span class="math display">\[\begin{eqnarray*}
+\mathbf{b}_{iv} &amp;=&amp; [\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{Y}\\
+\mathbf{b}_{iv} &amp;=&amp; \boldsymbol\beta + \frac{1}{\sqrt{T}}\underbrace{T[\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}}_{=Q(\mathbf{X},\mathbf{Z}) \overset{p}{\rightarrow} \mathbf{Q}_{xz}}\underbrace{\sqrt{T}\left(\frac{1}{T}\mathbf{Z}'\boldsymbol\varepsilon\right)}_{\overset{d}{\rightarrow} \mathcal{N}(0,S)},
+\end{eqnarray*}\]</span>
+where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance of <span class="math inline">\(\mathbf{z}_t\varepsilon_t\)</span> (see next slide).</p>
+<p>The asymptotic covariance matrix of <span class="math inline">\(\sqrt{T}\mathbf{b}_{iv}\)</span> is <span class="math inline">\(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\)</span>.</p>
+<p>The covariance matrix of <span class="math inline">\(\mathbf{b}_{iv}\)</span> can be approximated by <span class="math inline">\(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\)</span> where <span class="math inline">\(\hat{\mathbf{S}}\)</span> is the Newey-West estimator of <span class="math inline">\(\mathbf{S}\)</span> (see Eq. <a href="#eq:NW">(<strong>??</strong>)</a>)</p>
+<p>(IV.iii) is usually not restrictive for <span class="math inline">\(h&gt;0\)</span> (<span class="math inline">\(z_t\)</span> is usually not affected by future shocks). By contrast, it may be restrictive for <span class="math inline">\(h&lt;0\)</span>. This can be solved by adding controls in Regression <a href="Projections.html#eq:regIV1">(5.4)</a>. These controls should span the space of <span class="math inline">\(\{\eta_{t-1},\eta_{t-2},\dots\}\)</span>.</p>
+<p>If <span class="math inline">\(z_t\)</span> is suspected to be correlated to past values of <span class="math inline">\(\eta_{1,t}\)</span> but not to the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j&gt;1\)</span>, then one can add lags of <span class="math inline">\(z_t\)</span> as controls (method e.g. advocated by Ramey, 2016, p.108, considering the instrument by <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015" role="doc-biblioref">2015</a>)</span>).</p>
+<p>In the general case, one can use lags of <span class="math inline">\(y_t\)</span> as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.</p>
+<p>As noted by <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of <span class="math inline">\(z_t\)</span> to improve efficiency.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">res.LP.IV</span> <span class="op">&lt;-</span> <span class="fu">make.LPIV.irf</span><span class="op">(</span><span class="va">y</span>,<span class="va">Z</span>,</span>
+<span>                           nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                           nb.lags.Y.4.control<span class="op">=</span><span class="fl">4</span>,</span>
+<span>                           nb.lags.Z.4.control<span class="op">=</span><span class="fl">4</span>,</span>
+<span>                           indic.plot <span class="op">=</span> <span class="fl">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
+<span>                           confidence.interval <span class="op">=</span> <span class="fl">0.90</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="FAVAR.html"><span class="header-section-number">4</span> Factor-Augmented VAR</a></div>
+<div class="next"><a href="Inference.html"><span class="header-section-number">6</span> Inference</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#Projections"><span class="header-section-number">5</span> Local projection methods</a></li>
+<li><a class="nav-link" href="#projection-methods"><span class="header-section-number">5.1</span> Projection Methods</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
