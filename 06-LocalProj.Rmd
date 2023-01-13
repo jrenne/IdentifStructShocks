@@ -196,7 +196,7 @@ For each simulated sample (of $\tilde{y}_t$ and $\tilde{z}_t$, say), estimate $\
 ```{r essaiIV0, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Gertler-Karadi monthly shocks, fed funds futures 3 months."}
 # Load vars package:
 library(vars)
-library(AEC)
+library(IdSS)
 data("USmonthly")
 First.date <- "1990-05-01"
 Last.date <- "2012-6-01"

@@ -191,9 +191,9 @@ y_{t-1} +
 -1 &amp; 1
 \end{array}\right]}_{B}\eta_{t-1}.\tag{1.4}
 \end{eqnarray}\]</span></p>
-<p>We can use function <code>simul.VARMA</code> of package <code>AEC</code> to produce IRFs (using <code>indic.IRF=1</code> in the list of arguments):</p>
+<p>We can use function <code>simul.VARMA</code> of package <code>IdSS</code> to produce IRFs (using <code>indic.IRF=1</code> in the list of arguments):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="va">distri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,df<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">distri</span><span class="op">$</span><span class="va">type</span><span class="op">)</span> <span class="co"># dimension of y_t</span></span>
 <span><span class="va">nb.sim</span> <span class="op">&lt;-</span> <span class="fl">30</span></span>
@@ -583,7 +583,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

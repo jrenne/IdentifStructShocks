@@ -68,7 +68,7 @@ Let us illustrate PCA on the term structure of yields. The term strucutre of yie
 To run a PCA, one simply has to apply function `prcomp` to a matrix of data:
 
 ```{r USydsPCA0, warning=FALSE,message=FALSE}
-library(AEC)
+library(IdSS)
 USyields <- USyields[complete.cases(USyields),]
 yds <- USyields[c("Y1","Y2","Y3","Y5","Y7","Y10","Y20","Y30")]
 PCA.yds <- prcomp(yds,center=TRUE,scale. = TRUE)
@@ -131,7 +131,7 @@ Below, we employ this method on the dataset built by @McCracken_Ng_2016 ---the [
 
 ```{r FAVAR, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.",warning=FALSE,message=FALSE}
 library(BVAR)# contains the fred_md dataset
-library(AEC)
+library(IdSS)
 library(vars)
 data <- fred_transform(fred_md,na.rm = FALSE, type = "fred_md")
 First.date <- "1959-02-01"

@@ -147,7 +147,7 @@ An equivalent approach consists in computing the Cholesky decomposition of $BB'$
 
 
 ```{r CEE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).",warning=FALSE,message=FALSE}
-library(AEC)
+library(IdSS)
 library(vars)
 data("USmonthly")
 # Select sample period:
@@ -260,7 +260,7 @@ where $\Theta_{ij}$ is the element $(i,j)$ of $\Theta$.
 @Blanchard_Quah_1989's dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:
 
 ```{r BQ1}
-library(AEC)
+library(IdSS)
 data(BQ)
 par(mfrow=c(1,2))
 plot(BQ$Date,BQ$Dgdp,type="l",main="GDP quarterly growth rate",

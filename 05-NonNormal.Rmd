@@ -78,7 +78,7 @@ knitr::include_graphics("images/Figure_A.png")
 
 
 ```{r preMadeFigureICA2, fig.align = 'left-aligned', out.width = "95%", fig.cap = "This figure shows that the impulse response functions associated with an impulse matrix equal to $B$ (black line) or $BQ$ (red line) are different (even if $BB'=BQ(BQ)'$).", echo=FALSE}
-library(AEC)
+library(IdSS)
 nb.sim <- 12
 n <- 2
 Phi <- array(NaN,c(n,n,1))
@@ -305,7 +305,7 @@ Figure \@ref(fig:ThreePlots) represents again some bivariate distributions. The 
 
 
 ```{r ThreePlotsCode, fig.asp = .8,eval=FALSE,echo=FALSE}
-library(AEC)
+library(IdSS)
 indic.solve.C <- 0
 distri.1 <- list(type=c("gaussian"),name="Panel (a) Gaussian",name.4.table="Gaussian")
 distri.2 <- list(type=c("mixt.gaussian"),mu=0,sigma=5,p=.03,name="Panel (b) Mixture of Gaussian",name.4.table="Mixture of Gaussian")
@@ -443,7 +443,7 @@ The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\e
 \end{equation}
 \centerline{$s.t. \;B'B = Id.$}
 
-The restrictions $B'B = Id$ can be eliminated by parameterizing $B$ in such a way that, whatever the consider parameters, $B$ is orthogonal. @Gourieroux_Monfort_Renne_2017 propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to $-1$ can be written as
+The restrictions $B'B = Id$ can be eliminated by parameterizing $B$ in such a way that, whatever the consider parameters, $B$ is orthogonal.^[@Jarocinski_2021 develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that $B'B$ is orthogonal.] @Gourieroux_Monfort_Renne_2017 propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to $-1$ can be written as
 \begin{equation}
 B(A) = (Id+A) (Id-A)^{-1},
 \end{equation}
@@ -525,7 +525,7 @@ We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I
 
 
 ```{r ICA0}
-library(AEC)
+library(IdSS)
 First.date <- "1959-04-01"
 Last.date  <- "2015-01-01"
 data <- US3var
@@ -618,7 +618,7 @@ cbind(param,st.dev,t.stat) # print results of PML estimation
 ```
 (Note: it is always useful to combine two optimization algorithms, such as `Nelder-Mead` and `BFGS`.)
 
-We would obtain close results by neglecting commodity prices. In  that case, one can simply use the function `estim.SVAR.ICA` of the `AEC` package. Let us compare the $C$ matrix obtained in the two cases (with or without commodity prices):
+We would obtain close results by neglecting commodity prices. In  that case, one can simply use the function `estim.SVAR.ICA` of the `IdSS` package. Let us compare the $C$ matrix obtained in the two cases (with or without commodity prices):
 
 ```{r ICAcompareC}
 ICA.res.no.commo <- estim.SVAR.ICA(Y,distri = distri,p=6)

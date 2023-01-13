@@ -27,13 +27,13 @@ The identification and estimation of dynamic responses to structural shocks is o
 
 Over the last decades, several methodologies have been proposed so as to estimate these responses. The objective of this course, developed by [Kenza Benhima](https://sites.google.com/site/benhimakenza/) and [Jean-Paul Renne](https://sites.google.com/site/jeanpaulrenne/home), is to provide an exhaustive view of these methodologies and to provide students with tools enabling them to implement them in various contexts.
 
-Codes associated with this course are part of the `AEC` package, which is available on GitHub. To load a  package from GitHub, you need to use function `install_github` from the `devtools` package:
+Codes associated with this course are part of the `IdSS` package (**Id**entification of **S**tructural **S**hocks), which is available on GitHub. To load a  package from GitHub, you need to use function `install_github` from the `devtools` package:
 
 ```{r installAEC, eval=FALSE}
 install.packages("devtools") # in case you do not have already loaded this package.
 library(devtools)
-install_github("jrenne/AEC")
-library(AEC)
+install_github("jrenne/IdSS")
+library(IdSS)
 ```
 
 **Useful (R) links:**

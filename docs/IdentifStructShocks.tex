@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-03}
+\date{2023-01-13}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -166,14 +166,14 @@ The identification and estimation of dynamic responses to structural shocks is o
 
 Over the last decades, several methodologies have been proposed so as to estimate these responses. The objective of this course, developed by \href{https://sites.google.com/site/benhimakenza/}{Kenza Benhima} and \href{https://sites.google.com/site/jeanpaulrenne/home}{Jean-Paul Renne}, is to provide an exhaustive view of these methodologies and to provide students with tools enabling them to implement them in various contexts.
 
-Codes associated with this course are part of the \texttt{AEC} package, which is available on GitHub. To load a package from GitHub, you need to use function \texttt{install\_github} from the \texttt{devtools} package:
+Codes associated with this course are part of the \texttt{IdSS} package (\textbf{Id}entification of \textbf{S}tructural \textbf{S}hocks), which is available on GitHub. To load a package from GitHub, you need to use function \texttt{install\_github} from the \texttt{devtools} package:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{) }\CommentTok{\# in case you do not have already loaded this package.}
 \FunctionTok{library}\NormalTok{(devtools)}
-\FunctionTok{install\_github}\NormalTok{(}\StringTok{"jrenne/AEC"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{install\_github}\NormalTok{(}\StringTok{"jrenne/IdSS"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -326,11 +326,11 @@ y_{t-1} +
 \end{array}\right]}_{B}\eta_{t-1}.\label{eq:VARMA111}
 \end{eqnarray}
 
-We can use function \texttt{simul.VARMA} of package \texttt{AEC} to produce IRFs (using \texttt{indic.IRF=1} in the list of arguments):
+We can use function \texttt{simul.VARMA} of package \texttt{IdSS} to produce IRFs (using \texttt{indic.IRF=1} in the list of arguments):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \NormalTok{distri }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{type=}\FunctionTok{c}\NormalTok{(}\StringTok{"gaussian"}\NormalTok{,}\StringTok{"gaussian"}\NormalTok{),}\AttributeTok{df=}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{))}
 \NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(distri}\SpecialCharTok{$}\NormalTok{type) }\CommentTok{\# dimension of y\_t}
 \NormalTok{nb.sim }\OtherTok{\textless{}{-}} \DecValTok{30}
@@ -847,7 +847,7 @@ An equivalent approach consists in computing the Cholesky decomposition of \(BB'
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{library}\NormalTok{(vars)}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
 \CommentTok{\# Select sample period:}
@@ -948,7 +948,7 @@ where \(\Theta_{ij}\) is the element \((i,j)\) of \(\Theta\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{data}\NormalTok{(BQ)}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
 \FunctionTok{plot}\NormalTok{(BQ}\SpecialCharTok{$}\NormalTok{Date,BQ}\SpecialCharTok{$}\NormalTok{Dgdp,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{main=}\StringTok{"GDP quarterly growth rate"}\NormalTok{,}
@@ -1141,7 +1141,7 @@ What about output? Since is the response of interest, we leave it un-restricted.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(AEC);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
+\FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
 \NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
@@ -1499,7 +1499,7 @@ The log-likelihood function \eqref{eq:pseudolog} is computed as if the errors \(
 
 \centerline{$s.t. \;B'B = Id.$}
 
-The restrictions \(B'B = Id\) can be eliminated by parameterizing \(B\) in such a way that, whatever the consider parameters, \(B\) is orthogonal. \citet{Gourieroux_Monfort_Renne_2017} propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to \(-1\) can be written as
+The restrictions \(B'B = Id\) can be eliminated by parameterizing \(B\) in such a way that, whatever the consider parameters, \(B\) is orthogonal.\footnote{\citet{Jarocinski_2021} develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that \(B'B\) is orthogonal.} \citet{Gourieroux_Monfort_Renne_2017} propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to \(-1\) can be written as
 \begin{equation}
 B(A) = (Id+A) (Id-A)^{-1},
 \end{equation}
@@ -1559,7 +1559,7 @@ Note that the potential misspecification of pseudo-distributions \(g_i\) has no 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1959{-}04{-}01"}
 \NormalTok{Last.date  }\OtherTok{\textless{}{-}} \StringTok{"2015{-}01{-}01"}
 \NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ US3var}
@@ -1672,7 +1672,7 @@ The pseudo density functions are distinct and asymmetric mixtures of Gaussian di
 
 (Note: it is always useful to combine two optimization algorithms, such as \texttt{Nelder-Mead} and \texttt{BFGS}.)
 
-We would obtain close results by neglecting commodity prices. In that case, one can simply use the function \texttt{estim.SVAR.ICA} of the \texttt{AEC} package. Let us compare the \(C\) matrix obtained in the two cases (with or without commodity prices):
+We would obtain close results by neglecting commodity prices. In that case, one can simply use the function \texttt{estim.SVAR.ICA} of the \texttt{IdSS} package. Let us compare the \(C\) matrix obtained in the two cases (with or without commodity prices):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1954,7 +1954,7 @@ For each simulated sample (of \(\tilde{y}_t\) and \(\tilde{z}_t\), say), estimat
 \begin{Highlighting}[]
 \CommentTok{\# Load vars package:}
 \FunctionTok{library}\NormalTok{(vars)}
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1990{-}05{-}01"}
 \NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"2012{-}6{-}01"}
@@ -2312,10 +2312,10 @@ Function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\citet{VARetp}) can be u
 \end{Shaded}
 
 \begin{verbatim}
-##        inv(-1)    inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const
-## [1,] -0.323650 0.08013538 1.056878 -0.1401019 0.02164632 1.0078404 -0.01770122
-## [2,] -0.319631 0.14598883 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
-## [3,] -0.319631 0.14598883 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.2981078 0.1717533 0.9353458 -0.1343434 0.1719965 0.9383106 -0.01856969
+## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
 \end{verbatim}
 
 \hypertarget{FAVAR}{%
@@ -2389,7 +2389,7 @@ To run a PCA, one simply has to apply function \texttt{prcomp} to a matrix of da
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \NormalTok{USyields }\OtherTok{\textless{}{-}}\NormalTok{ USyields[}\FunctionTok{complete.cases}\NormalTok{(USyields),]}
 \NormalTok{yds }\OtherTok{\textless{}{-}}\NormalTok{ USyields[}\FunctionTok{c}\NormalTok{(}\StringTok{"Y1"}\NormalTok{,}\StringTok{"Y2"}\NormalTok{,}\StringTok{"Y3"}\NormalTok{,}\StringTok{"Y5"}\NormalTok{,}\StringTok{"Y7"}\NormalTok{,}\StringTok{"Y10"}\NormalTok{,}\StringTok{"Y20"}\NormalTok{,}\StringTok{"Y30"}\NormalTok{)]}
 \NormalTok{PCA.yds }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(yds,}\AttributeTok{center=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
@@ -2455,7 +2455,7 @@ Below, we employ this method on the dataset built by \citet{McCracken_Ng_2016} -
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(BVAR)}\CommentTok{\# contains the fred\_md dataset}
-\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{library}\NormalTok{(vars)}
 \NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{fred\_transform}\NormalTok{(fred\_md,}\AttributeTok{na.rm =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{type =} \StringTok{"fred\_md"}\NormalTok{)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1959{-}02{-}01"}

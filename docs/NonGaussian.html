@@ -235,7 +235,7 @@ The log-likelihood function <a href="NonGaussian.html#eq:pseudolog">(5.1)</a> is
 <span class="math display" id="eq:optimprob">\[\begin{equation}
 \widehat{B_T} = \arg \max_B \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i \varepsilon_t),\tag{5.2}
 \end{equation}\]</span>
-<p>The restrictions <span class="math inline">\(B'B = Id\)</span> can be eliminated by parameterizing <span class="math inline">\(B\)</span> in such a way that, whatever the consider parameters, <span class="math inline">\(B\)</span> is orthogonal. <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> propose to use, for that, the Cayley’s representation: any orthogonal matrix with no eigenvalue equal to <span class="math inline">\(-1\)</span> can be written as
+<p>The restrictions <span class="math inline">\(B'B = Id\)</span> can be eliminated by parameterizing <span class="math inline">\(B\)</span> in such a way that, whatever the consider parameters, <span class="math inline">\(B\)</span> is orthogonal.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;&lt;span class=&quot;citation&quot;&gt;Jarocinski (&lt;a href=&quot;references.html#ref-Jarocinski_2021&quot; role=&quot;doc-biblioref&quot;&gt;2021&lt;/a&gt;)&lt;/span&gt; develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that &lt;span class=&quot;math inline&quot;&gt;\(B'B\)&lt;/span&gt; is orthogonal.&lt;/p&gt;"><sup>7</sup></a> <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> propose to use, for that, the Cayley’s representation: any orthogonal matrix with no eigenvalue equal to <span class="math inline">\(-1\)</span> can be written as
 <span class="math display">\[\begin{equation}
 B(A) = (Id+A) (Id-A)^{-1},
 \end{equation}\]</span>
@@ -326,7 +326,7 @@ A = (B(A)+Id)^{-1} (B(A)-Id).
 <div class="example">
 <p><span id="exm:GMR2017" class="example"><strong>Example 5.1  (Non-Gaussian monetary-policy shocks) </strong></span>We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (<span class="math inline">\(T=224\)</span>). We consider three dependent variables: inflation (<span class="math inline">\(\pi_t\)</span>), economic activity (<span class="math inline">\(z_t\)</span>, the output gap) and the nominal short-term interest rate (<span class="math inline">\(r_t\)</span>). Changes in the log of oil prices added as an exogenous variable (<span class="math inline">\(x_t\)</span>).</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1959-04-01"</span></span>
 <span><span class="va">Last.date</span>  <span class="op">&lt;-</span> <span class="st">"2015-01-01"</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">US3var</span></span>
@@ -416,7 +416,7 @@ By construction of <span class="math inline">\(\hat{S}_T^{-1}\)</span>, it comes
 ##  [8,] -0.09906759 0.062185577  -1.5930959
 ##  [9,]  0.99222290 0.007785691 127.4418551</code></pre>
 <p>(Note: it is always useful to combine two optimization algorithms, such as <code>Nelder-Mead</code> and <code>BFGS</code>.)</p>
-<p>We would obtain close results by neglecting commodity prices. In that case, one can simply use the function <code>estim.SVAR.ICA</code> of the <code>AEC</code> package. Let us compare the <span class="math inline">\(C\)</span> matrix obtained in the two cases (with or without commodity prices):</p>
+<p>We would obtain close results by neglecting commodity prices. In that case, one can simply use the function <code>estim.SVAR.ICA</code> of the <code>IdSS</code> package. Let us compare the <span class="math inline">\(C\)</span> matrix obtained in the two cases (with or without commodity prices):</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ICA.res.no.commo</span> <span class="op">&lt;-</span> <span class="fu">estim.SVAR.ICA</span><span class="op">(</span><span class="va">Y</span>,distri <span class="op">=</span> <span class="va">distri</span>,p<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">ICA.res.no.commo</span><span class="op">$</span><span class="va">C.PML</span>,<span class="cn">NaN</span>,<span class="va">C.PML</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
@@ -803,6 +803,7 @@ Figure 5.5: The first row of plots shows the responses of the three endogenous v
 
 </div>
 </div>
+
   <div class="chapter-nav">
 <div class="prev"><a href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></div>
 <div class="next"><a href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></div>
@@ -830,7 +831,7 @@ Figure 5.5: The first row of plots shows the responses of the three endogenous v
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

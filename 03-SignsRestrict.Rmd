@@ -67,7 +67,7 @@ What about output? Since is the response of interest, we leave it un-restricted.
 
 
 ```{r signrestr1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.",warning=FALSE}
-library(AEC);library(vars);library(Matrix)
+library(IdSS);library(vars);library(Matrix)
 data("USmonthly")
 First.date <- "1965-01-01"
 Last.date <- "1995-06-01"

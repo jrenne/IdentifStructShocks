@@ -1,6 +1,5 @@
 # Vector Auto-Regressive (VAR) models: the basics {#basics}
 
-
 ## Definition of VARs (and SVARMA) models
 
 :::{.definition #SVAR name="(S)VAR model"}
@@ -118,10 +117,11 @@ y_{t-1} +
 \end{array}\right]}_{B}\eta_{t-1}.(\#eq:VARMA111)
 \end{eqnarray}
 
-We can use function `simul.VARMA` of package `AEC` to produce IRFs (using `indic.IRF=1` in the list of arguments):
+We can use function `simul.VARMA` of package `IdSS` to produce IRFs (using `indic.IRF=1` in the list of arguments):
+
 
 ```{r simVAR, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Impulse response functions"}
-library(AEC)
+library(IdSS)
 distri <- list(type=c("gaussian","gaussian"),df=c(4,4))
 n <- length(distri$type) # dimension of y_t
 nb.sim <- 30

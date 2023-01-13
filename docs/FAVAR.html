@@ -138,7 +138,7 @@ X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
 <p>Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., <span class="citation">Litterman and Scheinkman (<a href="references.html#ref-Litterman_Scheinkman_1991" role="doc-biblioref">1991</a>)</span>). One can typically employ PCA to recover such factors. The data used in the example below are taken from the <a href="https://fred.stlouisfed.org">Fred database</a> (tickers: “DGS6MO”,“DGS1”, …). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).</p>
 <p>To run a PCA, one simply has to apply function <code>prcomp</code> to a matrix of data:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="va">USyields</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">USyields</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">yds</span> <span class="op">&lt;-</span> <span class="va">USyields</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y1"</span>,<span class="st">"Y2"</span>,<span class="st">"Y3"</span>,<span class="st">"Y5"</span>,<span class="st">"Y7"</span>,<span class="st">"Y10"</span>,<span class="st">"Y20"</span>,<span class="st">"Y30"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">PCA.yds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">yds</span>,center<span class="op">=</span><span class="cn">TRUE</span>,scale. <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -193,7 +193,7 @@ where the <span class="math inline">\(e_t\)</span> are “small” serially and 
 <p>Below, we employ this method on the dataset built by <span class="citation">McCracken and Ng (<a href="references.html#ref-McCracken_Ng_2016" role="doc-biblioref">2016</a>)</span> —the <a href="https://research.stlouisfed.org/wp/more/2015-012">FRED:MD</a> database— that includes 119 time series.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nk027/bvar">BVAR</a></span><span class="op">)</span><span class="co"># contains the fred_md dataset</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BVAR/man/fred_transform.html">fred_transform</a></span><span class="op">(</span><span class="va">fred_md</span>,na.rm <span class="op">=</span> <span class="cn">FALSE</span>, type <span class="op">=</span> <span class="st">"fred_md"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1959-02-01"</span></span>
@@ -270,7 +270,7 @@ Figure 8.2: Responses of a monetary-policy shock. FAVAR approach of Bernanke, Bo
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

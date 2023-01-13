@@ -1,6 +1,28 @@
 {
     "sources": [
         {
+            "URL": "https://ideas.repec.org/p/ecb/ecbwps/20210.html",
+            "author": [
+                {
+                    "family": "Jarocinski",
+                    "given": "Marek"
+                }
+            ],
+            "genre": "Working Paper Series",
+            "id": "Jarocinski_2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "number": "20210",
+            "publisher": "European Central Bank",
+            "title": "Estimating the Fed’s Unconventional Policy Shocks",
+            "type": "report"
+        },
+        {
             "DOI": "10.1257/aer.20161852",
             "URL": "https://www.aeaweb.org/articles?id=10.1257/aer.20161852",
             "author": [

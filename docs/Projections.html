@@ -129,7 +129,7 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}\]</span></p>
 <p>This is for instance consistent with the case where <span class="math inline">\([\Delta GDP_t, \pi_t,i_t]'\)</span> follows a VAR(1) and the monetary-policy shock do not contemporaneously affect <span class="math inline">\(\Delta GDP_t\)</span> and <span class="math inline">\(\pi_t\)</span>.</p>
 <p>The IRFs can be estimated by LP, taking <span class="math inline">\(x_t = i_t\)</span> and <span class="math inline">\(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\)</span>.</p>
-<p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is reminiscent of the distinction betweem direct forecasting –based on regressions of &lt;span class="math inline"&gt;\(y_{t+h}\)&lt;/span&gt; on &lt;span class="math inline"&gt;\(\{y_t,y_{t-1},\dots\}\)&lt;/span&gt;– and iterated forecasting –based on a recursive model where &lt;span class="math inline"&gt;\(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\)&lt;/span&gt;, see &lt;span class="citation"&gt;Marcellino, Stock, and Watson (&lt;a href="references.html#ref-Marcellino_et_al_2006" role="doc-biblioref"&gt;2006&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;'><sup>7</sup></a></p>
+<p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is reminiscent of the distinction betweem direct forecasting –based on regressions of &lt;span class="math inline"&gt;\(y_{t+h}\)&lt;/span&gt; on &lt;span class="math inline"&gt;\(\{y_t,y_{t-1},\dots\}\)&lt;/span&gt;– and iterated forecasting –based on a recursive model where &lt;span class="math inline"&gt;\(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\)&lt;/span&gt;, see &lt;span class="citation"&gt;Marcellino, Stock, and Watson (&lt;a href="references.html#ref-Marcellino_et_al_2006" role="doc-biblioref"&gt;2006&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;'><sup>8</sup></a></p>
 </div>
 <div id="situation-b-iv-approach" class="section level2" number="6.3">
 <h2>
@@ -253,7 +253,7 @@ where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="ma
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load vars package:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1990-05-01"</span></span>
 <span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2012-6-01"</span></span>
@@ -377,7 +377,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-03.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
