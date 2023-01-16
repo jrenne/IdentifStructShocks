@@ -9,19 +9,15 @@ $$
 As seen in Section \@ref(IRFSVARMA), the entries $(i,j)$ of the sequence of the $\Psi_h$ matrices define the IRF of $\eta_{j,t}$ on $y_{i,t}$.
 
 
-Assume that you observe $\eta_{j,t}$, then a consistent estimate of $\Psi_{i,j,h}$ is simply obtained by the OLS regression of $y_{i,t+h}$ on $\eta_{j,t}$:
+Assume that you observe $\eta_{j,t}$, then a consistent estimate of $\Psi_{i,j,h}$ is simply obtained by the OLS regression of $y_{i,t+h}$ on $\eta_{j,t}$:^[Because the residuals $u_{i,j,t+h}$ are autocorrelated (for $h>0$), estimates of the covariance of the OLS estimators of the $\Psi_{i,j,h}$ would then have to be based on robust estimators (e.g. @Newey_West_1987).]
 \begin{equation}
 y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.(\#eq:OLS1)
 \end{equation}
-Because the residuals $u_{i,j,t+h}$ are autocorrelated (for $h>0$), estimates of the covariance of the OLS estimators of the $\Psi_{i,j,h}$ then have to be based on robust estimators (e.g. @Newey_West_1987). This is the core idea of the **local projection approach** proposed by @Jorda_2005.
+Running that kind of regression (using instruments for $\eta_{j,t}$) is the core idea of the **local projection approach** proposed by @Jorda_2005.
 
-Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations.
-
-
+Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations. While the second requires some instruments, the first approach does not; it corresponds to the original @Jorda_2005's approach. 
 
 ## Situation A: Without IV
-
-This corresponds to the original @Jorda_2005's approach. 
 
 Assume that the structural shock of interest ($\eta_{1,t}$, say) can be consistently obtained as the residual of a regression of a variable $x_t$ on a set of control variables $w_t$ independent from $\eta_{1,t}$:
 \begin{equation}
@@ -46,13 +42,11 @@ What precedes implies that the expectation of the blue term, conditional on $x_t
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}
 
-This is for instance consistent with the case where $[\Delta GDP_t, \pi_t,i_t]'$ follows a VAR(1) and the monetary-policy shock do not contemporaneously affect $\Delta GDP_t$ and $\pi_t$.
+This is for instance consistent with the case where $[\Delta GDP_t, \pi_t,i_t]'$ follows a VAR(1) and the monetary-policy shock do not contemporaneously affect $\Delta GDP_t$ and $\pi_t$. The IRFs can then be estimated by LP, taking $x_t = i_t$ and $w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'$.
 
-The IRFs can be estimated by LP, taking $x_t = i_t$ and $w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'$.
+This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if $w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'$, with $k\le n$, and $x_t = y_{k,t}$, then this approach corresponds, for $h=0$, to the SVAR($p$) Cholesky-based IRF (focusing on the responses to the $k^{th}$ structural shock). However, the two approaches differ for $h>0$, because the LP methodology does not assumes a VAR dynamics for $y_t$.[^FootnoteIteratedFcst]
 
-This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if $w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'$, with $k\le n$, and $x_t = y_{k,t}$, then this approach corresponds, for $h=0$, to the SVAR($p$) Cholesky-based IRF (focusing on the responses to the $k^{th}$ structural shock). However, the two approaches differ for $h>0$, because the LP methodology does not assumes a VAR dynamics for $y_t$.[^FootnoteIteratedFcst]
-
-[^FootnoteIteratedFcst]: This is reminiscent of the distinction betweem direct forecasting --based on regressions of $y_{t+h}$ on $\{y_t,y_{t-1},\dots\}$-- and iterated forecasting --based on a recursive model where $y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}$, see @Marcellino_et_al_2006. 
+[^FootnoteIteratedFcst]: This is reminiscent of the distinction betweem direct forecasting---based on regressions of $y_{t+h}$ on $\{y_t,y_{t-1},\dots\}$---and iterated forecasting---based on a recursive model where $y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}$, see @Marcellino_et_al_2006. 
 
 
 ## Situation B: IV approach
@@ -64,7 +58,7 @@ Consider now that we have a valid instrument $z_t$ for $\eta_{1,t}$ (with $\math
 \left\{
 \begin{array}{llll}
 (IV.i) & \mathbb{E}(z_t \eta_{1,t}) &\ne 0 & \mbox{(relevance condition)} \\
-(IV.ii) & \mathbb{E}(z_t \eta_{j,t}) &= 0 \quad \mbox{for } j>1 & \mbox{(exogeneity condition)}
+(IV.ii) & \mathbb{E}(z_t \eta_{j,t}) &= 0 \quad \mbox{for } j>1 & \mbox{(exogeneity condition).}
 \end{array}\right.(\#eq:IV1)
 \end{equation}
 The instrument $z_t$ can be used to identify the structural shock. Eq. \@ref(eq:IV1) implies that there exist $\rho \ne 0$ and a mean-zero variable $\xi_t$ such that:
@@ -77,7 +71,7 @@ where $\xi_t$ is correlated neither to $z_t$, nor to $\eta_{j,t}$, $j\ge2$.
 Define $\rho = \frac{\mathbb{E}(\eta_{1,t}z_t)}{\mathbb{V}ar(z_t)}$ and $\xi_t = \eta_{1,t} - \rho z_t$. It is easily seen that $\xi_t$ satisfies the moment restrictions given above.
 :::
 
-@Ramey_2016_NBER reviews the different approaches employed to construct monetary policy-shocks (the two main approaches are presented in \@ref(exm:HighFreq) and \@ref(exm:RomerRomer) below). She has also collected time series of such shocks, see [her website](https://econweb.ucsd.edu/~vramey/research.html#mon).
+@Ramey_2016_NBER reviews the different approaches employed to construct monetary policy-shocks (the two main approaches are presented in \@ref(exm:HighFreq) and \@ref(exm:RomerRomer) below). She has also collected time series of such shocks, see [her website](https://econweb.ucsd.edu/~vramey/research.html#mon). Several of these shocks are included in the `Ramey` dataset of package `IdSS`.
 
 :::{.example #HighFreq name="Identification of Monetary-Policy Shocks Based on High-Frequency Data"}
 
@@ -91,7 +85,8 @@ In general, changes in $\mathbb{E}_t(i_{t+s})$, for $s>0$, can be affected by al
 
 However, if a MP announcement takes place between $t$ and $t+\epsilon$, then most of $\mathbb{E}_{t+\epsilon}(i_{t+s})-\mathbb{E}_t(i_{t+s})$ is to be attributed to the MP shock (see Figure \@ref(fig:HighFreq), from @Gurkaynak_et_al_2005). Hence, a monthly time series of MP shocks can be obtained by summing, over each month, the changes $i_{t+ \epsilon,h} - i_{t,h}$ associated with a given interest rate (T-bills, futures, swaps) and a given maturity $h$.
 
-See among others: @KUTTNER2001523, @Cochrane_Piazzesi_2002,@Gurkaynak_et_al_2005, @Piazzesi_Swanson_2008, @Gertler_Karadi_2015.
+See among others: @KUTTNER2001523, @Cochrane_Piazzesi_2002, @Gurkaynak_et_al_2005, @Piazzesi_Swanson_2008, @Gertler_Karadi_2015. The time series named 
+`FF4_TC`, `ED2_TC`, `ED3_TC`, `ED4_TC`, `GS1`, `ff1_vr`, `ff4_vr`, `ed2_vr`, `ff1_gkgreen`, `ff4_gkgreen`, `ed2_gkgreen` in the data frame `Ramey` of package `IdSS` are time series of shocks based on this approach (see [Ramey's website](https://econweb.ucsd.edu/~vramey/research/Ramey_HOM_monetary.zip) for details).
 
 
 ```{r HighFreq, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\\% to 1\\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself.", echo=FALSE}
@@ -111,15 +106,15 @@ This gives a measure of intended monetary policy actions not driven by informati
 a. "intentions" are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and "Blue Books".
 b. Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve's internal forecasts (inflation, real output and unemployment), "Greenbook's forecasts" -- usually issued 6 days before the FOMC meeting.
 
-The shock measure is the residual series in the linear regression of (a) on (b).
+The shock measure is the residual series in the linear regression of (a) on (b). The time series `Ramey$rrshock83` and  `Ramey$rrshock83b` (where `Ramey` is a data frame included in package `IdSS`) contain such shocks for the period 1983-2007. (`Ramey$rrshock83b` uses long-horizon Greenbook forecasts.)
 :::
 
 
 
 There are two main IV approaches to estimate IRFs see @Stock_Watson_2018:
 
-a. The LP-IV approach, where $y_t$'s DGP is left unspecified,
-b. The SVAR-IV approach.
+a. The SVAR-IV approach (Subsection \@ref(SVARIVa)),
+b. The LP-IV approach, where $y_t$'s DGP is left unspecified  (Subsection \@ref(LPIVa)).
 
 The LP-IV approach is based on a set of IV regressions (for each variable of interest, one for each forecast horizon). The SVAR-IV approach is based on IV regressions of VAR innovations only (one for each series of VAR innovations).
 
@@ -127,7 +122,7 @@ If the VAR adequately captures the DGP, then the IV-SVAR is optimal for all hori
 
 
 
-### Situation B.1: SVAR-IV approach
+### Situation B.1: SVAR-IV approach {#SVARIVa}
 
 Assume you have consistent estimates of $\varepsilon_t = B\eta_t$, these estimates ($\hat\varepsilon_{t}$) coming from the estimation of a VAR model. You have, for $i \in \{1,\dots,n\}$:
 \begin{eqnarray}
@@ -231,7 +226,7 @@ res.svar.iv <-
 
 
 
-### Situation B.2: LP-IV
+### Situation B.2: LP-IV  {#LPIVa}
 
 If you do not want to posit a VAR-type dynamics for $y_t$ --e.g. because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the $\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}$ (that are the IRFs of $\tilde\eta_{1,t}$ on $y_{i,t}$).
 

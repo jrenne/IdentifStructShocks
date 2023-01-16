@@ -95,8 +95,8 @@ overview-of-the-approach
 situation-a-without-iv
 situation-b-iv-approach
 instruments-proxies-for-structural-shocks
-situation-b.1-svar-iv-approach
-situation-b.2-lp-iv
+SVARIVa
+LPIVa
 Inference
 MonteCarlo
 delta-method

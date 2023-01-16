@@ -437,7 +437,7 @@ Hence, non-normal structural shocks are identifiable. But how to estimate them b
 \end{equation}
 where $b_i$ is the $i^{th}$ column of matrix $B$ (or $b'_i$ is the $i^{th}$ row of $B^{-1}$ since $B^{-1}=B'$).
 
-The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\eta_{i,t}$ had the p.d.f. $g_i (\eta_i)$. The PML estimator of matrix $B$ maximizes the pseudo log-likelihood function:
+The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\eta_{i,t}$ had the pdf $g_i (\eta_i)$. The PML estimator of matrix $B$ maximizes the pseudo log-likelihood function:
 \begin{equation}
 \widehat{B_T} = \arg \max_B \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i \varepsilon_t),(\#eq:optimprob)
 \end{equation}
