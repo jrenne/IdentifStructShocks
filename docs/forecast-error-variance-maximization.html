@@ -66,7 +66,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
 <li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
 <li><a class="active" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
@@ -92,21 +92,21 @@
 <span class="header-section-number">4.1</span> The main (unconditional) approach<a class="anchor" aria-label="anchor" href="#the-main-unconditional-approach"><i class="fas fa-link"></i></a>
 </h2>
 <p>The approach presented in this section exploits the derivations of <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2004" role="doc-biblioref">2004</a>)</span>. <span class="citation">Barsky and Sims (<a href="references.html#ref-BARSKY2011273" role="doc-biblioref">2011</a>)</span> exploit this approach to identify a TFP news shock, that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP.</p>
-<p>Consider a process <span class="math inline">\(\{y_t\}\)</span> that admits the infinite MA representation of Eq. <a href="basics.html#eq:InfMA">(1.3)</a>. Let <span class="math inline">\(Q\)</span> be an orthogonal matrix, an alternative decomposition is:
+<p>Consider a process <span class="math inline">\(\{y_t\}\)</span> that admits the infinite MA representation of Eq. <a href="basics.html#eq:InfMA">(1.4)</a>. Let <span class="math inline">\(Q\)</span> be an orthogonal matrix, an alternative decomposition of <span class="math inline">\(y_t\)</span> is:
 <span class="math display">\[\begin{eqnarray}
 y_t&amp;=&amp;\sum_{h=0}^{+\infty}\Psi_h\underbrace{\eta_{t-h}}_{Q\tilde \eta_{t-h}} = \sum_{h=0}^{+\infty}\underbrace{\Psi_hQ}_{\tilde\Psi_h}\tilde
 \eta_{t-h} = \sum_{h=0}^{+\infty}\tilde\Psi_h\tilde \eta_{t-h},
 \end{eqnarray}\]</span>
-where <span class="math inline">\(\tilde \eta_{t-h}=Q'\eta_{t-h}\)</span> are the white-noise shocks associated with the new MA representation. (They also satisfy <span class="math inline">\(\mathbb{V}ar(\tilde\eta_t)=Id\)</span>.)</p>
-<p>The <span class="math inline">\(h\)</span>-step ahead prediction error of <span class="math inline">\(y_{t+h}\)</span>, given all the data up to and including <span class="math inline">\(t-1\)</span> is given by
+where <span class="math inline">\(\tilde \eta_{t-h}=Q'\eta_{t-h}\)</span> are the white-noise shocks associated with the new MA representation, <span class="math inline">\(Q\)</span> being an orthgonal matrix. (They also satisfy <span class="math inline">\(\mathbb{V}ar(\tilde\eta_t)=Id\)</span>.)</p>
+<p>The <span class="math inline">\(h\)</span>-step ahead prediction error of <span class="math inline">\(y_{t+h}\)</span>, given all the data up to, and including, <span class="math inline">\(t-1\)</span> is given by
 <span class="math display">\[
 e_{t+h}(h)=y_{t+h}-\mathbb{E}_{t-1}(y_{t+h})=\sum_{j=0}^h\tilde \Psi_h\tilde \eta_{t+h-j}.
 \]</span></p>
 <p>The variance-covariance matrix of <span class="math inline">\(e_{t+h}(h)\)</span> is
 <span class="math display">\[
-\Omega(h)=\sum_{j=0}^h\tilde \Psi_j\tilde \Psi_j'=\sum_{j=0}^h \Psi_j \Psi_j'.
+\Omega^{(h)}=\sum_{j=0}^h\tilde \Psi_j\tilde \Psi_j'=\sum_{j=0}^h \Psi_j \Psi_j'.
 \]</span></p>
-<p>We can decompose <span class="math inline">\(\Omega(h)\)</span> into the contribution of each shock <span class="math inline">\(l\)</span> (<span class="math inline">\(l^{th}\)</span> component of <span class="math inline">\(\tilde{\eta}_t\)</span>):
+<p>We can decompose <span class="math inline">\(\Omega^{(h)}\)</span> into the contribution of each shock <span class="math inline">\(l\)</span> (<span class="math inline">\(l^{th}\)</span> component of <span class="math inline">\(\tilde{\eta}_t\)</span>):
 <span class="math display">\[
 \Omega^{(h)}=\sum_{l=1}^n\Omega_l^{(h)}(Q)
 \]</span>
@@ -149,10 +149,10 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span class="header-section-number">4.2</span> Restrictions based on narrative historical decomposition<a class="anchor" aria-label="anchor" href="#NarrativeHistDecomp"><i class="fas fa-link"></i></a>
 </h2>
 <p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative information), a particular shock was the most important contributor to the unexpected movement of some variable during a particular period.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="Signs.html#NarrativeSign"&gt;3.5&lt;/a&gt;.&lt;/p&gt;'><sup>6</sup></a> This can be formalized in two different ways (respectively called Type A and Type B by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span>):</p>
-<ol style="list-style-type: decimal">
-<li>A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.</li>
-<li>A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.</li>
-</ol>
+<ul>
+<li>Type A: A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.</li>
+<li>Type B: A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.</li>
+</ul>
 </div>
 </div>
 
@@ -181,7 +181,7 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

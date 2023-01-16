@@ -2,6 +2,7 @@ def:SVAR
 eq:yVAR
 def:SVARMA
 eq:yVARMA
+eq:boxIRFs
 eq:InfMA
 prp:computPsi
 exm:IRFVARMA
@@ -29,6 +30,7 @@ eq:cumul
 fig:BQ4
 def:orthogonal
 fig:signrestr1
+exm:exMixSignSR
 fig:preMadeFigureICA
 fig:preMadeFigureICA2
 fig:preMadeFigureICAGaussianStudent
@@ -96,7 +98,7 @@ instruments-proxies-for-structural-shocks
 situation-b.1-svar-iv-approach
 situation-b.2-lp-iv
 Inference
-monte-carlo-method
+MonteCarlo
 delta-method
 bootstrap
 bootstrap-after-bootstrap

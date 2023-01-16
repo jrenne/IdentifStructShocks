@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Vector Auto-Regressive (VAR) models: the basics | The Identification of Dynamic Structural Shocks</title>
+<title>Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
-<meta name="description" content="1.1 Definition of VARs (and SVARMA) models  Definition 1.1 ((S)VAR model) Let \(y_{t}\) denote a \(n \times1\) vector of random variables. Process \(y_{t}\) follows a \(p^{th}\)-order (S)VAR if,...">
+<meta name="description" content="Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs. ...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Vector Auto-Regressive (VAR) models: the basics | The Identification of Dynamic Structural Shocks">
+<meta property="og:title" content="Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
-<meta property="og:description" content="1.1 Definition of VARs (and SVARMA) models  Definition 1.1 ((S)VAR model) Let \(y_{t}\) denote a \(n \times1\) vector of random variables. Process \(y_{t}\) follows a \(p^{th}\)-order (S)VAR if,...">
+<meta property="og:description" content="Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs. ...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Vector Auto-Regressive (VAR) models: the basics | The Identification of Dynamic Structural Shocks">
-<meta name="twitter:description" content="1.1 Definition of VARs (and SVARMA) models  Definition 1.1 ((S)VAR model) Let \(y_{t}\) denote a \(n \times1\) vector of random variables. Process \(y_{t}\) follows a \(p^{th}\)-order (S)VAR if,...">
+<meta name="twitter:title" content="Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs. ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -66,7 +66,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
-<li><a class="active" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="active" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
 <li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
 <li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
@@ -85,14 +85,15 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="basics" class="section level1" number="1">
 <h1>
-<span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1</span> VARs and IRFs: the basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
 </h1>
+<p>Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs.</p>
 <div id="definition-of-vars-and-svarma-models" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Definition of VARs (and SVARMA) models<a class="anchor" aria-label="anchor" href="#definition-of-vars-and-svarma-models"><i class="fas fa-link"></i></a>
 </h2>
 <div class="definition">
-<p><span id="def:SVAR" class="definition"><strong>Definition 1.1  ((S)VAR model) </strong></span>Let <span class="math inline">\(y_{t}\)</span> denote a <span class="math inline">\(n \times1\)</span> vector of random variables. Process <span class="math inline">\(y_{t}\)</span> follows a <span class="math inline">\(p^{th}\)</span>-order (S)VAR if, for all <span class="math inline">\(t\)</span>, we have
+<p><span id="def:SVAR" class="definition"><strong>Definition 1.1  ((S)VAR model) </strong></span>Let <span class="math inline">\(y_{t}\)</span> denote a <span class="math inline">\(n \times1\)</span> vector of (endogenous) random variables. Process <span class="math inline">\(y_{t}\)</span> follows a <span class="math inline">\(p^{th}\)</span>-order (S)VAR if, for all <span class="math inline">\(t\)</span>, we have
 <span class="math display" id="eq:yVAR">\[\begin{eqnarray}
 \begin{array}{rllll}
 VAR:&amp; y_t &amp;=&amp; c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t,\\
@@ -101,9 +102,8 @@ SVAR:&amp; y_t &amp;=&amp; c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + B \eta_
 \end{eqnarray}\]</span>
 with <span class="math inline">\(\varepsilon_t = B\eta_t\)</span>, where <span class="math inline">\(\{\eta_{t}\}\)</span> is a white noise sequence whose components are mutually and serially independent.</p>
 </div>
-<p>The first line of Eq. <a href="basics.html#eq:yVAR">(1.1)</a> corresponds to the <strong>reduced-form</strong> of the VAR model (<strong>structural form</strong> for the second line).</p>
-<p>While the structural shocks (the components of <span class="math inline">\(\eta_t\)</span>) are mutually uncorrelated, this is not the case of the <em>innovations</em>, that are the components of <span class="math inline">\(\varepsilon_t\)</span>. However, in boths cases, vectors <span class="math inline">\(\eta_t\)</span> and <span class="math inline">\(\varepsilon_t\)</span> are serially correlated (through time).</p>
-<p>As was the case for univariate models, VARs can be extended with MA terms in <span class="math inline">\(\eta_t\)</span>:</p>
+<p>The first line of Eq. <a href="basics.html#eq:yVAR">(1.1)</a> corresponds to the <strong>reduced-form</strong> of the VAR model (<strong>structural form</strong> for the second line). While the <strong>structural shocks</strong> (the components of <span class="math inline">\(\eta_t\)</span>) are mutually uncorrelated, this is not the case of the <strong>innovations</strong>, that are the components of <span class="math inline">\(\varepsilon_t\)</span>. However, in boths cases, vectors <span class="math inline">\(\eta_t\)</span> and <span class="math inline">\(\varepsilon_t\)</span> are serially correlated (through time).</p>
+<p>As is the case for univariate models, VARs can be extended with MA terms in <span class="math inline">\(\eta_t\)</span>, giving rise to VARMA models:</p>
 <div class="definition">
 <p><span id="def:SVARMA" class="definition"><strong>Definition 1.2  ((S)VARMA model) </strong></span>Let <span class="math inline">\(y_{t}\)</span> denote a <span class="math inline">\(n \times1\)</span> vector of random variables. Process <span class="math inline">\(y_{t}\)</span> follows a VARMA model of order (p,q) if, for all <span class="math inline">\(t\)</span>, we have
 <span class="math display" id="eq:yVARMA">\[\begin{eqnarray}
@@ -134,22 +134,23 @@ with <span class="math inline">\(\varepsilon_t = B_0\eta_t\)</span> (and <span c
 <!--        col=c("blue","red")) -->
 <!-- ``` -->
 <p>Formally, an IRF is a difference in conditional expectations:
-<span class="math display">\[
-\boxed{\Psi_{i,j,h} = \mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) - \mathbb{E}(y_{i,t+h})}
-\]</span>
+<span class="math display" id="eq:boxIRFs">\[\begin{equation}
+\boxed{\Psi_{i,j,h} = \mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) - \mathbb{E}(y_{i,t+h})}\tag{1.3}
+\end{equation}\]</span>
 (effect on <span class="math inline">\(y_{i,t+h}\)</span> of a one-unit shock on <span class="math inline">\(\eta_{j,t}\)</span>).</p>
-<p>If the dynamics of process <span class="math inline">\(y_t\)</span> can be described as a VARMA model, and if <span class="math inline">\(y_t\)</span> is covariance stationary (see Def. <a href="append.html#def:covstat">9.1</a>), then <span class="math inline">\(y_t\)</span> admits the following infinite MA representation (MA(<span class="math inline">\(\infty\)</span>)):<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is also the Wold decomposition of process &lt;span class="math inline"&gt;\(\{y_t\}\)&lt;/span&gt;.&lt;/p&gt;'><sup>1</sup></a>
+<p>IRFs closely relate to the Wold decomposition of <span class="math inline">\(y_t\)</span>. Indeed, if the dynamics of process <span class="math inline">\(y_t\)</span> can be described as a VARMA model, and if <span class="math inline">\(y_t\)</span> is covariance stationary (see Def. <a href="append.html#def:covstat">9.1</a>), then <span class="math inline">\(y_t\)</span> admits the following infinite MA representation (or Wold decomposition):
 <span class="math display" id="eq:InfMA">\[\begin{equation}
-y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.\tag{1.3}
-\end{equation}\]</span></p>
-<p>Estimating IRFs amounts to estimating the <span class="math inline">\(\Psi_{h}\)</span>’s. In general, there exist three main approaches for that:</p>
+y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.\tag{1.4}
+\end{equation}\]</span>
+With these notations, we get <span class="math inline">\(\mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) = \mu_i + \Psi_{i,j,h}\)</span>, where <span class="math inline">\(\Psi_{i,j,h}\)</span> is the component <span class="math inline">\((i,j)\)</span> of matrix <span class="math inline">\(\Psi_h\)</span> and <span class="math inline">\(\mu_i\)</span> is the <span class="math inline">\(i^{th}\)</span> entry of vector <span class="math inline">\(\mu\)</span>. Since we also have <span class="math inline">\(\mathbb{E}(y_{i,t+h})=\mu_i\)</span>, we obtain Eq. <a href="basics.html#eq:boxIRFs">(1.3)</a>.</p>
+<p>Hence, estimating IRFs amounts to estimating the <span class="math inline">\(\Psi_{h}\)</span>’s. In general, there exist three main approaches for that:</p>
 <ul>
-<li>Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at the first order (linearization). The solution takes the form of Eq. <a href="basics.html#eq:InfMA">(1.3)</a>.</li>
+<li>Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at the first order (linearization). The solution takes the form of Eq. <a href="basics.html#eq:InfMA">(1.4)</a>.</li>
 <li>Directly estimate the <span class="math inline">\(\Psi_{h}\)</span> based on <strong>projection approaches</strong> (see Section <a href="Projections.html#Projections">6</a>).</li>
-<li>Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. <strong>VAR(MA) models</strong> (see Section <a href="basics.html#estimVAR">1.4</a>). Once a (Structural) VARMA representation is obtained, Eq. <a href="basics.html#eq:InfMA">(1.3)</a> is easily deduced using the following proposition:</li>
+<li>Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. <strong>VAR(MA) models</strong> (see Section <a href="basics.html#estimVAR">1.4</a>). Once a (Structural) VARMA representation is obtained, Eq. <a href="basics.html#eq:InfMA">(1.4)</a> is easily deduced using the following proposition:</li>
 </ul>
 <div class="proposition">
-<p><span id="prp:computPsi" class="proposition"><strong>Proposition 1.1  (IRF of an ARMA(p,q) process) </strong></span>If <span class="math inline">\(y_t\)</span> follows the VARMA model described in Def. (def:SVARMA), then the matrices <span class="math inline">\(\Psi_h\)</span> appearing in Eq. <a href="basics.html#eq:InfMA">(1.3)</a> can be computed recursively as follows:</p>
+<p><span id="prp:computPsi" class="proposition"><strong>Proposition 1.1  (IRF of an ARMA(p,q) process) </strong></span>If <span class="math inline">\(y_t\)</span> follows the VARMA model described in Def. <a href="basics.html#def:SVARMA">1.2</a>, then the matrices <span class="math inline">\(\Psi_h\)</span> appearing in Eq. <a href="basics.html#eq:InfMA">(1.4)</a> can be computed recursively as follows:</p>
 <ol style="list-style-type: decimal">
 <li>Set <span class="math inline">\(\Psi_{-1}=\dots=\Psi_{-p}=0\)</span>.</li>
 <li>For <span class="math inline">\(h \ge 0\)</span>, (recursively) apply:
@@ -170,7 +171,7 @@ y_t &amp;=&amp; \Phi_1 {\color{blue}y_{t-1}} + \Phi_2 y_{t-2} + B \eta_t  \\
 &amp;=&amp; B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) \color{red}{(\Phi_1 y_{t-3} + \Phi_2 y_{t-4} + B \eta_{t-2})} + \Phi_1\Phi_2 y_{t-3} \\
 &amp;=&amp; \underbrace{B}_{=\Psi_0} \eta_t + \underbrace{\Phi_1 B}_{=\Psi_1} \eta_{t-1} + \underbrace{(\Phi_2 + \Phi_1^2)B}_{=\Psi_2} \eta_{t-2} + f(y_{t-3},y_{t-4}).
 \end{eqnarray*}\]</span></p>
-<p>In particular, we have <span class="math inline">\(B = \Psi_0\)</span>. Matrix <span class="math inline">\(B\)</span> indeed captures the contemporaneous impact of <span class="math inline">\(\eta_t\)</span> on <span class="math inline">\(y_t\)</span>. That is why matrix <span class="math inline">\(B\)</span> is sometimes called <em>impulse matrix</em>.</p>
+<p>In particular, we have <span class="math inline">\(B = \Psi_0\)</span>. Matrix <span class="math inline">\(B\)</span> indeed captures the contemporaneous impact of <span class="math inline">\(\eta_t\)</span> on <span class="math inline">\(y_t\)</span>. That is why matrix <span class="math inline">\(B\)</span> is sometimes called <strong>impulse matrix</strong>.</p>
 <div class="example">
 <p><span id="exm:IRFVARMA" class="example"><strong>Example 1.1  (IRFs of an SVARMA model) </strong></span>Consider the following VARMA(1,1) model:
 <span class="math display" id="eq:VARMA111">\[\begin{eqnarray}
@@ -189,7 +190,7 @@ y_{t-1} +
 \end{array}\right]}_{\Theta_1} \underbrace{\left[\begin{array}{cc}
 1 &amp; 2 \\
 -1 &amp; 1
-\end{array}\right]}_{B}\eta_{t-1}.\tag{1.4}
+\end{array}\right]}_{B}\eta_{t-1}.\tag{1.5}
 \end{eqnarray}\]</span></p>
 <p>We can use function <code>simul.VARMA</code> of package <code>IdSS</code> to produce IRFs (using <code>indic.IRF=1</code> in the list of arguments):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -237,8 +238,8 @@ y_{t-1} +
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>,col<span class="op">=</span><span class="st">"grey"</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:simVAR"></span>
-<img src="IdentifStructShocks_files/figure-html/simVAR-1.png" alt="Impulse response functions" width="95%"><p class="caption">
-Figure 1.1: Impulse response functions
+<img src="IdentifStructShocks_files/figure-html/simVAR-1.png" alt="Impulse response functions (SVARMA(1,1) specified above)." width="95%"><p class="caption">
+Figure 1.1: Impulse response functions (SVARMA(1,1) specified above).
 </p>
 </div>
 </div>
@@ -254,20 +255,20 @@ Figure 1.1: Impulse response functions
 <h2>
 <span class="header-section-number">1.3</span> Covariance-stationary VARMA models<a class="anchor" aria-label="anchor" href="#covariance-stationary-varma-models"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let’s come back to the infinite MA case (Eq. <a href="basics.html#eq:InfMA">(1.3)</a>):
+<p>Let’s come back to the infinite MA case (Eq. <a href="basics.html#eq:InfMA">(1.4)</a>):
 <span class="math display">\[
 y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.
 \]</span>
 For <span class="math inline">\(y_t\)</span> to be covariance-stationary (and ergodic for the mean), it has to be the case that
 <span class="math display" id="eq:condiInfiniteMA">\[\begin{equation}
-\sum_{i=0}^\infty \|\Psi_i\| &lt; \infty,\tag{1.5}
+\sum_{i=0}^\infty \|\Psi_i\| &lt; \infty,\tag{1.6}
 \end{equation}\]</span>
 where <span class="math inline">\(\|A\|\)</span> denotes a norm of the matrix <span class="math inline">\(A\)</span> (e.g. <span class="math inline">\(\|A\|=\sqrt{tr(AA')}\)</span>). This notably implies that if <span class="math inline">\(y_t\)</span> is stationary (and ergodic for the mean), then <span class="math inline">\(\|\Psi_h\|\rightarrow 0\)</span> when <span class="math inline">\(h\)</span> gets large.</p>
 <p>What should be satisfied by <span class="math inline">\(\Phi_k\)</span>’s and <span class="math inline">\(\Theta_k\)</span>’s for a VARMA-based process (Eq. <a href="basics.html#eq:yVARMA">(1.2)</a>) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
 <span class="math display" id="eq:VARMA2">\[\begin{eqnarray}
-y_t &amp;=&amp; c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  \tag{1.6}\\
+y_t &amp;=&amp; c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  \tag{1.7}\\
 &amp;&amp;\underbrace{B \eta_t+ \Theta_1 B \eta_{t-1}+ \dots+ \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
-&amp;\Leftrightarrow&amp; \underbrace{(I - \Phi_1 L - \dots - \Phi_p L^p)}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
+&amp;\Leftrightarrow&amp; \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
 \end{eqnarray}\]</span></p>
 <p>Process <span class="math inline">\(y_t\)</span> is stationary iff the roots of <span class="math inline">\(\det(\Phi(z))=0\)</span> are strictly outside the unit circle or, equivalently, iff the eigenvalues of
 <span class="math display" id="eq:matrixPHI">\[\begin{equation}
@@ -275,20 +276,20 @@ y_t &amp;=&amp; c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{
 \Phi_{1} &amp; \Phi_{2} &amp; \cdots &amp; \Phi_{p}\\
 I &amp; 0 &amp; \cdots &amp; 0\\
 0 &amp; \ddots &amp; 0 &amp; 0\\
-0 &amp; 0 &amp; I &amp; 0\end{array}\right]\tag{1.7}
+0 &amp; 0 &amp; I &amp; 0\end{array}\right]\tag{1.8}
 \end{equation}\]</span>
 lie strictly within the unit circle. Hence, as is the case for univariate processes, the covariance-stationarity of a VARMA model depends only on the specification of its AR part.</p>
 <p>Let’s derive the first two unconditional moments of a (covariance-stationary) VARMA process.</p>
-<p>Based on Eq. <a href="basics.html#eq:VARMA2">(1.6)</a>, we have <span class="math inline">\(\mathbb{E}(\Phi(L)y_t)=c\)</span>, which gives <span class="math inline">\(\Phi(1)\mathbb{E}(y_t)=c\)</span>, or::
+<p>Eq. <a href="basics.html#eq:VARMA2">(1.7)</a> gives <span class="math inline">\(\mathbb{E}(\Phi(L)y_t)=c\)</span>, therefore <span class="math inline">\(\Phi(1)\mathbb{E}(y_t)=c\)</span>, or
 <span class="math display">\[
 \mathbb{E}(y_t) = (I - \Phi_1 - \dots - \Phi_p)^{-1}c.
 \]</span>
-The autocovariances of <span class="math inline">\(y_t\)</span> can be deduced from the infinite MA representation (Eq. <a href="basics.html#eq:InfMA">(1.3)</a>). We have:
+The autocovariances of <span class="math inline">\(y_t\)</span> can be deduced from the infinite MA representation (Eq. <a href="basics.html#eq:InfMA">(1.4)</a>). We have:
 <span class="math display">\[
 \gamma_j \equiv \mathbb{C}ov(y_t,y_{t-j}) = \sum_{i=j}^\infty \Psi_i \Psi_{i-j}'.
 \]</span>
-(Note that this infinite sum exists as soon as Eq. <a href="basics.html#eq:condiInfiniteMA">(1.5)</a> is satisfied.)</p>
-<p>Conditional means and autocovariances can also be deduced from Eq. <a href="basics.html#eq:InfMA">(1.3)</a>. For <span class="math inline">\(0 \le h\)</span> and <span class="math inline">\(0 \le h_1 \le h_2\)</span>:
+(This infinite sum exists as soon as Eq. <a href="basics.html#eq:condiInfiniteMA">(1.6)</a> is satisfied.)</p>
+<p>Conditional means and autocovariances can also be deduced from Eq. <a href="basics.html#eq:InfMA">(1.4)</a>. For <span class="math inline">\(0 \le h\)</span> and <span class="math inline">\(0 \le h_1 \le h_2\)</span>:
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}_t(y_{t+h}) &amp;=&amp; \mu + \sum_{k=0}^\infty \Psi_{k+h} \eta_{t-k} \\
 \mathbb{C}ov_t(y_{t+1+h_1},y_{t+1+h_2}) &amp;=&amp; \sum_{k=0}^{h_1} \Psi_{k}\Psi_{k+h_2-h_1}'.
@@ -301,10 +302,9 @@ Because the <span class="math inline">\(\eta_t\)</span> are mutually and seriall
 <span class="math display">\[
 \mathbb{V}ar(\Psi_k \eta_{t-k}) = \mathbb{V}ar\left(\sum_{i=1}^n \psi_{k,i} \eta_{i,t-k}\right)  = \sum_{i=1}^n \psi_{k,i}\psi_{k,i}',
 \]</span>
-where <span class="math inline">\(\psi_{k,i}\)</span> denotes the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\Psi_k\)</span>.</p>
-<p>This suggests the following decomposition of the variance of the forecast error (called <strong>variance decomposition</strong>):
+where <span class="math inline">\(\psi_{k,i}\)</span> denotes the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\Psi_k\)</span>. This suggests the following decomposition of the variance of the forecast error (called <strong>variance decomposition</strong>):
 <span class="math display">\[
-\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'}_{\mbox{Contribution of $\eta_{i,t}$}}.
+\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'.}_{\mbox{Contribution of $\eta_{i,t}$}}
 \]</span></p>
 <p>Let us now turn to the estimation of VAR models. Note that if there is an MA component (i.e., if we consider a VARMA model), then OLS regressions yield biased estimates (even for asymptotically large samples). Assume for instance that <span class="math inline">\(y_t\)</span> follows a VARMA(1,1) model:
 <span class="math display">\[
@@ -316,7 +316,7 @@ where <span class="math inline">\(\phi_i\)</span> is the <span class="math inlin
 <h2>
 <span class="header-section-number">1.4</span> VAR estimation<a class="anchor" aria-label="anchor" href="#estimVAR"><i class="fas fa-link"></i></a>
 </h2>
-<p>This section discusses the estimation of VAR models. (The estimation of SVARMA models is more challenging, see, e.g., <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2020" role="doc-biblioref">2020</a>)</span>.) Eq. <a href="basics.html#eq:yVAR">(1.1)</a> can be written:
+<p>This section discusses the estimation of VAR models. Eq. <a href="basics.html#eq:yVAR">(1.1)</a> can be written:
 <span class="math display">\[
 y_{t}=c+\Phi(L)y_{t-1}+\varepsilon_{t},
 \]</span>
@@ -327,22 +327,22 @@ y_{t}\mid y_{t-1},y_{t-2},\ldots,y_{-p+1}\sim \mathcal{N}(c+\Phi_{1}y_{t-1}+\ldo
 \]</span></p>
 <p>Using <span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994" role="doc-biblioref">1994</a>)</span>’s notations, denote with <span class="math inline">\(\Pi\)</span> the matrix <span class="math inline">\(\left[\begin{array}{ccccc} c &amp; \Phi_{1} &amp; \Phi_{2} &amp; \ldots &amp; \Phi_{p}\end{array}\right]'\)</span> and with <span class="math inline">\(x_{t}\)</span> the vector <span class="math inline">\(\left[\begin{array}{ccccc} 1 &amp; y'_{t-1} &amp; y'_{t-2} &amp; \ldots &amp; y'_{t-p}\end{array}\right]'\)</span>, we have:
 <span class="math display" id="eq:PIVAR">\[\begin{equation}
-y_{t}= \Pi'x_{t} + \varepsilon_{t}. \tag{1.8}
+y_{t}= \Pi'x_{t} + \varepsilon_{t}. \tag{1.9}
 \end{equation}\]</span>
 The previous representation is convenient to discuss the estimation of the VAR model, as parameters are gathered in two matrices only: <span class="math inline">\(\Pi\)</span> and <span class="math inline">\(\Omega\)</span>.</p>
 <p>Let us start with the case where the shocks are Gaussian.</p>
 <div class="proposition">
-<p><span id="prp:estimVARGaussian" class="proposition"><strong>Proposition 1.2  (MLE of a Gaussian VAR) </strong></span>If <span class="math inline">\(y_t\)</span> follows a VAR(p) (see Definition <a href="basics.html#def:SVAR">1.1</a>), and if <span class="math inline">\(\varepsilon_t \sim \,i.i.d.\,\mathcal{N}(0,\Omega)\)</span>, then the ML estimate of <span class="math inline">\(\Pi\)</span>, denoted by <span class="math inline">\(\hat{\Pi}\)</span> (see Eq. <a href="basics.html#eq:PIVAR">(1.8)</a>), is given by
+<p><span id="prp:estimVARGaussian" class="proposition"><strong>Proposition 1.2  (MLE of a Gaussian VAR) </strong></span>If <span class="math inline">\(y_t\)</span> follows a VAR(p) (see Definition <a href="basics.html#def:SVAR">1.1</a>), and if <span class="math inline">\(\varepsilon_t \sim \,i.i.d.\,\mathcal{N}(0,\Omega)\)</span>, then the ML estimate of <span class="math inline">\(\Pi\)</span>, denoted by <span class="math inline">\(\hat{\Pi}\)</span> (see Eq. <a href="basics.html#eq:PIVAR">(1.9)</a>), is given by
 <span class="math display" id="eq:Pi">\[\begin{equation}
-\hat{\Pi}=\left[\sum_{t=1}^{T}x_{t}x'_{t}\right]^{-1}\left[\sum_{t=1}^{T}y_{t}'x_{t}\right]= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y},\tag{1.9}
+\hat{\Pi}=\left[\sum_{t=1}^{T}x_{t}x'_{t}\right]^{-1}\left[\sum_{t=1}^{T}y_{t}'x_{t}\right]= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y},\tag{1.10}
 \end{equation}\]</span>
 where <span class="math inline">\(\mathbf{X}\)</span> is the <span class="math inline">\(T \times (np)\)</span> matrix whose <span class="math inline">\(t^{th}\)</span> row is <span class="math inline">\(x_t\)</span> and where <span class="math inline">\(\mathbf{y}\)</span> is the <span class="math inline">\(T \times n\)</span> matrix whose <span class="math inline">\(t^{th}\)</span> row is <span class="math inline">\(y_{t}'\)</span>.</p>
 <p>That is, the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\hat{\Pi}\)</span> (<span class="math inline">\(b_i\)</span>, say) is the OLS estimate of <span class="math inline">\(\beta_i\)</span>, where:
 <span class="math display" id="eq:betayx">\[\begin{equation}
-y_{i,t} = \beta_i'x_t + \varepsilon_{i,t},\tag{1.10}
+y_{i,t} = \beta_i'x_t + \varepsilon_{i,t},\tag{1.11}
 \end{equation}\]</span>
 (i.e., <span class="math inline">\(\beta_i' = [c_i,\phi_{i,1}',\dots,\phi_{i,p}']'\)</span>).</p>
-<p>The ML estimate of <span class="math inline">\(\Omega\)</span>, denoted by <span class="math inline">\(\hat{\Omega}\)</span>, coincides with the sample covariance matrix of the <span class="math inline">\(n\)</span> series of the OLS residuals in Eq. <a href="basics.html#eq:betayx">(1.10)</a>, i.e.:
+<p>The ML estimate of <span class="math inline">\(\Omega\)</span>, denoted by <span class="math inline">\(\hat{\Omega}\)</span>, coincides with the sample covariance matrix of the <span class="math inline">\(n\)</span> series of the OLS residuals in Eq. <a href="basics.html#eq:betayx">(1.11)</a>, i.e.:
 <span class="math display">\[\begin{equation}
 \hat{\Omega} = \frac{1}{T} \sum_{i=1}^T \hat{\varepsilon}_t\hat{\varepsilon}_t',\quad\mbox{with } \hat{\varepsilon}_t= y_t - \hat{\Pi}'x_t.
 \end{equation}\]</span></p>
@@ -351,10 +351,9 @@ y_{i,t} = \beta_i'x_t + \varepsilon_{i,t},\tag{1.10}
 <div class="proof">
 <p><span id="unlabeled-div-2" class="proof"><em>Proof</em>. </span>See Appendix <a href="append.html#AppendixProof">9.2</a>.</p>
 </div>
-<p>As stated by Proposition <a href="basics.html#prp:OLSVAR">1.3</a>, when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since <span class="math inline">\(x_t\)</span> correlates to <span class="math inline">\(\varepsilon_s\)</span> for <span class="math inline">\(s&lt;t\)</span>, the OLS estimator <span class="math inline">\(\mathbf{b}_i\)</span> of <span class="math inline">\(\boldsymbol\beta_i\)</span> is biased in small sample. (That is also the case for the ML estimator.)</p>
-<p>Indeed, denoting by <span class="math inline">\(\boldsymbol\varepsilon_i\)</span> the <span class="math inline">\(T \times 1\)</span> vector of <span class="math inline">\(\varepsilon_{i,t}\)</span>’s, and using the notations of <span class="math inline">\(b_i\)</span> and <span class="math inline">\(\beta_i\)</span> introduced in Proposition <a href="basics.html#prp:estimVARGaussian">1.2</a>, we have:
+<p>As stated by Proposition <a href="basics.html#prp:OLSVAR">1.3</a>, when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since <span class="math inline">\(x_t\)</span> correlates to <span class="math inline">\(\varepsilon_s\)</span> for <span class="math inline">\(s&lt;t\)</span>, the OLS estimator <span class="math inline">\(\mathbf{b}_i\)</span> of <span class="math inline">\(\boldsymbol\beta_i\)</span> is biased in small sample. (That is also the case for the ML estimator.) Indeed, denoting by <span class="math inline">\(\boldsymbol\varepsilon_i\)</span> the <span class="math inline">\(T \times 1\)</span> vector of <span class="math inline">\(\varepsilon_{i,t}\)</span>’s, and using the notations of <span class="math inline">\(b_i\)</span> and <span class="math inline">\(\beta_i\)</span> introduced in Proposition <a href="basics.html#prp:estimVARGaussian">1.2</a>, we have:
 <span class="math display" id="eq:olsar1">\[\begin{equation}
-\mathbf{b}_i = \beta_i + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\boldsymbol\varepsilon_i.\tag{1.11}
+\mathbf{b}_i = \beta_i + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\boldsymbol\varepsilon_i.\tag{1.12}
 \end{equation}\]</span>
 We have non-zero correlation between <span class="math inline">\(x_t\)</span> and <span class="math inline">\(\varepsilon_{i,s}\)</span> for <span class="math inline">\(s&lt;t\)</span> and, therefore, <span class="math inline">\(\mathbb{E}[(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\boldsymbol\varepsilon_i] \ne 0\)</span>.</p>
 <p>However, when <span class="math inline">\(y_t\)</span> is covariance stationary, then <span class="math inline">\(\frac{1}{n}\mathbf{X}'\mathbf{X}\)</span> converges to a positive definite matrix <span class="math inline">\(\mathbf{Q}\)</span>, and <span class="math inline">\(\frac{1}{n}X'\boldsymbol\varepsilon_i\)</span> converges to 0. Hence <span class="math inline">\(\mathbf{b}_i \overset{p}{\rightarrow} \beta_i\)</span>. More precisely:</p>
@@ -374,7 +373,7 @@ where <span class="math inline">\(\sigma_i = \mathbb{V}ar(\varepsilon_{i,t})\)</
 \vdots &amp;\vdots &amp;\vdots &amp;\dots &amp;\vdots \\
 \mu &amp; \gamma_{p-1} + \mu\mu' &amp; \gamma_{p-2} + \mu\mu' &amp; \dots &amp; \gamma_{0} + \mu\mu'
 \end{array}
-\right].\tag{1.12}
+\right].\tag{1.13}
 \end{equation}\]</span></p>
 </div>
 <div class="proof">
@@ -396,14 +395,14 @@ vec(\hat\Omega - \Omega)
 \Omega \otimes \mathbf{Q}^{-1} &amp; 0\\
 0 &amp; \Sigma_{22}
 \end{array}
-\right]\right),\tag{1.13}
+\right]\right),\tag{1.14}
 \end{equation}\]</span>
 where the component of <span class="math inline">\(\Sigma_{22}\)</span> corresponding to the covariance between <span class="math inline">\(\hat\sigma_{i,j}\)</span> and <span class="math inline">\(\hat\sigma_{k,l}\)</span> (for <span class="math inline">\(i,j,l,m \in \{1,\dots,n\}^4\)</span>) is equal to <span class="math inline">\(\sigma_{i,l}\sigma_{j,m}+\sigma_{i,m}\sigma_{j,l}\)</span>.</p>
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>See <span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994" role="doc-biblioref">1994</a>)</span>, Appendix of Chapter 11.</p>
 </div>
-<p>Naturally, in practice, <span class="math inline">\(\Omega\)</span> is replaced with <span class="math inline">\(\hat{\Omega}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> is replaced with <span class="math inline">\(\hat{\mathbf{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'\)</span> and <span class="math inline">\(\Sigma\)</span> with the matrix whose components are of the form <span class="math inline">\(\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}\)</span>, where the <span class="math inline">\(\hat\sigma_{i,l}\)</span>’s are the components of <span class="math inline">\(\hat\Omega\)</span>.</p>
+<p>In practice, to use the previous proposition (for instance to implement Monte-Carlo simulations, see Section <a href="Inference.html#MonteCarlo">7.1</a>), <span class="math inline">\(\Omega\)</span> is replaced with <span class="math inline">\(\hat{\Omega}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> is replaced with <span class="math inline">\(\hat{\mathbf{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'\)</span> and <span class="math inline">\(\Sigma\)</span> with the matrix whose components are of the form <span class="math inline">\(\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}\)</span>, where the <span class="math inline">\(\hat\sigma_{i,l}\)</span>’s are the components of <span class="math inline">\(\hat\Omega\)</span>.</p>
 <p>The simplicity of the VAR framework and the tractability of its MLE open the way to convenient econometric testing. Let’s illustrate this with the likelihood ratio test (see Def. <a href="append.html#def:LR">9.2</a>). The maximum value achieved by the MLE is
 <span class="math display">\[
 \log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega}) = -\frac{Tn}{2}\log(2\pi)+\frac{T}{2}\log\left|\hat{\Omega}^{-1}\right| -\frac{1}{2}\sum_{t=1}^{T}\left[\hat{\varepsilon}_{t}'\hat{\Omega}^{-1}\hat{\varepsilon}_{t}\right].
@@ -415,22 +414,40 @@ The last term is:
 \end{eqnarray*}\]</span>
 Therefore, the optimized log-likelihood is simply obtained by:
 <span class="math display" id="eq:optimzedLogL">\[\begin{equation}
-\log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega})=-(Tn/2)\log(2\pi)+(T/2)\log\left|\hat{\Omega}^{-1}\right|-Tn/2.\tag{1.14}
+\log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega})=-(Tn/2)\log(2\pi)+(T/2)\log\left|\hat{\Omega}^{-1}\right|-Tn/2.\tag{1.15}
 \end{equation}\]</span></p>
-<p>Assume that we want to test the null hypothesis that a set of variables follows a VAR(<span class="math inline">\(p_{0}\)</span>) against the alternative
-specification of <span class="math inline">\(p_{1}\)</span> (<span class="math inline">\(&gt;p_{0}\)</span>).</p>
-<p>Let us denote by <span class="math inline">\(\hat{L}_{0}\)</span> and <span class="math inline">\(\hat{L}_{1}\)</span> the maximum log-likelihoods obtained with <span class="math inline">\(p_{0}\)</span> and <span class="math inline">\(p_{1}\)</span> lags, respectively.</p>
-<p>Under the null hypothesis (<span class="math inline">\(H_0\)</span>: <span class="math inline">\(p=p_0\)</span>), we have:
+<p>Assume that we want to test the null hypothesis that a set of variables follows a VAR(<span class="math inline">\(p_{0}\)</span>) against the alternative specification of <span class="math inline">\(p_{1}\)</span> (<span class="math inline">\(&gt;p_{0}\)</span>). Let us denote by <span class="math inline">\(\hat{L}_{0}\)</span> and <span class="math inline">\(\hat{L}_{1}\)</span> the maximum log-likelihoods obtained with <span class="math inline">\(p_{0}\)</span> and <span class="math inline">\(p_{1}\)</span> lags, respectively. Under the null hypothesis (<span class="math inline">\(H_0\)</span>: <span class="math inline">\(p=p_0\)</span>), we have:
 <span class="math display">\[\begin{eqnarray*}
 2\left(\hat{L}_{1}-\hat{L}_{0}\right)&amp;=&amp;T\left(\log\left|\hat{\Omega}_{1}^{-1}\right|-\log\left|\hat{\Omega}_{0}^{-1}\right|\right)  \sim \chi^2(n^{2}(p_{1}-p_{0})).
 \end{eqnarray*}\]</span></p>
 <p>What precedes can be used to help determine the appropriate number of lags to use in the specification. In a VAR, using too many lags consumes numerous degrees of freedom: with <span class="math inline">\(p\)</span> lags, each of the <span class="math inline">\(n\)</span> equations in the VAR contains <span class="math inline">\(n\times p\)</span> coefficients plus the intercept term. Adding lags improve in-sample fit, but is likely to result in over-parameterization and affect the <strong>out-of-sample</strong> prediction performance.</p>
-<p>To select appropriate lag length, <strong>selection criteria</strong> can be used. In the context of VAR models, using Eq. <a href="basics.html#eq:optimzedLogL">(1.14)</a>, we have for instance:
+<p>To select appropriate lag length, <strong>selection criteria</strong> are often used. In the context of VAR models, using Eq. <a href="basics.html#eq:optimzedLogL">(1.15)</a> (Gaussian case), we have for instance:
 <span class="math display">\[\begin{eqnarray*}
 AIC &amp; = &amp; cst + \log\left|\hat{\Omega}\right|+\frac{2}{T}N\\
 BIC &amp; = &amp; cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,
 \end{eqnarray*}\]</span>
 where <span class="math inline">\(N=p \times n^{2}\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">data</span>,lag.max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      3      3      2      3 
+## 
+## $criteria
+##                 1          2          3          4          5           6
+## AIC(n) -0.3394120 -0.4835525 -0.5328327 -0.5210835 -0.5141079 -0.49112812
+## HQ(n)  -0.3017869 -0.4208439 -0.4450407 -0.4082080 -0.3761491 -0.32808581
+## SC(n)  -0.2462608 -0.3283005 -0.3154798 -0.2416298 -0.1725534 -0.08747275
+## FPE(n)  0.7121914  0.6165990  0.5869659  0.5939325  0.5981364  0.61210908</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">estimated.var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">data</span>,p<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#print(estimated.var$varresult)</span></span>
+<span><span class="va">Phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">estimated.var</span><span class="op">)</span></span>
+<span><span class="va">PHI</span> <span class="op">&lt;-</span> <span class="fu">make.PHI</span><span class="op">(</span><span class="va">Phi</span><span class="op">)</span> <span class="co"># autoregressive matrix of companion form.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">PHI</span><span class="op">)</span><span class="op">$</span><span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="co"># check stationarity</span></span></code></pre></div>
+<pre><code>## [1] 0.9114892 0.9114892 0.6319554 0.4759403 0.4759403 0.3246995</code></pre>
 </div>
 <div id="BlockGranger" class="section level2" number="1.5">
 <h2>
@@ -529,12 +546,11 @@ bivariate VAR(<span class="math inline">\(p\)</span>) process:
 y_{1,t} &amp; = &amp; c_1+\Sigma_{i=1}^{p}\Phi_i^{(11)}y_{1,t-i}+\Sigma_{i=1}^{p}\Phi_i^{(12)}y_{2,t-i}+\varepsilon_{1,t}\\
 y_{2,t} &amp; = &amp; c_2+\Sigma_{i=1}^{p}\Phi_i^{(21)}y_{1,t-i}+\Sigma_{i=1}^{p}\Phi_i^{(22)}y_{2,t-i}+\varepsilon_{2,t},
 \end{eqnarray*}\]</span>
-where <span class="math inline">\(\Phi_k^{(ij)}\)</span> denotes the element <span class="math inline">\((i,j)\)</span> of <span class="math inline">\(\Phi_k\)</span>.</p>
-<p>Then, <span class="math inline">\(y_{1,t}\)</span> is said not to Granger-cause <span class="math inline">\(y_{2,t}\)</span> if
+where <span class="math inline">\(\Phi_k^{(ij)}\)</span> denotes the element <span class="math inline">\((i,j)\)</span> of <span class="math inline">\(\Phi_k\)</span>. Then, <span class="math inline">\(y_{1,t}\)</span> is said not to Granger-cause <span class="math inline">\(y_{2,t}\)</span> if
 <span class="math display">\[
 \Phi_1^{(21)}=\Phi_2^{(21)}=\ldots=\Phi_p^{(21)}=0.
 \]</span>
-Therefore the hypothesis testing is
+The null and alternative hypotheses therefore are:
 <span class="math display">\[
 \begin{cases}
 H_{0}: &amp; \Phi_1^{(21)}=\Phi_2^{(21)}=\ldots=\Phi_p^{(21)}=0\\
@@ -544,7 +560,28 @@ Loosely speaking, we reject <span class="math inline">\(H_{0}\)</span> if some o
 <span class="math display">\[
 F=\frac{(RSS-USS)/p}{USS/(T-2p-1)},
 \]</span>
-where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under <span class="math inline">\(H_{0}\)</span>, the <span class="math inline">\(F\)</span>-statistic is distributed as <span class="math inline">\(\mathcal{F}(p,T-2p-1)\)</span>. (We have <span class="math inline">\(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\)</span>.)</p>
+where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under <span class="math inline">\(H_{0}\)</span>, the <span class="math inline">\(F\)</span>-statistic is distributed as <span class="math inline">\(\mathcal{F}(p,T-2p-1)\)</span> (See Table <a href="append.html#tab:Fstat">9.4</a>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;We have &lt;span class="math inline"&gt;\(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\)&lt;/span&gt;.&lt;/p&gt;'><sup>1</sup></a></p>
+<p>According to the following lines of code, the output gap Granger-causes inflation, but the reverse is not true:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span>,order<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Granger causality test
+## 
+## Model 1: infl ~ Lags(infl, 1:3) + Lags(y.gdp.gap, 1:3)
+## Model 2: infl ~ Lags(infl, 1:3)
+##   Res.Df Df      F   Pr(&gt;F)   
+## 1    214                      
+## 2    217 -3 3.9761 0.008745 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"infl"</span>,<span class="st">"y.gdp.gap"</span><span class="op">)</span><span class="op">]</span>,order<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Granger causality test
+## 
+## Model 1: y.gdp.gap ~ Lags(y.gdp.gap, 1:3) + Lags(infl, 1:3)
+## Model 2: y.gdp.gap ~ Lags(y.gdp.gap, 1:3)
+##   Res.Df Df      F Pr(&gt;F)
+## 1    214                 
+## 2    217 -3 1.5451 0.2038</code></pre>
 
 </div>
 </div>
@@ -556,7 +593,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basics"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="nav-link" href="#basics"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="nav-link" href="#definition-of-vars-and-svarma-models"><span class="header-section-number">1.1</span> Definition of VARs (and SVARMA) models</a></li>
 <li><a class="nav-link" href="#IRFSVARMA"><span class="header-section-number">1.2</span> IRFs in SVARMA</a></li>
 <li><a class="nav-link" href="#covariance-stationary-varma-models"><span class="header-section-number">1.3</span> Covariance-stationary VARMA models</a></li>
@@ -583,7 +620,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

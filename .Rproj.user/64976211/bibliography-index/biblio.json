@@ -1,6 +1,32 @@
 {
     "sources": [
         {
+            "URL": "https://ideas.repec.org/p/cpr/ceprdp/16430.html",
+            "author": [
+                {
+                    "family": "Cesa-Bianchi",
+                    "given": "Ambrogio"
+                },
+                {
+                    "family": "Ferrero",
+                    "given": "Andrea"
+                }
+            ],
+            "genre": "CEPR Discussion Papers",
+            "id": "CesaBianchi_Ferrero_2021",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "number": "16430",
+            "publisher": "C.E.P.R. Discussion Papers",
+            "title": "The Transmission of Keynesian Supply Shocks",
+            "type": "report"
+        },
+        {
             "URL": "https://ideas.repec.org/p/ecb/ecbwps/20210.html",
             "author": [
                 {

@@ -23,7 +23,21 @@ css: "my-style.css"
 
 <!-- # Before starting {#intro .unlisted .unnumbered} -->
 
-The identification and estimation of dynamic responses to structural shocks is one of the principal goals of macroeconometrics. These responses correspond to the effect, over time, of an exogenous intervention that propagates through the economy, as modelled by a system of simultaneous equations.
+The identification and estimation of dynamic responses to structural shocks is one of the principal goals of macroeconometrics. These responses correspond to the effect, over time, of an exogenous intervention that propagates through the economy, as modeled by a system of simultaneous equations.
+
+<!-- As illustrated by Figure \@ref(fig:NgramIRF), that makes use of Google Ngram data, there is a close link between the development of "macroeconomic analysis" and the concept ofimpulse response functions. -->
+
+<!-- ```{r NgramIRF, echo=FALSE,fig.cap="Source: Google Ngram. Fraction of books containing the blue and red keywords."} -->
+<!-- library(ngramr) -->
+<!-- keyw <- c("impulse response function","macroeconomic analysis") -->
+<!-- res1 <- ngram(keyw[1],year_start = 1900);res2 <- ngram(keyw[2],year_start = 1900) -->
+<!-- plot(res1$Year,res1$Frequency,type="l",lwd=2,xlab="",ylab="",col="blue",las=1) -->
+<!-- lines(res2$Year,res2$Frequency,type="l",lwd=2,col="red") -->
+<!-- legend("topleft", -->
+<!--        keyw,lty=c(1),lwd=c(2), -->
+<!--        col=c("blue","red")) -->
+<!-- ``` -->
+
 
 Over the last decades, several methodologies have been proposed so as to estimate these responses. The objective of this course, developed by [Kenza Benhima](https://sites.google.com/site/benhimakenza/) and [Jean-Paul Renne](https://sites.google.com/site/jeanpaulrenne/home), is to provide an exhaustive view of these methodologies and to provide students with tools enabling them to implement them in various contexts.
 

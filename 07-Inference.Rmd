@@ -4,7 +4,7 @@ Consider the following SVAR model:
 \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
 with $\varepsilon_t=B\eta_t$, $\Omega_\varepsilon=BB'$.
 
-The corresponding infinite MA representation (Eq. \@ref(eq:InfMA), or Wold theorem, Theorem \@ref(thm:Wold)) is:
+The corresponding infinite MA representation (Eq. \@ref(eq:InfMA), or Wold representation, is:
 $$
 y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
 $$
@@ -24,7 +24,7 @@ The main inference methods are the following:
 
 
 
-## Monte Carlo method
+## Monte Carlo method {#MonteCarlo}
 
 We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the $\Psi_j$'s) but which is a function of another variable whose distribution is known (here, the $\Phi_j$'s).
 
@@ -32,7 +32,7 @@ For instance, suppose we know the distribution of a random variable $X$, which t
 $$
 \mathbb{E}(\varphi(X))=\int_{-\infty}^{+\infty}\varphi(x)p(x)dx
 $$
-Suppose that the above integral does not have a simple expression. We cannot compute $\mathbb{E}(\varphi(X))$ but, by virtue of the law of large numbers (Theorem \@ref(LLNappendix)), we can approximate it as follows:
+Suppose that the above integral does not have a simple expression. We cannot compute $\mathbb{E}(\varphi(X))$ but, by virtue of the law of large numbers, we can approximate it as follows:
 $$
 \mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
 $$

@@ -437,7 +437,7 @@ Hence, non-normal structural shocks are identifiable. But how to estimate them b
 \end{equation}
 where $b_i$ is the $i^{th}$ column of matrix $B$ (or $b'_i$ is the $i^{th}$ row of $B^{-1}$ since $B^{-1}=B'$).
 
-The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\eta_{i,t}$ had the p.d.f.  $g_i (\eta_i)$. The PML estimator of matrix $B$ maximizes the pseudo log-likelihood function:
+The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\eta_{i,t}$ had the p.d.f. $g_i (\eta_i)$. The PML estimator of matrix $B$ maximizes the pseudo log-likelihood function:
 \begin{equation}
 \widehat{B_T} = \arg \max_B \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i \varepsilon_t),(\#eq:optimprob)
 \end{equation}
@@ -498,15 +498,6 @@ Hence, the PML estimator of matrix $B$ is obtained as $\widehat{B_T} = B(\hat{A}
 <!-- Hyperbolic secant and the subgaussian distributions (see Table \@ref(tab:distriICA)): either one, or the other satisfy the inequality \@ref(eq:HKO) (see @Hyvarinen_Karhunen_Oja_2001). -->
 
 
-Table: (\#tab:distriICA) This table reports usual p.d.f. and their derivatives.
-
-|                    | $\log g(x)$                                                             | $\dfrac{d \log g(x)}{d x}$                                | $\dfrac{d^2 \log g(x)}{d x^2}$                                                    |
-|--------------------|-------------------------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
-| Gaussian           | $cst - x^2/2$                                                           | $-x$                                                      | $-1$  |
-| Student $t(\nu>4)$ | $-\dfrac{1-\nu}{2}\log\left( 1 +\dfrac{x^2}{\nu-2} \right)$             | $-\dfrac{x(1+\nu)}{\nu - 2 + x^2}$  | $- (1+\nu)  \dfrac{\nu - 2 - x^2}{\nu - 2 + x^2}$ |
-| Hyperbolic secant  | $cst - \log\left( \cosh\left\{\dfrac{\pi}{2}x\right\} \right)$          | $-\dfrac{\pi}{2}	anh\left(\dfrac{\pi}{2}x\right)$         | $-\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2$      |
-| Subgaussian        | $cst + \pi x^2 + \log \left(\cosh\left\{\dfrac{\pi}{2}x\right\}\right)$ | $2\pi x+\dfrac{\pi}{2}\tanh\left(x \dfrac{\pi}{2}\right)$ | $2\pi +\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2$ |
-
 
 <!-- Note: Except for the Gaussian distribution, we have $\mathbb{E}[d^2 \log g(X)/d \varepsilon^2 - X d\log g(X)/d \varepsilon] < 0$ (i.e. Assumption\,4 is satisfied) when these pseudo-distributions coincide to the distribution of $X$. The subGaussian distribution is a mixture of Gaussian distributions: $X$ is drawn from this distribution if it is equal to $BY - (1-B)Y$, where $B$ is drawn from a Bernoulli distribution of parameter $1/2$ and $Y \sim \mathcal{N}(\sqrt{(\pi-2)/\pi},2/\pi)$. -->
 
@@ -518,6 +509,18 @@ Under assumptions on the $g_i$ functions (excluding the Gaussian distributions),
 The asymptotic variance-covariance matrix of $vec \sqrt{T} (\widehat{B_T} - B_0)$ is $A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}$, where matrices $A$ and $\Gamma$ are detailed in @Gourieroux_Monfort_Renne_2017.
 
 Note that the potential misspecification of pseudo-distributions $g_i$ has no effect on the consistency of these specific PML estimators.
+
+Table \@ref(tab:distriICA) reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of $vec \sqrt{T} (\widehat{B_T} - B_0)$.)
+
+Table: (\#tab:distriICA) This table reports usual p.d.f. and their derivatives.
+
+|                    | $\log g(x)$                                                             | $\dfrac{d \log g(x)}{d x}$                                | $\dfrac{d^2 \log g(x)}{d x^2}$                                                    |
+|--------------------|-------------------------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
+| Gaussian           | $cst - x^2/2$                                                           | $-x$                                                      | $-1$  |
+| Student $t(\nu>4)$ | $-\dfrac{1-\nu}{2}\log\left( 1 +\dfrac{x^2}{\nu-2} \right)$             | $-\dfrac{x(1+\nu)}{\nu - 2 + x^2}$  | $- (1+\nu)  \dfrac{\nu - 2 - x^2}{\nu - 2 + x^2}$ |
+| Hyperbolic secant  | $cst - \log\left( \cosh\left\{\dfrac{\pi}{2}x\right\} \right)$          | $-\dfrac{\pi}{2}	anh\left(\dfrac{\pi}{2}x\right)$         | $-\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2$      |
+| Subgaussian        | $cst + \pi x^2 + \log \left(\cosh\left\{\dfrac{\pi}{2}x\right\}\right)$ | $2\pi x+\dfrac{\pi}{2}\tanh\left(x \dfrac{\pi}{2}\right)$ | $2\pi +\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2$ |
+
 
 :::{.example #GMR2017 name="Non-Gaussian monetary-policy shocks"}
 
@@ -604,11 +607,8 @@ n <- ncol(Y)
 M <- make.M(n)
 A.est <- matrix(M %*% AA.est,n,n)
 C.PML <- (diag(n) + A.est) %*% solve(diag(n) - A.est)
-
 eta.PML <- Eps %*% C.PML # eta.PML are the ICA-estimated structural shocks
 
-A <- make.A.matrix(eta.PML,distri,C.PML)
-Omega <- make.Omega(eta.PML,distri)
 # Compute asymptotic covariance matrix of C.PML:
 V <- make.Asympt.Cov.delta(eta.PML,distri,C.PML)
 param <- c(C.PML)
@@ -845,7 +845,7 @@ $$
 
 Without loss of generality, it can be assumed that $\Lambda_1=Id$.
 
-In this context, $B$ is identified, apart from sign reversal of its columns if for all $k \ne j \in \{1,\dots,n\}$, there is a regime $i$ s.t. $\lambda_{i,k} \ne \lambda_{i,j}$. (Prop.1 in @@LANNE2010121).
+In this context, $B$ is identified, apart from sign reversal of its columns if for all $k \ne j \in \{1,\dots,n\}$, there is a regime $i$ s.t. $\lambda_{i,k} \ne \lambda_{i,j}$. (Prop.1 in @LANNE2010121).
 
 Bivariate regime case ($M=2$): $B$ identified if the $\lambda_{2,k}$'s are all different. That is, identification is ensured if "there is sufficient heterogeneity in the volatility changes" (@LUTKEPOHL20172).
 

@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-13}
+\date{2023-01-16}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -162,7 +162,7 @@
 \hypertarget{intro}{%
 \chapter*{The Identification of Dynamic Structural Shocks}\label{intro}}
 
-The identification and estimation of dynamic responses to structural shocks is one of the principal goals of macroeconometrics. These responses correspond to the effect, over time, of an exogenous intervention that propagates through the economy, as modelled by a system of simultaneous equations.
+The identification and estimation of dynamic responses to structural shocks is one of the principal goals of macroeconometrics. These responses correspond to the effect, over time, of an exogenous intervention that propagates through the economy, as modeled by a system of simultaneous equations.
 
 Over the last decades, several methodologies have been proposed so as to estimate these responses. The objective of this course, developed by \href{https://sites.google.com/site/benhimakenza/}{Kenza Benhima} and \href{https://sites.google.com/site/jeanpaulrenne/home}{Jean-Paul Renne}, is to provide an exhaustive view of these methodologies and to provide students with tools enabling them to implement them in various contexts.
 
@@ -205,13 +205,15 @@ Codes associated with this course are part of the \texttt{IdSS} package (\textbf
 \end{itemize}
 
 \hypertarget{basics}{%
-\chapter{Vector Auto-Regressive (VAR) models: the basics}\label{basics}}
+\chapter{VARs and IRFs: the basics}\label{basics}}
+
+Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs.
 
 \hypertarget{definition-of-vars-and-svarma-models}{%
 \section{Definition of VARs (and SVARMA) models}\label{definition-of-vars-and-svarma-models}}
 
 \begin{definition}[(S)VAR model]
-\protect\hypertarget{def:SVAR}{}\label{def:SVAR}Let \(y_{t}\) denote a \(n \times1\) vector of random variables. Process \(y_{t}\) follows a \(p^{th}\)-order (S)VAR if, for all \(t\), we have
+\protect\hypertarget{def:SVAR}{}\label{def:SVAR}Let \(y_{t}\) denote a \(n \times1\) vector of (endogenous) random variables. Process \(y_{t}\) follows a \(p^{th}\)-order (S)VAR if, for all \(t\), we have
 \begin{eqnarray}
 \begin{array}{rllll}
 VAR:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t,\\
@@ -221,11 +223,9 @@ SVAR:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + B \eta_t,
 with \(\varepsilon_t = B\eta_t\), where \(\{\eta_{t}\}\) is a white noise sequence whose components are mutually and serially independent.
 \end{definition}
 
-The first line of Eq. \eqref{eq:yVAR} corresponds to the \textbf{reduced-form} of the VAR model (\textbf{structural form} for the second line).
+The first line of Eq. \eqref{eq:yVAR} corresponds to the \textbf{reduced-form} of the VAR model (\textbf{structural form} for the second line). While the \textbf{structural shocks} (the components of \(\eta_t\)) are mutually uncorrelated, this is not the case of the \textbf{innovations}, that are the components of \(\varepsilon_t\). However, in boths cases, vectors \(\eta_t\) and \(\varepsilon_t\) are serially correlated (through time).
 
-While the structural shocks (the components of \(\eta_t\)) are mutually uncorrelated, this is not the case of the \emph{innovations}, that are the components of \(\varepsilon_t\). However, in boths cases, vectors \(\eta_t\) and \(\varepsilon_t\) are serially correlated (through time).
-
-As was the case for univariate models, VARs can be extended with MA terms in \(\eta_t\):
+As is the case for univariate models, VARs can be extended with MA terms in \(\eta_t\), giving rise to VARMA models:
 
 \begin{definition}[(S)VARMA model]
 \protect\hypertarget{def:SVARMA}{}\label{def:SVARMA}Let \(y_{t}\) denote a \(n \times1\) vector of random variables. Process \(y_{t}\) follows a VARMA model of order (p,q) if, for all \(t\), we have
@@ -246,17 +246,18 @@ with \(\varepsilon_t = B_0\eta_t\) (and \(B_j = \Theta_j B_0\), for \(j \ge 0\))
 One of the main objectives of macro-econometrics is to derive IRFs, that represent the dynamic effects of structural shocks (components of \(\eta_t\)) though the system of variables \(y_t\).
 
 Formally, an IRF is a difference in conditional expectations:
-\[
-\boxed{\Psi_{i,j,h} = \mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) - \mathbb{E}(y_{i,t+h})}
-\]
+\begin{equation}
+\boxed{\Psi_{i,j,h} = \mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) - \mathbb{E}(y_{i,t+h})}\label{eq:boxIRFs}
+\end{equation}
 (effect on \(y_{i,t+h}\) of a one-unit shock on \(\eta_{j,t}\)).
 
-If the dynamics of process \(y_t\) can be described as a VARMA model, and if \(y_t\) is covariance stationary (see Def. \ref{def:covstat}), then \(y_t\) admits the following infinite MA representation (MA(\(\infty\))):\footnote{This is also the Wold decomposition of process \(\{y_t\}\).}
+IRFs closely relate to the Wold decomposition of \(y_t\). Indeed, if the dynamics of process \(y_t\) can be described as a VARMA model, and if \(y_t\) is covariance stationary (see Def. \ref{def:covstat}), then \(y_t\) admits the following infinite MA representation (or Wold decomposition):
 \begin{equation}
 y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.\label{eq:InfMA}
 \end{equation}
+With these notations, we get \(\mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) = \mu_i + \Psi_{i,j,h}\), where \(\Psi_{i,j,h}\) is the component \((i,j)\) of matrix \(\Psi_h\) and \(\mu_i\) is the \(i^{th}\) entry of vector \(\mu\). Since we also have \(\mathbb{E}(y_{i,t+h})=\mu_i\), we obtain Eq. \eqref{eq:boxIRFs}.
 
-Estimating IRFs amounts to estimating the \(\Psi_{h}\)'s. In general, there exist three main approaches for that:
+Hence, estimating IRFs amounts to estimating the \(\Psi_{h}\)'s. In general, there exist three main approaches for that:
 
 \begin{itemize}
 \tightlist
@@ -271,7 +272,7 @@ Estimating IRFs amounts to estimating the \(\Psi_{h}\)'s. In general, there exis
 \begin{proposition}[IRF of an ARMA(p,q) process]
 \protect\hypertarget{prp:computPsi}{}\label{prp:computPsi}
 
-If \(y_t\) follows the VARMA model described in Def. \ref(def:SVARMA), then the matrices \(\Psi_h\) appearing in Eq. \eqref{eq:InfMA} can be computed recursively as follows:
+If \(y_t\) follows the VARMA model described in Def. \ref{def:SVARMA}, then the matrices \(\Psi_h\) appearing in Eq. \eqref{eq:InfMA} can be computed recursively as follows:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -301,7 +302,7 @@ y_t &=& \Phi_1 {\color{blue}y_{t-1}} + \Phi_2 y_{t-2} + B \eta_t  \\
 &=& \underbrace{B}_{=\Psi_0} \eta_t + \underbrace{\Phi_1 B}_{=\Psi_1} \eta_{t-1} + \underbrace{(\Phi_2 + \Phi_1^2)B}_{=\Psi_2} \eta_{t-2} + f(y_{t-3},y_{t-4}).
 \end{eqnarray*}
 
-In particular, we have \(B = \Psi_0\). Matrix \(B\) indeed captures the contemporaneous impact of \(\eta_t\) on \(y_t\). That is why matrix \(B\) is sometimes called \emph{impulse matrix}.
+In particular, we have \(B = \Psi_0\). Matrix \(B\) indeed captures the contemporaneous impact of \(\eta_t\) on \(y_t\). That is why matrix \(B\) is sometimes called \textbf{impulse matrix}.
 
 \begin{example}[IRFs of an SVARMA model]
 \protect\hypertarget{exm:IRFVARMA}{}\label{exm:IRFVARMA}
@@ -376,7 +377,7 @@ We can use function \texttt{simul.VARMA} of package \texttt{IdSS} to produce IRF
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/simVAR-1} \caption{Impulse response functions}\label{fig:simVAR}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/simVAR-1} \caption{Impulse response functions (SVARMA(1,1) specified above).}\label{fig:simVAR}
 \end{figure}
 
 \end{example}
@@ -398,7 +399,7 @@ What should be satisfied by \(\Phi_k\)'s and \(\Theta_k\)'s for a VARMA-based pr
 \begin{eqnarray}
 y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  \label{eq:VARMA2}\\
 &&\underbrace{B \eta_t+ \Theta_1 B \eta_{t-1}+ \dots+ \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
-&\Leftrightarrow& \underbrace{(I - \Phi_1 L - \dots - \Phi_p L^p)}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
+&\Leftrightarrow& \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
 \end{eqnarray}
 
 Process \(y_t\) is stationary iff the roots of \(\det(\Phi(z))=0\) are strictly outside the unit circle or, equivalently, iff the eigenvalues of
@@ -413,7 +414,7 @@ lie strictly within the unit circle. Hence, as is the case for univariate proces
 
 Let's derive the first two unconditional moments of a (covariance-stationary) VARMA process.
 
-Based on Eq. \eqref{eq:VARMA2}, we have \(\mathbb{E}(\Phi(L)y_t)=c\), which gives \(\Phi(1)\mathbb{E}(y_t)=c\), or::
+Eq. \eqref{eq:VARMA2} gives \(\mathbb{E}(\Phi(L)y_t)=c\), therefore \(\Phi(1)\mathbb{E}(y_t)=c\), or
 \[
 \mathbb{E}(y_t) = (I - \Phi_1 - \dots - \Phi_p)^{-1}c.
 \]
@@ -421,7 +422,7 @@ The autocovariances of \(y_t\) can be deduced from the infinite MA representatio
 \[
 \gamma_j \equiv \mathbb{C}ov(y_t,y_{t-j}) = \sum_{i=j}^\infty \Psi_i \Psi_{i-j}'.
 \]
-(Note that this infinite sum exists as soon as Eq. \eqref{eq:condiInfiniteMA} is satisfied.)
+(This infinite sum exists as soon as Eq. \eqref{eq:condiInfiniteMA} is satisfied.)
 
 Conditional means and autocovariances can also be deduced from Eq. \eqref{eq:InfMA}. For \(0 \le h\) and \(0 \le h_1 \le h_2\):
 \begin{eqnarray*}
@@ -437,11 +438,9 @@ Because the \(\eta_t\) are mutually and serially independent (and therefore unco
 \[
 \mathbb{V}ar(\Psi_k \eta_{t-k}) = \mathbb{V}ar\left(\sum_{i=1}^n \psi_{k,i} \eta_{i,t-k}\right)  = \sum_{i=1}^n \psi_{k,i}\psi_{k,i}',
 \]
-where \(\psi_{k,i}\) denotes the \(i^{th}\) column of \(\Psi_k\).
-
-This suggests the following decomposition of the variance of the forecast error (called \textbf{variance decomposition}):
+where \(\psi_{k,i}\) denotes the \(i^{th}\) column of \(\Psi_k\). This suggests the following decomposition of the variance of the forecast error (called \textbf{variance decomposition}):
 \[
-\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'}_{\mbox{Contribution of $\eta_{i,t}$}}.
+\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'.}_{\mbox{Contribution of $\eta_{i,t}$}}
 \]
 
 Let us now turn to the estimation of VAR models. Note that if there is an MA component (i.e., if we consider a VARMA model), then OLS regressions yield biased estimates (even for asymptotically large samples). Assume for instance that \(y_t\) follows a VARMA(1,1) model:
@@ -453,7 +452,7 @@ where \(\phi_i\) is the \(i^{th}\) row of \(\Phi_1\), and where \(\varepsilon_{i
 \hypertarget{estimVAR}{%
 \section{VAR estimation}\label{estimVAR}}
 
-This section discusses the estimation of VAR models. (The estimation of SVARMA models is more challenging, see, e.g., \citet{Gourieroux_Monfort_Renne_2020}.) Eq. \eqref{eq:yVAR} can be written:
+This section discusses the estimation of VAR models. Eq. \eqref{eq:yVAR} can be written:
 \[
 y_{t}=c+\Phi(L)y_{t-1}+\varepsilon_{t},
 \]
@@ -497,9 +496,7 @@ The asymptotic distributions of these estimators are the ones resulting from sta
 See Appendix \ref{AppendixProof}.
 \end{proof}
 
-As stated by Proposition \ref{prp:OLSVAR}, when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since \(x_t\) correlates to \(\varepsilon_s\) for \(s<t\), the OLS estimator \(\mathbf{b}_i\) of \(\boldsymbol\beta_i\) is biased in small sample. (That is also the case for the ML estimator.)
-
-Indeed, denoting by \(\boldsymbol\varepsilon_i\) the \(T \times 1\) vector of \(\varepsilon_{i,t}\)'s, and using the notations of \(b_i\) and \(\beta_i\) introduced in Proposition \ref{prp:estimVARGaussian}, we have:
+As stated by Proposition \ref{prp:OLSVAR}, when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since \(x_t\) correlates to \(\varepsilon_s\) for \(s<t\), the OLS estimator \(\mathbf{b}_i\) of \(\boldsymbol\beta_i\) is biased in small sample. (That is also the case for the ML estimator.) Indeed, denoting by \(\boldsymbol\varepsilon_i\) the \(T \times 1\) vector of \(\varepsilon_{i,t}\)'s, and using the notations of \(b_i\) and \(\beta_i\) introduced in Proposition \ref{prp:estimVARGaussian}, we have:
 \begin{equation}
 \mathbf{b}_i = \beta_i + (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\boldsymbol\varepsilon_i.\label{eq:olsar1}
 \end{equation}
@@ -557,7 +554,7 @@ where the component of \(\Sigma_{22}\) corresponding to the covariance between \
 See \citet{Hamilton_1994}, Appendix of Chapter 11.
 \end{proof}
 
-Naturally, in practice, \(\Omega\) is replaced with \(\hat{\Omega}\), \(\mathbf{Q}\) is replaced with \(\hat{\mathbf{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'\) and \(\Sigma\) with the matrix whose components are of the form \(\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}\), where the \(\hat\sigma_{i,l}\)'s are the components of \(\hat\Omega\).
+In practice, to use the previous proposition (for instance to implement Monte-Carlo simulations, see Section \ref{MonteCarlo}), \(\Omega\) is replaced with \(\hat{\Omega}\), \(\mathbf{Q}\) is replaced with \(\hat{\mathbf{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'\) and \(\Sigma\) with the matrix whose components are of the form \(\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}\), where the \(\hat\sigma_{i,l}\)'s are the components of \(\hat\Omega\).
 
 The simplicity of the VAR framework and the tractability of its MLE open the way to convenient econometric testing. Let's illustrate this with the likelihood ratio test (see Def. \ref{def:LR}). The maximum value achieved by the MLE is
 \[
@@ -573,24 +570,54 @@ Therefore, the optimized log-likelihood is simply obtained by:
 \log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega})=-(Tn/2)\log(2\pi)+(T/2)\log\left|\hat{\Omega}^{-1}\right|-Tn/2.\label{eq:optimzedLogL}
 \end{equation}
 
-Assume that we want to test the null hypothesis that a set of variables follows a VAR(\(p_{0}\)) against the alternative
-specification of \(p_{1}\) (\(>p_{0}\)).
-
-Let us denote by \(\hat{L}_{0}\) and \(\hat{L}_{1}\) the maximum log-likelihoods obtained with \(p_{0}\) and \(p_{1}\) lags, respectively.
-
-Under the null hypothesis (\(H_0\): \(p=p_0\)), we have:
+Assume that we want to test the null hypothesis that a set of variables follows a VAR(\(p_{0}\)) against the alternative specification of \(p_{1}\) (\(>p_{0}\)). Let us denote by \(\hat{L}_{0}\) and \(\hat{L}_{1}\) the maximum log-likelihoods obtained with \(p_{0}\) and \(p_{1}\) lags, respectively. Under the null hypothesis (\(H_0\): \(p=p_0\)), we have:
 \begin{eqnarray*}
 2\left(\hat{L}_{1}-\hat{L}_{0}\right)&=&T\left(\log\left|\hat{\Omega}_{1}^{-1}\right|-\log\left|\hat{\Omega}_{0}^{-1}\right|\right)  \sim \chi^2(n^{2}(p_{1}-p_{0})).
 \end{eqnarray*}
 
 What precedes can be used to help determine the appropriate number of lags to use in the specification. In a VAR, using too many lags consumes numerous degrees of freedom: with \(p\) lags, each of the \(n\) equations in the VAR contains \(n\times p\) coefficients plus the intercept term. Adding lags improve in-sample fit, but is likely to result in over-parameterization and affect the \textbf{out-of-sample} prediction performance.
 
-To select appropriate lag length, \textbf{selection criteria} can be used. In the context of VAR models, using Eq. \eqref{eq:optimzedLogL}, we have for instance:
+To select appropriate lag length, \textbf{selection criteria} are often used. In the context of VAR models, using Eq. \eqref{eq:optimzedLogL} (Gaussian case), we have for instance:
 \begin{eqnarray*}
 AIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{2}{T}N\\
 BIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,
 \end{eqnarray*}
 where \(N=p \times n^{2}\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(AEC)}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ US3var[,}\FunctionTok{c}\NormalTok{(}\StringTok{"y.gdp.gap"}\NormalTok{,}\StringTok{"infl"}\NormalTok{)]}
+\FunctionTok{VARselect}\NormalTok{(data,}\AttributeTok{lag.max =} \DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $selection
+## AIC(n)  HQ(n)  SC(n) FPE(n) 
+##      3      3      2      3 
+## 
+## $criteria
+##                 1          2          3          4          5           6
+## AIC(n) -0.3394120 -0.4835525 -0.5328327 -0.5210835 -0.5141079 -0.49112812
+## HQ(n)  -0.3017869 -0.4208439 -0.4450407 -0.4082080 -0.3761491 -0.32808581
+## SC(n)  -0.2462608 -0.3283005 -0.3154798 -0.2416298 -0.1725534 -0.08747275
+## FPE(n)  0.7121914  0.6165990  0.5869659  0.5939325  0.5981364  0.61210908
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{estimated.var }\OtherTok{\textless{}{-}} \FunctionTok{VAR}\NormalTok{(data,}\AttributeTok{p=}\DecValTok{3}\NormalTok{)}
+\CommentTok{\#print(estimated.var$varresult)}
+\NormalTok{Phi }\OtherTok{\textless{}{-}} \FunctionTok{Acoef}\NormalTok{(estimated.var)}
+\NormalTok{PHI }\OtherTok{\textless{}{-}} \FunctionTok{make.PHI}\NormalTok{(Phi) }\CommentTok{\# autoregressive matrix of companion form.}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{abs}\NormalTok{(}\FunctionTok{eigen}\NormalTok{(PHI)}\SpecialCharTok{$}\NormalTok{values)) }\CommentTok{\# check stationarity}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9114892 0.9114892 0.6319554 0.4759403 0.4759403 0.3246995
+\end{verbatim}
 
 \hypertarget{BlockGranger}{%
 \section{Block exogeneity and Granger causality}\label{BlockGranger}}
@@ -642,13 +669,11 @@ bivariate VAR(\(p\)) process:
 y_{1,t} & = & c_1+\Sigma_{i=1}^{p}\Phi_i^{(11)}y_{1,t-i}+\Sigma_{i=1}^{p}\Phi_i^{(12)}y_{2,t-i}+\varepsilon_{1,t}\\
 y_{2,t} & = & c_2+\Sigma_{i=1}^{p}\Phi_i^{(21)}y_{1,t-i}+\Sigma_{i=1}^{p}\Phi_i^{(22)}y_{2,t-i}+\varepsilon_{2,t},
 \end{eqnarray*}
-where \(\Phi_k^{(ij)}\) denotes the element \((i,j)\) of \(\Phi_k\).
-
-Then, \(y_{1,t}\) is said not to Granger-cause \(y_{2,t}\) if
+where \(\Phi_k^{(ij)}\) denotes the element \((i,j)\) of \(\Phi_k\). Then, \(y_{1,t}\) is said not to Granger-cause \(y_{2,t}\) if
 \[
 \Phi_1^{(21)}=\Phi_2^{(21)}=\ldots=\Phi_p^{(21)}=0.
 \]
-Therefore the hypothesis testing is
+The null and alternative hypotheses therefore are:
 \[
 \begin{cases}
 H_{0}: & \Phi_1^{(21)}=\Phi_2^{(21)}=\ldots=\Phi_p^{(21)}=0\\
@@ -658,7 +683,43 @@ Loosely speaking, we reject \(H_{0}\) if some of the coefficients on the lagged 
 \[
 F=\frac{(RSS-USS)/p}{USS/(T-2p-1)},
 \]
-where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under \(H_{0}\), the \(F\)-statistic is distributed as \(\mathcal{F}(p,T-2p-1)\). (We have \(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\).)
+where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under \(H_{0}\), the \(F\)-statistic is distributed as \(\mathcal{F}(p,T-2p-1)\) (See Table \ref{tab:Fstat}).\footnote{We have \(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\).}
+
+According to the following lines of code, the output gap Granger-causes inflation, but the reverse is not true:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grangertest}\NormalTok{(US3var[,}\FunctionTok{c}\NormalTok{(}\StringTok{"y.gdp.gap"}\NormalTok{,}\StringTok{"infl"}\NormalTok{)],}\AttributeTok{order=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Granger causality test
+## 
+## Model 1: infl ~ Lags(infl, 1:3) + Lags(y.gdp.gap, 1:3)
+## Model 2: infl ~ Lags(infl, 1:3)
+##   Res.Df Df      F   Pr(>F)   
+## 1    214                      
+## 2    217 -3 3.9761 0.008745 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grangertest}\NormalTok{(US3var[,}\FunctionTok{c}\NormalTok{(}\StringTok{"infl"}\NormalTok{,}\StringTok{"y.gdp.gap"}\NormalTok{)],}\AttributeTok{order=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Granger causality test
+## 
+## Model 1: y.gdp.gap ~ Lags(y.gdp.gap, 1:3) + Lags(infl, 1:3)
+## Model 2: y.gdp.gap ~ Lags(y.gdp.gap, 1:3)
+##   Res.Df Df      F Pr(>F)
+## 1    214                 
+## 2    217 -3 1.5451 0.2038
+\end{verbatim}
 
 \hypertarget{identifStruct}{%
 \chapter{Identification problem and standard identification techniques}\label{identifStruct}}
@@ -666,9 +727,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 \hypertarget{IdentifPbm}{%
 \section{The identification problem}\label{IdentifPbm}}
 
-In Section \ref{estimVAR}, we have seen how to estimate \(\mathbb{V}ar(\varepsilon_t) =\Omega\) and the \(\Phi_k\) matrices in the context of a VAR model. But the IRFs are functions of \(B\) and the \(\Phi_k\)'s, not of \(\Omega\) the \(\Phi_k\)'s (see Section \ref{IRFSVARMA}). We have \(\Omega = BB'\), but this is not sufficient to recover \(B\).
-
-Indeed, seen a system of equations whose unknowns are the \(b_{i,j}\)'s (components of \(B\)), the system \(\Omega = BB'\) contains only \(n(n+1)/2\) linearly independent equations. For instance, for \(n=2\):
+In Section \ref{estimVAR}, we have seen how to estimate \(\mathbb{V}ar(\varepsilon_t) =\Omega\) and the \(\Phi_k\) matrices in the context of a VAR model. But the IRFs are functions of \(B\) and of the \(\Phi_k\)'s, not of \(\Omega\) the \(\Phi_k\)'s (see Section \ref{IRFSVARMA}). We have \(\Omega = BB'\), which provides some restrictions on the components of \(B\), but this is not sufficient to fully identify \(B\). Indeed, seen a system of equations whose unknowns are the \(b_{i,j}\)'s (components of \(B\)), the system \(\Omega = BB'\) contains only \(n(n+1)/2\) linearly independent equations. For instance, for \(n=2\):
 \begin{eqnarray*}
 &&\left[
 \begin{array}{cc}
@@ -711,11 +770,11 @@ We then have 3 linearly independent equations but 4 unknowns. Therefore, \(B\) i
 \begin{itemize}
 \tightlist
 \item
-  Easy to implement: the appropriate entries of \(B\) are set to 0.
+  It is easy to implement: the appropriate entries of \(B\) are set to 0.
 \item
-  Particular case: \textbf{Cholesky, or recursive approach}.
+  A particular (popular) case is that of the \textbf{Cholesky, or recursive approach}.
 \item
-  Examples: \citet{BERNANKE198649}, \citet{Sims_1986}, \citet{Gali_1992}, \citet{RubioRamirez_et_al_2010}.
+  Examples include \citet{BERNANKE198649}, \citet{Sims_1986}, \citet{Gali_1992}, \citet{RubioRamirez_et_al_2010}.
 \end{itemize}
 
 \begin{enumerate}
@@ -731,7 +790,7 @@ We then have 3 linearly independent equations but 4 unknowns. Therefore, \(B\) i
 \item
   Additional computations are required to implement this. One needs to compute the cumulative effect of one of the structural shocks \(u_{t}\) on one of the endogenous variable.
 \item
-  Examples: \citet{Blanchard_Quah_1989}, \citet{Faust_Leeper_1997}, \citet{Gali_1999}, \citet{Erceg_et_al_2005}, \citet{NBERc11177}.
+  Examples include \citet{Blanchard_Quah_1989}, \citet{Faust_Leeper_1997}, \citet{Gali_1999}, \citet{Erceg_et_al_2005}, \citet{NBERc11177}.
 \end{itemize}
 
 The two approaches can be combined (see, e.g., \citet{Gerlach_Smets_1995}).
@@ -773,7 +832,7 @@ Vector \(\eta_t\) is assumed to be a vector of structural shocks, mutually and s
   \(i_t\) is contemporaneously affected by \(\eta_{mp,t}\), \(\eta_{\pi,t}\) and \(\eta_{d,t}\).
 \end{itemize}
 
-System \eqref{eq:systemI} could be rewritten in the form:
+System \eqref{eq:systemI} could be rewritten as follows:
 \begin{equation}
 \left[\begin{array}{c}
 d_t\\
@@ -792,10 +851,10 @@ i_{t-1} +
 \bullet & \bullet & 0 \\
 \bullet & \bullet & \bullet
 \end{array}
-\right]}_{=B} \eta_t}_{=\varepsilon_t}\label{eq:BBBB}
+\right]}_{=B} \eta_t.}_{=\varepsilon_t}\label{eq:BBBB}
 \end{equation}
 
-This is the \textbf{reduced-form} of the model. This representation suggests three additional restrictions on the entries of \(B\); the latter matrix is therefore identified (up to the signs of its columns) as soon as \(\Omega = BB'\) is known.
+This is the \textbf{reduced-form} of the model. This representation suggests three additional restrictions on the entries of \(B\); the latter matrix is therefore identified as soon as \(\Omega = BB'\) is known (up to the signs of its columns).
 
 \hypertarget{cholesky-a-specific-short-run-restriction-situation}{%
 \section{Cholesky: a specific short-run-restriction situation}\label{cholesky-a-specific-short-run-restriction-situation}}
@@ -814,16 +873,25 @@ There are particular cases in which some well-known matrix decomposition of \(\O
   \(\dots\)
 \end{itemize}
 
-This implies (1) that column \(n_1\) of \(B\) has only 1 non-zero entry (this is the \(n_1^{th}\) entry), (2) that column \(n_2\) of \(B\) has 2 non-zero entries (the \(n_1^{th}\) and the \(n_2^{th}\) ones), etc. Without loss of generality, we can set \(n_1=n\), \(n_2=n-1\), etc. In this context, matrix \(B\) is lower triangular.
+This implies
 
-The Cholesky decomposition of \(\Omega_{\varepsilon}\) then provides an appropriate estimate of \(B\), since this matrix decomposition yields to a lower triangular matrix satisfying:
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  that column \(n_1\) of \(B\) has only 1 non-zero entry (this is the \(n_1^{th}\) entry),
+\item
+  that column \(n_2\) of \(B\) has 2 non-zero entries (the \(n_1^{th}\) and the \(n_2^{th}\) ones), etc.
+\end{enumerate}
+
+Without loss of generality, we can set \(n_1=n\), \(n_2=n-1\), etc. In this context, matrix \(B\) is lower triangular. The Cholesky decomposition of \(\Omega_{\varepsilon}\) then provides an appropriate estimate of \(B\), since this matrix decomposition yields to a lower triangular matrix satisfying:
 \[
 \Omega_\varepsilon = BB'.
 \]
 
 For instance, \citet{DEDOLA20051543} estimate 5 structural VAR models for the US, the UK, Germany, France and Italy to analyse the monetary-policy transmission mechanisms. They estimate SVAR(5) models over the period 1975-1997. The shock-identification scheme is based on Cholesky decompositions, the ordering of the endogenous variables being: the industrial production, the consumer price index, a commodity price index, the short-term rate, monetary aggregate and the effective exchange rate (except for the US). This ordering implies that monetary policy reacts to the shocks affecting the first three variables but that the latter react to monetary policy shocks with a one-period lag only.
 
-Importantly, the Cholesky approach can be useful when one is interested in one specific structural shock. This was the case, e.g., of \citet{Christiano_Eichenbaum_Evans_1996}. Their identification is based on the following relationship between \(\varepsilon_t\) and \(\eta_t\):
+The Cholesky approach can be employed when one is interested in one specific structural shock. This is the case, e.g., of \citet{Christiano_Eichenbaum_Evans_1996}. Their identification is based on the following relationship between \(\varepsilon_t\) and \(\eta_t\):
 \[
 \left[\begin{array}{c}
 \boldsymbol\varepsilon_{S,t}\\
@@ -883,9 +951,9 @@ Hence, the fact that a given structural shock (\(\eta_{i,t}\), say) has no long-
 \lim_{h\rightarrow\infty}\frac{\partial GDP_{t+h}}{\partial \eta_{i,t}} = \lim_{h\rightarrow\infty} \frac{\partial}{\partial \eta_{i,t}}\left(\sum_{k=1}^h \Delta  GDP_{t+k}\right)= 0.
 \]
 
-This can be easily formulated as a function of \(B\) and of the matrices \(\Phi_i\) when \(y_t\) (including \(\Delta GDP_t\)) follows a VAR process.
+This long-run effect can be formulated as a function of \(B\) and of the matrices \(\Phi_i\) when \(y_t\) (including \(\Delta GDP_t\)) follows a VAR process.
 
-Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR(\(p\)) as a VAR(1). To see that, stack the last \(p\) values of vector \(y_t\) in vector \(y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'\); Eq. \eqref{eq:yVAR} can then be rewritten in its \textbf{companion form}:
+Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR(\(p\)) as a VAR(1): for that, stack the last \(p\) values of vector \(y_t\) in vector \(y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'\); Eq. \eqref{eq:yVAR} can then be rewritten in its \textbf{companion form}:
 \begin{equation}
 y_{t}^{*} =
 \underbrace{\left[\begin{array}{c}
@@ -907,13 +975,14 @@ y_{t-1}^{*}+
 \end{equation}
 where matrices \(\Phi\) and \(\Omega^* = \mathbb{V}ar(\varepsilon_t^*)\) are of dimension \(np \times np\); \(\Omega^*\) is filled with zeros, except the \(n\times n\) upper-left block that is equal to \(\Omega = \mathbb{V}ar(\varepsilon_t)\). (Matrix \(\Phi\) had been introduced in Eq. \eqref{eq:matrixPHI}.)
 
-Focusing on the VAR(1) case:
+Let us then focus on the VAR(1) case:
 \begin{eqnarray*}
 y_{t} &=& c+\Phi y_{t-1}+\varepsilon_{t}\\
 & = & c+\varepsilon_{t}+\Phi(c+\varepsilon_{t-1})+\ldots+\Phi^{k}(c+\varepsilon_{t-k})+\ldots \\
 & = & \mu +\varepsilon_{t}+\Phi\varepsilon_{t-1}+\ldots+\Phi^{k}\varepsilon_{t-k}+\ldots \\
 & = & \mu +B\eta_{t}+\Phi B\eta_{t-1}+\ldots+\Phi^{k}B\eta_{t-k}+\ldots,
 \end{eqnarray*}
+which is the Wold representation of \(y_t\).
 
 The sequence of shocks \(\{\eta_t\}\) determines the sequence \(\{y_t\}\). What if \(\{\eta_t\}\) is replaced with \(\{\tilde{\eta}_t\}\), where \(\tilde{\eta}_t=\eta_t\) if \(t \ne s\) and \(\tilde{\eta}_s=\eta_s + \gamma\)? Assume \(\{\tilde{y}_t\}\) is the associated ``perturbated'' sequence. We have \(\tilde{y}_t = y_t\) if \(t<s\). For \(t \ge s\), the Wold decomposition of \(\{\tilde{y}_t\}\) implies:
 \[
@@ -933,9 +1002,9 @@ Consider a shock on \(\eta_{1,t}\), with a magnitude of \(1\). This shock corres
 \vdots\\
 0\end{array}\right],
 \]
-that is the first column of \(\Theta \equiv (Id - \Phi)^{-1}B\).
+that is the first column of the \(n \times n\) matrix \(\Theta \equiv (Id - \Phi)^{-1}B\).
 
-In this context, consider the following long-run restriction: \emph{``\(j^{th}\) structural shock has no cumulative impact on the \(i^{th}\) endogenous variable''}. It is equivalent to
+In this context, consider the following long-run restriction: \emph{``the \(j^{th}\) structural shock has no cumulative impact on the \(i^{th}\) endogenous variable''}. It is equivalent to
 \[
 \Theta_{ij}=0,
 \]
@@ -971,7 +1040,7 @@ Estimate a reduced-form VAR(8) model:
 \end{Highlighting}
 \end{Shaded}
 
-Now, let us define a loss function (\texttt{loss}) that is equal to zero if (a) \(BB'=\Omega\) and (b) the element (1,1) of \(\Theta B\) is equal to zero:
+Now, let us define a loss function (\texttt{loss}) that is equal to zero if (a) \(BB'=\Omega\) and (b) the element (1,1) of \(\Theta = (Id - \Phi)^{-1} B\) is equal to zero:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1111,7 +1180,7 @@ The sign-restriction approach method has the advantage of being relatively agnos
 
 A prominent example is \citet{Uhlig_2005}. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.
 
-According to conventional wisdom, monetary contractions should:\footnote{Standard identification schemes often fail to achieve these 4 points Two puzzles regularly arise: \emph{liquidity puzzle}: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; \emph{price puzzle}: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.}
+According to conventional wisdom, monetary contractions should:\footnote{Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: \emph{liquidity puzzle}: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; \emph{price puzzle}: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.}
 
 \begin{itemize}
 \tightlist
@@ -1125,7 +1194,7 @@ According to conventional wisdom, monetary contractions should:\footnote{Standar
   Reduce real output.
 \end{itemize}
 
-The restricitons considered by \citet{Uhlig_2005} are as follows: an expansionary monetary policy shock leads to:
+The restrictions considered by \citet{Uhlig_2005} are as follows: an expansionary monetary policy shock leads to:
 
 \begin{itemize}
 \tightlist
@@ -1181,7 +1250,7 @@ What about output? Since is the response of interest, we leave it un-restricted.
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr1-1} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr1}
 \end{figure}
 
-It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Also, we say that this approach is set-identified, not point-identified.
+It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.
 
 \hypertarget{the-penalty-function-approach-pfa}{%
 \section{The penalty-function approach (PFA)}\label{the-penalty-function-approach-pfa}}
@@ -1200,8 +1269,8 @@ Let \(\sigma_j\) be the standard deviation of variable \(j\). Let \(\iota_{j,k}=
 \]
 
 We are looking for a solution to
-\[\begin{array}{ll}&\min_q \mathbf{P}(q)\\
-&\\
+\[\begin{array}{ll}
+&\min_q \mathbf{P}(q)\\
 \text{s.t. }&q'q=1.\end{array}\]
 
 The problem is solved numerically.
@@ -1223,7 +1292,8 @@ Sometimes we need to combine different restriction approaches. For instance:
 
 In such instances, we must make independent draws from the set of all structural parameters satisfying the zero restrictions. How to do that? \citet{Arias_et_al_2018} propose to impose the zero restrictions on \(B\), and then check signs. Remember, \(\mathcal{P}=BQ\) is a candidate impact IRF. For each structural shock \(j\), define the \(m\)-column matrices \(Z_j\) (zero restrictions) and \(S_j\) (sign restrictions). Each row of \(Z_j\) (resp. \(S_j\)) defines a zero (resp. sign) restriction. \(Z_j\) has \(m-j\) rows at most (i.e., \(m-j\) zero restriction at most).
 
-Example: In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
+\begin{example}
+\protect\hypertarget{exm:exMixSignSR}{}\label{exm:exMixSignSR}In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
 \[Z_1 = \begin{pmatrix}1 & 0 & 0 & 0\end{pmatrix}, \]
 \[S_1 = \begin{pmatrix}0 & 1 & 0 & 0\\
 0 & 0 & -1 & 0\end{pmatrix}. \]
@@ -1233,6 +1303,7 @@ For both zero and sign restrictions to be satisfied, we must have
 Z_jb_j=0 \quad \mbox{and} \quad S_jb_j>0,
 \]
 where \(b_j\) is the \(j^{th}\) column of \(B\), i.e.~the impact effect of the \(j^{th}\) structural shock.
+\end{example}
 
 The algorithm is as follows:
 
@@ -1282,8 +1353,7 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
 \NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,n))}
 \NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{3}\SpecialCharTok{:}\NormalTok{n)\{}
-\NormalTok{  SR.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,n))}
-\NormalTok{\}}
+\NormalTok{  SR.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,n))\}}
 \NormalTok{res.svar.signs.zeros }\OtherTok{\textless{}{-}} \FunctionTok{svar.signs}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
                                   \AttributeTok{nb.shocks =} \DecValTok{6}\NormalTok{, }\CommentTok{\#number of identified shocks}
                                   \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
@@ -1292,10 +1362,8 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
                                   \AttributeTok{indic.plot =} \DecValTok{1}\NormalTok{, }\CommentTok{\# Plots are displayed if = 1.}
                                   \AttributeTok{nb.draws =} \DecValTok{10000}\NormalTok{, }\CommentTok{\# number of draws}
 \NormalTok{                                  sign.restrictions,}
-\NormalTok{                                  horizon,}
-                                  \AttributeTok{recursive =}\DecValTok{0}\NormalTok{,}
+\NormalTok{                                  horizon,}\AttributeTok{recursive =}\DecValTok{0}\NormalTok{,}
 \NormalTok{                                  SR.restrictions)}
-
 \NormalTok{IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{IRFs.signs}
 \NormalTok{nb.rotations }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{xx}
 \end{Highlighting}
@@ -1320,24 +1388,24 @@ where \(\hat\eta_{t}(B)\) is the vector of structural shock associated with a gi
 
 The approach presented in this section exploits the derivations of \citet{Uhlig_2004}. \citet{BARSKY2011273} exploit this approach to identify a TFP news shock, that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP.
 
-Consider a process \(\{y_t\}\) that admits the infinite MA representation of Eq. \eqref{eq:InfMA}. Let \(Q\) be an orthogonal matrix, an alternative decomposition is:
+Consider a process \(\{y_t\}\) that admits the infinite MA representation of Eq. \eqref{eq:InfMA}. Let \(Q\) be an orthogonal matrix, an alternative decomposition of \(y_t\) is:
 \begin{eqnarray}
 y_t&=&\sum_{h=0}^{+\infty}\Psi_h\underbrace{\eta_{t-h}}_{Q\tilde \eta_{t-h}} = \sum_{h=0}^{+\infty}\underbrace{\Psi_hQ}_{\tilde\Psi_h}\tilde
 \eta_{t-h} = \sum_{h=0}^{+\infty}\tilde\Psi_h\tilde \eta_{t-h},
 \end{eqnarray}
-where \(\tilde \eta_{t-h}=Q'\eta_{t-h}\) are the white-noise shocks associated with the new MA representation. (They also satisfy \(\mathbb{V}ar(\tilde\eta_t)=Id\).)
+where \(\tilde \eta_{t-h}=Q'\eta_{t-h}\) are the white-noise shocks associated with the new MA representation, \(Q\) being an orthgonal matrix. (They also satisfy \(\mathbb{V}ar(\tilde\eta_t)=Id\).)
 
-The \(h\)-step ahead prediction error of \(y_{t+h}\), given all the data up to and including \(t-1\) is given by
+The \(h\)-step ahead prediction error of \(y_{t+h}\), given all the data up to, and including, \(t-1\) is given by
 \[
 e_{t+h}(h)=y_{t+h}-\mathbb{E}_{t-1}(y_{t+h})=\sum_{j=0}^h\tilde \Psi_h\tilde \eta_{t+h-j}.
 \]
 
 The variance-covariance matrix of \(e_{t+h}(h)\) is
 \[
-\Omega(h)=\sum_{j=0}^h\tilde \Psi_j\tilde \Psi_j'=\sum_{j=0}^h \Psi_j \Psi_j'.
+\Omega^{(h)}=\sum_{j=0}^h\tilde \Psi_j\tilde \Psi_j'=\sum_{j=0}^h \Psi_j \Psi_j'.
 \]
 
-We can decompose \(\Omega(h)\) into the contribution of each shock \(l\) (\(l^{th}\) component of \(\tilde{\eta}_t\)):
+We can decompose \(\Omega^{(h)}\) into the contribution of each shock \(l\) (\(l^{th}\) component of \(\tilde{\eta}_t\)):
 \[
 \Omega^{(h)}=\sum_{l=1}^n\Omega_l^{(h)}(Q)
 \]
@@ -1384,14 +1452,13 @@ where \(D\) is diagonal matrix whose entries are the (ordered) eigenvalues: \(\l
 
 A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consists in imposing that, on some specific dates (based on narrative information), a particular shock was the most important contributor to the unexpected movement of some variable during a particular period.\footnote{See also Section \ref{NarrativeSign}.} This can be formalized in two different ways (respectively called Type A and Type B by \citet{AntolinDiaz_RubioRamirez_2018}):
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\begin{itemize}
 \tightlist
 \item
-  A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.
+  Type A: A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.
 \item
-  A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.
-\end{enumerate}
+  Type B: A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.
+\end{itemize}
 
 \hypertarget{NonGaussian}{%
 \chapter{Identification based on non-normality of the shocks}\label{NonGaussian}}
@@ -1513,6 +1580,14 @@ Hence, the PML estimator of matrix \(B\) is obtained as \(\widehat{B_T} = B(\hat
 \hat{A}_T = \arg \max_{a_{i,j}, i>j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [b_i (A)' \varepsilon_t].\label{eq:optimprob2}
 \end{equation}
 
+Under assumptions on the \(g_i\) functions (excluding the Gaussian distributions), \citet{Gourieroux_Monfort_Renne_2017} derive the asymptotic properties of the PML estimator. Specifically, the PML estimator \(\widehat{B_T}\) of \(B_0\) is consistent (in \(\mathcal{P}_0\), the set of matrices obtained by permutation and sign change of the columns of \(B_0\)) and asymptotically normal, with speed of convergence \(1/\sqrt{T}\).
+
+The asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{B_T} - B_0)\) is \(A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}\), where matrices \(A\) and \(\Gamma\) are detailed in \citet{Gourieroux_Monfort_Renne_2017}.
+
+Note that the potential misspecification of pseudo-distributions \(g_i\) has no effect on the consistency of these specific PML estimators.
+
+Table \ref{tab:distriICA} reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{B_T} - B_0)\).)
+
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0851}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3106}}
@@ -1547,12 +1622,6 @@ Hyperbolic secant & \(cst - \log\left( \cosh\left\{\dfrac{\pi}{2}x\right\} \righ
 Subgaussian & \(cst + \pi x^2 + \log \left(\cosh\left\{\dfrac{\pi}{2}x\right\}\right)\) & \(2\pi x+\dfrac{\pi}{2}\tanh\left(x \dfrac{\pi}{2}\right)\) & \(2\pi +\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2\) \\
 \bottomrule()
 \end{longtable}
-
-Under assumptions on the \(g_i\) functions (excluding the Gaussian distributions), \citet{Gourieroux_Monfort_Renne_2017} derive the asymptotic properties of the PML estimator. Specifically, the PML estimator \(\widehat{B_T}\) of \(B_0\) is consistent (in \(\mathcal{P}_0\), the set of matrices obtained by permutation and sign change of the columns of \(B_0\)) and asymptotically normal, with speed of convergence \(1/\sqrt{T}\).
-
-The asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{B_T} - B_0)\) is \(A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}\), where matrices \(A\) and \(\Gamma\) are detailed in \citet{Gourieroux_Monfort_Renne_2017}.
-
-Note that the potential misspecification of pseudo-distributions \(g_i\) has no effect on the consistency of these specific PML estimators.
 
 \begin{example}[Non-Gaussian monetary-policy shocks]
 \protect\hypertarget{exm:GMR2017}{}\label{exm:GMR2017}We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (\(T=224\)). We consider three dependent variables: inflation (\(\pi_t\)), economic activity (\(z_t\), the output gap) and the nominal short-term interest rate (\(r_t\)). Changes in the log of oil prices added as an exogenous variable (\(x_t\)).
@@ -1643,11 +1712,8 @@ The pseudo density functions are distinct and asymmetric mixtures of Gaussian di
 \NormalTok{M }\OtherTok{\textless{}{-}} \FunctionTok{make.M}\NormalTok{(n)}
 \NormalTok{A.est }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(M }\SpecialCharTok{\%*\%}\NormalTok{ AA.est,n,n)}
 \NormalTok{C.PML }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{diag}\NormalTok{(n) }\SpecialCharTok{+}\NormalTok{ A.est) }\SpecialCharTok{\%*\%} \FunctionTok{solve}\NormalTok{(}\FunctionTok{diag}\NormalTok{(n) }\SpecialCharTok{{-}}\NormalTok{ A.est)}
-
 \NormalTok{eta.PML }\OtherTok{\textless{}{-}}\NormalTok{ Eps }\SpecialCharTok{\%*\%}\NormalTok{ C.PML }\CommentTok{\# eta.PML are the ICA{-}estimated structural shocks}
 
-\NormalTok{A }\OtherTok{\textless{}{-}} \FunctionTok{make.A.matrix}\NormalTok{(eta.PML,distri,C.PML)}
-\NormalTok{Omega }\OtherTok{\textless{}{-}} \FunctionTok{make.Omega}\NormalTok{(eta.PML,distri)}
 \CommentTok{\# Compute asymptotic covariance matrix of C.PML:}
 \NormalTok{V }\OtherTok{\textless{}{-}} \FunctionTok{make.Asympt.Cov.delta}\NormalTok{(eta.PML,distri,C.PML)}
 \NormalTok{param }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(C.PML)}
@@ -2040,7 +2106,7 @@ where \(\mathbf{S}\) is the long-run variance of \(\mathbf{z}_t\varepsilon_t\) (
 
 The asymptotic covariance matrix of \(\sqrt{T}\mathbf{b}_{iv}\) is \(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\).
 
-The covariance matrix of \(\mathbf{b}_{iv}\) can be approximated by \(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\) where \(\hat{\mathbf{S}}\) is the Newey-West estimator of \(\mathbf{S}\) (see Eq. \eqref{eq:NW})
+The covariance matrix of \(\mathbf{b}_{iv}\) can be approximated by \(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\) where \(\hat{\mathbf{S}}\) is the Newey-West estimator of \(\mathbf{S}\).\footnote{That is: \(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\), where the \(\hat\gamma_j\)'s are sample auto-covariances of \(\mathbf{z}_t\varepsilon_t\), see \citet{Newey_West_1987}}
 
 (IV.iii) is usually not restrictive for \(h>0\) (\(z_t\) is usually not affected by future shocks). By contrast, it may be restrictive for \(h<0\). This can be solved by adding controls in Regression \eqref{eq:regIV1}. These controls should span the space of \(\{\eta_{t-1},\eta_{t-2},\dots\}\).
 
@@ -2068,7 +2134,7 @@ Consider the following SVAR model:
 \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
 with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\).
 
-The corresponding infinite MA representation (Eq. \eqref{eq:InfMA}, or Wold theorem, Theorem \ref{thm:Wold}) is:
+The corresponding infinite MA representation (Eq. \eqref{eq:InfMA}, or Wold representation, is:
 \[
 y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
 \]
@@ -2092,8 +2158,8 @@ The main inference methods are the following:
   Bootstrap method (Kilian\_1998)
 \end{itemize}
 
-\hypertarget{monte-carlo-method}{%
-\section{Monte Carlo method}\label{monte-carlo-method}}
+\hypertarget{MonteCarlo}{%
+\section{Monte Carlo method}\label{MonteCarlo}}
 
 We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the \(\Psi_j\)'s) but which is a function of another variable whose distribution is known (here, the \(\Phi_j\)'s).
 
@@ -2101,7 +2167,7 @@ For instance, suppose we know the distribution of a random variable \(X\), which
 \[
 \mathbb{E}(\varphi(X))=\int_{-\infty}^{+\infty}\varphi(x)p(x)dx
 \]
-Suppose that the above integral does not have a simple expression. We cannot compute \(\mathbb{E}(\varphi(X))\) but, by virtue of the law of large numbers (Theorem \ref{LLNappendix}), we can approximate it as follows:
+Suppose that the above integral does not have a simple expression. We cannot compute \(\mathbb{E}(\varphi(X))\) but, by virtue of the law of large numbers, we can approximate it as follows:
 \[
 \mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
 \]
@@ -2312,10 +2378,10 @@ Function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\citet{VARetp}) can be u
 \end{Shaded}
 
 \begin{verbatim}
-##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.2981078 0.1717533 0.9353458 -0.1343434 0.1719965 0.9383106 -0.01856969
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const
+## [1,] -0.3290144 0.1490842 1.046555 -0.1427905 0.09034837 1.0197083 -0.02073198
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
 \end{verbatim}
 
 \hypertarget{FAVAR}{%
@@ -2332,7 +2398,7 @@ In the case where one suspects that the \(y_{i,t}\)'s are mainly driven by a sma
 
 Suppose that we have \(T\) observations of a \(n\)-dimensional random vector \(x\), denoted by \(x_{1},x_{2},\ldots,x_{T}\). We suppose that each component of \(x\) is of mean zero.
 
-Let denote with \(X\) the matrix given by \(\left[\begin{array}{cccc} x_{1} & x_{2} & \ldots & x_{T}\end{array}\right]'\). Denote the \(j^{th}\) column of \(X\) by \(X_{j}\).
+Denote with \(X\) the matrix given by \(\left[\begin{array}{cccc} x_{1} & x_{2} & \ldots & x_{T}\end{array}\right]'\). Denote the \(j^{th}\) column of \(X\) by \(X_{j}\).
 
 We want to find the linear combination of the \(x_{i}\)'s (\(x.u\)), with \(\left\Vert u\right\Vert =1\), with ``maximum variance.'' That is, we want to solve:
 \begin{equation}
@@ -2543,7 +2609,7 @@ Under regularity assumptions and under the null hypothesis, the test statistic f
 \textbf{Proof of Proposition \ref{prp:estimVARGaussian}}
 
 \begin{proof}
-Using Proposition \ref{prp:multivarG}, we obtain that, conditionally on \(x_1\), the log-likelihood is given by
+Using Proposition \ref{prp:pdfMultivarGaussian}, we obtain that, conditionally on \(x_1\), the log-likelihood is given by
 \begin{eqnarray*}
 \log\mathcal{L}(Y_{T};\theta) & = & -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
 &  & -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].

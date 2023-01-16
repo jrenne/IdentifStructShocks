@@ -66,7 +66,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
 <li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
 <li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
@@ -786,7 +786,7 @@ Under regularity assumptions and under the null hypothesis, the test statistic f
 <!-- ::: -->
 <p><strong>Proof of Proposition <a href="basics.html#prp:estimVARGaussian">1.2</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-6" class="proof"><em>Proof</em>. </span>Using Proposition <a href="#prp:multivarG"><strong>??</strong></a>, we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
+<p><span id="unlabeled-div-6" class="proof"><em>Proof</em>. </span>Using Proposition <a href="append.html#prp:pdfMultivarGaussian">9.1</a>, we obtain that, conditionally on <span class="math inline">\(x_1\)</span>, the log-likelihood is given by
 <span class="math display">\[\begin{eqnarray*}
 \log\mathcal{L}(Y_{T};\theta) &amp; = &amp; -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
 &amp;  &amp; -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].
@@ -824,7 +824,7 @@ which leads to the result.</p>
 </div>
 <p><strong>Proof of Proposition <a href="basics.html#prp:OLSVAR">1.3</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-7" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(1.11)</a>, we have:
+<p><span id="unlabeled-div-7" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(1.12)</a>, we have:
 <span class="math display">\[
 \sqrt{T}(\mathbf{b}-\boldsymbol{\beta}) =  (X'X/T)^{-1}\sqrt{T}(X'\boldsymbol\varepsilon/T).
 \]</span>
@@ -2144,7 +2144,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -2,9 +2,7 @@
 
 ## The identification problem {#IdentifPbm}
 
-In Section \@ref(estimVAR), we have seen how to estimate $\mathbb{V}ar(\varepsilon_t) =\Omega$ and the $\Phi_k$ matrices in the context of a VAR model. But the IRFs are functions of $B$ and the $\Phi_k$'s, not of $\Omega$ the $\Phi_k$'s (see Section \@ref(IRFSVARMA)). We have $\Omega = BB'$, but this is not sufficient to recover $B$.
-
-Indeed, seen a system of equations whose unknowns are the $b_{i,j}$'s (components of $B$), the system  $\Omega = BB'$ contains only $n(n+1)/2$ linearly independent equations. For instance, for $n=2$:
+In Section \@ref(estimVAR), we have seen how to estimate $\mathbb{V}ar(\varepsilon_t) =\Omega$ and the $\Phi_k$ matrices in the context of a VAR model. But the IRFs are functions of $B$ and of the $\Phi_k$'s, not of $\Omega$ the $\Phi_k$'s (see Section \@ref(IRFSVARMA)). We have $\Omega = BB'$, which provides some restrictions on the components of $B$, but this is not sufficient to fully identify $B$. Indeed, seen a system of equations whose unknowns are the $b_{i,j}$'s (components of $B$), the system  $\Omega = BB'$ contains only $n(n+1)/2$ linearly independent equations. For instance, for $n=2$:
 \begin{eqnarray*}
 &&\left[
 \begin{array}{cc}
@@ -38,13 +36,13 @@ b_{11}^2+b_{12}^2 & \color{red}{b_{11}b_{21}+b_{12}b_{22}} \\
 We then have 3 linearly independent equations but 4 unknowns. Therefore, $B$ is not identified based on second-order moments. Additional restrictions are required to identify $B$. This section covers two standard identification schemes: **short-run** and **long-run** restrictions.
 
 1. A **short-run restriction (SRR)** prevents a structural shock from affecting an endogenous variable contemporaneously.
-* Easy to implement: the appropriate entries of $B$ are set to 0.
-* Particular case: **Cholesky, or recursive approach**.
-* Examples: @BERNANKE198649, @Sims_1986, @Gali_1992, @RubioRamirez_et_al_2010.
+* It is easy to implement: the appropriate entries of $B$ are set to 0.
+* A particular (popular) case is that of the **Cholesky, or recursive approach**.
+* Examples include @BERNANKE198649, @Sims_1986, @Gali_1992, @RubioRamirez_et_al_2010.
 
 2. A **long-run restriction (LRR)** prevents a structural shock from having a cumulative impact on one of the endogenous variables. 
 * Additional computations are required to implement this. One needs to compute the cumulative effect of one of the structural shocks $u_{t}$ on one of the endogenous variable.
-* Examples: @Blanchard_Quah_1989, @Faust_Leeper_1997, @Gali_1999, @Erceg_et_al_2005, @NBERc11177.
+* Examples include @Blanchard_Quah_1989, @Faust_Leeper_1997, @Gali_1999, @Erceg_et_al_2005, @NBERc11177.
 
 The two approaches can be combined (see, e.g., @Gerlach_Smets_1995).
 
@@ -79,7 +77,7 @@ Vector $\eta_t$ is assumed to be a vector of structural shocks, mutually and ser
 * $\pi_t$ is contemporaneously affected by $\eta_{\pi,t}$ and $\eta_{d,t}$;
 * $i_t$ is contemporaneously affected by $\eta_{mp,t}$, $\eta_{\pi,t}$ and $\eta_{d,t}$.
 
-System \@ref(eq:systemI) could be rewritten in the form:
+System \@ref(eq:systemI) could be rewritten as follows:
 \begin{equation}
 \left[\begin{array}{c}
 d_t\\
@@ -98,10 +96,10 @@ i_{t-1} +
 \bullet & \bullet & 0 \\
 \bullet & \bullet & \bullet
 \end{array}
-\right]}_{=B} \eta_t}_{=\varepsilon_t}(\#eq:BBBB)
+\right]}_{=B} \eta_t.}_{=\varepsilon_t}(\#eq:BBBB)
 \end{equation}
 
-This is the **reduced-form** of the model. This representation suggests three additional restrictions on the entries of $B$; the latter matrix is therefore identified (up to the signs of its columns) as soon as $\Omega = BB'$ is known.
+This is the **reduced-form** of the model. This representation suggests three additional restrictions on the entries of $B$; the latter matrix is therefore identified as soon as $\Omega = BB'$ is known (up to the signs of its columns).
 
 
 ## Cholesky: a specific short-run-restriction situation
@@ -114,16 +112,19 @@ There are particular cases in which some well-known matrix decomposition of $\Om
 (i.e., on date $t$) two endogenous variables, $y_{n_1,t}$ (the same as before) and  $y_{n_2,t}$;
 * $\dots$
 
-This implies (1) that column $n_1$ of $B$ has only 1 non-zero entry (this is the $n_1^{th}$ entry), (2) that column $n_2$ of $B$ has 2 non-zero entries (the $n_1^{th}$ and the $n_2^{th}$ ones), etc. Without loss of generality, we can set $n_1=n$, $n_2=n-1$, etc. In this context, matrix $B$ is lower triangular.
+This implies
 
-The Cholesky decomposition of $\Omega_{\varepsilon}$ then provides an appropriate estimate of $B$, since this matrix decomposition yields to a lower triangular matrix satisfying:
+1. that column $n_1$ of $B$ has only 1 non-zero entry (this is the $n_1^{th}$ entry),
+2. that column $n_2$ of $B$ has 2 non-zero entries (the $n_1^{th}$ and the $n_2^{th}$ ones), etc.
+
+Without loss of generality, we can set $n_1=n$, $n_2=n-1$, etc. In this context, matrix $B$ is lower triangular. The Cholesky decomposition of $\Omega_{\varepsilon}$ then provides an appropriate estimate of $B$, since this matrix decomposition yields to a lower triangular matrix satisfying:
 $$
 \Omega_\varepsilon = BB'.
 $$
 
 For instance, @DEDOLA20051543 estimate 5 structural VAR models for the US, the UK, Germany, France and Italy to analyse the monetary-policy transmission mechanisms. They estimate SVAR(5) models over the period 1975-1997. The shock-identification scheme is based on Cholesky decompositions, the ordering of the endogenous variables being: the industrial production, the consumer price index, a commodity price index, the short-term rate, monetary aggregate and the effective exchange rate (except for the US). This ordering implies that monetary policy reacts to the shocks affecting the first three variables but that the latter react to monetary policy shocks with a one-period lag only.
 
-Importantly, the Cholesky approach can be useful when one is interested in one specific structural shock. This was the case, e.g., of @Christiano_Eichenbaum_Evans_1996. Their identification is based on the following relationship between $\varepsilon_t$ and $\eta_t$:
+The Cholesky approach can be employed when one is interested in one specific structural shock. This is the case, e.g., of @Christiano_Eichenbaum_Evans_1996. Their identification is based on the following relationship between $\varepsilon_t$ and $\eta_t$:
 $$
 \left[\begin{array}{c}
 \boldsymbol\varepsilon_{S,t}\\
@@ -178,9 +179,9 @@ $$
 \lim_{h\rightarrow\infty}\frac{\partial GDP_{t+h}}{\partial \eta_{i,t}} = \lim_{h\rightarrow\infty} \frac{\partial}{\partial \eta_{i,t}}\left(\sum_{k=1}^h \Delta  GDP_{t+k}\right)= 0.
 $$
 
-This can be easily formulated as a function of $B$ and of the matrices $\Phi_i$ when $y_t$ (including $\Delta GDP_t$) follows a VAR process.
+This long-run effect can be formulated as a function of $B$ and of the matrices $\Phi_i$ when $y_t$ (including $\Delta GDP_t$) follows a VAR process.
 
-Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR($p$) as a VAR(1). To see that, stack the last $p$ values of vector $y_t$ in vector $y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'$; Eq. \@ref(eq:yVAR) can then be rewritten in its **companion form**:
+Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR($p$) as a VAR(1): for that, stack the last $p$ values of vector $y_t$ in vector $y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'$; Eq. \@ref(eq:yVAR) can then be rewritten in its **companion form**:
 \begin{equation}
 y_{t}^{*} =
 \underbrace{\left[\begin{array}{c}
@@ -202,13 +203,14 @@ y_{t-1}^{*}+
 \end{equation}
 where matrices $\Phi$ and $\Omega^* = \mathbb{V}ar(\varepsilon_t^*)$ are of dimension $np \times np$; $\Omega^*$ is filled with zeros, except the $n\times n$ upper-left block that is equal to $\Omega = \mathbb{V}ar(\varepsilon_t)$. (Matrix $\Phi$ had been introduced in Eq. \@ref(eq:matrixPHI).)
 
-Focusing on the VAR(1) case:
+Let us then focus on the VAR(1) case:
 \begin{eqnarray*}
 y_{t} &=& c+\Phi y_{t-1}+\varepsilon_{t}\\
 & = & c+\varepsilon_{t}+\Phi(c+\varepsilon_{t-1})+\ldots+\Phi^{k}(c+\varepsilon_{t-k})+\ldots \\
 & = & \mu +\varepsilon_{t}+\Phi\varepsilon_{t-1}+\ldots+\Phi^{k}\varepsilon_{t-k}+\ldots \\
 & = & \mu +B\eta_{t}+\Phi B\eta_{t-1}+\ldots+\Phi^{k}B\eta_{t-k}+\ldots,
 \end{eqnarray*}
+which is the Wold representation of $y_t$.
 
 The sequence of shocks $\{\eta_t\}$ determines the sequence $\{y_t\}$. What if $\{\eta_t\}$ is replaced with $\{\tilde{\eta}_t\}$, where $\tilde{\eta}_t=\eta_t$ if $t \ne s$ and $\tilde{\eta}_s=\eta_s + \gamma$? Assume $\{\tilde{y}_t\}$ is the associated "perturbated" sequence. We have $\tilde{y}_t = y_t$ if $t<s$. For $t \ge s$, the Wold decomposition of $\{\tilde{y}_t\}$ implies:
 $$
@@ -228,9 +230,9 @@ $$
 \vdots\\
 0\end{array}\right],
 $$
-that is the first column of $\Theta \equiv (Id - \Phi)^{-1}B$.
+that is the first column of the $n \times n$ matrix $\Theta \equiv (Id - \Phi)^{-1}B$.
 
-In this context, consider the following long-run restriction: *"$j^{th}$ structural shock has no cumulative impact on the $i^{th}$ endogenous variable"*. It is equivalent to
+In this context, consider the following long-run restriction: *"the $j^{th}$ structural shock has no cumulative impact on the $i^{th}$ endogenous variable"*. It is equivalent to
 $$
 \Theta_{ij}=0,
 $$
@@ -278,7 +280,7 @@ est.VAR <- VAR(y,p=8)
 Omega <- var(residuals(est.VAR))
 ```
 
-Now, let us define a loss function (`loss`) that is equal to zero if (a) $BB'=\Omega$ and (b) the element (1,1) of $\Theta B$ is equal to zero:
+Now, let us define a loss function (`loss`) that is equal to zero if (a) $BB'=\Omega$ and (b) the element (1,1) of $\Theta = (Id - \Phi)^{-1} B$ is equal to zero:
 
 ```{r BQ3}
 # Compute (Id - Phi)^{-1}:

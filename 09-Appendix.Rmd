@@ -870,7 +870,7 @@ $$
 **Proof of Proposition \@ref(prp:estimVARGaussian)**
 
 :::{.proof}
-Using Proposition \@ref(prp:multivarG), we obtain that, conditionally on $x_1$, the log-likelihood is given by
+Using Proposition \@ref(prp:pdfMultivarGaussian), we obtain that, conditionally on $x_1$, the log-likelihood is given by
 \begin{eqnarray*}
 \log\mathcal{L}(Y_{T};\theta) & = & -(Tn/2)\log(2\pi)+(T/2)\log\left|\Omega^{-1}\right|\\
 &  & -\frac{1}{2}\sum_{t=1}^{T}\left[\left(y_{t}-\Pi'x_{t}\right)'\Omega^{-1}\left(y_{t}-\Pi'x_{t}\right)\right].

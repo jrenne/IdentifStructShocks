@@ -276,7 +276,7 @@ where $\bv{S}$ is the long-run variance of $\bv{z}_t\varepsilon_t$ (see next sli
 
 The asymptotic covariance matrix of $\sqrt{T}\bv{b}_{iv}$ is $\bv{Q}_{xz} \bv{S} \bv{Q}_{xz}'$.
 
-The covariance matrix of $\bv{b}_{iv}$ can be approximated by $\frac{1}{T}Q(\bv{X},\bv{Z})\hat{\bv{S}}Q(\bv{X},\bv{Z})'$ where $\hat{\bv{S}}$ is the Newey-West estimator of $\bv{S}$ (see Eq. \@ref(eq:NW))
+The covariance matrix of $\bv{b}_{iv}$ can be approximated by $\frac{1}{T}Q(\bv{X},\bv{Z})\hat{\bv{S}}Q(\bv{X},\bv{Z})'$ where $\hat{\bv{S}}$ is the Newey-West estimator of $\bv{S}$.^[That is: $\hat{\bv{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu$, where the $\hat\gamma_j$'s are sample auto-covariances of $\bv{z}_t\varepsilon_t$, see @Newey_West_1987]
 
 
 (IV.iii) is usually not restrictive for $h>0$ ($z_t$ is usually not affected by future shocks). By contrast, it may be restrictive for $h<0$. This can be solved by adding controls in Regression \@ref(eq:regIV1). These controls should span the space of $\{\eta_{t-1},\eta_{t-2},\dots\}$.

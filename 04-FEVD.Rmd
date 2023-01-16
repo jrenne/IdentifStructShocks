@@ -4,24 +4,24 @@
 
 The approach presented in this section exploits the derivations of @Uhlig_2004. @BARSKY2011273 exploit this approach to identify a TFP news shock, that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP.
 
-Consider a process $\{y_t\}$ that admits the infinite MA representation of Eq. \@ref(eq:InfMA). Let $Q$ be an orthogonal matrix, an alternative decomposition is:
+Consider a process $\{y_t\}$ that admits the infinite MA representation of Eq. \@ref(eq:InfMA). Let $Q$ be an orthogonal matrix, an alternative decomposition of $y_t$ is:
 \begin{eqnarray}
 y_t&=&\sum_{h=0}^{+\infty}\Psi_h\underbrace{\eta_{t-h}}_{Q\tilde \eta_{t-h}} = \sum_{h=0}^{+\infty}\underbrace{\Psi_hQ}_{\tilde\Psi_h}\tilde
 \eta_{t-h} = \sum_{h=0}^{+\infty}\tilde\Psi_h\tilde \eta_{t-h},
 \end{eqnarray}
-where $\tilde \eta_{t-h}=Q'\eta_{t-h}$ are the white-noise shocks associated with the new MA representation. (They also satisfy $\mathbb{V}ar(\tilde\eta_t)=Id$.)
+where $\tilde \eta_{t-h}=Q'\eta_{t-h}$ are the white-noise shocks associated with the new MA representation, $Q$ being an orthgonal matrix. (They also satisfy $\mathbb{V}ar(\tilde\eta_t)=Id$.)
 
-The $h$-step ahead prediction error of $y_{t+h}$, given all the data up to and including $t-1$ is given by
+The $h$-step ahead prediction error of $y_{t+h}$, given all the data up to, and including, $t-1$ is given by
 $$
 e_{t+h}(h)=y_{t+h}-\mathbb{E}_{t-1}(y_{t+h})=\sum_{j=0}^h\tilde \Psi_h\tilde \eta_{t+h-j}.
 $$
 
 The variance-covariance matrix of $e_{t+h}(h)$ is
 $$
-\Omega(h)=\sum_{j=0}^h\tilde \Psi_j\tilde \Psi_j'=\sum_{j=0}^h \Psi_j \Psi_j'.
+\Omega^{(h)}=\sum_{j=0}^h\tilde \Psi_j\tilde \Psi_j'=\sum_{j=0}^h \Psi_j \Psi_j'.
 $$
 
-We can decompose $\Omega(h)$ into the contribution of each shock $l$ ($l^{th}$ component of $\tilde{\eta}_t$):
+We can decompose $\Omega^{(h)}$ into the contribution of each shock $l$ ($l^{th}$ component of $\tilde{\eta}_t$):
 $$
 \Omega^{(h)}=\sum_{l=1}^n\Omega_l^{(h)}(Q)
 $$
@@ -68,7 +68,7 @@ where $D$ is diagonal matrix whose entries are the (ordered) eigenvalues: $\lamb
 
 A related approach, introduced by @AntolinDiaz_RubioRamirez_2018, consists in imposing that, on some specific dates (based on narrative information), a particular shock was the most important contributor to the unexpected movement of some variable during a particular period.^[See also Section \@ref(NarrativeSign).] This can be formalized in two different ways (respectively called Type A and Type B by @AntolinDiaz_RubioRamirez_2018):
 
-1. A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.
-2. A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.
+* Type A: A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.
+* Type B: A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.
 
 

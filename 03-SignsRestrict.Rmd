@@ -55,9 +55,9 @@ According to conventional wisdom, monetary contractions should:[^Footnote:Puzzle
 * Decrease non-borrowed reserves,
 * Reduce real output.
 
-[^Footnote:Puzzles]: Standard identification schemes often fail to achieve these 4 points Two puzzles regularly arise: *liquidity puzzle*: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; *price puzzle*: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.
+[^Footnote:Puzzles]: Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: *liquidity puzzle*: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; *price puzzle*: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.
 
-The restricitons considered by @Uhlig_2005 are as follows: an expansionary monetary policy shock leads to:
+The restrictions considered by @Uhlig_2005 are as follows: an expansionary monetary policy shock leads to:
 
 * Increases in prices
 * Increase in nonborrowed reserves
@@ -66,7 +66,7 @@ The restricitons considered by @Uhlig_2005 are as follows: an expansionary monet
 What about output? Since is the response of interest, we leave it un-restricted.
 
 
-```{r signrestr1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.",warning=FALSE}
+```{r signrestr1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.",warning=FALSE,message=FALSE}
 library(IdSS);library(vars);library(Matrix)
 data("USmonthly")
 First.date <- "1965-01-01"
@@ -143,7 +143,7 @@ res.svar.signs <-
 <!-- * For $1\le j\le l$, draw $u_j\in \mathbb{R}^{m+1-j}$ from a standard normal distribution and set $w_j = u_j/||u_j||$.  -->
 <!-- * Define $\begin{pmatrix}q_1&...&q_l\end{pmatrix}$ recursively by $q_j = K_jw_j$ for any matrix $K_j$ whose columns form an orthogonal basis for the null space of the matrix \[M_j = \begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}'\] ($q_j$ will be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$) -->
 
-It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Also, we say that this approach is set-identified, not point-identified.
+It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.
 
 
 ## The penalty-function approach (PFA)
@@ -162,8 +162,8 @@ Let $\sigma_j$ be the standard deviation of variable $j$. Let $\iota_{j,k}=1$ if
 $$
 
 We are looking for a solution to
-\[\begin{array}{ll}&\min_q \mathbf{P}(q)\\
-&\\
+\[\begin{array}{ll}
+&\min_q \mathbf{P}(q)\\
 \text{s.t. }&q'q=1.\end{array}\]
 
 The problem is solved numerically.
@@ -180,7 +180,8 @@ Sometimes we need to combine different restriction approaches. For instance:
 
 In such instances, we must make independent draws from the set of all structural parameters satisfying the zero restrictions. How to do that? @Arias_et_al_2018 propose to impose the zero restrictions on $B$, and then check signs. Remember, $\mathcal{P}=BQ$ is a candidate impact IRF. For each structural shock $j$, define the $m$-column matrices $Z_j$ (zero restrictions) and $S_j$ (sign restrictions). Each row of $Z_j$ (resp. $S_j$) defines a zero (resp. sign) restriction. $Z_j$ has $m-j$ rows at most (i.e., $m-j$ zero restriction at most).
 
-Example: In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
+:::{.example #exMixSignSR}
+In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
 \[Z_1 = \begin{pmatrix}1 & 0 & 0 & 0\end{pmatrix}, \]
 \[S_1 = \begin{pmatrix}0 & 1 & 0 & 0\\
 0 & 0 & -1 & 0\end{pmatrix}. \]
@@ -190,6 +191,7 @@ $$
 Z_jb_j=0 \quad \mbox{and} \quad S_jb_j>0,
 $$
 where $b_j$ is the $j^{th}$ column of $B$, i.e. the impact effect of the $j^{th}$ structural shock.
+:::
 
 The algorithm is as follows:
 
@@ -230,8 +232,7 @@ SR.restrictions[[1]][1,5] <- 1
 SR.restrictions[[2]] <- array(0,c(1,n))
 SR.restrictions[[2]][1,5] <- 1
 for(i in 3:n){
-  SR.restrictions[[i]] <- array(0,c(0,n))
-}
+  SR.restrictions[[i]] <- array(0,c(0,n))}
 res.svar.signs.zeros <- svar.signs(y,p=3,
                                   nb.shocks = 6, #number of identified shocks
                                   nb.periods.IRF = 20,
@@ -240,10 +241,8 @@ res.svar.signs.zeros <- svar.signs(y,p=3,
                                   indic.plot = 1, # Plots are displayed if = 1.
                                   nb.draws = 10000, # number of draws
                                   sign.restrictions,
-                                  horizon,
-                                  recursive =0,
+                                  horizon,recursive =0,
                                   SR.restrictions)
-
 IRFs.signs <- res.svar.signs.zeros$IRFs.signs
 nb.rotations <- res.svar.signs.zeros$xx
 ```

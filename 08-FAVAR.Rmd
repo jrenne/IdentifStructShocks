@@ -11,7 +11,7 @@ In the case where one suspects that the $y_{i,t}$'s are mainly driven by a small
 
 Suppose that we have $T$ observations of a $n$-dimensional random vector $x$, denoted by $x_{1},x_{2},\ldots,x_{T}$. We suppose that each component of $x$ is of mean zero.
 
-Let denote with $X$ the matrix given by $\left[\begin{array}{cccc}
+Denote with $X$ the matrix given by $\left[\begin{array}{cccc}
 x_{1} & x_{2} & \ldots & x_{T}\end{array}\right]'$. Denote the $j^{th}$ column of $X$ by $X_{j}$.
 
 We want to find the linear combination of the $x_{i}$'s ($x.u$), with $\left\Vert u\right\Vert =1$, with "maximum variance." That is, we want to solve:

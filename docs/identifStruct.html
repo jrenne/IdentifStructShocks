@@ -66,7 +66,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="active" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
 <li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
 <li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
@@ -91,8 +91,7 @@
 <h2>
 <span class="header-section-number">2.1</span> The identification problem<a class="anchor" aria-label="anchor" href="#IdentifPbm"><i class="fas fa-link"></i></a>
 </h2>
-<p>In Section <a href="basics.html#estimVAR">1.4</a>, we have seen how to estimate <span class="math inline">\(\mathbb{V}ar(\varepsilon_t) =\Omega\)</span> and the <span class="math inline">\(\Phi_k\)</span> matrices in the context of a VAR model. But the IRFs are functions of <span class="math inline">\(B\)</span> and the <span class="math inline">\(\Phi_k\)</span>’s, not of <span class="math inline">\(\Omega\)</span> the <span class="math inline">\(\Phi_k\)</span>’s (see Section <a href="basics.html#IRFSVARMA">1.2</a>). We have <span class="math inline">\(\Omega = BB'\)</span>, but this is not sufficient to recover <span class="math inline">\(B\)</span>.</p>
-<p>Indeed, seen a system of equations whose unknowns are the <span class="math inline">\(b_{i,j}\)</span>’s (components of <span class="math inline">\(B\)</span>), the system <span class="math inline">\(\Omega = BB'\)</span> contains only <span class="math inline">\(n(n+1)/2\)</span> linearly independent equations. For instance, for <span class="math inline">\(n=2\)</span>:
+<p>In Section <a href="basics.html#estimVAR">1.4</a>, we have seen how to estimate <span class="math inline">\(\mathbb{V}ar(\varepsilon_t) =\Omega\)</span> and the <span class="math inline">\(\Phi_k\)</span> matrices in the context of a VAR model. But the IRFs are functions of <span class="math inline">\(B\)</span> and of the <span class="math inline">\(\Phi_k\)</span>’s, not of <span class="math inline">\(\Omega\)</span> the <span class="math inline">\(\Phi_k\)</span>’s (see Section <a href="basics.html#IRFSVARMA">1.2</a>). We have <span class="math inline">\(\Omega = BB'\)</span>, which provides some restrictions on the components of <span class="math inline">\(B\)</span>, but this is not sufficient to fully identify <span class="math inline">\(B\)</span>. Indeed, seen a system of equations whose unknowns are the <span class="math inline">\(b_{i,j}\)</span>’s (components of <span class="math inline">\(B\)</span>), the system <span class="math inline">\(\Omega = BB'\)</span> contains only <span class="math inline">\(n(n+1)/2\)</span> linearly independent equations. For instance, for <span class="math inline">\(n=2\)</span>:
 <span class="math display">\[\begin{eqnarray*}
 &amp;&amp;\left[
 \begin{array}{cc}
@@ -127,16 +126,16 @@ b_{11}^2+b_{12}^2 &amp; \color{red}{b_{11}b_{21}+b_{12}b_{22}} \\
 <li>A <strong>short-run restriction (SRR)</strong> prevents a structural shock from affecting an endogenous variable contemporaneously.</li>
 </ol>
 <ul>
-<li>Easy to implement: the appropriate entries of <span class="math inline">\(B\)</span> are set to 0.</li>
-<li>Particular case: <strong>Cholesky, or recursive approach</strong>.</li>
-<li>Examples: <span class="citation">Bernanke (<a href="references.html#ref-BERNANKE198649" role="doc-biblioref">1986</a>)</span>, <span class="citation">Sims (<a href="references.html#ref-Sims_1986" role="doc-biblioref">1986</a>)</span>, <span class="citation">Galí (<a href="references.html#ref-Gali_1992" role="doc-biblioref">1992</a>)</span>, <span class="citation">Ruibio-Ramírez, Waggoner, and Zha (<a href="references.html#ref-RubioRamirez_et_al_2010" role="doc-biblioref">2010</a>)</span>.</li>
+<li>It is easy to implement: the appropriate entries of <span class="math inline">\(B\)</span> are set to 0.</li>
+<li>A particular (popular) case is that of the <strong>Cholesky, or recursive approach</strong>.</li>
+<li>Examples include <span class="citation">Bernanke (<a href="references.html#ref-BERNANKE198649" role="doc-biblioref">1986</a>)</span>, <span class="citation">Sims (<a href="references.html#ref-Sims_1986" role="doc-biblioref">1986</a>)</span>, <span class="citation">Galí (<a href="references.html#ref-Gali_1992" role="doc-biblioref">1992</a>)</span>, <span class="citation">Ruibio-Ramírez, Waggoner, and Zha (<a href="references.html#ref-RubioRamirez_et_al_2010" role="doc-biblioref">2010</a>)</span>.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li>A <strong>long-run restriction (LRR)</strong> prevents a structural shock from having a cumulative impact on one of the endogenous variables.</li>
 </ol>
 <ul>
 <li>Additional computations are required to implement this. One needs to compute the cumulative effect of one of the structural shocks <span class="math inline">\(u_{t}\)</span> on one of the endogenous variable.</li>
-<li>Examples: <span class="citation">Blanchard and Quah (<a href="references.html#ref-Blanchard_Quah_1989" role="doc-biblioref">1989</a>)</span>, <span class="citation">Faust and Leeper (<a href="references.html#ref-Faust_Leeper_1997" role="doc-biblioref">1997</a>)</span>, <span class="citation">Galí (<a href="references.html#ref-Gali_1999" role="doc-biblioref">1999</a>)</span>, <span class="citation">Erceg, Guerrieri, and Gust (<a href="references.html#ref-Erceg_et_al_2005" role="doc-biblioref">2005</a>)</span>, <span class="citation">Christiano, Eichenbaum, and Vigfusson (<a href="references.html#ref-NBERc11177" role="doc-biblioref">2007</a>)</span>.</li>
+<li>Examples include <span class="citation">Blanchard and Quah (<a href="references.html#ref-Blanchard_Quah_1989" role="doc-biblioref">1989</a>)</span>, <span class="citation">Faust and Leeper (<a href="references.html#ref-Faust_Leeper_1997" role="doc-biblioref">1997</a>)</span>, <span class="citation">Galí (<a href="references.html#ref-Gali_1999" role="doc-biblioref">1999</a>)</span>, <span class="citation">Erceg, Guerrieri, and Gust (<a href="references.html#ref-Erceg_et_al_2005" role="doc-biblioref">2005</a>)</span>, <span class="citation">Christiano, Eichenbaum, and Vigfusson (<a href="references.html#ref-NBERc11177" role="doc-biblioref">2007</a>)</span>.</li>
 </ul>
 <p>The two approaches can be combined (see, e.g., <span class="citation">Gerlach and Smets (<a href="references.html#ref-Gerlach_Smets_1995" role="doc-biblioref">1995</a>)</span>).</p>
 </div>
@@ -174,7 +173,7 @@ where:
 <li>
 <span class="math inline">\(i_t\)</span> is contemporaneously affected by <span class="math inline">\(\eta_{mp,t}\)</span>, <span class="math inline">\(\eta_{\pi,t}\)</span> and <span class="math inline">\(\eta_{d,t}\)</span>.</li>
 </ul>
-<p>System <a href="identifStruct.html#eq:systemI">(2.1)</a> could be rewritten in the form:
+<p>System <a href="identifStruct.html#eq:systemI">(2.1)</a> could be rewritten as follows:
 <span class="math display" id="eq:BBBB">\[\begin{equation}
 \left[\begin{array}{c}
 d_t\\
@@ -193,9 +192,9 @@ i_{t-1} +
 \bullet &amp; \bullet &amp; 0 \\
 \bullet &amp; \bullet &amp; \bullet
 \end{array}
-\right]}_{=B} \eta_t}_{=\varepsilon_t}\tag{2.3}
+\right]}_{=B} \eta_t.}_{=\varepsilon_t}\tag{2.3}
 \end{equation}\]</span></p>
-<p>This is the <strong>reduced-form</strong> of the model. This representation suggests three additional restrictions on the entries of <span class="math inline">\(B\)</span>; the latter matrix is therefore identified (up to the signs of its columns) as soon as <span class="math inline">\(\Omega = BB'\)</span> is known.</p>
+<p>This is the <strong>reduced-form</strong> of the model. This representation suggests three additional restrictions on the entries of <span class="math inline">\(B\)</span>; the latter matrix is therefore identified as soon as <span class="math inline">\(\Omega = BB'\)</span> is known (up to the signs of its columns).</p>
 </div>
 <div id="cholesky-a-specific-short-run-restriction-situation" class="section level2" number="2.3">
 <h2>
@@ -209,13 +208,17 @@ i_{t-1} +
 (i.e., on date <span class="math inline">\(t\)</span>) two endogenous variables, <span class="math inline">\(y_{n_1,t}\)</span> (the same as before) and <span class="math inline">\(y_{n_2,t}\)</span>;</li>
 <li><span class="math inline">\(\dots\)</span></li>
 </ul>
-<p>This implies (1) that column <span class="math inline">\(n_1\)</span> of <span class="math inline">\(B\)</span> has only 1 non-zero entry (this is the <span class="math inline">\(n_1^{th}\)</span> entry), (2) that column <span class="math inline">\(n_2\)</span> of <span class="math inline">\(B\)</span> has 2 non-zero entries (the <span class="math inline">\(n_1^{th}\)</span> and the <span class="math inline">\(n_2^{th}\)</span> ones), etc. Without loss of generality, we can set <span class="math inline">\(n_1=n\)</span>, <span class="math inline">\(n_2=n-1\)</span>, etc. In this context, matrix <span class="math inline">\(B\)</span> is lower triangular.</p>
-<p>The Cholesky decomposition of <span class="math inline">\(\Omega_{\varepsilon}\)</span> then provides an appropriate estimate of <span class="math inline">\(B\)</span>, since this matrix decomposition yields to a lower triangular matrix satisfying:
+<p>This implies</p>
+<ol style="list-style-type: decimal">
+<li>that column <span class="math inline">\(n_1\)</span> of <span class="math inline">\(B\)</span> has only 1 non-zero entry (this is the <span class="math inline">\(n_1^{th}\)</span> entry),</li>
+<li>that column <span class="math inline">\(n_2\)</span> of <span class="math inline">\(B\)</span> has 2 non-zero entries (the <span class="math inline">\(n_1^{th}\)</span> and the <span class="math inline">\(n_2^{th}\)</span> ones), etc.</li>
+</ol>
+<p>Without loss of generality, we can set <span class="math inline">\(n_1=n\)</span>, <span class="math inline">\(n_2=n-1\)</span>, etc. In this context, matrix <span class="math inline">\(B\)</span> is lower triangular. The Cholesky decomposition of <span class="math inline">\(\Omega_{\varepsilon}\)</span> then provides an appropriate estimate of <span class="math inline">\(B\)</span>, since this matrix decomposition yields to a lower triangular matrix satisfying:
 <span class="math display">\[
 \Omega_\varepsilon = BB'.
 \]</span></p>
 <p>For instance, <span class="citation">Dedola and Lippi (<a href="references.html#ref-DEDOLA20051543" role="doc-biblioref">2005</a>)</span> estimate 5 structural VAR models for the US, the UK, Germany, France and Italy to analyse the monetary-policy transmission mechanisms. They estimate SVAR(5) models over the period 1975-1997. The shock-identification scheme is based on Cholesky decompositions, the ordering of the endogenous variables being: the industrial production, the consumer price index, a commodity price index, the short-term rate, monetary aggregate and the effective exchange rate (except for the US). This ordering implies that monetary policy reacts to the shocks affecting the first three variables but that the latter react to monetary policy shocks with a one-period lag only.</p>
-<p>Importantly, the Cholesky approach can be useful when one is interested in one specific structural shock. This was the case, e.g., of <span class="citation">Christiano, Eichenbaum, and Evans (<a href="references.html#ref-Christiano_Eichenbaum_Evans_1996" role="doc-biblioref">1996</a>)</span>. Their identification is based on the following relationship between <span class="math inline">\(\varepsilon_t\)</span> and <span class="math inline">\(\eta_t\)</span>:
+<p>The Cholesky approach can be employed when one is interested in one specific structural shock. This is the case, e.g., of <span class="citation">Christiano, Eichenbaum, and Evans (<a href="references.html#ref-Christiano_Eichenbaum_Evans_1996" role="doc-biblioref">1996</a>)</span>. Their identification is based on the following relationship between <span class="math inline">\(\varepsilon_t\)</span> and <span class="math inline">\(\eta_t\)</span>:
 <span class="math display">\[
 \left[\begin{array}{c}
 \boldsymbol\varepsilon_{S,t}\\
@@ -235,7 +238,7 @@ B_{FS} &amp; B_{Fr} &amp; B_{FF}
 \]</span>
 where <span class="math inline">\(S\)</span>, <span class="math inline">\(r\)</span> and <span class="math inline">\(F\)</span> respectively correspond to <em>slow-moving variables</em>, the policy variable (short-term rate) and <em>fast-moving variables</em>. While <span class="math inline">\(\eta_{r,t}\)</span> is scalar, <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span> and <span class="math inline">\(\boldsymbol\eta_{F,t}\)</span> may be vectors. The space spanned by <span class="math inline">\(\boldsymbol\varepsilon_{S,t}\)</span> is the same as that spanned by <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span>. As a result, because <span class="math inline">\(\varepsilon_{r,t}\)</span> is a linear combination of <span class="math inline">\(\eta_{r,t}\)</span> and <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span> (which are <span class="math inline">\(\perp\)</span>), it comes that the <span class="math inline">\(B_{rr}\eta_{r,t}\)</span>’s are the (population) residuals in the regression of <span class="math inline">\(\varepsilon_{r,t}\)</span> on <span class="math inline">\(\boldsymbol\varepsilon_{S,t}\)</span>. Because <span class="math inline">\(\mathbb{V}ar(\eta_{r,t})=1\)</span>, <span class="math inline">\(B_{rr}\)</span> is given by the square root of the variance of <span class="math inline">\(B_{rr}\eta_{r,t}\)</span>. <span class="math inline">\(B_{F,r}\)</span> is finally obtained by regressing the components of <span class="math inline">\(\boldsymbol\varepsilon_{F,t}\)</span> on the estimates of <span class="math inline">\(\eta_{r,t}\)</span>.</p>
 <p>An equivalent approach consists in computing the Cholesky decomposition of <span class="math inline">\(BB'\)</span> and the contemporaneous impacts of the monetary policy shock (on the <span class="math inline">\(n\)</span> endogenous variables) are the components of the column of <span class="math inline">\(B\)</span> corresponding to the policy variable.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
@@ -272,8 +275,8 @@ Hence, the fact that a given structural shock (<span class="math inline">\(\eta_
 <span class="math display">\[
 \lim_{h\rightarrow\infty}\frac{\partial GDP_{t+h}}{\partial \eta_{i,t}} = \lim_{h\rightarrow\infty} \frac{\partial}{\partial \eta_{i,t}}\left(\sum_{k=1}^h \Delta  GDP_{t+k}\right)= 0.
 \]</span></p>
-<p>This can be easily formulated as a function of <span class="math inline">\(B\)</span> and of the matrices <span class="math inline">\(\Phi_i\)</span> when <span class="math inline">\(y_t\)</span> (including <span class="math inline">\(\Delta GDP_t\)</span>) follows a VAR process.</p>
-<p>Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR(<span class="math inline">\(p\)</span>) as a VAR(1). To see that, stack the last <span class="math inline">\(p\)</span> values of vector <span class="math inline">\(y_t\)</span> in vector <span class="math inline">\(y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'\)</span>; Eq. <a href="basics.html#eq:yVAR">(1.1)</a> can then be rewritten in its <strong>companion form</strong>:
+<p>This long-run effect can be formulated as a function of <span class="math inline">\(B\)</span> and of the matrices <span class="math inline">\(\Phi_i\)</span> when <span class="math inline">\(y_t\)</span> (including <span class="math inline">\(\Delta GDP_t\)</span>) follows a VAR process.</p>
+<p>Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR(<span class="math inline">\(p\)</span>) as a VAR(1): for that, stack the last <span class="math inline">\(p\)</span> values of vector <span class="math inline">\(y_t\)</span> in vector <span class="math inline">\(y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'\)</span>; Eq. <a href="basics.html#eq:yVAR">(1.1)</a> can then be rewritten in its <strong>companion form</strong>:
 <span class="math display" id="eq:ystarVAR">\[\begin{equation}
 y_{t}^{*} =
 \underbrace{\left[\begin{array}{c}
@@ -293,14 +296,15 @@ y_{t-1}^{*}+
 \vdots\\
 0\end{array}\right]}_{\varepsilon_t^*},\tag{2.4}
 \end{equation}\]</span>
-where matrices <span class="math inline">\(\Phi\)</span> and <span class="math inline">\(\Omega^* = \mathbb{V}ar(\varepsilon_t^*)\)</span> are of dimension <span class="math inline">\(np \times np\)</span>; <span class="math inline">\(\Omega^*\)</span> is filled with zeros, except the <span class="math inline">\(n\times n\)</span> upper-left block that is equal to <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>. (Matrix <span class="math inline">\(\Phi\)</span> had been introduced in Eq. <a href="basics.html#eq:matrixPHI">(1.7)</a>.)</p>
-<p>Focusing on the VAR(1) case:
+where matrices <span class="math inline">\(\Phi\)</span> and <span class="math inline">\(\Omega^* = \mathbb{V}ar(\varepsilon_t^*)\)</span> are of dimension <span class="math inline">\(np \times np\)</span>; <span class="math inline">\(\Omega^*\)</span> is filled with zeros, except the <span class="math inline">\(n\times n\)</span> upper-left block that is equal to <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>. (Matrix <span class="math inline">\(\Phi\)</span> had been introduced in Eq. <a href="basics.html#eq:matrixPHI">(1.8)</a>.)</p>
+<p>Let us then focus on the VAR(1) case:
 <span class="math display">\[\begin{eqnarray*}
 y_{t} &amp;=&amp; c+\Phi y_{t-1}+\varepsilon_{t}\\
 &amp; = &amp; c+\varepsilon_{t}+\Phi(c+\varepsilon_{t-1})+\ldots+\Phi^{k}(c+\varepsilon_{t-k})+\ldots \\
 &amp; = &amp; \mu +\varepsilon_{t}+\Phi\varepsilon_{t-1}+\ldots+\Phi^{k}\varepsilon_{t-k}+\ldots \\
 &amp; = &amp; \mu +B\eta_{t}+\Phi B\eta_{t-1}+\ldots+\Phi^{k}B\eta_{t-k}+\ldots,
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
+which is the Wold representation of <span class="math inline">\(y_t\)</span>.</p>
 <p>The sequence of shocks <span class="math inline">\(\{\eta_t\}\)</span> determines the sequence <span class="math inline">\(\{y_t\}\)</span>. What if <span class="math inline">\(\{\eta_t\}\)</span> is replaced with <span class="math inline">\(\{\tilde{\eta}_t\}\)</span>, where <span class="math inline">\(\tilde{\eta}_t=\eta_t\)</span> if <span class="math inline">\(t \ne s\)</span> and <span class="math inline">\(\tilde{\eta}_s=\eta_s + \gamma\)</span>? Assume <span class="math inline">\(\{\tilde{y}_t\}\)</span> is the associated “perturbated” sequence. We have <span class="math inline">\(\tilde{y}_t = y_t\)</span> if <span class="math inline">\(t&lt;s\)</span>. For <span class="math inline">\(t \ge s\)</span>, the Wold decomposition of <span class="math inline">\(\{\tilde{y}_t\}\)</span> implies:
 <span class="math display">\[
 \tilde{y}_t = y_t + \Phi^{t-s} B \gamma.
@@ -318,8 +322,8 @@ Therefore, the cumulative impact of <span class="math inline">\(\gamma\)</span> 
 \vdots\\
 0\end{array}\right],
 \]</span>
-that is the first column of <span class="math inline">\(\Theta \equiv (Id - \Phi)^{-1}B\)</span>.</p>
-<p>In this context, consider the following long-run restriction: <em>“<span class="math inline">\(j^{th}\)</span> structural shock has no cumulative impact on the <span class="math inline">\(i^{th}\)</span> endogenous variable”</em>. It is equivalent to
+that is the first column of the <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\Theta \equiv (Id - \Phi)^{-1}B\)</span>.</p>
+<p>In this context, consider the following long-run restriction: <em>“the <span class="math inline">\(j^{th}\)</span> structural shock has no cumulative impact on the <span class="math inline">\(i^{th}\)</span> endogenous variable”</em>. It is equivalent to
 <span class="math display">\[
 \Theta_{ij}=0,
 \]</span>
@@ -343,7 +347,7 @@ where <span class="math inline">\(\Theta_{ij}\)</span> is the element <span clas
 <!-- \end{eqnarray*} -->
 <!-- Then, it appears that the demand shocks have no long-run cumulative impact on $\Delta Y_{t}$, the GDP growth, i.e. no long-term impact on output $Y_t$. The vector of endogenous variables is $y_t = [\Delta Y_{t} \quad u_{t}]'$ where $\Delta Y_{t}$ denotes the GDP growth. -->&lt;/p&gt;"><sup>2</sup></a></p>
 <p><span class="citation">Blanchard and Quah (<a href="references.html#ref-Blanchard_Quah_1989" role="doc-biblioref">1989</a>)</span>’s dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">BQ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
@@ -353,13 +357,13 @@ where <span class="math inline">\(\Theta_{ij}\)</span> is the element <span clas
 <span>     xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="IdentifStructShocks_files/figure-html/BQ1-1.png" width="672"></div>
 <p>Estimate a reduced-form VAR(8) model:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">BQ</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">est.VAR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">Omega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">est.VAR</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now, let us define a loss function (<code>loss</code>) that is equal to zero if (a) <span class="math inline">\(BB'=\Omega\)</span> and (b) the element (1,1) of <span class="math inline">\(\Theta B\)</span> is equal to zero:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>Now, let us define a loss function (<code>loss</code>) that is equal to zero if (a) <span class="math inline">\(BB'=\Omega\)</span> and (b) the element (1,1) of <span class="math inline">\(\Theta = (Id - \Phi)^{-1} B\)</span> is equal to zero:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute (Id - Phi)^{-1}:</span></span>
 <span><span class="va">Phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">est.VAR</span><span class="op">)</span></span>
 <span><span class="va">PHI</span> <span class="op">&lt;-</span> <span class="fu">make.PHI</span><span class="op">(</span><span class="va">Phi</span><span class="op">)</span></span>
@@ -376,13 +380,13 @@ where <span class="math inline">\(\Theta_{ij}\)</span> is the element <span clas
 <pre><code>## [1]  0.8570358 -0.2396345  0.1541395  0.1921221</code></pre>
 <p>(Note: one can use that type of approach, based on a loss function, to mix short- and long-run restrictions.)</p>
 <p>Figure <a href="identifStruct.html#fig:BQ4">2.2</a> displays the resulting IRFs. Note that, for GDP, we cumulate the GDP growth IRF, so as to have the response of the GDP in level.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">res.opt</span><span class="op">$</span><span class="va">par</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Omega</span>,<span class="va">B.hat</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">B.hat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##             Dgdp       unemp                       
 ## Dgdp   0.7582704 -0.17576173  0.7582694 -0.17576173
 ## unemp -0.1757617  0.09433658 -0.1757617  0.09433558</code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb.sim</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.15</span>,<span class="fl">.95</span>,<span class="fl">.15</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>,<span class="va">Phi</span>,<span class="va">B.hat</span>,<span class="va">nb.sim</span>,y0.star<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">*</span><span class="fl">8</span><span class="op">)</span>,</span>
@@ -404,7 +408,7 @@ Figure 2.2: IRF of GDP and unemployment to demand and supply shocks.
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="basics.html"><span class="header-section-number">1</span> Vector Auto-Regressive (VAR) models: the basics</a></div>
+<div class="prev"><a href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></div>
 <div class="next"><a href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -430,7 +434,7 @@ Figure 2.2: IRF of GDP and unemployment to demand and supply shocks.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-13.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
