@@ -13,11 +13,11 @@ Assume that you observe $\eta_{j,t}$, then a consistent estimate of $\Psi_{i,j,h
 \begin{equation}
 y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.(\#eq:OLS1)
 \end{equation}
-Running that kind of regression (using instruments for $\eta_{j,t}$) is the core idea of the **local projection approach** proposed by @Jorda_2005.
+Running that kind of regression (using instruments for $\eta_{j,t}$) is the core idea of the **local projection (LP) approach** proposed by @Jorda_2005.
 
-Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations. While the second requires some instruments, the first approach does not; it corresponds to the original @Jorda_2005's approach. 
+Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section \@ref(#LPIVww)) is the original @Jorda_2005's approach. 
 
-## Situation A: Without IV
+## Situation A: Without IV {#LPIVww}
 
 Assume that the structural shock of interest ($\eta_{1,t}$, say) can be consistently obtained as the residual of a regression of a variable $x_t$ on a set of control variables $w_t$ independent from $\eta_{1,t}$:
 \begin{equation}
@@ -26,18 +26,18 @@ Assume that the structural shock of interest ($\eta_{1,t}$, say) can be consiste
 where $\mathbb{E}(x_t|w_t)$ is affine in $w_t$ and where $w_t$ is an affine transformation of $\eta_{2:n,t}$ and of past shocks $\eta_{t-1},\eta_{t-2},\dots$.
 
 Eq. \@ref(eq:xetaw) implies that, conditional on $w_t$, the additional knowledge of $x_t$ is useful only when it comes to forecast something that depends on $\eta_{1,t}$. Hence, given that $u_{i,1,t+h}$ (see Eq. \@ref(eq:OLS1)) is independent from $\eta_{1,t}$ (it depends on  $\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots$), it comes that
-$$
-\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).
-$$
+\begin{equation}
+\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).(\#eq:uuuIV)
+\end{equation}
 This is the *conditional mean independence* case.
 
-Let's rewrite Eq. \@ref(eq:OLS1) as follows:
+Using \@ref(eq:xetaw), one can rewrite Eq. \@ref(eq:OLS1) as follows:
 \begin{eqnarray*}
 y_{i,t+h} &=& \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
 &=&  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
 \end{eqnarray*}
 
-What precedes implies that the expectation of the blue term, conditional on $x_t$ and $w_t$, is linear in $w_t$. Standard results in the conditional mean independence case imply that the regression of $y_{i,t+h}$ on $x_t$, controlling for $w_t$, provides a consistent estimate of $\Psi_{i,1,h}$:
+Given Eq. \@ref(eq:uuuIV), it comes that, conditional on $x_t$ and $w_t$, the expectation of the blue term is a function of $w_t$. Assuming this expectation is linear, standard results in the conditional mean independence case imply that the OLS estimator in the regression of $y_{i,t+h}$ on $x_t$, controlling for $w_t$, provides a consistent estimate of $\Psi_{i,1,h}$:
 \begin{equation}
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}
@@ -103,12 +103,12 @@ a. derive a series for Federal Reserve intentions for the  federal  funds  rate 
 b. control for Federal Reserve forecasts.
 
 This gives a measure of intended monetary policy actions not driven by information about future economic developments.
+
 a. "intentions" are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and "Blue Books".
 b. Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve's internal forecasts (inflation, real output and unemployment), "Greenbook's forecasts" -- usually issued 6 days before the FOMC meeting.
 
 The shock measure is the residual series in the linear regression of (a) on (b). The time series `Ramey$rrshock83` and  `Ramey$rrshock83b` (where `Ramey` is a data frame included in package `IdSS`) contain such shocks for the period 1983-2007. (`Ramey$rrshock83b` uses long-horizon Greenbook forecasts.)
 :::
-
 
 
 There are two main IV approaches to estimate IRFs see @Stock_Watson_2018:
@@ -124,27 +124,27 @@ If the VAR adequately captures the DGP, then the IV-SVAR is optimal for all hori
 
 ### Situation B.1: SVAR-IV approach {#SVARIVa}
 
-Assume you have consistent estimates of $\varepsilon_t = B\eta_t$, these estimates ($\hat\varepsilon_{t}$) coming from the estimation of a VAR model. You have, for $i \in \{1,\dots,n\}$:
+Assume you have consistent estimates of $\varepsilon_t = B\eta_t$, these estimates ($\hat\varepsilon_{t}$) coming from the estimation of a VAR model. We have, for $i \in \{1,\dots,n\}$:
 \begin{eqnarray}
-\varepsilon_{i,t} &=& b_{i,1} \eta_{1,t} + u_{i,t} (\#eq:eps_rho)\\
+\varepsilon_{i,t} &=& b_{i,1} \eta_{1,t} + u_{i,t} (\#eq:epsrho)\\
 &=& b_{i,1} \rho z_t + \underbrace{b_{i,1}\xi_t + u_{i,t}}_{\perp z_t}. \nonumber
 \end{eqnarray}
 ($u_{i,t}$ is a linear combination of the $\eta_{j,t}$'s, $j\ge2$).
 
-Hence, up to a multiplicative factor ($\rho$), the (OLS) regressions of the $\hat\varepsilon_{i,t}$'s on $z_t$ provide consistent estimates of the $b_{i,1}$'s.
+Hence, up to a multiplicative factor ($\rho$), the (OLS) regressions of the $\hat\varepsilon_{i,t}$'s on $z_t$ (that are consistent of the true $\varepsilon_{i,t}$'s) provide consistent estimates of the $b_{i,1}$'s.
 
-Combined with the estimated VAR (the $\Phi_k$ matrices), this provides consistent estimates of the IRFs of $\eta_{1,t}$ on $y_t$, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock ("unit-effect normalisation", see @Stock_Watson_2018). Let us consider $\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}$; by construction, $\tilde\eta_{1,t}$ has a one-unit contemporaneous effect on $y_{1,t}$. Denoting by $\tilde{B}_{i,1}$ the contemporaneous impact of $\tilde\eta_{1,t}$, we get:
+Combined with the estimated VAR (the $\Phi_k$ matrices), this provides consistent estimates of the IRFs of $\eta_{1,t}$ on $y_t$, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock ("unit-effect normalisation", see @Stock_Watson_2018). Let us consider $\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}$; by construction, $\tilde\eta_{1,t}$ has a unit contemporaneous effect on $y_{1,t}$. Denoting by $\tilde{B}_{i,1}$ the contemporaneous impact of $\tilde\eta_{1,t}$, we get:
 $$
 \tilde{B}_{1} = \frac{1}{b_{1,1}} {B}_{1},
 $$
 where $B_{1}$ denotes the $1^{st}$ column of $B$ and $\tilde{B}_{1}=[1,\tilde{B}_{2,1},\dots,\tilde{B}_{n,1}]'$.
 
-Eq. \@ref(eq:eps_rho) gives:
+Eq. \@ref(eq:epsrho) gives:
 \begin{eqnarray*}
 \varepsilon_{1,t} &=& \tilde\eta_{1,t} + u_{1,t}\\
 \varepsilon_{i,t} &=& \tilde{B}_{i,1} \tilde\eta_{1,t} + u_{i,t}.
 \end{eqnarray*}
-This suggests that $\tilde{B}_{i,1}$ can be estimated by regressing $\varepsilon_{i,t}$ on $\varepsilon_{1,t}$, using $z_t$ as an instrument.
+This suggests that $\tilde{B}_{i,1}$ can be estimated by regressing $\varepsilon_{i,t}$ on $\varepsilon_{1,t}$ (or $\hat\varepsilon_{i,t}$ on $\hat\varepsilon_{1,t}$ in practice), using $z_t$ as an instrument.
 
 What about inference? Once cannot use the usual TSLS standard deviations because the $\varepsilon_{i,t}$'s are not directly observed. Bootstrap procedures can be resorted to. @Stock_Watson_2018 propose, in particular, a Gaussian parametric bootstrap:
 
@@ -186,15 +186,12 @@ where $\widehat{\rho}(L)$ and $\sigma^2_{e}$ result from the estimation of an AR
 
 For each simulated sample (of $\tilde{y}_t$ and $\tilde{z}_t$, say), estimate $\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}$ and associated $\widetilde{\Psi}_{i,1,h}$. This provides e.g. a sequence of $N$ estimates of $\Psi_{i,1,h}$, from which quantiles and conf. intervals can be deduced.
 
-
+In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is `FF4_TC` from the Ramsey's database; they are base on the @Gertler_Karadi_2015 approach, that use 3-month fed funds futures.
 
 ```{r essaiIV0, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Gertler-Karadi monthly shocks, fed funds futures 3 months."}
-# Load vars package:
-library(vars)
-library(IdSS)
+library(vars);library(IdSS)
 data("USmonthly")
-First.date <- "1990-05-01"
-Last.date <- "2012-6-01"
+First.date <- "1990-05-01";Last.date <- "2012-6-01"
 indic.first <- which(USmonthly$DATES==First.date)
 indic.last  <- which(USmonthly$DATES==Last.date)
 USmonthly   <- USmonthly[indic.first:indic.last,]
@@ -228,7 +225,7 @@ res.svar.iv <-
 
 ### Situation B.2: LP-IV  {#LPIVa}
 
-If you do not want to posit a VAR-type dynamics for $y_t$ --e.g. because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the $\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}$ (that are the IRFs of $\tilde\eta_{1,t}$ on $y_{i,t}$).
+If you do not want to posit a VAR-type dynamics for $y_t$ --e.g., because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the $\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}$ (that are the IRFs of $\tilde\eta_{1,t}$ on $y_{i,t}$).
 
 However, Assumptions (IV.i) and (IV.ii) (Eq. \@ref(eq:IV1)) have to be complemented with (IV.iii):
 \begin{equation*}
@@ -256,31 +253,23 @@ Consider the linear regression:
 $$
 \bv{Y} = \bv{X}\boldsymbol\beta + \boldsymbol\varepsilon,
 $$
-where $\mathbb{E}(\boldsymbol\varepsilon)=0$, but where the explicative variables $\bv{X}$ are supposed to be correlated to the residuals $\boldsymbol\varepsilon$. 
-
-Moreover, the $\boldsymbol\varepsilon$ are supposed to be possibly heteroskedastic and auto-correlated.
-
-We consider the instruments $\bv{Z}$, with $\mathbb{E}(\bv{X}'\bv{Z}) \ne 0$ but $\mathbb{E}(\boldsymbol\varepsilon'\bv{Z}) = 0$.
+where $\mathbb{E}(\boldsymbol\varepsilon)=0$, but where the explicative variables $\bv{X}$ can be correlated to the residuals $\boldsymbol\varepsilon$. Moreover, the $\boldsymbol\varepsilon$'s may feature heteroskedasticity and be auto-correlated. We denote by $\bv{Z}$ the matrix of instruments, with $\mathbb{E}(\bv{X}'\bv{Z}) \ne 0$ but $\mathbb{E}(\boldsymbol\varepsilon'\bv{Z}) = 0$.
 
 The IV estimator of $\boldsymbol\beta$ is obtained by regressing $\hat{\bv{Y}}$ on $\hat{\bv{X}}$, where $\hat{\bv{Y}}$ and $\hat{\bv{X}}$ are the respective residuals of the regressions of $\bv{Y}$ and $\bv{X}$ on $\bv{Z}$.
 \begin{eqnarray*}
 \bv{b}_{iv} &=& [\bv{X}'\bv{Z}(\bv{Z}'\bv{Z})^{-1}\bv{Z}'\bv{X}]^{-1}\bv{X}'\bv{Z}(\bv{Z}'\bv{Z})^{-1}\bv{Z}'\bv{Y}\\
 \bv{b}_{iv} &=& \boldsymbol\beta + \frac{1}{\sqrt{T}}\underbrace{T[\bv{X}'\bv{Z}(\bv{Z}'\bv{Z})^{-1}\bv{Z}'\bv{X}]^{-1}\bv{X}'\bv{Z}(\bv{Z}'\bv{Z})^{-1}}_{=Q(\bv{X},\bv{Z}) \overset{p}{\rightarrow} \bv{Q}_{xz}}\underbrace{\sqrt{T}\left(\frac{1}{T}\bv{Z}'\boldsymbol\varepsilon\right)}_{\overset{d}{\rightarrow} \mathcal{N}(0,S)},
 \end{eqnarray*}
-where $\bv{S}$ is the long-run variance of $\bv{z}_t\varepsilon_t$ (see next slide).
-
-The asymptotic covariance matrix of $\sqrt{T}\bv{b}_{iv}$ is $\bv{Q}_{xz} \bv{S} \bv{Q}_{xz}'$.
-
-The covariance matrix of $\bv{b}_{iv}$ can be approximated by $\frac{1}{T}Q(\bv{X},\bv{Z})\hat{\bv{S}}Q(\bv{X},\bv{Z})'$ where $\hat{\bv{S}}$ is the Newey-West estimator of $\bv{S}$.^[That is: $\hat{\bv{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu$, where the $\hat\gamma_j$'s are sample auto-covariances of $\bv{z}_t\varepsilon_t$, see @Newey_West_1987]
+where $\bv{S}$ is the long-run variance of $\bv{z}_t\varepsilon_t$.^[That is the sum of the covariance matrices of $\bv{z}_t\varepsilon_t$, for orders from $-\infty$ to $+\infty$.] The asymptotic covariance matrix of $\sqrt{T}\bv{b}_{iv}$ is $\bv{Q}_{xz} \bv{S} \bv{Q}_{xz}'$. Therefore, the covariance matrix of $\bv{b}_{iv}$ can be approximated by $\frac{1}{T}Q(\bv{X},\bv{Z})\hat{\bv{S}}Q(\bv{X},\bv{Z})'$ where $\hat{\bv{S}}$ is the Newey-West estimator of $\bv{S}$.^[That is: $\hat{\bv{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu$, where the $\hat\gamma_j$'s are sample auto-covariances of $\bv{z}_t\varepsilon_t$, see @Newey_West_1987]
 
 
-(IV.iii) is usually not restrictive for $h>0$ ($z_t$ is usually not affected by future shocks). By contrast, it may be restrictive for $h<0$. This can be solved by adding controls in Regression \@ref(eq:regIV1). These controls should span the space of $\{\eta_{t-1},\eta_{t-2},\dots\}$.
+Assumption (IV.iii) is usually not restrictive for $h>0$ ($z_t$ is usually not affected by future shocks). By contrast, it may be restrictive for $h<0$. This can be solved by adding controls in Regression \@ref(eq:regIV1). These controls should span the space of $\{\eta_{t-1},\eta_{t-2},\dots\}$.
 
 If $z_t$ is  suspected to be correlated to past values of $\eta_{1,t}$ but not to the $\eta_{j,t}$'s, $j>1$, then one can add lags of $z_t$ as controls (method e.g. advocated by Ramey, 2016, p.108, considering the instrument by @Gertler_Karadi_2015).
 
 In the general case, one can use lags of $y_t$ as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.
 
-As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency.
+<!-- As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency. -->
 
 
 

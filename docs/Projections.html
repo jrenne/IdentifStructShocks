@@ -100,12 +100,12 @@ As seen in Section <a href="basics.html#IRFSVARMA">1.2</a>, the entries <span cl
 <span class="math display" id="eq:OLS1">\[\begin{equation}
 y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.\tag{6.1}
 \end{equation}\]</span>
-Running that kind of regression (using instruments for <span class="math inline">\(\eta_{j,t}\)</span>) is the core idea of the <strong>local projection approach</strong> proposed by <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005" role="doc-biblioref">2005</a>)</span>.</p>
-<p>Now, how to proceed in the (usual) case where <span class="math inline">\(\eta_{j,t}\)</span> is not observed? We consider two situations. While the second requires some instruments, the first approach does not; it corresponds to the original <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005" role="doc-biblioref">2005</a>)</span>’s approach.</p>
+Running that kind of regression (using instruments for <span class="math inline">\(\eta_{j,t}\)</span>) is the core idea of the <strong>local projection (LP) approach</strong> proposed by <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005" role="doc-biblioref">2005</a>)</span>.</p>
+<p>Now, how to proceed in the (usual) case where <span class="math inline">\(\eta_{j,t}\)</span> is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section @ref(#LPIVww)) is the original <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005" role="doc-biblioref">2005</a>)</span>’s approach.</p>
 </div>
-<div id="situation-a-without-iv" class="section level2" number="6.2">
+<div id="LPIVww" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> Situation A: Without IV<a class="anchor" aria-label="anchor" href="#situation-a-without-iv"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> Situation A: Without IV<a class="anchor" aria-label="anchor" href="#LPIVww"><i class="fas fa-link"></i></a>
 </h2>
 <p>Assume that the structural shock of interest (<span class="math inline">\(\eta_{1,t}\)</span>, say) can be consistently obtained as the residual of a regression of a variable <span class="math inline">\(x_t\)</span> on a set of control variables <span class="math inline">\(w_t\)</span> independent from <span class="math inline">\(\eta_{1,t}\)</span>:
 <span class="math display" id="eq:xetaw">\[\begin{equation}
@@ -113,16 +113,16 @@ Running that kind of regression (using instruments for <span class="math inline"
 \end{equation}\]</span>
 where <span class="math inline">\(\mathbb{E}(x_t|w_t)\)</span> is affine in <span class="math inline">\(w_t\)</span> and where <span class="math inline">\(w_t\)</span> is an affine transformation of <span class="math inline">\(\eta_{2:n,t}\)</span> and of past shocks <span class="math inline">\(\eta_{t-1},\eta_{t-2},\dots\)</span>.</p>
 <p>Eq. <a href="Projections.html#eq:xetaw">(6.2)</a> implies that, conditional on <span class="math inline">\(w_t\)</span>, the additional knowledge of <span class="math inline">\(x_t\)</span> is useful only when it comes to forecast something that depends on <span class="math inline">\(\eta_{1,t}\)</span>. Hence, given that <span class="math inline">\(u_{i,1,t+h}\)</span> (see Eq. <a href="Projections.html#eq:OLS1">(6.1)</a>) is independent from <span class="math inline">\(\eta_{1,t}\)</span> (it depends on <span class="math inline">\(\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)</span>), it comes that
-<span class="math display">\[
-\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).
-\]</span>
+<span class="math display" id="eq:uuuIV">\[\begin{equation}
+\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).\tag{6.3}
+\end{equation}\]</span>
 This is the <em>conditional mean independence</em> case.</p>
-<p>Let’s rewrite Eq. <a href="Projections.html#eq:OLS1">(6.1)</a> as follows:
+<p>Using <a href="Projections.html#eq:xetaw">(6.2)</a>, one can rewrite Eq. <a href="Projections.html#eq:OLS1">(6.1)</a> as follows:
 <span class="math display">\[\begin{eqnarray*}
 y_{i,t+h} &amp;=&amp; \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
 &amp;=&amp;  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
 \end{eqnarray*}\]</span></p>
-<p>What precedes implies that the expectation of the blue term, conditional on <span class="math inline">\(x_t\)</span> and <span class="math inline">\(w_t\)</span>, is linear in <span class="math inline">\(w_t\)</span>. Standard results in the conditional mean independence case imply that the regression of <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(x_t\)</span>, controlling for <span class="math inline">\(w_t\)</span>, provides a consistent estimate of <span class="math inline">\(\Psi_{i,1,h}\)</span>:
+<p>Given Eq. <a href="Projections.html#eq:uuuIV">(6.3)</a>, it comes that, conditional on <span class="math inline">\(x_t\)</span> and <span class="math inline">\(w_t\)</span>, the expectation of the blue term is a function of <span class="math inline">\(w_t\)</span>. Assuming this expectation is linear, standard results in the conditional mean independence case imply that the OLS estimator in the regression of <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(x_t\)</span>, controlling for <span class="math inline">\(w_t\)</span>, provides a consistent estimate of <span class="math inline">\(\Psi_{i,1,h}\)</span>:
 <span class="math display">\[\begin{equation}
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}\]</span></p>
@@ -143,9 +143,9 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \begin{array}{llll}
 (IV.i) &amp; \mathbb{E}(z_t \eta_{1,t}) &amp;\ne 0 &amp; \mbox{(relevance condition)} \\
 (IV.ii) &amp; \mathbb{E}(z_t \eta_{j,t}) &amp;= 0 \quad \mbox{for } j&gt;1 &amp; \mbox{(exogeneity condition).}
-\end{array}\right.\tag{6.3}
+\end{array}\right.\tag{6.4}
 \end{equation}\]</span>
-The instrument <span class="math inline">\(z_t\)</span> can be used to identify the structural shock. Eq. <a href="Projections.html#eq:IV1">(6.3)</a> implies that there exist <span class="math inline">\(\rho \ne 0\)</span> and a mean-zero variable <span class="math inline">\(\xi_t\)</span> such that:
+The instrument <span class="math inline">\(z_t\)</span> can be used to identify the structural shock. Eq. <a href="Projections.html#eq:IV1">(6.4)</a> implies that there exist <span class="math inline">\(\rho \ne 0\)</span> and a mean-zero variable <span class="math inline">\(\xi_t\)</span> such that:
 <span class="math display">\[
 \eta_{1,t} = \rho z_t + \xi_t,
 \]</span>
@@ -177,9 +177,11 @@ Figure 6.1: Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Fed
 <li>derive a series for Federal Reserve intentions for the federal funds rate (the explicit target of the Fed) around FOMC meetings,</li>
 <li>control for Federal Reserve forecasts.</li>
 </ol>
-<p>This gives a measure of intended monetary policy actions not driven by information about future economic developments.
-a. “intentions” are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and “Blue Books”.
-b. Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve’s internal forecasts (inflation, real output and unemployment), “Greenbook’s forecasts” – usually issued 6 days before the FOMC meeting.</p>
+<p>This gives a measure of intended monetary policy actions not driven by information about future economic developments.</p>
+<ol style="list-style-type: lower-alpha">
+<li>“intentions” are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and “Blue Books”.</li>
+<li>Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve’s internal forecasts (inflation, real output and unemployment), “Greenbook’s forecasts” – usually issued 6 days before the FOMC meeting.</li>
+</ol>
 <p>The shock measure is the residual series in the linear regression of (a) on (b). The time series <code>Ramey$rrshock83</code> and <code>Ramey$rrshock83b</code> (where <code>Ramey</code> is a data frame included in package <code>IdSS</code>) contain such shocks for the period 1983-2007. (<code>Ramey$rrshock83b</code> uses long-horizon Greenbook forecasts.)</p>
 </div>
 <p>There are two main IV approaches to estimate IRFs see <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>:</p>
@@ -194,24 +196,24 @@ b. Controls = variables spanning the information the Federal Reserve has about f
 <h3>
 <span class="header-section-number">6.3.2</span> Situation B.1: SVAR-IV approach<a class="anchor" aria-label="anchor" href="#SVARIVa"><i class="fas fa-link"></i></a>
 </h3>
-<p>Assume you have consistent estimates of <span class="math inline">\(\varepsilon_t = B\eta_t\)</span>, these estimates (<span class="math inline">\(\hat\varepsilon_{t}\)</span>) coming from the estimation of a VAR model. You have, for <span class="math inline">\(i \in \{1,\dots,n\}\)</span>:
-<span class="math display">\[\begin{eqnarray}
-\varepsilon_{i,t} &amp;=&amp; b_{i,1} \eta_{1,t} + u_{i,t} (\#eq:eps_rho)\\
+<p>Assume you have consistent estimates of <span class="math inline">\(\varepsilon_t = B\eta_t\)</span>, these estimates (<span class="math inline">\(\hat\varepsilon_{t}\)</span>) coming from the estimation of a VAR model. We have, for <span class="math inline">\(i \in \{1,\dots,n\}\)</span>:
+<span class="math display" id="eq:epsrho">\[\begin{eqnarray}
+\varepsilon_{i,t} &amp;=&amp; b_{i,1} \eta_{1,t} + u_{i,t} \tag{6.5}\\
 &amp;=&amp; b_{i,1} \rho z_t + \underbrace{b_{i,1}\xi_t + u_{i,t}}_{\perp z_t}. \nonumber
 \end{eqnarray}\]</span>
 (<span class="math inline">\(u_{i,t}\)</span> is a linear combination of the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j\ge2\)</span>).</p>
-<p>Hence, up to a multiplicative factor (<span class="math inline">\(\rho\)</span>), the (OLS) regressions of the <span class="math inline">\(\hat\varepsilon_{i,t}\)</span>’s on <span class="math inline">\(z_t\)</span> provide consistent estimates of the <span class="math inline">\(b_{i,1}\)</span>’s.</p>
-<p>Combined with the estimated VAR (the <span class="math inline">\(\Phi_k\)</span> matrices), this provides consistent estimates of the IRFs of <span class="math inline">\(\eta_{1,t}\)</span> on <span class="math inline">\(y_t\)</span>, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (“unit-effect normalisation”, see <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>). Let us consider <span class="math inline">\(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\)</span>; by construction, <span class="math inline">\(\tilde\eta_{1,t}\)</span> has a one-unit contemporaneous effect on <span class="math inline">\(y_{1,t}\)</span>. Denoting by <span class="math inline">\(\tilde{B}_{i,1}\)</span> the contemporaneous impact of <span class="math inline">\(\tilde\eta_{1,t}\)</span>, we get:
+<p>Hence, up to a multiplicative factor (<span class="math inline">\(\rho\)</span>), the (OLS) regressions of the <span class="math inline">\(\hat\varepsilon_{i,t}\)</span>’s on <span class="math inline">\(z_t\)</span> (that are consistent of the true <span class="math inline">\(\varepsilon_{i,t}\)</span>’s) provide consistent estimates of the <span class="math inline">\(b_{i,1}\)</span>’s.</p>
+<p>Combined with the estimated VAR (the <span class="math inline">\(\Phi_k\)</span> matrices), this provides consistent estimates of the IRFs of <span class="math inline">\(\eta_{1,t}\)</span> on <span class="math inline">\(y_t\)</span>, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (“unit-effect normalisation”, see <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>). Let us consider <span class="math inline">\(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\)</span>; by construction, <span class="math inline">\(\tilde\eta_{1,t}\)</span> has a unit contemporaneous effect on <span class="math inline">\(y_{1,t}\)</span>. Denoting by <span class="math inline">\(\tilde{B}_{i,1}\)</span> the contemporaneous impact of <span class="math inline">\(\tilde\eta_{1,t}\)</span>, we get:
 <span class="math display">\[
 \tilde{B}_{1} = \frac{1}{b_{1,1}} {B}_{1},
 \]</span>
 where <span class="math inline">\(B_{1}\)</span> denotes the <span class="math inline">\(1^{st}\)</span> column of <span class="math inline">\(B\)</span> and <span class="math inline">\(\tilde{B}_{1}=[1,\tilde{B}_{2,1},\dots,\tilde{B}_{n,1}]'\)</span>.</p>
-<p>Eq. @ref(eq:eps_rho) gives:
+<p>Eq. <a href="Projections.html#eq:epsrho">(6.5)</a> gives:
 <span class="math display">\[\begin{eqnarray*}
 \varepsilon_{1,t} &amp;=&amp; \tilde\eta_{1,t} + u_{1,t}\\
 \varepsilon_{i,t} &amp;=&amp; \tilde{B}_{i,1} \tilde\eta_{1,t} + u_{i,t}.
 \end{eqnarray*}\]</span>
-This suggests that <span class="math inline">\(\tilde{B}_{i,1}\)</span> can be estimated by regressing <span class="math inline">\(\varepsilon_{i,t}\)</span> on <span class="math inline">\(\varepsilon_{1,t}\)</span>, using <span class="math inline">\(z_t\)</span> as an instrument.</p>
+This suggests that <span class="math inline">\(\tilde{B}_{i,1}\)</span> can be estimated by regressing <span class="math inline">\(\varepsilon_{i,t}\)</span> on <span class="math inline">\(\varepsilon_{1,t}\)</span> (or <span class="math inline">\(\hat\varepsilon_{i,t}\)</span> on <span class="math inline">\(\hat\varepsilon_{1,t}\)</span> in practice), using <span class="math inline">\(z_t\)</span> as an instrument.</p>
 <p>What about inference? Once cannot use the usual TSLS standard deviations because the <span class="math inline">\(\varepsilon_{i,t}\)</span>’s are not directly observed. Bootstrap procedures can be resorted to. <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span> propose, in particular, a Gaussian parametric bootstrap:</p>
 <p>Assume you have estimated <span class="math inline">\(\{\widehat{\Phi}_1,\dots,\widehat{\Phi}_p,\widehat{B}_1\}\)</span> using the SVAR-IV approach based on a size-<span class="math inline">\(T\)</span> sample. Generate <span class="math inline">\(N\)</span> (where <span class="math inline">\(N\)</span> is large) size-<span class="math inline">\(T\)</span> samples from the following VAR:
 <span class="math display">\[
@@ -249,13 +251,11 @@ S_{\varepsilon,e}&amp; \sigma^2_{e}
 \]</span>
 where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="math inline">\(\sigma^2_{e}\)</span> result from the estimation of an AR process for <span class="math inline">\(z_t\)</span>, and where <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S_{\varepsilon,e}\)</span> are sample covariances for the VAR/AR residuals.</p>
 <p>For each simulated sample (of <span class="math inline">\(\tilde{y}_t\)</span> and <span class="math inline">\(\tilde{z}_t\)</span>, say), estimate <span class="math inline">\(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\)</span> and associated <span class="math inline">\(\widetilde{\Psi}_{i,1,h}\)</span>. This provides e.g. a sequence of <span class="math inline">\(N\)</span> estimates of <span class="math inline">\(\Psi_{i,1,h}\)</span>, from which quantiles and conf. intervals can be deduced.</p>
+<p>In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is <code>FF4_TC</code> from the Ramsey’s database; they are base on the <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015" role="doc-biblioref">2015</a>)</span> approach, that use 3-month fed funds futures.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load vars package:</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
-<span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1990-05-01"</span></span>
-<span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2012-6-01"</span></span>
+<span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1990-05-01"</span>;<span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2012-6-01"</span></span>
 <span><span class="va">indic.first</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">First.date</span><span class="op">)</span></span>
 <span><span class="va">indic.last</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">Last.date</span><span class="op">)</span></span>
 <span><span class="va">USmonthly</span>   <span class="op">&lt;-</span> <span class="va">USmonthly</span><span class="op">[</span><span class="va">indic.first</span><span class="op">:</span><span class="va">indic.last</span>,<span class="op">]</span></span>
@@ -294,8 +294,8 @@ Figure 6.3: Reponses to a monetary-policy shock, SVAR-IV approach.
 <h3>
 <span class="header-section-number">6.3.3</span> Situation B.2: LP-IV<a class="anchor" aria-label="anchor" href="#LPIVa"><i class="fas fa-link"></i></a>
 </h3>
-<p>If you do not want to posit a VAR-type dynamics for <span class="math inline">\(y_t\)</span> –e.g. because you suspect that the true generating model may be a non-invertible VARMA model– you can directly proceed by IV-projection methods to obtain the <span class="math inline">\(\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}\)</span> (that are the IRFs of <span class="math inline">\(\tilde\eta_{1,t}\)</span> on <span class="math inline">\(y_{i,t}\)</span>).</p>
-<p>However, Assumptions (IV.i) and (IV.ii) (Eq. <a href="Projections.html#eq:IV1">(6.3)</a>) have to be complemented with (IV.iii):
+<p>If you do not want to posit a VAR-type dynamics for <span class="math inline">\(y_t\)</span> –e.g., because you suspect that the true generating model may be a non-invertible VARMA model– you can directly proceed by IV-projection methods to obtain the <span class="math inline">\(\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}\)</span> (that are the IRFs of <span class="math inline">\(\tilde\eta_{1,t}\)</span> on <span class="math inline">\(y_{i,t}\)</span>).</p>
+<p>However, Assumptions (IV.i) and (IV.ii) (Eq. <a href="Projections.html#eq:IV1">(6.4)</a>) have to be complemented with (IV.iii):
 <span class="math display">\[\begin{equation*}
 \begin{array}{llll}
 (IV.iii) &amp; \mathbb{E}(z_t \eta_{j,t+h}) &amp;= 0 \, \mbox{ for } h \ne 0 &amp; \mbox{(lead-lag exogeneity)}
@@ -303,7 +303,7 @@ Figure 6.3: Reponses to a monetary-policy shock, SVAR-IV approach.
 \end{equation*}\]</span></p>
 <p>When (IV.i), (IV.ii) and (IV.iii) are satisfied, <span class="math inline">\(\tilde\Psi_{i,1,h}\)</span> can be estimated by regressing <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(y_{1,t}\)</span>, using <span class="math inline">\(z_t\)</span> as an instrument, i.e. by considering the TSLS estimation of:
 <span class="math display" id="eq:regIV1">\[\begin{equation}
-y_{i,t+h} = \alpha_i + \tilde\Psi_{i,1,h}y_{1,t} + \nu_{i,t+h},\tag{6.4}
+y_{i,t+h} = \alpha_i + \tilde\Psi_{i,1,h}y_{1,t} + \nu_{i,t+h},\tag{6.6}
 \end{equation}\]</span>
 where <span class="math inline">\(\nu_{i,t+h}\)</span> is correlated to <span class="math inline">\(y_{1,t}\)</span>, but not to <span class="math inline">\(z_t\)</span>.</p>
 <p>We have indeed:
@@ -317,21 +317,17 @@ where the <span class="math inline">\(v_{i,t+h}\)</span>’s are uncorrelated to
 <span class="math display">\[
 \mathbf{Y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon,
 \]</span>
-where <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon)=0\)</span>, but where the explicative variables <span class="math inline">\(\mathbf{X}\)</span> are supposed to be correlated to the residuals <span class="math inline">\(\boldsymbol\varepsilon\)</span>.</p>
-<p>Moreover, the <span class="math inline">\(\boldsymbol\varepsilon\)</span> are supposed to be possibly heteroskedastic and auto-correlated.</p>
-<p>We consider the instruments <span class="math inline">\(\mathbf{Z}\)</span>, with <span class="math inline">\(\mathbb{E}(\mathbf{X}'\mathbf{Z}) \ne 0\)</span> but <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon'\mathbf{Z}) = 0\)</span>.</p>
+where <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon)=0\)</span>, but where the explicative variables <span class="math inline">\(\mathbf{X}\)</span> can be correlated to the residuals <span class="math inline">\(\boldsymbol\varepsilon\)</span>. Moreover, the <span class="math inline">\(\boldsymbol\varepsilon\)</span>’s may feature heteroskedasticity and be auto-correlated. We denote by <span class="math inline">\(\mathbf{Z}\)</span> the matrix of instruments, with <span class="math inline">\(\mathbb{E}(\mathbf{X}'\mathbf{Z}) \ne 0\)</span> but <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon'\mathbf{Z}) = 0\)</span>.</p>
 <p>The IV estimator of <span class="math inline">\(\boldsymbol\beta\)</span> is obtained by regressing <span class="math inline">\(\hat{\mathbf{Y}}\)</span> on <span class="math inline">\(\hat{\mathbf{X}}\)</span>, where <span class="math inline">\(\hat{\mathbf{Y}}\)</span> and <span class="math inline">\(\hat{\mathbf{X}}\)</span> are the respective residuals of the regressions of <span class="math inline">\(\mathbf{Y}\)</span> and <span class="math inline">\(\mathbf{X}\)</span> on <span class="math inline">\(\mathbf{Z}\)</span>.
 <span class="math display">\[\begin{eqnarray*}
 \mathbf{b}_{iv} &amp;=&amp; [\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{Y}\\
 \mathbf{b}_{iv} &amp;=&amp; \boldsymbol\beta + \frac{1}{\sqrt{T}}\underbrace{T[\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}}_{=Q(\mathbf{X},\mathbf{Z}) \overset{p}{\rightarrow} \mathbf{Q}_{xz}}\underbrace{\sqrt{T}\left(\frac{1}{T}\mathbf{Z}'\boldsymbol\varepsilon\right)}_{\overset{d}{\rightarrow} \mathcal{N}(0,S)},
 \end{eqnarray*}\]</span>
-where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance of <span class="math inline">\(\mathbf{z}_t\varepsilon_t\)</span> (see next slide).</p>
-<p>The asymptotic covariance matrix of <span class="math inline">\(\sqrt{T}\mathbf{b}_{iv}\)</span> is <span class="math inline">\(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\)</span>.</p>
-<p>The covariance matrix of <span class="math inline">\(\mathbf{b}_{iv}\)</span> can be approximated by <span class="math inline">\(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\)</span> where <span class="math inline">\(\hat{\mathbf{S}}\)</span> is the Newey-West estimator of <span class="math inline">\(\mathbf{S}\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is: &lt;span class="math inline"&gt;\(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\)&lt;/span&gt;, where the &lt;span class="math inline"&gt;\(\hat\gamma_j\)&lt;/span&gt;’s are sample auto-covariances of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, see &lt;span class="citation"&gt;Newey and West (&lt;a href="references.html#ref-Newey_West_1987" role="doc-biblioref"&gt;1987&lt;/a&gt;)&lt;/span&gt;&lt;/p&gt;'><sup>10</sup></a></p>
-<p>(IV.iii) is usually not restrictive for <span class="math inline">\(h&gt;0\)</span> (<span class="math inline">\(z_t\)</span> is usually not affected by future shocks). By contrast, it may be restrictive for <span class="math inline">\(h&lt;0\)</span>. This can be solved by adding controls in Regression <a href="Projections.html#eq:regIV1">(6.4)</a>. These controls should span the space of <span class="math inline">\(\{\eta_{t-1},\eta_{t-2},\dots\}\)</span>.</p>
+where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance of <span class="math inline">\(\mathbf{z}_t\varepsilon_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is the sum of the covariance matrices of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, for orders from &lt;span class="math inline"&gt;\(-\infty\)&lt;/span&gt; to &lt;span class="math inline"&gt;\(+\infty\)&lt;/span&gt;.&lt;/p&gt;'><sup>10</sup></a> The asymptotic covariance matrix of <span class="math inline">\(\sqrt{T}\mathbf{b}_{iv}\)</span> is <span class="math inline">\(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\)</span>. Therefore, the covariance matrix of <span class="math inline">\(\mathbf{b}_{iv}\)</span> can be approximated by <span class="math inline">\(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\)</span> where <span class="math inline">\(\hat{\mathbf{S}}\)</span> is the Newey-West estimator of <span class="math inline">\(\mathbf{S}\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is: &lt;span class="math inline"&gt;\(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\)&lt;/span&gt;, where the &lt;span class="math inline"&gt;\(\hat\gamma_j\)&lt;/span&gt;’s are sample auto-covariances of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, see &lt;span class="citation"&gt;Newey and West (&lt;a href="references.html#ref-Newey_West_1987" role="doc-biblioref"&gt;1987&lt;/a&gt;)&lt;/span&gt;&lt;/p&gt;'><sup>11</sup></a></p>
+<p>Assumption (IV.iii) is usually not restrictive for <span class="math inline">\(h&gt;0\)</span> (<span class="math inline">\(z_t\)</span> is usually not affected by future shocks). By contrast, it may be restrictive for <span class="math inline">\(h&lt;0\)</span>. This can be solved by adding controls in Regression <a href="Projections.html#eq:regIV1">(6.6)</a>. These controls should span the space of <span class="math inline">\(\{\eta_{t-1},\eta_{t-2},\dots\}\)</span>.</p>
 <p>If <span class="math inline">\(z_t\)</span> is suspected to be correlated to past values of <span class="math inline">\(\eta_{1,t}\)</span> but not to the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j&gt;1\)</span>, then one can add lags of <span class="math inline">\(z_t\)</span> as controls (method e.g. advocated by Ramey, 2016, p.108, considering the instrument by <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015" role="doc-biblioref">2015</a>)</span>).</p>
 <p>In the general case, one can use lags of <span class="math inline">\(y_t\)</span> as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.</p>
-<p>As noted by <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of <span class="math inline">\(z_t\)</span> to improve efficiency.</p>
+<!-- As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency. -->
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res.LP.IV</span> <span class="op">&lt;-</span> <span class="fu">make.LPIV.irf</span><span class="op">(</span><span class="va">y</span>,<span class="va">Z</span>,</span>
 <span>                           nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
@@ -352,7 +348,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#Projections"><span class="header-section-number">6</span> Local projection methods</a></li>
 <li><a class="nav-link" href="#overview-of-the-approach"><span class="header-section-number">6.1</span> Overview of the approach</a></li>
-<li><a class="nav-link" href="#situation-a-without-iv"><span class="header-section-number">6.2</span> Situation A: Without IV</a></li>
+<li><a class="nav-link" href="#LPIVww"><span class="header-section-number">6.2</span> Situation A: Without IV</a></li>
 <li>
 <a class="nav-link" href="#situation-b-iv-approach"><span class="header-section-number">6.3</span> Situation B: IV approach</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#instruments-proxies-for-structural-shocks"><span class="header-section-number">6.3.1</span> Instruments (proxies for structural shocks)</a></li>
@@ -376,7 +372,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-16.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

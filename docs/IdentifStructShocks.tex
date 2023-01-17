@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-16}
+\date{2023-01-17}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1832,12 +1832,12 @@ Assume that you observe \(\eta_{j,t}\), then a consistent estimate of \(\Psi_{i,
 \begin{equation}
 y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.\label{eq:OLS1}
 \end{equation}
-Running that kind of regression (using instruments for \(\eta_{j,t}\)) is the core idea of the \textbf{local projection approach} proposed by \citet{Jorda_2005}.
+Running that kind of regression (using instruments for \(\eta_{j,t}\)) is the core idea of the \textbf{local projection (LP) approach} proposed by \citet{Jorda_2005}.
 
-Now, how to proceed in the (usual) case where \(\eta_{j,t}\) is not observed? We consider two situations. While the second requires some instruments, the first approach does not; it corresponds to the original \citet{Jorda_2005}'s approach.
+Now, how to proceed in the (usual) case where \(\eta_{j,t}\) is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section @ref(\#LPIVww)) is the original \citet{Jorda_2005}'s approach.
 
-\hypertarget{situation-a-without-iv}{%
-\section{Situation A: Without IV}\label{situation-a-without-iv}}
+\hypertarget{LPIVww}{%
+\section{Situation A: Without IV}\label{LPIVww}}
 
 Assume that the structural shock of interest (\(\eta_{1,t}\), say) can be consistently obtained as the residual of a regression of a variable \(x_t\) on a set of control variables \(w_t\) independent from \(\eta_{1,t}\):
 \begin{equation}
@@ -1846,18 +1846,18 @@ Assume that the structural shock of interest (\(\eta_{1,t}\), say) can be consis
 where \(\mathbb{E}(x_t|w_t)\) is affine in \(w_t\) and where \(w_t\) is an affine transformation of \(\eta_{2:n,t}\) and of past shocks \(\eta_{t-1},\eta_{t-2},\dots\).
 
 Eq. \eqref{eq:xetaw} implies that, conditional on \(w_t\), the additional knowledge of \(x_t\) is useful only when it comes to forecast something that depends on \(\eta_{1,t}\). Hence, given that \(u_{i,1,t+h}\) (see Eq. \eqref{eq:OLS1}) is independent from \(\eta_{1,t}\) (it depends on \(\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)), it comes that
-\[
-\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).
-\]
+\begin{equation}
+\mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).\label{eq:uuuIV}
+\end{equation}
 This is the \emph{conditional mean independence} case.
 
-Let's rewrite Eq. \eqref{eq:OLS1} as follows:
+Using \eqref{eq:xetaw}, one can rewrite Eq. \eqref{eq:OLS1} as follows:
 \begin{eqnarray*}
 y_{i,t+h} &=& \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
 &=&  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
 \end{eqnarray*}
 
-What precedes implies that the expectation of the blue term, conditional on \(x_t\) and \(w_t\), is linear in \(w_t\). Standard results in the conditional mean independence case imply that the regression of \(y_{i,t+h}\) on \(x_t\), controlling for \(w_t\), provides a consistent estimate of \(\Psi_{i,1,h}\):
+Given Eq. \eqref{eq:uuuIV}, it comes that, conditional on \(x_t\) and \(w_t\), the expectation of the blue term is a function of \(w_t\). Assuming this expectation is linear, standard results in the conditional mean independence case imply that the OLS estimator in the regression of \(y_{i,t+h}\) on \(x_t\), controlling for \(w_t\), provides a consistent estimate of \(\Psi_{i,1,h}\):
 \begin{equation}
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}
@@ -1927,8 +1927,15 @@ See among others: \citet{KUTTNER2001523}, \citet{Cochrane_Piazzesi_2002}, \citet
 \end{enumerate}
 
 This gives a measure of intended monetary policy actions not driven by information about future economic developments.
-a. ``intentions'' are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and ``Blue Books''.
-b. Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve's internal forecasts (inflation, real output and unemployment), ``Greenbook's forecasts'' -- usually issued 6 days before the FOMC meeting.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  ``intentions'' are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and ``Blue Books''.
+\item
+  Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve's internal forecasts (inflation, real output and unemployment), ``Greenbook's forecasts'' -- usually issued 6 days before the FOMC meeting.
+\end{enumerate}
 
 The shock measure is the residual series in the linear regression of (a) on (b). The time series \texttt{Ramey\$rrshock83} and \texttt{Ramey\$rrshock83b} (where \texttt{Ramey} is a data frame included in package \texttt{IdSS}) contain such shocks for the period 1983-2007. (\texttt{Ramey\$rrshock83b} uses long-horizon Greenbook forecasts.)
 \end{example}
@@ -1951,27 +1958,27 @@ If the VAR adequately captures the DGP, then the IV-SVAR is optimal for all hori
 \hypertarget{SVARIVa}{%
 \subsection{Situation B.1: SVAR-IV approach}\label{SVARIVa}}
 
-Assume you have consistent estimates of \(\varepsilon_t = B\eta_t\), these estimates (\(\hat\varepsilon_{t}\)) coming from the estimation of a VAR model. You have, for \(i \in \{1,\dots,n\}\):
+Assume you have consistent estimates of \(\varepsilon_t = B\eta_t\), these estimates (\(\hat\varepsilon_{t}\)) coming from the estimation of a VAR model. We have, for \(i \in \{1,\dots,n\}\):
 \begin{eqnarray}
-\varepsilon_{i,t} &=& b_{i,1} \eta_{1,t} + u_{i,t} (\#eq:eps_rho)\\
+\varepsilon_{i,t} &=& b_{i,1} \eta_{1,t} + u_{i,t} \label{eq:epsrho}\\
 &=& b_{i,1} \rho z_t + \underbrace{b_{i,1}\xi_t + u_{i,t}}_{\perp z_t}. \nonumber
 \end{eqnarray}
 (\(u_{i,t}\) is a linear combination of the \(\eta_{j,t}\)'s, \(j\ge2\)).
 
-Hence, up to a multiplicative factor (\(\rho\)), the (OLS) regressions of the \(\hat\varepsilon_{i,t}\)'s on \(z_t\) provide consistent estimates of the \(b_{i,1}\)'s.
+Hence, up to a multiplicative factor (\(\rho\)), the (OLS) regressions of the \(\hat\varepsilon_{i,t}\)'s on \(z_t\) (that are consistent of the true \(\varepsilon_{i,t}\)'s) provide consistent estimates of the \(b_{i,1}\)'s.
 
-Combined with the estimated VAR (the \(\Phi_k\) matrices), this provides consistent estimates of the IRFs of \(\eta_{1,t}\) on \(y_t\), though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (``unit-effect normalisation'', see \citet{Stock_Watson_2018}). Let us consider \(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\); by construction, \(\tilde\eta_{1,t}\) has a one-unit contemporaneous effect on \(y_{1,t}\). Denoting by \(\tilde{B}_{i,1}\) the contemporaneous impact of \(\tilde\eta_{1,t}\), we get:
+Combined with the estimated VAR (the \(\Phi_k\) matrices), this provides consistent estimates of the IRFs of \(\eta_{1,t}\) on \(y_t\), though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (``unit-effect normalisation'', see \citet{Stock_Watson_2018}). Let us consider \(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\); by construction, \(\tilde\eta_{1,t}\) has a unit contemporaneous effect on \(y_{1,t}\). Denoting by \(\tilde{B}_{i,1}\) the contemporaneous impact of \(\tilde\eta_{1,t}\), we get:
 \[
 \tilde{B}_{1} = \frac{1}{b_{1,1}} {B}_{1},
 \]
 where \(B_{1}\) denotes the \(1^{st}\) column of \(B\) and \(\tilde{B}_{1}=[1,\tilde{B}_{2,1},\dots,\tilde{B}_{n,1}]'\).
 
-Eq. @ref(eq:eps\_rho) gives:
+Eq. \eqref{eq:epsrho} gives:
 \begin{eqnarray*}
 \varepsilon_{1,t} &=& \tilde\eta_{1,t} + u_{1,t}\\
 \varepsilon_{i,t} &=& \tilde{B}_{i,1} \tilde\eta_{1,t} + u_{i,t}.
 \end{eqnarray*}
-This suggests that \(\tilde{B}_{i,1}\) can be estimated by regressing \(\varepsilon_{i,t}\) on \(\varepsilon_{1,t}\), using \(z_t\) as an instrument.
+This suggests that \(\tilde{B}_{i,1}\) can be estimated by regressing \(\varepsilon_{i,t}\) on \(\varepsilon_{1,t}\) (or \(\hat\varepsilon_{i,t}\) on \(\hat\varepsilon_{1,t}\) in practice), using \(z_t\) as an instrument.
 
 What about inference? Once cannot use the usual TSLS standard deviations because the \(\varepsilon_{i,t}\)'s are not directly observed. Bootstrap procedures can be resorted to. \citet{Stock_Watson_2018} propose, in particular, a Gaussian parametric bootstrap:
 
@@ -2013,14 +2020,13 @@ where \(\widehat{\rho}(L)\) and \(\sigma^2_{e}\) result from the estimation of a
 
 For each simulated sample (of \(\tilde{y}_t\) and \(\tilde{z}_t\), say), estimate \(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\) and associated \(\widetilde{\Psi}_{i,1,h}\). This provides e.g.~a sequence of \(N\) estimates of \(\Psi_{i,1,h}\), from which quantiles and conf. intervals can be deduced.
 
+In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is \texttt{FF4\_TC} from the Ramsey's database; they are base on the \citet{Gertler_Karadi_2015} approach, that use 3-month fed funds futures.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Load vars package:}
-\FunctionTok{library}\NormalTok{(vars)}
-\FunctionTok{library}\NormalTok{(IdSS)}
+\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
-\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1990{-}05{-}01"}
-\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"2012{-}6{-}01"}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1990{-}05{-}01"}\NormalTok{;Last.date }\OtherTok{\textless{}{-}} \StringTok{"2012{-}6{-}01"}
 \NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
 \NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
 \NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
@@ -2060,7 +2066,7 @@ For each simulated sample (of \(\tilde{y}_t\) and \(\tilde{z}_t\), say), estimat
 \hypertarget{LPIVa}{%
 \subsection{Situation B.2: LP-IV}\label{LPIVa}}
 
-If you do not want to posit a VAR-type dynamics for \(y_t\) --e.g.~because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the \(\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}\) (that are the IRFs of \(\tilde\eta_{1,t}\) on \(y_{i,t}\)).
+If you do not want to posit a VAR-type dynamics for \(y_t\) --e.g., because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the \(\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}\) (that are the IRFs of \(\tilde\eta_{1,t}\) on \(y_{i,t}\)).
 
 However, Assumptions (IV.i) and (IV.ii) (Eq. \eqref{eq:IV1}) have to be complemented with (IV.iii):
 \begin{equation*}
@@ -2088,30 +2094,20 @@ Consider the linear regression:
 \[
 \mathbf{Y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon,
 \]
-where \(\mathbb{E}(\boldsymbol\varepsilon)=0\), but where the explicative variables \(\mathbf{X}\) are supposed to be correlated to the residuals \(\boldsymbol\varepsilon\).
-
-Moreover, the \(\boldsymbol\varepsilon\) are supposed to be possibly heteroskedastic and auto-correlated.
-
-We consider the instruments \(\mathbf{Z}\), with \(\mathbb{E}(\mathbf{X}'\mathbf{Z}) \ne 0\) but \(\mathbb{E}(\boldsymbol\varepsilon'\mathbf{Z}) = 0\).
+where \(\mathbb{E}(\boldsymbol\varepsilon)=0\), but where the explicative variables \(\mathbf{X}\) can be correlated to the residuals \(\boldsymbol\varepsilon\). Moreover, the \(\boldsymbol\varepsilon\)'s may feature heteroskedasticity and be auto-correlated. We denote by \(\mathbf{Z}\) the matrix of instruments, with \(\mathbb{E}(\mathbf{X}'\mathbf{Z}) \ne 0\) but \(\mathbb{E}(\boldsymbol\varepsilon'\mathbf{Z}) = 0\).
 
 The IV estimator of \(\boldsymbol\beta\) is obtained by regressing \(\hat{\mathbf{Y}}\) on \(\hat{\mathbf{X}}\), where \(\hat{\mathbf{Y}}\) and \(\hat{\mathbf{X}}\) are the respective residuals of the regressions of \(\mathbf{Y}\) and \(\mathbf{X}\) on \(\mathbf{Z}\).
 \begin{eqnarray*}
 \mathbf{b}_{iv} &=& [\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{Y}\\
 \mathbf{b}_{iv} &=& \boldsymbol\beta + \frac{1}{\sqrt{T}}\underbrace{T[\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}}_{=Q(\mathbf{X},\mathbf{Z}) \overset{p}{\rightarrow} \mathbf{Q}_{xz}}\underbrace{\sqrt{T}\left(\frac{1}{T}\mathbf{Z}'\boldsymbol\varepsilon\right)}_{\overset{d}{\rightarrow} \mathcal{N}(0,S)},
 \end{eqnarray*}
-where \(\mathbf{S}\) is the long-run variance of \(\mathbf{z}_t\varepsilon_t\) (see next slide).
+where \(\mathbf{S}\) is the long-run variance of \(\mathbf{z}_t\varepsilon_t\).\footnote{That is the sum of the covariance matrices of \(\mathbf{z}_t\varepsilon_t\), for orders from \(-\infty\) to \(+\infty\).} The asymptotic covariance matrix of \(\sqrt{T}\mathbf{b}_{iv}\) is \(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\). Therefore, the covariance matrix of \(\mathbf{b}_{iv}\) can be approximated by \(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\) where \(\hat{\mathbf{S}}\) is the Newey-West estimator of \(\mathbf{S}\).\footnote{That is: \(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\), where the \(\hat\gamma_j\)'s are sample auto-covariances of \(\mathbf{z}_t\varepsilon_t\), see \citet{Newey_West_1987}}
 
-The asymptotic covariance matrix of \(\sqrt{T}\mathbf{b}_{iv}\) is \(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\).
-
-The covariance matrix of \(\mathbf{b}_{iv}\) can be approximated by \(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\) where \(\hat{\mathbf{S}}\) is the Newey-West estimator of \(\mathbf{S}\).\footnote{That is: \(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\), where the \(\hat\gamma_j\)'s are sample auto-covariances of \(\mathbf{z}_t\varepsilon_t\), see \citet{Newey_West_1987}}
-
-(IV.iii) is usually not restrictive for \(h>0\) (\(z_t\) is usually not affected by future shocks). By contrast, it may be restrictive for \(h<0\). This can be solved by adding controls in Regression \eqref{eq:regIV1}. These controls should span the space of \(\{\eta_{t-1},\eta_{t-2},\dots\}\).
+Assumption (IV.iii) is usually not restrictive for \(h>0\) (\(z_t\) is usually not affected by future shocks). By contrast, it may be restrictive for \(h<0\). This can be solved by adding controls in Regression \eqref{eq:regIV1}. These controls should span the space of \(\{\eta_{t-1},\eta_{t-2},\dots\}\).
 
 If \(z_t\) is suspected to be correlated to past values of \(\eta_{1,t}\) but not to the \(\eta_{j,t}\)'s, \(j>1\), then one can add lags of \(z_t\) as controls (method e.g.~advocated by Ramey, 2016, p.108, considering the instrument by \citet{Gertler_Karadi_2015}).
 
 In the general case, one can use lags of \(y_t\) as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.
-
-As noted by \citet{Stock_Watson_2018}, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of \(z_t\) to improve efficiency.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2168,13 +2164,11 @@ Suppose that the above integral does not have a simple expression. We cannot com
 \[
 \mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
 \]
-where \(\{X^{(i)}\}_{i=1,...,N}\) are \(N\) independent draws of \(X\). More generally, the distribution of \(\varphi(X)\) can be approximated by the empirical distribution of the \(\varphi(X^{(i)}\)'s. Typically, if 10'000 values of \(\varphi(X^{(i)}\) are drawn, the \(5^{th}\) percentile of the p.d.f. of \(\varphi(X)\) can be approximated by the \(500^{th}\) value of the 10'000 draws of \(\varphi(X^{(i)}\) (after arranging these values in ascending order).
+where \(\{X^{(i)}\}_{i=1,...,N}\) are \(N\) independent draws of \(X\). More generally, the distribution of \(\varphi(X)\) can be approximated by the empirical distribution of the \(\varphi(X^{(i)})\)'s. Typically, if 10'000 values of \(\varphi(X^{(i)})\) are drawn, the \(5^{th}\) percentile of the p.d.f. of \(\varphi(X)\) can be approximated by the \(500^{th}\) value of the 10'000 draws of \(\varphi(X^{(i)})\) (after arranging these values in ascending order).
 
 As regards the computation of confidence intervals around IRFs, one has to think of \(\{\widehat{\Phi}_j\}_{j=1,...,p}\), and of \(\widehat{\Omega}\) as \(X\) and \(\{\widehat{\Psi}_j\}_{j=1,...}\) as \(\varphi(X)\). (Proposition \ref{prp:OLSVAR2} provides us with the asymptotic distribution of the ``\(X\).'')
 
-To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach:
-
-For each iteration \(k\):
+To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach: For each iteration \(k\),
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2211,9 +2205,7 @@ Using this property, \citet{Lutkepohl_1990} provides the asymptotic distribution
 \NormalTok{  phi }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{2}\SpecialCharTok{:}\NormalTok{(p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]}
   \ControlFlowTok{if}\NormalTok{(q}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
 \NormalTok{    theta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q)])}
-\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{}
-\NormalTok{    theta }\OtherTok{\textless{}{-}} \DecValTok{1}
-\NormalTok{  \}}
+\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{theta }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{\}}
 \NormalTok{  sigma }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
 \NormalTok{  r }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Matrix.of.Exog)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}} \DecValTok{1}
 \NormalTok{  beta }\OtherTok{\textless{}{-}}\NormalTok{ THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\NormalTok{(r}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))]}
@@ -2221,9 +2213,7 @@ Using this property, \citet{Lutkepohl_1990} provides the asymptotic distribution
 \NormalTok{  irf }\OtherTok{\textless{}{-}} \FunctionTok{sim.arma}\NormalTok{(}\DecValTok{0}\NormalTok{,phi,beta,}\AttributeTok{sigma=}\FunctionTok{sd}\NormalTok{(Ramey}\SpecialCharTok{$}\NormalTok{ED3\_TC,}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}\AttributeTok{T=}\DecValTok{60}\NormalTok{,}
                   \AttributeTok{y.0=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{phi)),}\AttributeTok{nb.sim=}\DecValTok{1}\NormalTok{,}\AttributeTok{make.IRF=}\DecValTok{1}\NormalTok{,}
                   \AttributeTok{X=}\ConstantTok{NaN}\NormalTok{,}\AttributeTok{beta=}\ConstantTok{NaN}\NormalTok{)}
-  \FunctionTok{return}\NormalTok{(irf)}
-\NormalTok{\}}
-
+  \FunctionTok{return}\NormalTok{(irf)\}}
 \NormalTok{IRF}\FloatTok{.0} \OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA)}
 \NormalTok{eps }\OtherTok{\textless{}{-}}\NormalTok{ .}\DecValTok{00000001}
 \NormalTok{d.IRF }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
@@ -2232,19 +2222,17 @@ Using this property, \citet{Lutkepohl_1990} provides the asymptotic distribution
 \NormalTok{  THETA.i[i] }\OtherTok{\textless{}{-}}\NormalTok{ THETA.i[i] }\SpecialCharTok{+}\NormalTok{ eps}
 \NormalTok{  IRF.i }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(THETA.i)}
 \NormalTok{  d.IRF }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(d.IRF,}
-\NormalTok{                 (IRF.i }\SpecialCharTok{{-}}\NormalTok{ IRF}\FloatTok{.0}\NormalTok{)}\SpecialCharTok{/}\NormalTok{eps}
-\NormalTok{                 )}
-\NormalTok{\}}
+\NormalTok{                 (IRF.i }\SpecialCharTok{{-}}\NormalTok{ IRF}\FloatTok{.0}\NormalTok{)}\SpecialCharTok{/}\NormalTok{eps)\}}
 \NormalTok{mat.var.cov.IRF }\OtherTok{\textless{}{-}}\NormalTok{ d.IRF }\SpecialCharTok{\%*\%}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{I }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(d.IRF)}
 \end{Highlighting}
 \end{Shaded}
 
-A limit of the last two approaches (Monte Carlo and the Delta method) is that they critically rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.
+A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.
 
 \hypertarget{bootstrap}{%
 \section{Bootstrap}\label{bootstrap}}
 
-IRFs' confidence intervals are intervals where 90\% (or 95\%,75\%,\ldots) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (\(T\) observations). We obviously cannot do this, because we have only one sample: \(\{y_t\}_{t=1,..,T}\). But we can try to \emph{construct} such samples.
+IRFs' confidence intervals are intervals where 90\% (or 95\%, 75\%, \ldots) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (\(T\) observations). We obviously cannot do this, because we have only one sample: \(\{y_t\}_{t=1,..,T}\). But we can try to \emph{construct} such samples.
 
 Bootstrapping consists in:
 
@@ -2376,7 +2364,7 @@ Function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\citet{VARetp}) can be u
 
 \begin{verbatim}
 ##         inv(-1)   inc(-1)   con(-1)    inv(-2)  inc(-2)   con(-2)       const
-## [1,] -0.3351341 0.1912448 0.9704194 -0.1501428 0.138947 0.9522544 -0.01825913
+## [1,] -0.3144964 0.1967887 0.9029882 -0.1406986 0.135344 0.9746742 -0.01857263
 ## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.114605 0.9343938 -0.01672199
 ## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.114605 0.9343938 -0.01672199
 \end{verbatim}

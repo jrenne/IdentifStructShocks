@@ -45,10 +45,12 @@ exm:GMR2017
 fig:ICAFigIRF
 eq:OLS1
 eq:xetaw
+eq:uuuIV
 eq:IV1
 exm:HighFreq
 fig:HighFreq
 exm:RomerRomer
+eq:epsrho
 fig:essaiIV0
 fig:essaiIV1
 eq:regIV1
@@ -92,7 +94,7 @@ pseudo-maximum-likelihood-pml-approach
 relation-with-the-heteroskedasticity-identification
 Projections
 overview-of-the-approach
-situation-a-without-iv
+LPIVww
 situation-b-iv-approach
 instruments-proxies-for-structural-shocks
 SVARIVa

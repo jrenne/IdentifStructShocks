@@ -36,13 +36,11 @@ Suppose that the above integral does not have a simple expression. We cannot com
 $$
 \mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
 $$
-where $\{X^{(i)}\}_{i=1,...,N}$ are $N$ independent draws of $X$. More generally, the distribution of $\varphi(X)$ can be approximated by the empirical distribution of the $\varphi(X^{(i)}$'s. Typically, if 10'000 values of $\varphi(X^{(i)}$ are drawn, the $5^{th}$ percentile of the p.d.f. of $\varphi(X)$ can be approximated by the $500^{th}$ value of the 10'000 draws of $\varphi(X^{(i)}$ (after arranging these values in ascending order).
+where $\{X^{(i)}\}_{i=1,...,N}$ are $N$ independent draws of $X$. More generally, the distribution of $\varphi(X)$ can be approximated by the empirical distribution of the $\varphi(X^{(i)})$'s. Typically, if 10'000 values of $\varphi(X^{(i)})$ are drawn, the $5^{th}$ percentile of the p.d.f. of $\varphi(X)$ can be approximated by the $500^{th}$ value of the 10'000 draws of $\varphi(X^{(i)})$ (after arranging these values in ascending order).
 
 As regards the computation of confidence intervals around IRFs, one has to think of $\{\widehat{\Phi}_j\}_{j=1,...,p}$, and of $\widehat{\Omega}$ as $X$ and $\{\widehat{\Psi}_j\}_{j=1,...}$ as $\varphi(X)$. (Proposition \@ref(prp:OLSVAR2) provides us with the asymptotic distribution of the "$X$.")
 
-To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach:
-
-For each iteration $k$:
+To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach: For each iteration $k$,
 
 1. Draw $\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}$ and $\widehat{\Omega}^{(k)}$ from their asymptotic distribution (using Proposition \@ref(prp:OLSVAR2)).
 2. Compute the matrix $B^{(k)}$ so that $\widehat{\Omega}^{(k)}=B^{(k)}B^{(k)'}$, according to your identification strategy.
@@ -74,9 +72,7 @@ irf.function <- function(THETA){
   phi <- THETA[2:(p+1)]
   if(q>0){
     theta <- c(1,THETA[(1+p+1):(1+p+q)])
-  }else{
-    theta <- 1
-  }
+  }else{theta <- 1}
   sigma <- THETA[1+p+q+1]
   r <- dim(Matrix.of.Exog)[2] - 1
   beta <- THETA[(1+p+q+1+1):(1+p+q+1+(r+1))]
@@ -84,9 +80,7 @@ irf.function <- function(THETA){
   irf <- sim.arma(0,phi,beta,sigma=sd(Ramey$ED3_TC,na.rm=TRUE),T=60,
                   y.0=rep(0,length(x$phi)),nb.sim=1,make.IRF=1,
                   X=NaN,beta=NaN)
-  return(irf)
-}
-
+  return(irf)}
 IRF.0 <- 100*irf.function(x$THETA)
 eps <- .00000001
 d.IRF <- NULL
@@ -95,19 +89,17 @@ for(i in 1:length(x$THETA)){
   THETA.i[i] <- THETA.i[i] + eps
   IRF.i <- 100*irf.function(THETA.i)
   d.IRF <- cbind(d.IRF,
-                 (IRF.i - IRF.0)/eps
-                 )
-}
+                 (IRF.i - IRF.0)/eps)}
 mat.var.cov.IRF <- d.IRF %*% x$I %*% t(d.IRF)
 ```
 
 
-A limit of the last two approaches (Monte Carlo and the Delta method) is that they critically rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.
+A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.
 
 
 ## Bootstrap
 
-IRFs' confidence intervals are intervals where 90\% (or 95\%,75\%,...) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions ($T$ observations). We obviously cannot do this, because we have only one sample: $\{y_t\}_{t=1,..,T}$. But we can try to *construct* such samples.
+IRFs' confidence intervals are intervals where 90\% (or 95\%, 75\%, ...) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions ($T$ observations). We obviously cannot do this, because we have only one sample: $\{y_t\}_{t=1,..,T}$. But we can try to *construct* such samples.
 
 Bootstrapping consists in:
 
