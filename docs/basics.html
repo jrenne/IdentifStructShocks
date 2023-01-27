@@ -68,13 +68,15 @@
 <li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
 <li><a class="active" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
-<li><a class="" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
-<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
-<li><a class="" href="NonGaussian.html"><span class="header-section-number">5</span> Identification based on non-normality of the shocks</a></li>
-<li><a class="" href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></li>
-<li><a class="" href="Inference.html"><span class="header-section-number">7</span> Inference</a></li>
-<li><a class="" href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></li>
-<li><a class="" href="append.html"><span class="header-section-number">9</span> Appendix</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">3</span> Inference</a></li>
+<li><a class="" href="Signs.html"><span class="header-section-number">4</span> Sign restrictions</a></li>
+<li><a class="" href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">6</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">7</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">8</span> Local projection methods</a></li>
+<li><a class="" href="PanelVARs.html"><span class="header-section-number">9</span> Panel VARs</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">10</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">11</span> Appendix</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -138,7 +140,7 @@ with <span class="math inline">\(\varepsilon_t = B_0\eta_t\)</span> (and <span c
 \boxed{\Psi_{i,j,h} = \mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) - \mathbb{E}(y_{i,t+h})}\tag{1.3}
 \end{equation}\]</span>
 (effect on <span class="math inline">\(y_{i,t+h}\)</span> of a one-unit shock on <span class="math inline">\(\eta_{j,t}\)</span>).</p>
-<p>IRFs closely relate to the Wold decomposition of <span class="math inline">\(y_t\)</span>. Indeed, if the dynamics of process <span class="math inline">\(y_t\)</span> can be described as a VARMA model, and if <span class="math inline">\(y_t\)</span> is covariance stationary (see Def. <a href="append.html#def:covstat">9.1</a>), then <span class="math inline">\(y_t\)</span> admits the following infinite MA representation (or Wold decomposition):
+<p>IRFs closely relate to the Wold decomposition of <span class="math inline">\(y_t\)</span>. Indeed, if the dynamics of process <span class="math inline">\(y_t\)</span> can be described as a VARMA model, and if <span class="math inline">\(y_t\)</span> is covariance stationary (see Def. <a href="append.html#def:covstat">11.1</a>), then <span class="math inline">\(y_t\)</span> admits the following infinite MA representation (or Wold decomposition):
 <span class="math display" id="eq:InfMA">\[\begin{equation}
 y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}.\tag{1.4}
 \end{equation}\]</span>
@@ -146,7 +148,7 @@ With these notations, we get <span class="math inline">\(\mathbb{E}(y_{i,t+h}|\e
 <p>Hence, estimating IRFs amounts to estimating the <span class="math inline">\(\Psi_{h}\)</span>’s. In general, there exist three main approaches for that:</p>
 <ul>
 <li>Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at the first order (linearization). The solution takes the form of Eq. <a href="basics.html#eq:InfMA">(1.4)</a>.</li>
-<li>Directly estimate the <span class="math inline">\(\Psi_{h}\)</span> based on <strong>projection approaches</strong> (see Section <a href="Projections.html#Projections">6</a>).</li>
+<li>Directly estimate the <span class="math inline">\(\Psi_{h}\)</span> based on <strong>projection approaches</strong> (see Section <a href="Projections.html#Projections">8</a>).</li>
 <li>Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. <strong>VAR(MA) models</strong> (see Section <a href="basics.html#estimVAR">1.4</a>). Once a (Structural) VARMA representation is obtained, Eq. <a href="basics.html#eq:InfMA">(1.4)</a> is easily deduced using the following proposition:</li>
 </ul>
 <div class="proposition">
@@ -216,26 +218,16 @@ y_{t-1} +
 <span><span class="va">res.sim.2</span> <span class="op">&lt;-</span> <span class="fu">simul.VARMA</span><span class="op">(</span><span class="va">Model</span>,<span class="va">nb.sim</span>,<span class="va">Y0</span>,<span class="va">eta0</span>,indic.IRF<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.15</span>,<span class="fl">.95</span>,<span class="fl">.25</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res.sim.1</span><span class="op">$</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,las<span class="op">=</span><span class="fl">1</span>,</span>
-<span>     type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">3</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
-<span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Response of "</span>,<span class="va">y</span><span class="op">[</span><span class="fl">1</span>,<span class="st">"*,*"</span>,<span class="va">t</span><span class="op">]</span>,</span>
-<span>                           <span class="st">" to a one-unit increase in "</span>,<span class="va">eta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>,col<span class="op">=</span><span class="st">"grey"</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res.sim.2</span><span class="op">$</span><span class="va">Y</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,las<span class="op">=</span><span class="fl">1</span>,</span>
-<span>     type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">3</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
-<span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Response of "</span>,<span class="va">y</span><span class="op">[</span><span class="fl">1</span>,<span class="st">"*,*"</span>,<span class="va">t</span><span class="op">]</span>,</span>
-<span>                           <span class="st">" to a one-unit increase in "</span>,<span class="va">eta</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>,col<span class="op">=</span><span class="st">"grey"</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res.sim.1</span><span class="op">$</span><span class="va">Y</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>,las<span class="op">=</span><span class="fl">1</span>,</span>
-<span>     type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">3</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
-<span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Response of "</span>,<span class="va">y</span><span class="op">[</span><span class="fl">2</span>,<span class="st">"*,*"</span>,<span class="va">t</span><span class="op">]</span>,</span>
-<span>                           <span class="st">" to a one-unit increase in "</span>,<span class="va">eta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>,col<span class="op">=</span><span class="st">"grey"</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res.sim.2</span><span class="op">$</span><span class="va">Y</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span>,las<span class="op">=</span><span class="fl">1</span>,</span>
-<span>     type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">3</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
-<span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Response of "</span>,<span class="va">y</span><span class="op">[</span><span class="fl">2</span>,<span class="st">"*,*"</span>,<span class="va">t</span><span class="op">]</span>,</span>
-<span>                           <span class="st">" to a one-unit increase in "</span>,<span class="va">eta</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>,col<span class="op">=</span><span class="st">"grey"</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">i</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span><span class="op">{</span><span class="va">res.sim</span> <span class="op">&lt;-</span> <span class="va">res.sim.1</span></span>
+<span>  <span class="op">}</span><span class="kw">else</span><span class="op">{</span><span class="va">res.sim</span> <span class="op">&lt;-</span> <span class="va">res.sim.2</span><span class="op">}</span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res.sim</span><span class="op">$</span><span class="va">Y</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span>,las<span class="op">=</span><span class="fl">1</span>,</span>
+<span>         type<span class="op">=</span><span class="st">"l"</span>,lwd<span class="op">=</span><span class="fl">3</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
+<span>         main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Resp. of y"</span>,<span class="va">j</span>,</span>
+<span>                    <span class="st">" to a 1-unit increase in eta"</span>,<span class="va">i</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>,col<span class="op">=</span><span class="st">"grey"</span>,lty<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">}</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:simVAR"></span>
 <img src="IdentifStructShocks_files/figure-html/simVAR-1.png" alt="Impulse response functions (SVARMA(1,1) specified above)." width="95%"><p class="caption">
@@ -349,7 +341,7 @@ y_{i,t} = \beta_i'x_t + \varepsilon_{i,t},\tag{1.11}
 <p>The asymptotic distributions of these estimators are the ones resulting from standard OLS formula.</p>
 </div>
 <div class="proof">
-<p><span id="unlabeled-div-2" class="proof"><em>Proof</em>. </span>See Appendix <a href="append.html#AppendixProof">9.2</a>.</p>
+<p><span id="unlabeled-div-2" class="proof"><em>Proof</em>. </span>See Appendix <a href="append.html#AppendixProof">11.2</a>.</p>
 </div>
 <p>As stated by Proposition <a href="basics.html#prp:OLSVAR">1.3</a>, when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since <span class="math inline">\(x_t\)</span> correlates to <span class="math inline">\(\varepsilon_s\)</span> for <span class="math inline">\(s&lt;t\)</span>, the OLS estimator <span class="math inline">\(\mathbf{b}_i\)</span> of <span class="math inline">\(\boldsymbol\beta_i\)</span> is biased in small sample. (That is also the case for the ML estimator.) Indeed, denoting by <span class="math inline">\(\boldsymbol\varepsilon_i\)</span> the <span class="math inline">\(T \times 1\)</span> vector of <span class="math inline">\(\varepsilon_{i,t}\)</span>’s, and using the notations of <span class="math inline">\(b_i\)</span> and <span class="math inline">\(\beta_i\)</span> introduced in Proposition <a href="basics.html#prp:estimVARGaussian">1.2</a>, we have:
 <span class="math display" id="eq:olsar1">\[\begin{equation}
@@ -377,7 +369,7 @@ where <span class="math inline">\(\sigma_i = \mathbb{V}ar(\varepsilon_{i,t})\)</
 \end{equation}\]</span></p>
 </div>
 <div class="proof">
-<p><span id="unlabeled-div-3" class="proof"><em>Proof</em>. </span>See Appendix <a href="append.html#AppendixProof">9.2</a>.</p>
+<p><span id="unlabeled-div-3" class="proof"><em>Proof</em>. </span>See Appendix <a href="append.html#AppendixProof">11.2</a>.</p>
 </div>
 <p>The following proposition extends the previous proposition and includes covariances between different <span class="math inline">\(\beta_i\)</span>’s as well as the asymptotic distribution of the ML estimates of <span class="math inline">\(\Omega\)</span>.</p>
 <div class="proposition">
@@ -402,8 +394,8 @@ where the component of <span class="math inline">\(\Sigma_{22}\)</span> correspo
 <div class="proof">
 <p><span id="unlabeled-div-4" class="proof"><em>Proof</em>. </span>See <span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994" role="doc-biblioref">1994</a>)</span>, Appendix of Chapter 11.</p>
 </div>
-<p>In practice, to use the previous proposition (for instance to implement Monte-Carlo simulations, see Section <a href="Inference.html#MonteCarlo">7.1</a>), <span class="math inline">\(\Omega\)</span> is replaced with <span class="math inline">\(\hat{\Omega}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> is replaced with <span class="math inline">\(\hat{\mathbf{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'\)</span> and <span class="math inline">\(\Sigma\)</span> with the matrix whose components are of the form <span class="math inline">\(\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}\)</span>, where the <span class="math inline">\(\hat\sigma_{i,l}\)</span>’s are the components of <span class="math inline">\(\hat\Omega\)</span>.</p>
-<p>The simplicity of the VAR framework and the tractability of its MLE open the way to convenient econometric testing. Let’s illustrate this with the likelihood ratio test (see Def. <a href="append.html#def:LR">9.2</a>). The maximum value achieved by the MLE is
+<p>In practice, to use the previous proposition (for instance to implement Monte-Carlo simulations, see Section <a href="Inference.html#MonteCarlo">3.1</a>), <span class="math inline">\(\Omega\)</span> is replaced with <span class="math inline">\(\hat{\Omega}\)</span>, <span class="math inline">\(\mathbf{Q}\)</span> is replaced with <span class="math inline">\(\hat{\mathbf{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'\)</span> and <span class="math inline">\(\Sigma\)</span> with the matrix whose components are of the form <span class="math inline">\(\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}\)</span>, where the <span class="math inline">\(\hat\sigma_{i,l}\)</span>’s are the components of <span class="math inline">\(\hat\Omega\)</span>.</p>
+<p>The simplicity of the VAR framework and the tractability of its MLE open the way to convenient econometric testing. Let’s illustrate this with the likelihood ratio test (see Def. <a href="append.html#def:LR">11.2</a>). The maximum value achieved by the MLE is
 <span class="math display">\[
 \log\mathcal{L}(Y_{T};\hat{\Pi},\hat{\Omega}) = -\frac{Tn}{2}\log(2\pi)+\frac{T}{2}\log\left|\hat{\Omega}^{-1}\right| -\frac{1}{2}\sum_{t=1}^{T}\left[\hat{\varepsilon}_{t}'\hat{\Omega}^{-1}\hat{\varepsilon}_{t}\right].
 \]</span>
@@ -428,7 +420,7 @@ BIC &amp; = &amp; cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,
 \end{eqnarray*}\]</span>
 where <span class="math inline">\(N=p \times n^{2}\)</span>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AEC</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">data</span>,lag.max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
@@ -477,7 +469,7 @@ y^{(2)}_{t-1}
 \end{array}
 \right] + \varepsilon_t.
 \]</span>
-Using, e.g., a likelihood ratio test (see Def. <a href="append.html#def:LR">9.2</a>), one can easily test for block exogeneity of <span class="math inline">\(y_t^{(2)}\)</span> (say). The null assumption can be expressed as <span class="math inline">\(\Phi^{(2,1)}=0\)</span>.</p>
+Using, e.g., a likelihood ratio test (see Def. <a href="append.html#def:LR">11.2</a>), one can easily test for block exogeneity of <span class="math inline">\(y_t^{(2)}\)</span> (say). The null assumption can be expressed as <span class="math inline">\(\Phi^{(2,1)}=0\)</span>.</p>
 <!-- **Companion Form and Stability of a VAR process** -->
 <!-- Let us introduce vector $y_{t}^{*}$, whihc stacks the last $p$ values of $y_t$: -->
 <!-- $$ -->
@@ -560,7 +552,7 @@ Loosely speaking, we reject <span class="math inline">\(H_{0}\)</span> if some o
 <span class="math display">\[
 F=\frac{(RSS-USS)/p}{USS/(T-2p-1)},
 \]</span>
-where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under <span class="math inline">\(H_{0}\)</span>, the <span class="math inline">\(F\)</span>-statistic is distributed as <span class="math inline">\(\mathcal{F}(p,T-2p-1)\)</span> (See Table <a href="append.html#tab:Fstat">9.4</a>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;We have &lt;span class="math inline"&gt;\(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\)&lt;/span&gt;.&lt;/p&gt;'><sup>1</sup></a></p>
+where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under <span class="math inline">\(H_{0}\)</span>, the <span class="math inline">\(F\)</span>-statistic is distributed as <span class="math inline">\(\mathcal{F}(p,T-2p-1)\)</span> (See Table <a href="append.html#tab:Fstat">11.4</a>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;We have &lt;span class="math inline"&gt;\(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\)&lt;/span&gt;.&lt;/p&gt;'><sup>1</sup></a></p>
 <p>According to the following lines of code, the output gap Granger-causes inflation, but the reverse is not true:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span>,order<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
@@ -620,7 +612,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-17.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

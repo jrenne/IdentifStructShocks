@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-17}
+\date{2023-01-27}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -353,26 +353,16 @@ We can use function \texttt{simul.VARMA} of package \texttt{IdSS} to produce IRF
 \NormalTok{res.sim}\FloatTok{.2} \OtherTok{\textless{}{-}} \FunctionTok{simul.VARMA}\NormalTok{(Model,nb.sim,Y0,eta0,}\AttributeTok{indic.IRF=}\DecValTok{1}\NormalTok{)}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{plt=}\FunctionTok{c}\NormalTok{(.}\DecValTok{15}\NormalTok{,.}\DecValTok{95}\NormalTok{,.}\DecValTok{25}\NormalTok{,.}\DecValTok{8}\NormalTok{))}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(res.sim}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{Y[}\DecValTok{1}\NormalTok{,],}\AttributeTok{las=}\DecValTok{1}\NormalTok{,}
-     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
-     \AttributeTok{main=}\FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Response of "}\NormalTok{,y[}\DecValTok{1}\NormalTok{,}\StringTok{"*,*"}\NormalTok{,t],}
-                           \StringTok{" to a one{-}unit increase in "}\NormalTok{,eta[}\DecValTok{1}\NormalTok{],}\AttributeTok{sep=}\StringTok{""}\NormalTok{)))}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{3}\NormalTok{)}
-\FunctionTok{plot}\NormalTok{(res.sim}\FloatTok{.2}\SpecialCharTok{$}\NormalTok{Y[}\DecValTok{1}\NormalTok{,],}\AttributeTok{las=}\DecValTok{1}\NormalTok{,}
-     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
-     \AttributeTok{main=}\FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Response of "}\NormalTok{,y[}\DecValTok{1}\NormalTok{,}\StringTok{"*,*"}\NormalTok{,t],}
-                           \StringTok{" to a one{-}unit increase in "}\NormalTok{,eta[}\DecValTok{2}\NormalTok{],}\AttributeTok{sep=}\StringTok{""}\NormalTok{)))}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{3}\NormalTok{)}
-\FunctionTok{plot}\NormalTok{(res.sim}\FloatTok{.1}\SpecialCharTok{$}\NormalTok{Y[}\DecValTok{2}\NormalTok{,],}\AttributeTok{las=}\DecValTok{1}\NormalTok{,}
-     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
-     \AttributeTok{main=}\FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Response of "}\NormalTok{,y[}\DecValTok{2}\NormalTok{,}\StringTok{"*,*"}\NormalTok{,t],}
-                           \StringTok{" to a one{-}unit increase in "}\NormalTok{,eta[}\DecValTok{1}\NormalTok{],}\AttributeTok{sep=}\StringTok{""}\NormalTok{)))}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{3}\NormalTok{)}
-\FunctionTok{plot}\NormalTok{(res.sim}\FloatTok{.2}\SpecialCharTok{$}\NormalTok{Y[}\DecValTok{2}\NormalTok{,],}\AttributeTok{las=}\DecValTok{1}\NormalTok{,}
-     \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
-     \AttributeTok{main=}\FunctionTok{expression}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Response of "}\NormalTok{,y[}\DecValTok{2}\NormalTok{,}\StringTok{"*,*"}\NormalTok{,t],}
-                           \StringTok{" to a one{-}unit increase in "}\NormalTok{,eta[}\DecValTok{2}\NormalTok{],}\AttributeTok{sep=}\StringTok{""}\NormalTok{)))}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{3}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)\{}
+  \ControlFlowTok{if}\NormalTok{(i }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)\{res.sim }\OtherTok{\textless{}{-}}\NormalTok{ res.sim}\FloatTok{.1}
+\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{res.sim }\OtherTok{\textless{}{-}}\NormalTok{ res.sim}\FloatTok{.2}\NormalTok{\}}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)\{}
+    \FunctionTok{plot}\NormalTok{(res.sim}\SpecialCharTok{$}\NormalTok{Y[j,],}\AttributeTok{las=}\DecValTok{1}\NormalTok{,}
+         \AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{3}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
+         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Resp. of y"}\NormalTok{,j,}
+                    \StringTok{" to a 1{-}unit increase in eta"}\NormalTok{,i,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+    \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{3}\NormalTok{)}
+\NormalTok{  \}\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -586,7 +576,7 @@ where \(N=p \times n^{2}\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(AEC)}
+\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(IdSS)}
 \NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ US3var[,}\FunctionTok{c}\NormalTok{(}\StringTok{"y.gdp.gap"}\NormalTok{,}\StringTok{"infl"}\NormalTok{)]}
 \FunctionTok{VARselect}\NormalTok{(data,}\AttributeTok{lag.max =} \DecValTok{6}\NormalTok{)}
 \end{Highlighting}
@@ -1100,6 +1090,485 @@ Figure \ref{fig:BQ4} displays the resulting IRFs. Note that, for GDP, we cumulat
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/BQ4-1} \caption{IRF of GDP and unemployment to demand and supply shocks.}\label{fig:BQ4}
 \end{figure}
 
+\hypertarget{Inference}{%
+\chapter{Inference}\label{Inference}}
+
+Consider the following SVAR model:
+\[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
+with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\).
+
+The corresponding infinite MA representation (Eq. \eqref{eq:InfMA}, or Wold representation, is:
+\[
+y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
+\]
+where \(\Psi_0=B\) and for \(h=1,2,\dots\):
+\[
+\Psi_h = \sum_{j=1}^h\Psi_{h-j}\Phi_j,
+\]
+with \(\Phi_j=0\) for \(j>p\) (see Prop. \ref{prp:computPsi} for this recursive computation of the \(\Psi_j\)'s).
+
+Inference on the VAR coefficients \(\{\Phi_j\}_{j=1,...,p}\) is straightforward (standard OLS inference). But inference is more complicated regarding IRFs. Indeed, as shown by the previous equation, the (infinite) MA coefficients \(\{\Psi_j\}_{j=1,...}\) are non-linear functions of the \(\{\Phi_j\}_{j=1,...,p}\) and of \(\Omega_\varepsilon\). An other issue pertain to small sample bias: typically, for persistent processes, auto-regressive parameters are known to be downward biased.
+
+The main inference methods are the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Monte Carlo method (\citet{Hamilton_1994})
+\item
+  Asymptotic normal approximation (\citet{Lutkepohl_1990}), or Delta method
+\item
+  Bootstrap method (\citet{Kilian_1998})
+\end{itemize}
+
+\hypertarget{MonteCarlo}{%
+\section{Monte Carlo method}\label{MonteCarlo}}
+
+We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the \(\Psi_j\)'s) but which is a function of another variable whose distribution is known (here, the \(\Phi_j\)'s).
+
+For instance, suppose we know the distribution of a random variable \(X\), which takes values in \(\mathbb{R}\), with density function \(p\). Assume we want to compute the mean of \(\varphi(X)\). We have:
+\[
+\mathbb{E}(\varphi(X))=\int_{-\infty}^{+\infty}\varphi(x)p(x)dx
+\]
+Suppose that the above integral does not have a simple expression. We cannot compute \(\mathbb{E}(\varphi(X))\) but, by virtue of the law of large numbers, we can approximate it as follows:
+\[
+\mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
+\]
+where \(\{X^{(i)}\}_{i=1,...,N}\) are \(N\) independent draws of \(X\). More generally, the distribution of \(\varphi(X)\) can be approximated by the empirical distribution of the \(\varphi(X^{(i)})\)'s. Typically, if 10'000 values of \(\varphi(X^{(i)})\) are drawn, the \(5^{th}\) percentile of the p.d.f. of \(\varphi(X)\) can be approximated by the \(500^{th}\) value of the 10'000 draws of \(\varphi(X^{(i)})\) (after arranging these values in ascending order).
+
+As regards the computation of confidence intervals around IRFs, one has to think of \(\{\widehat{\Phi}_j\}_{j=1,...,p}\), and of \(\widehat{\Omega}\) as \(X\) and \(\{\widehat{\Psi}_j\}_{j=1,...}\) as \(\varphi(X)\). (Proposition \ref{prp:OLSVAR2} provides us with the asymptotic distribution of the ``\(X\).'')
+
+To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach: For each iteration \(k\),
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Draw \(\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}\) and \(\widehat{\Omega}^{(k)}\) from their asymptotic distribution (using Proposition \ref{prp:OLSVAR2}).
+\item
+  Compute the matrix \(B^{(k)}\) so that \(\widehat{\Omega}^{(k)}=B^{(k)}B^{(k)'}\), according to your identification strategy.
+\item
+  Compute the associated IRFs \(\{\widehat{\Psi}_j\}^{(k)}\).
+\end{enumerate}
+
+Perform \(N\) replications and report the median impulse response (and its confidence intervals).
+
+The following code implements the Monte Carlo method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
+\NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
+\NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
+\NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
+\NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\CommentTok{\# ===================================}
+\CommentTok{\# CEE with different inference methods}
+\CommentTok{\# ===================================}
+
+\NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}} \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                                   \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                                   \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                                   \AttributeTok{inference =} \DecValTok{3}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstrap, 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo, 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                                   \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                                   \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                                   \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference1-1} \caption{IRF associated with a monetary policy shock; Monte Carlo method.}\label{fig:inference1}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IRFs.ordering }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{IRFs}
+\NormalTok{median.IRFs.ordering }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{all.CI.median}
+\NormalTok{simulated.IRFs.ordering }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{simulated.IRFs}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{delta-method}{%
+\section{Delta method}\label{delta-method}}
+
+Suppose \(\beta\) is a vector of parameters and \(\beta\) is an estimator such that
+\[
+\sqrt{T}(\hat\beta-\beta)\overset{d}{\rightarrow}\mathcal{N}(0,\Sigma_\beta),
+\]
+where \(d\) denotes convergence in distribution, \(N(0,\Sigma_\beta)\) denotes the multivariate normal distribution with mean vector 0 and covariance matrix \(\Sigma_\beta\) and \(T\) is the size of the sample used for estimation.
+
+Let \(g(\beta) = (g_l(\beta),..., g_m(\beta))'\) be a continuously differentiable function with values in \(\mathbb{R}^m\), and assume that \(\partial g_i/\partial \beta' = (\partial g_i/\partial \beta_j)\) is nonzero at \(\beta\) for \(i = 1,\dots, m\). Then
+\[
+\sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
+\]
+Using this property, \citet{Lutkepohl_1990} provides the asymptotic distributions of the \(\Psi_j\)'s. The following lines of code can be used to get approximate confidence intervals for IRFs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{irf.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(THETA)\{}
+\NormalTok{  c }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  phi }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{2}\SpecialCharTok{:}\NormalTok{(p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]}
+  \ControlFlowTok{if}\NormalTok{(q}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
+\NormalTok{    theta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q)])}
+\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{theta }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{\}}
+\NormalTok{  sigma }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
+\NormalTok{  r }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Matrix.of.Exog)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{  beta }\OtherTok{\textless{}{-}}\NormalTok{ THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\NormalTok{(r}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))]}
+  
+\NormalTok{  irf }\OtherTok{\textless{}{-}} \FunctionTok{sim.arma}\NormalTok{(}\DecValTok{0}\NormalTok{,phi,beta,}\AttributeTok{sigma=}\FunctionTok{sd}\NormalTok{(Ramey}\SpecialCharTok{$}\NormalTok{ED3\_TC,}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}\AttributeTok{T=}\DecValTok{60}\NormalTok{,}
+                  \AttributeTok{y.0=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{phi)),}\AttributeTok{nb.sim=}\DecValTok{1}\NormalTok{,}\AttributeTok{make.IRF=}\DecValTok{1}\NormalTok{,}
+                  \AttributeTok{X=}\ConstantTok{NaN}\NormalTok{,}\AttributeTok{beta=}\ConstantTok{NaN}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(irf)\}}
+\NormalTok{IRF}\FloatTok{.0} \OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA)}
+\NormalTok{eps }\OtherTok{\textless{}{-}}\NormalTok{ .}\DecValTok{00000001}
+\NormalTok{d.IRF }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA))\{}
+\NormalTok{  THETA.i }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{THETA}
+\NormalTok{  THETA.i[i] }\OtherTok{\textless{}{-}}\NormalTok{ THETA.i[i] }\SpecialCharTok{+}\NormalTok{ eps}
+\NormalTok{  IRF.i }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(THETA.i)}
+\NormalTok{  d.IRF }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(d.IRF,}
+\NormalTok{                 (IRF.i }\SpecialCharTok{{-}}\NormalTok{ IRF}\FloatTok{.0}\NormalTok{)}\SpecialCharTok{/}\NormalTok{eps)\}}
+\NormalTok{mat.var.cov.IRF }\OtherTok{\textless{}{-}}\NormalTok{ d.IRF }\SpecialCharTok{\%*\%}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{I }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(d.IRF)}
+\end{Highlighting}
+\end{Shaded}
+
+A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results and the normality assumption. Boostrapping approaches are more robust in small-sample and non-normal situations.
+
+\hypertarget{bootstrap}{%
+\section{Bootstrap}\label{bootstrap}}
+
+IRFs' confidence intervals are intervals where 90\% (or 95\%, 75\%, \ldots) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (\(T\) observations). We obviously cannot do this, because we have only one sample: \(\{y_t\}_{t=1,..,T}\). But we can try to \emph{construct} such samples.
+
+Bootstrapping consists in:
+
+\begin{itemize}
+\tightlist
+\item
+  re-sampling \(N\) times, i.e., constructing \(N\) samples of \(T\) observations, using the estimated
+  VAR coefficients and
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  a sample of residuals from the distribution \(N(0,BB')\) (\textbf{parametric approach}), or
+\item
+  a sample of residuals drawn randomly from the set of the actual estimated residuals \(\{\hat\varepsilon_t\}_{t=1,..,T}\). (\textbf{non-parametric approach}).
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  re-estimating the SVAR \(N\) times.
+\end{itemize}
+
+Here is the algorithm:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Construct a sample
+  \[
+  y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
+  \]
+  with \(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\), where \(\{s_1^{(k)},..,s_T^{(k)}\}\) is a random set from \(\{1,..,T\}^T\).
+\item
+  Re-estimate the SVAR and compute the IRFs \(\{\widehat{\Psi}_j\}^{(k)}\).
+\end{enumerate}
+
+Perform \(N\) replications and report the median impulse response (and its confidence intervals).
+
+The following code implements the bootstrap method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
+\NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
+\NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
+\NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
+\NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\CommentTok{\# ===================================}
+\CommentTok{\# CEE with different inference methods}
+\CommentTok{\# ===================================}
+
+\NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}} \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                                   \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                                   \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                                   \AttributeTok{inference =} \DecValTok{2}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstrap, 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo, 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                                   \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                                   \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                                   \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference2-1} \caption{IRF associated with a monetary policy shock; bootstrap method.}\label{fig:inference2}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IRFs.ordering.bootstrap }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{IRFs}
+\NormalTok{median.IRFs.ordering.bootstrap }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{all.CI.median}
+\NormalTok{simulated.IRFs.ordering.bootstrap }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{simulated.IRFs}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{bootstrap-after-bootstrap}{%
+\section{Bootstrap-after-bootstrap}\label{bootstrap-after-bootstrap}}
+
+The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the \emph{small sample bias}, stemming, in particular, from small-sample bias associated with OLS coefficient estimates \(\{\widehat{\Phi}_j\}_{j=1,..,p}\).
+
+The code below illustrates the small sample bias.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of coefficients stemming from the non{-}parametric bootstrap}
+\NormalTok{h }\OtherTok{\textless{}{-}} \DecValTok{5}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{round}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{==}\NormalTok{n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+\FunctionTok{hist}\NormalTok{(simulated.IRFs.ordering.bootstrap[h,i,],}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
+     \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of shock at horizon "}\NormalTok{,h,}\StringTok{"on "}\NormalTok{,considered.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(IRFs.ordering.bootstrap[h,i],IRFs.ordering.bootstrap[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(median.IRFs.ordering.bootstrap[h,i],median.IRFs.ordering.bootstrap[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(IRFs.ordering.bootstrap[h,i],}\DecValTok{25}\NormalTok{,}\AttributeTok{label=}\StringTok{"Estimated coefficient"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference3-1} \caption{Estimated and bootstrapped coefficients.}\label{fig:inference3}
+\end{figure}
+
+The distribution of the bootstrapped coefficients is not centered around the estimated coefficients.
+
+In the following code, we perform the VAR estimation and bootstrap inference after generating artificial data. We can then compare the IRFs and confidence intervals to the ``true'\,' parameters used to generate the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Simulate a small sample}
+\NormalTok{est.VAR }\OtherTok{\textless{}{-}} \FunctionTok{VAR}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{)}
+\NormalTok{Phi     }\OtherTok{\textless{}{-}} \FunctionTok{Acoef}\NormalTok{(est.VAR)}
+\NormalTok{cst     }\OtherTok{\textless{}{-}} \FunctionTok{Bcoef}\NormalTok{(est.VAR)[,}\DecValTok{3}\SpecialCharTok{*}\NormalTok{n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
+\NormalTok{resids  }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(est.VAR)}
+\NormalTok{Omega   }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(resids)}
+\NormalTok{B.hat   }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(Omega))}
+\NormalTok{y0.star }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\ControlFlowTok{for}\NormalTok{(k }\ControlFlowTok{in} \DecValTok{3}\SpecialCharTok{:}\DecValTok{1}\NormalTok{)\{}
+\NormalTok{  y0.star }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(y0.star,y[k,])}
+\NormalTok{\}}
+\NormalTok{small.sample }\OtherTok{\textless{}{-}} \FunctionTok{simul.VAR}\NormalTok{(}\AttributeTok{c=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{dim}\NormalTok{(y)[}\DecValTok{2}\NormalTok{]),}
+\NormalTok{                    Phi,}
+\NormalTok{                    B.hat,}
+                    \AttributeTok{nb.sim =} \DecValTok{100}\NormalTok{,}
+\NormalTok{                    y0.star,}
+                    \AttributeTok{indic.IRF =} \DecValTok{0}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(small.sample)  }\OtherTok{\textless{}{-}}\NormalTok{ considered.variables}
+\CommentTok{\# Estimate the VAR with the small sample}
+\NormalTok{res.svar.small.sample }\OtherTok{\textless{}{-}} \FunctionTok{svar.ordering.2}\NormalTok{(small.sample,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                                         \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                                         \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                                         \AttributeTok{inference =} \DecValTok{2}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstrap, 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo}
+                                         \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                                         \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                                         \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference4-1} \caption{Simulated IRF associated with a monetary policy shock.}\label{fig:inference4}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IRFs.small.sample }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.small.sample}\SpecialCharTok{$}\NormalTok{IRFs}
+\NormalTok{median.IRFs.small.sample }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.small.sample}\SpecialCharTok{$}\NormalTok{all.CI.median}
+\NormalTok{simulated.IRFs.small.sample }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.small.sample}\SpecialCharTok{$}\NormalTok{simulated.IRFs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Distribution of coefficients resulting from the small sample VAR}
+\NormalTok{h }\OtherTok{\textless{}{-}} \DecValTok{5}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{round}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{==}\NormalTok{n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+  \FunctionTok{hist}\NormalTok{(simulated.IRFs.small.sample[h,i,],}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
+       \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of shock at horizon "}\NormalTok{,h,}\StringTok{"on "}\NormalTok{,considered.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+  \FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(IRFs.small.sample[h,i],IRFs.small.sample[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(median.IRFs.small.sample[h,i],median.IRFs.small.sample[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+  \FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(IRFs.ordering.bootstrap[h,i],IRFs.ordering.bootstrap[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"black"}\NormalTok{)}
+  \FunctionTok{text}\NormalTok{(IRFs.small.sample[h,i],}\DecValTok{25}\NormalTok{,}\AttributeTok{label=}\StringTok{"Estimated coefficient"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+  \FunctionTok{text}\NormalTok{(IRFs.ordering.bootstrap[h,i],}\DecValTok{30}\NormalTok{,}\AttributeTok{label=}\StringTok{"True coefficient"}\NormalTok{,}\AttributeTok{col=}\StringTok{"black"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference5-1} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:inference5}
+\end{figure}
+
+The main idea of the bootstrap-after-bootstrap of \citet{Kilian_1998} is to run two consecutive boostraps: the objective of the first is to compute the bias, which can further be used to correct the initial estimates of the \(\Phi_i\)'s. Further, these corrected estimates are used ---in the second boostrap--- to compute a set of IRFs (as in the standard boostrap).
+
+More formally, the algorithm is as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimate the SVAR coefficients \(\{\widehat{\Phi}_j\}_{j=1,..,p}\) and \(\widehat{\Omega}\)
+\item
+  \textbf{First bootstrap.} For each iteration \(k\):
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Construct a sample
+  \[
+  y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
+  \]
+  with \(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\), where \(\{s_1^{(k)},..,s_T^{(k)}\}\) is a random set from \(\{1,..,T\}^T\).
+\item
+  Re-estimate the VAR and compute the coefficients \(\{\widehat{\Phi}_j\}_{j=1,..,p}^{(k)}\).
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Perform \(N\) replications and compute the median coefficients \(\{\widehat{\Phi}_j\}_{j=1,..,p}^*\).
+\item
+  Approximate the bias terms by \(\widehat{\Theta}_j=\widehat{\Phi}_j^*-\widehat{\Phi}_j\).
+\item
+  Construct the bias-corrected terms \(\widetilde{\Phi}_j=\widehat{\Phi}_j-\widehat{\Theta}_j\).
+\item
+  \textbf{Second bootstrap.} For each iteration \(k\):
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Construct a sample now from
+  \[
+  y_t^{(k)}=\widetilde{\Phi}_1 y_{t-1}^{(k)} + \dots + \widetilde{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)}.
+  \]
+\item
+  Re-estimate the VAR and compute the coefficients \(\{\widehat{\Phi}^*_j\}_{j=1,..,p}^{(k)}\).
+\item
+  Construct the bias-corrected estimates \(\widetilde{\Phi}_j^{*(k)}=\widehat{\Phi}_j^{*(k)}-\widehat{\Theta}_j\).
+\item
+  Compute the associated IRFs \(\{\widetilde{\Psi}_j^{*(k)}\}_{j\ge 1}\).
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Perform \(N\) replications and compute the median and the confidence interval of the set of IRFs.
+\end{enumerate}
+
+It should be noted that correcting for the bias can generate non-stationary results (\(\tilde \Phi\) with eigenvalue with modulus \(>1\)). Solution (\citet{Kilian_1998}):
+
+In step 5, check if the largest eigenvalue of \(\tilde\Phi\) is of modulus \textless1.
+If not, shrink the bias: for all \(j\)s, set \(\widehat{\Theta}_j^{(i+1)}=\delta_{i+1}\widehat{\Theta}_j^{(i)}\), with \(\delta_{i+1}=\delta_i-0.01\), starting with \(\delta_1=1\) and \(\widehat{\Theta}_j^{(1)} =\widehat{\Theta}_j\), and compute \(\widetilde{\Phi}_j^{(i+1)}=\widehat{\Phi}_j-\widehat{\Theta}_j^{(i+1)}\) until the largest eigenvalue of \(\tilde\Phi^{(i+1)}\) has modulus \textless1.
+
+The following code implements the bootstrap-after-bootrap method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
+\NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
+\NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
+\NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
+\NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\CommentTok{\# ===================================}
+\CommentTok{\# CEE with different inference methods}
+\CommentTok{\# ===================================}
+
+\NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}} \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                                   \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                                   \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                                   \AttributeTok{inference =} \DecValTok{4}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstrap, 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo, 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                                   \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                                   \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                                   \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference6-1} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:inference6}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IRFs.ordering }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{IRFs}
+\NormalTok{median.IRFs.ordering }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{all.CI.median}
+\NormalTok{simulated.IRFs.ordering }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{simulated.IRFs}
+\end{Highlighting}
+\end{Shaded}
+
+As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\citet{VARetp}) can be used to operate the bias-correction approach of \citet{Kilian_1998}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(VAR.etp)}
+\FunctionTok{library}\NormalTok{(vars) }\CommentTok{\#standard VAR models}
+\FunctionTok{data}\NormalTok{(dat) }\CommentTok{\# part of VAR.etp package}
+\NormalTok{corrected }\OtherTok{\textless{}{-}} \FunctionTok{VAR.Boot}\NormalTok{(dat,}\AttributeTok{p=}\DecValTok{2}\NormalTok{,}\AttributeTok{nb=}\DecValTok{200}\NormalTok{,}\AttributeTok{type=}\StringTok{"const"}\NormalTok{)}
+\NormalTok{noncorrec }\OtherTok{\textless{}{-}} \FunctionTok{VAR}\NormalTok{(dat,}\AttributeTok{p=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{rbind}\NormalTok{(corrected}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,],}
+\NormalTok{      (corrected}\SpecialCharTok{$}\NormalTok{coef}\SpecialCharTok{+}\NormalTok{corrected}\SpecialCharTok{$}\NormalTok{Bias)[}\DecValTok{1}\NormalTok{,],}
+\NormalTok{      noncorrec}\SpecialCharTok{$}\NormalTok{varresult}\SpecialCharTok{$}\NormalTok{inv}\SpecialCharTok{$}\NormalTok{coefficients)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3053754 0.1709274 0.915578 -0.1408695 0.1489711 0.9345016 -0.01764081
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+\end{verbatim}
+
 \hypertarget{Signs}{%
 \chapter{Sign restrictions}\label{Signs}}
 
@@ -1275,10 +1744,21 @@ We are looking for a solution to
 
 The problem is solved numerically.
 
-\hypertarget{combining-different-approaches}{%
-\section{Combining different approaches}\label{combining-different-approaches}}
+\hypertarget{NarrativeSign}{%
+\section{Narrative sign restrictions}\label{NarrativeSign}}
 
-Sometimes we need to combine different restriction approaches. For instance:
+A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).\footnote{See also Section \ref{NarrativeHistDecomp}.} For instance, \citet{AntolinDiaz_RubioRamirez_2018} argue that one should rule out structural parameters that disagree with the view that ``a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.''
+
+Suppose we want to impose the restriction that, at dates \(\{t_1,\dots,t_J\}\), the signs of the \(j^{th}\) shock are all positive. Then, the narrative sign restrictions are simply imposed by:
+\[
+\hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) > 0,
+\]
+where \(\hat\eta_{t}(B)\) is the vector of structural shock associated with a given matrix \(B\) (and where \(e_j\) is the \(j^{th}\) column of the \(n \times n\) identity matrix).
+
+\hypertarget{SignsZeros}{%
+\chapter{Combining sign and zero restrictions}\label{SignsZeros}}
+
+Sometimes we need to combine different types of restrictions. For instance:
 
 \begin{itemize}
 \tightlist
@@ -1327,9 +1807,20 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
+\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
+\NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
+\NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
+\NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
 \NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \NormalTok{SR.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
 \NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
 \CommentTok{\#Define sign restrictions and horizon for restrictions}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
 \NormalTok{  sign.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,n,n)}
@@ -1347,13 +1838,16 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
 \NormalTok{sign.restrictions[[}\DecValTok{6}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{6}\NormalTok{]][}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{horizon[[}\DecValTok{6}\NormalTok{]] }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+
 \CommentTok{\#Define zero restrictions}
 \NormalTok{SR.restrictions[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,n))}
 \NormalTok{SR.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,n))}
 \NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{3}\SpecialCharTok{:}\NormalTok{n)\{}
-\NormalTok{  SR.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,n))\}}
+\NormalTok{  SR.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,n))}
+\NormalTok{\}}
+
 \NormalTok{res.svar.signs.zeros }\OtherTok{\textless{}{-}} \FunctionTok{svar.signs}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
                                   \AttributeTok{nb.shocks =} \DecValTok{6}\NormalTok{, }\CommentTok{\#number of identified shocks}
                                   \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
@@ -1362,23 +1856,38 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
                                   \AttributeTok{indic.plot =} \DecValTok{1}\NormalTok{, }\CommentTok{\# Plots are displayed if = 1.}
                                   \AttributeTok{nb.draws =} \DecValTok{10000}\NormalTok{, }\CommentTok{\# number of draws}
 \NormalTok{                                  sign.restrictions,}
-\NormalTok{                                  horizon,}\AttributeTok{recursive =}\DecValTok{0}\NormalTok{,}
-\NormalTok{                                  SR.restrictions)}
+\NormalTok{                                  horizon,}
+                                  \AttributeTok{recursive =}\DecValTok{0}\NormalTok{,}
+\NormalTok{                                  SR.restrictions}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-1} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-1}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-2} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-2}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-3} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-3}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-4} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-4}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-5} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-5}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-6} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-6}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{IRFs.signs}
 \NormalTok{nb.rotations }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{xx}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{NarrativeSign}{%
-\section{Narrative sign restrictions}\label{NarrativeSign}}
-
-A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).\footnote{See also Section \ref{NarrativeHistDecomp}.} For instance, \citet{AntolinDiaz_RubioRamirez_2018} argue that one should rule out structural parameters that disagree with the view that ``a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.''
-
-Suppose we want to impose the restriction that, at dates \(\{t_1,\dots,t_J\}\), the signs of the \(j^{th}\) shock are all positive. Then, the narrative sign restrictions are simply imposed by:
-\[
-\hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) > 0,
-\]
-where \(\hat\eta_{t}(B)\) is the vector of structural shock associated with a given matrix \(B\) (and where \(e_j\) is the \(j^{th}\) column of the \(n \times n\) identity matrix).
 
 \hypertarget{forecast-error-variance-maximization}{%
 \chapter{Forecast error variance maximization}\label{forecast-error-variance-maximization}}
@@ -1446,6 +1955,270 @@ with the first-order condition \(Sq_1=\lambda q_1\) (the side constraint is \(q_
 S = \mathcal{P}D\mathcal{P}',
 \]
 where \(D\) is diagonal matrix whose entries are the (ordered) eigenvalues: \(\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n \ge 0\), then \(\sigma^2(\underline{h},\overline{h},q_1)\) is maximized for \(q_1 = p_1\), where \(p_1\) is the first column of \(\mathcal{P}\).
+
+The following code identifies a ``main GDP shock'\,' using Uhlig's method.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IdSS)}
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(vars)}
+\FunctionTok{library}\NormalTok{(Matrix)}
+\CommentTok{\# Declare data:}
+\NormalTok{TFP   }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{tfp\_lev}
+\NormalTok{GDP   }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{lngdpcap}
+\NormalTok{E12   }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{e12m}
+\NormalTok{CONS  }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{lnconcap}
+\NormalTok{HOURS }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{lnhrscap}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(TFP,GDP,E12,CONS,HOURS)}
+\NormalTok{names.of.variables }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"TFP"}\NormalTok{,}\StringTok{"GDP"}\NormalTok{,}\StringTok{"E12"}\NormalTok{,}\StringTok{"Consumption"}\NormalTok{,}\StringTok{"Hours"}\NormalTok{)}
+\FunctionTok{colnames}\NormalTok{(y)  }\OtherTok{\textless{}{-}}\NormalTok{ names.of.variables}
+\NormalTok{T }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(y)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(y)[}\DecValTok{2}\NormalTok{]}
+\NormalTok{p }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{nb.periods.IRF }\OtherTok{\textless{}{-}} \DecValTok{40}
+\NormalTok{bootstrap.replications }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{confidence.interval }\OtherTok{\textless{}{-}} \FloatTok{0.75}
+\NormalTok{indic.plot }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{H }\OtherTok{\textless{}{-}} \DecValTok{20}
+\CommentTok{\# ===============================}
+\CommentTok{\# FEVM}
+\CommentTok{\# ===============================}
+\NormalTok{y0.star }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,n}\SpecialCharTok{*}\NormalTok{p)}
+\NormalTok{En }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n,n))}
+\NormalTok{En[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{stdv.IRFs }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\CommentTok{\# do Choleski (we need the FULL IRFs)}
+\NormalTok{cholesky.res }\OtherTok{\textless{}{-}} \FunctionTok{svar.ordering.all}\NormalTok{(y,p,nb.periods.IRF,n)}
+\CommentTok{\# Store results}
+\NormalTok{IRFs }\OtherTok{\textless{}{-}}\NormalTok{ cholesky.res}\SpecialCharTok{$}\NormalTok{IRFs}
+\NormalTok{est.VAR }\OtherTok{\textless{}{-}}\NormalTok{ cholesky.res}\SpecialCharTok{$}\NormalTok{est.VAR}
+\NormalTok{Phi     }\OtherTok{\textless{}{-}} \FunctionTok{Acoef}\NormalTok{(est.VAR)}
+\NormalTok{B.hat }\OtherTok{\textless{}{-}}\NormalTok{ cholesky.res}\SpecialCharTok{$}\NormalTok{B.hat}
+\NormalTok{cst     }\OtherTok{\textless{}{-}} \FunctionTok{Bcoef}\NormalTok{(est.VAR)[,p}\SpecialCharTok{*}\NormalTok{n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
+\NormalTok{resids  }\OtherTok{\textless{}{-}} \FunctionTok{residuals}\NormalTok{(est.VAR)}
+\NormalTok{Omega   }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(resids)}
+\CommentTok{\# if no bootstrap then simply use point estimate}
+\NormalTok{simulated.IRFs  }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(}\DecValTok{1}\NormalTok{,IRFs, }\AttributeTok{simplify=}\StringTok{"array"}\NormalTok{)}
+\NormalTok{simulated.B.hat }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(}\DecValTok{1}\NormalTok{,B.hat, }\AttributeTok{simplify=}\StringTok{"array"}\NormalTok{)}
+\NormalTok{simulated.Phi   }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(}\DecValTok{1}\NormalTok{,Phi, }\AttributeTok{simplify=}\StringTok{"array"}\NormalTok{)}
+\CommentTok{\# if bootstrap then generate and store simulated IRFs, B.hat and Phi}
+\ControlFlowTok{if}\NormalTok{(bootstrap.replications}\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{)\{}
+\NormalTok{  bootstrap.res }\OtherTok{\textless{}{-}} \FunctionTok{param.bootstrap}\NormalTok{(y,p,nb.periods.IRF,n,}
+\NormalTok{                                  bootstrap.replications,}
+                                  \AttributeTok{posit.of.shock =} \DecValTok{0}\NormalTok{)}
+\NormalTok{  simulated.IRFs  }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap.res}\SpecialCharTok{$}\NormalTok{simulated.IRFs}
+\NormalTok{  simulated.B.hat }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap.res}\SpecialCharTok{$}\NormalTok{simulated.B.hat}
+\NormalTok{  simulated.Phi   }\OtherTok{\textless{}{-}}\NormalTok{ bootstrap.res}\SpecialCharTok{$}\NormalTok{simulated.Phi}
+\NormalTok{\}}
+\CommentTok{\# Initialize Q as identity matrix}
+\NormalTok{Q }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(bootstrap.replications,}\FunctionTok{diag}\NormalTok{(n), }\AttributeTok{simplify=}\StringTok{"array"}\NormalTok{)}
+\CommentTok{\# This is where we will store the IRFs}
+\NormalTok{IRFs.final }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\ConstantTok{NaN}\NormalTok{,}\FunctionTok{c}\NormalTok{(n,n,nb.periods.IRF,bootstrap.replications))}
+\CommentTok{\# This loop identifies the relevant Q for each bootstrap replication}
+  \ControlFlowTok{for}\NormalTok{ (l }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{bootstrap.replications)\{}
+    \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+    \CommentTok{\# Identification of main GDP shock}
+    \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+    \CommentTok{\# Compute S}
+\NormalTok{    WWW }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n,n))}
+    \ControlFlowTok{for}\NormalTok{ (h }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{H)\{}
+\NormalTok{      V99 }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,h,l]}
+\NormalTok{      JJ }\OtherTok{\textless{}{-}}\NormalTok{ (H}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{h)}\SpecialCharTok{*}\FunctionTok{t}\NormalTok{(V99)}\SpecialCharTok{\%*\%}\NormalTok{En}\SpecialCharTok{\%*\%}\NormalTok{V99}
+\NormalTok{      WWW }\OtherTok{\textless{}{-}}\NormalTok{ WWW}\SpecialCharTok{+}\NormalTok{JJ}
+\NormalTok{    \}}
+\NormalTok{    r }\OtherTok{\textless{}{-}} \FunctionTok{eigen}\NormalTok{(WWW) }
+    \CommentTok{\# Take the eigenvector with the highest eigenvalue}
+\NormalTok{    eigvec }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(r}\SpecialCharTok{$}\NormalTok{vectors[,}\DecValTok{1}\NormalTok{],n,}\DecValTok{1}\NormalTok{)}
+    \CommentTok{\# We might need to adjust the sign}
+    \ControlFlowTok{if}\NormalTok{ (simulated.IRFs[}\DecValTok{1}\NormalTok{,,}\DecValTok{20}\NormalTok{,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
+\NormalTok{      Q[,}\DecValTok{1}\NormalTok{,l] }\OtherTok{\textless{}{-}}\NormalTok{ Q[,,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
+\NormalTok{      \}}\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{        Q[,}\DecValTok{1}\NormalTok{,l] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{ Q[,,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
+\NormalTok{        \}}
+\NormalTok{    Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 2 to n are orthogonal to the first}
+    \CommentTok{\# New IRFs}
+    \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nb.periods.IRF)\{}
+\NormalTok{      IRFs.final[,,t,l] }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,t,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,,l]}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\CommentTok{\# compute some key moments of the simulated IRFs}
+\NormalTok{stdv.IRFs }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),sd)}
+\NormalTok{CI.lower.bounds }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                                   \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+\NormalTok{CI.upper.bounds }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                                   \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+\NormalTok{CI.median }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                             \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\FloatTok{0.5}\NormalTok{)\})}
+\CommentTok{\# Plot graphs}
+  \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{round}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{==}\NormalTok{n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+    \FunctionTok{plot}\NormalTok{(CI.median[i,}\DecValTok{1}\NormalTok{,],}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
+         \AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(CI.lower.bounds[i,}\DecValTok{1}\NormalTok{,]),}
+                \FunctionTok{max}\NormalTok{(CI.upper.bounds[i,}\DecValTok{1}\NormalTok{,])),}
+         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of Main GDP shock on "}\NormalTok{,names.of.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+    \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{)}
+      \FunctionTok{lines}\NormalTok{(CI.lower.bounds[i,}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+      \FunctionTok{lines}\NormalTok{(CI.upper.bounds[i,}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{variance.decomp }\OtherTok{\textless{}{-}} \FunctionTok{variance.decomp}\NormalTok{(IRFs.final)}
+\NormalTok{vardecomp }\OtherTok{\textless{}{-}}\NormalTok{ variance.decomp}\SpecialCharTok{$}\NormalTok{vardecomp}
+\FunctionTok{mean}\NormalTok{(vardecomp[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{40}\NormalTok{,,}\DecValTok{1}\NormalTok{]) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7380281
+\end{verbatim}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/uhlig-1} \caption{Main GDP shock.}\label{fig:uhlig}
+\end{figure}
+
+The ``main GDP shock'\,' explains 74\% of the variance of GDP.
+
+The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a mix of zero and FEVD to identify TFP surprises, TFP news and sentiment shocks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nb.periods.IRF }\OtherTok{\textless{}{-}} \DecValTok{40}
+\NormalTok{p }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{bootstrap.replications }\OtherTok{\textless{}{-}} \DecValTok{1000}
+\NormalTok{confidence.interval }\OtherTok{\textless{}{-}} \FloatTok{0.75}
+\NormalTok{indic.plot }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{nb.shocks }\OtherTok{\textless{}{-}} \DecValTok{3}
+\NormalTok{names.of.shocks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"TFP surprise"}\NormalTok{,}\StringTok{"TFP news"}\NormalTok{,}\StringTok{"Sentiment"}\NormalTok{)}
+\NormalTok{Hn }\OtherTok{\textless{}{-}} \DecValTok{40} \CommentTok{\#horizon for news shock}
+\NormalTok{Hs }\OtherTok{\textless{}{-}} \DecValTok{2} \CommentTok{\#horizon for sentiment shock}
+\CommentTok{\# ===============================}
+\CommentTok{\# FEVM + zeros}
+\CommentTok{\# ===============================}
+\NormalTok{En }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n,n))}
+\NormalTok{En[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{Es }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n,n))}
+\NormalTok{Es[}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# Initialize Q as identity matrix}
+\NormalTok{Q }\OtherTok{\textless{}{-}} \FunctionTok{replicate}\NormalTok{(bootstrap.replications,}\FunctionTok{diag}\NormalTok{(n), }\AttributeTok{simplify=}\StringTok{"array"}\NormalTok{)}
+\CommentTok{\# This loop identifies the relevant Q for each bootstrap replication}
+  \ControlFlowTok{for}\NormalTok{ (l }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{bootstrap.replications)\{}
+    \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+    \CommentTok{\# Identification of news shocks}
+    \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+    \CommentTok{\# Compute S}
+\NormalTok{    WWW }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n}\DecValTok{{-}1}\NormalTok{,n}\DecValTok{{-}1}\NormalTok{))}
+    \ControlFlowTok{for}\NormalTok{ (h }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Hn)\{}
+\NormalTok{      V99 }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,h,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l] }
+      \CommentTok{\# Notice that we use only columns 2 to n of Q: the first column selects the TFP surprise shock, }
+      \CommentTok{\# which is the first shock in the Cholesky decomposition where TFP is ordered first}
+\NormalTok{      JJ }\OtherTok{\textless{}{-}}\NormalTok{ (Hn}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{h)}\SpecialCharTok{*}\FunctionTok{t}\NormalTok{(V99)}\SpecialCharTok{\%*\%}\NormalTok{En}\SpecialCharTok{\%*\%}\NormalTok{V99}
+\NormalTok{      WWW }\OtherTok{\textless{}{-}}\NormalTok{ WWW}\SpecialCharTok{+}\NormalTok{JJ}
+\NormalTok{    \}}
+\NormalTok{    r }\OtherTok{\textless{}{-}} \FunctionTok{eigen}\NormalTok{(WWW) }
+    \CommentTok{\# Take the eigenvector with the highest eigenvalue}
+\NormalTok{    eigvec }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(r}\SpecialCharTok{$}\NormalTok{vectors[,}\DecValTok{1}\NormalTok{],n}\DecValTok{{-}1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+    \CommentTok{\# We might need to adjust the sign}
+    \ControlFlowTok{if}\NormalTok{ (simulated.IRFs[}\DecValTok{1}\NormalTok{,,}\DecValTok{20}\NormalTok{,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
+\NormalTok{      Q[,}\DecValTok{2}\NormalTok{,l] }\OtherTok{\textless{}{-}}\NormalTok{ Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
+\NormalTok{      \}}\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{        Q[,}\DecValTok{2}\NormalTok{,l] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{ Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
+\NormalTok{        \}}
+\NormalTok{    Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 3 to n are orthogonal to the first 2}
+    \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+    \CommentTok{\# Identification of sentiment shocks}
+    \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+    \CommentTok{\# Compute S}
+\NormalTok{    WWW }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n}\DecValTok{{-}2}\NormalTok{,n}\DecValTok{{-}2}\NormalTok{))}
+    \ControlFlowTok{for}\NormalTok{ (h }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Hs)\{}
+\NormalTok{      V99 }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,h,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}
+      \CommentTok{\# Notice that we use only columns 3 to n of Q: the first column selects the TFP surprise shock, }
+      \CommentTok{\# which is the first shock in the Cholesky decomposition where TFP is ordered first, the second column generates }
+      \CommentTok{\# the linear combination of "Cholesky shocks" that is orthogonal to TFP surprise and best explains TFP up to }
+      \CommentTok{\# horizon 40 (see last step)}
+\NormalTok{      JJ }\OtherTok{\textless{}{-}}\NormalTok{ (Hs}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{h)}\SpecialCharTok{*}\FunctionTok{t}\NormalTok{(V99)}\SpecialCharTok{\%*\%}\NormalTok{Es}\SpecialCharTok{\%*\%}\NormalTok{V99}
+\NormalTok{      WWW }\OtherTok{\textless{}{-}}\NormalTok{ WWW}\SpecialCharTok{+}\NormalTok{JJ}
+\NormalTok{    \}}
+\NormalTok{    r }\OtherTok{\textless{}{-}} \FunctionTok{eigen}\NormalTok{(WWW) }
+    \CommentTok{\# Take the eigenvector with the highest eigenvalue}
+\NormalTok{    eigvec }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(r}\SpecialCharTok{$}\NormalTok{vectors[,}\DecValTok{1}\NormalTok{],n}\DecValTok{{-}2}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+    \CommentTok{\# We might need to adjust the sign}
+    \ControlFlowTok{if}\NormalTok{ (simulated.IRFs[}\DecValTok{3}\NormalTok{,,}\DecValTok{2}\NormalTok{,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
+\NormalTok{      Q[,}\DecValTok{3}\NormalTok{,l] }\OtherTok{\textless{}{-}}\NormalTok{ Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
+\NormalTok{    \}}\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{      Q[,}\DecValTok{3}\NormalTok{,l] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
+\NormalTok{    \}}
+\NormalTok{    Q[,}\DecValTok{4}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 4 to n are orthogonal to the first 3}
+    \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nb.periods.IRF)\{}
+\NormalTok{      IRFs.final[,,t,l] }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,t,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,,l]}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\CommentTok{\# compute some key moments of the simulated IRFs}
+\NormalTok{stdv.IRFs }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),sd)}
+\NormalTok{CI.lower.bounds }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                                   \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+\NormalTok{CI.upper.bounds }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                                   \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+\NormalTok{CI.median }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+                             \ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\FloatTok{0.5}\NormalTok{)\})}
+\CommentTok{\# Plot graphs}
+\ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nb.shocks)\{}
+  \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{round}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{==}\NormalTok{n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
+    \FunctionTok{plot}\NormalTok{(CI.median[i,j,],}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
+         \AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(CI.lower.bounds[i,j,]),}
+                \FunctionTok{max}\NormalTok{(CI.upper.bounds[i,j,])),}
+         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of "}\NormalTok{,names.of.shocks[j],}\StringTok{" on "}\NormalTok{,names.of.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+    \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{)}
+      \FunctionTok{lines}\NormalTok{(CI.lower.bounds[i,j,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+      \FunctionTok{lines}\NormalTok{(CI.upper.bounds[i,j,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-1} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-1}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-2} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-2}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance.decomp }\OtherTok{\textless{}{-}} \FunctionTok{variance.decomp}\NormalTok{(IRFs.final)}
+\NormalTok{vardecomp }\OtherTok{\textless{}{-}}\NormalTok{ variance.decomp}\SpecialCharTok{$}\NormalTok{vardecomp}
+\FunctionTok{mean}\NormalTok{(vardecomp[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{40}\NormalTok{,,}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1005313
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(vardecomp[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{40}\NormalTok{,,}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6351427
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(vardecomp[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{40}\NormalTok{,,}\DecValTok{3}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1226737
+\end{verbatim}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-3} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-3}
+\end{figure}
+
+Sentiment shocks explain 12\% of the variance of GDP, against 72\% for TFP shocks (including 62\% for TFP news shocks).
 
 \hypertarget{NarrativeHistDecomp}{%
 \section{Restrictions based on narrative historical decomposition}\label{NarrativeHistDecomp}}
@@ -2120,254 +2893,71 @@ In the general case, one can use lags of \(y_t\) as controls. Note that, even if
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{Inference}{%
-\chapter{Inference}\label{Inference}}
+\hypertarget{PanelVARs}{%
+\chapter{Panel VARs}\label{PanelVARs}}
 
-Consider the following SVAR model:
-\[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
-with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\).
+Panel VARs have the same structure as VAR models, in the
+sense that all variables are assumed to be endogenous and
+interdependent, but a \emph{cross sectional dimension} is
+added to the representation. There are \(N\) units indexed by
+\(i\in\{1,...,N\}\). The index \(i\) is generic and could indicate
+countries, sectors, markets\ldots{} Then a panel VAR is
+\[ y_{it}=c_i+\Phi_i(L)
+y_{t-1}+\varepsilon_{it}.\] where \(y_t\) is the stacked version of
+\(y_{it}\) and \(\varepsilon_t\) is i.i.d., with variance-covariance
+matrix \(\Omega\). Vector \(c_i\) and the lag polynomial \(\Phi_i(L)\) may depend on the unit. \citet{Canova_Cicarelli_2013} provide a survey of panel estimation methods.
 
-The corresponding infinite MA representation (Eq. \eqref{eq:InfMA}, or Wold representation, is:
-\[
-y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
-\]
-where \(\Psi_0=B\) and for \(h=1,2,\dots\):
-\[
-\Psi_h = \sum_{j=1}^h\Psi_{h-j}\Phi_j,
-\]
-with \(\Phi_j=0\) for \(j>p\) (see Prop. \ref{prp:computPsi} for this recursive computation of the \(\Psi_j\)'s).
+Contrary to standard VARs, panel VARs may help study
+* similarities/differences in the transmission of shocks;
+* Spillovers, contagion.
 
-Inference on the VAR coefficients \(\{\Phi_j\}_{j=1,...,p}\) is straightforward (standard OLS inference). But inference is more complicated regarding IRF. Indeed, as shown by the previous equation, the (infinite) MA coefficients \(\{\Psi_j\}_{j=1,...}\) are non-linear functions of the \(\{\Phi_j\}_{j=1,...,p}\) and of \(\Omega_\varepsilon\). An other issue pertain to small sample bias: typically, for persistent process, auto-regressive parameters are known to be downward biased.
+But panel VARs are subject tothe \emph{curse of dimensionality}. Indeed, they can be characterized by
+* \emph{Dynamic interdependence}: potentially, the lags of \emph{all}
+endogenous variables of \emph{all} units can enter the model for unit \(i\).
+* \emph{Static interdependence}: \(\varepsilon_{it}\) are
+generally correlated across \(i\).
+* \emph{Cross sectional heterogeneity}: the intercept, the slope and the
+variance of the shocks may be unit-specific.
 
-The main inference methods are the following:
+\hypertarget{without-dynamic-interdependence}{%
+\section{Without Dynamic interdependence}\label{without-dynamic-interdependence}}
 
-\begin{itemize}
-\tightlist
-\item
-  Monte Carlo method (\citet{Hamilton_1994})
-\item
-  Asymptotic normal approximation (\citet{Lutkepohl_1990}), or Delta method
-\item
-  Bootstrap method (Kilian\_1998)
-\end{itemize}
+A panel VAR, assuming no dynamic interdependence, is of the form:
+\[ y_{it}=c_i+\Phi_i(L)
+\color{red}{y_{it-1}}+\varepsilon_{it}.\]
 
-\hypertarget{MonteCarlo}{%
-\section{Monte Carlo method}\label{MonteCarlo}}
+As a comparison, consider \emph{micro panel data}, in the univariate cae (AR(1) case): \[y_{it}=c_i+{\color{red}\phi} y_{it-1}+\varepsilon_{it}.\] In that kind of context, we usually have no cross-sectional heterogeneity as \(\phi_i=\phi\) for all \(i\). Typically, we have a large cross-sectional dimension \(N\), and a small time dimension \(T\). If one uses a \emph{``Fixed-effect'\,' regression}:
+\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T\color{red}{\varepsilon_{is}},\]
+then one faces the \emph{Nickell bias}: with a lagged dependent variable, the estimator is biased, with a bias of size \(\sim 1/T\). One can then use GMM regressions (\citet{Arellano_Bond_1991}) so as to get unbiased estimates.
 
-We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the \(\Psi_j\)'s) but which is a function of another variable whose distribution is known (here, the \(\Phi_j\)'s).
+\emph{Macro panel data} have a different structure, with typically a moderate cross-sectional dimension \(N\) and a large time dimension \(T\), so that the Nickell bias is negligible (\(\rightarrow 0\) as \(T\rightarrow\infty\)).
 
-For instance, suppose we know the distribution of a random variable \(X\), which takes values in \(\mathbb{R}\), with density function \(p\). Assume we want to compute the mean of \(\varphi(X)\). We have:
-\[
-\mathbb{E}(\varphi(X))=\int_{-\infty}^{+\infty}\varphi(x)p(x)dx
-\]
-Suppose that the above integral does not have a simple expression. We cannot compute \(\mathbb{E}(\varphi(X))\) but, by virtue of the law of large numbers, we can approximate it as follows:
-\[
-\mathbb{E}(\varphi(X))\approx\frac{1}{N}\sum_{i=1}^N\varphi(X^{(i)}),
-\]
-where \(\{X^{(i)}\}_{i=1,...,N}\) are \(N\) independent draws of \(X\). More generally, the distribution of \(\varphi(X)\) can be approximated by the empirical distribution of the \(\varphi(X^{(i)})\)'s. Typically, if 10'000 values of \(\varphi(X^{(i)})\) are drawn, the \(5^{th}\) percentile of the p.d.f. of \(\varphi(X)\) can be approximated by the \(500^{th}\) value of the 10'000 draws of \(\varphi(X^{(i)})\) (after arranging these values in ascending order).
+\hypertarget{mean-group-estimator}{%
+\subsection{Mean Group Estimator}\label{mean-group-estimator}}
 
-As regards the computation of confidence intervals around IRFs, one has to think of \(\{\widehat{\Phi}_j\}_{j=1,...,p}\), and of \(\widehat{\Omega}\) as \(X\) and \(\{\widehat{\Psi}_j\}_{j=1,...}\) as \(\varphi(X)\). (Proposition \ref{prp:OLSVAR2} provides us with the asymptotic distribution of the ``\(X\).'')
+When we etimate
+\[ y_{it}=c_i+\Phi_i(L)
+y_{it-1}+\varepsilon_{it},\]
+we need to take into account the cross-sectional heterogeneity in the coefficients, i.e., different \(\Phi_i\)'s across \(i\)'s.
+Pooled estimators (assuming cross-sectional homogeneity, i.e.~identical \(\Phi_i\)'s across \(i\)s) are \emph{not consistent} (biased) if the underlying dynamics are actually heterogeneous. By contrast, the \emph{Mean Group (MG) estimator}, which consists in estimating \(N\) separate regressions
+and calculating the coefficient means, is \emph{consistent}.
 
-To summarize, here are the steps one can implement to derive confidence intervals for the IRFs using the Monte-Carlo approach: For each iteration \(k\),
+\hypertarget{shock-identification}{%
+\subsection{Shock identification}\label{shock-identification}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Draw \(\{\widehat{\Phi}_j^{(k)}\}_{j=1,...,p}\) and \(\widehat{\Omega}^{(k)}\) from their asymptotic distribution (using Proposition \ref{prp:OLSVAR2}).
-\item
-  Compute the matrix \(B^{(k)}\) so that \(\widehat{\Omega}^{(k)}=B^{(k)}B^{(k)'}\), according to your identification strategy.
-\item
-  Compute the associated IRFs \(\{\widehat{\Psi}_j\}^{(k)}\).
-\end{enumerate}
+Shock identification can be performed with standard methods (zeros, signs, FEVM, etc.). We make the assumption that \(\Omega\) is block-diagonal (no interdependence on impact), which is consistent with the assumption of no cross-sectional dependence.
 
-Perform \(N\) replications and report the median impulse response (and its confidence intervals).
+\hypertarget{with-dynamic-interdependencies}{%
+\section{With Dynamic Interdependencies}\label{with-dynamic-interdependencies}}
 
-\hypertarget{delta-method}{%
-\section{Delta method}\label{delta-method}}
+A panel VAR that accommodates dynamic interdependence is of the form:
+\[ y_{it}=c_i+\Phi_i(L)
+y_{t-1}+\varepsilon_{it}.\]
 
-Suppose \(\beta\) is a vector of parameters and \(\beta\) is an estimator such that
-\[
-\sqrt{T}(\hat\beta-\beta)\overset{d}{\rightarrow}\mathcal{N}(0,\Sigma_\beta),
-\]
-where \(d\) denotes convergence in distribution, \(N(0,\Sigma_\beta)\) denotes the multivariate normal distribution with mean vector 0 and covariance matrix \(\Sigma_\beta\) and \(T\) is the sample size used for estimation.
+We face a serious \emph{curse of dimensionality} here: there are \(NGp+1\) coefficients to estimate in
+each equation.
 
-Let \(g(\beta) = (g_l(\beta),..., g_m(\beta))'\) be a continuously differentiable function with values in \(\mathbb{R}^m\), and assume that \(\partial g_i/\partial \beta' = (\partial g_i/\partial \beta_j)\) is nonzero at \(\beta\) for \(i = 1,\dots, m\). Then
-\[
-\sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
-\]
-Using this property, \citet{Lutkepohl_1990} provides the asymptotic distributions of the \(\Psi_j\)'s. The following lines of code can be used to get approximate confidence intervals for IRFs.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{irf.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(THETA)\{}
-\NormalTok{  c }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\NormalTok{]}
-\NormalTok{  phi }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{2}\SpecialCharTok{:}\NormalTok{(p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]}
-  \ControlFlowTok{if}\NormalTok{(q}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
-\NormalTok{    theta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q)])}
-\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{theta }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{\}}
-\NormalTok{  sigma }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
-\NormalTok{  r }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Matrix.of.Exog)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}} \DecValTok{1}
-\NormalTok{  beta }\OtherTok{\textless{}{-}}\NormalTok{ THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\NormalTok{(r}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))]}
-  
-\NormalTok{  irf }\OtherTok{\textless{}{-}} \FunctionTok{sim.arma}\NormalTok{(}\DecValTok{0}\NormalTok{,phi,beta,}\AttributeTok{sigma=}\FunctionTok{sd}\NormalTok{(Ramey}\SpecialCharTok{$}\NormalTok{ED3\_TC,}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}\AttributeTok{T=}\DecValTok{60}\NormalTok{,}
-                  \AttributeTok{y.0=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{phi)),}\AttributeTok{nb.sim=}\DecValTok{1}\NormalTok{,}\AttributeTok{make.IRF=}\DecValTok{1}\NormalTok{,}
-                  \AttributeTok{X=}\ConstantTok{NaN}\NormalTok{,}\AttributeTok{beta=}\ConstantTok{NaN}\NormalTok{)}
-  \FunctionTok{return}\NormalTok{(irf)\}}
-\NormalTok{IRF}\FloatTok{.0} \OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA)}
-\NormalTok{eps }\OtherTok{\textless{}{-}}\NormalTok{ .}\DecValTok{00000001}
-\NormalTok{d.IRF }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA))\{}
-\NormalTok{  THETA.i }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{THETA}
-\NormalTok{  THETA.i[i] }\OtherTok{\textless{}{-}}\NormalTok{ THETA.i[i] }\SpecialCharTok{+}\NormalTok{ eps}
-\NormalTok{  IRF.i }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(THETA.i)}
-\NormalTok{  d.IRF }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(d.IRF,}
-\NormalTok{                 (IRF.i }\SpecialCharTok{{-}}\NormalTok{ IRF}\FloatTok{.0}\NormalTok{)}\SpecialCharTok{/}\NormalTok{eps)\}}
-\NormalTok{mat.var.cov.IRF }\OtherTok{\textless{}{-}}\NormalTok{ d.IRF }\SpecialCharTok{\%*\%}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{I }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(d.IRF)}
-\end{Highlighting}
-\end{Shaded}
-
-A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results. Boostrapping approaches are more robust in small-sample situations.
-
-\hypertarget{bootstrap}{%
-\section{Bootstrap}\label{bootstrap}}
-
-IRFs' confidence intervals are intervals where 90\% (or 95\%, 75\%, \ldots) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (\(T\) observations). We obviously cannot do this, because we have only one sample: \(\{y_t\}_{t=1,..,T}\). But we can try to \emph{construct} such samples.
-
-Bootstrapping consists in:
-
-\begin{itemize}
-\tightlist
-\item
-  re-sampling \(N\) times, i.e., constructing \(N\) samples of \(T\) observations, using the estimated
-  VAR coefficients and
-\end{itemize}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  a sample of residuals from the distribution \(N(0,BB')\) (\textbf{parametric approach}), or
-\item
-  a sample of residuals drawn randomly from the set of the actual estimated residuals \(\{\hat\varepsilon_t\}_{t=1,..,T}\). (\textbf{non-parametric approach}).
-\end{enumerate}
-
-\begin{itemize}
-\tightlist
-\item
-  re-estimating the SVAR \(N\) times.
-\end{itemize}
-
-Here is the algorithm:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Construct a sample
-  \[
-  y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
-  \]
-  with \(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\), where \(\{s_1^{(k)},..,s_T^{(k)}\}\) is a random set from \(\{1,..,T\}^T\).
-\item
-  Re-estimate the SVAR and compute the IRFs \(\{\widehat{\Psi}_j\}^{(k)}\).
-\end{enumerate}
-
-Perform \(N\) replications and report the median impulse response (and its confidence intervals).
-
-\hypertarget{bootstrap-after-bootstrap}{%
-\section{Bootstrap-after-bootstrap}\label{bootstrap-after-bootstrap}}
-
-The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the \emph{small sample bias}, stemming, in particular, from small-sample bias associated with OLS coefficient estimates \(\{\widehat{\Phi}_j\}_{j=1,..,p}\). The main idea of the bootstrap-after-bootstrap of \citet{Kilian_1998} is to run two consecutive boostraps: the objective of the first is to compute the bias, which can further be used to correct the initial estimates of the \(\Phi_i\)'s. Further, these corrected estimates are used ---in the second boostrap--- to compute a set of IRFs (as in the standard boostrap).
-
-More formally, the algorithm is as follows:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Estimate the SVAR coefficients \(\{\widehat{\Phi}_j\}_{j=1,..,p}\) and \(\widehat{\Omega}\)
-\item
-  \textbf{First bootstrap.} For each iteration \(k\):
-\end{enumerate}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  Construct a sample
-  \[
-  y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
-  \]
-  with \(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\), where \(\{s_1^{(k)},..,s_T^{(k)}\}\) is a random set from \(\{1,..,T\}^T\).
-\item
-  Re-estimate the VAR and compute the coefficients \(\{\widehat{\Phi}_j\}_{j=1,..,p}^{(k)}\).
-\end{enumerate}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  Perform \(N\) replications and compute the median coefficients \(\{\widehat{\Phi}_j\}_{j=1,..,p}^*\).
-\item
-  Approximate the bias terms by \(\widehat{\Theta}_j=\widehat{\Phi}_j^*-\widehat{\Phi}_j\).
-\item
-  Construct the bias-corrected terms \(\widetilde{\Phi}_j=\widehat{\Phi}_j-\widehat{\Theta}_j\).
-\item
-  \textbf{Second bootstrap.} For each iteration \(k\):
-\end{enumerate}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  Construct a sample now from
-  \[
-  y_t^{(k)}=\widetilde{\Phi}_1 y_{t-1}^{(k)} + \dots + \widetilde{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)}.
-  \]
-\item
-  Re-estimate the VAR and compute the coefficients \(\{\widehat{\Phi}^*_j\}_{j=1,..,p}^{(k)}\).
-\item
-  Construct the bias-corrected estimates \(\widetilde{\Phi}_j^{*(k)}=\widehat{\Phi}_j^{*(k)}-\widehat{\Theta}_j\).
-\item
-  Compute the associated IRFs \(\{\widetilde{\Psi}_j^{*(k)}\}_{j\ge 1}\).
-\end{enumerate}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{6}
-\tightlist
-\item
-  Perform \(N\) replications and compute the median and the confidence interval of the set of IRFs.
-\end{enumerate}
-
-It should be noted that correcting for the bias can generate non-stationary results (\(\tilde \Phi\) with eigenvalue with modulus \(>1\)). Solution (\citet{Kilian_1998}):
-
-In step 5, check if the largest eigenvalue of \(\tilde\Phi\) is of modulus \textless1.
-If not, shrink the bias: for all \(j\)s, set \(\widehat{\Theta}_j^{(i+1)}=\delta_{i+1}\widehat{\Theta}_j^{(i)}\), with \(\delta_{i+1}=\delta_i-0.01\), starting with \(\delta_1=1\) and \(\widehat{\Theta}_j^{(1)} =\widehat{\Theta}_j\), and compute \(\widetilde{\Phi}_j^{(i+1)}=\widehat{\Phi}_j-\widehat{\Theta}_j^{(i+1)}\) until the largest eigenvalue of \(\tilde\Phi^{(i+1)}\) has modulus \textless1.
-
-Function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\citet{VARetp}) can be used to operate the bias-correction approach of \citet{Kilian_1998}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(VAR.etp)}
-\FunctionTok{library}\NormalTok{(vars) }\CommentTok{\#standard VAR models}
-\FunctionTok{data}\NormalTok{(dat) }\CommentTok{\# part of VAR.etp package}
-\NormalTok{corrected }\OtherTok{\textless{}{-}} \FunctionTok{VAR.Boot}\NormalTok{(dat,}\AttributeTok{p=}\DecValTok{2}\NormalTok{,}\AttributeTok{nb=}\DecValTok{200}\NormalTok{,}\AttributeTok{type=}\StringTok{"const"}\NormalTok{)}
-\NormalTok{noncorrec }\OtherTok{\textless{}{-}} \FunctionTok{VAR}\NormalTok{(dat,}\AttributeTok{p=}\DecValTok{2}\NormalTok{)}
-\FunctionTok{rbind}\NormalTok{(corrected}\SpecialCharTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,],}
-\NormalTok{      (corrected}\SpecialCharTok{$}\NormalTok{coef}\SpecialCharTok{+}\NormalTok{corrected}\SpecialCharTok{$}\NormalTok{Bias)[}\DecValTok{1}\NormalTok{,],}
-\NormalTok{      noncorrec}\SpecialCharTok{$}\NormalTok{varresult}\SpecialCharTok{$}\NormalTok{inv}\SpecialCharTok{$}\NormalTok{coefficients)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##         inv(-1)   inc(-1)   con(-1)    inv(-2)  inc(-2)   con(-2)       const
-## [1,] -0.3144964 0.1967887 0.9029882 -0.1406986 0.135344 0.9746742 -0.01857263
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.114605 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.114605 0.9343938 -0.01672199
-\end{verbatim}
+A solution is to select some eligible dynamic links (See for instance \citet{DelNegro_Schorfheide_2010}). Another alternative is to use a factor model. This consists in capturing the dynamic interdependencies by a set of unobservable factors (See \citet{Canova_Cicarelli_2004} and \citet{Canova_Cicarelli_2009}). See Section \ref{FAVAR} for more details on FAVAR models.
 
 \hypertarget{FAVAR}{%
 \chapter{Factor-Augmented VAR}\label{FAVAR}}

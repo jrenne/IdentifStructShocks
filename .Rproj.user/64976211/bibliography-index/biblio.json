@@ -1,6 +1,134 @@
 {
     "sources": [
         {
+            "author": [
+                {
+                    "family": "Canova",
+                    "given": "Fabio"
+                },
+                {
+                    "family": "Ciccarelli",
+                    "given": "Matteo"
+                }
+            ],
+            "container-title": "International Economic Review",
+            "id": "Canova_Cicarelli_2009",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2009
+                    ]
+                ]
+            },
+            "page": "929-959",
+            "title": "Estimating multi-country VAR models",
+            "type": "article-journal",
+            "volume": "50"
+        },
+        {
+            "author": [
+                {
+                    "family": "Canova",
+                    "given": "Fabio"
+                },
+                {
+                    "family": "Ciccarelli",
+                    "given": "Matteo"
+                }
+            ],
+            "container-title": "Journal of Econometrics",
+            "id": "Canova_Cicarelli_2004",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "327-359",
+            "title": "Forecasting and turning point predictions in a bayesian panel VAR model",
+            "type": "article-journal",
+            "volume": "120"
+        },
+        {
+            "ISBN": "9780199559084",
+            "author": [
+                {
+                    "dropping-particle": "del",
+                    "family": "Negro",
+                    "given": "Marco"
+                }
+            ],
+            "container-title": "The Oxford Handbook of Bayesian Econometrics",
+            "id": "DelNegro_Schorfheide_2010",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011,
+                        9
+                    ]
+                ]
+            },
+            "publisher": "Oxford University Press",
+            "title": "293 Bayesian Macroeconometrics",
+            "type": "chapter"
+        },
+        {
+            "author": [
+                {
+                    "family": "Canova",
+                    "given": "Fabio"
+                },
+                {
+                    "family": "Ciccarelli",
+                    "given": "Matteo"
+                }
+            ],
+            "genre": "CEPR Discussion Papers",
+            "id": "Canova_Cicarelli_2013",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013,
+                        3
+                    ]
+                ]
+            },
+            "number": "9380",
+            "publisher": "C.E.P.R. Discussion Papers",
+            "title": "Panel Vector Autoregressive Models: A Survey",
+            "type": "report"
+        },
+        {
+            "author": [
+                {
+                    "family": "Levchenko",
+                    "given": "Andrei A"
+                },
+                {
+                    "family": "Pandalai-Nayar",
+                    "given": "Nitya"
+                }
+            ],
+            "container-title": "Journal of the European Economic Association",
+            "id": "Levchenko_Pandalai-Nayar_2018",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        11
+                    ]
+                ]
+            },
+            "page": "302-341",
+            "title": "Tfp, News, and “Sentiments”: the International Transmission of Business Cycles",
+            "type": "article-journal",
+            "volume": "18"
+        },
+        {
             "URL": "https://ideas.repec.org/p/cpr/ceprdp/16430.html",
             "author": [
                 {

@@ -66,7 +66,7 @@ library(IdSS)
 
 <!-- <!-- To specify the corresponding covariance matrix vcov. to be used, there are three possibilities: 1. It is pre-computed and supplied in argument vcov.. 2. A function for extracting the covariance matrix from x is supplied, e.g., sandwich, vcovHC, vcovCL, or vcovHAC from package sandwich.  -->
 <!-- ```{r shp2,warning=FALSE,message=FALSE} -->
-<!-- library(AEC) -->
+<!-- library(IdSS) -->
 <!-- library(sandwich) -->
 <!-- shp$income <- shp$i19ptotn/1000 -->
 <!-- shp$female <- 1*(shp$sex19==2) -->

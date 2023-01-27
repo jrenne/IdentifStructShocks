@@ -1,0 +1,63 @@
+# Panel VARs {#PanelVARs}
+
+Panel VARs have the same structure as VAR models, in the
+sense that all variables are assumed to be endogenous and
+interdependent, but a *cross sectional dimension* is
+added to the representation. There are $N$ units indexed by
+$i\in\{1,...,N\}$. The index $i$ is generic and could indicate
+countries, sectors, markets... Then a panel VAR is
+\[ y_{it}=c_i+\Phi_i(L)
+y_{t-1}+\varepsilon_{it}.\] where $y_t$ is the stacked version of
+$y_{it}$ and $\varepsilon_t$ is i.i.d., with variance-covariance
+matrix $\Omega$. Vector $c_i$ and the lag polynomial $\Phi_i(L)$ may depend on the unit. @Canova_Cicarelli_2013 provide a survey of panel estimation methods.
+
+Contrary to standard VARs, panel VARs may help study 
+* similarities/differences in the transmission of shocks;
+* Spillovers, contagion.
+
+But panel VARs are subject tothe *curse of dimensionality*. Indeed, they can be characterized by
+* *Dynamic interdependence*: potentially, the lags of *all*
+endogenous variables of *all* units can enter the model for unit $i$.
+* *Static interdependence*: $\varepsilon_{it}$ are
+generally correlated across $i$. 
+* *Cross sectional heterogeneity*: the intercept, the slope and the
+variance of the shocks may be unit-specific.
+
+## Without Dynamic interdependence
+
+A panel VAR, assuming no dynamic interdependence, is of the form:
+\[ y_{it}=c_i+\Phi_i(L)
+\color{red}{y_{it-1}}+\varepsilon_{it}.\] 
+
+As a comparison, consider *micro panel data*, in the univariate cae (AR(1) case): \[y_{it}=c_i+{\color{red}\phi} y_{it-1}+\varepsilon_{it}.\] In that kind of context, we usually have no cross-sectional heterogeneity as $\phi_i=\phi$ for all $i$. Typically, we have a large cross-sectional dimension $N$, and a small time dimension $T$. If one uses a *``Fixed-effect'' regression*:
+\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T\color{red}{\varepsilon_{is}},\]
+then one faces the *Nickell bias*: with a lagged dependent variable, the estimator is biased, with a bias of size $\sim 1/T$. One can then use GMM regressions (@Arellano_Bond_1991) so as to get unbiased estimates.
+
+*Macro panel data* have a different structure, with typically a moderate cross-sectional dimension $N$ and a large time dimension $T$, so that the Nickell bias is negligible ($\rightarrow 0$ as $T\rightarrow\infty$).
+
+
+### Mean Group Estimator
+
+When we etimate
+\[ y_{it}=c_i+\Phi_i(L)
+y_{it-1}+\varepsilon_{it},\] 
+we need to take into account the cross-sectional heterogeneity in the coefficients, i.e., different $\Phi_i$'s across $i$'s.
+Pooled estimators (assuming cross-sectional homogeneity, i.e. identical $\Phi_i$'s across $i$s) are *not consistent* (biased) if the underlying dynamics are actually heterogeneous. By contrast, the *Mean Group (MG) estimator*, which consists in estimating $N$ separate regressions
+and calculating the coefficient means, is *consistent*.
+
+### Shock identification
+
+Shock identification can be performed with standard methods (zeros, signs, FEVM, etc.). We make the assumption that $\Omega$ is block-diagonal (no interdependence on impact), which is consistent with the assumption of no cross-sectional dependence.
+
+
+## With Dynamic Interdependencies
+
+
+A panel VAR that accommodates dynamic interdependence is of the form:
+\[ y_{it}=c_i+\Phi_i(L)
+y_{t-1}+\varepsilon_{it}.\] 
+
+We face a serious *curse of dimensionality* here: there are $NGp+1$ coefficients to estimate in
+each equation.
+
+A solution is to select some eligible dynamic links (See for instance @DelNegro_Schorfheide_2010). Another alternative is to use a factor model. This consists in capturing the dynamic interdependencies by a set of unobservable factors (See @Canova_Cicarelli_2004 and @Canova_Cicarelli_2009). See Section \@ref(FAVAR) for more details on FAVAR models.

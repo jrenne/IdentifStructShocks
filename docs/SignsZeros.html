@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Combining sign and zero restrictions | The Identification of Dynamic Structural Shocks</title>
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
+<meta name="description" content="Sometimes we need to combine different types of restrictions. For instance: One shock satisfies both zero and sign restrictions. Some shocks can be identified with zero restrictions (SR or LR),...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Combining sign and zero restrictions | The Identification of Dynamic Structural Shocks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Sometimes we need to combine different types of restrictions. For instance: One shock satisfies both zero and sign restrictions. Some shocks can be identified with zero restrictions (SR or LR),...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Combining sign and zero restrictions | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="Sometimes we need to combine different types of restrictions. For instance: One shock satisfies both zero and sign restrictions. Some shocks can be identified with zero restrictions (SR or LR),...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="my-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">3</span> Inference</a></li>
+<li><a class="" href="Signs.html"><span class="header-section-number">4</span> Sign restrictions</a></li>
+<li><a class="active" href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">6</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">7</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">8</span> Local projection methods</a></li>
+<li><a class="" href="PanelVARs.html"><span class="header-section-number">9</span> Panel VARs</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">10</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">11</span> Appendix</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="SignsZeros" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Combining sign and zero restrictions<a class="anchor" aria-label="anchor" href="#SignsZeros"><i class="fas fa-link"></i></a>
+</h1>
+<p>Sometimes we need to combine different types of restrictions. For instance:</p>
+<ul>
+<li>One shock satisfies both zero and sign restrictions.</li>
+<li>Some shocks can be identified with zero restrictions (SR or LR), others with sign restrictions.</li>
+<li>Some shocks satisfy the same zero restrictions (e.g. no LR effect on output) but can be distinguished from each other through sign restrictions.</li>
+</ul>
+<p>In such instances, we must make independent draws from the set of all structural parameters satisfying the zero restrictions. How to do that? <span class="citation">Arias, Rubio-Ramírez, and Waggoner (<a href="references.html#ref-Arias_et_al_2018" role="doc-biblioref">2018</a>)</span> propose to impose the zero restrictions on <span class="math inline">\(B\)</span>, and then check signs. Remember, <span class="math inline">\(\mathcal{P}=BQ\)</span> is a candidate impact IRF. For each structural shock <span class="math inline">\(j\)</span>, define the <span class="math inline">\(m\)</span>-column matrices <span class="math inline">\(Z_j\)</span> (zero restrictions) and <span class="math inline">\(S_j\)</span> (sign restrictions). Each row of <span class="math inline">\(Z_j\)</span> (resp. <span class="math inline">\(S_j\)</span>) defines a zero (resp. sign) restriction. <span class="math inline">\(Z_j\)</span> has <span class="math inline">\(m-j\)</span> rows at most (i.e., <span class="math inline">\(m-j\)</span> zero restriction at most).</p>
+<div class="example">
+<p><span id="exm:exMixSignSR" class="example"><strong>Example 5.1  </strong></span>In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
+<span class="math display">\[Z_1 = \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}, \]</span>
+<span class="math display">\[S_1 = \begin{pmatrix}0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; -1 &amp; 0\end{pmatrix}. \]</span></p>
+<p>For both zero and sign restrictions to be satisfied, we must have
+<span class="math display">\[
+Z_jb_j=0 \quad \mbox{and} \quad S_jb_j&gt;0,
+\]</span>
+where <span class="math inline">\(b_j\)</span> is the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(B\)</span>, i.e. the impact effect of the <span class="math inline">\(j^{th}\)</span> structural shock.</p>
+</div>
+<p>The algorithm is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>For <span class="math inline">\(1\le j\le m\)</span>, draw <span class="math inline">\(u_j\in \mathbb{R}^{m+1-j-z_j}\)</span> from a standard normal distribution (<span class="math inline">\(z_j\)</span> is the number of zero restrictions imposed on the <span class="math inline">\(j^{th}\)</span> shock) and set <span class="math inline">\(w_j = u_j/||u_j||\)</span>.</li>
+<li>Define <span class="math inline">\(Q= \begin{pmatrix}q_1&amp;...&amp;q_m\end{pmatrix}\)</span> recursively by <span class="math inline">\(q_j = K_jw_j\)</span> for any matrix <span class="math inline">\(K_j\)</span> whose columns form an orthogonal basis for the null space of the matrix <span class="math display">\[M_j =
+\begin{pmatrix} q_1&amp;...&amp;q_{j-1}&amp;\color{blue}{(Z_jP)'}\end{pmatrix}'.\]</span> (Vector <span class="math inline">\(q_j\)</span> will then be orthogonal to <span class="math inline">\(\begin{pmatrix} q_1&amp;...&amp;q_{j-1}\end{pmatrix}\)</span> and satisfy the zero restriction.)</li>
+<li>Set <span class="math inline">\(B=PQ\)</span>.</li>
+<li>Check sign restrictions (<span class="math inline">\(S_jb_j&gt;0\)</span> for all <span class="math inline">\(j\)</span>?).</li>
+</ol>
+<p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
+<p>Function <code>svar.signs</code> can run this algorithm. It is called as follows:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that outputs are not reported here; just copy-paste in Rstudio to get the 6 sets of IRFs.&lt;/p&gt;"><sup>5</sup></a></p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
+<span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
+<span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"1995-06-01"</span></span>
+<span><span class="va">indic.first</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">First.date</span><span class="op">)</span></span>
+<span><span class="va">indic.last</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">Last.date</span><span class="op">)</span></span>
+<span><span class="va">USmonthly</span>   <span class="op">&lt;-</span> <span class="va">USmonthly</span><span class="op">[</span><span class="va">indic.first</span><span class="op">:</span><span class="va">indic.last</span>,<span class="op">]</span></span>
+<span><span class="va">considered.variables</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LIP"</span>,<span class="st">"UNEMP"</span>,<span class="st">"LCPI"</span>,<span class="st">"LPCOM"</span>,<span class="st">"FFR"</span>,<span class="st">"NBR"</span>,<span class="st">"TTR"</span>,<span class="st">"M1"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">considered.variables</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">[</span><span class="va">considered.variables</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">sign.restrictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">SR.restrictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">horizon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Define sign restrictions and horizon for restrictions</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">sign.restrictions</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span>,<span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">horizon</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">horizon</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span></span>
+<span><span class="co">#Define zero restrictions</span></span>
+<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">SR.restrictions</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">res.svar.signs.zeros</span> <span class="op">&lt;-</span> <span class="fu">svar.signs</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
+<span>                                  nb.shocks <span class="op">=</span> <span class="fl">6</span>, <span class="co">#number of identified shocks</span></span>
+<span>                                  nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                                  bootstrap.replications <span class="op">=</span> <span class="fl">100</span>, <span class="co"># = 0 or 1</span></span>
+<span>                                  confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
+<span>                                  indic.plot <span class="op">=</span> <span class="fl">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
+<span>                                  nb.draws <span class="op">=</span> <span class="fl">10000</span>, <span class="co"># number of draws</span></span>
+<span>                                  <span class="va">sign.restrictions</span>,</span>
+<span>                                  <span class="va">horizon</span>,</span>
+<span>                                  recursive <span class="op">=</span><span class="fl">0</span>,</span>
+<span>                                  <span class="va">SR.restrictions</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:signrestr2-1"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr2-1.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+Figure 5.1: IRF associated with a monetary policy shock; sign-restriction approach.
+</p>
+</div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:signrestr2-2"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr2-2.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+Figure 5.2: IRF associated with a monetary policy shock; sign-restriction approach.
+</p>
+</div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:signrestr2-3"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr2-3.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+Figure 5.3: IRF associated with a monetary policy shock; sign-restriction approach.
+</p>
+</div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:signrestr2-4"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr2-4.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+Figure 5.4: IRF associated with a monetary policy shock; sign-restriction approach.
+</p>
+</div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:signrestr2-5"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr2-5.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+Figure 5.5: IRF associated with a monetary policy shock; sign-restriction approach.
+</p>
+</div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:signrestr2-6"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr2-6.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+Figure 5.6: IRF associated with a monetary policy shock; sign-restriction approach.
+</p>
+</div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">IRFs.signs</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs.zeros</span><span class="op">$</span><span class="va">IRFs.signs</span></span>
+<span><span class="va">nb.rotations</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs.zeros</span><span class="op">$</span><span class="va">xx</span></span></code></pre></div>
+
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="Signs.html"><span class="header-section-number">4</span> Sign restrictions</a></div>
+<div class="next"><a href="forecast-error-variance-maximization.html"><span class="header-section-number">6</span> Forecast error variance maximization</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#SignsZeros"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -143,26 +143,16 @@ eta0 <- c(0,1)
 res.sim.2 <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
 par(plt=c(.15,.95,.25,.8))
 par(mfrow=c(2,2))
-plot(res.sim.1$Y[1,],las=1,
-     type="l",lwd=3,xlab="",ylab="",
-     main=expression(paste("Response of ",y[1,"*,*",t],
-                           " to a one-unit increase in ",eta[1],sep="")))
-abline(h=0,col="grey",lty=3)
-plot(res.sim.2$Y[1,],las=1,
-     type="l",lwd=3,xlab="",ylab="",
-     main=expression(paste("Response of ",y[1,"*,*",t],
-                           " to a one-unit increase in ",eta[2],sep="")))
-abline(h=0,col="grey",lty=3)
-plot(res.sim.1$Y[2,],las=1,
-     type="l",lwd=3,xlab="",ylab="",
-     main=expression(paste("Response of ",y[2,"*,*",t],
-                           " to a one-unit increase in ",eta[1],sep="")))
-abline(h=0,col="grey",lty=3)
-plot(res.sim.2$Y[2,],las=1,
-     type="l",lwd=3,xlab="",ylab="",
-     main=expression(paste("Response of ",y[2,"*,*",t],
-                           " to a one-unit increase in ",eta[2],sep="")))
-abline(h=0,col="grey",lty=3)
+for(i in 1:2){
+  if(i == 1){res.sim <- res.sim.1
+  }else{res.sim <- res.sim.2}
+  for(j in 1:2){
+    plot(res.sim$Y[j,],las=1,
+         type="l",lwd=3,xlab="",ylab="",
+         main=paste("Resp. of y",j,
+                    " to a 1-unit increase in eta",i,sep=""))
+    abline(h=0,col="grey",lty=3)
+  }}
 ```
 :::
 
@@ -377,7 +367,7 @@ BIC & = & cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,
 where $N=p \times n^{2}$.
 
 ```{r varselect,message=FALSE}
-library(vars);library(AEC)
+library(vars);library(IdSS)
 data <- US3var[,c("y.gdp.gap","infl")]
 VARselect(data,lag.max = 6)
 estimated.var <- VAR(data,p=3)

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Panel VARs | The Identification of Dynamic Structural Shocks</title>
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
+<meta name="description" content="Panel VARs have the same structure as VAR models, in the sense that all variables are assumed to be endogenous and interdependent, but a cross sectional dimension is added to the representation....">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Panel VARs | The Identification of Dynamic Structural Shocks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Panel VARs have the same structure as VAR models, in the sense that all variables are assumed to be endogenous and interdependent, but a cross sectional dimension is added to the representation....">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Panel VARs | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:description" content="Panel VARs have the same structure as VAR models, in the sense that all variables are assumed to be endogenous and interdependent, but a cross sectional dimension is added to the representation....">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="my-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
+<li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
+<li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">3</span> Inference</a></li>
+<li><a class="" href="Signs.html"><span class="header-section-number">4</span> Sign restrictions</a></li>
+<li><a class="" href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">6</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">7</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">8</span> Local projection methods</a></li>
+<li><a class="active" href="PanelVARs.html"><span class="header-section-number">9</span> Panel VARs</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">10</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">11</span> Appendix</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="PanelVARs" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Panel VARs<a class="anchor" aria-label="anchor" href="#PanelVARs"><i class="fas fa-link"></i></a>
+</h1>
+<p>Panel VARs have the same structure as VAR models, in the
+sense that all variables are assumed to be endogenous and
+interdependent, but a <em>cross sectional dimension</em> is
+added to the representation. There are <span class="math inline">\(N\)</span> units indexed by
+<span class="math inline">\(i\in\{1,...,N\}\)</span>. The index <span class="math inline">\(i\)</span> is generic and could indicate
+countries, sectors, markets… Then a panel VAR is
+<span class="math display">\[ y_{it}=c_i+\Phi_i(L)
+y_{t-1}+\varepsilon_{it}.\]</span> where <span class="math inline">\(y_t\)</span> is the stacked version of
+<span class="math inline">\(y_{it}\)</span> and <span class="math inline">\(\varepsilon_t\)</span> is i.i.d., with variance-covariance
+matrix <span class="math inline">\(\Omega\)</span>. Vector <span class="math inline">\(c_i\)</span> and the lag polynomial <span class="math inline">\(\Phi_i(L)\)</span> may depend on the unit. <span class="citation">Canova and Ciccarelli (<a href="references.html#ref-Canova_Cicarelli_2013" role="doc-biblioref">2013</a>)</span> provide a survey of panel estimation methods.</p>
+<p>Contrary to standard VARs, panel VARs may help study
+* similarities/differences in the transmission of shocks;
+* Spillovers, contagion.</p>
+<p>But panel VARs are subject tothe <em>curse of dimensionality</em>. Indeed, they can be characterized by
+* <em>Dynamic interdependence</em>: potentially, the lags of <em>all</em>
+endogenous variables of <em>all</em> units can enter the model for unit <span class="math inline">\(i\)</span>.
+* <em>Static interdependence</em>: <span class="math inline">\(\varepsilon_{it}\)</span> are
+generally correlated across <span class="math inline">\(i\)</span>.
+* <em>Cross sectional heterogeneity</em>: the intercept, the slope and the
+variance of the shocks may be unit-specific.</p>
+<div id="without-dynamic-interdependence" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Without Dynamic interdependence<a class="anchor" aria-label="anchor" href="#without-dynamic-interdependence"><i class="fas fa-link"></i></a>
+</h2>
+<p>A panel VAR, assuming no dynamic interdependence, is of the form:
+<span class="math display">\[ y_{it}=c_i+\Phi_i(L)
+\color{red}{y_{it-1}}+\varepsilon_{it}.\]</span></p>
+<p>As a comparison, consider <em>micro panel data</em>, in the univariate cae (AR(1) case): <span class="math display">\[y_{it}=c_i+{\color{red}\phi} y_{it-1}+\varepsilon_{it}.\]</span> In that kind of context, we usually have no cross-sectional heterogeneity as <span class="math inline">\(\phi_i=\phi\)</span> for all <span class="math inline">\(i\)</span>. Typically, we have a large cross-sectional dimension <span class="math inline">\(N\)</span>, and a small time dimension <span class="math inline">\(T\)</span>. If one uses a <em>``Fixed-effect’’ regression</em>:
+<span class="math display">\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T\color{red}{\varepsilon_{is}},\]</span>
+then one faces the <em>Nickell bias</em>: with a lagged dependent variable, the estimator is biased, with a bias of size <span class="math inline">\(\sim 1/T\)</span>. One can then use GMM regressions (<span class="citation">Arellano and Bond (<a href="references.html#ref-Arellano_Bond_1991" role="doc-biblioref">1991</a>)</span>) so as to get unbiased estimates.</p>
+<p><em>Macro panel data</em> have a different structure, with typically a moderate cross-sectional dimension <span class="math inline">\(N\)</span> and a large time dimension <span class="math inline">\(T\)</span>, so that the Nickell bias is negligible (<span class="math inline">\(\rightarrow 0\)</span> as <span class="math inline">\(T\rightarrow\infty\)</span>).</p>
+<div id="mean-group-estimator" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> Mean Group Estimator<a class="anchor" aria-label="anchor" href="#mean-group-estimator"><i class="fas fa-link"></i></a>
+</h3>
+<p>When we etimate
+<span class="math display">\[ y_{it}=c_i+\Phi_i(L)
+y_{it-1}+\varepsilon_{it},\]</span>
+we need to take into account the cross-sectional heterogeneity in the coefficients, i.e., different <span class="math inline">\(\Phi_i\)</span>’s across <span class="math inline">\(i\)</span>’s.
+Pooled estimators (assuming cross-sectional homogeneity, i.e. identical <span class="math inline">\(\Phi_i\)</span>’s across <span class="math inline">\(i\)</span>s) are <em>not consistent</em> (biased) if the underlying dynamics are actually heterogeneous. By contrast, the <em>Mean Group (MG) estimator</em>, which consists in estimating <span class="math inline">\(N\)</span> separate regressions
+and calculating the coefficient means, is <em>consistent</em>.</p>
+</div>
+<div id="shock-identification" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">9.1.2</span> Shock identification<a class="anchor" aria-label="anchor" href="#shock-identification"><i class="fas fa-link"></i></a>
+</h3>
+<p>Shock identification can be performed with standard methods (zeros, signs, FEVM, etc.). We make the assumption that <span class="math inline">\(\Omega\)</span> is block-diagonal (no interdependence on impact), which is consistent with the assumption of no cross-sectional dependence.</p>
+</div>
+</div>
+<div id="with-dynamic-interdependencies" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> With Dynamic Interdependencies<a class="anchor" aria-label="anchor" href="#with-dynamic-interdependencies"><i class="fas fa-link"></i></a>
+</h2>
+<p>A panel VAR that accommodates dynamic interdependence is of the form:
+<span class="math display">\[ y_{it}=c_i+\Phi_i(L)
+y_{t-1}+\varepsilon_{it}.\]</span></p>
+<p>We face a serious <em>curse of dimensionality</em> here: there are <span class="math inline">\(NGp+1\)</span> coefficients to estimate in
+each equation.</p>
+<p>A solution is to select some eligible dynamic links (See for instance <span class="citation">Negro (<a href="references.html#ref-DelNegro_Schorfheide_2010" role="doc-biblioref">2011</a>)</span>). Another alternative is to use a factor model. This consists in capturing the dynamic interdependencies by a set of unobservable factors (See <span class="citation">Canova and Ciccarelli (<a href="references.html#ref-Canova_Cicarelli_2004" role="doc-biblioref">2004</a>)</span> and <span class="citation">Canova and Ciccarelli (<a href="references.html#ref-Canova_Cicarelli_2009" role="doc-biblioref">2009</a>)</span>). See Section <a href="FAVAR.html#FAVAR">10</a> for more details on FAVAR models.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="Projections.html"><span class="header-section-number">8</span> Local projection methods</a></div>
+<div class="next"><a href="FAVAR.html"><span class="header-section-number">10</span> Factor-Augmented VAR</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#PanelVARs"><span class="header-section-number">9</span> Panel VARs</a></li>
+<li>
+<a class="nav-link" href="#without-dynamic-interdependence"><span class="header-section-number">9.1</span> Without Dynamic interdependence</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mean-group-estimator"><span class="header-section-number">9.1.1</span> Mean Group Estimator</a></li>
+<li><a class="nav-link" href="#shock-identification"><span class="header-section-number">9.1.2</span> Shock identification</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#with-dynamic-interdependencies"><span class="header-section-number">9.2</span> With Dynamic Interdependencies</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

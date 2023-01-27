@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Sign restrictions | The Identification of Dynamic Structural Shocks</title>
+<title>Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Sign restrictions | The Identification of Dynamic Structural Shocks">
+<meta property="og:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Sign restrictions | The Identification of Dynamic Structural Shocks">
+<meta name="twitter:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks">
 <meta name="twitter:description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -68,13 +68,15 @@
 <li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
 <li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
 <li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
-<li><a class="active" href="Signs.html"><span class="header-section-number">3</span> Sign restrictions</a></li>
-<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></li>
-<li><a class="" href="NonGaussian.html"><span class="header-section-number">5</span> Identification based on non-normality of the shocks</a></li>
-<li><a class="" href="Projections.html"><span class="header-section-number">6</span> Local projection methods</a></li>
-<li><a class="" href="Inference.html"><span class="header-section-number">7</span> Inference</a></li>
-<li><a class="" href="FAVAR.html"><span class="header-section-number">8</span> Factor-Augmented VAR</a></li>
-<li><a class="" href="append.html"><span class="header-section-number">9</span> Appendix</a></li>
+<li><a class="" href="Inference.html"><span class="header-section-number">3</span> Inference</a></li>
+<li><a class="active" href="Signs.html"><span class="header-section-number">4</span> Sign restrictions</a></li>
+<li><a class="" href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></li>
+<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">6</span> Forecast error variance maximization</a></li>
+<li><a class="" href="NonGaussian.html"><span class="header-section-number">7</span> Identification based on non-normality of the shocks</a></li>
+<li><a class="" href="Projections.html"><span class="header-section-number">8</span> Local projection methods</a></li>
+<li><a class="" href="PanelVARs.html"><span class="header-section-number">9</span> Panel VARs</a></li>
+<li><a class="" href="FAVAR.html"><span class="header-section-number">10</span> Factor-Augmented VAR</a></li>
+<li><a class="" href="append.html"><span class="header-section-number">11</span> Appendix</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -83,20 +85,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Signs" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Signs" class="section level1" number="4">
 <h1>
-<span class="header-section-number">3</span> Sign restrictions<a class="anchor" aria-label="anchor" href="#Signs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Sign restrictions<a class="anchor" aria-label="anchor" href="#Signs"><i class="fas fa-link"></i></a>
 </h1>
-<p>To identifiy the structural shocks, we need to find a matrix <span class="math inline">\(B\)</span> that satisfies <span class="math inline">\(\Omega = BB'\)</span> (with <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>) and other restrictions. Indeed, as explained above, <span class="math inline">\(\Omega = BB'\)</span> is not sufficient to identify <span class="math inline">\(B\)</span> since, if we take any orthogonal matrix <span class="math inline">\(Q\)</span> (see Def. <a href="Signs.html#def:orthogonal">3.1</a>), then <span class="math inline">\(\mathcal{P}=BQ\)</span> also satisfies <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span>.</p>
+<p>To identifiy the structural shocks, we need to find a matrix <span class="math inline">\(B\)</span> that satisfies <span class="math inline">\(\Omega = BB'\)</span> (with <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>) and other restrictions. Indeed, as explained above, <span class="math inline">\(\Omega = BB'\)</span> is not sufficient to identify <span class="math inline">\(B\)</span> since, if we take any orthogonal matrix <span class="math inline">\(Q\)</span> (see Def. <a href="Signs.html#def:orthogonal">4.1</a>), then <span class="math inline">\(\mathcal{P}=BQ\)</span> also satisfies <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span>.</p>
 <div class="definition">
-<p><span id="def:orthogonal" class="definition"><strong>Definition 3.1  (Orthogonal matrix) </strong></span>An orthogonal matrix <span class="math inline">\(Q\)</span> is a matrix such that <span class="math inline">\(QQ' = I,\)</span> i.e., all columns (rows) of <span class="math inline">\(Q\)</span> are are
+<p><span id="def:orthogonal" class="definition"><strong>Definition 4.1  (Orthogonal matrix) </strong></span>An orthogonal matrix <span class="math inline">\(Q\)</span> is a matrix such that <span class="math inline">\(QQ' = I,\)</span> i.e., all columns (rows) of <span class="math inline">\(Q\)</span> are are
 orthogonal and unit vectors:
 <span class="math display">\[q_i'q_j=0\text{ if }i\neq j\text{ and }q_i'q_j=1\text{ if }i= j,\]</span>
 where <span class="math inline">\(q_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(Q\)</span>.</p>
 </div>
-<div id="the-approach" class="section level2" number="3.1">
+<div id="the-approach" class="section level2" number="4.1">
 <h2>
-<span class="header-section-number">3.1</span> The approach<a class="anchor" aria-label="anchor" href="#the-approach"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.1</span> The approach<a class="anchor" aria-label="anchor" href="#the-approach"><i class="fas fa-link"></i></a>
 </h2>
 <p>The idea behind the sign-restriction approach is to “draw” random matrices <span class="math inline">\(\mathcal{P}\)</span> that satisfy <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span>, and then to constitute a set of admissible matrices, keeping in this set only the simulated <span class="math inline">\(\mathcal{P}\)</span> matrices that satisfy some predefined sign-based restriction. An example of restriction is “<em>after one year, a contractionary monetary-policy shocks has a negative impact on inflation</em>”.</p>
 <p>As suggested above, if <span class="math inline">\(B\)</span> is any matrix that satisfies <span class="math inline">\(\Omega = BB'\)</span> (for instance, <span class="math inline">\(B\)</span> can be based on the Cholesky decomposition of <span class="math inline">\(\Omega\)</span>), then we also have <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span> as soon as <span class="math inline">\(\mathcal{P}=BQ\)</span>, where <span class="math inline">\(Q\)</span> is an orthogonal matrix. Therefore, to draw <span class="math inline">\(\mathcal{P}\)</span> matrices, it suffices to draw in the set of orthogonal matrices.</p>
@@ -129,12 +131,12 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <ol start="5" style="list-style-type: decimal">
 <li>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its “confidence” intervals).</li>
 </ol>
-<p>Note: to take into account the uncertainty in <span class="math inline">\(B\)</span> and <span class="math inline">\(\Phi\)</span>, you can draw <span class="math inline">\(B\)</span> and <span class="math inline">\(\Phi\)</span> in Steps 2 and 3 using an inference method (see Section <a href="Inference.html#Inference">7</a>).</p>
+<p>Note: to take into account the uncertainty in <span class="math inline">\(B\)</span> and <span class="math inline">\(\Phi\)</span>, you can draw <span class="math inline">\(B\)</span> and <span class="math inline">\(\Phi\)</span> in Steps 2 and 3 using an inference method (see Section <a href="Inference.html#Inference">3</a>).</p>
 <p>The sign-restriction approach method has the advantage of being relatively agnostic. Moreover, it is fairly flexible, as one can impose sign restrictions on any variable, at any horizon.</p>
 </div>
-<div id="an-example" class="section level2" number="3.2">
+<div id="an-example" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">3.2</span> An example<a class="anchor" aria-label="anchor" href="#an-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> An example<a class="anchor" aria-label="anchor" href="#an-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>A prominent example is <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005" role="doc-biblioref">2005</a>)</span>. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.</p>
 <p>According to conventional wisdom, monetary contractions should:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: &lt;em&gt;liquidity puzzle&lt;/em&gt;: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; &lt;em&gt;price puzzle&lt;/em&gt;: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.&lt;/p&gt;"><sup>3</sup></a></p>
@@ -151,7 +153,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <li>Decreases in the federal funds rate</li>
 </ul>
 <p>What about output? Since is the response of interest, we leave it un-restricted.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
@@ -188,7 +190,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:signrestr1"></span>
 <img src="IdentifStructShocks_files/figure-html/signrestr1-1.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
-Figure 3.1: IRF associated with a monetary policy shock; sign-restriction approach.
+Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
 <!-- Another approach -->
@@ -219,9 +221,9 @@ Figure 3.1: IRF associated with a monetary policy shock; sign-restriction approa
 <!-- * Define $\begin{pmatrix}q_1&...&q_l\end{pmatrix}$ recursively by $q_j = K_jw_j$ for any matrix $K_j$ whose columns form an orthogonal basis for the null space of the matrix \[M_j = \begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}'\] ($q_j$ will be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$) -->
 <p>It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.</p>
 </div>
-<div id="the-penalty-function-approach-pfa" class="section level2" number="3.3">
+<div id="the-penalty-function-approach-pfa" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">3.3</span> The penalty-function approach (PFA)<a class="anchor" aria-label="anchor" href="#the-penalty-function-approach-pfa"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> The penalty-function approach (PFA)<a class="anchor" aria-label="anchor" href="#the-penalty-function-approach-pfa"><i class="fas fa-link"></i></a>
 </h2>
 <p>An alternative approach is the so-called <strong>penalty-function approach</strong> (PFA, <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005" role="doc-biblioref">2005</a>)</span>, present in <span class="citation">Danne (<a href="references.html#ref-Danne_2015" role="doc-biblioref">2015</a>)</span>’s package). This approach relies on a <em>penalty function</em>:
 <span class="math display">\[
@@ -239,84 +241,11 @@ which penalizes positive responses and rewards negative responses.</p>
 \text{s.t. }&amp;q'q=1.\end{array}\]</span></p>
 <p>The problem is solved numerically.</p>
 </div>
-<div id="combining-different-approaches" class="section level2" number="3.4">
+<div id="NarrativeSign" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">3.4</span> Combining different approaches<a class="anchor" aria-label="anchor" href="#combining-different-approaches"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Narrative sign restrictions<a class="anchor" aria-label="anchor" href="#NarrativeSign"><i class="fas fa-link"></i></a>
 </h2>
-<p>Sometimes we need to combine different restriction approaches. For instance:</p>
-<ul>
-<li>One shock satisfies both zero and sign restrictions.</li>
-<li>Some shocks can be identified with zero restrictions (SR or LR), others with sign restrictions.</li>
-<li>Some shocks satisfy the same zero restrictions (e.g. no LR effect on output) but can be distinguished from each other through sign restrictions.</li>
-</ul>
-<p>In such instances, we must make independent draws from the set of all structural parameters satisfying the zero restrictions. How to do that? <span class="citation">Arias, Rubio-Ramírez, and Waggoner (<a href="references.html#ref-Arias_et_al_2018" role="doc-biblioref">2018</a>)</span> propose to impose the zero restrictions on <span class="math inline">\(B\)</span>, and then check signs. Remember, <span class="math inline">\(\mathcal{P}=BQ\)</span> is a candidate impact IRF. For each structural shock <span class="math inline">\(j\)</span>, define the <span class="math inline">\(m\)</span>-column matrices <span class="math inline">\(Z_j\)</span> (zero restrictions) and <span class="math inline">\(S_j\)</span> (sign restrictions). Each row of <span class="math inline">\(Z_j\)</span> (resp. <span class="math inline">\(S_j\)</span>) defines a zero (resp. sign) restriction. <span class="math inline">\(Z_j\)</span> has <span class="math inline">\(m-j\)</span> rows at most (i.e., <span class="math inline">\(m-j\)</span> zero restriction at most).</p>
-<div class="example">
-<p><span id="exm:exMixSignSR" class="example"><strong>Example 3.1  </strong></span>In a 4-variable VAR, we want to impose that the first structural shock has no effect on variable 1, affects positively variable 2 and negatively variable 3 on impact:
-<span class="math display">\[Z_1 = \begin{pmatrix}1 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}, \]</span>
-<span class="math display">\[S_1 = \begin{pmatrix}0 &amp; 1 &amp; 0 &amp; 0\\
-0 &amp; 0 &amp; -1 &amp; 0\end{pmatrix}. \]</span></p>
-<p>For both zero and sign restrictions to be satisfied, we must have
-<span class="math display">\[
-Z_jb_j=0 \quad \mbox{and} \quad S_jb_j&gt;0,
-\]</span>
-where <span class="math inline">\(b_j\)</span> is the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(B\)</span>, i.e. the impact effect of the <span class="math inline">\(j^{th}\)</span> structural shock.</p>
-</div>
-<p>The algorithm is as follows:</p>
-<ol style="list-style-type: decimal">
-<li>For <span class="math inline">\(1\le j\le m\)</span>, draw <span class="math inline">\(u_j\in \mathbb{R}^{m+1-j-z_j}\)</span> from a standard normal distribution (<span class="math inline">\(z_j\)</span> is the number of zero restrictions imposed on the <span class="math inline">\(j^{th}\)</span> shock) and set <span class="math inline">\(w_j = u_j/||u_j||\)</span>.</li>
-<li>Define <span class="math inline">\(Q= \begin{pmatrix}q_1&amp;...&amp;q_m\end{pmatrix}\)</span> recursively by <span class="math inline">\(q_j = K_jw_j\)</span> for any matrix <span class="math inline">\(K_j\)</span> whose columns form an orthogonal basis for the null space of the matrix <span class="math display">\[M_j =
-\begin{pmatrix} q_1&amp;...&amp;q_{j-1}&amp;\color{blue}{(Z_jP)'}\end{pmatrix}'.\]</span> (Vector <span class="math inline">\(q_j\)</span> will then be orthogonal to <span class="math inline">\(\begin{pmatrix} q_1&amp;...&amp;q_{j-1}\end{pmatrix}\)</span> and satisfy the zero restriction.)</li>
-<li>Set <span class="math inline">\(B=PQ\)</span>.</li>
-<li>Check sign restrictions (<span class="math inline">\(S_jb_j&gt;0\)</span> for all <span class="math inline">\(j\)</span>?).</li>
-</ol>
-<p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
-<p>Function <code>svar.signs</code> can run this algorithm. It is called as follows:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that outputs are not reported here; just copy-paste in Rstudio to get the 6 sets of IRFs.&lt;/p&gt;"><sup>4</sup></a></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sign.restrictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">SR.restrictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">horizon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#Define sign restrictions and horizon for restrictions</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">sign.restrictions</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span>,<span class="va">n</span><span class="op">)</span></span>
-<span>  <span class="va">horizon</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="op">}</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">7</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">horizon</span><span class="op">[[</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
-<span><span class="co">#Define zero restrictions</span></span>
-<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">SR.restrictions</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">SR.restrictions</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">}</span></span>
-<span><span class="va">res.svar.signs.zeros</span> <span class="op">&lt;-</span> <span class="fu">svar.signs</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
-<span>                                  nb.shocks <span class="op">=</span> <span class="fl">6</span>, <span class="co">#number of identified shocks</span></span>
-<span>                                  nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>                                  bootstrap.replications <span class="op">=</span> <span class="fl">100</span>, <span class="co"># = 0 or 1</span></span>
-<span>                                  confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
-<span>                                  indic.plot <span class="op">=</span> <span class="fl">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
-<span>                                  nb.draws <span class="op">=</span> <span class="fl">10000</span>, <span class="co"># number of draws</span></span>
-<span>                                  <span class="va">sign.restrictions</span>,</span>
-<span>                                  <span class="va">horizon</span>,recursive <span class="op">=</span><span class="fl">0</span>,</span>
-<span>                                  <span class="va">SR.restrictions</span><span class="op">)</span></span>
-<span><span class="va">IRFs.signs</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs.zeros</span><span class="op">$</span><span class="va">IRFs.signs</span></span>
-<span><span class="va">nb.rotations</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs.zeros</span><span class="op">$</span><span class="va">xx</span></span></code></pre></div>
-</div>
-<div id="NarrativeSign" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> Narrative sign restrictions<a class="anchor" aria-label="anchor" href="#NarrativeSign"><i class="fas fa-link"></i></a>
-</h2>
-<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;4.2&lt;/a&gt;.&lt;/p&gt;'><sup>5</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
+<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;6.2&lt;/a&gt;.&lt;/p&gt;'><sup>4</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
 <p>Suppose we want to impose the restriction that, at dates <span class="math inline">\(\{t_1,\dots,t_J\}\)</span>, the signs of the <span class="math inline">\(j^{th}\)</span> shock are all positive. Then, the narrative sign restrictions are simply imposed by:
 <span class="math display">\[
 \hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) &gt; 0,
@@ -327,17 +256,16 @@ where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of stru
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></div>
-<div class="next"><a href="forecast-error-variance-maximization.html"><span class="header-section-number">4</span> Forecast error variance maximization</a></div>
+<div class="prev"><a href="Inference.html"><span class="header-section-number">3</span> Inference</a></div>
+<div class="next"><a href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#Signs"><span class="header-section-number">3</span> Sign restrictions</a></li>
-<li><a class="nav-link" href="#the-approach"><span class="header-section-number">3.1</span> The approach</a></li>
-<li><a class="nav-link" href="#an-example"><span class="header-section-number">3.2</span> An example</a></li>
-<li><a class="nav-link" href="#the-penalty-function-approach-pfa"><span class="header-section-number">3.3</span> The penalty-function approach (PFA)</a></li>
-<li><a class="nav-link" href="#combining-different-approaches"><span class="header-section-number">3.4</span> Combining different approaches</a></li>
-<li><a class="nav-link" href="#NarrativeSign"><span class="header-section-number">3.5</span> Narrative sign restrictions</a></li>
+<li><a class="nav-link" href="#Signs"><span class="header-section-number">4</span> Sign restrictions</a></li>
+<li><a class="nav-link" href="#the-approach"><span class="header-section-number">4.1</span> The approach</a></li>
+<li><a class="nav-link" href="#an-example"><span class="header-section-number">4.2</span> An example</a></li>
+<li><a class="nav-link" href="#the-penalty-function-approach-pfa"><span class="header-section-number">4.3</span> The penalty-function approach (PFA)</a></li>
+<li><a class="nav-link" href="#NarrativeSign"><span class="header-section-number">4.4</span> Narrative sign restrictions</a></li>
 </ul>
 
       <div class="book-extra">
@@ -354,7 +282,7 @@ where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of stru
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-17.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
