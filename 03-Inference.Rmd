@@ -69,15 +69,17 @@ horizon <- list()
 # ===================================
 # CEE with different inference methods
 # ===================================
-
-res.svar.ordering <- svar.ordering.2(y,p=3,
-                                   posit.of.shock = 5,
-                                   nb.periods.IRF = 20,
-                                   inference = 3,# 0 -> no inference, 1 -> parametric bootstrap, 2 <- non-parametric bootstrap, 3 <- monte carlo, 4 <- bootstrap-after-bootstrap
-                                   nb.draws = 200,
-                                   confidence.interval = 0.90, # expressed in pp.
-                                   indic.plot = 1 # Plots are displayed if = 1.
-)
+res.svar.ordering <-
+  svar.ordering.2(y,p=3,
+                  posit.of.shock = 5,
+                  nb.periods.IRF = 20,
+                  inference = 3,# 0 -> no inference, 1 -> parametric bootst.,
+                  # 2 <- non-parametric bootstrap, 3 <- Monte Carlo,
+                  # 4 <- bootstrap-after-bootstrap
+                  nb.draws = 200,
+                  confidence.interval = 0.90, # expressed in pp.
+                  indic.plot = 1 # Plots are displayed if = 1.
+  )
 
 IRFs.ordering <- res.svar.ordering$IRFs
 median.IRFs.ordering <- res.svar.ordering$all.CI.median
@@ -177,16 +179,17 @@ horizon <- list()
 # ===================================
 # CEE with different inference methods
 # ===================================
-
-res.svar.ordering <- svar.ordering.2(y,p=3,
-                                   posit.of.shock = 5,
-                                   nb.periods.IRF = 20,
-                                   inference = 2,# 0 -> no inference, 1 -> parametric bootstrap, 2 <- non-parametric bootstrap, 3 <- monte carlo, 4 <- bootstrap-after-bootstrap
-                                   nb.draws = 200,
-                                   confidence.interval = 0.90, # expressed in pp.
-                                   indic.plot = 1 # Plots are displayed if = 1.
-)
-
+res.svar.ordering <-
+  svar.ordering.2(y,p=3,
+                  posit.of.shock = 5,
+                  nb.periods.IRF = 20,
+                  inference = 2,# 0 -> no inference, 1 -> parametric bootstr.,
+                  # 2 <- non-parametric bootstrap, 3 <- monte carlo,
+                  # 4 <- bootstrap-after-bootstrap
+                  nb.draws = 200,
+                  confidence.interval = 0.90, # expressed in pp.
+                  indic.plot = 1 # Plots are displayed if = 1.
+  )
 IRFs.ordering.bootstrap <- res.svar.ordering$IRFs
 median.IRFs.ordering.bootstrap <- res.svar.ordering$all.CI.median
 simulated.IRFs.ordering.bootstrap <- res.svar.ordering$simulated.IRFs
@@ -200,15 +203,18 @@ The code below illustrates the small sample bias.
 
 ```{r inference3, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Estimated and bootstrapped coefficients.",warning=FALSE,message=FALSE}
 
-# Distribution of coefficients stemming from the non-parametric bootstrap
+# Distribution of coefficients stemming from non-parametric bootstrap
 h <- 5
 par(mfrow=c(2,ifelse(round(n/2)==n/2,n/2,(n+1)/2)))
 for (i in 1:n){
-hist(simulated.IRFs.ordering.bootstrap[h,i,],xlab="",ylab="",
-     main=paste("Effect of shock at horizon ",h,"on ",considered.variables[i],sep=""))
-lines(array(c(IRFs.ordering.bootstrap[h,i],IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="red")
-lines(array(c(median.IRFs.ordering.bootstrap[h,i],median.IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="blue")
-text(IRFs.ordering.bootstrap[h,i],25,label="Estimated coefficient",col="red")
+  hist(simulated.IRFs.ordering.bootstrap[h,i,],xlab="",ylab="",
+       main=paste("Effect at h = ",h," on ",
+                  considered.variables[i],sep=""),cex.main=.9)
+  lines(array(c(IRFs.ordering.bootstrap[h,i],
+                IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="red")
+  lines(array(c(median.IRFs.ordering.bootstrap[h,i],
+                median.IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="blue")
+  text(IRFs.ordering.bootstrap[h,i],25,label="Estimated coef.",col="red")
 }
 ```
 
@@ -229,21 +235,23 @@ for(k in 3:1){
   y0.star <- c(y0.star,y[k,])
 }
 small.sample <- simul.VAR(c=rep(0,dim(y)[2]),
-                    Phi,
-                    B.hat,
-                    nb.sim = 100,
-                    y0.star,
-                    indic.IRF = 0)
+                          Phi,
+                          B.hat,
+                          nb.sim = 100,
+                          y0.star,
+                          indic.IRF = 0)
 colnames(small.sample)  <- considered.variables
 # Estimate the VAR with the small sample
-res.svar.small.sample <- svar.ordering.2(small.sample,p=3,
-                                         posit.of.shock = 5,
-                                         nb.periods.IRF = 20,
-                                         inference = 2,# 0 -> no inference, 1 -> parametric bootstrap, 2 <- non-parametric bootstrap, 3 <- monte carlo
-                                         nb.draws = 200,
-                                         confidence.interval = 0.90, # expressed in pp.
-                                         indic.plot = 1 # Plots are displayed if = 1.
-)
+res.svar.small.sample <-
+  svar.ordering.2(small.sample,p=3,
+                  posit.of.shock = 5,
+                  nb.periods.IRF = 20,
+                  inference = 2,# 0 -> no inference, 1 -> parametric bootstr.,
+                  # 2 <- non-parametric bootstrap, 3 <- monte carlo
+                  nb.draws = 200,
+                  confidence.interval = 0.90, # expressed in pp.
+                  indic.plot = 1 # Plots are displayed if = 1.
+  )
 
 IRFs.small.sample <- res.svar.small.sample$IRFs
 median.IRFs.small.sample <- res.svar.small.sample$all.CI.median
@@ -257,12 +265,16 @@ h <- 5
 par(mfrow=c(2,ifelse(round(n/2)==n/2,n/2,(n+1)/2)))
 for (i in 1:n){
   hist(simulated.IRFs.small.sample[h,i,],xlab="",ylab="",
-       main=paste("Effect of shock at horizon ",h,"on ",considered.variables[i],sep=""))
-  lines(array(c(IRFs.small.sample[h,i],IRFs.small.sample[h,i],0,100),c(2,2)),col="red")
-  lines(array(c(median.IRFs.small.sample[h,i],median.IRFs.small.sample[h,i],0,100),c(2,2)),col="blue")
-  lines(array(c(IRFs.ordering.bootstrap[h,i],IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="black")
-  text(IRFs.small.sample[h,i],25,label="Estimated coefficient",col="red")
-  text(IRFs.ordering.bootstrap[h,i],30,label="True coefficient",col="black")
+       main=paste("Effect at h = ",h," on ",
+                  considered.variables[i],sep=""),cex.main=.9)
+  lines(array(c(IRFs.small.sample[h,i],
+                IRFs.small.sample[h,i],0,100),c(2,2)),col="red")
+  lines(array(c(median.IRFs.small.sample[h,i],
+                median.IRFs.small.sample[h,i],0,100),c(2,2)),col="blue")
+  lines(array(c(IRFs.ordering.bootstrap[h,i],
+                IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="black")
+  text(IRFs.small.sample[h,i],25,label="Estimated coef.",col="red")
+  text(IRFs.ordering.bootstrap[h,i],30,label="True coef.",col="black")
 }
 ```
 
@@ -320,16 +332,17 @@ horizon <- list()
 # ===================================
 # CEE with different inference methods
 # ===================================
-
-res.svar.ordering <- svar.ordering.2(y,p=3,
-                                   posit.of.shock = 5,
-                                   nb.periods.IRF = 20,
-                                   inference = 4,# 0 -> no inference, 1 -> parametric bootstrap, 2 <- non-parametric bootstrap, 3 <- monte carlo, 4 <- bootstrap-after-bootstrap
-                                   nb.draws = 200,
-                                   confidence.interval = 0.90, # expressed in pp.
-                                   indic.plot = 1 # Plots are displayed if = 1.
-)
-
+res.svar.ordering <-
+  svar.ordering.2(y,p=3,
+                  posit.of.shock = 5,
+                  nb.periods.IRF = 20,
+                  inference = 4,# 0 -> no inference, 1 -> parametric bootstr.,
+                  # 2 <- non-parametric bootstrap, 3 <- monte carlo,
+                  # 4 <- bootstrap-after-bootstrap
+                  nb.draws = 200,
+                  confidence.interval = 0.90, # expressed in pp.
+                  indic.plot = 1 # Plots are displayed if = 1.
+  )
 IRFs.ordering <- res.svar.ordering$IRFs
 median.IRFs.ordering <- res.svar.ordering$all.CI.median
 simulated.IRFs.ordering <- res.svar.ordering$simulated.IRFs

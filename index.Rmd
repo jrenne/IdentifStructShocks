@@ -44,7 +44,7 @@ Over the last decades, several methodologies have been proposed so as to estimat
 Codes associated with this course are part of the `IdSS` package (**Id**entification of **S**tructural **S**hocks), which is available on GitHub. To load a  package from GitHub, you need to use function `install_github` from the `devtools` package:
 
 ```{r installAEC, eval=FALSE}
-install.packages("devtools") # in case you do not have already loaded this package.
+install.packages("devtools") # devtools allows to use "install_github"
 library(devtools)
 install_github("jrenne/IdSS")
 library(IdSS)

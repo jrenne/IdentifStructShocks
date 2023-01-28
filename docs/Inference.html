@@ -150,15 +150,17 @@ where <span class="math inline">\(\{X^{(i)}\}_{i=1,...,N}\)</span> are <span cla
 <span><span class="co"># ===================================</span></span>
 <span><span class="co"># CEE with different inference methods</span></span>
 <span><span class="co"># ===================================</span></span>
-<span></span>
-<span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span> <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
-<span>                                   posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                                   nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>                                   inference <span class="op">=</span> <span class="fl">3</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstrap, 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo, 4 &lt;- bootstrap-after-bootstrap</span></span>
-<span>                                   nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>                                   confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
-<span>                                   indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
+<span>                  posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                  nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                  inference <span class="op">=</span> <span class="fl">3</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootst.,</span></span>
+<span>                  <span class="co"># 2 &lt;- non-parametric bootstrap, 3 &lt;- Monte Carlo,</span></span>
+<span>                  <span class="co"># 4 &lt;- bootstrap-after-bootstrap</span></span>
+<span>                  nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>                  confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
+<span>                  indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:inference1"></span>
 <img src="IdentifStructShocks_files/figure-html/inference1-1.png" alt="IRF associated with a monetary policy shock; Monte Carlo method." width="95%"><p class="caption">
@@ -258,15 +260,17 @@ with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^
 <span><span class="co"># ===================================</span></span>
 <span><span class="co"># CEE with different inference methods</span></span>
 <span><span class="co"># ===================================</span></span>
-<span></span>
-<span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span> <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
-<span>                                   posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                                   nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>                                   inference <span class="op">=</span> <span class="fl">2</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstrap, 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo, 4 &lt;- bootstrap-after-bootstrap</span></span>
-<span>                                   nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>                                   confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
-<span>                                   indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
+<span>                  posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                  nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                  inference <span class="op">=</span> <span class="fl">2</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstr.,</span></span>
+<span>                  <span class="co"># 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo,</span></span>
+<span>                  <span class="co"># 4 &lt;- bootstrap-after-bootstrap</span></span>
+<span>                  nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>                  confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
+<span>                  indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:inference2"></span>
 <img src="IdentifStructShocks_files/figure-html/inference2-1.png" alt="IRF associated with a monetary policy shock; bootstrap method." width="95%"><p class="caption">
@@ -285,15 +289,18 @@ Figure 3.2: IRF associated with a monetary policy shock; bootstrap method.
 <p>The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the <em>small sample bias</em>, stemming, in particular, from small-sample bias associated with OLS coefficient estimates <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}\)</span>.</p>
 <p>The code below illustrates the small sample bias.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Distribution of coefficients stemming from the non-parametric bootstrap</span></span>
+<code class="sourceCode R"><span><span class="co"># Distribution of coefficients stemming from non-parametric bootstrap</span></span>
 <span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">==</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span>,<span class="va">n</span><span class="op">/</span><span class="fl">2</span>,<span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">simulated.IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span>,<span class="op">]</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
-<span>     main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Effect of shock at horizon "</span>,<span class="va">h</span>,<span class="st">"on "</span>,<span class="va">considered.variables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">median.IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="va">median.IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">25</span>,label<span class="op">=</span><span class="st">"Estimated coefficient"</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">simulated.IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span>,<span class="op">]</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
+<span>       main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Effect at h = "</span>,<span class="va">h</span>,<span class="st">" on "</span>,</span>
+<span>                  <span class="va">considered.variables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,cex.main<span class="op">=</span><span class="fl">.9</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,</span>
+<span>                <span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">median.IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,</span>
+<span>                <span class="va">median.IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">25</span>,label<span class="op">=</span><span class="st">"Estimated coef."</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:inference3"></span>
@@ -316,21 +323,23 @@ Figure 3.3: Estimated and bootstrapped coefficients.
 <span>  <span class="va">y0.star</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y0.star</span>,<span class="va">y</span><span class="op">[</span><span class="va">k</span>,<span class="op">]</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">small.sample</span> <span class="op">&lt;-</span> <span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
-<span>                    <span class="va">Phi</span>,</span>
-<span>                    <span class="va">B.hat</span>,</span>
-<span>                    nb.sim <span class="op">=</span> <span class="fl">100</span>,</span>
-<span>                    <span class="va">y0.star</span>,</span>
-<span>                    indic.IRF <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span>                          <span class="va">Phi</span>,</span>
+<span>                          <span class="va">B.hat</span>,</span>
+<span>                          nb.sim <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>                          <span class="va">y0.star</span>,</span>
+<span>                          indic.IRF <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">small.sample</span><span class="op">)</span>  <span class="op">&lt;-</span> <span class="va">considered.variables</span></span>
 <span><span class="co"># Estimate the VAR with the small sample</span></span>
-<span><span class="va">res.svar.small.sample</span> <span class="op">&lt;-</span> <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">small.sample</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
-<span>                                         posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                                         nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>                                         inference <span class="op">=</span> <span class="fl">2</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstrap, 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo</span></span>
-<span>                                         nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>                                         confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
-<span>                                         indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res.svar.small.sample</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">small.sample</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
+<span>                  posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                  nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                  inference <span class="op">=</span> <span class="fl">2</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstr.,</span></span>
+<span>                  <span class="co"># 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo</span></span>
+<span>                  nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>                  confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
+<span>                  indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:inference4"></span>
 <img src="IdentifStructShocks_files/figure-html/inference4-1.png" alt="Simulated IRF associated with a monetary policy shock." width="95%"><p class="caption">
@@ -347,12 +356,16 @@ Figure 3.4: Simulated IRF associated with a monetary policy shock.
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">==</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span>,<span class="va">n</span><span class="op">/</span><span class="fl">2</span>,<span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">simulated.IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span>,<span class="op">]</span>,xlab<span class="op">=</span><span class="st">""</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
-<span>       main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Effect of shock at horizon "</span>,<span class="va">h</span>,<span class="st">"on "</span>,<span class="va">considered.variables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="va">IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">median.IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="va">median.IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">25</span>,label<span class="op">=</span><span class="st">"Estimated coefficient"</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">30</span>,label<span class="op">=</span><span class="st">"True coefficient"</span>,col<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span>
+<span>       main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Effect at h = "</span>,<span class="va">h</span>,<span class="st">" on "</span>,</span>
+<span>                  <span class="va">considered.variables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,cex.main<span class="op">=</span><span class="fl">.9</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,</span>
+<span>                <span class="va">IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">median.IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,</span>
+<span>                <span class="va">median.IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,</span>
+<span>                <span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">0</span>,<span class="fl">100</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">IRFs.small.sample</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">25</span>,label<span class="op">=</span><span class="st">"Estimated coef."</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">IRFs.ordering.bootstrap</span><span class="op">[</span><span class="va">h</span>,<span class="va">i</span><span class="op">]</span>,<span class="fl">30</span>,label<span class="op">=</span><span class="st">"True coef."</span>,col<span class="op">=</span><span class="st">"black"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:inference5"></span>
@@ -419,15 +432,17 @@ If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <s
 <span><span class="co"># ===================================</span></span>
 <span><span class="co"># CEE with different inference methods</span></span>
 <span><span class="co"># ===================================</span></span>
-<span></span>
-<span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span> <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
-<span>                                   posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                                   nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>                                   inference <span class="op">=</span> <span class="fl">4</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstrap, 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo, 4 &lt;- bootstrap-after-bootstrap</span></span>
-<span>                                   nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
-<span>                                   confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
-<span>                                   indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
+<span>                  posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                  nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>                  inference <span class="op">=</span> <span class="fl">4</span>,<span class="co"># 0 -&gt; no inference, 1 -&gt; parametric bootstr.,</span></span>
+<span>                  <span class="co"># 2 &lt;- non-parametric bootstrap, 3 &lt;- monte carlo,</span></span>
+<span>                  <span class="co"># 4 &lt;- bootstrap-after-bootstrap</span></span>
+<span>                  nb.draws <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>                  confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
+<span>                  indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:inference6"></span>
 <img src="IdentifStructShocks_files/figure-html/inference6-1.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
@@ -448,10 +463,10 @@ Figure 3.6: IRF associated with a monetary policy shock; sign-restriction approa
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">+</span><span class="va">corrected</span><span class="op">$</span><span class="va">Bias</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="va">noncorrec</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">inv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##         inv(-1)    inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3160809 0.08519478 0.9683538 -0.1248979 0.1955202 0.9918225 -0.01929033
-## [2,] -0.3196310 0.14598883 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.14598883 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199</code></pre>
+<pre><code>##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3203449 0.1733465 0.9117226 -0.1479991 0.1861329 0.9562903 -0.01828695
+## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199</code></pre>
 
 </div>
 </div>
