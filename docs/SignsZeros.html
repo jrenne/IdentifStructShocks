@@ -117,7 +117,7 @@ where <span class="math inline">\(b_j\)</span> is the <span class="math inline">
 </ol>
 <p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
 <p>Function <code>svar.signs</code> can run this algorithm. It is called as follows:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that outputs are not reported here; just copy-paste in Rstudio to get the 6 sets of IRFs.&lt;/p&gt;"><sup>5</sup></a></p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
@@ -207,7 +207,7 @@ Figure 5.5: IRF associated with a monetary policy shock; sign-restriction approa
 Figure 5.6: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IRFs.signs</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs.zeros</span><span class="op">$</span><span class="va">IRFs.signs</span></span>
 <span><span class="va">nb.rotations</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs.zeros</span><span class="op">$</span><span class="va">xx</span></span></code></pre></div>
 
@@ -234,7 +234,7 @@ Figure 5.6: IRF associated with a monetary policy shock; sign-restriction approa
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-27.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

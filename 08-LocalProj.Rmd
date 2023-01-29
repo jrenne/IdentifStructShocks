@@ -110,6 +110,27 @@ b. Controls = variables spanning the information the Federal Reserve has about f
 The shock measure is the residual series in the linear regression of (a) on (b). The time series `Ramey$rrshock83` and  `Ramey$rrshock83b` (where `Ramey` is a data frame included in package `IdSS`) contain such shocks for the period 1983-2007. (`Ramey$rrshock83b` uses long-horizon Greenbook forecasts.)
 :::
 
+To create a measure of *news* about future government spending, @Ramey_2011 uses newspaper articles to construct a time series of (unexpected) fiscal shocks:^[Data and replication codes can be found on [her website](https://econweb.ucsd.edu/~vramey/research.html#govt).]
+
+:::{.example #RameyQJE2011 name="Identification of news about future government spending"}
+
+@Ramey_2011's measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public's expectations (*Business Week* before 2001, other newspapers afterwards).  is the principal source for most of sample because it often gave detailed predictions. 
+
+According to @Ramey_2011, government sources could not be used because (a) they were either not released in a timely manner or (b) were known to underestimate the costs of certain actions.
+
+Figure \@ref(fig:RameyFiscalShocks) shows the resulting time series of shocks. Figure \@ref(fig:IRFfiscalRamey) shows the IRF of macro variables to the shock on expected government spending.
+
+
+```{r RameyFiscalShocks, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP.", echo=FALSE}
+knitr::include_graphics("images/RameyFiscalShocks.png")
+```
+
+```{r IRFfiscalRamey, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending.", echo=FALSE}
+knitr::include_graphics("images/RameyFiscalShocksIRF.png")
+```
+
+:::
+
 
 There are two main IV approaches to estimate IRFs see @Stock_Watson_2018:
 

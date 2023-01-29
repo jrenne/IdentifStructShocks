@@ -11,6 +11,7 @@ fig:simVAR
 eq:condiInfiniteMA
 eq:VARMA2
 eq:matrixPHI
+fig:simulARMAbiased
 eq:PIVAR
 prp:estimVARGaussian
 eq:Pi
@@ -66,6 +67,9 @@ eq:IV1
 exm:HighFreq
 fig:HighFreq
 exm:RomerRomer
+exm:RameyQJE2011
+fig:RameyFiscalShocks
+fig:IRFfiscalRamey
 eq:epsrho
 fig:essaiIV0
 fig:essaiIV1

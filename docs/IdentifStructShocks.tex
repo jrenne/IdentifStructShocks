@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-27}
+\date{2023-01-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -318,8 +318,8 @@ y_{t-1} +
 \underbrace{\left[\begin{array}{cc}
 1 & 2 \\
 -1 & 1
-\end{array}\right]}_{B}\eta_t + \underbrace{\left[\begin{array}{cc}
-2 & 0 \\
+\end{array}\right]}_{B}\eta_t - \underbrace{\left[\begin{array}{cc}
+-0.4 & 0 \\
 1 & 0.5
 \end{array}\right]}_{\Theta_1} \underbrace{\left[\begin{array}{cc}
 1 & 2 \\
@@ -340,7 +340,7 @@ We can use function \texttt{simul.VARMA} of package \texttt{IdSS} to produce IRF
 \NormalTok{Phi[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(.}\DecValTok{5}\NormalTok{,}\SpecialCharTok{{-}}\NormalTok{.}\DecValTok{4}\NormalTok{,.}\DecValTok{3}\NormalTok{,.}\DecValTok{7}\NormalTok{),}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
 \NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Phi)[}\DecValTok{3}\NormalTok{]}
 \NormalTok{Theta }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\ConstantTok{NaN}\NormalTok{,}\FunctionTok{c}\NormalTok{(n,n,}\DecValTok{1}\NormalTok{))}
-\NormalTok{Theta[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,.}\DecValTok{5}\NormalTok{),}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{Theta[,,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{.}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,.}\DecValTok{5}\NormalTok{),}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
 \NormalTok{q }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Theta)[}\DecValTok{3}\NormalTok{]}
 \NormalTok{Mu }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,n)}
 \NormalTok{C }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
@@ -388,7 +388,7 @@ where \(\|A\|\) denotes a norm of the matrix \(A\) (e.g.~\(\|A\|=\sqrt{tr(AA')}\
 What should be satisfied by \(\Phi_k\)'s and \(\Theta_k\)'s for a VARMA-based process (Eq. \eqref{eq:yVARMA}) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
 \begin{eqnarray}
 y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  \label{eq:VARMA2}\\
-&&\underbrace{B \eta_t+ \Theta_1 B \eta_{t-1}+ \dots+ \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
+&&\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
 &\Leftrightarrow& \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
 \end{eqnarray}
 
@@ -422,7 +422,7 @@ Conditional means and autocovariances can also be deduced from Eq. \eqref{eq:Inf
 
 The previous formula implies in particular that the forecasting error \(y_{t+h} - \mathbb{E}_t(y_{t+h})\) has a variance equal to:
 \[
-\mathbb{V}ar_t(y_{t+h}) = \sum_{k=1}^{h} \Psi_{k}\Psi_{k}'.
+\mathbb{V}ar_t(y_{t+1+h}) = \sum_{k=0}^{h} \Psi_{k}\Psi_{k}'.
 \]
 Because the \(\eta_t\) are mutually and serially independent (and therefore uncorrelated), we have:
 \[
@@ -430,14 +430,46 @@ Because the \(\eta_t\) are mutually and serially independent (and therefore unco
 \]
 where \(\psi_{k,i}\) denotes the \(i^{th}\) column of \(\Psi_k\). This suggests the following decomposition of the variance of the forecast error (called \textbf{variance decomposition}):
 \[
-\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'.}_{\mbox{Contribution of $\eta_{i,t}$}}
+\mathbb{V}ar_t(y_{t+1+h}) = \sum_{i=1}^n \underbrace{\sum_{k=0}^{h}\psi_{k,i}\psi_{k,i}'.}_{\mbox{Contribution of $\eta_{i,t}$}}
 \]
 
 Let us now turn to the estimation of VAR models. Note that if there is an MA component (i.e., if we consider a VARMA model), then OLS regressions yield biased estimates (even for asymptotically large samples). Assume for instance that \(y_t\) follows a VARMA(1,1) model:
 \[
 y_{i,t} = \phi_i y_{t-1} + \varepsilon_{i,t},
 \]
-where \(\phi_i\) is the \(i^{th}\) row of \(\Phi_1\), and where \(\varepsilon_{i,t}\) is a linear combination of \(\eta_t\) and \(\eta_{t-1}\). Since \(y_{t-1}\) (the regressor) is correlated to \(\eta_{t-1}\), it is also correlated to \(\varepsilon_{i,t}\). The OLS regression of \(y_{i,t}\) on \(y_{t-1}\) yields a biased estimator of \(\phi_i\). Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of \(y_t\) as instruments, see, e.g., \citet{Gourieroux_Monfort_Renne_2020}).
+where \(\phi_i\) is the \(i^{th}\) row of \(\Phi_1\), and where \(\varepsilon_{i,t}\) is a linear combination of \(\eta_t\) and \(\eta_{t-1}\). Since \(y_{t-1}\) (the regressor) is correlated to \(\eta_{t-1}\), it is also correlated to \(\varepsilon_{i,t}\). The OLS regression of \(y_{i,t}\) on \(y_{t-1}\) yields a biased estimator of \(\phi_i\) (see Figure \ref{fig:simulARMAbiased}). Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of \(y_t\) as instruments, see, e.g., \citet{Gourieroux_Monfort_Renne_2020}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{N }\OtherTok{\textless{}{-}} \DecValTok{1000} \CommentTok{\# number of replications}
+\NormalTok{T }\OtherTok{\textless{}{-}} \DecValTok{100} \CommentTok{\# sample length}
+\NormalTok{phi }\OtherTok{\textless{}{-}}\NormalTok{ .}\DecValTok{8} \CommentTok{\# autoregressive parameter}
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \DecValTok{1}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(theta }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{))\{}
+\NormalTok{  all.y }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,N)}
+\NormalTok{  y     }\OtherTok{\textless{}{-}}\NormalTok{ all.y}
+\NormalTok{  eta\_1 }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(N)}
+  \ControlFlowTok{for}\NormalTok{(t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(T}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))\{}
+\NormalTok{    eta }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(N)}
+\NormalTok{    y }\OtherTok{\textless{}{-}}\NormalTok{ phi }\SpecialCharTok{*}\NormalTok{ y }\SpecialCharTok{+}\NormalTok{ sigma }\SpecialCharTok{*}\NormalTok{ eta }\SpecialCharTok{+}\NormalTok{ theta }\SpecialCharTok{*}\NormalTok{ sigma }\SpecialCharTok{*}\NormalTok{ eta\_1}
+\NormalTok{    all.y }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(all.y,y)}
+\NormalTok{    eta\_1 }\OtherTok{\textless{}{-}}\NormalTok{ eta}
+\NormalTok{  \}}
+\NormalTok{  all.y\_1 }\OtherTok{\textless{}{-}}\NormalTok{ all.y[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{T,]}
+\NormalTok{  all.y   }\OtherTok{\textless{}{-}}\NormalTok{ all.y[}\DecValTok{2}\SpecialCharTok{:}\NormalTok{(T}\SpecialCharTok{+}\DecValTok{1}\NormalTok{),]}
+\NormalTok{  XX\_1 }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\FunctionTok{apply}\NormalTok{(all.y\_1 }\SpecialCharTok{*}\NormalTok{ all.y\_1,}\DecValTok{2}\NormalTok{,sum)}
+\NormalTok{  XY   }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(all.y\_1 }\SpecialCharTok{*}\NormalTok{ all.y,}\DecValTok{2}\NormalTok{,sum)}
+\NormalTok{  phi.est.OLS }\OtherTok{\textless{}{-}}\NormalTok{ XX\_1 }\SpecialCharTok{*}\NormalTok{ XY}
+  \FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(phi.est.OLS),}\AttributeTok{xlab=}\StringTok{"OLS estimate of phi"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
+       \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"theta = "}\NormalTok{,theta,}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+  \FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{phi,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/simulARMAbiased-1} \caption{Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS.}\label{fig:simulARMAbiased}
+\end{figure}
 
 \hypertarget{estimVAR}{%
 \section{VAR estimation}\label{estimVAR}}
@@ -494,7 +526,7 @@ We have non-zero correlation between \(x_t\) and \(\varepsilon_{i,s}\) for \(s<t
 
 However, when \(y_t\) is covariance stationary, then \(\frac{1}{n}\mathbf{X}'\mathbf{X}\) converges to a positive definite matrix \(\mathbf{Q}\), and \(\frac{1}{n}X'\boldsymbol\varepsilon_i\) converges to 0. Hence \(\mathbf{b}_i \overset{p}{\rightarrow} \beta_i\). More precisely:
 
-\begin{proposition}[Asymptotic distribution of the OLS estimate of $\beta_i$]
+\begin{proposition}[Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)]
 \protect\hypertarget{prp:OLSVAR}{}\label{prp:OLSVAR}If \(y_t\) follows a VAR model, as defined in Definition \ref{def:SVAR}, we have:
 \[
 \sqrt{T}(\mathbf{b}_i-\beta_i) =  \underbrace{\left[\frac{1}{T}\sum_{t=p}^T x_t x_t' \right]^{-1}}_{\overset{p}{\rightarrow} \mathbf{Q}^{-1}}
@@ -1167,11 +1199,7 @@ The following code implements the Monte Carlo method.
 \NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
 \NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
 \NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
-\NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-
 \CommentTok{\# ===================================}
 \CommentTok{\# CEE with different inference methods}
 \CommentTok{\# ===================================}
@@ -1276,7 +1304,7 @@ Bootstrapping consists in:
   re-estimating the SVAR \(N\) times.
 \end{itemize}
 
-Here is the algorithm:
+Here is the algorithm for the non-parametric approach:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1286,7 +1314,7 @@ Here is the algorithm:
   \[
   y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
   \]
-  with \(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\), where \(\{s_1^{(k)},..,s_T^{(k)}\}\) is a random set from \(\{1,..,T\}^T\).
+  with \(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\), where \(\{s_1^{(k)},..,s_T^{(k)}\}\) is a random set from \(\{1,..,T\}^T\). (Note: in the parametric approach, we would draw \(\hat\varepsilon_{t}^{(k)}\) from the \(N(0,BB')\) distribution)
 \item
   Re-estimate the SVAR and compute the IRFs \(\{\widehat{\Psi}_j\}^{(k)}\).
 \end{enumerate}
@@ -1307,11 +1335,7 @@ The following code implements the bootstrap method.
 \NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
 \NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
 \NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
-\NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-
 \CommentTok{\# ===================================}
 \CommentTok{\# CEE with different inference methods}
 \CommentTok{\# ===================================}
@@ -1351,6 +1375,7 @@ The code below illustrates the small sample bias.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Distribution of coefficients stemming from non{-}parametric bootstrap}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
 \NormalTok{h }\OtherTok{\textless{}{-}} \DecValTok{5}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{round}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{==}\NormalTok{n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)\{}
@@ -1422,6 +1447,18 @@ In the following code, we perform the VAR estimation and bootstrap inference aft
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# True IRFs}
+\NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
+  \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                  \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                  \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                  \AttributeTok{inference =} \DecValTok{0}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
+                  \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
+                  \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                  \AttributeTok{indic.plot =} \DecValTok{0} \CommentTok{\# Plots are displayed if = 1.}
+\NormalTok{  )}
+\NormalTok{IRFs.ordering.true }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{IRFs}
+
 \CommentTok{\# Distribution of coefficients resulting from the small sample VAR}
 \NormalTok{h }\OtherTok{\textless{}{-}} \DecValTok{5}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{round}\NormalTok{(n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{==}\NormalTok{n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,n}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}
@@ -1433,10 +1470,10 @@ In the following code, we perform the VAR estimation and bootstrap inference aft
 \NormalTok{                IRFs.small.sample[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
   \FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(median.IRFs.small.sample[h,i],}
 \NormalTok{                median.IRFs.small.sample[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
-  \FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(IRFs.ordering.bootstrap[h,i],}
-\NormalTok{                IRFs.ordering.bootstrap[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"black"}\NormalTok{)}
+  \FunctionTok{lines}\NormalTok{(}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(IRFs.ordering.true[h,i],}
+\NormalTok{                IRFs.ordering.true[h,i],}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\AttributeTok{col=}\StringTok{"black"}\NormalTok{)}
   \FunctionTok{text}\NormalTok{(IRFs.small.sample[h,i],}\DecValTok{25}\NormalTok{,}\AttributeTok{label=}\StringTok{"Estimated coef."}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
-  \FunctionTok{text}\NormalTok{(IRFs.ordering.bootstrap[h,i],}\DecValTok{30}\NormalTok{,}\AttributeTok{label=}\StringTok{"True coef."}\NormalTok{,}\AttributeTok{col=}\StringTok{"black"}\NormalTok{)}
+  \FunctionTok{text}\NormalTok{(IRFs.ordering.true[h,i],}\DecValTok{30}\NormalTok{,}\AttributeTok{label=}\StringTok{"True coef."}\NormalTok{,}\AttributeTok{col=}\StringTok{"black"}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -1528,11 +1565,7 @@ The following code implements the bootstrap-after-bootrap method.
 \NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
 \NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
 \NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
-\NormalTok{sign.restrictions }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-\NormalTok{horizon }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
-
 \CommentTok{\# ===================================}
 \CommentTok{\# CEE with different inference methods}
 \CommentTok{\# ===================================}
@@ -1578,10 +1611,10 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 \end{Shaded}
 
 \begin{verbatim}
-##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3179651 0.1427872 0.9783125 -0.1514789 0.1525633 1.0319650 -0.01935510
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const
+## [1,] -0.3395594 0.1158214 1.060404 -0.1525154 0.07307634 0.9600814 -0.01794788
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
 \end{verbatim}
 
 \hypertarget{Signs}{%
@@ -1993,7 +2026,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \NormalTok{p }\OtherTok{\textless{}{-}} \DecValTok{2}
 \NormalTok{nb.periods.IRF }\OtherTok{\textless{}{-}} \DecValTok{40}
 \NormalTok{bootstrap.replications }\OtherTok{\textless{}{-}} \DecValTok{1000}
-\NormalTok{confidence.interval }\OtherTok{\textless{}{-}} \FloatTok{0.75}
+\NormalTok{confid.interv }\OtherTok{\textless{}{-}} \FloatTok{0.75}
 \NormalTok{indic.plot }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{H }\OtherTok{\textless{}{-}} \DecValTok{20}
 \CommentTok{\# ===============================}
@@ -2046,7 +2079,8 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
     \ControlFlowTok{if}\NormalTok{ (simulated.IRFs[}\DecValTok{1}\NormalTok{,,}\DecValTok{20}\NormalTok{,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
 \NormalTok{      Q[,}\DecValTok{1}\NormalTok{,l] }\OtherTok{\textless{}{-}}\NormalTok{ Q[,,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
 \NormalTok{      \}}\ControlFlowTok{else}\NormalTok{\{Q[,}\DecValTok{1}\NormalTok{,l] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{ Q[,,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec\}}
-\NormalTok{    Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 2 to n are orthogonal to the first}
+\NormalTok{    Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 2 to n are }
+    \CommentTok{\#   orthogonal to the first one.}
     \CommentTok{\# New IRFs}
     \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nb.periods.IRF)\{}
 \NormalTok{      IRFs.final[,,t,l] }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,t,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,,l]\}}
@@ -2054,9 +2088,9 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \CommentTok{\# compute some key moments of the simulated IRFs:}
 \NormalTok{stdv.IRFs }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),sd)}
 \NormalTok{CI.lower.bounds }\OtherTok{\textless{}{-}}
-  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confid.interv)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
 \NormalTok{CI.upper.bounds }\OtherTok{\textless{}{-}}
-  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confid.interv)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
 \NormalTok{CI.median }\OtherTok{\textless{}{-}}
   \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\FloatTok{0.5}\NormalTok{)\})}
 \CommentTok{\# Plot graphs}
@@ -2065,7 +2099,8 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
     \FunctionTok{plot}\NormalTok{(CI.median[i,}\DecValTok{1}\NormalTok{,],}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
          \AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(CI.lower.bounds[i,}\DecValTok{1}\NormalTok{,]),}
                 \FunctionTok{max}\NormalTok{(CI.upper.bounds[i,}\DecValTok{1}\NormalTok{,])),}
-         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of Main GDP shock on "}\NormalTok{,names.of.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of Main GDP shock on "}\NormalTok{,}
+\NormalTok{                    names.of.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
     \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{)}
       \FunctionTok{lines}\NormalTok{(CI.lower.bounds[i,}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
       \FunctionTok{lines}\NormalTok{(CI.upper.bounds[i,}\DecValTok{1}\NormalTok{,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)\}}
@@ -2076,7 +2111,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7361815
+## [1] 0.7284664
 \end{verbatim}
 
 \begin{figure}
@@ -2092,7 +2127,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \NormalTok{nb.periods.IRF }\OtherTok{\textless{}{-}} \DecValTok{40}
 \NormalTok{p }\OtherTok{\textless{}{-}} \DecValTok{2}
 \NormalTok{bootstrap.replications }\OtherTok{\textless{}{-}} \DecValTok{1000}
-\NormalTok{confidence.interval }\OtherTok{\textless{}{-}} \FloatTok{0.75}
+\NormalTok{confid.interv }\OtherTok{\textless{}{-}} \FloatTok{0.75}
 \NormalTok{indic.plot }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{nb.shocks }\OtherTok{\textless{}{-}} \DecValTok{3}
 \NormalTok{names.of.shocks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"TFP surprise"}\NormalTok{,}\StringTok{"TFP news"}\NormalTok{,}\StringTok{"Sentiment"}\NormalTok{)}
@@ -2117,8 +2152,9 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
     \ControlFlowTok{for}\NormalTok{ (h }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Hn)\{}
 \NormalTok{      V99 }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,h,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l] }
       \CommentTok{\# Notice that we use only columns 2 to n of Q:}
-      \CommentTok{\#  the first column selects the TFP surprise shock, which is the first}
-      \CommentTok{\#  shock in the Cholesky decomposition where TFP is ordered first}
+      \CommentTok{\#  the first column selects the TFP surprise shock,}
+      \CommentTok{\#  which is the first shock in the Cholesky}
+      \CommentTok{\#  decomposition where TFP is ordered first.}
 \NormalTok{      JJ }\OtherTok{\textless{}{-}}\NormalTok{ (Hn}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{h)}\SpecialCharTok{*}\FunctionTok{t}\NormalTok{(V99)}\SpecialCharTok{\%*\%}\NormalTok{En}\SpecialCharTok{\%*\%}\NormalTok{V99}
 \NormalTok{      WWW }\OtherTok{\textless{}{-}}\NormalTok{ WWW}\SpecialCharTok{+}\NormalTok{JJ\}}
 \NormalTok{    r }\OtherTok{\textless{}{-}} \FunctionTok{eigen}\NormalTok{(WWW) }
@@ -2129,7 +2165,8 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \NormalTok{      Q[,}\DecValTok{2}\NormalTok{,l] }\OtherTok{\textless{}{-}}\NormalTok{ Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
 \NormalTok{      \}}\ControlFlowTok{else}\NormalTok{\{}
 \NormalTok{        Q[,}\DecValTok{2}\NormalTok{,l] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{ Q[,}\DecValTok{2}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec\}}
-\NormalTok{    Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 3 to n are orthogonal to the first 2}
+\NormalTok{    Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 3 to n}
+    \CommentTok{\#   are orthogonal to the first 2}
     \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
     \CommentTok{\# Identification of sentiment shocks}
     \DocumentationTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
@@ -2137,9 +2174,12 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \NormalTok{    WWW }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(n}\DecValTok{{-}2}\NormalTok{,n}\DecValTok{{-}2}\NormalTok{))}
     \ControlFlowTok{for}\NormalTok{ (h }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{Hs)\{}
 \NormalTok{      V99 }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,h,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}
-      \CommentTok{\# Notice that we use only columns 3 to n of Q: the first column selects the TFP surprise shock, }
-      \CommentTok{\# which is the first shock in the Cholesky decomposition where TFP is ordered first, the second column generates }
-      \CommentTok{\# the linear combination of "Cholesky shocks" that is orthogonal to TFP surprise and best explains TFP up to }
+      \CommentTok{\# Notice that we use only columns 3 to n of Q:}
+      \CommentTok{\# the first column selects the TFP surprise shock, }
+      \CommentTok{\# which is the first shock in the Cholesky decomposition}
+      \CommentTok{\# where TFP is ordered first, the second column generates }
+      \CommentTok{\# the linear combination of "Cholesky shocks" that is orthogonal}
+      \CommentTok{\# to TFP surprise and best explains TFP up to }
       \CommentTok{\# horizon 40 (see last step)}
 \NormalTok{      JJ }\OtherTok{\textless{}{-}}\NormalTok{ (Hs}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{h)}\SpecialCharTok{*}\FunctionTok{t}\NormalTok{(V99)}\SpecialCharTok{\%*\%}\NormalTok{Es}\SpecialCharTok{\%*\%}\NormalTok{V99}
 \NormalTok{      WWW }\OtherTok{\textless{}{-}}\NormalTok{ WWW}\SpecialCharTok{+}\NormalTok{JJ\}}
@@ -2150,16 +2190,17 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
     \ControlFlowTok{if}\NormalTok{ (simulated.IRFs[}\DecValTok{3}\NormalTok{,,}\DecValTok{2}\NormalTok{,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
 \NormalTok{      Q[,}\DecValTok{3}\NormalTok{,l] }\OtherTok{\textless{}{-}}\NormalTok{ Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec}
 \NormalTok{    \}}\ControlFlowTok{else}\NormalTok{\{Q[,}\DecValTok{3}\NormalTok{,l] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\NormalTok{Q[,}\DecValTok{3}\SpecialCharTok{:}\NormalTok{n,l]}\SpecialCharTok{\%*\%}\NormalTok{eigvec\}}
-\NormalTok{    Q[,}\DecValTok{4}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 4 to n are orthogonal to the first 3}
+\NormalTok{    Q[,}\DecValTok{4}\SpecialCharTok{:}\NormalTok{n,l] }\OtherTok{\textless{}{-}} \FunctionTok{Null}\NormalTok{(Q[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,l]) }\CommentTok{\# we ensure that columns 4 to n are}
+    \CommentTok{\# orthogonal to the first 3}
     \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{nb.periods.IRF)\{}
 \NormalTok{      IRFs.final[,,t,l] }\OtherTok{\textless{}{-}}\NormalTok{ simulated.IRFs[,,t,l]}\SpecialCharTok{\%*\%}\NormalTok{Q[,,l]\}}
 \NormalTok{  \}}
 \CommentTok{\# compute some key moments of the simulated IRFs}
 \NormalTok{stdv.IRFs }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),sd)}
 \NormalTok{CI.lower.bounds }\OtherTok{\textless{}{-}}
-  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confid.interv)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
 \NormalTok{CI.upper.bounds }\OtherTok{\textless{}{-}}
-  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confidence.interval)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
+  \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{confid.interv)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)\})}
 \NormalTok{CI.median }\OtherTok{\textless{}{-}}
   \FunctionTok{apply}\NormalTok{(IRFs.final,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{quantile}\NormalTok{(x,}\FloatTok{0.5}\NormalTok{)\})}
 \CommentTok{\# Plot graphs}
@@ -2169,7 +2210,8 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
     \FunctionTok{plot}\NormalTok{(CI.median[i,j,],}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}
          \AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\FunctionTok{min}\NormalTok{(CI.lower.bounds[i,j,]),}
                 \FunctionTok{max}\NormalTok{(CI.upper.bounds[i,j,])),}
-         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of "}\NormalTok{,names.of.shocks[j],}\StringTok{" on "}\NormalTok{,names.of.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
+         \AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Effect of "}\NormalTok{,names.of.shocks[j],}\StringTok{" on "}\NormalTok{,}
+\NormalTok{                    names.of.variables[i],}\AttributeTok{sep=}\StringTok{""}\NormalTok{))}
     \FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\DecValTok{0}\NormalTok{,}\AttributeTok{col=}\StringTok{"grey"}\NormalTok{)}
       \FunctionTok{lines}\NormalTok{(CI.lower.bounds[i,j,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
       \FunctionTok{lines}\NormalTok{(CI.upper.bounds[i,j,],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)\}}
@@ -2193,7 +2235,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1057931
+## [1] 0.101081
 \end{verbatim}
 
 \begin{Shaded}
@@ -2203,7 +2245,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.6331799
+## [1] 0.6208016
 \end{verbatim}
 
 \begin{Shaded}
@@ -2213,7 +2255,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1163406
+## [1] 0.1255303
 \end{verbatim}
 
 \begin{figure}
@@ -2713,6 +2755,27 @@ This gives a measure of intended monetary policy actions not driven by informati
 \end{enumerate}
 
 The shock measure is the residual series in the linear regression of (a) on (b). The time series \texttt{Ramey\$rrshock83} and \texttt{Ramey\$rrshock83b} (where \texttt{Ramey} is a data frame included in package \texttt{IdSS}) contain such shocks for the period 1983-2007. (\texttt{Ramey\$rrshock83b} uses long-horizon Greenbook forecasts.)
+\end{example}
+
+To create a measure of \emph{news} about future government spending, \citet{Ramey_2011} uses newspaper articles to construct a time series of (unexpected) fiscal shocks:\footnote{Data and replication codes can be found on \href{https://econweb.ucsd.edu/~vramey/research.html\#govt}{her website}.}
+
+\begin{example}[Identification of news about future government spending]
+\protect\hypertarget{exm:RameyQJE2011}{}\label{exm:RameyQJE2011}
+
+\citet{Ramey_2011}'s measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public's expectations (\emph{Business Week} before 2001, other newspapers afterwards). is the principal source for most of sample because it often gave detailed predictions.
+
+According to \citet{Ramey_2011}, government sources could not be used because (a) they were either not released in a timely manner or (b) were known to underestimate the costs of certain actions.
+
+Figure \ref{fig:RameyFiscalShocks} shows the resulting time series of shocks. Figure \ref{fig:IRFfiscalRamey} shows the IRF of macro variables to the shock on expected government spending.
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{images/RameyFiscalShocks} \caption{Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP.}\label{fig:RameyFiscalShocks}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{images/RameyFiscalShocksIRF} \caption{Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending.}\label{fig:IRFfiscalRamey}
+\end{figure}
+
 \end{example}
 
 There are two main IV approaches to estimate IRFs see \citet{Stock_Watson_2018}:

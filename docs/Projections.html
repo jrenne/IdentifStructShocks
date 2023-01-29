@@ -186,6 +186,24 @@ Figure 8.1: Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Fed
 </ol>
 <p>The shock measure is the residual series in the linear regression of (a) on (b). The time series <code>Ramey$rrshock83</code> and <code>Ramey$rrshock83b</code> (where <code>Ramey</code> is a data frame included in package <code>IdSS</code>) contain such shocks for the period 1983-2007. (<code>Ramey$rrshock83b</code> uses long-horizon Greenbook forecasts.)</p>
 </div>
+<p>To create a measure of <em>news</em> about future government spending, <span class="citation">Ramey (<a href="references.html#ref-Ramey_2011" role="doc-biblioref">2011</a>)</span> uses newspaper articles to construct a time series of (unexpected) fiscal shocks:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Data and replication codes can be found on &lt;a href="https://econweb.ucsd.edu/~vramey/research.html#govt"&gt;her website&lt;/a&gt;.&lt;/p&gt;'><sup>10</sup></a></p>
+<div class="example">
+<p><span id="exm:RameyQJE2011" class="example"><strong>Example 8.3  (Identification of news about future government spending) </strong></span><span class="citation">Ramey (<a href="references.html#ref-Ramey_2011" role="doc-biblioref">2011</a>)</span>’s measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public’s expectations (<em>Business Week</em> before 2001, other newspapers afterwards). is the principal source for most of sample because it often gave detailed predictions.</p>
+<p>According to <span class="citation">Ramey (<a href="references.html#ref-Ramey_2011" role="doc-biblioref">2011</a>)</span>, government sources could not be used because (a) they were either not released in a timely manner or (b) were known to underestimate the costs of certain actions.</p>
+<p>Figure <a href="Projections.html#fig:RameyFiscalShocks">8.2</a> shows the resulting time series of shocks. Figure <a href="Projections.html#fig:IRFfiscalRamey">8.3</a> shows the IRF of macro variables to the shock on expected government spending.</p>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:RameyFiscalShocks"></span>
+<img src="images/RameyFiscalShocks.png" alt="Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP." width="95%"><p class="caption">
+Figure 8.2: Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP.
+</p>
+</div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:IRFfiscalRamey"></span>
+<img src="images/RameyFiscalShocksIRF.png" alt="Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending." width="95%"><p class="caption">
+Figure 8.3: Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending.
+</p>
+</div>
+</div>
 <p>There are two main IV approaches to estimate IRFs see <span class="citation">Stock and Watson (<a href="references.html#ref-Stock_Watson_2018" role="doc-biblioref">2018</a>)</span>:</p>
 <ol style="list-style-type: lower-alpha">
 <li>The SVAR-IV approach (Subsection <a href="Projections.html#SVARIVa">8.3.2</a>),</li>
@@ -254,7 +272,7 @@ S_{\varepsilon,e}&amp; \sigma^2_{e}
 where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="math inline">\(\sigma^2_{e}\)</span> result from the estimation of an AR process for <span class="math inline">\(z_t\)</span>, and where <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S_{\varepsilon,e}\)</span> are sample covariances for the VAR/AR residuals.</p>
 <p>For each simulated sample (of <span class="math inline">\(\tilde{y}_t\)</span> and <span class="math inline">\(\tilde{z}_t\)</span>, say), estimate <span class="math inline">\(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\)</span> and associated <span class="math inline">\(\widetilde{\Psi}_{i,1,h}\)</span>. This provides e.g. a sequence of <span class="math inline">\(N\)</span> estimates of <span class="math inline">\(\Psi_{i,1,h}\)</span>, from which quantiles and conf. intervals can be deduced.</p>
 <p>In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is <code>FF4_TC</code> from the Ramsey’s database; they are base on the <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015" role="doc-biblioref">2015</a>)</span> approach, that use 3-month fed funds futures.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1990-05-01"</span>;<span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2012-6-01"</span></span>
@@ -269,10 +287,10 @@ where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="ma
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:essaiIV0"></span>
 <img src="IdentifStructShocks_files/figure-html/essaiIV0-1.png" alt="Gertler-Karadi monthly shocks, fed funds futures 3 months." width="95%"><p class="caption">
-Figure 8.2: Gertler-Karadi monthly shocks, fed funds futures 3 months.
+Figure 8.4: Gertler-Karadi monthly shocks, fed funds futures 3 months.
 </p>
 </div>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">considered.variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GS1"</span>,<span class="st">"LIP"</span>,<span class="st">"LCPI"</span>,<span class="st">"EBP"</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">[</span>,<span class="va">considered.variables</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">considered.variables</span><span class="op">)</span></span>
@@ -288,7 +306,7 @@ Figure 8.2: Gertler-Karadi monthly shocks, fed funds futures 3 months.
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:essaiIV1"></span>
 <img src="IdentifStructShocks_files/figure-html/essaiIV1-1.png" alt="Reponses to a monetary-policy shock, SVAR-IV approach." width="95%"><p class="caption">
-Figure 8.3: Reponses to a monetary-policy shock, SVAR-IV approach.
+Figure 8.5: Reponses to a monetary-policy shock, SVAR-IV approach.
 </p>
 </div>
 </div>
@@ -325,12 +343,12 @@ where <span class="math inline">\(\mathbb{E}(\boldsymbol\varepsilon)=0\)</span>,
 \mathbf{b}_{iv} &amp;=&amp; [\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{Y}\\
 \mathbf{b}_{iv} &amp;=&amp; \boldsymbol\beta + \frac{1}{\sqrt{T}}\underbrace{T[\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X}]^{-1}\mathbf{X}'\mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}}_{=Q(\mathbf{X},\mathbf{Z}) \overset{p}{\rightarrow} \mathbf{Q}_{xz}}\underbrace{\sqrt{T}\left(\frac{1}{T}\mathbf{Z}'\boldsymbol\varepsilon\right)}_{\overset{d}{\rightarrow} \mathcal{N}(0,S)},
 \end{eqnarray*}\]</span>
-where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance of <span class="math inline">\(\mathbf{z}_t\varepsilon_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is the sum of the covariance matrices of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, for orders from &lt;span class="math inline"&gt;\(-\infty\)&lt;/span&gt; to &lt;span class="math inline"&gt;\(+\infty\)&lt;/span&gt;.&lt;/p&gt;'><sup>10</sup></a> The asymptotic covariance matrix of <span class="math inline">\(\sqrt{T}\mathbf{b}_{iv}\)</span> is <span class="math inline">\(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\)</span>. Therefore, the covariance matrix of <span class="math inline">\(\mathbf{b}_{iv}\)</span> can be approximated by <span class="math inline">\(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\)</span> where <span class="math inline">\(\hat{\mathbf{S}}\)</span> is the Newey-West estimator of <span class="math inline">\(\mathbf{S}\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is: &lt;span class="math inline"&gt;\(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\)&lt;/span&gt;, where the &lt;span class="math inline"&gt;\(\hat\gamma_j\)&lt;/span&gt;’s are sample auto-covariances of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, see &lt;span class="citation"&gt;Newey and West (&lt;a href="references.html#ref-Newey_West_1987" role="doc-biblioref"&gt;1987&lt;/a&gt;)&lt;/span&gt;&lt;/p&gt;'><sup>11</sup></a></p>
+where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance of <span class="math inline">\(\mathbf{z}_t\varepsilon_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is the sum of the covariance matrices of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, for orders from &lt;span class="math inline"&gt;\(-\infty\)&lt;/span&gt; to &lt;span class="math inline"&gt;\(+\infty\)&lt;/span&gt;.&lt;/p&gt;'><sup>11</sup></a> The asymptotic covariance matrix of <span class="math inline">\(\sqrt{T}\mathbf{b}_{iv}\)</span> is <span class="math inline">\(\mathbf{Q}_{xz} \mathbf{S} \mathbf{Q}_{xz}'\)</span>. Therefore, the covariance matrix of <span class="math inline">\(\mathbf{b}_{iv}\)</span> can be approximated by <span class="math inline">\(\frac{1}{T}Q(\mathbf{X},\mathbf{Z})\hat{\mathbf{S}}Q(\mathbf{X},\mathbf{Z})'\)</span> where <span class="math inline">\(\hat{\mathbf{S}}\)</span> is the Newey-West estimator of <span class="math inline">\(\mathbf{S}\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;That is: &lt;span class="math inline"&gt;\(\hat{\mathbf{S}}=\hat\gamma_0 + 2 \sum_{\nu=1}^{q}\left(1-\frac{\nu}{q+1}\right) \hat\gamma_\nu\)&lt;/span&gt;, where the &lt;span class="math inline"&gt;\(\hat\gamma_j\)&lt;/span&gt;’s are sample auto-covariances of &lt;span class="math inline"&gt;\(\mathbf{z}_t\varepsilon_t\)&lt;/span&gt;, see &lt;span class="citation"&gt;Newey and West (&lt;a href="references.html#ref-Newey_West_1987" role="doc-biblioref"&gt;1987&lt;/a&gt;)&lt;/span&gt;&lt;/p&gt;'><sup>12</sup></a></p>
 <p>Assumption (IV.iii) is usually not restrictive for <span class="math inline">\(h&gt;0\)</span> (<span class="math inline">\(z_t\)</span> is usually not affected by future shocks). By contrast, it may be restrictive for <span class="math inline">\(h&lt;0\)</span>. This can be solved by adding controls in Regression <a href="Projections.html#eq:regIV1">(8.6)</a>. These controls should span the space of <span class="math inline">\(\{\eta_{t-1},\eta_{t-2},\dots\}\)</span>.</p>
 <p>If <span class="math inline">\(z_t\)</span> is suspected to be correlated to past values of <span class="math inline">\(\eta_{1,t}\)</span> but not to the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j&gt;1\)</span>, then one can add lags of <span class="math inline">\(z_t\)</span> as controls (method e.g. advocated by Ramey, 2016, p.108, considering the instrument by <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015" role="doc-biblioref">2015</a>)</span>).</p>
 <p>In the general case, one can use lags of <span class="math inline">\(y_t\)</span> as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.</p>
 <!-- As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency. -->
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res.LP.IV</span> <span class="op">&lt;-</span> <span class="fu">make.LPIV.irf</span><span class="op">(</span><span class="va">y</span>,<span class="va">Z</span>,</span>
 <span>                           nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>                           nb.lags.Y.4.control<span class="op">=</span><span class="fl">4</span>,</span>
@@ -374,7 +392,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-27.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

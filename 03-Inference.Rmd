@@ -61,11 +61,7 @@ indic.first <- which(USmonthly$DATES==First.date)
 indic.last  <- which(USmonthly$DATES==Last.date)
 USmonthly   <- USmonthly[indic.first:indic.last,]
 considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
-n <- length(considered.variables)
 y <- as.matrix(USmonthly[considered.variables])
-sign.restrictions <- list()
-horizon <- list()
-
 # ===================================
 # CEE with different inference methods
 # ===================================
@@ -147,13 +143,13 @@ b. a sample of residuals drawn randomly from the set of the actual estimated res
 
 * re-estimating the SVAR $N$ times.
 
-Here is the algorithm:
+Here is the algorithm for the non-parametric approach:
 
 1. Construct a sample
 $$
 y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
 $$
-with $\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}$, where $\{s_1^{(k)},..,s_T^{(k)}\}$ is a random set from $\{1,..,T\}^T$.
+with $\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}$, where $\{s_1^{(k)},..,s_T^{(k)}\}$ is a random set from $\{1,..,T\}^T$. (Note: in the parametric approach, we would draw $\hat\varepsilon_{t}^{(k)}$ from the $N(0,BB')$ distribution)
 2. Re-estimate the SVAR and compute the IRFs $\{\widehat{\Psi}_j\}^{(k)}$.
 
 Perform $N$ replications and report the median impulse response (and its confidence intervals).
@@ -171,11 +167,7 @@ indic.first <- which(USmonthly$DATES==First.date)
 indic.last  <- which(USmonthly$DATES==Last.date)
 USmonthly   <- USmonthly[indic.first:indic.last,]
 considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
-n <- length(considered.variables)
 y <- as.matrix(USmonthly[considered.variables])
-sign.restrictions <- list()
-horizon <- list()
-
 # ===================================
 # CEE with different inference methods
 # ===================================
@@ -204,6 +196,7 @@ The code below illustrates the small sample bias.
 ```{r inference3, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Estimated and bootstrapped coefficients.",warning=FALSE,message=FALSE}
 
 # Distribution of coefficients stemming from non-parametric bootstrap
+n <- length(considered.variables)
 h <- 5
 par(mfrow=c(2,ifelse(round(n/2)==n/2,n/2,(n+1)/2)))
 for (i in 1:n){
@@ -260,6 +253,18 @@ simulated.IRFs.small.sample <- res.svar.small.sample$simulated.IRFs
 
 
 ```{r inference5, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.",warning=FALSE,message=FALSE}
+# True IRFs
+res.svar.ordering <-
+  svar.ordering.2(y,p=3,
+                  posit.of.shock = 5,
+                  nb.periods.IRF = 20,
+                  inference = 0,# 0 -> no inference, 1 -> parametric bootstr.,
+                  # 2 <- non-parametric bootstrap, 3 <- monte carlo,
+                  # 4 <- bootstrap-after-bootstrap
+                  indic.plot = 0 # Plots are displayed if = 1.
+  )
+IRFs.ordering.true <- res.svar.ordering$IRFs
+
 # Distribution of coefficients resulting from the small sample VAR
 h <- 5
 par(mfrow=c(2,ifelse(round(n/2)==n/2,n/2,(n+1)/2)))
@@ -271,10 +276,10 @@ for (i in 1:n){
                 IRFs.small.sample[h,i],0,100),c(2,2)),col="red")
   lines(array(c(median.IRFs.small.sample[h,i],
                 median.IRFs.small.sample[h,i],0,100),c(2,2)),col="blue")
-  lines(array(c(IRFs.ordering.bootstrap[h,i],
-                IRFs.ordering.bootstrap[h,i],0,100),c(2,2)),col="black")
+  lines(array(c(IRFs.ordering.true[h,i],
+                IRFs.ordering.true[h,i],0,100),c(2,2)),col="black")
   text(IRFs.small.sample[h,i],25,label="Estimated coef.",col="red")
-  text(IRFs.ordering.bootstrap[h,i],30,label="True coef.",col="black")
+  text(IRFs.ordering.true[h,i],30,label="True coef.",col="black")
 }
 ```
 
@@ -324,11 +329,7 @@ indic.first <- which(USmonthly$DATES==First.date)
 indic.last  <- which(USmonthly$DATES==Last.date)
 USmonthly   <- USmonthly[indic.first:indic.last,]
 considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
-n <- length(considered.variables)
 y <- as.matrix(USmonthly[considered.variables])
-sign.restrictions <- list()
-horizon <- list()
-
 # ===================================
 # CEE with different inference methods
 # ===================================

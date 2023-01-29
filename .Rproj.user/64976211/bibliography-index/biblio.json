@@ -1,6 +1,41 @@
 {
     "sources": [
         {
+            "ISSN": "00335533, 15314650",
+            "URL": "http://www.jstor.org/stable/23015663",
+            "accessed": {
+                "date-parts": [
+                    [
+                        2023,
+                        1,
+                        29
+                    ]
+                ]
+            },
+            "author": [
+                {
+                    "family": "Ramey",
+                    "given": "Valerie A."
+                }
+            ],
+            "container-title": "The Quarterly Journal of Economics",
+            "id": "Ramey_2011",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2011
+                    ]
+                ]
+            },
+            "page": "1-50",
+            "publisher": "Oxford University Press",
+            "title": "Identifying government spending shocks: It’s all tn the timing",
+            "title-short": "Identifying government spending shocks",
+            "type": "article-journal",
+            "volume": "126"
+        },
+        {
             "author": [
                 {
                     "family": "Canova",

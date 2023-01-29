@@ -108,8 +108,8 @@ y_{t-1} +
 \underbrace{\left[\begin{array}{cc}
 1 & 2 \\
 -1 & 1
-\end{array}\right]}_{B}\eta_t + \underbrace{\left[\begin{array}{cc}
-2 & 0 \\
+\end{array}\right]}_{B}\eta_t - \underbrace{\left[\begin{array}{cc}
+-0.4 & 0 \\
 1 & 0.5
 \end{array}\right]}_{\Theta_1} \underbrace{\left[\begin{array}{cc}
 1 & 2 \\
@@ -130,7 +130,7 @@ Phi <- array(NaN,c(n,n,1))
 Phi[,,1] <- matrix(c(.5,-.4,.3,.7),2,2)
 p <- dim(Phi)[3]
 Theta <- array(NaN,c(n,n,1))
-Theta[,,1] <- -matrix(c(2,1,0,.5),2,2)
+Theta[,,1] <- matrix(c(-.4,1,0,.5),2,2)
 q <- dim(Theta)[3]
 Mu <- rep(0,n)
 C <- matrix(c(1,-1,2,1),2,2)
@@ -181,7 +181,7 @@ where $\|A\|$ denotes a norm of the matrix $A$ (e.g. $\|A\|=\sqrt{tr(AA')}$). Th
 What should be satisfied by $\Phi_k$'s and $\Theta_k$'s for a VARMA-based process (Eq. \@ref(eq:yVARMA)) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
 \begin{eqnarray}
 y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  (\#eq:VARMA2)\\
-&&\underbrace{B \eta_t+ \Theta_1 B \eta_{t-1}+ \dots+ \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
+&&\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
 &\Leftrightarrow& \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
 \end{eqnarray}
 
@@ -215,7 +215,7 @@ Conditional means and autocovariances can also be deduced from Eq. \@ref(eq:InfM
 
 The previous formula implies in particular that the forecasting error $y_{t+h} - \mathbb{E}_t(y_{t+h})$ has a variance equal to:
 $$
-\mathbb{V}ar_t(y_{t+h}) = \sum_{k=1}^{h} \Psi_{k}\Psi_{k}'.
+\mathbb{V}ar_t(y_{t+1+h}) = \sum_{k=0}^{h} \Psi_{k}\Psi_{k}'.
 $$
 Because the $\eta_t$ are mutually and serially independent (and therefore uncorrelated), we have:
 $$
@@ -223,15 +223,41 @@ $$
 $$
 where $\psi_{k,i}$ denotes the $i^{th}$ column of $\Psi_k$. This suggests the following decomposition of the variance of the forecast error (called  **variance decomposition**):
 $$
-\mathbb{V}ar_t(y_{t+h}) = \sum_{i=1}^n \underbrace{\sum_{k=1}^{h}  \psi_{k,i}\psi_{k,i}'.}_{\mbox{Contribution of $\eta_{i,t}$}}
+\mathbb{V}ar_t(y_{t+1+h}) = \sum_{i=1}^n \underbrace{\sum_{k=0}^{h}\psi_{k,i}\psi_{k,i}'.}_{\mbox{Contribution of $\eta_{i,t}$}}
 $$
 
 Let us now turn to the estimation of VAR models. Note that if there is an MA component (i.e., if we consider a VARMA model), then OLS regressions yield biased estimates (even for asymptotically large samples). Assume for instance that $y_t$ follows a VARMA(1,1) model:
 $$
 y_{i,t} = \phi_i y_{t-1} + \varepsilon_{i,t},
 $$
-where $\phi_i$ is the $i^{th}$ row of $\Phi_1$, and where $\varepsilon_{i,t}$ is a linear combination of $\eta_t$ and $\eta_{t-1}$. Since $y_{t-1}$ (the regressor) is correlated to $\eta_{t-1}$, it is also correlated to $\varepsilon_{i,t}$. The OLS regression of $y_{i,t}$ on $y_{t-1}$ yields a biased estimator of $\phi_i$. Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of $y_t$ as instruments, see, e.g., @Gourieroux_Monfort_Renne_2020).
+where $\phi_i$ is the $i^{th}$ row of $\Phi_1$, and where $\varepsilon_{i,t}$ is a linear combination of $\eta_t$ and $\eta_{t-1}$. Since $y_{t-1}$ (the regressor) is correlated to $\eta_{t-1}$, it is also correlated to $\varepsilon_{i,t}$. The OLS regression of $y_{i,t}$ on $y_{t-1}$ yields a biased estimator of $\phi_i$ (see Figure \@ref(fig:simulARMAbiased)). Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of $y_t$ as instruments, see, e.g., @Gourieroux_Monfort_Renne_2020).
 
+
+```{r simulARMAbiased, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS."}
+N <- 1000 # number of replications
+T <- 100 # sample length
+phi <- .8 # autoregressive parameter
+sigma <- 1
+par(mfrow=c(1,2))
+for(theta in c(0,-0.4)){
+  all.y <- matrix(0,1,N)
+  y     <- all.y
+  eta_1 <- rnorm(N)
+  for(t in 1:(T+1)){
+    eta <- rnorm(N)
+    y <- phi * y + sigma * eta + theta * sigma * eta_1
+    all.y <- rbind(all.y,y)
+    eta_1 <- eta
+  }
+  all.y_1 <- all.y[1:T,]
+  all.y   <- all.y[2:(T+1),]
+  XX_1 <- 1/apply(all.y_1 * all.y_1,2,sum)
+  XY   <- apply(all.y_1 * all.y,2,sum)
+  phi.est.OLS <- XX_1 * XY
+  plot(density(phi.est.OLS),xlab="OLS estimate of phi",ylab="",
+       main=paste("theta = ",theta,sep=""))
+  abline(v=phi,col="red",lwd=2)}
+```
 
 ## VAR estimation {#estimVAR}
 
@@ -288,7 +314,7 @@ We have non-zero correlation between $x_t$ and $\varepsilon_{i,s}$ for $s<t$ and
 
 However, when $y_t$ is covariance stationary, then $\frac{1}{n}\bv{X}'\bv{X}$ converges to a positive definite matrix $\bv{Q}$, and $\frac{1}{n}X'\boldsymbol\varepsilon_i$ converges to 0. Hence $\bv{b}_i \overset{p}{\rightarrow} \beta_i$. More precisely:
 
-:::{.proposition #OLSVAR name="Asymptotic distribution of the OLS estimate of $\beta_i$"}
+:::{.proposition #OLSVAR name="Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)"}
 If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
 $$
 \sqrt{T}(\bv{b}_i-\beta_i) =  \underbrace{\left[\frac{1}{T}\sum_{t=p}^T x_t x_t' \right]^{-1}}_{\overset{p}{\rightarrow} \bv{Q}^{-1}}
