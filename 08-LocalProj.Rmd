@@ -15,7 +15,7 @@ y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.(\#eq:OLS1)
 \end{equation}
 Running that kind of regression (using instruments for $\eta_{j,t}$) is the core idea of the **local projection (LP) approach** proposed by @Jorda_2005.
 
-Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section \@ref(#LPIVww)) is the original @Jorda_2005's approach. 
+Now, how to proceed in the (usual) case where $\eta_{j,t}$ is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section \@ref(LPIVww)) is the original @Jorda_2005's approach. 
 
 ## Situation A: Without IV {#LPIVww}
 

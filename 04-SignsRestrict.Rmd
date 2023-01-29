@@ -100,6 +100,8 @@ res.svar.signs <-
              horizon,
              recursive =1 #  =0 <- draw Q directly, =1 <- draw q recursively
   )
+simulated.IRFs.signs <- res.svar.signs$IRFs.signs
+dim(simulated.IRFs.signs)[4]
 ```
 
 <!-- Another approach -->

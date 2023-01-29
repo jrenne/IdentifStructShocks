@@ -1611,10 +1611,10 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 \end{Shaded}
 
 \begin{verbatim}
-##        inv(-1)    inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.317153 0.09039799 1.016917 -0.1367568 0.1447039 0.9766621 -0.01839922
-## [2,] -0.319631 0.14598883 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.319631 0.14598883 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)   con(-1)    inv(-2)    inc(-2)   con(-2)       const
+## [1,] -0.3294471 0.1382972 0.9421905 -0.1398762 0.09628841 1.0055748 -0.01776419
+## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.11460498 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.11460498 0.9343938 -0.01672199
 \end{verbatim}
 
 \hypertarget{Signs}{%
@@ -1766,6 +1766,17 @@ What about output? Since is the response of interest, we leave it un-restricted.
 \begin{figure}
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr1-1} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr1}
 \end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{simulated.IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{IRFs.signs}
+\FunctionTok{dim}\NormalTok{(simulated.IRFs.signs)[}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 319
+\end{verbatim}
 
 It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.
 
@@ -2111,7 +2122,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.735869
+## [1] 0.7382889
 \end{verbatim}
 
 \begin{figure}
@@ -2235,7 +2246,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.09985906
+## [1] 0.1025147
 \end{verbatim}
 
 \begin{Shaded}
@@ -2245,7 +2256,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.63529
+## [1] 0.6291176
 \end{verbatim}
 
 \begin{Shaded}
@@ -2255,7 +2266,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1183981
+## [1] 0.1221707
 \end{verbatim}
 
 \begin{figure}
@@ -2651,7 +2662,7 @@ y_{i,t+h} = \mu_i + \Psi_{i,j,h}\eta_{j,t} + u_{i,j,t+h}.\label{eq:OLS1}
 \end{equation}
 Running that kind of regression (using instruments for \(\eta_{j,t}\)) is the core idea of the \textbf{local projection (LP) approach} proposed by \citet{Jorda_2005}.
 
-Now, how to proceed in the (usual) case where \(\eta_{j,t}\) is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section @ref(\#LPIVww)) is the original \citet{Jorda_2005}'s approach.
+Now, how to proceed in the (usual) case where \(\eta_{j,t}\) is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section \ref{LPIVww}) is the original \citet{Jorda_2005}'s approach.
 
 \hypertarget{LPIVww}{%
 \section{Situation A: Without IV}\label{LPIVww}}

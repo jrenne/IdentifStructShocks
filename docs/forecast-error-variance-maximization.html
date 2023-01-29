@@ -146,7 +146,7 @@ S = \mathcal{P}D\mathcal{P}',
 \]</span>
 where <span class="math inline">\(D\)</span> is diagonal matrix whose entries are the (ordered) eigenvalues: <span class="math inline">\(\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_n \ge 0\)</span>, then <span class="math inline">\(\sigma^2(\underline{h},\overline{h},q_1)\)</span> is maximized for <span class="math inline">\(q_1 = p_1\)</span>, where <span class="math inline">\(p_1\)</span> is the first column of <span class="math inline">\(\mathcal{P}\)</span>.</p>
 <p>The following code identifies a ``main GDP shock’’ using Uhlig’s method.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
@@ -246,7 +246,7 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span><span class="va">variance.decomp</span> <span class="op">&lt;-</span> <span class="fu">variance.decomp</span><span class="op">(</span><span class="va">IRFs.final</span><span class="op">)</span></span>
 <span><span class="va">vardecomp</span> <span class="op">&lt;-</span> <span class="va">variance.decomp</span><span class="op">$</span><span class="va">vardecomp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> </span></code></pre></div>
-<pre><code>## [1] 0.7408809</code></pre>
+<pre><code>## [1] 0.7364087</code></pre>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:uhlig"></span>
 <img src="IdentifStructShocks_files/figure-html/uhlig-1.png" alt="Main GDP shock." width="95%"><p class="caption">
@@ -255,7 +255,7 @@ Figure 6.1: Main GDP shock.
 </div>
 <p>The ``main GDP shock’’ explains 74% of the variance of GDP.</p>
 <p>The following code replicates <span class="citation">Levchenko and Pandalai-Nayar (<a href="references.html#ref-Levchenko_Pandalai-Nayar_2018" role="doc-biblioref">2018</a>)</span>. They use a mix of zero and FEVD to identify TFP surprises, TFP news, and sentiment shocks.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb.periods.IRF</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">bootstrap.replications</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
@@ -360,17 +360,17 @@ Figure 6.2: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 Figure 6.3: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.
 </p>
 </div>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">variance.decomp</span> <span class="op">&lt;-</span> <span class="fu">variance.decomp</span><span class="op">(</span><span class="va">IRFs.final</span><span class="op">)</span></span>
 <span><span class="va">vardecomp</span> <span class="op">&lt;-</span> <span class="va">variance.decomp</span><span class="op">$</span><span class="va">vardecomp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.09810709</code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.6357398</code></pre>
+<pre><code>## [1] 0.1024986</code></pre>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.6256657</code></pre>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.1210712</code></pre>
+<pre><code>## [1] 0.1232048</code></pre>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:levchenko-3"></span>
 <img src="IdentifStructShocks_files/figure-html/levchenko-3.png" alt="Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions." width="95%"><p class="caption">
