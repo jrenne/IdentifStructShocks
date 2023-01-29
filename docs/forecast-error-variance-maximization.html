@@ -246,7 +246,7 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span><span class="va">variance.decomp</span> <span class="op">&lt;-</span> <span class="fu">variance.decomp</span><span class="op">(</span><span class="va">IRFs.final</span><span class="op">)</span></span>
 <span><span class="va">vardecomp</span> <span class="op">&lt;-</span> <span class="va">variance.decomp</span><span class="op">$</span><span class="va">vardecomp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> </span></code></pre></div>
-<pre><code>## [1] 0.739408</code></pre>
+<pre><code>## [1] 0.7408809</code></pre>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:uhlig"></span>
 <img src="IdentifStructShocks_files/figure-html/uhlig-1.png" alt="Main GDP shock." width="95%"><p class="caption">
@@ -364,13 +364,13 @@ Figure 6.3: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 <code class="sourceCode R"><span><span class="va">variance.decomp</span> <span class="op">&lt;-</span> <span class="fu">variance.decomp</span><span class="op">(</span><span class="va">IRFs.final</span><span class="op">)</span></span>
 <span><span class="va">vardecomp</span> <span class="op">&lt;-</span> <span class="va">variance.decomp</span><span class="op">$</span><span class="va">vardecomp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.1004037</code></pre>
+<pre><code>## [1] 0.09810709</code></pre>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.6356303</code></pre>
+<pre><code>## [1] 0.6357398</code></pre>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.1192929</code></pre>
+<pre><code>## [1] 0.1210712</code></pre>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:levchenko-3"></span>
 <img src="IdentifStructShocks_files/figure-html/levchenko-3.png" alt="Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions." width="95%"><p class="caption">

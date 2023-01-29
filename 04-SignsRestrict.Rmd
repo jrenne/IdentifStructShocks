@@ -92,7 +92,7 @@ res.svar.signs <-
   svar.signs(y,p=3,
              nb.shocks = 1, #number of identified shocks
              nb.periods.IRF = 20,
-             bootstrap.replications = 1, # = 0 if no bootstrap
+             bootstrap.replications = 1, # = 1 if no bootstrap
              confidence.interval = 0.80, # expressed in pp.
              indic.plot = 1, # Plots are displayed if = 1.
              nb.draws = 10000, # number of draws
