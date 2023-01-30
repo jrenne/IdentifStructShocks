@@ -111,12 +111,12 @@ with <span class="math inline">\(\varepsilon_t = B\eta_t\)</span>, where <span c
 <span class="math display" id="eq:yVARMA">\[\begin{eqnarray}
 \begin{array}{rllll}
 VARMA:&amp; y_t &amp;=&amp; c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
-&amp;&amp;&amp;\varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q ,\\
+&amp;&amp;&amp;\varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q \varepsilon_{t-q},\\
 SVARMA:&amp; y_t &amp;=&amp; c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
 &amp;&amp;&amp; B_0 \eta_t+ B_1 \eta_{t-1} + \dots +  B_q \eta_{t-q},
 \end{array}\tag{1.2}
 \end{eqnarray}\]</span>
-with <span class="math inline">\(\varepsilon_t = B_0\eta_t\)</span> (and <span class="math inline">\(B_j = \Theta_j B_0\)</span>, for <span class="math inline">\(j \ge 0\)</span>), where <span class="math inline">\(\{\eta_{t}\}\)</span> is a white noise sequence whose components are are mutually and serially independent.</p>
+with <span class="math inline">\(\varepsilon_t = B_0\eta_t\)</span>, and <span class="math inline">\(B_j = \Theta_j B_0\)</span>, for <span class="math inline">\(j \ge 0\)</span> (with <span class="math inline">\(\Theta_0=Id\)</span>), where <span class="math inline">\(\{\eta_{t}\}\)</span> is a white noise sequence whose components are are mutually and serially independent.</p>
 </div>
 </div>
 <div id="IRFSVARMA" class="section level2" number="1.2">
@@ -157,7 +157,7 @@ With these notations, we get <span class="math inline">\(\mathbb{E}(y_{i,t+h}|\e
 <li>Set <span class="math inline">\(\Psi_{-1}=\dots=\Psi_{-p}=0\)</span>.</li>
 <li>For <span class="math inline">\(h \ge 0\)</span>, (recursively) apply:
 <span class="math display">\[
-\Psi_h = \Phi_1 \Psi_{h-1} + \dots + \Phi_p \Psi_{h-p} + \Theta_h,
+\Psi_h = \Phi_1 \Psi_{h-1} + \dots + \Phi_p \Psi_{h-p} + \Theta_h B_0,
 \]</span>
 with <span class="math inline">\(\Theta_0 = Id\)</span> and <span class="math inline">\(\Theta_h = 0\)</span> for <span class="math inline">\(h&gt;q\)</span>.</li>
 </ol>
@@ -358,7 +358,7 @@ The previous representation is convenient to discuss the estimation of the VAR m
 <span class="math display" id="eq:Pi">\[\begin{equation}
 \hat{\Pi}=\left[\sum_{t=1}^{T}x_{t}x'_{t}\right]^{-1}\left[\sum_{t=1}^{T}y_{t}'x_{t}\right]= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y},\tag{1.10}
 \end{equation}\]</span>
-where <span class="math inline">\(\mathbf{X}\)</span> is the <span class="math inline">\(T \times (np)\)</span> matrix whose <span class="math inline">\(t^{th}\)</span> row is <span class="math inline">\(x_t\)</span> and where <span class="math inline">\(\mathbf{y}\)</span> is the <span class="math inline">\(T \times n\)</span> matrix whose <span class="math inline">\(t^{th}\)</span> row is <span class="math inline">\(y_{t}'\)</span>.</p>
+where <span class="math inline">\(\mathbf{X}\)</span> is the <span class="math inline">\(T \times (1+np)\)</span> matrix whose <span class="math inline">\(t^{th}\)</span> row is <span class="math inline">\(x_t\)</span> and where <span class="math inline">\(\mathbf{y}\)</span> is the <span class="math inline">\(T \times n\)</span> matrix whose <span class="math inline">\(t^{th}\)</span> row is <span class="math inline">\(y_{t}'\)</span>.</p>
 <p>That is, the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\hat{\Pi}\)</span> (<span class="math inline">\(b_i\)</span>, say) is the OLS estimate of <span class="math inline">\(\beta_i\)</span>, where:
 <span class="math display" id="eq:betayx">\[\begin{equation}
 y_{i,t} = \beta_i'x_t + \varepsilon_{i,t},\tag{1.11}
@@ -642,7 +642,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-29.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

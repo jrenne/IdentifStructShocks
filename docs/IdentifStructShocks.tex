@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-29}
+\date{2023-01-30}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -232,12 +232,12 @@ As is the case for univariate models, VARs can be extended with MA terms in \(\e
 \begin{eqnarray}
 \begin{array}{rllll}
 VARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
-&&&\varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q ,\\
+&&&\varepsilon_t + \Theta_1\varepsilon_{t-1} + \dots + \Theta_q \varepsilon_{t-q},\\
 SVARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
 &&& B_0 \eta_t+ B_1 \eta_{t-1} + \dots +  B_q \eta_{t-q},
 \end{array}\label{eq:yVARMA}
 \end{eqnarray}
-with \(\varepsilon_t = B_0\eta_t\) (and \(B_j = \Theta_j B_0\), for \(j \ge 0\)), where \(\{\eta_{t}\}\) is a white noise sequence whose components are are mutually and serially independent.
+with \(\varepsilon_t = B_0\eta_t\), and \(B_j = \Theta_j B_0\), for \(j \ge 0\) (with \(\Theta_0=Id\)), where \(\{\eta_{t}\}\) is a white noise sequence whose components are are mutually and serially independent.
 \end{definition}
 
 \hypertarget{IRFSVARMA}{%
@@ -282,7 +282,7 @@ If \(y_t\) follows the VARMA model described in Def. \ref{def:SVARMA}, then the 
 \item
   For \(h \ge 0\), (recursively) apply:
   \[
-  \Psi_h = \Phi_1 \Psi_{h-1} + \dots + \Phi_p \Psi_{h-p} + \Theta_h,
+  \Psi_h = \Phi_1 \Psi_{h-1} + \dots + \Phi_p \Psi_{h-p} + \Theta_h B_0,
   \]
   with \(\Theta_0 = Id\) and \(\Theta_h = 0\) for \(h>q\).
 \end{enumerate}
@@ -498,7 +498,7 @@ Let us start with the case where the shocks are Gaussian.
 \begin{equation}
 \hat{\Pi}=\left[\sum_{t=1}^{T}x_{t}x'_{t}\right]^{-1}\left[\sum_{t=1}^{T}y_{t}'x_{t}\right]= (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y},\label{eq:Pi}
 \end{equation}
-where \(\mathbf{X}\) is the \(T \times (np)\) matrix whose \(t^{th}\) row is \(x_t\) and where \(\mathbf{y}\) is the \(T \times n\) matrix whose \(t^{th}\) row is \(y_{t}'\).
+where \(\mathbf{X}\) is the \(T \times (1+np)\) matrix whose \(t^{th}\) row is \(x_t\) and where \(\mathbf{y}\) is the \(T \times n\) matrix whose \(t^{th}\) row is \(y_{t}'\).
 
 That is, the \(i^{th}\) column of \(\hat{\Pi}\) (\(b_i\), say) is the OLS estimate of \(\beta_i\), where:
 \begin{equation}
@@ -1611,10 +1611,10 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 \end{Shaded}
 
 \begin{verbatim}
-##         inv(-1)   inc(-1)   con(-1)    inv(-2)    inc(-2)   con(-2)       const
-## [1,] -0.3294471 0.1382972 0.9421905 -0.1398762 0.09628841 1.0055748 -0.01776419
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.11460498 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.11460498 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3095045 0.1942588 0.9557274 -0.1403278 0.1378551 0.9551761 -0.01956420
+## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
 \end{verbatim}
 
 \hypertarget{Signs}{%
@@ -1775,7 +1775,7 @@ What about output? Since is the response of interest, we leave it un-restricted.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 319
+## [1] 346
 \end{verbatim}
 
 It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.
@@ -2122,7 +2122,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7382889
+## [1] 0.7419444
 \end{verbatim}
 
 \begin{figure}
@@ -2246,7 +2246,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1025147
+## [1] 0.1041925
 \end{verbatim}
 
 \begin{Shaded}
@@ -2256,7 +2256,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.6291176
+## [1] 0.6313523
 \end{verbatim}
 
 \begin{Shaded}
@@ -2266,7 +2266,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1221707
+## [1] 0.1191076
 \end{verbatim}
 
 \begin{figure}
@@ -2690,7 +2690,7 @@ Given Eq. \eqref{eq:uuuIV}, it comes that, conditional on \(x_t\) and \(w_t\), t
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}
 
-This is for instance consistent with the case where \([\Delta GDP_t, \pi_t,i_t]'\) follows a VAR(1) and the monetary-policy shock do not contemporaneously affect \(\Delta GDP_t\) and \(\pi_t\). The IRFs can then be estimated by LP, taking \(x_t = i_t\) and \(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\).
+This is for instance consistent with the case where \([\Delta GDP_t, \pi_t,i_t]'\) follows a VAR(1) and the monetary-policy shock does not contemporaneously affect \(\Delta GDP_t\) and \(\pi_t\). The IRFs can then be estimated by LP, taking \(x_t = i_t\) and \(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\).
 
 This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if \(w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\), with \(k\le n\), and \(x_t = y_{k,t}\), then this approach corresponds, for \(h=0\), to the SVAR(\(p\)) Cholesky-based IRF (focusing on the responses to the \(k^{th}\) structural shock). However, the two approaches differ for \(h>0\), because the LP methodology does not assumes a VAR dynamics for \(y_t\).\footnote{This is reminiscent of the distinction betweem direct forecasting---based on regressions of \(y_{t+h}\) on \(\{y_t,y_{t-1},\dots\}\)---and iterated forecasting---based on a recursive model where \(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\), see \citet{Marcellino_et_al_2006}.}
 
@@ -2773,7 +2773,7 @@ To create a measure of \emph{news} about future government spending, \citet{Rame
 \begin{example}[Identification of news about future government spending]
 \protect\hypertarget{exm:RameyQJE2011}{}\label{exm:RameyQJE2011}
 
-\citet{Ramey_2011}'s measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public's expectations (\emph{Business Week} before 2001, other newspapers afterwards). is the principal source for most of sample because it often gave detailed predictions.
+\citet{Ramey_2011}'s measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public's expectations (\emph{Business Week} before 2001, other newspapers afterwards).
 
 According to \citet{Ramey_2011}, government sources could not be used because (a) they were either not released in a timely manner or (b) were known to underestimate the costs of certain actions.
 
@@ -2816,7 +2816,7 @@ Assume you have consistent estimates of \(\varepsilon_t = B\eta_t\), these estim
 
 Hence, up to a multiplicative factor (\(\rho\)), the (OLS) regressions of the \(\hat\varepsilon_{i,t}\)'s on \(z_t\) (that are consistent of the true \(\varepsilon_{i,t}\)'s) provide consistent estimates of the \(b_{i,1}\)'s.
 
-Combined with the estimated VAR (the \(\Phi_k\) matrices), this provides consistent estimates of the IRFs of \(\eta_{1,t}\) on \(y_t\), though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (``unit-effect normalisation'', see \citet{Stock_Watson_2018}). Let us consider \(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\); by construction, \(\tilde\eta_{1,t}\) has a unit contemporaneous effect on \(y_{1,t}\). Denoting by \(\tilde{B}_{i,1}\) the contemporaneous impact of \(\tilde\eta_{1,t}\), we get:
+Combined with the estimated VAR (the \(\Phi_k\) matrices), this provides consistent estimates of the IRFs of \(\eta_{1,t}\) on \(y_t\), though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock (``unit-effect normalisation'', see \citet{Stock_Watson_2018}). Let us consider \(\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}\); by construction, \(\tilde\eta_{1,t}\) has a unit contemporaneous effect on \(y_{1,t}\). Denoting by \(\tilde{B}_{i,1}\) the contemporaneous impact of \(\tilde\eta_{1,t}\) on the \(i^{th}\) endogenous variable, we get:
 \[
 \tilde{B}_{1} = \frac{1}{b_{1,1}} {B}_{1},
 \]

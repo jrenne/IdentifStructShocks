@@ -42,7 +42,7 @@ Given Eq. \@ref(eq:uuuIV), it comes that, conditional on $x_t$ and $w_t$, the ex
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 \end{equation}
 
-This is for instance consistent with the case where $[\Delta GDP_t, \pi_t,i_t]'$ follows a VAR(1) and the monetary-policy shock do not contemporaneously affect $\Delta GDP_t$ and $\pi_t$. The IRFs can then be estimated by LP, taking $x_t = i_t$ and $w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'$.
+This is for instance consistent with the case where $[\Delta GDP_t, \pi_t,i_t]'$ follows a VAR(1) and the monetary-policy shock does not contemporaneously affect $\Delta GDP_t$ and $\pi_t$. The IRFs can then be estimated by LP, taking $x_t = i_t$ and $w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'$.
 
 This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if $w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'$, with $k\le n$, and $x_t = y_{k,t}$, then this approach corresponds, for $h=0$, to the SVAR($p$) Cholesky-based IRF (focusing on the responses to the $k^{th}$ structural shock). However, the two approaches differ for $h>0$, because the LP methodology does not assumes a VAR dynamics for $y_t$.[^FootnoteIteratedFcst]
 
@@ -114,7 +114,7 @@ To create a measure of *news* about future government spending, @Ramey_2011 uses
 
 :::{.example #RameyQJE2011 name="Identification of news about future government spending"}
 
-@Ramey_2011's measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public's expectations (*Business Week* before 2001, other newspapers afterwards).  is the principal source for most of sample because it often gave detailed predictions. 
+@Ramey_2011's measure aims to measure the expected discounted value of government spending changes due to foreign political events. She argues this variable should matter for the wealth effect in a neoclassical framework. The series is constructed by reading periodicals in order to gauge the public's expectations (*Business Week* before 2001, other newspapers afterwards).
 
 According to @Ramey_2011, government sources could not be used because (a) they were either not released in a timely manner or (b) were known to underestimate the costs of certain actions.
 
@@ -154,7 +154,7 @@ Assume you have consistent estimates of $\varepsilon_t = B\eta_t$, these estimat
 
 Hence, up to a multiplicative factor ($\rho$), the (OLS) regressions of the $\hat\varepsilon_{i,t}$'s on $z_t$ (that are consistent of the true $\varepsilon_{i,t}$'s) provide consistent estimates of the $b_{i,1}$'s.
 
-Combined with the estimated VAR (the $\Phi_k$ matrices), this provides consistent estimates of the IRFs of $\eta_{1,t}$ on $y_t$, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock ("unit-effect normalisation", see @Stock_Watson_2018). Let us consider $\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}$; by construction, $\tilde\eta_{1,t}$ has a unit contemporaneous effect on $y_{1,t}$. Denoting by $\tilde{B}_{i,1}$ the contemporaneous impact of $\tilde\eta_{1,t}$, we get:
+Combined with the estimated VAR (the $\Phi_k$ matrices), this provides consistent estimates of the IRFs of $\eta_{1,t}$ on $y_t$, though up to a multiplicative factor. This scale ambiguity can be solved by rescaling the structural shock ("unit-effect normalisation", see @Stock_Watson_2018). Let us consider $\tilde\eta_{1,t}=b_{1,1}\eta_{1,t}$; by construction, $\tilde\eta_{1,t}$ has a unit contemporaneous effect on $y_{1,t}$. Denoting by $\tilde{B}_{i,1}$ the contemporaneous impact of $\tilde\eta_{1,t}$ on the $i^{th}$ endogenous variable, we get:
 $$
 \tilde{B}_{1} = \frac{1}{b_{1,1}} {B}_{1},
 $$
