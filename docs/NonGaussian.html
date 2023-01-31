@@ -192,21 +192,23 @@ Figure 7.3: This figure compares the distributions of two Gaussian bivariate vec
 <h2>
 <span class="header-section-number">7.2</span> Independent Component Analysis (ICA)<a class="anchor" aria-label="anchor" href="#independent-component-analysis-ica"><i class="fas fa-link"></i></a>
 </h2>
-<p>The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called <strong>independent component analysis (ICA)</strong>. Without loss of generality, we can assume that <span class="math inline">\(BB' = Id\)</span> (i.e. <span class="math inline">\(B\)</span> is orthogonal). (If this is not the case, i.e. if <span class="math inline">\(\mathbb{V}ar(\varepsilon_t)=\Omega \ne Id\)</span>, then one can pre-multiply the data by <span class="math inline">\(\Omega^{-1/2}\)</span>.) The classical ICA problem is as follows: Find <span class="math inline">\(B\)</span> such that <span class="math inline">\(\varepsilon_t = B \eta_t\)</span> (or $_t= B’ _t $) given that</p>
+<!-- Without loss of generality, we can assume that $BB' = Id$ (i.e. $B$ is orthogonal). (If this is not the case, i.e. if $\mathbb{V}ar(\varepsilon_t)=\Omega \ne Id$, then one can pre-multiply the data by $\Omega^{-1/2}$.) -->
+<p>The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called <strong>independent component analysis (ICA)</strong>. Let us denote by <span class="math inline">\(C\)</span> the matrix that is such that <span class="math inline">\(C = \Omega^{-1/2}B\)</span>, where <span class="math inline">\(\Omega^{1/2}\)</span> results from the Cholesky decomposition of <span class="math inline">\(\Omega = BB'\)</span> (implying, <span class="math inline">\(\Omega^{1/2}{\Omega^{1/2}}'=\Omega\)</span>). It is easy to check that <span class="math inline">\(C\)</span> is an orthogonal matrix (and we have <span class="math inline">\(B = \Omega^{1/2}C\)</span>).</p>
+<p>The classical ICA problem is as follows: Find <span class="math inline">\(C\)</span> such that <span class="math inline">\(\varepsilon_t = C \eta_t\)</span> (or <span class="math inline">\(\eta_t = C'\varepsilon_t\)</span>) given that:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;The &lt;span class="math inline"&gt;\(\varepsilon_t\)&lt;/span&gt;’s that we consider here are &lt;em&gt;standardized&lt;/em&gt; VAR residuals, obtained by pre-multiplying the actual VAR residuals by &lt;span class="math inline"&gt;\(\Omega^{-1/2}\)&lt;/span&gt;.&lt;/p&gt;'><sup>7</sup></a></p>
 <ol style="list-style-type: lower-roman">
 <li>We observe the <span class="math inline">\(\varepsilon_t\)</span>’s,</li>
 <li>The components of <span class="math inline">\(\eta_t\)</span> are independent,</li>
 <li>
-<span class="math inline">\(BB'=Id\)</span> (i.e., <span class="math inline">\(B\)</span> is orthogonal).</li>
+<span class="math inline">\(CC'=Id\)</span> (i.e., <span class="math inline">\(C\)</span> is orthogonal).</li>
 </ol>
-<p>Figure <a href="NonGaussian.html#fig:ThreePlots">7.4</a> represents again some bivariate distributions. The black (red) lines correspond to the distributions of <span class="math inline">\(\eta_t\)</span> (<span class="math inline">\(B\eta_t\)</span>). It is important to note that the two components of vector <span class="math inline">\(B \eta_t\)</span> are not independent (contrary to those of <span class="math inline">\(\eta_t\)</span>).</p>
+<p>Figure <a href="NonGaussian.html#fig:ThreePlots">7.4</a> represents again some bivariate distributions. The black (red) lines correspond to the distributions of <span class="math inline">\(\eta_t\)</span> (<span class="math inline">\(C\eta_t\)</span>). It is important to note that the two components of vector <span class="math inline">\(C \eta_t\)</span> are not independent (contrary to those of <span class="math inline">\(\eta_t\)</span>).</p>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:ThreePlots"></span>
-<img src="images/Figure_E.png" alt="The three plots represent the bivariate distributions of $\eta_t$ (black) and of $B\eta_t$ (red), where the two components of $\eta_t$ are independent, of unit variance, and $B$ is orthogonal. Hence, for each of the three plots, $\mathbb{V}ar(B\eta_t)=Id$." width="95%"><p class="caption">
-Figure 7.4: The three plots represent the bivariate distributions of <span class="math inline">\(\eta_t\)</span> (black) and of <span class="math inline">\(B\eta_t\)</span> (red), where the two components of <span class="math inline">\(\eta_t\)</span> are independent, of unit variance, and <span class="math inline">\(B\)</span> is orthogonal. Hence, for each of the three plots, <span class="math inline">\(\mathbb{V}ar(B\eta_t)=Id\)</span>.
+<img src="images/Figure_E.png" alt="The three plots represent the bivariate distributions of $\eta_t$ (black) and of $C\eta_t$ (red), where the two components of $\eta_t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\mathbb{V}ar(C\eta_t)=Id$." width="95%"><p class="caption">
+Figure 7.4: The three plots represent the bivariate distributions of <span class="math inline">\(\eta_t\)</span> (black) and of <span class="math inline">\(C\eta_t\)</span> (red), where the two components of <span class="math inline">\(\eta_t\)</span> are independent, of unit variance, and <span class="math inline">\(C\)</span> is orthogonal. Hence, for each of the three plots, <span class="math inline">\(\mathbb{V}ar(C\eta_t)=Id\)</span>.
 </p>
 </div>
-<p>In all cases, we have <span class="math inline">\(\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id\)</span>. But the two components of <span class="math inline">\(\varepsilon_t\)</span> are not independent. For instance: We have <span class="math inline">\(\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}&gt;4)&lt;0\)</span> (whereas <span class="math inline">\(\mathbb{E}(\eta_{2,t}|\eta_{1,t}&gt;4)=0\)</span>). The objctive of ICA is to rotate <span class="math inline">\(\varepsilon_t\)</span> to retrieve independent components (<span class="math inline">\(\eta_t\)</span>).</p>
+<p>In all cases, we have <span class="math inline">\(\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id\)</span>. But the two components of <span class="math inline">\(\varepsilon_t\)</span> are not independent. For instance, in the last two cases, we have <span class="math inline">\(\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}&gt;4)&lt;0\)</span> (whereas <span class="math inline">\(\mathbb{E}(\eta_{2,t}|\eta_{1,t}&gt;4)=0\)</span>). The objective of ICA is to rotate <span class="math inline">\(\varepsilon_t\)</span> to retrieve independent components (<span class="math inline">\(\eta_t\)</span>).</p>
 <div class="hypothesis">
 <p><span id="hyp:NonGauss" class="hypothesis"><strong>Hypothesis 7.1  </strong></span>Process <span class="math inline">\(\eta_t\)</span> satisfies:</p>
 <ol style="list-style-type: lower-roman">
@@ -215,13 +217,13 @@ Figure 7.4: The three plots represent the bivariate distributions of <span class
 <li>The components <span class="math inline">\(\eta_{1,t}, \ldots, \eta_{n,t}\)</span> are mutually independent.
 iii We have
 <span class="math display">\[
-\varepsilon_t = B_0 \eta_t,
+\varepsilon_t = C_0 \eta_t,
 \]</span>
-with <span class="math inline">\(\mathbb{V}ar(\varepsilon_t) = Id\)</span> (i.e. <span class="math inline">\(B_0\)</span> is orthogonal).</li>
+with <span class="math inline">\(\mathbb{V}ar(\varepsilon_t) = Id\)</span> (i.e., <span class="math inline">\(C_0\)</span> is orthogonal).</li>
 </ol>
 </div>
 <div class="theorem">
-<p><span id="thm:EK2004" class="theorem"><strong>Theorem 7.1  (Eriksson, Koivunen (2004)) </strong></span>If Hypothesis <a href="NonGaussian.html#hyp:NonGauss">7.1</a> is satisfied and if at most one of the components of <span class="math inline">\(\eta\)</span> is Gaussian, then matrix <span class="math inline">\(B_0\)</span> is identifiable up to the post multiplication by <span class="math inline">\(DP\)</span>, where <span class="math inline">\(P\)</span> is a permutation matrix and <span class="math inline">\(D\)</span> is a diagonal matrix whose diagonal entries are 1 or <span class="math inline">\(-1\)</span>.}</p>
+<p><span id="thm:EK2004" class="theorem"><strong>Theorem 7.1  (Eriksson, Koivunen (2004)) </strong></span>If Hypothesis <a href="NonGaussian.html#hyp:NonGauss">7.1</a> is satisfied and if at most one of the components of <span class="math inline">\(\eta\)</span> is Gaussian, then matrix <span class="math inline">\(C_0\)</span> is identifiable up to the post multiplication by <span class="math inline">\(DP\)</span>, where <span class="math inline">\(P\)</span> is a permutation matrix and <span class="math inline">\(D\)</span> is a diagonal matrix whose diagonal entries are 1 or <span class="math inline">\(-1\)</span>.}</p>
 </div>
 </div>
 <div id="pseudo-maximum-likelihood-pml-approach" class="section level2" number="7.3">
@@ -230,24 +232,24 @@ with <span class="math inline">\(\mathbb{V}ar(\varepsilon_t) = Id\)</span> (i.e.
 </h2>
 <p>Hence, non-normal structural shocks are identifiable. But how to estimate them based on observations of the <span class="math inline">\(\varepsilon_t\)</span>’s? <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> have proposed a <strong>Pseudo-Maximum Likelihood (PML)</strong> approach. This approach consists in maximizing a so-called <strong>pseudo log-likelihood function</strong>, based on a set of p.d.f. <span class="math inline">\(g_i (\eta_i), i=1,\ldots,n\)</span> (that may be different from the true p.d.f. of the <span class="math inline">\(\eta_{i,t}\)</span>’s):
 <span class="math display" id="eq:pseudolog">\[\begin{equation}
-\log \mathcal{L}_T (B) = \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i Y_t),\tag{7.1}
+\log \mathcal{L}_T (C) = \sum^T_{t=1} \sum^n_{i=1} \log g_i (c'_i \varepsilon_t),\tag{7.1}
 \end{equation}\]</span>
-where <span class="math inline">\(b_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of matrix <span class="math inline">\(B\)</span> (or <span class="math inline">\(b'_i\)</span> is the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(B^{-1}\)</span> since <span class="math inline">\(B^{-1}=B'\)</span>).</p>
-The log-likelihood function <a href="NonGaussian.html#eq:pseudolog">(7.1)</a> is computed as if the errors <span class="math inline">\(\eta_{i,t}\)</span> had the pdf <span class="math inline">\(g_i (\eta_i)\)</span>. The PML estimator of matrix <span class="math inline">\(B\)</span> maximizes the pseudo log-likelihood function:
+where <span class="math inline">\(c_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of matrix <span class="math inline">\(C\)</span> (or <span class="math inline">\(c'_i\)</span> is the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(C^{-1}\)</span> since <span class="math inline">\(C^{-1}=C'\)</span>).</p>
+The log-likelihood function <a href="NonGaussian.html#eq:pseudolog">(7.1)</a> is computed as if the errors <span class="math inline">\(\eta_{i,t}\)</span> had the pdf <span class="math inline">\(g_i (\eta_i)\)</span>. The PML estimator of matrix <span class="math inline">\(C\)</span> maximizes the pseudo log-likelihood function:
 <span class="math display" id="eq:optimprob">\[\begin{equation}
-\widehat{B_T} = \arg \max_B \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i \varepsilon_t),\tag{7.2}
+\widehat{C_T} = \arg \max_C \sum^T_{t=1} \sum^n_{i=1} \log g_i (c'_i \varepsilon_t),\tag{7.2}
 \end{equation}\]</span>
-<p>The restrictions <span class="math inline">\(B'B = Id\)</span> can be eliminated by parameterizing <span class="math inline">\(B\)</span> in such a way that, whatever the consider parameters, <span class="math inline">\(B\)</span> is orthogonal.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;&lt;span class=&quot;citation&quot;&gt;Jarocinski (&lt;a href=&quot;references.html#ref-Jarocinski_2021&quot; role=&quot;doc-biblioref&quot;&gt;2021&lt;/a&gt;)&lt;/span&gt; develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that &lt;span class=&quot;math inline&quot;&gt;\(B'B\)&lt;/span&gt; is orthogonal.&lt;/p&gt;"><sup>7</sup></a> <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> propose to use, for that, the Cayley’s representation: any orthogonal matrix with no eigenvalue equal to <span class="math inline">\(-1\)</span> can be written as
+<p>The restrictions <span class="math inline">\(C'C = Id\)</span> can be eliminated by parameterizing <span class="math inline">\(C\)</span> in such a way that, whatever the considered parameters, <span class="math inline">\(C\)</span> is orthogonal.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;&lt;span class=&quot;citation&quot;&gt;Jarocinski (&lt;a href=&quot;references.html#ref-Jarocinski_2021&quot; role=&quot;doc-biblioref&quot;&gt;2021&lt;/a&gt;)&lt;/span&gt; develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that &lt;span class=&quot;math inline&quot;&gt;\(C'C\)&lt;/span&gt; is orthogonal.&lt;/p&gt;"><sup>8</sup></a> <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> propose to use, for that, the Cayley’s representation: any orthogonal matrix with no eigenvalue equal to <span class="math inline">\(-1\)</span> can be written as
 <span class="math display">\[\begin{equation}
-B(A) = (Id+A) (Id-A)^{-1},
+C(A) = (Id+A) (Id-A)^{-1},
 \end{equation}\]</span>
 where <span class="math inline">\(A\)</span> is a skew symmetric (or antisymmetric) matrix, such that <span class="math inline">\(A'=-A\)</span>. There is a one-to-one relationship with <span class="math inline">\(A\)</span>, since:
 <span class="math display">\[\begin{equation}
-A = (B(A)+Id)^{-1} (B(A)-Id).
+A = (C(A)+Id)^{-1} (C(A)-Id).
 \end{equation}\]</span></p>
-<p>Hence, the PML estimator of matrix <span class="math inline">\(B\)</span> is obtained as <span class="math inline">\(\widehat{B_T} = B(\hat{A}_T),\)</span> where:
+<p>Hence, the PML estimator of matrix <span class="math inline">\(C\)</span> is obtained as <span class="math inline">\(\widehat{C_T} = C(\hat{A}_T),\)</span> where:
 <span class="math display" id="eq:optimprob2">\[\begin{equation}
-\hat{A}_T = \arg \max_{a_{i,j}, i&gt;j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [b_i (A)' \varepsilon_t].\tag{7.3}
+\hat{A}_T = \arg \max_{a_{i,j}, i&gt;j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [c_i (A)' \varepsilon_t].\tag{7.3}
 \end{equation}\]</span></p>
 <!-- The asymptotic properties of the PML estimator are derived  -->
 <!-- **Asymptotic properties of the PML approach** -->
@@ -281,10 +283,10 @@ A = (B(A)+Id)^{-1} (B(A)-Id).
 <!-- Hyperbolic secant and the subgaussian distributions (see Table \@ref(tab:distriICA)): either one, or the other satisfy the inequality \@ref(eq:HKO) (see @Hyvarinen_Karhunen_Oja_2001). -->
 <!-- Note: Except for the Gaussian distribution, we have $\mathbb{E}[d^2 \log g(X)/d \varepsilon^2 - X d\log g(X)/d \varepsilon] < 0$ (i.e. Assumption\,4 is satisfied) when these pseudo-distributions coincide to the distribution of $X$. The subGaussian distribution is a mixture of Gaussian distributions: $X$ is drawn from this distribution if it is equal to $BY - (1-B)Y$, where $B$ is drawn from a Bernoulli distribution of parameter $1/2$ and $Y \sim \mathcal{N}(\sqrt{(\pi-2)/\pi},2/\pi)$. -->
 <!-- Under Hypotheses \@ref(hyp:NonGauss)-\@ref(hyp:NonGauss4), -->
-<p>Under assumptions on the <span class="math inline">\(g_i\)</span> functions (excluding the Gaussian distributions), <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> derive the asymptotic properties of the PML estimator. Specifically, the PML estimator <span class="math inline">\(\widehat{B_T}\)</span> of <span class="math inline">\(B_0\)</span> is consistent (in <span class="math inline">\(\mathcal{P}_0\)</span>, the set of matrices obtained by permutation and sign change of the columns of <span class="math inline">\(B_0\)</span>) and asymptotically normal, with speed of convergence <span class="math inline">\(1/\sqrt{T}\)</span>.</p>
-<p>The asymptotic variance-covariance matrix of <span class="math inline">\(vec \sqrt{T} (\widehat{B_T} - B_0)\)</span> is <span class="math inline">\(A^{-1} \left[\begin{array}{cc} \Gamma &amp; 0 \\ 0 &amp; 0 \end{array} \right] (A')^{-1}\)</span>, where matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(\Gamma\)</span> are detailed in <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span>.</p>
+<p>Under assumptions on the <span class="math inline">\(g_i\)</span> functions (excluding the Gaussian distributions), <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span> derive the asymptotic properties of the PML estimator. Specifically, the PML estimator <span class="math inline">\(\widehat{C_T}\)</span> of <span class="math inline">\(C_0\)</span> is consistent (in <span class="math inline">\(\mathcal{P}_0\)</span>, the set of matrices obtained by permutation and sign change of the columns of <span class="math inline">\(C_0\)</span>) and asymptotically normal, with speed of convergence <span class="math inline">\(1/\sqrt{T}\)</span>.</p>
+<p>The asymptotic variance-covariance matrix of <span class="math inline">\(vec \sqrt{T} (\widehat{C_T} - C_0)\)</span> is <span class="math inline">\(A^{-1} \left[\begin{array}{cc} \Gamma &amp; 0 \\ 0 &amp; 0 \end{array} \right] (A')^{-1}\)</span>, where matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(\Gamma\)</span> are detailed in <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2017" role="doc-biblioref">2017</a>)</span>.</p>
 <p>Note that the potential misspecification of pseudo-distributions <span class="math inline">\(g_i\)</span> has no effect on the consistency of these specific PML estimators.</p>
-<p>Table <a href="NonGaussian.html#tab:distriICA">7.1</a> reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of <span class="math inline">\(vec \sqrt{T} (\widehat{B_T} - B_0)\)</span>.)</p>
+<p>Table <a href="NonGaussian.html#tab:distriICA">7.1</a> reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of <span class="math inline">\(vec \sqrt{T} (\widehat{C_T} - C_0)\)</span>.)</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
 <span id="tab:distriICA">Table 7.1: </span> This table reports usual p.d.f. and their derivatives.</caption>
@@ -329,7 +331,7 @@ A = (B(A)+Id)^{-1} (B(A)-Id).
 </tbody>
 </table></div>
 <div class="example">
-<p><span id="exm:GMR2017" class="example"><strong>Example 7.1  (Non-Gaussian monetary-policy shocks) </strong></span>We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (<span class="math inline">\(T=224\)</span>). We consider three dependent variables: inflation (<span class="math inline">\(\pi_t\)</span>), economic activity (<span class="math inline">\(z_t\)</span>, the output gap) and the nominal short-term interest rate (<span class="math inline">\(r_t\)</span>). Changes in the log of oil prices added as an exogenous variable (<span class="math inline">\(x_t\)</span>).</p>
+<p><span id="exm:GMR2017" class="example"><strong>Example 7.1  (Non-Gaussian monetary-policy shocks) </strong></span>We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (<span class="math inline">\(T=224\)</span>). We consider three dependent variables: inflation (<span class="math inline">\(\pi_t\)</span>), economic activity (<span class="math inline">\(z_t\)</span>, the output gap) and the nominal short-term interest rate (<span class="math inline">\(r_t\)</span>). Changes in the log of oil prices are added as an exogenous variable (<span class="math inline">\(x_t\)</span>).</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1959-04-01"</span></span>
@@ -344,8 +346,8 @@ A = (B(A)+Id)^{-1} (B(A)-Id).
 <span class="math display">\[
 y_t  = \underbrace{\mu + \sum_{i=1}^{p} \Phi_i y_{t-i} + \Theta x_t}_{a(W_t;\theta)} + u_t
 \]</span>
-where the <span class="math inline">\(u_t\)</span>’s are assumed to be serially independent, with zero mean and variance-covariance matrix <span class="math inline">\(\Sigma\)</span>.</p>
-<p>Matrices <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Phi_i\)</span>, <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(\Sigma\)</span> are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.</p>
+where the <span class="math inline">\(u_t\)</span>’s are assumed to be serially independent, with zero mean and variance-covariance matrix <span class="math inline">\(\Omega\)</span>.</p>
+<p>Matrices <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Phi_i\)</span>, <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(\Omega\)</span> are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb.lags</span> <span class="op">&lt;-</span> <span class="fl">6</span> <span class="co"># number of lags used in the VAR model</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
@@ -364,19 +366,19 @@ where the <span class="math inline">\(u_t\)</span>’s are assumed to be seriall
 <span>  <span class="va">effect.commo</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">eq</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">eq</span><span class="op">$</span><span class="va">coef</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">Omega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">U</span><span class="op">)</span> <span class="co"># Covariance matrix of the OLS residuals.</span></span>
-<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/chol.html">chol</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span> <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
-<span><span class="va">Eps</span> <span class="op">&lt;-</span> <span class="va">U</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html">solve</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span><span class="op">)</span> <span class="co"># Recover associated structural shocks</span></span></code></pre></div>
-<p>We want to estimate the orthogonal matrix <span class="math inline">\(B\)</span> such that <span class="math inline">\(u_t=SB \eta_t\)</span>, where</p>
+<span><span class="va">Omeg12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/chol.html">chol</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span> <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
+<span><span class="va">Eps</span> <span class="op">&lt;-</span> <span class="va">U</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html">solve</a></span><span class="op">(</span><span class="va">Omeg12</span><span class="op">)</span><span class="op">)</span> <span class="co"># Recover associated structural shocks</span></span></code></pre></div>
+<p>We want to estimate the orthogonal matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(u_t=\Omega^{1/2}C \eta_t\)</span>, where</p>
 <ul>
 <li>
-<span class="math inline">\(S\)</span> results from the Cholesky decomposition of <span class="math inline">\(\Sigma\)</span> and</li>
+<span class="math inline">\(\Omega^{1/2}\)</span> results from the Cholesky decomposition of <span class="math inline">\(\Omega\)</span> and</li>
 <li>the components of <span class="math inline">\(\eta_t\)</span> are independent, zero-mean with unit variance.</li>
 </ul>
 <p>The PML approach is applied on standardized VAR residuals given by:
 <span class="math display">\[
-\hat\varepsilon_t = \hat{S}_T^{-1}\underbrace{[y_t - a(W_t;\hat\theta_T)]}_{\mbox{VAR residuals}}.
+\hat\varepsilon_t = \hat\Omega^{-1/2}_T\underbrace{[y_t - a(W_t;\hat\theta_T)]}_{\mbox{VAR residuals}}.
 \]</span>
-By construction of <span class="math inline">\(\hat{S}_T^{-1}\)</span>, it comes that the covariance matrix of these residuals is <span class="math inline">\(Id\)</span>.</p>
+By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it comes that the covariance matrix of these residuals is <span class="math inline">\(Id\)</span>.</p>
 <p>The pseudo density functions are distinct and asymmetric mixtures of Gaussian distributions.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">distri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
@@ -426,7 +428,7 @@ By construction of <span class="math inline">\(\hat{S}_T^{-1}\)</span>, it comes
 ## [1,]  0.956 0.287 -0.059  NaN  0.944 0.321 -0.075
 ## [2,] -0.292 0.950 -0.108  NaN -0.327 0.940 -0.099
 ## [3,]  0.025 0.121  0.992  NaN  0.039 0.118  0.992</code></pre>
-<p>Once <span class="math inline">\(B\)</span> has been estimated, it remains to label the resulting structural shocks (components of <span class="math inline">\(\eta_{t}\)</span>). Postulated shocks are monetary-policy, supply, and demand shocks. This labelling can be based on the following considerations:</p>
+<p>Once <span class="math inline">\(C\)</span> has been estimated, it remains to label the resulting structural shocks (components of <span class="math inline">\(\eta_{t}\)</span>). Postulated shocks are monetary-policy, supply, and demand shocks. This labelling can be based on the following considerations:</p>
 <ul>
 <li>Contractionary <strong>monetary-policy shocks</strong> have a negative impact on real activity and on inflation.</li>
 <li>
@@ -443,10 +445,10 @@ By construction of <span class="math inline">\(\hat{S}_T^{-1}\)</span>, it comes
 <span>  <span class="va">u.shock</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span><span class="op">)</span></span>
 <span>  <span class="va">u.shock</span><span class="op">[</span><span class="va">jjjj</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span>  <span class="va">IRF.Chol</span><span class="op">[</span>,,<span class="va">jjjj</span><span class="op">]</span> <span class="op">&lt;-</span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>,Phi<span class="op">=</span><span class="va">PHI</span>,B<span class="op">=</span><span class="va">B</span>,nb.sim<span class="op">=</span><span class="fl">41</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>,Phi<span class="op">=</span><span class="va">PHI</span>,B<span class="op">=</span><span class="va">Omeg12</span>,nb.sim<span class="op">=</span><span class="fl">41</span>,</span>
 <span>                y0.star<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">*</span><span class="va">nb.lags</span><span class="op">)</span>,indic.IRF <span class="op">=</span> <span class="fl">1</span>,u.shock <span class="op">=</span> <span class="va">u.shock</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">IRF.ICA</span><span class="op">[</span>,,<span class="va">jjjj</span><span class="op">]</span>  <span class="op">&lt;-</span> </span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>,Phi<span class="op">=</span><span class="va">PHI</span>,B<span class="op">=</span><span class="va">B</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">C.PML</span>,nb.sim<span class="op">=</span><span class="fl">41</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span>,Phi<span class="op">=</span><span class="va">PHI</span>,B<span class="op">=</span><span class="va">Omeg12</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">C.PML</span>,nb.sim<span class="op">=</span><span class="fl">41</span>,</span>
 <span>                y0.star<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">*</span><span class="va">nb.lags</span><span class="op">)</span>,indic.IRF <span class="op">=</span> <span class="fl">1</span>,u.shock <span class="op">=</span> <span class="va">u.shock</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
@@ -833,7 +835,7 @@ Figure 7.5: The first row of plots shows the responses of the three endogenous v
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-30.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

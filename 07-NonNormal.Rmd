@@ -295,13 +295,17 @@ knitr::include_graphics("images/Figure_C.png")
 ## Independent Component Analysis (ICA)
 
 
-The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called **independent component analysis (ICA)**. Without loss of generality, we can assume that $BB' = Id$ (i.e. $B$ is orthogonal). (If this is not the case, i.e. if $\mathbb{V}ar(\varepsilon_t)=\Omega \ne Id$, then one can pre-multiply the data by $\Omega^{-1/2}$.) The classical ICA problem is as follows: Find $B$ such that $\varepsilon_t = B \eta_t$ (or $\eta_t= B' \varepsilon_t $) given that
+<!-- Without loss of generality, we can assume that $BB' = Id$ (i.e. $B$ is orthogonal). (If this is not the case, i.e. if $\mathbb{V}ar(\varepsilon_t)=\Omega \ne Id$, then one can pre-multiply the data by $\Omega^{-1/2}$.) -->
+
+The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called **independent component analysis (ICA)**. Let us denote by $C$ the matrix that is such that $C = \Omega^{-1/2}B$, where $\Omega^{1/2}$ results from the Cholesky decomposition of $\Omega = BB'$ (implying, $\Omega^{1/2}{\Omega^{1/2}}'=\Omega$). It is easy to check that $C$ is an orthogonal matrix (and we have $B = \Omega^{1/2}C$).
+
+The classical ICA problem is as follows: Find $C$ such that $\varepsilon_t = C \eta_t$ (or $\eta_t = C'\varepsilon_t$) given that:^[The $\varepsilon_t$'s that we consider here are *standardized* VAR residuals, obtained by pre-multiplying the actual VAR residuals by $\Omega^{-1/2}$.]
 
 i. We observe the $\varepsilon_t$'s,
 ii. The components of $\eta_t$ are independent,
-iii. $BB'=Id$ (i.e., $B$ is orthogonal).
+iii. $CC'=Id$ (i.e., $C$ is orthogonal).
 
-Figure \@ref(fig:ThreePlots) represents again some bivariate distributions. The black (red) lines correspond to the distributions of $\eta_t$ ($B\eta_t$). It is important to note that the two components of vector $B \eta_t$ are not independent (contrary to those of $\eta_t$).
+Figure \@ref(fig:ThreePlots) represents again some bivariate distributions. The black (red) lines correspond to the distributions of $\eta_t$ ($C\eta_t$). It is important to note that the two components of vector $C \eta_t$ are not independent (contrary to those of $\eta_t$).
 
 
 ```{r ThreePlotsCode, fig.asp = .8,eval=FALSE,echo=FALSE}
@@ -406,11 +410,11 @@ contour(x.points,y.points,z,levels=levels,xlim=x.lim,ylim=y.lim,col="red",lwd=2)
 ```
 
 
-```{r ThreePlots, fig.align = 'left-aligned', out.width = "95%", fig.cap = "The three plots represent the bivariate distributions of $\\eta_t$ (black) and of $B\\eta_t$ (red), where the two components of $\\eta_t$ are independent, of unit variance, and $B$ is orthogonal. Hence, for each of the three plots, $\\mathbb{V}ar(B\\eta_t)=Id$.", echo=FALSE}
+```{r ThreePlots, fig.align = 'left-aligned', out.width = "95%", fig.cap = "The three plots represent the bivariate distributions of $\\eta_t$ (black) and of $C\\eta_t$ (red), where the two components of $\\eta_t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\\mathbb{V}ar(C\\eta_t)=Id$.", echo=FALSE}
 knitr::include_graphics("images/Figure_E.png")
 ```
 
-In all cases, we have $\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id$. But the two components of $\varepsilon_t$ are not independent. For instance: We have $\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}>4)<0$ (whereas $\mathbb{E}(\eta_{2,t}|\eta_{1,t}>4)=0$). The objctive of ICA is to rotate $\varepsilon_t$ to retrieve independent components ($\eta_t$).
+In all cases, we have $\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id$. But the two components of $\varepsilon_t$ are not independent. For instance, in the last two cases, we have $\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}>4)<0$ (whereas $\mathbb{E}(\eta_{2,t}|\eta_{1,t}>4)=0$). The objective of ICA is to rotate $\varepsilon_t$ to retrieve independent components ($\eta_t$).
 
 
 :::{.hypothesis #NonGauss}
@@ -420,41 +424,41 @@ i. The $\eta_t$'s are i.i.d. (across time) with $\mathbb{E}(\eta_t) = 0$ and $\m
 ii. The components $\eta_{1,t}, \ldots, \eta_{n,t}$ are mutually independent.
 iii We have
 $$
-\varepsilon_t = B_0 \eta_t,
+\varepsilon_t = C_0 \eta_t,
 $$
-with $\mathbb{V}ar(\varepsilon_t) = Id$ (i.e. $B_0$ is orthogonal).
+with $\mathbb{V}ar(\varepsilon_t) = Id$ (i.e., $C_0$ is orthogonal).
 :::
 
 :::{.theorem #EK2004 name="Eriksson, Koivunen (2004)"}
-If Hypothesis \@ref(hyp:NonGauss) is satisfied and if at most one of the components of $\eta$ is Gaussian, then matrix $B_0$ is identifiable up to the post multiplication by $DP$, where $P$ is a permutation matrix and $D$ is a diagonal matrix whose diagonal entries are 1 or $-1$.}
+If Hypothesis \@ref(hyp:NonGauss) is satisfied and if at most one of the components of $\eta$ is Gaussian, then matrix $C_0$ is identifiable up to the post multiplication by $DP$, where $P$ is a permutation matrix and $D$ is a diagonal matrix whose diagonal entries are 1 or $-1$.}
 :::
 
 ## Pseudo-Maximum Likelihood (PML) approach
 
 Hence, non-normal structural shocks are identifiable. But how to estimate them based on observations of the $\varepsilon_t$'s? @Gourieroux_Monfort_Renne_2017 have proposed a **Pseudo-Maximum Likelihood (PML)** approach.  This approach consists in maximizing a so-called **pseudo log-likelihood function**, based on a set of p.d.f. $g_i (\eta_i), i=1,\ldots,n$ (that may be different from the true p.d.f. of the $\eta_{i,t}$'s):
 \begin{equation}
-\log \mathcal{L}_T (B) = \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i Y_t),(\#eq:pseudolog)
+\log \mathcal{L}_T (C) = \sum^T_{t=1} \sum^n_{i=1} \log g_i (c'_i \varepsilon_t),(\#eq:pseudolog)
 \end{equation}
-where $b_i$ is the $i^{th}$ column of matrix $B$ (or $b'_i$ is the $i^{th}$ row of $B^{-1}$ since $B^{-1}=B'$).
+where $c_i$ is the $i^{th}$ column of matrix $C$ (or $c'_i$ is the $i^{th}$ row of $C^{-1}$ since $C^{-1}=C'$).
 
-The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\eta_{i,t}$ had the pdf $g_i (\eta_i)$. The PML estimator of matrix $B$ maximizes the pseudo log-likelihood function:
+The log-likelihood function \@ref(eq:pseudolog) is computed as if the errors $\eta_{i,t}$ had the pdf $g_i (\eta_i)$. The PML estimator of matrix $C$ maximizes the pseudo log-likelihood function:
 \begin{equation}
-\widehat{B_T} = \arg \max_B \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i \varepsilon_t),(\#eq:optimprob)
+\widehat{C_T} = \arg \max_C \sum^T_{t=1} \sum^n_{i=1} \log g_i (c'_i \varepsilon_t),(\#eq:optimprob)
 \end{equation}
-\centerline{$s.t. \;B'B = Id.$}
+\centerline{$s.t. \;C'C = Id.$}
 
-The restrictions $B'B = Id$ can be eliminated by parameterizing $B$ in such a way that, whatever the consider parameters, $B$ is orthogonal.^[@Jarocinski_2021 develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that $B'B$ is orthogonal.] @Gourieroux_Monfort_Renne_2017 propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to $-1$ can be written as
+The restrictions $C'C = Id$ can be eliminated by parameterizing $C$ in such a way that, whatever the considered parameters, $C$ is orthogonal.^[@Jarocinski_2021 develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that $C'C$ is orthogonal.] @Gourieroux_Monfort_Renne_2017 propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to $-1$ can be written as
 \begin{equation}
-B(A) = (Id+A) (Id-A)^{-1},
+C(A) = (Id+A) (Id-A)^{-1},
 \end{equation}
 where $A$ is a skew symmetric (or antisymmetric) matrix, such that $A'=-A$. There is a one-to-one relationship with $A$, since:
 \begin{equation}
-A = (B(A)+Id)^{-1} (B(A)-Id).
+A = (C(A)+Id)^{-1} (C(A)-Id).
 \end{equation}
 
-Hence, the PML estimator of matrix $B$ is obtained as $\widehat{B_T} = B(\hat{A}_T),$ where:
+Hence, the PML estimator of matrix $C$ is obtained as $\widehat{C_T} = C(\hat{A}_T),$ where:
 \begin{equation}
-\hat{A}_T = \arg \max_{a_{i,j}, i>j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [b_i (A)' \varepsilon_t].(\#eq:optimprob2)
+\hat{A}_T = \arg \max_{a_{i,j}, i>j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [c_i (A)' \varepsilon_t].(\#eq:optimprob2)
 \end{equation}
 
 
@@ -504,13 +508,13 @@ Hence, the PML estimator of matrix $B$ is obtained as $\widehat{B_T} = B(\hat{A}
 
 <!-- Under Hypotheses \@ref(hyp:NonGauss)-\@ref(hyp:NonGauss4), -->
 
-Under assumptions on the $g_i$ functions (excluding the Gaussian distributions), @Gourieroux_Monfort_Renne_2017 derive the asymptotic properties of the PML estimator. Specifically, the PML estimator $\widehat{B_T}$ of $B_0$ is consistent (in $\mathcal{P}_0$, the set of matrices obtained by permutation and sign change of the columns of $B_0$) and asymptotically normal, with speed of convergence $1/\sqrt{T}$.
+Under assumptions on the $g_i$ functions (excluding the Gaussian distributions), @Gourieroux_Monfort_Renne_2017 derive the asymptotic properties of the PML estimator. Specifically, the PML estimator $\widehat{C_T}$ of $C_0$ is consistent (in $\mathcal{P}_0$, the set of matrices obtained by permutation and sign change of the columns of $C_0$) and asymptotically normal, with speed of convergence $1/\sqrt{T}$.
 
-The asymptotic variance-covariance matrix of $vec \sqrt{T} (\widehat{B_T} - B_0)$ is $A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}$, where matrices $A$ and $\Gamma$ are detailed in @Gourieroux_Monfort_Renne_2017.
+The asymptotic variance-covariance matrix of $vec \sqrt{T} (\widehat{C_T} - C_0)$ is $A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}$, where matrices $A$ and $\Gamma$ are detailed in @Gourieroux_Monfort_Renne_2017.
 
 Note that the potential misspecification of pseudo-distributions $g_i$ has no effect on the consistency of these specific PML estimators.
 
-Table \@ref(tab:distriICA) reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of $vec \sqrt{T} (\widehat{B_T} - B_0)$.)
+Table \@ref(tab:distriICA) reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of $vec \sqrt{T} (\widehat{C_T} - C_0)$.)
 
 Table: (\#tab:distriICA) This table reports usual p.d.f. and their derivatives.
 
@@ -524,7 +528,7 @@ Table: (\#tab:distriICA) This table reports usual p.d.f. and their derivatives.
 
 :::{.example #GMR2017 name="Non-Gaussian monetary-policy shocks"}
 
-We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency ($T=224$). We consider three dependent variables: inflation ($\pi_t$), economic activity ($z_t$, the output gap) and the nominal  short-term interest rate ($r_t$). Changes in the log of oil prices added as an exogenous variable ($x_t$).
+We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency ($T=224$). We consider three dependent variables: inflation ($\pi_t$), economic activity ($z_t$, the output gap) and the nominal  short-term interest rate ($r_t$). Changes in the log of oil prices are added as an exogenous variable ($x_t$).
 
 
 ```{r ICA0}
@@ -544,9 +548,9 @@ Let us denote by $W_t$ the set of information made of the past values of $y_t= [
 $$
 y_t  = \underbrace{\mu + \sum_{i=1}^{p} \Phi_i y_{t-i} + \Theta x_t}_{a(W_t;\theta)} + u_t
 $$
-where the $u_t$'s are assumed to be serially independent, with zero mean and variance-covariance matrix $\Sigma$.
+where the $u_t$'s are assumed to be serially independent, with zero mean and variance-covariance matrix $\Omega$.
 
-Matrices $\mu$, $\Phi_i$, $\Theta$ and $\Sigma$ are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals. 
+Matrices $\mu$, $\Phi_i$, $\Theta$ and $\Omega$ are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals. 
 
 
 ```{r ICA1}
@@ -567,21 +571,21 @@ for(i in 1:n){
   effect.commo[i] <- eq$coef[length(eq$coef)]
 }
 Omega <- var(U) # Covariance matrix of the OLS residuals.
-B <- t(chol(Omega)) # Cholesky matrix associated with Omega (lower triang.)
-Eps <- U %*% t(solve(B)) # Recover associated structural shocks
+Omeg12 <- t(chol(Omega)) # Cholesky matrix associated with Omega (lower triang.)
+Eps <- U %*% t(solve(Omeg12)) # Recover associated structural shocks
 ```
 
 
-We want to estimate the orthogonal matrix $B$ such that $u_t=SB \eta_t$, where
+We want to estimate the orthogonal matrix $C$ such that $u_t=\Omega^{1/2}C \eta_t$, where
 
-* $S$ results from the Cholesky decomposition of $\Sigma$ and
+* $\Omega^{1/2}$ results from the Cholesky decomposition of $\Omega$ and
 * the components of $\eta_t$ are independent, zero-mean with unit variance.
 
 The PML approach is applied on standardized VAR residuals given by:
 $$
-\hat\varepsilon_t = \hat{S}_T^{-1}\underbrace{[y_t - a(W_t;\hat\theta_T)]}_{\mbox{VAR residuals}}.
+\hat\varepsilon_t = \hat\Omega^{-1/2}_T\underbrace{[y_t - a(W_t;\hat\theta_T)]}_{\mbox{VAR residuals}}.
 $$
-By construction of $\hat{S}_T^{-1}$, it comes that the covariance matrix of these residuals is $Id$.
+By construction of $\hat\Omega^{-1/2}_T$, it comes that the covariance matrix of these residuals is $Id$.
 
 The pseudo density functions are distinct and asymmetric mixtures of Gaussian distributions.
 
@@ -625,7 +629,7 @@ ICA.res.no.commo <- estim.SVAR.ICA(Y,distri = distri,p=6)
 round(cbind(ICA.res.no.commo$C.PML,NaN,C.PML),3)
 ```
 
-Once $B$ has been estimated, it remains to label the resulting structural shocks (components of $\eta_{t}$). Postulated shocks are monetary-policy, supply, and demand shocks. This labelling can be based on the following considerations:
+Once $C$ has been estimated, it remains to label the resulting structural shocks (components of $\eta_{t}$). Postulated shocks are monetary-policy, supply, and demand shocks. This labelling can be based on the following considerations:
 
 * Contractionary **monetary-policy shocks** have a negative impact on real activity and on inflation.
 * **Supply shock** have influences of opposite signs on economic activity and on inflation.
@@ -641,10 +645,10 @@ for(jjjj in 1:n){
   u.shock <- rep(0,n)
   u.shock[jjjj] <- 1
   IRF.Chol[,,jjjj] <- 
-    t(simul.VAR(c=rep(0,3),Phi=PHI,B=B,nb.sim=41,
+    t(simul.VAR(c=rep(0,3),Phi=PHI,B=Omeg12,nb.sim=41,
                 y0.star=rep(0,3*nb.lags),indic.IRF = 1,u.shock = u.shock))
   IRF.ICA[,,jjjj]  <- 
-    t(simul.VAR(c=rep(0,3),Phi=PHI,B=B%*%C.PML,nb.sim=41,
+    t(simul.VAR(c=rep(0,3),Phi=PHI,B=Omeg12%*%C.PML,nb.sim=41,
                 y0.star=rep(0,3*nb.lags),indic.IRF = 1,u.shock = u.shock))
 }
 ```

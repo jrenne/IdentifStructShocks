@@ -131,7 +131,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2023-01-30}
+\date{2023-01-31}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -878,8 +878,8 @@ i_{t-1} +
 
 This is the \textbf{reduced-form} of the model. This representation suggests three additional restrictions on the entries of \(B\); the latter matrix is therefore identified as soon as \(\Omega = BB'\) is known (up to the signs of its columns).
 
-\hypertarget{cholesky-a-specific-short-run-restriction-situation}{%
-\section{Cholesky: a specific short-run-restriction situation}\label{cholesky-a-specific-short-run-restriction-situation}}
+\hypertarget{Cholesky}{%
+\section{Cholesky: a specific short-run-restriction situation}\label{Cholesky}}
 
 There are particular cases in which some well-known matrix decomposition of \(\Omega=\mathbb{V}ar(\varepsilon_t)\) can be used to easily estimate some specific SVAR. This is the case for the so-called Cholesky decomposition. Consider the following context:
 
@@ -953,7 +953,7 @@ An equivalent approach consists in computing the Cholesky decomposition of \(BB'
                                    \AttributeTok{nb.bootstrap.replications =} \DecValTok{100}\NormalTok{,}
                                    \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
                                    \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
-\NormalTok{)}
+\NormalTok{                                   )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1611,10 +1611,10 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 \end{Shaded}
 
 \begin{verbatim}
-##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3095045 0.1942588 0.9557274 -0.1403278 0.1378551 0.9551761 -0.01956420
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3175022 0.1065178 0.994819 -0.1628976 0.1359181 1.0214214 -0.01874282
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
 \end{verbatim}
 
 \hypertarget{Signs}{%
@@ -1775,7 +1775,7 @@ What about output? Since is the response of interest, we leave it un-restricted.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 346
+## [1] 303
 \end{verbatim}
 
 It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.
@@ -2122,7 +2122,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7419444
+## [1] 0.7347343
 \end{verbatim}
 
 \begin{figure}
@@ -2246,7 +2246,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1041925
+## [1] 0.1053017
 \end{verbatim}
 
 \begin{Shaded}
@@ -2256,7 +2256,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.6313523
+## [1] 0.625288
 \end{verbatim}
 
 \begin{Shaded}
@@ -2266,7 +2266,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1191076
+## [1] 0.1212666
 \end{verbatim}
 
 \begin{figure}
@@ -2332,7 +2332,9 @@ Figure \ref{fig:preMadeFigureICAGaussianStudent} shows that, in this case, \(B \
 \hypertarget{independent-component-analysis-ica}{%
 \section{Independent Component Analysis (ICA)}\label{independent-component-analysis-ica}}
 
-The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called \textbf{independent component analysis (ICA)}. Without loss of generality, we can assume that \(BB' = Id\) (i.e.~\(B\) is orthogonal). (If this is not the case, i.e.~if \(\mathbb{V}ar(\varepsilon_t)=\Omega \ne Id\), then one can pre-multiply the data by \(\Omega^{-1/2}\).) The classical ICA problem is as follows: Find \(B\) such that \(\varepsilon_t = B \eta_t\) (or \$\eta\_t= B' \varepsilon\_t \$) given that
+The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called \textbf{independent component analysis (ICA)}. Let us denote by \(C\) the matrix that is such that \(C = \Omega^{-1/2}B\), where \(\Omega^{1/2}\) results from the Cholesky decomposition of \(\Omega = BB'\) (implying, \(\Omega^{1/2}{\Omega^{1/2}}'=\Omega\)). It is easy to check that \(C\) is an orthogonal matrix (and we have \(B = \Omega^{1/2}C\)).
+
+The classical ICA problem is as follows: Find \(C\) such that \(\varepsilon_t = C \eta_t\) (or \(\eta_t = C'\varepsilon_t\)) given that:\footnote{The \(\varepsilon_t\)'s that we consider here are \emph{standardized} VAR residuals, obtained by pre-multiplying the actual VAR residuals by \(\Omega^{-1/2}\).}
 
 \begin{enumerate}
 \def\labelenumi{\roman{enumi}.}
@@ -2342,16 +2344,16 @@ The exercise that consists in identifying non-Gaussian independent shocks out of
 \item
   The components of \(\eta_t\) are independent,
 \item
-  \(BB'=Id\) (i.e., \(B\) is orthogonal).
+  \(CC'=Id\) (i.e., \(C\) is orthogonal).
 \end{enumerate}
 
-Figure \ref{fig:ThreePlots} represents again some bivariate distributions. The black (red) lines correspond to the distributions of \(\eta_t\) (\(B\eta_t\)). It is important to note that the two components of vector \(B \eta_t\) are not independent (contrary to those of \(\eta_t\)).
+Figure \ref{fig:ThreePlots} represents again some bivariate distributions. The black (red) lines correspond to the distributions of \(\eta_t\) (\(C\eta_t\)). It is important to note that the two components of vector \(C \eta_t\) are not independent (contrary to those of \(\eta_t\)).
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{images/Figure_E} \caption{The three plots represent the bivariate distributions of $\eta_t$ (black) and of $B\eta_t$ (red), where the two components of $\eta_t$ are independent, of unit variance, and $B$ is orthogonal. Hence, for each of the three plots, $\mathbb{V}ar(B\eta_t)=Id$.}\label{fig:ThreePlots}
+\includegraphics[width=0.95\linewidth]{images/Figure_E} \caption{The three plots represent the bivariate distributions of $\eta_t$ (black) and of $C\eta_t$ (red), where the two components of $\eta_t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\mathbb{V}ar(C\eta_t)=Id$.}\label{fig:ThreePlots}
 \end{figure}
 
-In all cases, we have \(\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id\). But the two components of \(\varepsilon_t\) are not independent. For instance: We have \(\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}>4)<0\) (whereas \(\mathbb{E}(\eta_{2,t}|\eta_{1,t}>4)=0\)). The objctive of ICA is to rotate \(\varepsilon_t\) to retrieve independent components (\(\eta_t\)).
+In all cases, we have \(\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id\). But the two components of \(\varepsilon_t\) are not independent. For instance, in the last two cases, we have \(\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}>4)<0\) (whereas \(\mathbb{E}(\eta_{2,t}|\eta_{1,t}>4)=0\)). The objective of ICA is to rotate \(\varepsilon_t\) to retrieve independent components (\(\eta_t\)).
 
 \begin{hypothesis}
 \protect\hypertarget{hyp:NonGauss}{}\label{hyp:NonGauss}
@@ -2367,15 +2369,15 @@ Process \(\eta_t\) satisfies:
   The components \(\eta_{1,t}, \ldots, \eta_{n,t}\) are mutually independent.
   iii We have
   \[
-  \varepsilon_t = B_0 \eta_t,
+  \varepsilon_t = C_0 \eta_t,
   \]
-  with \(\mathbb{V}ar(\varepsilon_t) = Id\) (i.e.~\(B_0\) is orthogonal).
+  with \(\mathbb{V}ar(\varepsilon_t) = Id\) (i.e., \(C_0\) is orthogonal).
 \end{enumerate}
 
 \end{hypothesis}
 
 \begin{theorem}[Eriksson, Koivunen (2004)]
-\protect\hypertarget{thm:EK2004}{}\label{thm:EK2004}If Hypothesis \ref{hyp:NonGauss} is satisfied and if at most one of the components of \(\eta\) is Gaussian, then matrix \(B_0\) is identifiable up to the post multiplication by \(DP\), where \(P\) is a permutation matrix and \(D\) is a diagonal matrix whose diagonal entries are 1 or \(-1\).\}
+\protect\hypertarget{thm:EK2004}{}\label{thm:EK2004}If Hypothesis \ref{hyp:NonGauss} is satisfied and if at most one of the components of \(\eta\) is Gaussian, then matrix \(C_0\) is identifiable up to the post multiplication by \(DP\), where \(P\) is a permutation matrix and \(D\) is a diagonal matrix whose diagonal entries are 1 or \(-1\).\}
 \end{theorem}
 
 \hypertarget{pseudo-maximum-likelihood-pml-approach}{%
@@ -2383,38 +2385,38 @@ Process \(\eta_t\) satisfies:
 
 Hence, non-normal structural shocks are identifiable. But how to estimate them based on observations of the \(\varepsilon_t\)'s? \citet{Gourieroux_Monfort_Renne_2017} have proposed a \textbf{Pseudo-Maximum Likelihood (PML)} approach. This approach consists in maximizing a so-called \textbf{pseudo log-likelihood function}, based on a set of p.d.f. \(g_i (\eta_i), i=1,\ldots,n\) (that may be different from the true p.d.f. of the \(\eta_{i,t}\)'s):
 \begin{equation}
-\log \mathcal{L}_T (B) = \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i Y_t),\label{eq:pseudolog}
+\log \mathcal{L}_T (C) = \sum^T_{t=1} \sum^n_{i=1} \log g_i (c'_i \varepsilon_t),\label{eq:pseudolog}
 \end{equation}
-where \(b_i\) is the \(i^{th}\) column of matrix \(B\) (or \(b'_i\) is the \(i^{th}\) row of \(B^{-1}\) since \(B^{-1}=B'\)).
+where \(c_i\) is the \(i^{th}\) column of matrix \(C\) (or \(c'_i\) is the \(i^{th}\) row of \(C^{-1}\) since \(C^{-1}=C'\)).
 
-The log-likelihood function \eqref{eq:pseudolog} is computed as if the errors \(\eta_{i,t}\) had the pdf \(g_i (\eta_i)\). The PML estimator of matrix \(B\) maximizes the pseudo log-likelihood function:
+The log-likelihood function \eqref{eq:pseudolog} is computed as if the errors \(\eta_{i,t}\) had the pdf \(g_i (\eta_i)\). The PML estimator of matrix \(C\) maximizes the pseudo log-likelihood function:
 \begin{equation}
-\widehat{B_T} = \arg \max_B \sum^T_{t=1} \sum^n_{i=1} \log g_i (b'_i \varepsilon_t),\label{eq:optimprob}
+\widehat{C_T} = \arg \max_C \sum^T_{t=1} \sum^n_{i=1} \log g_i (c'_i \varepsilon_t),\label{eq:optimprob}
 \end{equation}
 
-\centerline{$s.t. \;B'B = Id.$}
+\centerline{$s.t. \;C'C = Id.$}
 
-The restrictions \(B'B = Id\) can be eliminated by parameterizing \(B\) in such a way that, whatever the consider parameters, \(B\) is orthogonal.\footnote{\citet{Jarocinski_2021} develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that \(B'B\) is orthogonal.} \citet{Gourieroux_Monfort_Renne_2017} propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to \(-1\) can be written as
+The restrictions \(C'C = Id\) can be eliminated by parameterizing \(C\) in such a way that, whatever the considered parameters, \(C\) is orthogonal.\footnote{\citet{Jarocinski_2021} develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that \(C'C\) is orthogonal.} \citet{Gourieroux_Monfort_Renne_2017} propose to use, for that, the Cayley's representation: any orthogonal matrix with no eigenvalue equal to \(-1\) can be written as
 \begin{equation}
-B(A) = (Id+A) (Id-A)^{-1},
+C(A) = (Id+A) (Id-A)^{-1},
 \end{equation}
 where \(A\) is a skew symmetric (or antisymmetric) matrix, such that \(A'=-A\). There is a one-to-one relationship with \(A\), since:
 \begin{equation}
-A = (B(A)+Id)^{-1} (B(A)-Id).
+A = (C(A)+Id)^{-1} (C(A)-Id).
 \end{equation}
 
-Hence, the PML estimator of matrix \(B\) is obtained as \(\widehat{B_T} = B(\hat{A}_T),\) where:
+Hence, the PML estimator of matrix \(C\) is obtained as \(\widehat{C_T} = C(\hat{A}_T),\) where:
 \begin{equation}
-\hat{A}_T = \arg \max_{a_{i,j}, i>j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [b_i (A)' \varepsilon_t].\label{eq:optimprob2}
+\hat{A}_T = \arg \max_{a_{i,j}, i>j} \sum^T_{t=1} \sum^n_{i=1} \log g_i [c_i (A)' \varepsilon_t].\label{eq:optimprob2}
 \end{equation}
 
-Under assumptions on the \(g_i\) functions (excluding the Gaussian distributions), \citet{Gourieroux_Monfort_Renne_2017} derive the asymptotic properties of the PML estimator. Specifically, the PML estimator \(\widehat{B_T}\) of \(B_0\) is consistent (in \(\mathcal{P}_0\), the set of matrices obtained by permutation and sign change of the columns of \(B_0\)) and asymptotically normal, with speed of convergence \(1/\sqrt{T}\).
+Under assumptions on the \(g_i\) functions (excluding the Gaussian distributions), \citet{Gourieroux_Monfort_Renne_2017} derive the asymptotic properties of the PML estimator. Specifically, the PML estimator \(\widehat{C_T}\) of \(C_0\) is consistent (in \(\mathcal{P}_0\), the set of matrices obtained by permutation and sign change of the columns of \(C_0\)) and asymptotically normal, with speed of convergence \(1/\sqrt{T}\).
 
-The asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{B_T} - B_0)\) is \(A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}\), where matrices \(A\) and \(\Gamma\) are detailed in \citet{Gourieroux_Monfort_Renne_2017}.
+The asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{C_T} - C_0)\) is \(A^{-1} \left[\begin{array}{cc} \Gamma & 0 \\ 0 & 0 \end{array} \right] (A')^{-1}\), where matrices \(A\) and \(\Gamma\) are detailed in \citet{Gourieroux_Monfort_Renne_2017}.
 
 Note that the potential misspecification of pseudo-distributions \(g_i\) has no effect on the consistency of these specific PML estimators.
 
-Table \ref{tab:distriICA} reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{B_T} - B_0)\).)
+Table \ref{tab:distriICA} reports usual p.d.f. and their derivatives. (The latter are needed to compute the asymptotic variance-covariance matrix of \(vec \sqrt{T} (\widehat{C_T} - C_0)\).)
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0851}}
@@ -2452,7 +2454,7 @@ Subgaussian & \(cst + \pi x^2 + \log \left(\cosh\left\{\dfrac{\pi}{2}x\right\}\r
 \end{longtable}
 
 \begin{example}[Non-Gaussian monetary-policy shocks]
-\protect\hypertarget{exm:GMR2017}{}\label{exm:GMR2017}We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (\(T=224\)). We consider three dependent variables: inflation (\(\pi_t\)), economic activity (\(z_t\), the output gap) and the nominal short-term interest rate (\(r_t\)). Changes in the log of oil prices added as an exogenous variable (\(x_t\)).
+\protect\hypertarget{exm:GMR2017}{}\label{exm:GMR2017}We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (\(T=224\)). We consider three dependent variables: inflation (\(\pi_t\)), economic activity (\(z_t\), the output gap) and the nominal short-term interest rate (\(r_t\)). Changes in the log of oil prices are added as an exogenous variable (\(x_t\)).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2472,9 +2474,9 @@ Let us denote by \(W_t\) the set of information made of the past values of \(y_t
 \[
 y_t  = \underbrace{\mu + \sum_{i=1}^{p} \Phi_i y_{t-i} + \Theta x_t}_{a(W_t;\theta)} + u_t
 \]
-where the \(u_t\)'s are assumed to be serially independent, with zero mean and variance-covariance matrix \(\Sigma\).
+where the \(u_t\)'s are assumed to be serially independent, with zero mean and variance-covariance matrix \(\Omega\).
 
-Matrices \(\mu\), \(\Phi_i\), \(\Theta\) and \(\Sigma\) are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.
+Matrices \(\mu\), \(\Phi_i\), \(\Theta\) and \(\Omega\) are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2495,26 +2497,26 @@ Matrices \(\mu\), \(\Phi_i\), \(\Theta\) and \(\Sigma\) are consistently estimat
 \NormalTok{  effect.commo[i] }\OtherTok{\textless{}{-}}\NormalTok{ eq}\SpecialCharTok{$}\NormalTok{coef[}\FunctionTok{length}\NormalTok{(eq}\SpecialCharTok{$}\NormalTok{coef)]}
 \NormalTok{\}}
 \NormalTok{Omega }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(U) }\CommentTok{\# Covariance matrix of the OLS residuals.}
-\NormalTok{B }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(Omega)) }\CommentTok{\# Cholesky matrix associated with Omega (lower triang.)}
-\NormalTok{Eps }\OtherTok{\textless{}{-}}\NormalTok{ U }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(}\FunctionTok{solve}\NormalTok{(B)) }\CommentTok{\# Recover associated structural shocks}
+\NormalTok{Omeg12 }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{chol}\NormalTok{(Omega)) }\CommentTok{\# Cholesky matrix associated with Omega (lower triang.)}
+\NormalTok{Eps }\OtherTok{\textless{}{-}}\NormalTok{ U }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(}\FunctionTok{solve}\NormalTok{(Omeg12)) }\CommentTok{\# Recover associated structural shocks}
 \end{Highlighting}
 \end{Shaded}
 
-We want to estimate the orthogonal matrix \(B\) such that \(u_t=SB \eta_t\), where
+We want to estimate the orthogonal matrix \(C\) such that \(u_t=\Omega^{1/2}C \eta_t\), where
 
 \begin{itemize}
 \tightlist
 \item
-  \(S\) results from the Cholesky decomposition of \(\Sigma\) and
+  \(\Omega^{1/2}\) results from the Cholesky decomposition of \(\Omega\) and
 \item
   the components of \(\eta_t\) are independent, zero-mean with unit variance.
 \end{itemize}
 
 The PML approach is applied on standardized VAR residuals given by:
 \[
-\hat\varepsilon_t = \hat{S}_T^{-1}\underbrace{[y_t - a(W_t;\hat\theta_T)]}_{\mbox{VAR residuals}}.
+\hat\varepsilon_t = \hat\Omega^{-1/2}_T\underbrace{[y_t - a(W_t;\hat\theta_T)]}_{\mbox{VAR residuals}}.
 \]
-By construction of \(\hat{S}_T^{-1}\), it comes that the covariance matrix of these residuals is \(Id\).
+By construction of \(\hat\Omega^{-1/2}_T\), it comes that the covariance matrix of these residuals is \(Id\).
 
 The pseudo density functions are distinct and asymmetric mixtures of Gaussian distributions.
 
@@ -2582,7 +2584,7 @@ We would obtain close results by neglecting commodity prices. In that case, one 
 ## [3,]  0.025 0.121  0.992  NaN  0.039 0.118  0.992
 \end{verbatim}
 
-Once \(B\) has been estimated, it remains to label the resulting structural shocks (components of \(\eta_{t}\)). Postulated shocks are monetary-policy, supply, and demand shocks. This labelling can be based on the following considerations:
+Once \(C\) has been estimated, it remains to label the resulting structural shocks (components of \(\eta_{t}\)). Postulated shocks are monetary-policy, supply, and demand shocks. This labelling can be based on the following considerations:
 
 \begin{itemize}
 \tightlist
@@ -2605,10 +2607,10 @@ Let us compute the IRFs associated with the three structural shocks. (For the sa
 \NormalTok{  u.shock }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,n)}
 \NormalTok{  u.shock[jjjj] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{  IRF.Chol[,,jjjj] }\OtherTok{\textless{}{-}} 
-    \FunctionTok{t}\NormalTok{(}\FunctionTok{simul.VAR}\NormalTok{(}\AttributeTok{c=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{Phi=}\NormalTok{PHI,}\AttributeTok{B=}\NormalTok{B,}\AttributeTok{nb.sim=}\DecValTok{41}\NormalTok{,}
+    \FunctionTok{t}\NormalTok{(}\FunctionTok{simul.VAR}\NormalTok{(}\AttributeTok{c=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{Phi=}\NormalTok{PHI,}\AttributeTok{B=}\NormalTok{Omeg12,}\AttributeTok{nb.sim=}\DecValTok{41}\NormalTok{,}
                 \AttributeTok{y0.star=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\SpecialCharTok{*}\NormalTok{nb.lags),}\AttributeTok{indic.IRF =} \DecValTok{1}\NormalTok{,}\AttributeTok{u.shock =}\NormalTok{ u.shock))}
 \NormalTok{  IRF.ICA[,,jjjj]  }\OtherTok{\textless{}{-}} 
-    \FunctionTok{t}\NormalTok{(}\FunctionTok{simul.VAR}\NormalTok{(}\AttributeTok{c=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{Phi=}\NormalTok{PHI,}\AttributeTok{B=}\NormalTok{B}\SpecialCharTok{\%*\%}\NormalTok{C.PML,}\AttributeTok{nb.sim=}\DecValTok{41}\NormalTok{,}
+    \FunctionTok{t}\NormalTok{(}\FunctionTok{simul.VAR}\NormalTok{(}\AttributeTok{c=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{Phi=}\NormalTok{PHI,}\AttributeTok{B=}\NormalTok{Omeg12}\SpecialCharTok{\%*\%}\NormalTok{C.PML,}\AttributeTok{nb.sim=}\DecValTok{41}\NormalTok{,}
                 \AttributeTok{y0.star=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\SpecialCharTok{*}\NormalTok{nb.lags),}\AttributeTok{indic.IRF =} \DecValTok{1}\NormalTok{,}\AttributeTok{u.shock =}\NormalTok{ u.shock))}
 \NormalTok{\}}
 \end{Highlighting}
@@ -2693,6 +2695,31 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 This is for instance consistent with the case where \([\Delta GDP_t, \pi_t,i_t]'\) follows a VAR(1) and the monetary-policy shock does not contemporaneously affect \(\Delta GDP_t\) and \(\pi_t\). The IRFs can then be estimated by LP, taking \(x_t = i_t\) and \(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\).
 
 This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if \(w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\), with \(k\le n\), and \(x_t = y_{k,t}\), then this approach corresponds, for \(h=0\), to the SVAR(\(p\)) Cholesky-based IRF (focusing on the responses to the \(k^{th}\) structural shock). However, the two approaches differ for \(h>0\), because the LP methodology does not assumes a VAR dynamics for \(y_t\).\footnote{This is reminiscent of the distinction betweem direct forecasting---based on regressions of \(y_{t+h}\) on \(\{y_t,y_{t-1},\dots\}\)---and iterated forecasting---based on a recursive model where \(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\), see \citet{Marcellino_et_al_2006}.}
+
+In the following lines of code, we employ the \citet{Jorda_2005}'s approach on the same dataset as the one used in Section @ref\{Cholesky\}. (We were then illustrating \citet{Christiano_Eichenbaum_Evans_1996}'s methodology.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
+\CommentTok{\# Select sample period:}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}\NormalTok{;Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
+\NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
+\NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
+\NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
+\NormalTok{considered.variables }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
+\NormalTok{res.jorda }\OtherTok{\textless{}{-}} \FunctionTok{make.jorda.irf}\NormalTok{(y,}\AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                            \AttributeTok{nb.periods.IRF =} \DecValTok{12}\NormalTok{,}
+                            \AttributeTok{nb.lags.endog.var.4.control=}\DecValTok{3}\NormalTok{,}
+                            \AttributeTok{indic.plot =} \DecValTok{1}\NormalTok{, }\CommentTok{\# Plots are displayed if = 1.}
+                            \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/CEEJorda-1} \caption{Response to a monetary-policy shock. Identification approach of Jorda (2005).}\label{fig:CEEJorda}
+\end{figure}
 
 \hypertarget{situation-b-iv-approach}{%
 \section{Situation B: IV approach}\label{situation-b-iv-approach}}

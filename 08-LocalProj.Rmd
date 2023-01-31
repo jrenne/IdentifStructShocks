@@ -48,6 +48,24 @@ This approach closely relates to the SVAR Cholesky-based identification approach
 
 [^FootnoteIteratedFcst]: This is reminiscent of the distinction betweem direct forecasting---based on regressions of $y_{t+h}$ on $\{y_t,y_{t-1},\dots\}$---and iterated forecasting---based on a recursive model where $y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}$, see @Marcellino_et_al_2006. 
 
+In the following lines of code, we employ the @Jorda_2005's approach on the same dataset as the one used in Section \@ref{Cholesky}. (We were then illustrating @Christiano_Eichenbaum_Evans_1996's methodology.)
+
+```{r CEEJorda, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Response to a monetary-policy shock. Identification approach of Jorda (2005).",warning=FALSE,message=FALSE}
+library(IdSS);library(vars)
+data("USmonthly")
+# Select sample period:
+First.date <- "1965-01-01";Last.date <- "1995-06-01"
+indic.first <- which(USmonthly$DATES==First.date)
+indic.last  <- which(USmonthly$DATES==Last.date)
+USmonthly   <- USmonthly[indic.first:indic.last,]
+considered.variables <- c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
+y <- as.matrix(USmonthly[considered.variables])
+res.jorda <- make.jorda.irf(y,posit.of.shock = 5,
+                            nb.periods.IRF = 12,
+                            nb.lags.endog.var.4.control=3,
+                            indic.plot = 1, # Plots are displayed if = 1.
+                            confidence.interval = 0.90)
+```
 
 ## Situation B: IV approach
 

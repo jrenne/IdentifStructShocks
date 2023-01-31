@@ -102,7 +102,7 @@ i_{t-1} +
 This is the **reduced-form** of the model. This representation suggests three additional restrictions on the entries of $B$; the latter matrix is therefore identified as soon as $\Omega = BB'$ is known (up to the signs of its columns).
 
 
-## Cholesky: a specific short-run-restriction situation
+## Cholesky: a specific short-run-restriction situation {#Cholesky}
 
 There are particular cases in which some well-known matrix decomposition of $\Omega=\mathbb{V}ar(\varepsilon_t)$ can be used to easily estimate some specific SVAR. This is the case for the so-called Cholesky decomposition. Consider the following context:
 
@@ -164,7 +164,7 @@ res.svar.ordering <- svar.ordering(y,p=3,
                                    nb.bootstrap.replications = 100,
                                    confidence.interval = 0.90, # expressed in pp.
                                    indic.plot = 1 # Plots are displayed if = 1.
-)
+                                   )
 ```
 
 

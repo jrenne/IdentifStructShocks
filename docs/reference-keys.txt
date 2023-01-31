@@ -63,6 +63,7 @@ fig:ICAFigIRF
 eq:OLS1
 eq:xetaw
 eq:uuuIV
+fig:CEEJorda
 eq:IV1
 exm:HighFreq
 fig:HighFreq
@@ -96,7 +97,7 @@ granger-causality
 identifStruct
 IdentifPbm
 a-stylized-example-motivating-short-run-restrictions
-cholesky-a-specific-short-run-restriction-situation
+Cholesky
 long-run-restrictions
 Inference
 MonteCarlo
