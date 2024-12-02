@@ -227,29 +227,30 @@ For each simulated sample (of $\tilde{y}_t$ and $\tilde{z}_t$, say), estimate $\
 
 In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is `FF4_TC` from the Ramsey's database; they are base on the @Gertler_Karadi_2015 approach, that use 3-month fed funds futures.
 
-```{r essaiIV0, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Gertler-Karadi monthly shocks, fed funds futures 3 months."}
+```{r essaiIV0, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red)."}
 library(vars);library(IdSS)
 data("USmonthly")
 First.date <- "1990-05-01";Last.date <- "2012-6-01"
 indic.first <- which(USmonthly$DATES==First.date)
 indic.last  <- which(USmonthly$DATES==Last.date)
 USmonthly   <- USmonthly[indic.first:indic.last,]
-shock.name <- "FF4_TC" #"FF4_TC", "ED2_TC", "ff1_vr", "rrshock83b"
-indic.shock.name <- which(names(USmonthly)==shock.name)
-Z <- matrix(USmonthly[,indic.shock.name],ncol=1)
+shock.name <- c("FF4_TC","ED2_TC") # "ff1_vr", "rrshock83b"
+indic.shock.name <- which(names(USmonthly)%in%shock.name)
+Z <- as.matrix(USmonthly[,indic.shock.name])
 par(plt=c(.1,.95,.1,.95))
-plot(USmonthly$DATES,Z,type="l",xlab="",ylab="",lwd=2)
+plot(USmonthly$DATES,Z[,1],type="l",xlab="",ylab="",lwd=2)
+lines(USmonthly$DATES,Z[,2],col="red",lwd=2,pch=3,lty=2)
 ```
 
 
 ```{r essaiIV1, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Reponses to a monetary-policy shock, SVAR-IV approach."}
 considered.variables <- c("GS1","LIP","LCPI","EBP")
-y <- as.matrix(USmonthly[,considered.variables])
+Y <- as.matrix(USmonthly[,considered.variables])
 n <- length(considered.variables)
-colnames(y) <- considered.variables
+colnames(Y) <- considered.variables
 par(plt=c(.15,.95,.15,.8))
 res.svar.iv <- 
-  svar.iv(y,Z,p = 4,names.of.variables=considered.variables,
+  svar.iv(Y,Z,p = 4,names.of.variables=considered.variables,
           nb.periods.IRF = 20,
           z.AR.order=1, 
           nb.bootstrap.replications = 100, 
@@ -314,7 +315,7 @@ In the general case, one can use lags of $y_t$ as controls. Note that, even if (
 
 
 ```{r essaiIV, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Reponses to a monetary-policy shock, LP-IV approach.",eval=FALSE}
-res.LP.IV <- make.LPIV.irf(y,Z,
+res.LP.IV <- make.LPIV.irf(Y,Z,
                            nb.periods.IRF = 20,
                            nb.lags.Y.4.control=4,
                            nb.lags.Z.4.control=4,

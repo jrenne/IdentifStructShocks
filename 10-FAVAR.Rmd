@@ -139,11 +139,7 @@ library(BVAR)# contains the fred_md dataset
 library(IdSS)
 library(vars)
 data <- fred_transform(fred_md,na.rm = FALSE, type = "fred_md")
-First.date <- "1959-02-01"
-Last.date <- "2020-01-01"
-data <- data[(rownames(data)>First.date)&(rownames(data)<Last.date),]
-variables.with.na <- which(is.na(apply(data,2,sum)))
-data <- data[,-variables.with.na]
+data <- data[complete.cases(data),]
 data.values <- scale(data, center = TRUE, scale = TRUE)
 data_scaled <- data
 data_scaled[1:dim(data)[1],1:dim(data)[2]] <- data.values

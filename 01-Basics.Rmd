@@ -81,7 +81,7 @@ with $\Theta_0 = Id$ and $\Theta_h = 0$ for $h>q$.
 :::
 
 :::{.proof}
-This is obtained by applying the operator $\frac{\partial}{\partial \varepsilon_{t}}$ on both sides of Eq. \@ref(eq:yVARMA).
+This is obtained by applying the operator $\frac{\partial}{\partial \eta_{t}}$ on both sides of Eq. \@ref(eq:yVARMA).
 :::
 
 Typically, consider the VAR(2) case. The first steps of the algorithm mentioned in the last bullet point are as follows:
@@ -108,7 +108,8 @@ y_{t-1} +
 \underbrace{\left[\begin{array}{cc}
 1 & 2 \\
 -1 & 1
-\end{array}\right]}_{B}\eta_t - \underbrace{\left[\begin{array}{cc}
+\end{array}\right]}_{B}\eta_t \\
+&& - \underbrace{\left[\begin{array}{cc}
 -0.4 & 0 \\
 1 & 0.5
 \end{array}\right]}_{\Theta_1} \underbrace{\left[\begin{array}{cc}
@@ -182,7 +183,7 @@ What should be satisfied by $\Phi_k$'s and $\Theta_k$'s for a VARMA-based proces
 \begin{eqnarray}
 y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  (\#eq:VARMA2)\\
 &&\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
-&\Leftrightarrow& \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I - \Theta_1 L - \ldots - \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
+&\Leftrightarrow& \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I + \Theta_1 L + \ldots + \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
 \end{eqnarray}
 
 Process $y_t$ is stationary iff the roots of $\det(\Phi(z))=0$ are strictly outside the unit circle or, equivalently, iff the eigenvalues of 
@@ -330,8 +331,9 @@ where $\sigma_i = \mathbb{V}ar(\varepsilon_{i,t})$ and where $\bv{Q} = \mbox{pli
 \vdots &\vdots &\vdots &\dots &\vdots \\
 \mu & \gamma_{p-1} + \mu\mu' & \gamma_{p-2} + \mu\mu' & \dots & \gamma_{0} + \mu\mu'
 \end{array}
-\right].(\#eq:Qols)
+\right],(\#eq:Qols)
 \end{equation}
+where $\gamma_j$ is the unconditional autocovariance matrix of order $j$ of $y_t$, i.e., $\gamma_i = \mathbb{C}ov(y_{t},y_{t-j})$.
 :::
 :::{.proof}
 See Appendix \@ref(AppendixProof).

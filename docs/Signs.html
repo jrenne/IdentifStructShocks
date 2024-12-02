@@ -7,7 +7,7 @@
 <title>Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
-<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -109,7 +109,7 @@ Q_x=\begin{pmatrix}\cos(x)&amp;\cos\left(x+\frac{\pi}{2}\right)\\
 \sin(x)&amp;\cos(x)\end{pmatrix}.
 \]</span>
 (This is an angle-<span class="math inline">\(x\)</span> counter-clockwise rotation.) Hence, in that case, by drawing <span class="math inline">\(x\)</span> randomly from <span class="math inline">\([0,2\pi]\)</span>, we draw randomly from the set of <span class="math inline">\(2\times2\)</span> rotation matrices. For high-dimensional VAR, we lose this simple geometrical representation, though. It is not always possible to parametrize a rotation matrix (high-dimentional VARs).</p>
-<p>How to proceed, then? <span class="citation">Arias, Rubio-Ramírez, and Waggoner (<a href="references.html#ref-Arias_et_al_2018" role="doc-biblioref">2018</a>)</span> provide a procedure. Their approach is based on the so-called <span class="math inline">\(QR\)</span> decomposition: any square matrix <span class="math inline">\(X\)</span> may be decomposed as <span class="math inline">\(X=QR\)</span> where <span class="math inline">\(Q\)</span> is an orthogonal matrix and <span class="math inline">\(R\)</span> is an upper diagonal matrix. With this in mind, they propose a two-step approach:</p>
+<p>How to proceed, then? <span class="citation">Arias, Rubio-Ramírez, and Waggoner (<a href="references.html#ref-Arias_et_al_2018">2018</a>)</span> provide a procedure. Their approach is based on the so-called <span class="math inline">\(QR\)</span> decomposition: any square matrix <span class="math inline">\(X\)</span> may be decomposed as <span class="math inline">\(X=QR\)</span> where <span class="math inline">\(Q\)</span> is an orthogonal matrix and <span class="math inline">\(R\)</span> is an upper diagonal matrix. With this in mind, they propose a two-step approach:</p>
 <ol style="list-style-type: lower-roman">
 <li>Draw a random matrix <span class="math inline">\(X\)</span> by drawing each element from independent standard normal distribution.</li>
 <li>Let <span class="math inline">\(X = QR\)</span> be the <span class="math inline">\(QR\)</span> decomposition of <span class="math inline">\(X\)</span> with the diagonal of <span class="math inline">\(R\)</span> normalized to be
@@ -138,7 +138,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <h2>
 <span class="header-section-number">4.2</span> An example<a class="anchor" aria-label="anchor" href="#an-example"><i class="fas fa-link"></i></a>
 </h2>
-<p>A prominent example is <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005" role="doc-biblioref">2005</a>)</span>. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.</p>
+<p>A prominent example is <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span>. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.</p>
 <p>According to conventional wisdom, monetary contractions should:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: &lt;em&gt;liquidity puzzle&lt;/em&gt;: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; &lt;em&gt;price puzzle&lt;/em&gt;: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.&lt;/p&gt;"><sup>3</sup></a></p>
 <ul>
 <li>Raise the federal funds rate,</li>
@@ -146,15 +146,15 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <li>Decrease non-borrowed reserves,</li>
 <li>Reduce real output.</li>
 </ul>
-<p>The restrictions considered by <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005" role="doc-biblioref">2005</a>)</span> are as follows: an expansionary monetary policy shock leads to:</p>
+<p>The restrictions considered by <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span> are as follows: an expansionary monetary policy shock leads to:</p>
 <ul>
 <li>Increases in prices</li>
 <li>Increase in nonborrowed reserves</li>
 <li>Decreases in the federal funds rate</li>
 </ul>
 <p>What about output? Since is the response of interest, we leave it un-restricted.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
 <span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"1995-06-01"</span></span>
@@ -193,10 +193,10 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">simulated.IRFs.signs</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">IRFs.signs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">simulated.IRFs.signs</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] 284</code></pre>
+<pre><code>## [1] 276</code></pre>
 <!-- Another approach -->
 <!-- If $B$ satisfies $BB'=\Omega_\varepsilon$, the vectors of $B$ are called **impulse vectors** -->
 <!-- Let $b$ be en impulse vector, there exists a unit-length vector $q$ (i.e. $q'q=1$) so that \[b=Pq\] -->
@@ -229,7 +229,7 @@ Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approa
 <h2>
 <span class="header-section-number">4.3</span> The penalty-function approach (PFA)<a class="anchor" aria-label="anchor" href="#the-penalty-function-approach-pfa"><i class="fas fa-link"></i></a>
 </h2>
-<p>An alternative approach is the so-called <strong>penalty-function approach</strong> (PFA, <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005" role="doc-biblioref">2005</a>)</span>, present in <span class="citation">Danne (<a href="references.html#ref-Danne_2015" role="doc-biblioref">2015</a>)</span>’s package). This approach relies on a <em>penalty function</em>:
+<p>An alternative approach is the so-called <strong>penalty-function approach</strong> (PFA, <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span>, present in <span class="citation">Danne (<a href="references.html#ref-Danne_2015">2015</a>)</span>’s package). This approach relies on a <em>penalty function</em>:
 <span class="math display">\[
 \begin{array}{llll}f(x)&amp;=&amp;x&amp;\text{ if }x\le0\\
 &amp;&amp;100.x&amp;\text{ if }x&gt;0\end{array}
@@ -249,7 +249,7 @@ which penalizes positive responses and rewards negative responses.</p>
 <h2>
 <span class="header-section-number">4.4</span> Narrative sign restrictions<a class="anchor" aria-label="anchor" href="#NarrativeSign"><i class="fas fa-link"></i></a>
 </h2>
-<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;6.2&lt;/a&gt;.&lt;/p&gt;'><sup>4</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018" role="doc-biblioref">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
+<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;6.2&lt;/a&gt;.&lt;/p&gt;'><sup>4</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
 <p>Suppose we want to impose the restriction that, at dates <span class="math inline">\(\{t_1,\dots,t_J\}\)</span>, the signs of the <span class="math inline">\(j^{th}\)</span> shock are all positive. Then, the narrative sign restrictions are simply imposed by:
 <span class="math display">\[
 \hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) &gt; 0,
@@ -286,7 +286,7 @@ where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of stru
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2023-01-31.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -299,7 +299,7 @@ where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of stru
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
