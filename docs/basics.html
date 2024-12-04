@@ -7,7 +7,7 @@
 <title>Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs. ...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
 <meta property="og:title" content="Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs. ...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs. ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -348,7 +349,9 @@ with <span class="math inline">\(\Phi(L) = \Phi_1 + \Phi_2 L + \dots + \Phi_p L^
 <span class="math display">\[
 y_{t}\mid y_{t-1},y_{t-2},\ldots,y_{-p+1}\sim \mathcal{N}(c+\Phi_{1}y_{t-1}+\ldots\Phi_{p}y_{t-p},\Omega).
 \]</span></p>
-<p>Using <span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994">1994</a>)</span>’s notations, denote with <span class="math inline">\(\Pi\)</span> the matrix <span class="math inline">\(\left[\begin{array}{ccccc} c &amp; \Phi_{1} &amp; \Phi_{2} &amp; \ldots &amp; \Phi_{p}\end{array}\right]'\)</span> and with <span class="math inline">\(x_{t}\)</span> the vector <span class="math inline">\(\left[\begin{array}{ccccc} 1 &amp; y'_{t-1} &amp; y'_{t-2} &amp; \ldots &amp; y'_{t-p}\end{array}\right]'\)</span>, we have:
+<p>Using <span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994">1994</a>)</span>’s notations, denote with <span class="math inline">\(\Pi\)</span> the matrix <span class="math inline">\(\left[\begin{array}{ccccc}
+c &amp; \Phi_{1} &amp; \Phi_{2} &amp; \ldots &amp; \Phi_{p}\end{array}\right]'\)</span> and with <span class="math inline">\(x_{t}\)</span> the vector <span class="math inline">\(\left[\begin{array}{ccccc}
+1 &amp; y'_{t-1} &amp; y'_{t-2} &amp; \ldots &amp; y'_{t-p}\end{array}\right]'\)</span>, we have:
 <span class="math display" id="eq:PIVAR">\[\begin{equation}
 y_{t}= \Pi'x_{t} + \varepsilon_{t}. \tag{1.9}
 \end{equation}\]</span>
@@ -452,10 +455,8 @@ BIC &amp; = &amp; cst + \log\left|\hat{\Omega}\right|+\frac{\log T}{T}N,
 \end{eqnarray*}\]</span>
 where <span class="math inline">\(N=p \times n^{2}\)</span>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Warning: package 'vars' was built under R version 4.3.2</code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VARselect.html">VARselect</a></span><span class="op">(</span><span class="va">data</span>,lag.max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
@@ -467,7 +468,7 @@ where <span class="math inline">\(N=p \times n^{2}\)</span>.</p>
 ## HQ(n)  -0.3017869 -0.4208439 -0.4450407 -0.4082080 -0.3761491 -0.32808581
 ## SC(n)  -0.2462608 -0.3283005 -0.3154798 -0.2416298 -0.1725534 -0.08747275
 ## FPE(n)  0.7121914  0.6165990  0.5869659  0.5939325  0.5981364  0.61210908</code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">estimated.var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">data</span>,p<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#print(estimated.var$varresult)</span></span>
 <span><span class="va">Phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">estimated.var</span><span class="op">)</span></span>
@@ -588,7 +589,7 @@ F=\frac{(RSS-USS)/p}{USS/(T-2p-1)},
 \]</span>
 where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under <span class="math inline">\(H_{0}\)</span>, the <span class="math inline">\(F\)</span>-statistic is distributed as <span class="math inline">\(\mathcal{F}(p,T-2p-1)\)</span> (See Table <a href="append.html#tab:Fstat">11.4</a>).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;We have &lt;span class="math inline"&gt;\(pF\underset{T \rightarrow \infty}{\rightarrow}\chi^{2}(p)\)&lt;/span&gt;.&lt;/p&gt;'><sup>1</sup></a></p>
 <p>According to the following lines of code, the output gap Granger-causes inflation, but the reverse is not true:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y.gdp.gap"</span>,<span class="st">"infl"</span><span class="op">)</span><span class="op">]</span>,order<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Granger causality test
 ## 
@@ -599,7 +600,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 ## 2    217 -3 3.9761 0.008745 **
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lmtest/man/grangertest.html">grangertest</a></span><span class="op">(</span><span class="va">US3var</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"infl"</span>,<span class="st">"y.gdp.gap"</span><span class="op">)</span><span class="op">]</span>,order<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Granger causality test
 ## 
@@ -646,7 +647,7 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-02.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

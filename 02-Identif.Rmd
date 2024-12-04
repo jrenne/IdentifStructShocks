@@ -80,13 +80,13 @@ Vector $\eta_t$ is assumed to be a vector of structural shocks, mutually and ser
 System \@ref(eq:systemI) could be rewritten as follows:
 \begin{equation}
 \left[\begin{array}{c}
-d_t\\
+g_t\\
 \pi_t\\
 i_t
 \end{array}\right]
 = \Phi(L)
 \left[\begin{array}{c}
-d_{t-1}\\
+g_{t-1}\\
 \pi_{t-1}\\
 i_{t-1} +
 \end{array}\right] +\underbrace{\underbrace{

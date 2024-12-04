@@ -30,6 +30,7 @@ eq:ystarVAR
 eq:cumul
 fig:BQ4
 fig:inference1
+fig:inference1bis
 fig:inference2
 fig:inference3
 fig:inference4

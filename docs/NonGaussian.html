@@ -7,7 +7,7 @@
 <title>Chapter 7 Identification based on non-normality of the shocks | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="7.1 Intuition In this section, we show that the non-identification of the structural shocks (\(\eta_t\)) is specific to the Gaussian case. We propose consistent estimation approaches for SVAR in...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Identification based on non-normality of the shocks | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="7.1 Intuition In this section, we show that the non-identification of the structural shocks (\(\eta_t\)) is specific to the Gaussian case. We propose consistent estimation approaches for SVAR in...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="7.1 Intuition In this section, we show that the non-identification of the structural shocks (\(\eta_t\)) is specific to the Gaussian case. We propose consistent estimation approaches for SVAR in...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -99,8 +100,14 @@
 <p>Indeed, if <span class="math inline">\(\eta_t \sim \mathcal{N}(0,Id)\)</span>, then the distribution of <span class="math inline">\(\varepsilon_t \equiv B \eta_t\)</span> is <span class="math inline">\(\mathcal{N}(0,BB')\)</span>. Hence <span class="math inline">\(\Omega = B B'\)</span> is observed (in the population), but for any orthogonal matrix <span class="math inline">\(Q\)</span> (i.e. <span class="math inline">\(QQ'=Id\)</span>), we also have <span class="math inline">\(BQ \eta_t \sim \mathcal{N}(0,\Omega)\)</span>.</p>
 <p>To illustrate, consider the following bivariate Gaussian situations, with <span class="math inline">\(\Theta_1=0\)</span>):</p>
 <p><span class="math inline">\(\left[\begin{array}{c}\eta_{1,t}\\ \eta_{2,t}\end{array}\right]\sim \mathcal{N}(0,Id)\)</span>, with
-<span class="math inline">\(B = \left[\begin{array}{cc} 1 &amp; 2 \\ -1 &amp; 1 \end{array}\right]\)</span> and
-<span class="math inline">\(Q = \left[\begin{array}{cc} \cos(\pi/3) &amp; -\sin(\pi/3) \\ \sin(\pi/3) &amp; \cos(\pi/3) \end{array}\right]\)</span> (rotation).</p>
+<span class="math inline">\(B = \left[\begin{array}{cc}
+1 &amp; 2 \\
+-1 &amp; 1
+\end{array}\right]\)</span> and
+<span class="math inline">\(Q = \left[\begin{array}{cc}
+\cos(\pi/3) &amp; -\sin(\pi/3) \\
+\sin(\pi/3) &amp; \cos(\pi/3)
+\end{array}\right]\)</span> (rotation).</p>
 <p>Figure <a href="NonGaussian.html#fig:preMadeFigureICA">7.1</a> shows that the distributions of <span class="math inline">\(B \eta_t\)</span> and of <span class="math inline">\(BQ\eta_t\)</span> are identical. However, the impulse response functions associated with one of the other impulse matrix (<span class="math inline">\(B\)</span> or <span class="math inline">\(BQ\)</span>) are different. This is illustrated by Figure <a href="NonGaussian.html#fig:preMadeFigureICA2">7.2</a>, that shows the IRFs associated with two identical models (defined by Eq. <a href="basics.html#eq:VARMA111">(1.5)</a>), the only difference being the impulse matrix (<span class="math inline">\(B\)</span> or <span class="math inline">\(BQ\)</span>).</p>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:preMadeFigureICA"></span>
@@ -117,8 +124,14 @@ Figure 7.2: This figure shows that the impulse response functions associated wit
 <p>Hence, in the Gaussian case, external restrictions (economic hypotheses) are needed to identify <span class="math inline">\(B\)</span> (see previous sections). But such restrictions may not be necessary if the structural shocks are not Gaussian. That is, the identification problem is very specific to normally-distributed <span class="math inline">\(\eta_t\)</span>’s (<span class="citation">Rigobon (<a href="references.html#ref-Rigobon_2003">2003</a>)</span>, <span class="citation">Normandin and Phaneuf (<a href="references.html#ref-NORMANDIN20041217">2004</a>)</span>, <span class="citation">Lanne and Lütkepohl (<a href="references.html#ref-Lanne_Lutkepohl_2008">2008</a>)</span>).</p>
 <p>To better see why this can be the case, consider again a bivariate vector of independent structural shocks (<span class="math inline">\(\eta_{1,t}\)</span> and <span class="math inline">\(\eta_{2,t}\)</span>) but, now, assume that one of them is not Gaussian any more. Specifically, assume that <span class="math inline">\(\eta_{2,t}\)</span> is drawn from a Student distribution with 5 degrees of freedom:
 <span class="math inline">\(\eta_{1,t} \sim \mathcal{N}(0,1)\)</span>, <span class="math inline">\(\eta_{2,t} \sim t(5)\)</span>,
-<span class="math inline">\(B = \left[\begin{array}{cc} 1 &amp; 2 \\ -1 &amp; 1 \end{array}\right]\)</span> and
-<span class="math inline">\(Q = \left[\begin{array}{cc} \cos(\pi/3) &amp; -\sin(\pi/3) \\ \sin(\pi/3) &amp; \cos(\pi/3) \end{array}\right]\)</span>.</p>
+<span class="math inline">\(B = \left[\begin{array}{cc}
+1 &amp; 2 \\
+-1 &amp; 1
+\end{array}\right]\)</span> and
+<span class="math inline">\(Q = \left[\begin{array}{cc}
+\cos(\pi/3) &amp; -\sin(\pi/3) \\
+\sin(\pi/3) &amp; \cos(\pi/3)
+\end{array}\right]\)</span>.</p>
 <p>Figure <a href="NonGaussian.html#fig:preMadeFigureICAGaussianStudent">7.3</a> shows that, in this case, <span class="math inline">\(B \eta_t\)</span> and <span class="math inline">\(BQ\eta_t\)</span> do not have the same distribution any more (in spite of the fact that, in both cases, we have <span class="math inline">\(\mathbb{V}ar(\varepsilon_t)=BB'\)</span>). This opens the door to the identification of the impulse matrix (<span class="math inline">\(BQ\)</span>) in the non-Gaussian case.</p>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:preMadeFigureICAGaussianStudent"></span>
@@ -314,12 +327,12 @@ A = (C(A)+Id)^{-1} (C(A)-Id).
 </td>
 <td><span class="math inline">\(-\dfrac{1-\nu}{2}\log\left( 1 +\dfrac{x^2}{\nu-2} \right)\)</span></td>
 <td><span class="math inline">\(-\dfrac{x(1+\nu)}{\nu - 2 + x^2}\)</span></td>
-<td><span class="math inline">\(- (1+\nu) \dfrac{\nu - 2 - x^2}{\nu - 2 + x^2}\)</span></td>
+<td><span class="math inline">\(- (1+\nu)  \dfrac{\nu - 2 - x^2}{\nu - 2 + x^2}\)</span></td>
 </tr>
 <tr class="odd">
 <td>Hyperbolic secant</td>
 <td><span class="math inline">\(cst - \log\left( \cosh\left\{\dfrac{\pi}{2}x\right\} \right)\)</span></td>
-<td><span class="math inline">\(-\dfrac{\pi}{2} anh\left(\dfrac{\pi}{2}x\right)\)</span></td>
+<td><span class="math inline">\(-\dfrac{\pi}{2}   anh\left(\dfrac{\pi}{2}x\right)\)</span></td>
 <td><span class="math inline">\(-\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2\)</span></td>
 </tr>
 <tr class="even">
@@ -332,7 +345,7 @@ A = (C(A)+Id)^{-1} (C(A)-Id).
 </table></div>
 <div class="example">
 <p><span id="exm:GMR2017" class="example"><strong>Example 7.1  (Non-Gaussian monetary-policy shocks) </strong></span>We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (<span class="math inline">\(T=224\)</span>). We consider three dependent variables: inflation (<span class="math inline">\(\pi_t\)</span>), economic activity (<span class="math inline">\(z_t\)</span>, the output gap) and the nominal short-term interest rate (<span class="math inline">\(r_t\)</span>). Changes in the log of oil prices are added as an exogenous variable (<span class="math inline">\(x_t\)</span>).</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1959-04-01"</span></span>
 <span><span class="va">Last.date</span>  <span class="op">&lt;-</span> <span class="st">"2015-01-01"</span></span>
@@ -348,7 +361,7 @@ y_t  = \underbrace{\mu + \sum_{i=1}^{p} \Phi_i y_{t-i} + \Theta x_t}_{a(W_t;\the
 \]</span>
 where the <span class="math inline">\(u_t\)</span>’s are assumed to be serially independent, with zero mean and variance-covariance matrix <span class="math inline">\(\Omega\)</span>.</p>
 <p>Matrices <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Phi_i\)</span>, <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(\Omega\)</span> are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb.lags</span> <span class="op">&lt;-</span> <span class="fl">6</span> <span class="co"># number of lags used in the VAR model</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nb.lags</span><span class="op">)</span><span class="op">{</span></span>
@@ -366,7 +379,7 @@ where the <span class="math inline">\(u_t\)</span>’s are assumed to be seriall
 <span>  <span class="va">effect.commo</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">eq</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">eq</span><span class="op">$</span><span class="va">coef</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">Omega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">U</span><span class="op">)</span> <span class="co"># Covariance matrix of the OLS residuals.</span></span>
-<span><span class="va">Omeg12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/chol.html">chol</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span> <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
+<span><span class="va">Omeg12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/chol-methods.html">chol</a></span><span class="op">(</span><span class="va">Omega</span><span class="op">)</span><span class="op">)</span> <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
 <span><span class="va">Eps</span> <span class="op">&lt;-</span> <span class="va">U</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/solve-methods.html">solve</a></span><span class="op">(</span><span class="va">Omeg12</span><span class="op">)</span><span class="op">)</span> <span class="co"># Recover associated structural shocks</span></span></code></pre></div>
 <p>We want to estimate the orthogonal matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(u_t=\Omega^{1/2}C \eta_t\)</span>, where</p>
 <ul>
@@ -380,7 +393,7 @@ where the <span class="math inline">\(u_t\)</span>’s are assumed to be seriall
 \]</span>
 By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it comes that the covariance matrix of these residuals is <span class="math inline">\(Id\)</span>.</p>
 <p>The pseudo density functions are distinct and asymmetric mixtures of Gaussian distributions.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">distri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mixt.gaussian"</span>,<span class="st">"mixt.gaussian"</span>,<span class="st">"mixt.gaussian"</span><span class="op">)</span>,</span>
 <span>  df<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NaN</span>,<span class="cn">NaN</span>,<span class="cn">NaN</span><span class="op">)</span>,</span>
@@ -421,7 +434,7 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 ##  [9,]  0.99222290 0.007785691 127.4418551</code></pre>
 <p>(Note: it is always useful to combine two optimization algorithms, such as <code>Nelder-Mead</code> and <code>BFGS</code>.)</p>
 <p>We would obtain close results by neglecting commodity prices. In that case, one can simply use the function <code>estim.SVAR.ICA</code> of the <code>IdSS</code> package. Let us compare the <span class="math inline">\(C\)</span> matrix obtained in the two cases (with or without commodity prices):</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ICA.res.no.commo</span> <span class="op">&lt;-</span> <span class="fu">estim.SVAR.ICA</span><span class="op">(</span><span class="va">Y</span>,distri <span class="op">=</span> <span class="va">distri</span>,p<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">ICA.res.no.commo</span><span class="op">$</span><span class="va">C.PML</span>,<span class="cn">NaN</span>,<span class="va">C.PML</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        [,1]  [,2]   [,3] [,4]   [,5]  [,6]   [,7]
@@ -437,7 +450,7 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 <strong>Demand shock</strong> have influences of same signs on economic activity and on inflation.</li>
 </ul>
 <p>Let us compute the IRFs associated with the three structural shocks. (For the sake of comparison, the first line of plots shows the IRFs to a monetary-policy shock obtained from a Cholesky-based approach where the short-term rate is ordered last.)</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IRF.Chol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="cn">NaN</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">n</span>,<span class="fl">41</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">IRF.ICA</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="cn">NaN</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">n</span>,<span class="fl">41</span>,<span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">PHI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>;<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nb.lags</span><span class="op">)</span><span class="op">{</span><span class="va">PHI</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="va">Phi</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span>,<span class="va">nb.lags</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,,<span class="va">i</span><span class="op">]</span><span class="op">}</span></span>
@@ -835,7 +848,7 @@ Figure 7.5: The first row of plots shows the responses of the three endogenous v
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-02.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

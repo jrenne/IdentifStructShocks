@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Inference {#Inference}
 
 Consider the following SVAR model:
@@ -52,8 +57,6 @@ The following code implements the Monte Carlo method.
 
 ```{r inference1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; Monte Carlo method.",warning=FALSE,message=FALSE}
 library(IdSS);library(vars);library(Matrix)
-First.date <- "1965-01-01"
-Last.date <- "1995-06-01"
 data("USmonthly")
 First.date <- "1965-01-01"
 Last.date <- "1995-06-01"
@@ -63,7 +66,7 @@ USmonthly   <- USmonthly[indic.first:indic.last,]
 considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
 y <- as.matrix(USmonthly[considered.variables])
 # ===================================
-# CEE with different inference methods
+# CEE with Monte Carlo
 # ===================================
 res.svar.ordering <-
   svar.ordering.2(y,p=3,
@@ -82,6 +85,20 @@ median.IRFs.ordering <- res.svar.ordering$all.CI.median
 simulated.IRFs.ordering <- res.svar.ordering$simulated.IRFs
 ```
 
+Below we plot the estimated IRFs to a mom^netary policy shock, together with a sample of 50 IRFs simulated with the Monte Carlo method, and the median of all simulated IRFs.
+
+```{r inference1bis, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Estimated IRF associated with a monetary policy shock (black line) with simulated IRFs (red lines) and median IRF (blue line); Monte Carlo method.",warning=FALSE,message=FALSE}
+
+par(mfrow=c(1,1))
+plot(IRFs.ordering[,5],type="l")
+for(i in 1:50){
+  lines(simulated.IRFs.ordering[,5,i],col="red",type="l")
+}
+lines(IRFs.ordering[,5],col="black",type="l")
+lines(median.IRFs.ordering[,5],col="blue",type="l")
+
+```
+
 ## Delta method
 
 Suppose $\beta$ is a vector of parameters and $\beta$ is an estimator such that
@@ -90,40 +107,42 @@ $$
 $$
 where $d$ denotes convergence in distribution, $N(0,\Sigma_\beta)$ denotes the multivariate normal distribution with mean vector 0 and covariance matrix $\Sigma_\beta$ and $T$ is the size of the sample used for estimation.
 
-Let $g(\beta) = (g_l(\beta),..., g_m(\beta))'$ be a continuously differentiable function with values in $\mathbb{R}^m$, and assume that $\partial g_i/\partial
-\beta' = (\partial g_i/\partial \beta_j)$ is nonzero at $\beta$ for $i = 1,\dots, m$. Then
+Let $\varphi(\beta) = (\varphi_l(\beta),..., \varphi_m(\beta))'$ be a continuously differentiable function with values in $\mathbb{R}^m$, and assume that $\partial \varphi_i/\partial
+\beta' = (\partial \varphi_i/\partial \beta_j)$ is nonzero at $\beta$ for $i = 1,\dots, m$. Then
 $$
-\sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
+\sqrt{T}(\varphi(\hat\beta)-\varphi(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial \varphi}{\partial \beta'}\Sigma_\beta\frac{\partial \varphi'}{\partial \beta}\right).
 $$
-Using this property, @Lutkepohl_1990 provides the asymptotic distributions of the $\Psi_j$'s. The following lines of code can be used to get approximate confidence intervals for IRFs.
+Using this property, @Lutkepohl_1990 provides the asymptotic distributions of the $\Psi_j$'s. 
+
+<!-- The following lines of code can be used to get approximate confidence intervals for IRFs.
 
 
-```{r #IRFDELTA, eval=FALSE}
-irf.function <- function(THETA){
-  c <- THETA[1]
-  phi <- THETA[2:(p+1)]
-  if(q>0){
-    theta <- c(1,THETA[(1+p+1):(1+p+q)])
-  }else{theta <- 1}
-  sigma <- THETA[1+p+q+1]
-  r <- dim(Matrix.of.Exog)[2] - 1
-  beta <- THETA[(1+p+q+1+1):(1+p+q+1+(r+1))]
-  
-  irf <- sim.arma(0,phi,beta,sigma=sd(Ramey$ED3_TC,na.rm=TRUE),T=60,
-                  y.0=rep(0,length(x$phi)),nb.sim=1,make.IRF=1,
-                  X=NaN,beta=NaN)
-  return(irf)}
-IRF.0 <- 100*irf.function(x$THETA)
-eps <- .00000001
-d.IRF <- NULL
-for(i in 1:length(x$THETA)){
-  THETA.i <- x$THETA
-  THETA.i[i] <- THETA.i[i] + eps
-  IRF.i <- 100*irf.function(THETA.i)
-  d.IRF <- cbind(d.IRF,
-                 (IRF.i - IRF.0)/eps)}
-mat.var.cov.IRF <- d.IRF %*% x$I %*% t(d.IRF)
-```
+<!-- ```{r #IRFDELTA, eval=FALSE} -->
+<!-- irf.function <- function(THETA){ -->
+<!--   c <- THETA[1] -->
+<!--   phi <- THETA[2:(p+1)] -->
+<!--   if(q>0){ -->
+<!--     theta <- c(1,THETA[(1+p+1):(1+p+q)]) -->
+<!--   }else{theta <- 1} -->
+<!--   sigma <- THETA[1+p+q+1] -->
+<!--   r <- dim(Matrix.of.Exog)[2] - 1 -->
+<!--   beta <- THETA[(1+p+q+1+1):(1+p+q+1+(r+1))] -->
+
+<!--   irf <- sim.arma(0,phi,beta,sigma=sd(Ramey$ED3_TC,na.rm=TRUE),T=60, -->
+<!--                   y.0=rep(0,length(x$phi)),nb.sim=1,make.IRF=1, -->
+<!--                   X=NaN,beta=NaN) -->
+<!--   return(irf)} -->
+<!-- IRF.0 <- 100*irf.function(x$THETA) -->
+<!-- eps <- .00000001 -->
+<!-- d.IRF <- NULL -->
+<!-- for(i in 1:length(x$THETA)){ -->
+<!--   THETA.i <- x$THETA -->
+<!--   THETA.i[i] <- THETA.i[i] + eps -->
+<!--   IRF.i <- 100*irf.function(THETA.i) -->
+<!--   d.IRF <- cbind(d.IRF, -->
+<!--                  (IRF.i - IRF.0)/eps)} -->
+<!-- mat.var.cov.IRF <- d.IRF %*% x$I %*% t(d.IRF) -->
+<!-- ``` -->
 
 
 A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results and the normality assumption. Boostrapping approaches are more robust in small-sample and non-normal situations.
@@ -158,8 +177,6 @@ The following code implements the bootstrap method.
 
 ```{r inference2, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; bootstrap method.",warning=FALSE,message=FALSE}
 library(IdSS);library(vars);library(Matrix)
-First.date <- "1965-01-01"
-Last.date <- "1995-06-01"
 data("USmonthly")
 First.date <- "1965-01-01"
 Last.date <- "1995-06-01"
@@ -169,7 +186,7 @@ USmonthly   <- USmonthly[indic.first:indic.last,]
 considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
 y <- as.matrix(USmonthly[considered.variables])
 # ===================================
-# CEE with different inference methods
+# CEE with bootstrap
 # ===================================
 res.svar.ordering <-
   svar.ordering.2(y,p=3,
@@ -320,8 +337,6 @@ The following code implements the bootstrap-after-bootrap method.
 
 ```{r inference6, fig.align = 'left-aligned', out.width = "95%", fig.cap = "IRF associated with a monetary policy shock; sign-restriction approach.",warning=FALSE,message=FALSE}
 library(IdSS);library(vars);library(Matrix)
-First.date <- "1965-01-01"
-Last.date <- "1995-06-01"
 data("USmonthly")
 First.date <- "1965-01-01"
 Last.date <- "1995-06-01"
@@ -331,7 +346,7 @@ USmonthly   <- USmonthly[indic.first:indic.last,]
 considered.variables<-c("LIP","UNEMP","LCPI","LPCOM","FFR","NBR","TTR","M1")
 y <- as.matrix(USmonthly[considered.variables])
 # ===================================
-# CEE with different inference methods
+# CEE with bootstrap-after-bootstrap
 # ===================================
 res.svar.ordering <-
   svar.ordering.2(y,p=3,

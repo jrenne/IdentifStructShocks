@@ -7,7 +7,7 @@
 <title>Chapter 8 Local projection methods | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="8.1 Overview of the approach Consider the infinite MA representation of \(y_t\) (Eq. (1.4)): \[ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}. \] As seen in Section 1.2, the entries \((i,j)\)...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Local projection methods | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="8.1 Overview of the approach Consider the infinite MA representation of \(y_t\) (Eq. (1.4)): \[ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}. \] As seen in Section 1.2, the entries \((i,j)\)...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="8.1 Overview of the approach Consider the infinite MA representation of \(y_t\) (Eq. (1.4)): \[ y_t = \mu + \sum_{h=0}^\infty \Psi_{h} \eta_{t-h}. \] As seen in Section 1.2, the entries \((i,j)\)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -131,7 +132,7 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 <p>This is for instance consistent with the case where <span class="math inline">\([\Delta GDP_t, \pi_t,i_t]'\)</span> follows a VAR(1) and the monetary-policy shock does not contemporaneously affect <span class="math inline">\(\Delta GDP_t\)</span> and <span class="math inline">\(\pi_t\)</span>. The IRFs can then be estimated by LP, taking <span class="math inline">\(x_t = i_t\)</span> and <span class="math inline">\(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\)</span>.</p>
 <p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This is reminiscent of the distinction betweem direct forecasting—based on regressions of &lt;span class="math inline"&gt;\(y_{t+h}\)&lt;/span&gt; on &lt;span class="math inline"&gt;\(\{y_t,y_{t-1},\dots\}\)&lt;/span&gt;—and iterated forecasting—based on a recursive model where &lt;span class="math inline"&gt;\(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\)&lt;/span&gt;, see &lt;span class="citation"&gt;Marcellino, Stock, and Watson (&lt;a href="references.html#ref-Marcellino_et_al_2006"&gt;2006&lt;/a&gt;)&lt;/span&gt;.&lt;/p&gt;'><sup>10</sup></a></p>
 <p>In the following lines of code, we employ the <span class="citation">Jordà (<a href="references.html#ref-Jorda_2005">2005</a>)</span>’s approach on the same dataset as the one used in Section @ref{Cholesky}. (We were then illustrating <span class="citation">Christiano, Eichenbaum, and Evans (<a href="references.html#ref-Christiano_Eichenbaum_Evans_1996">1996</a>)</span>’s methodology.)</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="co"># Select sample period:</span></span>
@@ -294,7 +295,7 @@ S_{\varepsilon,e}&amp; \sigma^2_{e}
 where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="math inline">\(\sigma^2_{e}\)</span> result from the estimation of an AR process for <span class="math inline">\(z_t\)</span>, and where <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S_{\varepsilon,e}\)</span> are sample covariances for the VAR/AR residuals.</p>
 <p>For each simulated sample (of <span class="math inline">\(\tilde{y}_t\)</span> and <span class="math inline">\(\tilde{z}_t\)</span>, say), estimate <span class="math inline">\(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\)</span> and associated <span class="math inline">\(\widetilde{\Psi}_{i,1,h}\)</span>. This provides e.g. a sequence of <span class="math inline">\(N\)</span> estimates of <span class="math inline">\(\Psi_{i,1,h}\)</span>, from which quantiles and conf. intervals can be deduced.</p>
 <p>In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is <code>FF4_TC</code> from the Ramsey’s database; they are base on the <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015">2015</a>)</span> approach, that use 3-month fed funds futures.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1990-05-01"</span>;<span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"2012-6-01"</span></span>
@@ -313,7 +314,7 @@ where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="ma
 Figure 8.5: Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red).
 </p>
 </div>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">considered.variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"GS1"</span>,<span class="st">"LIP"</span>,<span class="st">"LCPI"</span>,<span class="st">"EBP"</span><span class="op">)</span></span>
 <span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">[</span>,<span class="va">considered.variables</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">considered.variables</span><span class="op">)</span></span>
@@ -371,7 +372,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <p>If <span class="math inline">\(z_t\)</span> is suspected to be correlated to past values of <span class="math inline">\(\eta_{1,t}\)</span> but not to the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j&gt;1\)</span>, then one can add lags of <span class="math inline">\(z_t\)</span> as controls (method e.g. advocated by Ramey, 2016, p.108, considering the instrument by <span class="citation">Gertler and Karadi (<a href="references.html#ref-Gertler_Karadi_2015">2015</a>)</span>).</p>
 <p>In the general case, one can use lags of <span class="math inline">\(y_t\)</span> as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.</p>
 <!-- As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency. -->
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res.LP.IV</span> <span class="op">&lt;-</span> <span class="fu">make.LPIV.irf</span><span class="op">(</span><span class="va">Y</span>,<span class="va">Z</span>,</span>
 <span>                           nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>                           nb.lags.Y.4.control<span class="op">=</span><span class="fl">4</span>,</span>
@@ -415,7 +416,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-02.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

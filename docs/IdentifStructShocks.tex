@@ -123,7 +123,7 @@
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -134,7 +134,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2024-12-02}
+\date{2024-12-04}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -162,8 +162,7 @@
 }
 \newcommand{\bv}[1]{\mathbf{#1}}
 
-\hypertarget{intro}{%
-\chapter*{The Identification of Dynamic Structural Shocks}\label{intro}}
+\chapter*{The Identification of Dynamic Structural Shocks}\label{intro}
 
 The identification and estimation of dynamic responses to structural shocks is one of the principal goals of macroeconometrics. These responses correspond to the effect, over time, of an exogenous intervention that propagates through the economy, as modeled by a system of simultaneous equations.
 
@@ -207,13 +206,11 @@ Codes associated with this course are part of the \texttt{IdSS} package (\textbf
   \end{itemize}
 \end{itemize}
 
-\hypertarget{basics}{%
-\chapter{VARs and IRFs: the basics}\label{basics}}
+\chapter{VARs and IRFs: the basics}\label{basics}
 
 Often, impulse response functions (IRFs) are generated in the context of vectorial autoregressive (VAR) models. This section presents these models and show how they can be used to compute IRFs.
 
-\hypertarget{definition-of-vars-and-svarma-models}{%
-\section{Definition of VARs (and SVARMA) models}\label{definition-of-vars-and-svarma-models}}
+\section{Definition of VARs (and SVARMA) models}\label{definition-of-vars-and-svarma-models}
 
 \begin{definition}[(S)VAR model]
 \protect\hypertarget{def:SVAR}{}\label{def:SVAR}Let \(y_{t}\) denote a \(n \times1\) vector of (endogenous) random variables. Process \(y_{t}\) follows a \(p^{th}\)-order (S)VAR if, for all \(t\), we have
@@ -243,8 +240,7 @@ SVARMA:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \\
 with \(\varepsilon_t = B_0\eta_t\), and \(B_j = \Theta_j B_0\), for \(j \ge 0\) (with \(\Theta_0=Id\)), where \(\{\eta_{t}\}\) is a white noise sequence whose components are are mutually and serially independent.
 \end{definition}
 
-\hypertarget{IRFSVARMA}{%
-\section{IRFs in SVARMA}\label{IRFSVARMA}}
+\section{IRFs in SVARMA}\label{IRFSVARMA}
 
 One of the main objectives of macro-econometrics is to derive IRFs, that represent the dynamic effects of structural shocks (components of \(\eta_t\)) though the system of variables \(y_t\).
 
@@ -376,8 +372,7 @@ We can use function \texttt{simul.VARMA} of package \texttt{IdSS} to produce IRF
 
 \end{example}
 
-\hypertarget{covariance-stationary-varma-models}{%
-\section{Covariance-stationary VARMA models}\label{covariance-stationary-varma-models}}
+\section{Covariance-stationary VARMA models}\label{covariance-stationary-varma-models}
 
 Let's come back to the infinite MA case (Eq. \eqref{eq:InfMA}):
 \[
@@ -475,8 +470,7 @@ where \(\phi_i\) is the \(i^{th}\) row of \(\Phi_1\), and where \(\varepsilon_{i
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/simulARMAbiased-1} \caption{Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS.}\label{fig:simulARMAbiased}
 \end{figure}
 
-\hypertarget{estimVAR}{%
-\section{VAR estimation}\label{estimVAR}}
+\section{VAR estimation}\label{estimVAR}
 
 This section discusses the estimation of VAR models. Eq. \eqref{eq:yVAR} can be written:
 \[
@@ -489,7 +483,9 @@ Consequently:
 y_{t}\mid y_{t-1},y_{t-2},\ldots,y_{-p+1}\sim \mathcal{N}(c+\Phi_{1}y_{t-1}+\ldots\Phi_{p}y_{t-p},\Omega).
 \]
 
-Using \citet{Hamilton_1994}'s notations, denote with \(\Pi\) the matrix \(\left[\begin{array}{ccccc} c & \Phi_{1} & \Phi_{2} & \ldots & \Phi_{p}\end{array}\right]'\) and with \(x_{t}\) the vector \(\left[\begin{array}{ccccc} 1 & y'_{t-1} & y'_{t-2} & \ldots & y'_{t-p}\end{array}\right]'\), we have:
+Using \citet{Hamilton_1994}'s notations, denote with \(\Pi\) the matrix \(\left[\begin{array}{ccccc}
+c & \Phi_{1} & \Phi_{2} & \ldots & \Phi_{p}\end{array}\right]'\) and with \(x_{t}\) the vector \(\left[\begin{array}{ccccc}
+1 & y'_{t-1} & y'_{t-2} & \ldots & y'_{t-p}\end{array}\right]'\), we have:
 \begin{equation}
 y_{t}= \Pi'x_{t} + \varepsilon_{t}. \label{eq:PIVAR}
 \end{equation}
@@ -614,15 +610,6 @@ where \(N=p \times n^{2}\).
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(IdSS)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: package 'vars' was built under R version 4.3.2
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ US3var[,}\FunctionTok{c}\NormalTok{(}\StringTok{"y.gdp.gap"}\NormalTok{,}\StringTok{"infl"}\NormalTok{)]}
 \FunctionTok{VARselect}\NormalTok{(data,}\AttributeTok{lag.max =} \DecValTok{6}\NormalTok{)}
 \end{Highlighting}
@@ -655,11 +642,9 @@ where \(N=p \times n^{2}\).
 ## [1] 0.9114892 0.9114892 0.6319554 0.4759403 0.4759403 0.3246995
 \end{verbatim}
 
-\hypertarget{BlockGranger}{%
-\section{Block exogeneity and Granger causality}\label{BlockGranger}}
+\section{Block exogeneity and Granger causality}\label{BlockGranger}
 
-\hypertarget{block-exogeneity}{%
-\subsection{Block exogeneity}\label{block-exogeneity}}
+\subsection{Block exogeneity}\label{block-exogeneity}
 
 Let's decompose \(y_t\) into two subvectors \(y^{(1)}_{t}\) (\(n_1 \times 1\)) and \(y^{(2)}_{t}\) (\(n_2 \times 1\)), with \(y_t' = [{y^{(1)}_{t}}',{y^{(2)}_{t}}']\) (and therefore \(n=n_1 +n_2\)), such that:
 \[
@@ -683,8 +668,7 @@ y^{(2)}_{t-1}
 \]
 Using, e.g., a likelihood ratio test (see Def. \ref{def:LR}), one can easily test for block exogeneity of \(y_t^{(2)}\) (say). The null assumption can be expressed as \(\Phi^{(2,1)}=0\).
 
-\hypertarget{granger-causality}{%
-\subsection{Granger Causality}\label{granger-causality}}
+\subsection{Granger Causality}\label{granger-causality}
 
 \citet{Granger_1969} developed a method to explore \textbf{causal relationships} among variables. The approach consists in determining whether the past values of \(y_{1,t}\) can help explain the current \(y_{2,t}\) (beyond the information already included in the past values of \(y_{2,t}\)).
 
@@ -757,11 +741,9 @@ According to the following lines of code, the output gap Granger-causes inflatio
 ## 2    217 -3 1.5451 0.2038
 \end{verbatim}
 
-\hypertarget{identifStruct}{%
-\chapter{Identification problem and standard identification techniques}\label{identifStruct}}
+\chapter{Identification problem and standard identification techniques}\label{identifStruct}
 
-\hypertarget{IdentifPbm}{%
-\section{The identification problem}\label{IdentifPbm}}
+\section{The identification problem}\label{IdentifPbm}
 
 In Section \ref{estimVAR}, we have seen how to estimate \(\mathbb{V}ar(\varepsilon_t) =\Omega\) and the \(\Phi_k\) matrices in the context of a VAR model. But the IRFs are functions of \(B\) and of the \(\Phi_k\)'s, not of \(\Omega\) the \(\Phi_k\)'s (see Section \ref{IRFSVARMA}). We have \(\Omega = BB'\), which provides some restrictions on the components of \(B\), but this is not sufficient to fully identify \(B\). Indeed, seen a system of equations whose unknowns are the \(b_{i,j}\)'s (components of \(B\)), the system \(\Omega = BB'\) contains only \(n(n+1)/2\) linearly independent equations. For instance, for \(n=2\):
 \begin{eqnarray*}
@@ -831,8 +813,7 @@ We then have 3 linearly independent equations but 4 unknowns. Therefore, \(B\) i
 
 The two approaches can be combined (see, e.g., \citet{Gerlach_Smets_1995}).
 
-\hypertarget{a-stylized-example-motivating-short-run-restrictions}{%
-\section{A stylized example motivating short-run restrictions}\label{a-stylized-example-motivating-short-run-restrictions}}
+\section{A stylized example motivating short-run restrictions}\label{a-stylized-example-motivating-short-run-restrictions}
 
 Let us consider a simple example that could motivate short-run restrictions. Consider the following stylized macro model:
 \begin{equation}
@@ -871,13 +852,13 @@ Vector \(\eta_t\) is assumed to be a vector of structural shocks, mutually and s
 System \eqref{eq:systemI} could be rewritten as follows:
 \begin{equation}
 \left[\begin{array}{c}
-d_t\\
+g_t\\
 \pi_t\\
 i_t
 \end{array}\right]
 = \Phi(L)
 \left[\begin{array}{c}
-d_{t-1}\\
+g_{t-1}\\
 \pi_{t-1}\\
 i_{t-1} +
 \end{array}\right] +\underbrace{\underbrace{
@@ -892,8 +873,7 @@ i_{t-1} +
 
 This is the \textbf{reduced-form} of the model. This representation suggests three additional restrictions on the entries of \(B\); the latter matrix is therefore identified as soon as \(\Omega = BB'\) is known (up to the signs of its columns).
 
-\hypertarget{Cholesky}{%
-\section{Cholesky: a specific short-run-restriction situation}\label{Cholesky}}
+\section{Cholesky: a specific short-run-restriction situation}\label{Cholesky}
 
 There are particular cases in which some well-known matrix decomposition of \(\Omega=\mathbb{V}ar(\varepsilon_t)\) can be used to easily estimate some specific SVAR. This is the case for the so-called Cholesky decomposition. Consider the following context:
 
@@ -975,8 +955,7 @@ An equivalent approach consists in computing the Cholesky decomposition of \(BB'
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/CEE-1} \caption{Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).}\label{fig:CEE}
 \end{figure}
 
-\hypertarget{long-run-restrictions}{%
-\section{Long-run restrictions}\label{long-run-restrictions}}
+\section{Long-run restrictions}\label{long-run-restrictions}
 
 Let us now turn to \textbf{Long-run restrictions}. Such a restriction concerns the long-run influence of a shock on an endogenous variable. Let us consider for instance a structural shock that is assumed to have no ``long-run influence'' on GDP. How to express this? The long-run change in GDP can be expressed as \(GDP_{t+h} - GDP_t\), with \(h\) large. Note further that:
 \[
@@ -1136,8 +1115,7 @@ Figure \ref{fig:BQ4} displays the resulting IRFs. Note that, for GDP, we cumulat
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/BQ4-1} \caption{IRF of GDP and unemployment to demand and supply shocks.}\label{fig:BQ4}
 \end{figure}
 
-\hypertarget{Inference}{%
-\chapter{Inference}\label{Inference}}
+\chapter{Inference}\label{Inference}
 
 Consider the following SVAR model:
 \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
@@ -1167,8 +1145,7 @@ The main inference methods are the following:
   Bootstrap method (\citet{Kilian_1998})
 \end{itemize}
 
-\hypertarget{MonteCarlo}{%
-\section{Monte Carlo method}\label{MonteCarlo}}
+\section{Monte Carlo method}\label{MonteCarlo}
 
 We use Monte Carlo when we need to approximate the distribution of a variable whose distribution is unknown (here: the \(\Psi_j\)'s) but which is a function of another variable whose distribution is known (here, the \(\Phi_j\)'s).
 
@@ -1204,8 +1181,6 @@ The following code implements the Monte Carlo method.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
-\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
-\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
 \NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
@@ -1215,7 +1190,7 @@ The following code implements the Monte Carlo method.
 \NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
 \CommentTok{\# ===================================}
-\CommentTok{\# CEE with different inference methods}
+\CommentTok{\# CEE with Monte Carlo}
 \CommentTok{\# ===================================}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
   \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
@@ -1243,8 +1218,25 @@ The following code implements the Monte Carlo method.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{delta-method}{%
-\section{Delta method}\label{delta-method}}
+Below we plot the estimated IRFs to a mom\^{}netary policy shock, together with a sample of 50 IRFs simulated with the Monte Carlo method, and the median of all simulated IRFs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(IRFs.ordering[,}\DecValTok{5}\NormalTok{],}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{)\{}
+  \FunctionTok{lines}\NormalTok{(simulated.IRFs.ordering[,}\DecValTok{5}\NormalTok{,i],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\NormalTok{\}}
+\FunctionTok{lines}\NormalTok{(IRFs.ordering[,}\DecValTok{5}\NormalTok{],}\AttributeTok{col=}\StringTok{"black"}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(median.IRFs.ordering[,}\DecValTok{5}\NormalTok{],}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/inference1bis-1} \caption{Estimated IRF associated with a monetary policy shock (black line) with simulated IRFs (red lines) and median IRF (blue line); Monte Carlo method.}\label{fig:inference1bis}
+\end{figure}
+
+\section{Delta method}\label{delta-method}
 
 Suppose \(\beta\) is a vector of parameters and \(\beta\) is an estimator such that
 \[
@@ -1252,45 +1244,16 @@ Suppose \(\beta\) is a vector of parameters and \(\beta\) is an estimator such t
 \]
 where \(d\) denotes convergence in distribution, \(N(0,\Sigma_\beta)\) denotes the multivariate normal distribution with mean vector 0 and covariance matrix \(\Sigma_\beta\) and \(T\) is the size of the sample used for estimation.
 
-Let \(g(\beta) = (g_l(\beta),..., g_m(\beta))'\) be a continuously differentiable function with values in \(\mathbb{R}^m\), and assume that \(\partial g_i/\partial \beta' = (\partial g_i/\partial \beta_j)\) is nonzero at \(\beta\) for \(i = 1,\dots, m\). Then
+Let \(\varphi(\beta) = (\varphi_l(\beta),..., \varphi_m(\beta))'\) be a continuously differentiable function with values in \(\mathbb{R}^m\), and assume that \(\partial \varphi_i/\partial
+\beta' = (\partial \varphi_i/\partial \beta_j)\) is nonzero at \(\beta\) for \(i = 1,\dots, m\). Then
 \[
-\sqrt{T}(g(\hat\beta)-g(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial g}{\partial \beta'}\Sigma_\beta\frac{\partial g'}{\partial \beta}\right).
+\sqrt{T}(\varphi(\hat\beta)-\varphi(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial \varphi}{\partial \beta'}\Sigma_\beta\frac{\partial \varphi'}{\partial \beta}\right).
 \]
-Using this property, \citet{Lutkepohl_1990} provides the asymptotic distributions of the \(\Psi_j\)'s. The following lines of code can be used to get approximate confidence intervals for IRFs.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{irf.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(THETA)\{}
-\NormalTok{  c }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\NormalTok{]}
-\NormalTok{  phi }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{2}\SpecialCharTok{:}\NormalTok{(p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]}
-  \ControlFlowTok{if}\NormalTok{(q}\SpecialCharTok{\textgreater{}}\DecValTok{0}\NormalTok{)\{}
-\NormalTok{    theta }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q)])}
-\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{theta }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{\}}
-\NormalTok{  sigma }\OtherTok{\textless{}{-}}\NormalTok{ THETA[}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}
-\NormalTok{  r }\OtherTok{\textless{}{-}} \FunctionTok{dim}\NormalTok{(Matrix.of.Exog)[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{{-}} \DecValTok{1}
-\NormalTok{  beta }\OtherTok{\textless{}{-}}\NormalTok{ THETA[(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{p}\SpecialCharTok{+}\NormalTok{q}\SpecialCharTok{+}\DecValTok{1}\SpecialCharTok{+}\NormalTok{(r}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))]}
-  
-\NormalTok{  irf }\OtherTok{\textless{}{-}} \FunctionTok{sim.arma}\NormalTok{(}\DecValTok{0}\NormalTok{,phi,beta,}\AttributeTok{sigma=}\FunctionTok{sd}\NormalTok{(Ramey}\SpecialCharTok{$}\NormalTok{ED3\_TC,}\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}\AttributeTok{T=}\DecValTok{60}\NormalTok{,}
-                  \AttributeTok{y.0=}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{phi)),}\AttributeTok{nb.sim=}\DecValTok{1}\NormalTok{,}\AttributeTok{make.IRF=}\DecValTok{1}\NormalTok{,}
-                  \AttributeTok{X=}\ConstantTok{NaN}\NormalTok{,}\AttributeTok{beta=}\ConstantTok{NaN}\NormalTok{)}
-  \FunctionTok{return}\NormalTok{(irf)\}}
-\NormalTok{IRF}\FloatTok{.0} \OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA)}
-\NormalTok{eps }\OtherTok{\textless{}{-}}\NormalTok{ .}\DecValTok{00000001}
-\NormalTok{d.IRF }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(x}\SpecialCharTok{$}\NormalTok{THETA))\{}
-\NormalTok{  THETA.i }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{THETA}
-\NormalTok{  THETA.i[i] }\OtherTok{\textless{}{-}}\NormalTok{ THETA.i[i] }\SpecialCharTok{+}\NormalTok{ eps}
-\NormalTok{  IRF.i }\OtherTok{\textless{}{-}} \DecValTok{100}\SpecialCharTok{*}\FunctionTok{irf.function}\NormalTok{(THETA.i)}
-\NormalTok{  d.IRF }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(d.IRF,}
-\NormalTok{                 (IRF.i }\SpecialCharTok{{-}}\NormalTok{ IRF}\FloatTok{.0}\NormalTok{)}\SpecialCharTok{/}\NormalTok{eps)\}}
-\NormalTok{mat.var.cov.IRF }\OtherTok{\textless{}{-}}\NormalTok{ d.IRF }\SpecialCharTok{\%*\%}\NormalTok{ x}\SpecialCharTok{$}\NormalTok{I }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(d.IRF)}
-\end{Highlighting}
-\end{Shaded}
+Using this property, \citet{Lutkepohl_1990} provides the asymptotic distributions of the \(\Psi_j\)'s.
 
 A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results and the normality assumption. Boostrapping approaches are more robust in small-sample and non-normal situations.
 
-\hypertarget{bootstrap}{%
-\section{Bootstrap}\label{bootstrap}}
+\section{Bootstrap}\label{bootstrap}
 
 IRFs' confidence intervals are intervals where 90\% (or 95\%, 75\%, \ldots) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (\(T\) observations). We obviously cannot do this, because we have only one sample: \(\{y_t\}_{t=1,..,T}\). But we can try to \emph{construct} such samples.
 
@@ -1340,8 +1303,6 @@ The following code implements the bootstrap method.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
-\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
-\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
 \NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
@@ -1351,7 +1312,7 @@ The following code implements the bootstrap method.
 \NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
 \CommentTok{\# ===================================}
-\CommentTok{\# CEE with different inference methods}
+\CommentTok{\# CEE with bootstrap}
 \CommentTok{\# ===================================}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
   \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
@@ -1379,8 +1340,7 @@ The following code implements the bootstrap method.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{bootstrap-after-bootstrap}{%
-\section{Bootstrap-after-bootstrap}\label{bootstrap-after-bootstrap}}
+\section{Bootstrap-after-bootstrap}\label{bootstrap-after-bootstrap}
 
 The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the \emph{small sample bias}, stemming, in particular, from small-sample bias associated with OLS coefficient estimates \(\{\widehat{\Phi}_j\}_{j=1,..,p}\).
 
@@ -1570,8 +1530,6 @@ The following code implements the bootstrap-after-bootrap method.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(IdSS);}\FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(Matrix)}
-\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
-\NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
 \NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1965{-}01{-}01"}
 \NormalTok{Last.date }\OtherTok{\textless{}{-}} \StringTok{"1995{-}06{-}01"}
@@ -1581,7 +1539,7 @@ The following code implements the bootstrap-after-bootrap method.
 \NormalTok{considered.variables}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{,}\StringTok{"UNEMP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"LPCOM"}\NormalTok{,}\StringTok{"FFR"}\NormalTok{,}\StringTok{"NBR"}\NormalTok{,}\StringTok{"TTR"}\NormalTok{,}\StringTok{"M1"}\NormalTok{)}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[considered.variables])}
 \CommentTok{\# ===================================}
-\CommentTok{\# CEE with different inference methods}
+\CommentTok{\# CEE with bootstrap{-}after{-}bootstrap}
 \CommentTok{\# ===================================}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
   \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
@@ -1625,14 +1583,13 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 \end{Shaded}
 
 \begin{verbatim}
-##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3208718 0.1635269 1.037054 -0.1536259 0.1508895 0.9684860 -0.02109236
-## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)  con(-1)    inv(-2)    inc(-2)   con(-2)       const
+## [1,] -0.3206672 0.1821731 0.942746 -0.1272501 0.06465073 1.0121522 -0.01837695
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.11460498 0.9343938 -0.01672199
 \end{verbatim}
 
-\hypertarget{Signs}{%
-\chapter{Sign restrictions}\label{Signs}}
+\chapter{Sign restrictions}\label{Signs}
 
 To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained above, \(\Omega = BB'\) is not sufficient to identify \(B\) since, if we take any orthogonal matrix \(Q\) (see Def. \ref{def:orthogonal}), then \(\mathcal{P}=BQ\) also satisfies \(\Omega = \mathcal{P}\mathcal{P}'\).
 
@@ -1643,8 +1600,7 @@ orthogonal and unit vectors:
 where \(q_i\) is the \(i^{th}\) column of \(Q\).
 \end{definition}
 
-\hypertarget{the-approach}{%
-\section{The approach}\label{the-approach}}
+\section{The approach}\label{the-approach}
 
 The idea behind the sign-restriction approach is to ``draw'' random matrices \(\mathcal{P}\) that satisfy \(\Omega = \mathcal{P}\mathcal{P}'\), and then to constitute a set of admissible matrices, keeping in this set only the simulated \(\mathcal{P}\) matrices that satisfy some predefined sign-based restriction. An example of restriction is ``\emph{after one year, a contractionary monetary-policy shocks has a negative impact on inflation}''.
 
@@ -1706,8 +1662,7 @@ Note: to take into account the uncertainty in \(B\) and \(\Phi\), you can draw \
 
 The sign-restriction approach method has the advantage of being relatively agnostic. Moreover, it is fairly flexible, as one can impose sign restrictions on any variable, at any horizon.
 
-\hypertarget{an-example}{%
-\section{An example}\label{an-example}}
+\section{An example}\label{an-example}
 
 A prominent example is \citet{Uhlig_2005}. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.
 
@@ -1758,16 +1713,17 @@ What about output? Since is the response of interest, we leave it un-restricted.
 \NormalTok{  sign.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,n,n)}
 \NormalTok{  horizon[[i]] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{\}}
-\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
-\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\DecValTok{1}
-\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
-\NormalTok{horizon[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\CommentTok{\# Sign restrictions on shock 1 (monetary shock)}
+\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}  \CommentTok{\# positive impact on price level}
+\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\DecValTok{1} \CommentTok{\# negative impact on interest rate}
+\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\# positive impact on non{-}borrowed reserves}
+\NormalTok{horizon[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5} \CommentTok{\# from horizon 1 to 5}
 \NormalTok{res.svar.signs }\OtherTok{\textless{}{-}} 
   \FunctionTok{svar.signs}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
              \AttributeTok{nb.shocks =} \DecValTok{1}\NormalTok{, }\CommentTok{\#number of identified shocks}
              \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-             \AttributeTok{bootstrap.replications =} \DecValTok{1}\NormalTok{, }\CommentTok{\# = 1 if no bootstrap}
-             \AttributeTok{confidence.interval =} \FloatTok{0.80}\NormalTok{, }\CommentTok{\# expressed in pp.}
+             \AttributeTok{bootstrap.replications =} \DecValTok{1}\NormalTok{, }\CommentTok{\# = 1 if no bootstrap, = N if bootstrap}
+             \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
              \AttributeTok{indic.plot =} \DecValTok{1}\NormalTok{, }\CommentTok{\# Plots are displayed if = 1.}
              \AttributeTok{nb.draws =} \DecValTok{10000}\NormalTok{, }\CommentTok{\# number of draws}
 \NormalTok{             sign.restrictions,}
@@ -1783,19 +1739,18 @@ What about output? Since is the response of interest, we leave it un-restricted.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{simulated.IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{IRFs.signs}
-\FunctionTok{dim}\NormalTok{(simulated.IRFs.signs)[}\DecValTok{4}\NormalTok{]}
+\CommentTok{\# Output}
+\NormalTok{IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{IRFs.signs }\CommentTok{\# all the simulated IRFs}
+\NormalTok{nb.rotations }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{xx }\CommentTok{\# total number of rotations}
+\NormalTok{all.CI.median }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{all.CI.median }\CommentTok{\# median IRFs for the selected shocks}
+\NormalTok{all.CI.lower.bounds }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{all.CI.lower.bounds }\CommentTok{\# lower{-}bound IRFs for the selected shocks}
+\NormalTok{all.CI.upper.bounds }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs}\SpecialCharTok{$}\NormalTok{all.CI.upper.bounds }\CommentTok{\# upper{-}bound IRFs for the selected shocks}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [1] 322
-\end{verbatim}
-
 It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.
 
-\hypertarget{the-penalty-function-approach-pfa}{%
-\section{The penalty-function approach (PFA)}\label{the-penalty-function-approach-pfa}}
+\section{The penalty-function approach (PFA)}\label{the-penalty-function-approach-pfa}
 
 An alternative approach is the so-called \textbf{penalty-function approach} (PFA, \citet{Uhlig_2005}, present in \citet{Danne_2015}'s package). This approach relies on a \emph{penalty function}:
 \[
@@ -1817,8 +1772,7 @@ We are looking for a solution to
 
 The problem is solved numerically.
 
-\hypertarget{NarrativeSign}{%
-\section{Narrative sign restrictions}\label{NarrativeSign}}
+\section{Narrative sign restrictions}\label{NarrativeSign}
 
 A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).\footnote{See also Section \ref{NarrativeHistDecomp}.} For instance, \citet{AntolinDiaz_RubioRamirez_2018} argue that one should rule out structural parameters that disagree with the view that ``a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.''
 
@@ -1828,8 +1782,7 @@ Suppose we want to impose the restriction that, at dates \(\{t_1,\dots,t_J\}\), 
 \]
 where \(\hat\eta_{t}(B)\) is the vector of structural shock associated with a given matrix \(B\) (and where \(e_j\) is the \(j^{th}\) column of the \(n \times n\) identity matrix).
 
-\hypertarget{SignsZeros}{%
-\chapter{Combining sign and zero restrictions}\label{SignsZeros}}
+\chapter{Combining sign and zero restrictions}\label{SignsZeros}
 
 Sometimes we need to combine different types of restrictions. For instance:
 
@@ -1899,24 +1852,29 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
 \NormalTok{  sign.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,n,n)}
 \NormalTok{  horizon[[i]] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{\}}
-\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# 2 shocks on the demand for reserves}
+\NormalTok{sign.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1} 
 \NormalTok{sign.restrictions[[}\DecValTok{2}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# 3 shocks that drive an endogenous response of the interest rate}
 \NormalTok{sign.restrictions[[}\DecValTok{3}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{3}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{4}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{4}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{5}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{5}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# monetary policy shock}
 \NormalTok{sign.restrictions[[}\DecValTok{6}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{6}\NormalTok{]][}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
 \NormalTok{sign.restrictions[[}\DecValTok{6}\NormalTok{]][}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# horizon for sign restrictions on monetary policy shock}
 \NormalTok{horizon[[}\DecValTok{6}\NormalTok{]] }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
 
 \CommentTok{\#Define zero restrictions}
+\CommentTok{\# 2 shocks on the demand for reserves}
 \NormalTok{SR.restrictions[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,n))}
-\NormalTok{SR.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{SR.restrictions[[}\DecValTok{1}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\# no impact on the interest rate}
 \NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,n))}
-\NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{SR.restrictions[[}\DecValTok{2}\NormalTok{]][}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{1} \CommentTok{\# no impact on the interest rate}
 \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{3}\SpecialCharTok{:}\NormalTok{n)\{}
 \NormalTok{  SR.restrictions[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,n))}
 \NormalTok{\}}
@@ -1924,7 +1882,7 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
 \NormalTok{res.svar.signs.zeros }\OtherTok{\textless{}{-}} \FunctionTok{svar.signs}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
                                   \AttributeTok{nb.shocks =} \DecValTok{6}\NormalTok{, }\CommentTok{\#number of identified shocks}
                                   \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                                  \AttributeTok{bootstrap.replications =} \DecValTok{100}\NormalTok{, }\CommentTok{\# = 0 or 1}
+                                  \AttributeTok{bootstrap.replications =} \DecValTok{100}\NormalTok{, }\CommentTok{\# = 1 if no bootstrap, = N if bootstrap}
                                   \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
                                   \AttributeTok{indic.plot =} \DecValTok{1}\NormalTok{, }\CommentTok{\# Plots are displayed if = 1.}
                                   \AttributeTok{nb.draws =} \DecValTok{10000}\NormalTok{, }\CommentTok{\# number of draws}
@@ -1937,36 +1895,38 @@ Function \texttt{svar.signs} can run this algorithm. It is called as follows:\fo
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-1} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-1}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-1} \caption{IRFs; sign-restriction approach.}\label{fig:signrestr2-1}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-2} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-2}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-2} \caption{IRFs; sign-restriction approach.}\label{fig:signrestr2-2}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-3} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-3}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-3} \caption{IRFs; sign-restriction approach.}\label{fig:signrestr2-3}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-4} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-4}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-4} \caption{IRFs; sign-restriction approach.}\label{fig:signrestr2-4}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-5} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-5}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-5} \caption{IRFs; sign-restriction approach.}\label{fig:signrestr2-5}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-6} \caption{IRF associated with a monetary policy shock; sign-restriction approach.}\label{fig:signrestr2-6}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/signrestr2-6} \caption{IRFs; sign-restriction approach.}\label{fig:signrestr2-6}
 \end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{IRFs.signs}
-\NormalTok{nb.rotations }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{xx}
+\CommentTok{\# Output}
+\NormalTok{IRFs.signs }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{IRFs.signs }\CommentTok{\# all the simulated IRFs}
+\NormalTok{nb.rotations }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{xx }\CommentTok{\# total number of rotations}
+\NormalTok{all.CI.median }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{all.CI.median }\CommentTok{\# median IRFs for the selected shocks}
+\NormalTok{all.CI.lower.bounds }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{all.CI.lower.bounds }\CommentTok{\# lower{-}bound IRFs for the selected shocks}
+\NormalTok{all.CI.upper.bounds }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.signs.zeros}\SpecialCharTok{$}\NormalTok{all.CI.upper.bounds }\CommentTok{\# upper{-}bound IRFs for the selected shocks}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{forecast-error-variance-maximization}{%
-\chapter{Forecast error variance maximization}\label{forecast-error-variance-maximization}}
+\chapter{Forecast error variance maximization}\label{forecast-error-variance-maximization}
 
-\hypertarget{the-main-unconditional-approach}{%
-\section{The main (unconditional) approach}\label{the-main-unconditional-approach}}
+\section{The main (unconditional) approach}\label{the-main-unconditional-approach}
 
 The approach presented in this section exploits the derivations of \citet{Uhlig_2004}. \citet{BARSKY2011273} exploit this approach to identify a TFP news shock, that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP.
 
@@ -2136,7 +2096,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7432967
+## [1] 0.740811
 \end{verbatim}
 
 \begin{figure}
@@ -2260,7 +2220,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.09783451
+## [1] 0.09983764
 \end{verbatim}
 
 \begin{Shaded}
@@ -2270,7 +2230,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.6346986
+## [1] 0.6401938
 \end{verbatim}
 
 \begin{Shaded}
@@ -2280,7 +2240,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1207397
+## [1] 0.1188194
 \end{verbatim}
 
 \begin{figure}
@@ -2289,8 +2249,7 @@ The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a 
 
 Sentiment shocks explain 12\% of the variance of GDP, against 72\% for TFP shocks (including 62\% for TFP news shocks).
 
-\hypertarget{NarrativeHistDecomp}{%
-\section{Restrictions based on narrative historical decomposition}\label{NarrativeHistDecomp}}
+\section{Restrictions based on narrative historical decomposition}\label{NarrativeHistDecomp}
 
 A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consists in imposing that, on some specific dates (based on narrative information), a particular shock was the most important contributor to the unexpected movement of some variable during a particular period.\footnote{See also Section \ref{NarrativeSign}.} This can be formalized in two different ways (respectively called Type A and Type B by \citet{AntolinDiaz_RubioRamirez_2018}):
 
@@ -2302,11 +2261,9 @@ A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consist
   Type B: A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.
 \end{itemize}
 
-\hypertarget{NonGaussian}{%
-\chapter{Identification based on non-normality of the shocks}\label{NonGaussian}}
+\chapter{Identification based on non-normality of the shocks}\label{NonGaussian}
 
-\hypertarget{intuition}{%
-\section{Intuition}\label{intuition}}
+\section{Intuition}\label{intuition}
 
 In this section, we show that the non-identification of the structural shocks (\(\eta_t\)) is specific to the Gaussian case. We propose consistent estimation approaches for SVAR in the context of non-Gaussian shocks.
 
@@ -2317,8 +2274,14 @@ Indeed, if \(\eta_t \sim \mathcal{N}(0,Id)\), then the distribution of \(\vareps
 To illustrate, consider the following bivariate Gaussian situations, with \(\Theta_1=0\)):
 
 \(\left[\begin{array}{c}\eta_{1,t}\\ \eta_{2,t}\end{array}\right]\sim \mathcal{N}(0,Id)\), with
-\(B = \left[\begin{array}{cc} 1 & 2 \\ -1 & 1 \end{array}\right]\) and
-\(Q = \left[\begin{array}{cc} \cos(\pi/3) & -\sin(\pi/3) \\ \sin(\pi/3) & \cos(\pi/3) \end{array}\right]\) (rotation).
+\(B = \left[\begin{array}{cc}
+1 & 2 \\
+-1 & 1
+\end{array}\right]\) and
+\(Q = \left[\begin{array}{cc}
+\cos(\pi/3) & -\sin(\pi/3) \\
+\sin(\pi/3) & \cos(\pi/3)
+\end{array}\right]\) (rotation).
 
 Figure \ref{fig:preMadeFigureICA} shows that the distributions of \(B \eta_t\) and of \(BQ\eta_t\) are identical. However, the impulse response functions associated with one of the other impulse matrix (\(B\) or \(BQ\)) are different. This is illustrated by Figure \ref{fig:preMadeFigureICA2}, that shows the IRFs associated with two identical models (defined by Eq. \eqref{eq:VARMA111}), the only difference being the impulse matrix (\(B\) or \(BQ\)).
 
@@ -2334,8 +2297,14 @@ Hence, in the Gaussian case, external restrictions (economic hypotheses) are nee
 
 To better see why this can be the case, consider again a bivariate vector of independent structural shocks (\(\eta_{1,t}\) and \(\eta_{2,t}\)) but, now, assume that one of them is not Gaussian any more. Specifically, assume that \(\eta_{2,t}\) is drawn from a Student distribution with 5 degrees of freedom:
 \(\eta_{1,t} \sim \mathcal{N}(0,1)\), \(\eta_{2,t} \sim t(5)\),
-\(B = \left[\begin{array}{cc} 1 & 2 \\ -1 & 1 \end{array}\right]\) and
-\(Q = \left[\begin{array}{cc} \cos(\pi/3) & -\sin(\pi/3) \\ \sin(\pi/3) & \cos(\pi/3) \end{array}\right]\).
+\(B = \left[\begin{array}{cc}
+1 & 2 \\
+-1 & 1
+\end{array}\right]\) and
+\(Q = \left[\begin{array}{cc}
+\cos(\pi/3) & -\sin(\pi/3) \\
+\sin(\pi/3) & \cos(\pi/3)
+\end{array}\right]\).
 
 Figure \ref{fig:preMadeFigureICAGaussianStudent} shows that, in this case, \(B \eta_t\) and \(BQ\eta_t\) do not have the same distribution any more (in spite of the fact that, in both cases, we have \(\mathbb{V}ar(\varepsilon_t)=BB'\)). This opens the door to the identification of the impulse matrix (\(BQ\)) in the non-Gaussian case.
 
@@ -2343,8 +2312,7 @@ Figure \ref{fig:preMadeFigureICAGaussianStudent} shows that, in this case, \(B \
 \includegraphics[width=0.95\linewidth]{images/Figure_C} \caption{This figure compares the distributions of two Gaussian bivariate vectors, $B \eta_t$ and $BQ\eta_t$, where $\eta_t{1,t} \sim \mathcal{N}(0,1)$, $\eta_t{2,t} \sim t(5)$, and $Q$  is an orthogonal matrix.}\label{fig:preMadeFigureICAGaussianStudent}
 \end{figure}
 
-\hypertarget{independent-component-analysis-ica}{%
-\section{Independent Component Analysis (ICA)}\label{independent-component-analysis-ica}}
+\section{Independent Component Analysis (ICA)}\label{independent-component-analysis-ica}
 
 The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called \textbf{independent component analysis (ICA)}. Let us denote by \(C\) the matrix that is such that \(C = \Omega^{-1/2}B\), where \(\Omega^{1/2}\) results from the Cholesky decomposition of \(\Omega = BB'\) (implying, \(\Omega^{1/2}{\Omega^{1/2}}'=\Omega\)). It is easy to check that \(C\) is an orthogonal matrix (and we have \(B = \Omega^{1/2}C\)).
 
@@ -2394,8 +2362,7 @@ Process \(\eta_t\) satisfies:
 \protect\hypertarget{thm:EK2004}{}\label{thm:EK2004}If Hypothesis \ref{hyp:NonGauss} is satisfied and if at most one of the components of \(\eta\) is Gaussian, then matrix \(C_0\) is identifiable up to the post multiplication by \(DP\), where \(P\) is a permutation matrix and \(D\) is a diagonal matrix whose diagonal entries are 1 or \(-1\).\}
 \end{theorem}
 
-\hypertarget{pseudo-maximum-likelihood-pml-approach}{%
-\section{Pseudo-Maximum Likelihood (PML) approach}\label{pseudo-maximum-likelihood-pml-approach}}
+\section{Pseudo-Maximum Likelihood (PML) approach}\label{pseudo-maximum-likelihood-pml-approach}
 
 Hence, non-normal structural shocks are identifiable. But how to estimate them based on observations of the \(\varepsilon_t\)'s? \citet{Gourieroux_Monfort_Renne_2017} have proposed a \textbf{Pseudo-Maximum Likelihood (PML)} approach. This approach consists in maximizing a so-called \textbf{pseudo log-likelihood function}, based on a set of p.d.f. \(g_i (\eta_i), i=1,\ldots,n\) (that may be different from the true p.d.f. of the \(\eta_{i,t}\)'s):
 \begin{equation}
@@ -2463,8 +2430,8 @@ Table \ref{tab:distriICA} reports usual p.d.f. and their derivatives. (The latte
 \bottomrule\noalign{}
 \endlastfoot
 Gaussian & \(cst - x^2/2\) & \(-x\) & \(-1\) \\
-Student \(t(\nu>4)\) & \(-\dfrac{1-\nu}{2}\log\left( 1 +\dfrac{x^2}{\nu-2} \right)\) & \(-\dfrac{x(1+\nu)}{\nu - 2 + x^2}\) & \(- (1+\nu) \dfrac{\nu - 2 - x^2}{\nu - 2 + x^2}\) \\
-Hyperbolic secant & \(cst - \log\left( \cosh\left\{\dfrac{\pi}{2}x\right\} \right)\) & \(-\dfrac{\pi}{2} anh\left(\dfrac{\pi}{2}x\right)\) & \(-\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2\) \\
+Student \(t(\nu>4)\) & \(-\dfrac{1-\nu}{2}\log\left( 1 +\dfrac{x^2}{\nu-2} \right)\) & \(-\dfrac{x(1+\nu)}{\nu - 2 + x^2}\) & \(- (1+\nu)  \dfrac{\nu - 2 - x^2}{\nu - 2 + x^2}\) \\
+Hyperbolic secant & \(cst - \log\left( \cosh\left\{\dfrac{\pi}{2}x\right\} \right)\) & \(-\dfrac{\pi}{2}   anh\left(\dfrac{\pi}{2}x\right)\) & \(-\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2\) \\
 Subgaussian & \(cst + \pi x^2 + \log \left(\cosh\left\{\dfrac{\pi}{2}x\right\}\right)\) & \(2\pi x+\dfrac{\pi}{2}\tanh\left(x \dfrac{\pi}{2}\right)\) & \(2\pi +\left(\dfrac{\pi}{2}\dfrac{1}{\cosh\left(\dfrac{\pi}{2}x\right)}\right)^2\) \\
 \end{longtable}
 
@@ -2638,8 +2605,7 @@ Let us compute the IRFs associated with the three structural shocks. (For the sa
 According to Figure \ref{fig:ICAFigIRF}, Shock 1 is a supply shock, Shock 2 is a demand shock, and Shock 3 is a monetary-policy shock. Note that Shock 3 is close to the one resulting from the Cholesky approach.
 \end{example}
 
-\hypertarget{relation-with-the-heteroskedasticity-identification}{%
-\section{Relation with the Heteroskedasticity Identification}\label{relation-with-the-heteroskedasticity-identification}}
+\section{Relation with the Heteroskedasticity Identification}\label{relation-with-the-heteroskedasticity-identification}
 
 In some cases, where the \(\varepsilon_t\)'s are heteroskedastic, the \(B\) matrix can be identified (\citet{Rigobon_2003}, \citet{LANNE2010121}).
 
@@ -2661,11 +2627,9 @@ Bivariate regime case (\(M=2\)): \(B\) identified if the \(\lambda_{2,k}\)'s are
 
 If the regimes \(s_t\) are exogenous and serially independent, then this situation is consistent with the ``non-Gaussian'' situation described above.
 
-\hypertarget{Projections}{%
-\chapter{Local projection methods}\label{Projections}}
+\chapter{Local projection methods}\label{Projections}
 
-\hypertarget{overview-of-the-approach}{%
-\section{Overview of the approach}\label{overview-of-the-approach}}
+\section{Overview of the approach}\label{overview-of-the-approach}
 
 Consider the infinite MA representation of \(y_t\) (Eq. \eqref{eq:InfMA}):
 \[
@@ -2681,8 +2645,7 @@ Running that kind of regression (using instruments for \(\eta_{j,t}\)) is the co
 
 Now, how to proceed in the (usual) case where \(\eta_{j,t}\) is not observed? We consider two situations. While the second requires some instruments, the first approach does not. This first approach (Section \ref{LPIVww}) is the original \citet{Jorda_2005}'s approach.
 
-\hypertarget{LPIVww}{%
-\section{Situation A: Without IV}\label{LPIVww}}
+\section{Situation A: Without IV}\label{LPIVww}
 
 Assume that the structural shock of interest (\(\eta_{1,t}\), say) can be consistently obtained as the residual of a regression of a variable \(x_t\) on a set of control variables \(w_t\) independent from \(\eta_{1,t}\):
 \begin{equation}
@@ -2736,11 +2699,9 @@ In the following lines of code, we employ the \citet{Jorda_2005}'s approach on t
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/CEEJorda-1} \caption{Response to a monetary-policy shock. Identification approach of Jorda (2005).}\label{fig:CEEJorda}
 \end{figure}
 
-\hypertarget{situation-b-iv-approach}{%
-\section{Situation B: IV approach}\label{situation-b-iv-approach}}
+\section{Situation B: IV approach}\label{situation-b-iv-approach}
 
-\hypertarget{instruments-proxies-for-structural-shocks}{%
-\subsection{Instruments (proxies for structural shocks)}\label{instruments-proxies-for-structural-shocks}}
+\subsection{Instruments (proxies for structural shocks)}\label{instruments-proxies-for-structural-shocks}
 
 Consider now that we have a valid instrument \(z_t\) for \(\eta_{1,t}\) (with \(\mathbb{E}(z_t)=0\)). That is:
 \begin{equation}
@@ -2846,8 +2807,7 @@ The LP-IV approach is based on a set of IV regressions (for each variable of int
 
 If the VAR adequately captures the DGP, then the IV-SVAR is optimal for all horizons. However, if the VAR is misspecified, then specification errors are compounded at each horizon and a local projection method would lead to better results.
 
-\hypertarget{SVARIVa}{%
-\subsection{Situation B.1: SVAR-IV approach}\label{SVARIVa}}
+\subsection{Situation B.1: SVAR-IV approach}\label{SVARIVa}
 
 Assume you have consistent estimates of \(\varepsilon_t = B\eta_t\), these estimates (\(\hat\varepsilon_{t}\)) coming from the estimation of a VAR model. We have, for \(i \in \{1,\dots,n\}\):
 \begin{eqnarray}
@@ -2955,8 +2915,7 @@ In the following lines of code, we use this approach to estimate the response of
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/essaiIV1-1} \caption{Reponses to a monetary-policy shock, SVAR-IV approach.}\label{fig:essaiIV1}
 \end{figure}
 
-\hypertarget{LPIVa}{%
-\subsection{Situation B.2: LP-IV}\label{LPIVa}}
+\subsection{Situation B.2: LP-IV}\label{LPIVa}
 
 If you do not want to posit a VAR-type dynamics for \(y_t\) --e.g., because you suspect that the true generating model may be a non-invertible VARMA model-- you can directly proceed by IV-projection methods to obtain the \(\tilde\Psi_{i,1,h}\equiv \Psi_{i,1,h}/b_{1,1}\) (that are the IRFs of \(\tilde\eta_{1,t}\) on \(y_{i,t}\)).
 
@@ -3012,8 +2971,7 @@ In the general case, one can use lags of \(y_t\) as controls. Note that, even if
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{PanelVARs}{%
-\chapter{Panel VARs}\label{PanelVARs}}
+\chapter{Panel VARs}\label{PanelVARs}
 
 Panel VARs have the same structure as VAR models, in the
 sense that all variables are assumed to be endogenous and
@@ -3038,8 +2996,7 @@ generally correlated across \(i\).
 * \emph{Cross sectional heterogeneity}: the intercept, the slope and the
 variance of the shocks may be unit-specific.
 
-\hypertarget{without-dynamic-interdependence}{%
-\section{Without Dynamic interdependence}\label{without-dynamic-interdependence}}
+\section{Without Dynamic interdependence}\label{without-dynamic-interdependence}
 
 A panel VAR, assuming no dynamic interdependence, is of the form:
 \[ y_{it}=c_i+\Phi_i(L)
@@ -3051,8 +3008,7 @@ then one faces the \emph{Nickell bias}: with a lagged dependent variable, the es
 
 \emph{Macro panel data} have a different structure, with typically a moderate cross-sectional dimension \(N\) and a large time dimension \(T\), so that the Nickell bias is negligible (\(\rightarrow 0\) as \(T\rightarrow\infty\)).
 
-\hypertarget{mean-group-estimator}{%
-\subsection{Mean Group Estimator}\label{mean-group-estimator}}
+\subsection{Mean Group Estimator}\label{mean-group-estimator}
 
 When we etimate
 \[ y_{it}=c_i+\Phi_i(L)
@@ -3061,13 +3017,11 @@ we need to take into account the cross-sectional heterogeneity in the coefficien
 Pooled estimators (assuming cross-sectional homogeneity, i.e.~identical \(\Phi_i\)'s across \(i\)s) are \emph{not consistent} (biased) if the underlying dynamics are actually heterogeneous. By contrast, the \emph{Mean Group (MG) estimator}, which consists in estimating \(N\) separate regressions
 and calculating the coefficient means, is \emph{consistent}.
 
-\hypertarget{shock-identification}{%
-\subsection{Shock identification}\label{shock-identification}}
+\subsection{Shock identification}\label{shock-identification}
 
 Shock identification can be performed with standard methods (zeros, signs, FEVM, etc.). We make the assumption that \(\Omega\) is block-diagonal (no interdependence on impact), which is consistent with the assumption of no cross-sectional dependence.
 
-\hypertarget{with-dynamic-interdependencies}{%
-\section{With Dynamic Interdependencies}\label{with-dynamic-interdependencies}}
+\section{With Dynamic Interdependencies}\label{with-dynamic-interdependencies}
 
 A panel VAR that accommodates dynamic interdependence is of the form:
 \[ y_{it}=c_i+\Phi_i(L)
@@ -3078,21 +3032,20 @@ each equation.
 
 A solution is to select some eligible dynamic links (See for instance \citet{DelNegro_Schorfheide_2010}). Another alternative is to use a factor model. This consists in capturing the dynamic interdependencies by a set of unobservable factors (See \citet{Canova_Cicarelli_2004} and \citet{Canova_Cicarelli_2009}). See Section \ref{FAVAR} for more details on FAVAR models.
 
-\hypertarget{FAVAR}{%
-\chapter{Factor-Augmented VAR}\label{FAVAR}}
+\chapter{Factor-Augmented VAR}\label{FAVAR}
 
 VAR models are subject to the curse of dimensionality: If \(n\), is large, then the number of parameters (in \(n^2\)) explodes.
 
 In the case where one suspects that the \(y_{i,t}\)'s are mainly driven by a small number of random sources, a factor structure may be imposed, and \textbf{principal component analysis} (PCA, see Appendix \ref{PCAapp}) can be employed to estimate the relevant factors (\citet{Bernanke_Boivin_Eliasz_2005}).
 
-\hypertarget{PCAapp}{%
-\section{Principal component analysis (PCA)}\label{PCAapp}}
+\section{Principal component analysis (PCA)}\label{PCAapp}
 
 \textbf{Principal component analysis (PCA)} is a classical and easy-to-use statistical method to reduce the dimension of large datasets containing variables that are linearly driven by a relatively small number of factors. This approach is widely used in data analysis and image compression.
 
 Suppose that we have \(T\) observations of a \(n\)-dimensional random vector \(x\), denoted by \(x_{1},x_{2},\ldots,x_{T}\). We suppose that each component of \(x\) is of mean zero.
 
-Let denote with \(X\) the matrix given by \(\left[\begin{array}{cccc} x_{1} & x_{2} & \ldots & x_{T}\end{array}\right]'\). Denote the \(j^{th}\) column of \(X\) by \(X_{j}\).
+Let denote with \(X\) the matrix given by \(\left[\begin{array}{cccc}
+x_{1} & x_{2} & \ldots & x_{T}\end{array}\right]'\). Denote the \(j^{th}\) column of \(X\) by \(X_{j}\).
 
 We want to find the linear combination of the \(x_{i}\)'s (\(x.u\)), with \(\left\Vert u\right\Vert =1\), with ``maximum variance.'' That is, we want to solve:
 \begin{equation}
@@ -3195,8 +3148,7 @@ Let us know visualize some results. The first plot of Figure \ref{fig:USydsPCA1}
 \includegraphics{IdentifStructShocks_files/figure-latex/USydsPCA1-1} \caption{Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.}\label{fig:USydsPCA1}
 \end{figure}
 
-\hypertarget{favar-models}{%
-\section{FAVAR models}\label{favar-models}}
+\section{FAVAR models}\label{favar-models}
 
 Let us denote by \(F_t\) a \(k\)-dimensional vector of latent factors accounting for important shares of the variances of the \(y_{i,t}\)'s (with \(K \ll n\)) and by \(x_t\) is a small \(M\)-dimensional subset of \(y_t\) (with \(M \ll n\)). The following factor structure is posited:
 \[
@@ -3266,11 +3218,9 @@ Below, we employ this method on the dataset built by \citet{McCracken_Ng_2016} -
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/FAVAR-1} \caption{Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.}\label{fig:FAVAR}
 \end{figure}
 
-\hypertarget{append}{%
-\chapter{Appendix}\label{append}}
+\chapter{Appendix}\label{append}
 
-\hypertarget{definitions-and-statistical-results}{%
-\section{Definitions and statistical results}\label{definitions-and-statistical-results}}
+\section{Definitions and statistical results}\label{definitions-and-statistical-results}
 
 \begin{definition}[Covariance stationarity]
 \protect\hypertarget{def:covstat}{}\label{def:covstat}The process \(y_t\) is covariance stationary ---or weakly stationary--- if, for all \(t\) and \(j\),
@@ -3298,8 +3248,7 @@ Under regularity assumptions and under the null hypothesis, the test statistic f
 \]
 \end{proposition}
 
-\hypertarget{AppendixProof}{%
-\section{Proofs}\label{AppendixProof}}
+\section{Proofs}\label{AppendixProof}
 
 \textbf{Proof of Proposition \ref{prp:estimVARGaussian}}
 
@@ -3361,8 +3310,7 @@ If \(j>0\), we have \(\mathbb{E}(\varepsilon_t\varepsilon_{t-j}x_tx_{t-j}')=\mat
 The convergence in distribution of \(\sqrt{T}(X'\boldsymbol\varepsilon/T)=\sqrt{T}\frac{1}{T}\sum_{t=1}^Tv_t\) results from the Central Limit Theorem for covariance-stationary processes, using the \(\gamma_j^v\) computed above.
 \end{proof}
 
-\hypertarget{statistical-tables}{%
-\section{Statistical Tables}\label{statistical-tables}}
+\section{Statistical Tables}\label{statistical-tables}
 
 \begin{table}
 
