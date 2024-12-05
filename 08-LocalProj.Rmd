@@ -48,7 +48,7 @@ This approach closely relates to the SVAR Cholesky-based identification approach
 
 [^FootnoteIteratedFcst]: This is reminiscent of the distinction betweem direct forecasting---based on regressions of $y_{t+h}$ on $\{y_t,y_{t-1},\dots\}$---and iterated forecasting---based on a recursive model where $y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}$, see @Marcellino_et_al_2006. 
 
-In the following lines of code, we employ the @Jorda_2005's approach on the same dataset as the one used in Section \@ref{Cholesky}. (We were then illustrating @Christiano_Eichenbaum_Evans_1996's methodology.)
+In the following lines of code, we employ the @Jorda_2005's approach on the same dataset as the one used in Section \@ref(Cholesky). (We were then illustrating @Christiano_Eichenbaum_Evans_1996's methodology.)
 
 ```{r CEEJorda, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Response to a monetary-policy shock. Identification approach of Jorda (2005).",warning=FALSE,message=FALSE}
 library(IdSS);library(vars)

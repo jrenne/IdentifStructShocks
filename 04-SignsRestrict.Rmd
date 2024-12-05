@@ -21,7 +21,7 @@ Q_x=\begin{pmatrix}\cos(x)&\cos\left(x+\frac{\pi}{2}\right)\\
 \sin(x)&\sin\left(x+\frac{\pi}{2}\right)\end{pmatrix}=\begin{pmatrix}\cos(x)&-\sin(x)\\
 \sin(x)&\cos(x)\end{pmatrix}.
 $$
-(This is an angle-$x$ counter-clockwise rotation.) Hence, in that case, by drawing $x$ randomly from $[0,2\pi]$, we draw randomly from the set of $2\times2$ rotation matrices. For high-dimensional VAR, we lose this simple geometrical representation, though. It is not always possible to parametrize a rotation matrix (high-dimentional VARs).
+(This is an angle-$x$ counter-clockwise rotation.) Hence, in that case, by drawing $x$ randomly from $[0,2\pi]$, we draw randomly from the set of $2\times2$ rotation matrices. For high-dimensional VAR, we lose this simple geometrical representation, though. It is not always possible to parametrize a rotation matrix (high-dimensional VARs).
 
 How to proceed, then? @Arias_et_al_2018 provide a procedure. Their approach is based on the so-called $QR$ decomposition: any square matrix $X$ may be decomposed as $X=QR$ where $Q$ is an orthogonal matrix and $R$ is an upper diagonal matrix. With this in mind, they propose a two-step approach:
 
