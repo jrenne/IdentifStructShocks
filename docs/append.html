@@ -7,7 +7,7 @@
 <title>Chapter 11 Appendix | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
 <meta name="description" content="11.1 Definitions and statistical results  Definition 11.1 (Covariance stationarity) The process \(y_t\) is covariance stationary —or weakly stationary— if, for all \(t\) and \(j\), \[...">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 11 Appendix | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
 <meta property="og:description" content="11.1 Definitions and statistical results  Definition 11.1 (Covariance stationarity) The process \(y_t\) is covariance stationary —or weakly stationary— if, for all \(t\) and \(j\), \[...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="11.1 Definitions and statistical results  Definition 11.1 (Covariance stationarity) The process \(y_t\) is covariance stationary —or weakly stationary— if, for all \(t\) and \(j\), \[...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -542,9 +543,50 @@ Under regularity assumptions and under the null hypothesis, the test statistic f
 <!-- $$ -->
 <!-- ::: -->
 </div>
-<div id="AppendixProof" class="section level2" number="11.2">
+<div id="AppEstimVARMA" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">11.2</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Estimation of VARMA models<a class="anchor" aria-label="anchor" href="#AppEstimVARMA"><i class="fas fa-link"></i></a>
+</h2>
+<p>Section <a href="basics.html#estimVAR">1.4</a> discusses the estimation of VAR models and shows that standard VAR models can be esitmated by running OLS regressions.</p>
+<p>If there is an MA component (i.e., if we consider a VARMA model), then OLS regressions yield biased estimates (even for asymptotically large samples). Assume for instance that <span class="math inline">\(y_t\)</span> follows a VARMA(1,1) model:
+<span class="math display">\[
+y_{i,t} = \phi_i y_{t-1} + \varepsilon_{i,t},
+\]</span>
+where <span class="math inline">\(\phi_i\)</span> is the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(\Phi_1\)</span>, and where <span class="math inline">\(\varepsilon_{i,t}\)</span> is a linear combination of <span class="math inline">\(\eta_t\)</span> and <span class="math inline">\(\eta_{t-1}\)</span>. Since <span class="math inline">\(y_{t-1}\)</span> (the regressor) is correlated to <span class="math inline">\(\eta_{t-1}\)</span>, it is also correlated to <span class="math inline">\(\varepsilon_{i,t}\)</span>. The OLS regression of <span class="math inline">\(y_{i,t}\)</span> on <span class="math inline">\(y_{t-1}\)</span> yields a biased estimator of <span class="math inline">\(\phi_i\)</span> (see Figure <a href="append.html#fig:simulARMAbiased">11.1</a>). Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of <span class="math inline">\(y_t\)</span> as instruments, see, e.g., <span class="citation">Gouriéroux, Monfort, and Renne (<a href="references.html#ref-Gourieroux_Monfort_Renne_2020">2020</a>)</span>).</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">1000</span> <span class="co"># number of replications</span></span>
+<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="co"># sample length</span></span>
+<span><span class="va">phi</span> <span class="op">&lt;-</span> <span class="fl">.8</span> <span class="co"># autoregressive parameter</span></span>
+<span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">theta</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">0.4</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">all.y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="va">N</span><span class="op">)</span></span>
+<span>  <span class="va">y</span>     <span class="op">&lt;-</span> <span class="va">all.y</span></span>
+<span>  <span class="va">eta_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="cn">T</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">eta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span></span>
+<span>    <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">phi</span> <span class="op">*</span> <span class="va">y</span> <span class="op">+</span> <span class="va">sigma</span> <span class="op">*</span> <span class="va">eta</span> <span class="op">+</span> <span class="va">theta</span> <span class="op">*</span> <span class="va">sigma</span> <span class="op">*</span> <span class="va">eta_1</span></span>
+<span>    <span class="va">all.y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">all.y</span>,<span class="va">y</span><span class="op">)</span></span>
+<span>    <span class="va">eta_1</span> <span class="op">&lt;-</span> <span class="va">eta</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">all.y_1</span> <span class="op">&lt;-</span> <span class="va">all.y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="cn">T</span>,<span class="op">]</span></span>
+<span>  <span class="va">all.y</span>   <span class="op">&lt;-</span> <span class="va">all.y</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="op">(</span><span class="cn">T</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,<span class="op">]</span></span>
+<span>  <span class="va">XX_1</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">all.y_1</span> <span class="op">*</span> <span class="va">all.y_1</span>,<span class="fl">2</span>,<span class="va">sum</span><span class="op">)</span></span>
+<span>  <span class="va">XY</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">all.y_1</span> <span class="op">*</span> <span class="va">all.y</span>,<span class="fl">2</span>,<span class="va">sum</span><span class="op">)</span></span>
+<span>  <span class="va">phi.est.OLS</span> <span class="op">&lt;-</span> <span class="va">XX_1</span> <span class="op">*</span> <span class="va">XY</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">phi.est.OLS</span><span class="op">)</span>,xlab<span class="op">=</span><span class="st">"OLS estimate of phi"</span>,ylab<span class="op">=</span><span class="st">""</span>,</span>
+<span>       main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"theta = "</span>,<span class="va">theta</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">phi</span>,col<span class="op">=</span><span class="st">"red"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="figure" style="text-align: left-aligned">
+<span style="display:block;" id="fig:simulARMAbiased"></span>
+<img src="IdentifStructShocks_files/figure-html/simulARMAbiased-1.png" alt="Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS." width="95%"><p class="caption">
+Figure 11.1: Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS.
+</p>
+</div>
+</div>
+<div id="AppendixProof" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Proofs<a class="anchor" aria-label="anchor" href="#AppendixProof"><i class="fas fa-link"></i></a>
 </h2>
 <!-- **Proof of Proposition \@ref(prp:MLEproperties)** -->
 <!-- :::{.proof} -->
@@ -826,7 +868,7 @@ which leads to the result.</p>
 </div>
 <p><strong>Proof of Proposition <a href="basics.html#prp:OLSVAR">1.3</a></strong></p>
 <div class="proof">
-<p><span id="unlabeled-div-7" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(1.12)</a>, we have:
+<p><span id="unlabeled-div-7" class="proof"><em>Proof</em>. </span>Let us drop the <span class="math inline">\(i\)</span> subscript. Rearranging Eq. <a href="basics.html#eq:olsar1">(1.13)</a>, we have:
 <span class="math display">\[
 \sqrt{T}(\mathbf{b}-\boldsymbol{\beta}) =  (X'X/T)^{-1}\sqrt{T}(X'\boldsymbol\varepsilon/T).
 \]</span>
@@ -841,9 +883,9 @@ If <span class="math inline">\(j&gt;0\)</span>, we have <span class="math inline
 The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\boldsymbol\varepsilon/T)=\sqrt{T}\frac{1}{T}\sum_{t=1}^Tv_t\)</span> results from the Central Limit Theorem for covariance-stationary processes, using the <span class="math inline">\(\gamma_j^v\)</span> computed above.</p>
 </div>
 </div>
-<div id="statistical-tables" class="section level2" number="11.3">
+<div id="statistical-tables" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">11.3</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Statistical Tables<a class="anchor" aria-label="anchor" href="#statistical-tables"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <caption>
@@ -2128,8 +2170,9 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#append"><span class="header-section-number">11</span> Appendix</a></li>
 <li><a class="nav-link" href="#definitions-and-statistical-results"><span class="header-section-number">11.1</span> Definitions and statistical results</a></li>
-<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">11.2</span> Proofs</a></li>
-<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">11.3</span> Statistical Tables</a></li>
+<li><a class="nav-link" href="#AppEstimVARMA"><span class="header-section-number">11.2</span> Estimation of VARMA models</a></li>
+<li><a class="nav-link" href="#AppendixProof"><span class="header-section-number">11.3</span> Proofs</a></li>
+<li><a class="nav-link" href="#statistical-tables"><span class="header-section-number">11.4</span> Statistical Tables</a></li>
 </ul>
 
       <div class="book-extra">
@@ -2146,7 +2189,7 @@ The convergence in distribution of <span class="math inline">\(\sqrt{T}(X'\bolds
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2024-12-05.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-10-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -122,7 +122,29 @@ $$
 \Omega_\varepsilon = BB'.
 $$
 
-For instance, @DEDOLA20051543 estimate 5 structural VAR models for the US, the UK, Germany, France and Italy to analyse the monetary-policy transmission mechanisms. They estimate SVAR(5) models over the period 1975-1997. The shock-identification scheme is based on Cholesky decompositions, the ordering of the endogenous variables being: the industrial production, the consumer price index, a commodity price index, the short-term rate, monetary aggregate and the effective exchange rate (except for the US). This ordering implies that monetary policy reacts to the shocks affecting the first three variables but that the latter react to monetary policy shocks with a one-period lag only.
+For instance, @DEDOLA20051543 estimate 5 structural VAR models for the US, the UK, Germany, France and Italy to analyse the monetary-policy transmission mechanisms. They estimate SVAR(5) models over the period 1975-1997. The shock-identification scheme is based on Cholesky decompositions, the ordering of the endogenous variables being: (1) the industrial production, (2) the consumer price index, (3) a commodity price index, (4) the short-term rate, (5) monetary aggregate and (6) the effective exchange rate (except for the US). This ordering implies that monetary policy (i.e., the short-term rate) reacts to the shocks affecting the first three variables but that the latter react to monetary policy shocks with a one-period lag only.
+
+Consider again the small structural example discussed above, whose reduced-form VAR representation is given in Eq. \@ref(eq:BBBB). If we reorder the structural shocks as $\eta_t = (\eta_{d,t},\eta_{\pi,t},\eta_{mp,t})'$ (the order being arbitrary), the impact matrix $B$ can be written as
+$$
+B = \begin{bmatrix}
+\bullet & 0 & 0 \\
+\bullet & \bullet & 0 \\
+\bullet & \bullet & \bullet
+\end{bmatrix},
+$$
+that is, $B$ corresponds to the Cholesky factor of $\Omega$.
+
+However, it is not always possible to obtain a lower-triangular $B$ matrix by reordering the structural shocks. For instance, if for a given ordering we have
+$$
+B = \begin{bmatrix}
+0 & \bullet & \bullet \\
+\bullet & 0 & \bullet \\
+\bullet & \bullet & 0
+\end{bmatrix},
+$$
+then no reordering of the shocks will produce a lower-triangular structure.
+
+
 
 The Cholesky approach can be employed when one is interested in one specific structural shock. This is the case, e.g., of @Christiano_Eichenbaum_Evans_1996. Their identification is based on the following relationship between $\varepsilon_t$ and $\eta_t$:
 $$
@@ -170,7 +192,7 @@ res.svar.ordering <- svar.ordering(y,p=3,
 
 ## Long-run restrictions
 
-Let us now turn to **Long-run restrictions**. Such a restriction concerns the long-run influence of a shock on an endogenous variable. Let us consider for instance a structural shock that is assumed to have no "long-run influence" on GDP. How to express this? The long-run change in GDP can be expressed as $GDP_{t+h} - GDP_t$, with $h$ large. Note further that:
+Let us now turn to **long-run restrictions**. Such a restriction concerns the long-run influence of a shock on an endogenous variable. Let us consider for instance a structural shock that is assumed to have no "long-run influence" on GDP. How to express this? The long-run change in GDP can be expressed as $GDP_{t+h} - GDP_t$, with $h$ large. Note further that:
 $$
 GDP_{t+h} - GDP_t = \Delta GDP_{t+h} +\Delta GDP_{t+h-1} + \dots + \Delta GDP_{t+1}.
 $$
@@ -181,29 +203,9 @@ $$
 
 This long-run effect can be formulated as a function of $B$ and of the matrices $\Phi_i$ when $y_t$ (including $\Delta GDP_t$) follows a VAR process.
 
-Without loss of generality, we will only consider the VAR(1) case. Indeed, one can always write a VAR($p$) as a VAR(1): for that, stack the last $p$ values of vector $y_t$ in vector $y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'$; Eq. \@ref(eq:yVAR) can then be rewritten in its **companion form**:
-\begin{equation}
-y_{t}^{*} =
-\underbrace{\left[\begin{array}{c}
-c\\
-0\\
-\vdots\\
-0\end{array}\right]}_{=c^*}+
-\underbrace{\left[\begin{array}{cccc}
-\Phi_{1} & \Phi_{2} & \cdots & \Phi_{p}\\
-I & 0 & \cdots & 0\\
-0 & \ddots & 0 & 0\\
-0 & 0 & I & 0\end{array}\right]}_{=\Phi}
-y_{t-1}^{*}+
-\underbrace{\left[\begin{array}{c}
-\varepsilon_{t}\\
-0\\
-\vdots\\
-0\end{array}\right]}_{\varepsilon_t^*},(\#eq:ystarVAR)
-\end{equation}
-where matrices $\Phi$ and $\Omega^* = \mathbb{V}ar(\varepsilon_t^*)$ are of dimension $np \times np$; $\Omega^*$ is filled with zeros, except the $n\times n$ upper-left block that is equal to $\Omega = \mathbb{V}ar(\varepsilon_t)$. (Matrix $\Phi$ had been introduced in Eq. \@ref(eq:matrixPHI).)
+### The VAR(1) case
 
-Let us then focus on the VAR(1) case:
+Let us start with the VAR(1) case. We have:
 \begin{eqnarray*}
 y_{t} &=& c+\Phi y_{t-1}+\varepsilon_{t}\\
 & = & c+\varepsilon_{t}+\Phi(c+\varepsilon_{t-1})+\ldots+\Phi^{k}(c+\varepsilon_{t-k})+\ldots \\
@@ -224,19 +226,86 @@ Therefore, the cumulative impact of $\gamma$ on $\tilde{y}_t$ will be (for $t \g
 
 Consider a shock on $\eta_{1,t}$, with a magnitude of $1$. This shock corresponds to $\gamma = [1,0,\dots,0]'$. Given Eq. \@ref(eq:cumul), the long-run cumulative effect of this shock on the endogenous variables is given by:
 $$
-\underbrace{(Id+\Phi+\ldots+\Phi^{k}+\ldots)}_{=(Id - \Phi)^{-1}}B\left[\begin{array}{c}
+\underbrace{\underbrace{(Id+\Phi+\ldots+\Phi^{k}+\ldots)}_{=(Id - \Phi)^{-1}}B}_{=: \Theta}\left[\begin{array}{c}
 1\\
 0\\
 \vdots\\
 0\end{array}\right],
 $$
-that is the first column of the $n \times n$ matrix $\Theta \equiv (Id - \Phi)^{-1}B$.
+which is the first column of the $n \times n$ matrix $\Theta := (Id - \Phi)^{-1}B$.
 
 In this context, consider the following long-run restriction: *"the $j^{th}$ structural shock has no cumulative impact on the $i^{th}$ endogenous variable"*. It is equivalent to
 $$
 \Theta_{ij}=0,
 $$
 where $\Theta_{ij}$ is the element $(i,j)$ of $\Theta$.
+
+If $n(n-1)/2$ restrictions of this type can be made, then $B$ is identified. In particular, in the case case where $\Theta$ is lower-triangular, the problem admits an analytical solution. Indeed, let $J = (I - \Phi)^{-1}$ (assumed to be invertible). We want $\Theta = JB$ to be lower triangular and $\Omega = BB'$. Since $B = J^{-1} \Theta$, we have
+\[
+\Omega = BB' = J^{-1} \Theta \Theta' (J^{-1})' \;\Rightarrow\; J\Omega J' = \Theta \Theta'.
+\]
+Since $\Omega$ is positive definite and $J$ is invertible, $\Sigma = J\Omega J'$ is positive definite. Take the (unique, with positive diagonal) Cholesky factorization $\Sigma = \Theta \Theta'$ with $\Theta$ lower triangular. Then set $B = J^{-1} \Theta$. This $B$ satisfies $\Omega = BB'$ and $(I - \Phi)^{-1}B = \Theta$ is lower triangular.
+
+
+### The VAR($p$) case
+
+Several of the developments made above are still valid in the VAR($p$) case since a VAR($p$) process can be rewritten as a VAR(1) process by augmenting the state vector. More specifically, stack the last $p$ values of vector $y_t$ in vector $y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'$; Eq. \@ref(eq:yVAR) can then be rewritten in its **companion form**:
+\begin{equation}
+y_{t}^{*} =
+\underbrace{\left[\begin{array}{c}
+c\\
+0_{n \times 1}\\
+\vdots\\
+0_{n \times 1}\end{array}\right]}_{=c^*}+
+\underbrace{\left[\begin{array}{cccc}
+\Phi_{1} & \Phi_{2} & \cdots & \Phi_{p}\\
+I & 0 & \cdots & 0\\
+0 & \ddots & 0 & 0\\
+0 & 0 & I & 0\end{array}\right]}_{=\Phi}
+y_{t-1}^{*}+
+\underbrace{\left[\begin{array}{c}
+\varepsilon_{t}\\
+0_{n \times 1}\\
+\vdots\\
+0_{n \times 1}\end{array}\right]}_{\varepsilon_t^*},(\#eq:ystarVAR)
+\end{equation}
+where matrices $\Phi$ and $\Omega^*:= \mathbb{V}ar(\varepsilon_t^*)$ are of dimension $np \times np$. Matrix $\Phi$ had been introduced in Eq. \@ref(eq:matrixPHI), and
+$$
+\Omega^* := \mathbb{V}ar(\varepsilon_t^*)=
+\left[\begin{array}{c}
+B \\
+0_{n \times n}  \\
+\vdots \\
+0_{n \times n}
+\end{array}\right]\left[\begin{array}{cccc}
+B & 0_{n \times n} & \dots & 0_{n \times n}
+\end{array}\right]
+= \left[\begin{array}{cccc}
+\Omega & 0_{n \times n} & \dots & 0_{n \times n} \\
+0_{n \times n} & 0_{n \times n} \\
+\vdots &&\ddots\\
+0_{n \times n} & \dots &&0_{n \times n}
+\end{array}\right].
+$$
+In that context, the long-run effect on $y_t^*+y_{t+1}^*+y_{t+2}^*+\dots$ of a change in $\eta_t$ by $\gamma$ (that happens on date $t$) is given by:
+$$
+\underbrace{(Id+\Phi+\ldots+\Phi^{k}+\ldots)}_{=(Id - \Phi)^{-1}}\left[\begin{array}{c}
+B \\
+0_{n \times n}  \\
+\vdots \\
+0_{n \times n}
+\end{array}\right]\gamma.
+$$
+In particular, the cumulated effect of this shock on $y_t$ (and not $y_t^*$ anymore) is $J B \gamma$, where $J$ is the upper-left $n \times n$ submatrix of $(I - \Phi)^{-1}$. Let us denote the matrix $J B$ by $\Theta$. With these notations, the long-run restriction: *the $j^{th}$ structural shock has no cumulative impact on the $i^{th}$ endogenous variable* is equivalent to the fact that the component $(i,j)$ of $\Theta$ is equal to zero.
+
+If $n(n-1)/2$ restrictions of this type can be made, then $B$ is identified. In particular, in the case where $\Theta$ is lower triangular, the problem admits an analytical solution. Using $B = J^{-1} \Theta$, we get
+\[
+\Omega = B B' = J^{-1} \Theta \Theta' (J^{-1})' \;\Rightarrow\; J \Omega J' = \Theta \Theta'.
+\]
+Since $\Omega$ is positive definite, $\Sigma = J \Omega J'$ is positive definite. Take the (unique, with positive diagonal) Cholesky factorization $\Sigma = \Theta \Theta'$ with $\Theta$ lower triangular. Then set $B = J^{-1} \Theta$. This $B$ satisfies $\Omega = B B'$ and $J B = \Theta$ is lower triangular.
+
+
+### Blanchard and Quah (1989)
 
 @Blanchard_Quah_1989 have implemented such long-run restrictions in a small-scale VAR. Two variables are considered: GDP and unemployment. Consequently, the VAR is affected by two types of shocks. Specifically, authors want to identify **supply shocks** (that can have a permanent effect on output) and **demand shocks** (that cannot have a permanent effect on output).[^Footnote:BQstruct]
 
@@ -261,7 +330,7 @@ where $\Theta_{ij}$ is the element $(i,j)$ of $\Theta$.
 
 @Blanchard_Quah_1989's dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:
 
-```{r BQ1}
+```{r BQ1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP."}
 library(IdSS)
 data(BQ)
 par(mfrow=c(1,2))
@@ -276,8 +345,22 @@ Estimate a reduced-form VAR(8) model:
 ```{r BQ2, warning=FALSE, message=FALSE}
 library(vars)
 y <- BQ[,2:3]
-est.VAR <- VAR(y,p=8)
+n <- dim(y)[2]
+p <- 8
+est.VAR <- VAR(y,p=p)
 Omega <- var(residuals(est.VAR))
+```
+
+Let us employ the approach described above:
+
+```{r}
+Phi <- Acoef(est.VAR)
+PHI <- make.PHI(Phi)
+A <- diag(n*p) - PHI
+J <- solve(A)[1:n,1:n]
+Sigma <- J %*% Omega %*% t(J)
+L <- t(chol(Sigma))
+B <- solve(J) %*% L
 ```
 
 Now, let us define a loss function (`loss`) that is equal to zero if (a) $BB'=\Omega$ and (b) the element (1,1) of $\Theta = (Id - \Phi)^{-1} B$ is equal to zero:

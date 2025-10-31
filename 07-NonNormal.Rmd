@@ -26,6 +26,7 @@ Figure \@ref(fig:preMadeFigureICA) shows that the distributions of $B \eta_t$ an
 
 
 ```{r simulGaussian, eval=FALSE, echo=FALSE}
+library(IdSS)
 theta.angle <- pi/3
 Q <- matrix(c(cos(theta.angle),sin(theta.angle),-sin(theta.angle),cos(theta.angle)),2,2)
 #nb.sim <- 10^4
@@ -54,7 +55,7 @@ plot(epsilon.C[,1],epsilon.C[,2],pch=19,
      xlab=expression(epsilon[1]),
      ylab=expression(epsilon[2]),cex.lab=1.6,cex.main=1.6,
      main=expression(paste("Distribution of ",epsilon[t]," = ",B,eta[t],sep="")))
-z <- matrix(exp(g(eps,Model)),nb.points,nb.points)
+z <- matrix(exp(gICA(eps,Model)),nb.points,nb.points)
 par(new=TRUE)
 max.z <- max(z)
 levels <- c(.01,.1,.3,.6,.9)*max.z
@@ -87,29 +88,27 @@ p <- dim(Phi)[3]
 Theta <- array(NaN,c(n,n,1))
 Theta[,,1] <- 0*(-matrix(c(2,1,0,.5),2,2))
 q <- dim(Theta)[3]
-Mu <- rep(0,n)
+c <- rep(0,n)
 C <- matrix(c(1,-1,2,1),2,2)
 distri <- list(type=c("gaussian","gaussian"),df=c(4,4))
 Model <- list(
-  Mu = Mu,
+  c = c,
   Phi = Phi,
   Theta = Theta,
   C = C,
   distri = distri
 )
-Y0 <- rep(0,n)
 eta0 <- c(1,0)
-res.sim.1C <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
+res.sim.1C <- simul.VARMA(Model,nb.sim,eta0=eta0,indic.IRF=1)
 eta0 <- c(0,1)
-res.sim.2C <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
+res.sim.2C <- simul.VARMA(Model,nb.sim,eta0=eta0,indic.IRF=1)
 theta.angle <- pi/3
 Q <- matrix(c(cos(theta.angle),sin(theta.angle),-sin(theta.angle),cos(theta.angle)),2,2)
 Model$C <- C %*% Q
-Y0 <- rep(0,n)
 eta0 <- c(1,0)
-res.sim.1CQ <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
+res.sim.1CQ <- simul.VARMA(Model,nb.sim,eta0=eta0,indic.IRF=1)
 eta0 <- c(0,1)
-res.sim.2CQ <- simul.VARMA(Model,nb.sim,Y0,eta0,indic.IRF=1)
+res.sim.2CQ <- simul.VARMA(Model,nb.sim,eta0=eta0,indic.IRF=1)
 par(plt=c(.1,.95,.25,.8))
 par(mfrow=c(2,2))
 plot(res.sim.1C$Y[1,],las=1,
@@ -410,9 +409,10 @@ contour(x.points,y.points,z,levels=levels,xlim=x.lim,ylim=y.lim,col="red",lwd=2)
 ```
 
 
-```{r ThreePlots, fig.align = 'left-aligned', out.width = "95%", fig.cap = "The three plots represent the bivariate distributions of $\\eta_t$ (black) and of $C\\eta_t$ (red), where the two components of $\\eta_t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\\mathbb{V}ar(C\\eta_t)=Id$.", echo=FALSE}
+```{r ThreePlots, fig.align='left', out.width='95%', echo=FALSE,fig.cap="The three plots represent the bivariate distributions of $\\eta_t$ (black) and of $C\\eta_t$ (red), where the two components of $\\eta_t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\\mathbb{V}ar(C\\eta_t)=Id$."}
 knitr::include_graphics("images/Figure_E.png")
 ```
+
 
 In all cases, we have $\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(\eta_t)=Id$. But the two components of $\varepsilon_t$ are not independent. For instance, in the last two cases, we have $\mathbb{E}(\varepsilon_{2,t}|\varepsilon_{1,t}>4)<0$ (whereas $\mathbb{E}(\eta_{2,t}|\eta_{1,t}>4)=0$). The objective of ICA is to rotate $\varepsilon_t$ to retrieve independent components ($\eta_t$).
 
