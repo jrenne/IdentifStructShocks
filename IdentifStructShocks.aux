@@ -19,8 +19,8 @@
 \newlabel{eq:boxIRFs}{{1.3}{8}{IRFs in SVARMA}{equation.1.3}{}}
 \newlabel{eq:InfMA}{{1.4}{8}{IRFs in SVARMA}{equation.1.4}{}}
 \newlabel{exm:IRFsimpleAR}{{1.1}{8}{IRF of a univariate AR model}{example.1.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Impulse response functions for an AR(1) process.}}{9}{figure.1.1}\protected@file@percent }
-\newlabel{fig:simAR1}{{1.1}{9}{Impulse response functions for an AR(1) process}{figure.1.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Impulse response functions for an AR(1) process: $y_t = \mitphi y_{t-1} + b \miteta _t$, $\miteta _t \sim i.i.d. \symcal {N}(0,1)$.}}{9}{figure.1.1}\protected@file@percent }
+\newlabel{fig:simAR1}{{1.1}{9}{Impulse response functions for an AR(1) process: $y_t = \phi y_{t-1} + b \eta _t$, $\eta _t \sim i.i.d. \mathcal {N}(0,1)$}{figure.1.1}{}}
 \newlabel{prp:computPsi}{{1.1}{10}{IRF of an ARMA(p,q) process}{proposition.1.1}{}}
 \newlabel{exm:IRFVAR}{{1.2}{10}{IRFs of an SVAR model}{example.1.2}{}}
 \newlabel{eq:VAR111}{{1.5}{10}{IRFs of an SVAR model}{equation.1.5}{}}
@@ -42,248 +42,266 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1.4}VAR estimation}{18}{section.1.4}\protected@file@percent }
 \newlabel{estimVAR}{{1.4}{18}{VAR estimation}{section.1.4}{}}
 \newlabel{eq:PIVAR}{{1.11}{18}{VAR estimation}{equation.1.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Maximum Likelihood Estimation (MLE) when the shocks are Gaussian}{18}{subsection.1.4.1}\protected@file@percent }
+\newlabel{maximum-likelihood-estimation-mle-when-the-shocks-are-gaussian}{{1.4.1}{18}{Maximum Likelihood Estimation (MLE) when the shocks are Gaussian}{subsection.1.4.1}{}}
 \newlabel{prp:estimVARGaussian}{{1.2}{18}{MLE of a Gaussian VAR}{proposition.1.2}{}}
 \newlabel{eq:Pi}{{1.12}{18}{MLE of a Gaussian VAR}{equation.1.12}{}}
 \newlabel{eq:betayx}{{1.13}{18}{MLE of a Gaussian VAR}{equation.1.13}{}}
+\newlabel{eq:optimzedLogL}{{1.15}{19}{Maximum Likelihood Estimation (MLE) when the shocks are Gaussian}{equation.1.15}{}}
+\newlabel{exm:AdhocLagSelectLR}{{1.5}{19}{Ad-hoc lag selection based on the LR test}{example.1.5}{}}
+\newlabel{exm:US3varselect}{{1.6}{20}{Three-variable VAR model}{example.1.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Impulse response functions for a 3-variable VAR model estimated on U.S. quarterly data.}}{22}{figure.1.5}\protected@file@percent }
+\newlabel{fig:US3varIRFs1}{{1.5}{22}{Impulse response functions for a 3-variable VAR model estimated on U.S. quarterly data}{figure.1.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Variance decomposition for a 3-variable VAR model estimated on U.S. quarterly data.}}{23}{figure.1.6}\protected@file@percent }
+\newlabel{fig:US3varVARdecomp}{{1.6}{23}{Variance decomposition for a 3-variable VAR model estimated on U.S. quarterly data}{figure.1.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Asymptotic distribution of the OLS estimates}{23}{subsection.1.4.2}\protected@file@percent }
+\newlabel{asymptotic-distribution-of-the-ols-estimates}{{1.4.2}{23}{Asymptotic distribution of the OLS estimates}{subsection.1.4.2}{}}
+\newlabel{prp:OLSVAR}{{1.3}{23}{Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)}{proposition.1.3}{}}
 \citation{Hamilton_1994}
-\newlabel{eq:olsar1}{{1.15}{19}{VAR estimation}{equation.1.15}{}}
-\newlabel{prp:OLSVAR}{{1.3}{19}{Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)}{proposition.1.3}{}}
-\newlabel{eq:Qols}{{1.16}{19}{Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)}{equation.1.16}{}}
-\newlabel{prp:OLSVAR2}{{1.4}{19}{Asymptotic distribution of the OLS estimates}{proposition.1.4}{}}
-\newlabel{eq:asymptPi}{{1.17}{19}{Asymptotic distribution of the OLS estimates}{equation.1.17}{}}
-\newlabel{eq:optimzedLogL}{{1.18}{20}{VAR estimation}{equation.1.18}{}}
-\newlabel{exm:AdhocLagSelectLR}{{1.5}{20}{Ad-hoc lag selection based on the LR test}{example.1.5}{}}
-\newlabel{exm:US3varselect}{{1.6}{21}{Three-variable VAR model}{example.1.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Impulse response functions for a 3-variable VAR model estimated on U.S. quarterly data.}}{23}{figure.1.5}\protected@file@percent }
-\newlabel{fig:US3varIRFs1}{{1.5}{23}{Impulse response functions for a 3-variable VAR model estimated on U.S. quarterly data}{figure.1.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Variance decomposition for a 3-variable VAR model estimated on U.S. quarterly data.}}{24}{figure.1.6}\protected@file@percent }
-\newlabel{fig:US3varVARdecomp}{{1.6}{24}{Variance decomposition for a 3-variable VAR model estimated on U.S. quarterly data}{figure.1.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.5}Block exogeneity and Granger causality}{24}{section.1.5}\protected@file@percent }
-\newlabel{BlockGranger}{{1.5}{24}{Block exogeneity and Granger causality}{section.1.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.1}Block exogeneity}{24}{subsection.1.5.1}\protected@file@percent }
-\newlabel{block-exogeneity}{{1.5.1}{24}{Block exogeneity}{subsection.1.5.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.7}{\ignorespaces GDP log growth rates and inflation rates for the US and Korea. Black lines are for Korea; grey lines are for the US. All series are year-on-year growth rates, expressed in percent.}}{26}{figure.1.7}\protected@file@percent }
-\newlabel{fig:VARdataUSAKOR}{{1.7}{26}{GDP log growth rates and inflation rates for the US and Korea. Black lines are for Korea; grey lines are for the US. All series are year-on-year growth rates, expressed in percent}{figure.1.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces Impulse response functions in the context of VAR models depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}}{29}{figure.1.8}\protected@file@percent }
-\newlabel{fig:IRFblockexog}{{1.8}{29}{Impulse response functions in the context of VAR models depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}{figure.1.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.9}{\ignorespaces Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}}{30}{figure.1.9}\protected@file@percent }
-\newlabel{fig:VARdecblockexogUS}{{1.9}{30}{Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}{figure.1.9}{}}
+\newlabel{eq:Qols}{{1.17}{24}{Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)}{equation.1.17}{}}
+\newlabel{eq:olsar1}{{1.18}{24}{Asymptotic distribution of the OLS estimates}{equation.1.18}{}}
+\newlabel{prp:OLSVAR2}{{1.4}{24}{Asymptotic distribution of the OLS estimates}{proposition.1.4}{}}
+\newlabel{eq:asymptPi}{{1.19}{24}{Asymptotic distribution of the OLS estimates}{equation.1.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.3}Specification tests}{25}{subsection.1.4.3}\protected@file@percent }
+\newlabel{specification-tests}{{1.4.3}{25}{Specification tests}{subsection.1.4.3}{}}
+\newlabel{exm:BivariateVARCHE}{{1.7}{25}{Bivariate model for Switzerland}{example.1.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.7}{\ignorespaces Inflation and GDP growth rates. Percent change from year ago.}}{26}{figure.1.7}\protected@file@percent }
+\newlabel{fig:US2varCHE}{{1.7}{26}{Inflation and GDP growth rates. Percent change from year ago}{figure.1.7}{}}
+\citation{Breusch_1978}
+\citation{Godfrey_1978}
+\citation{Engle_1982}
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Block exogeneity and Granger causality}{29}{section.1.5}\protected@file@percent }
+\newlabel{BlockGranger}{{1.5}{29}{Block exogeneity and Granger causality}{section.1.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.1}Block exogeneity}{29}{subsection.1.5.1}\protected@file@percent }
+\newlabel{block-exogeneity}{{1.5.1}{29}{Block exogeneity}{subsection.1.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces GDP log growth rates and inflation rates for the US and Korea. Black lines are for Korea; grey lines are for the US. All series are year-on-year growth rates, expressed in percent.}}{30}{figure.1.8}\protected@file@percent }
+\newlabel{fig:VARdataUSAKOR}{{1.8}{30}{GDP log growth rates and inflation rates for the US and Korea. Black lines are for Korea; grey lines are for the US. All series are year-on-year growth rates, expressed in percent}{figure.1.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.9}{\ignorespaces Impulse response functions in the context of VAR models depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}}{33}{figure.1.9}\protected@file@percent }
+\newlabel{fig:IRFblockexog}{{1.9}{33}{Impulse response functions in the context of VAR models depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}{figure.1.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.10}{\ignorespaces Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}}{34}{figure.1.10}\protected@file@percent }
+\newlabel{fig:VARdecblockexogUS}{{1.10}{34}{Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)}{figure.1.10}{}}
 \citation{Granger_1969}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.10}{\ignorespaces Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The model is contrained in such a way that Korean variables do not affect US ones. (In other words, in this restricted model, US variables are exogenous.)}}{31}{figure.1.10}\protected@file@percent }
-\newlabel{fig:VARdecblockexogCH}{{1.10}{31}{Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The model is contrained in such a way that Korean variables do not affect US ones. (In other words, in this restricted model, US variables are exogenous.)}{figure.1.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.2}Granger Causality}{31}{subsection.1.5.2}\protected@file@percent }
-\newlabel{granger-causality}{{1.5.2}{31}{Granger Causality}{subsection.1.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.11}{\ignorespaces Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The model is contrained in such a way that Korean variables do not affect US ones. (In other words, in this restricted model, US variables are exogenous.)}}{35}{figure.1.11}\protected@file@percent }
+\newlabel{fig:VARdecblockexogCH}{{1.11}{35}{Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The model is contrained in such a way that Korean variables do not affect US ones. (In other words, in this restricted model, US variables are exogenous.)}{figure.1.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.2}Granger Causality}{35}{subsection.1.5.2}\protected@file@percent }
+\newlabel{granger-causality}{{1.5.2}{35}{Granger Causality}{subsection.1.5.2}{}}
 \citation{BERNANKE198649}
 \citation{Sims_1986}
 \citation{Gali_1992}
 \citation{RubioRamirez_et_al_2010}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Identification problem and standard identification techniques}{39}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{identifStruct}{{2}{39}{Identification problem and standard identification techniques}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}The identification problem}{39}{section.2.1}\protected@file@percent }
+\newlabel{IdentifPbm}{{2.1}{39}{The identification problem}{section.2.1}{}}
 \citation{Blanchard_Quah_1989}
 \citation{Faust_Leeper_1997}
 \citation{Gali_1999}
 \citation{Erceg_et_al_2005}
 \citation{NBERc11177}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Identification problem and standard identification techniques}{35}{chapter.2}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{identifStruct}{{2}{35}{Identification problem and standard identification techniques}{chapter.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}The identification problem}{35}{section.2.1}\protected@file@percent }
-\newlabel{IdentifPbm}{{2.1}{35}{The identification problem}{section.2.1}{}}
 \citation{Gerlach_Smets_1995}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}A stylized example motivating short-run restrictions}{36}{section.2.2}\protected@file@percent }
-\newlabel{a-stylized-example-motivating-short-run-restrictions}{{2.2}{36}{A stylized example motivating short-run restrictions}{section.2.2}{}}
-\newlabel{eq:systemI}{{2.1}{36}{A stylized example motivating short-run restrictions}{equation.2.1}{}}
-\newlabel{eq:covU}{{2.2}{36}{A stylized example motivating short-run restrictions}{equation.2.2}{}}
-\newlabel{eq:BBBB}{{2.3}{36}{A stylized example motivating short-run restrictions}{equation.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}A stylized example motivating short-run restrictions}{40}{section.2.2}\protected@file@percent }
+\newlabel{a-stylized-example-motivating-short-run-restrictions}{{2.2}{40}{A stylized example motivating short-run restrictions}{section.2.2}{}}
+\newlabel{eq:systemI}{{2.1}{40}{A stylized example motivating short-run restrictions}{equation.2.1}{}}
+\newlabel{eq:covU}{{2.2}{40}{A stylized example motivating short-run restrictions}{equation.2.2}{}}
+\newlabel{eq:BBBB}{{2.3}{40}{A stylized example motivating short-run restrictions}{equation.2.3}{}}
 \citation{DEDOLA20051543}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Cholesky: a specific short-run-restriction situation}{41}{section.2.3}\protected@file@percent }
+\newlabel{Cholesky}{{2.3}{41}{Cholesky: a specific short-run-restriction situation}{section.2.3}{}}
 \citation{Christiano_Eichenbaum_Evans_1996}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Cholesky: a specific short-run-restriction situation}{37}{section.2.3}\protected@file@percent }
-\newlabel{Cholesky}{{2.3}{37}{Cholesky: a specific short-run-restriction situation}{section.2.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Long-run restrictions}{38}{section.2.4}\protected@file@percent }
-\newlabel{long-run-restrictions}{{2.4}{38}{Long-run restrictions}{section.2.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).}}{39}{figure.2.1}\protected@file@percent }
-\newlabel{fig:CEE}{{2.1}{39}{Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section)}{figure.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}The VAR(1) case}{40}{subsection.2.4.1}\protected@file@percent }
-\newlabel{the-var1-case}{{2.4.1}{40}{The VAR(1) case}{subsection.2.4.1}{}}
-\newlabel{eq:cumul}{{2.4}{40}{The VAR(1) case}{equation.2.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}The VAR(\(p\)) case}{41}{subsection.2.4.2}\protected@file@percent }
-\newlabel{the-varp-case}{{2.4.2}{41}{\texorpdfstring {The VAR(\(p\)) case}{The VAR(p) case}}{subsection.2.4.2}{}}
-\newlabel{eq:ystarVAR}{{2.5}{41}{\texorpdfstring {The VAR(\(p\)) case}{The VAR(p) case}}{equation.2.5}{}}
+\citation{ref}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Using Cholesky to identify a single shock}{42}{section.2.4}\protected@file@percent }
+\newlabel{Cholesky1}{{2.4}{42}{Using Cholesky to identify a single shock}{section.2.4}{}}
+\newlabel{eq:BCEE}{{2.4}{42}{Using Cholesky to identify a single shock}{equation.2.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).}}{43}{figure.2.1}\protected@file@percent }
+\newlabel{fig:CEE}{{2.1}{43}{Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section)}{figure.2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Long-run restrictions}{44}{section.2.5}\protected@file@percent }
+\newlabel{LRrestr}{{2.5}{44}{Long-run restrictions}{section.2.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}The VAR(1) case}{44}{subsection.2.5.1}\protected@file@percent }
+\newlabel{the-var1-case}{{2.5.1}{44}{The VAR(1) case}{subsection.2.5.1}{}}
+\newlabel{eq:cumul}{{2.5}{44}{The VAR(1) case}{equation.2.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}The VAR(\(p\)) case}{45}{subsection.2.5.2}\protected@file@percent }
+\newlabel{the-varp-case}{{2.5.2}{45}{\texorpdfstring {The VAR(\(p\)) case}{The VAR(p) case}}{subsection.2.5.2}{}}
+\newlabel{eq:ystarVAR}{{2.6}{45}{\texorpdfstring {The VAR(\(p\)) case}{The VAR(p) case}}{equation.2.6}{}}
 \citation{Blanchard_Quah_1989}
 \citation{Fischer_1977}
 \citation{Blanchard_Quah_1989}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Blanchard and Quah (1989)}{42}{subsection.2.4.3}\protected@file@percent }
-\newlabel{blanchard-and-quah-1989}{{2.4.3}{42}{Blanchard and Quah (1989)}{subsection.2.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP.}}{43}{figure.2.2}\protected@file@percent }
-\newlabel{fig:BQ1}{{2.2}{43}{These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP}{figure.2.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces IRF of GDP and unemployment to demand and supply shocks.}}{45}{figure.2.3}\protected@file@percent }
-\newlabel{fig:BQ4}{{2.3}{45}{IRF of GDP and unemployment to demand and supply shocks}{figure.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Blanchard and Quah (1989)}{46}{subsection.2.5.3}\protected@file@percent }
+\newlabel{blanchard-and-quah-1989}{{2.5.3}{46}{Blanchard and Quah (1989)}{subsection.2.5.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP.}}{47}{figure.2.2}\protected@file@percent }
+\newlabel{fig:BQ1}{{2.2}{47}{These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP}{figure.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces IRF of GDP and unemployment to demand and supply shocks.}}{49}{figure.2.3}\protected@file@percent }
+\newlabel{fig:BQ4}{{2.3}{49}{IRF of GDP and unemployment to demand and supply shocks}{figure.2.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.6}Mixing short- and long-run restrictions}{49}{section.2.6}\protected@file@percent }
+\newlabel{Mixing}{{2.6}{49}{Mixing short- and long-run restrictions}{section.2.6}{}}
 \citation{Hamilton_1994}
 \citation{Lutkepohl_1990}
 \citation{Kilian_1998}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Inference}{47}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Inference}{53}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Inference}{{3}{47}{Inference}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Monte Carlo method}{48}{section.3.1}\protected@file@percent }
-\newlabel{MonteCarlo}{{3.1}{48}{Monte Carlo method}{section.3.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces IRF associated with a monetary policy shock; Monte Carlo method.}}{49}{figure.3.1}\protected@file@percent }
-\newlabel{fig:inference1}{{3.1}{49}{IRF associated with a monetary policy shock; Monte Carlo method}{figure.3.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Estimated IRF associated with a monetary policy shock (black line) with simulated IRFs (red lines) and median IRF (blue line); Monte Carlo method.}}{50}{figure.3.2}\protected@file@percent }
-\newlabel{fig:inference1bis}{{3.2}{50}{Estimated IRF associated with a monetary policy shock (black line) with simulated IRFs (red lines) and median IRF (blue line); Monte Carlo method}{figure.3.2}{}}
+\newlabel{Inference}{{3}{53}{Inference}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Monte Carlo method}{54}{section.3.1}\protected@file@percent }
+\newlabel{MonteCarlo}{{3.1}{54}{Monte Carlo method}{section.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces IRF associated with a monetary policy shock; Monte Carlo method.}}{55}{figure.3.1}\protected@file@percent }
+\newlabel{fig:inference1}{{3.1}{55}{IRF associated with a monetary policy shock; Monte Carlo method}{figure.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Estimated IRF associated with a monetary policy shock (black line) with simulated IRFs (red lines) and median IRF (blue line); Monte Carlo method.}}{56}{figure.3.2}\protected@file@percent }
+\newlabel{fig:inference1bis}{{3.2}{56}{Estimated IRF associated with a monetary policy shock (black line) with simulated IRFs (red lines) and median IRF (blue line); Monte Carlo method}{figure.3.2}{}}
 \citation{Lutkepohl_1990}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Delta method}{51}{section.3.2}\protected@file@percent }
-\newlabel{delta-method}{{3.2}{51}{Delta method}{section.3.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Bootstrap}{51}{section.3.3}\protected@file@percent }
-\newlabel{bootstrap}{{3.3}{51}{Bootstrap}{section.3.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Bootstrap-after-bootstrap}{52}{section.3.4}\protected@file@percent }
-\newlabel{bootstrap-after-bootstrap}{{3.4}{52}{Bootstrap-after-bootstrap}{section.3.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces IRF associated with a monetary policy shock; bootstrap method.}}{53}{figure.3.3}\protected@file@percent }
-\newlabel{fig:inference2}{{3.3}{53}{IRF associated with a monetary policy shock; bootstrap method}{figure.3.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Estimated and bootstrapped coefficients.}}{54}{figure.3.4}\protected@file@percent }
-\newlabel{fig:inference3}{{3.4}{54}{Estimated and bootstrapped coefficients}{figure.3.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Simulated IRF associated with a monetary policy shock.}}{56}{figure.3.5}\protected@file@percent }
-\newlabel{fig:inference4}{{3.5}{56}{Simulated IRF associated with a monetary policy shock}{figure.3.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Delta method}{57}{section.3.2}\protected@file@percent }
+\newlabel{Delta}{{3.2}{57}{Delta method}{section.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Bootstrap}{57}{section.3.3}\protected@file@percent }
+\newlabel{Bootstrap1}{{3.3}{57}{Bootstrap}{section.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Bootstrap-after-bootstrap}{58}{section.3.4}\protected@file@percent }
+\newlabel{BootstrapAfter}{{3.4}{58}{Bootstrap-after-bootstrap}{section.3.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces IRF associated with a monetary policy shock; bootstrap method.}}{59}{figure.3.3}\protected@file@percent }
+\newlabel{fig:inference2}{{3.3}{59}{IRF associated with a monetary policy shock; bootstrap method}{figure.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Estimated and bootstrapped coefficients.}}{60}{figure.3.4}\protected@file@percent }
+\newlabel{fig:inference3}{{3.4}{60}{Estimated and bootstrapped coefficients}{figure.3.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Simulated IRF associated with a monetary policy shock.}}{62}{figure.3.5}\protected@file@percent }
+\newlabel{fig:inference4}{{3.5}{62}{Simulated IRF associated with a monetary policy shock}{figure.3.5}{}}
 \citation{Kilian_1998}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces IRF associated with a monetary policy shock; sign-restriction approach.}}{57}{figure.3.6}\protected@file@percent }
-\newlabel{fig:inference5}{{3.6}{57}{IRF associated with a monetary policy shock; sign-restriction approach}{figure.3.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces IRF associated with a monetary policy shock; sign-restriction approach.}}{64}{figure.3.6}\protected@file@percent }
+\newlabel{fig:inference5}{{3.6}{64}{IRF associated with a monetary policy shock; sign-restriction approach}{figure.3.6}{}}
 \citation{Kilian_1998}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces IRF associated with a monetary policy shock; sign-restriction approach.}}{66}{figure.3.7}\protected@file@percent }
+\newlabel{fig:inference6}{{3.7}{66}{IRF associated with a monetary policy shock; sign-restriction approach}{figure.3.7}{}}
 \citation{VARetp}
 \citation{Kilian_1998}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces IRF associated with a monetary policy shock; sign-restriction approach.}}{60}{figure.3.7}\protected@file@percent }
-\newlabel{fig:inference6}{{3.7}{60}{IRF associated with a monetary policy shock; sign-restriction approach}{figure.3.7}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Sign restrictions}{61}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Sign restrictions}{69}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Signs}{{4}{61}{Sign restrictions}{chapter.4}{}}
-\newlabel{def:orthogonal}{{4.1}{61}{Orthogonal matrix}{definition.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}The approach}{61}{section.4.1}\protected@file@percent }
-\newlabel{the-approach}{{4.1}{61}{The approach}{section.4.1}{}}
+\newlabel{Signs}{{4}{69}{Sign restrictions}{chapter.4}{}}
+\newlabel{def:orthogonal}{{4.1}{69}{Orthogonal matrix}{definition.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}The approach}{69}{section.4.1}\protected@file@percent }
+\newlabel{the-approach}{{4.1}{69}{The approach}{section.4.1}{}}
 \citation{Arias_et_al_2018}
 \citation{Uhlig_2005}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}An example}{62}{section.4.2}\protected@file@percent }
-\newlabel{an-example}{{4.2}{62}{An example}{section.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}An example}{70}{section.4.2}\protected@file@percent }
+\newlabel{an-example}{{4.2}{70}{An example}{section.4.2}{}}
 \citation{Uhlig_2005}
 \citation{Uhlig_2005}
 \citation{Danne_2015}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces IRF associated with a monetary policy shock; sign-restriction approach.}}{64}{figure.4.1}\protected@file@percent }
-\newlabel{fig:signrestr1}{{4.1}{64}{IRF associated with a monetary policy shock; sign-restriction approach}{figure.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces IRF associated with a monetary policy shock; sign-restriction approach.}}{72}{figure.4.1}\protected@file@percent }
+\newlabel{fig:signrestr1}{{4.1}{72}{IRF associated with a monetary policy shock; sign-restriction approach}{figure.4.1}{}}
 \citation{AntolinDiaz_RubioRamirez_2018}
 \citation{AntolinDiaz_RubioRamirez_2018}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}The penalty-function approach (PFA)}{65}{section.4.3}\protected@file@percent }
-\newlabel{the-penalty-function-approach-pfa}{{4.3}{65}{The penalty-function approach (PFA)}{section.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Narrative sign restrictions}{65}{section.4.4}\protected@file@percent }
-\newlabel{NarrativeSign}{{4.4}{65}{Narrative sign restrictions}{section.4.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}The penalty-function approach (PFA)}{73}{section.4.3}\protected@file@percent }
+\newlabel{the-penalty-function-approach-pfa}{{4.3}{73}{The penalty-function approach (PFA)}{section.4.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Narrative sign restrictions}{73}{section.4.4}\protected@file@percent }
+\newlabel{NarrativeSign}{{4.4}{73}{Narrative sign restrictions}{section.4.4}{}}
 \citation{Arias_et_al_2018}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Combining sign and zero restrictions}{67}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Combining sign and zero restrictions}{75}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{SignsZeros}{{5}{67}{Combining sign and zero restrictions}{chapter.5}{}}
-\newlabel{exm:exMixSignSR}{{5.1}{67}{}{example.5.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces IRFs; sign-restriction approach.}}{70}{figure.5.1}\protected@file@percent }
-\newlabel{fig:signrestr2-1}{{5.1}{70}{IRFs; sign-restriction approach}{figure.5.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces IRFs; sign-restriction approach.}}{71}{figure.5.2}\protected@file@percent }
-\newlabel{fig:signrestr2-2}{{5.2}{71}{IRFs; sign-restriction approach}{figure.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces IRFs; sign-restriction approach.}}{72}{figure.5.3}\protected@file@percent }
-\newlabel{fig:signrestr2-3}{{5.3}{72}{IRFs; sign-restriction approach}{figure.5.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces IRFs; sign-restriction approach.}}{73}{figure.5.4}\protected@file@percent }
-\newlabel{fig:signrestr2-4}{{5.4}{73}{IRFs; sign-restriction approach}{figure.5.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces IRFs; sign-restriction approach.}}{74}{figure.5.5}\protected@file@percent }
-\newlabel{fig:signrestr2-5}{{5.5}{74}{IRFs; sign-restriction approach}{figure.5.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces IRFs; sign-restriction approach.}}{75}{figure.5.6}\protected@file@percent }
-\newlabel{fig:signrestr2-6}{{5.6}{75}{IRFs; sign-restriction approach}{figure.5.6}{}}
+\newlabel{SignsZeros}{{5}{75}{Combining sign and zero restrictions}{chapter.5}{}}
+\newlabel{exm:exMixSignSR}{{5.1}{75}{}{example.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces IRFs; sign-restriction approach.}}{78}{figure.5.1}\protected@file@percent }
+\newlabel{fig:signrestr2-1}{{5.1}{78}{IRFs; sign-restriction approach}{figure.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces IRFs; sign-restriction approach.}}{79}{figure.5.2}\protected@file@percent }
+\newlabel{fig:signrestr2-2}{{5.2}{79}{IRFs; sign-restriction approach}{figure.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces IRFs; sign-restriction approach.}}{80}{figure.5.3}\protected@file@percent }
+\newlabel{fig:signrestr2-3}{{5.3}{80}{IRFs; sign-restriction approach}{figure.5.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces IRFs; sign-restriction approach.}}{81}{figure.5.4}\protected@file@percent }
+\newlabel{fig:signrestr2-4}{{5.4}{81}{IRFs; sign-restriction approach}{figure.5.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces IRFs; sign-restriction approach.}}{82}{figure.5.5}\protected@file@percent }
+\newlabel{fig:signrestr2-5}{{5.5}{82}{IRFs; sign-restriction approach}{figure.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces IRFs; sign-restriction approach.}}{83}{figure.5.6}\protected@file@percent }
+\newlabel{fig:signrestr2-6}{{5.6}{83}{IRFs; sign-restriction approach}{figure.5.6}{}}
 \citation{Uhlig_2004}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Forecast error variance maximization}{77}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Forecast error variance maximization}{85}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{forecast-error-variance-maximization}{{6}{77}{Forecast error variance maximization}{chapter.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}The main (unconditional) approach}{77}{section.6.1}\protected@file@percent }
-\newlabel{the-main-unconditional-approach}{{6.1}{77}{The main (unconditional) approach}{section.6.1}{}}
+\newlabel{forecast-error-variance-maximization}{{6}{85}{Forecast error variance maximization}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}The main (unconditional) approach}{85}{section.6.1}\protected@file@percent }
+\newlabel{the-main-unconditional-approach}{{6.1}{85}{The main (unconditional) approach}{section.6.1}{}}
 \citation{BARSKY2011273}
 \citation{Levchenko_Pandalai-Nayar_2018}
 \citation{Levchenko_Pandalai-Nayar_2018}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Main GDP shock.}}{80}{figure.6.1}\protected@file@percent }
-\newlabel{fig:uhlig}{{6.1}{80}{Main GDP shock}{figure.6.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Main GDP shock.}}{88}{figure.6.1}\protected@file@percent }
+\newlabel{fig:uhlig}{{6.1}{88}{Main GDP shock}{figure.6.1}{}}
 \citation{AntolinDiaz_RubioRamirez_2018}
 \citation{AntolinDiaz_RubioRamirez_2018}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Restrictions based on narrative historical decomposition}{81}{section.6.2}\protected@file@percent }
-\newlabel{NarrativeHistDecomp}{{6.2}{81}{Restrictions based on narrative historical decomposition}{section.6.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}}{82}{figure.6.2}\protected@file@percent }
-\newlabel{fig:levchenko-1}{{6.2}{82}{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions}{figure.6.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}}{83}{figure.6.3}\protected@file@percent }
-\newlabel{fig:levchenko-2}{{6.3}{83}{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions}{figure.6.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}}{84}{figure.6.4}\protected@file@percent }
-\newlabel{fig:levchenko-3}{{6.4}{84}{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions}{figure.6.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Restrictions based on narrative historical decomposition}{89}{section.6.2}\protected@file@percent }
+\newlabel{NarrativeHistDecomp}{{6.2}{89}{Restrictions based on narrative historical decomposition}{section.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}}{90}{figure.6.2}\protected@file@percent }
+\newlabel{fig:levchenko-1}{{6.2}{90}{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions}{figure.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}}{91}{figure.6.3}\protected@file@percent }
+\newlabel{fig:levchenko-2}{{6.3}{91}{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions}{figure.6.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}}{92}{figure.6.4}\protected@file@percent }
+\newlabel{fig:levchenko-3}{{6.4}{92}{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions}{figure.6.4}{}}
 \citation{Rigobon_2003}
 \citation{NORMANDIN20041217}
 \citation{Lanne_Lutkepohl_2008}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Identification based on non-normality of the shocks}{87}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Identification based on non-normality of the shocks}{95}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{NonGaussian}{{7}{87}{Identification based on non-normality of the shocks}{chapter.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Intuition}{87}{section.7.1}\protected@file@percent }
-\newlabel{intuition}{{7.1}{87}{Intuition}{section.7.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces This figure compares the distributions of two Gaussian bivariate vectors, $B \miteta _t$ and $BQ\miteta _t$, where $\miteta _{t} \sim \symcal {N}(0,Id)$ (therefore $\miteta _{1,t}$ and $\miteta _{2,t}$ are independent), and $Q$ is an orthogonal matrix.}}{88}{figure.7.1}\protected@file@percent }
-\newlabel{fig:preMadeFigureICA}{{7.1}{88}{This figure compares the distributions of two Gaussian bivariate vectors, $B \eta _t$ and $BQ\eta _t$, where $\eta _{t} \sim \mathcal {N}(0,Id)$ (therefore $\eta _{1,t}$ and $\eta _{2,t}$ are independent), and $Q$ is an orthogonal matrix}{figure.7.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces This figure shows that the impulse response functions associated with an impulse matrix equal to $B$ (black line) or $BQ$ (red line) are different (even if $BB'=BQ(BQ)'$).}}{88}{figure.7.2}\protected@file@percent }
-\newlabel{fig:preMadeFigureICA2}{{7.2}{88}{This figure shows that the impulse response functions associated with an impulse matrix equal to $B$ (black line) or $BQ$ (red line) are different (even if $BB'=BQ(BQ)'$)}{figure.7.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces This figure compares the distributions of two Gaussian bivariate vectors, $B \miteta _t$ and $BQ\miteta _t$, where $\miteta _t{1,t} \sim \symcal {N}(0,1)$, $\miteta _t{2,t} \sim t(5)$, and $Q$ is an orthogonal matrix.}}{89}{figure.7.3}\protected@file@percent }
-\newlabel{fig:preMadeFigureICAGaussianStudent}{{7.3}{89}{This figure compares the distributions of two Gaussian bivariate vectors, $B \eta _t$ and $BQ\eta _t$, where $\eta _t{1,t} \sim \mathcal {N}(0,1)$, $\eta _t{2,t} \sim t(5)$, and $Q$ is an orthogonal matrix}{figure.7.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Independent Component Analysis (ICA)}{89}{section.7.2}\protected@file@percent }
-\newlabel{independent-component-analysis-ica}{{7.2}{89}{Independent Component Analysis (ICA)}{section.7.2}{}}
+\newlabel{NonGaussian}{{7}{95}{Identification based on non-normality of the shocks}{chapter.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Intuition}{95}{section.7.1}\protected@file@percent }
+\newlabel{intuition}{{7.1}{95}{Intuition}{section.7.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces This figure compares the distributions of two Gaussian bivariate vectors, $B \miteta _t$ and $BQ\miteta _t$, where $\miteta _{t} \sim \symcal {N}(0,Id)$ (therefore $\miteta _{1,t}$ and $\miteta _{2,t}$ are independent), and $Q$ is an orthogonal matrix.}}{96}{figure.7.1}\protected@file@percent }
+\newlabel{fig:preMadeFigureICA}{{7.1}{96}{This figure compares the distributions of two Gaussian bivariate vectors, $B \eta _t$ and $BQ\eta _t$, where $\eta _{t} \sim \mathcal {N}(0,Id)$ (therefore $\eta _{1,t}$ and $\eta _{2,t}$ are independent), and $Q$ is an orthogonal matrix}{figure.7.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces This figure shows that the impulse response functions associated with an impulse matrix equal to $B$ (black line) or $BQ$ (red line) are different (even if $BB'=BQ(BQ)'$).}}{96}{figure.7.2}\protected@file@percent }
+\newlabel{fig:preMadeFigureICA2}{{7.2}{96}{This figure shows that the impulse response functions associated with an impulse matrix equal to $B$ (black line) or $BQ$ (red line) are different (even if $BB'=BQ(BQ)'$)}{figure.7.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces This figure compares the distributions of two Gaussian bivariate vectors, $B \miteta _t$ and $BQ\miteta _t$, where $\miteta _t{1,t} \sim \symcal {N}(0,1)$, $\miteta _t{2,t} \sim t(5)$, and $Q$ is an orthogonal matrix.}}{97}{figure.7.3}\protected@file@percent }
+\newlabel{fig:preMadeFigureICAGaussianStudent}{{7.3}{97}{This figure compares the distributions of two Gaussian bivariate vectors, $B \eta _t$ and $BQ\eta _t$, where $\eta _t{1,t} \sim \mathcal {N}(0,1)$, $\eta _t{2,t} \sim t(5)$, and $Q$ is an orthogonal matrix}{figure.7.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Independent Component Analysis (ICA)}{97}{section.7.2}\protected@file@percent }
+\newlabel{independent-component-analysis-ica}{{7.2}{97}{Independent Component Analysis (ICA)}{section.7.2}{}}
 \citation{Gourieroux_Monfort_Renne_2017}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces The three plots represent the bivariate distributions of $\miteta _t$ (black) and of $C\miteta _t$ (red), where the two components of $\miteta _t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\symbb {V}ar(C\miteta _t)=Id$.}}{90}{figure.7.4}\protected@file@percent }
-\newlabel{fig:ThreePlots}{{7.4}{90}{The three plots represent the bivariate distributions of $\eta _t$ (black) and of $C\eta _t$ (red), where the two components of $\eta _t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\mathbb {V}ar(C\eta _t)=Id$}{figure.7.4}{}}
-\newlabel{hyp:NonGauss}{{7.1}{90}{}{hypothesis.7.1}{}}
-\newlabel{thm:EK2004}{{7.1}{90}{Eriksson, Koivunen (2004)}{theorem.7.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Pseudo-Maximum Likelihood (PML) approach}{90}{section.7.3}\protected@file@percent }
-\newlabel{pseudo-maximum-likelihood-pml-approach}{{7.3}{90}{Pseudo-Maximum Likelihood (PML) approach}{section.7.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces The three plots represent the bivariate distributions of $\miteta _t$ (black) and of $C\miteta _t$ (red), where the two components of $\miteta _t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\symbb {V}ar(C\miteta _t)=Id$.}}{98}{figure.7.4}\protected@file@percent }
+\newlabel{fig:ThreePlots}{{7.4}{98}{The three plots represent the bivariate distributions of $\eta _t$ (black) and of $C\eta _t$ (red), where the two components of $\eta _t$ are independent, of unit variance, and $C$ is orthogonal. Hence, for each of the three plots, $\mathbb {V}ar(C\eta _t)=Id$}{figure.7.4}{}}
+\newlabel{hyp:NonGauss}{{7.1}{98}{}{hypothesis.7.1}{}}
+\newlabel{thm:EK2004}{{7.1}{98}{Eriksson, Koivunen (2004)}{theorem.7.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Pseudo-Maximum Likelihood (PML) approach}{98}{section.7.3}\protected@file@percent }
+\newlabel{pseudo-maximum-likelihood-pml-approach}{{7.3}{98}{Pseudo-Maximum Likelihood (PML) approach}{section.7.3}{}}
 \citation{Jarocinski_2021}
 \citation{Gourieroux_Monfort_Renne_2017}
 \citation{Gourieroux_Monfort_Renne_2017}
 \citation{Gourieroux_Monfort_Renne_2017}
-\newlabel{eq:pseudolog}{{7.1}{91}{Pseudo-Maximum Likelihood (PML) approach}{equation.7.1}{}}
-\newlabel{eq:optimprob}{{7.2}{91}{Pseudo-Maximum Likelihood (PML) approach}{equation.7.2}{}}
-\newlabel{eq:optimprob2}{{7.5}{91}{Pseudo-Maximum Likelihood (PML) approach}{equation.7.5}{}}
+\newlabel{eq:pseudolog}{{7.1}{99}{Pseudo-Maximum Likelihood (PML) approach}{equation.7.1}{}}
+\newlabel{eq:optimprob}{{7.2}{99}{Pseudo-Maximum Likelihood (PML) approach}{equation.7.2}{}}
+\newlabel{eq:optimprob2}{{7.5}{99}{Pseudo-Maximum Likelihood (PML) approach}{equation.7.5}{}}
 \gdef \LT@i {\LT@entry 
     {1}{42.91179pt}\LT@entry 
     {1}{146.7211pt}\LT@entry 
     {1}{120.91528pt}\LT@entry 
     {1}{159.20016pt}}
-\newlabel{tab:distriICA}{{7.1}{92}{Pseudo-Maximum Likelihood (PML) approach}{table.7.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7.1}{ This table reports usual p.d.f. and their derivatives.}}{92}{table.7.1}\protected@file@percent }
-\newlabel{exm:GMR2017}{{7.1}{92}{Non-Gaussian monetary-policy shocks}{example.7.1}{}}
+\newlabel{tab:distriICA}{{7.1}{100}{Pseudo-Maximum Likelihood (PML) approach}{table.7.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{ This table reports usual p.d.f. and their derivatives.}}{100}{table.7.1}\protected@file@percent }
+\newlabel{exm:GMR2017}{{7.1}{100}{Non-Gaussian monetary-policy shocks}{example.7.1}{}}
 \citation{Rigobon_2003}
 \citation{LANNE2010121}
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Relation with the Heteroskedasticity Identification}{103}{section.7.4}\protected@file@percent }
+\newlabel{relation-with-the-heteroskedasticity-identification}{{7.4}{103}{Relation with the Heteroskedasticity Identification}{section.7.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces The first row of plots shows the responses of the three endogenous variables to the monetary policy shock in the context of a Cholesky-idendtified SVAR (ordering: inflation, output gap, interest rate). The next three rows of plots show the repsonses of the endogenous variables to the three structural shocks identified by ICA. The last one (Shock 3) is close to the Cholesky-identified monetary policy shock.}}{104}{figure.7.5}\protected@file@percent }
+\newlabel{fig:ICAFigIRF}{{7.5}{104}{The first row of plots shows the responses of the three endogenous variables to the monetary policy shock in the context of a Cholesky-idendtified SVAR (ordering: inflation, output gap, interest rate). The next three rows of plots show the repsonses of the endogenous variables to the three structural shocks identified by ICA. The last one (Shock 3) is close to the Cholesky-identified monetary policy shock}{figure.7.5}{}}
 \citation{LANNE2010121}
 \citation{LUTKEPOHL20172}
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Relation with the Heteroskedasticity Identification}{95}{section.7.4}\protected@file@percent }
-\newlabel{relation-with-the-heteroskedasticity-identification}{{7.4}{95}{Relation with the Heteroskedasticity Identification}{section.7.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces The first row of plots shows the responses of the three endogenous variables to the monetary policy shock in the context of a Cholesky-idendtified SVAR (ordering: inflation, output gap, interest rate). The next three rows of plots show the repsonses of the endogenous variables to the three structural shocks identified by ICA. The last one (Shock 3) is close to the Cholesky-identified monetary policy shock.}}{96}{figure.7.5}\protected@file@percent }
-\newlabel{fig:ICAFigIRF}{{7.5}{96}{The first row of plots shows the responses of the three endogenous variables to the monetary policy shock in the context of a Cholesky-idendtified SVAR (ordering: inflation, output gap, interest rate). The next three rows of plots show the repsonses of the endogenous variables to the three structural shocks identified by ICA. The last one (Shock 3) is close to the Cholesky-identified monetary policy shock}{figure.7.5}{}}
 \citation{Newey_West_1987}
 \citation{Jorda_2005}
 \citation{Jorda_2005}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Local projection methods}{99}{chapter.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Local projection methods}{107}{chapter.8}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Projections}{{8}{99}{Local projection methods}{chapter.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.1}Overview of the approach}{99}{section.8.1}\protected@file@percent }
-\newlabel{overview-of-the-approach}{{8.1}{99}{Overview of the approach}{section.8.1}{}}
-\newlabel{eq:OLS1}{{8.1}{99}{Overview of the approach}{equation.8.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.2}Situation A: Without IV}{99}{section.8.2}\protected@file@percent }
-\newlabel{LPIVww}{{8.2}{99}{Situation A: Without IV}{section.8.2}{}}
-\newlabel{eq:xetaw}{{8.2}{99}{Situation A: Without IV}{equation.8.2}{}}
+\newlabel{Projections}{{8}{107}{Local projection methods}{chapter.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Overview of the approach}{107}{section.8.1}\protected@file@percent }
+\newlabel{overview-of-the-approach}{{8.1}{107}{Overview of the approach}{section.8.1}{}}
+\newlabel{eq:OLS1}{{8.1}{107}{Overview of the approach}{equation.8.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Situation A: Without IV}{107}{section.8.2}\protected@file@percent }
+\newlabel{LPIVww}{{8.2}{107}{Situation A: Without IV}{section.8.2}{}}
+\newlabel{eq:xetaw}{{8.2}{107}{Situation A: Without IV}{equation.8.2}{}}
 \citation{Marcellino_et_al_2006}
 \citation{Jorda_2005}
 \citation{Christiano_Eichenbaum_Evans_1996}
-\newlabel{eq:uuuIV}{{8.3}{100}{Situation A: Without IV}{equation.8.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.1}{\ignorespaces Response to a monetary-policy shock. Identification approach of Jorda (2005).}}{101}{figure.8.1}\protected@file@percent }
-\newlabel{fig:CEEJorda}{{8.1}{101}{Response to a monetary-policy shock. Identification approach of Jorda (2005)}{figure.8.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8.3}Situation B: IV approach}{101}{section.8.3}\protected@file@percent }
-\newlabel{situation-b-iv-approach}{{8.3}{101}{Situation B: IV approach}{section.8.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.1}Instruments (proxies for structural shocks)}{101}{subsection.8.3.1}\protected@file@percent }
-\newlabel{instruments-proxies-for-structural-shocks}{{8.3.1}{101}{Instruments (proxies for structural shocks)}{subsection.8.3.1}{}}
-\newlabel{eq:IV1}{{8.5}{101}{Instruments (proxies for structural shocks)}{equation.8.5}{}}
+\newlabel{eq:uuuIV}{{8.3}{108}{Situation A: Without IV}{equation.8.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.1}{\ignorespaces Response to a monetary-policy shock. Identification approach of Jorda (2005).}}{109}{figure.8.1}\protected@file@percent }
+\newlabel{fig:CEEJorda}{{8.1}{109}{Response to a monetary-policy shock. Identification approach of Jorda (2005)}{figure.8.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Situation B: IV approach}{109}{section.8.3}\protected@file@percent }
+\newlabel{situation-b-iv-approach}{{8.3}{109}{Situation B: IV approach}{section.8.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.1}Instruments (proxies for structural shocks)}{109}{subsection.8.3.1}\protected@file@percent }
+\newlabel{instruments-proxies-for-structural-shocks}{{8.3.1}{109}{Instruments (proxies for structural shocks)}{subsection.8.3.1}{}}
+\newlabel{eq:IV1}{{8.5}{109}{Instruments (proxies for structural shocks)}{equation.8.5}{}}
 \citation{Ramey_2016_NBER}
 \citation{Gurkaynak_et_al_2005}
 \citation{KUTTNER2001523}
@@ -292,96 +310,152 @@
 \citation{Piazzesi_Swanson_2008}
 \citation{Gertler_Karadi_2015}
 \citation{Romer_Romer_2004}
-\newlabel{exm:HighFreq}{{8.1}{102}{Identification of Monetary-Policy Shocks Based on High-Frequency Data}{example.8.1}{}}
-\newlabel{exm:RomerRomer}{{8.2}{102}{Identification of Monetary-Policy Shocks Based on the Narrative Approach}{example.8.2}{}}
+\newlabel{exm:HighFreq}{{8.1}{110}{Identification of Monetary-Policy Shocks Based on High-Frequency Data}{example.8.1}{}}
+\newlabel{exm:RomerRomer}{{8.2}{110}{Identification of Monetary-Policy Shocks Based on the Narrative Approach}{example.8.2}{}}
 \citation{Ramey_2011}
 \citation{Ramey_2011}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.2}{\ignorespaces Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\% to 1\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself.}}{111}{figure.8.2}\protected@file@percent }
+\newlabel{fig:HighFreq}{{8.2}{111}{Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\% to 1\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself}{figure.8.2}{}}
 \citation{Ramey_2011}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.2}{\ignorespaces Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\% to 1\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself.}}{103}{figure.8.2}\protected@file@percent }
-\newlabel{fig:HighFreq}{{8.2}{103}{Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\% to 1\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself}{figure.8.2}{}}
-\newlabel{exm:RameyQJE2011}{{8.3}{103}{Identification of news about future government spending}{example.8.3}{}}
 \citation{Stock_Watson_2018}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.3}{\ignorespaces Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP.}}{104}{figure.8.3}\protected@file@percent }
-\newlabel{fig:RameyFiscalShocks}{{8.3}{104}{Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP}{figure.8.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.4}{\ignorespaces Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending.}}{105}{figure.8.4}\protected@file@percent }
-\newlabel{fig:IRFfiscalRamey}{{8.4}{105}{Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending}{figure.8.4}{}}
+\newlabel{exm:RameyQJE2011}{{8.3}{112}{Identification of news about future government spending}{example.8.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.3}{\ignorespaces Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP.}}{112}{figure.8.3}\protected@file@percent }
+\newlabel{fig:RameyFiscalShocks}{{8.3}{112}{Source: Ramey (2011). Defense News: PDV of Change in Spending as a Percent of GDP}{figure.8.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.4}{\ignorespaces Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending.}}{113}{figure.8.4}\protected@file@percent }
+\newlabel{fig:IRFfiscalRamey}{{8.4}{113}{Source: Ramey (2011) [Figure X of the paper]. Responses of macro variables to a shock on expected government spending}{figure.8.4}{}}
 \citation{Stock_Watson_2018}
 \citation{Stock_Watson_2018}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.2}Situation B.1: SVAR-IV approach}{114}{subsection.8.3.2}\protected@file@percent }
+\newlabel{SVARIVa}{{8.3.2}{114}{Situation B.1: SVAR-IV approach}{subsection.8.3.2}{}}
+\newlabel{eq:epsrho}{{8.6}{114}{Situation B.1: SVAR-IV approach}{equation.8.6}{}}
 \citation{Gertler_Karadi_2015}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.2}Situation B.1: SVAR-IV approach}{106}{subsection.8.3.2}\protected@file@percent }
-\newlabel{SVARIVa}{{8.3.2}{106}{Situation B.1: SVAR-IV approach}{subsection.8.3.2}{}}
-\newlabel{eq:epsrho}{{8.6}{106}{Situation B.1: SVAR-IV approach}{equation.8.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.3}Situation B.2: LP-IV}{107}{subsection.8.3.3}\protected@file@percent }
-\newlabel{LPIVa}{{8.3.3}{107}{Situation B.2: LP-IV}{subsection.8.3.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.5}{\ignorespaces Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red).}}{108}{figure.8.5}\protected@file@percent }
-\newlabel{fig:essaiIV0}{{8.5}{108}{Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red)}{figure.8.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.6}{\ignorespaces Reponses to a monetary-policy shock, SVAR-IV approach.}}{109}{figure.8.6}\protected@file@percent }
-\newlabel{fig:essaiIV1}{{8.6}{109}{Reponses to a monetary-policy shock, SVAR-IV approach}{figure.8.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.5}{\ignorespaces Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red).}}{116}{figure.8.5}\protected@file@percent }
+\newlabel{fig:essaiIV0}{{8.5}{116}{Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red)}{figure.8.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8.6}{\ignorespaces Reponses to a monetary-policy shock, SVAR-IV approach.}}{117}{figure.8.6}\protected@file@percent }
+\newlabel{fig:essaiIV1}{{8.6}{117}{Reponses to a monetary-policy shock, SVAR-IV approach}{figure.8.6}{}}
 \citation{Newey_West_1987}
 \citation{Gertler_Karadi_2015}
-\newlabel{eq:regIV1}{{8.7}{110}{Situation B.2: LP-IV}{equation.8.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3.3}Situation B.2: LP-IV}{118}{subsection.8.3.3}\protected@file@percent }
+\newlabel{LPIVa}{{8.3.3}{118}{Situation B.2: LP-IV}{subsection.8.3.3}{}}
+\newlabel{eq:regIV1}{{8.7}{118}{Situation B.2: LP-IV}{equation.8.7}{}}
 \citation{Canova_Cicarelli_2013}
-\@writefile{toc}{\contentsline {chapter}{\numberline {9}Panel VARs}{113}{chapter.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}Panel VARs}{121}{chapter.9}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{PanelVARs}{{9}{113}{Panel VARs}{chapter.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.1}Without Dynamic interdependence}{113}{section.9.1}\protected@file@percent }
-\newlabel{without-dynamic-interdependence}{{9.1}{113}{Without Dynamic interdependence}{section.9.1}{}}
+\newlabel{PanelVARs}{{9}{121}{Panel VARs}{chapter.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Without Dynamic interdependence}{121}{section.9.1}\protected@file@percent }
+\newlabel{without-dynamic-interdependence}{{9.1}{121}{Without Dynamic interdependence}{section.9.1}{}}
 \citation{Arellano_Bond_1991}
 \citation{DelNegro_Schorfheide_2010}
 \citation{Canova_Cicarelli_2004}
 \citation{Canova_Cicarelli_2009}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.1}Mean Group Estimator}{114}{subsection.9.1.1}\protected@file@percent }
-\newlabel{mean-group-estimator}{{9.1.1}{114}{Mean Group Estimator}{subsection.9.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.2}Shock identification}{114}{subsection.9.1.2}\protected@file@percent }
-\newlabel{shock-identification}{{9.1.2}{114}{Shock identification}{subsection.9.1.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9.2}With Dynamic Interdependencies}{114}{section.9.2}\protected@file@percent }
-\newlabel{with-dynamic-interdependencies}{{9.2}{114}{With Dynamic Interdependencies}{section.9.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.1}Mean Group Estimator}{122}{subsection.9.1.1}\protected@file@percent }
+\newlabel{mean-group-estimator}{{9.1.1}{122}{Mean Group Estimator}{subsection.9.1.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1.2}Shock identification}{122}{subsection.9.1.2}\protected@file@percent }
+\newlabel{shock-identification}{{9.1.2}{122}{Shock identification}{subsection.9.1.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}With Dynamic Interdependencies}{122}{section.9.2}\protected@file@percent }
+\newlabel{with-dynamic-interdependencies}{{9.2}{122}{With Dynamic Interdependencies}{section.9.2}{}}
 \citation{Bernanke_Boivin_Eliasz_2005}
-\@writefile{toc}{\contentsline {chapter}{\numberline {10}Factor-Augmented VAR}{115}{chapter.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Factor-Augmented VAR}{123}{chapter.10}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{FAVAR}{{10}{115}{Factor-Augmented VAR}{chapter.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10.1}Principal component analysis (PCA)}{115}{section.10.1}\protected@file@percent }
-\newlabel{PCAapp}{{10.1}{115}{Principal component analysis (PCA)}{section.10.1}{}}
-\newlabel{eq:PCA11}{{10.1}{115}{Principal component analysis (PCA)}{equation.10.1}{}}
+\newlabel{FAVAR}{{10}{123}{Factor-Augmented VAR}{chapter.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Principal component analysis (PCA)}{123}{section.10.1}\protected@file@percent }
+\newlabel{PCAapp}{{10.1}{123}{Principal component analysis (PCA)}{section.10.1}{}}
+\newlabel{eq:PCA11}{{10.1}{123}{Principal component analysis (PCA)}{equation.10.1}{}}
 \citation{Litterman_Scheinkman_1991}
-\@writefile{lof}{\contentsline {figure}{\numberline {10.1}{\ignorespaces Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.}}{118}{figure.10.1}\protected@file@percent }
-\newlabel{fig:USydsPCA1}{{10.1}{118}{Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities}{figure.10.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10.1}{\ignorespaces Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities.}}{126}{figure.10.1}\protected@file@percent }
+\newlabel{fig:USydsPCA1}{{10.1}{126}{Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities}{figure.10.1}{}}
 \citation{Bernanke_Boivin_Eliasz_2005}
 \citation{Bernanke_Boivin_Eliasz_2005}
 \citation{Bernanke_Boivin_Eliasz_2005}
 \citation{McCracken_Ng_2016}
-\@writefile{toc}{\contentsline {section}{\numberline {10.2}FAVAR models}{119}{section.10.2}\protected@file@percent }
-\newlabel{favar-models}{{10.2}{119}{FAVAR models}{section.10.2}{}}
-\newlabel{eq:FAVAR}{{10.2}{119}{FAVAR models}{equation.10.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10.2}{\ignorespaces Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.}}{121}{figure.10.2}\protected@file@percent }
-\newlabel{fig:FAVAR}{{10.2}{121}{Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset}{figure.10.2}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {11}Appendix}{123}{chapter.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}FAVAR models}{127}{section.10.2}\protected@file@percent }
+\newlabel{favar-models}{{10.2}{127}{FAVAR models}{section.10.2}{}}
+\newlabel{eq:FAVAR}{{10.2}{127}{FAVAR models}{equation.10.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10.2}{\ignorespaces Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset.}}{129}{figure.10.2}\protected@file@percent }
+\newlabel{fig:FAVAR}{{10.2}{129}{Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset}{figure.10.2}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Appendix}{131}{chapter.11}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{append}{{11}{123}{Appendix}{chapter.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.1}Definitions and statistical results}{123}{section.11.1}\protected@file@percent }
-\newlabel{definitions-and-statistical-results}{{11.1}{123}{Definitions and statistical results}{section.11.1}{}}
-\newlabel{def:covstat}{{11.1}{123}{Covariance stationarity}{definition.11.1}{}}
-\newlabel{def:LR}{{11.2}{123}{Likelihood Ratio test statistics}{definition.11.2}{}}
-\newlabel{prp:pdfMultivarGaussian}{{11.1}{123}{p.d.f. of a multivariate Gaussian variable}{proposition.11.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11.2}Estimation of VARMA models}{123}{section.11.2}\protected@file@percent }
-\newlabel{AppEstimVARMA}{{11.2}{123}{Estimation of VARMA models}{section.11.2}{}}
+\newlabel{append}{{11}{131}{Appendix}{chapter.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}Definitions and statistical results}{131}{section.11.1}\protected@file@percent }
+\newlabel{definitions-and-statistical-results}{{11.1}{131}{Definitions and statistical results}{section.11.1}{}}
+\newlabel{def:covstat}{{11.1}{131}{Covariance stationarity}{definition.11.1}{}}
+\newlabel{def:LR}{{11.2}{131}{Likelihood Ratio test statistics}{definition.11.2}{}}
+\newlabel{prp:pdfMultivarGaussian}{{11.1}{131}{p.d.f. of a multivariate Gaussian variable}{proposition.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Estimation of VARMA models}{131}{section.11.2}\protected@file@percent }
+\newlabel{AppEstimVARMA}{{11.2}{131}{Estimation of VARMA models}{section.11.2}{}}
 \citation{Gourieroux_Monfort_Renne_2020}
-\@writefile{toc}{\contentsline {section}{\numberline {11.3}Proofs}{124}{section.11.3}\protected@file@percent }
-\newlabel{AppendixProof}{{11.3}{124}{Proofs}{section.11.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11.1}{\ignorespaces Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS.}}{125}{figure.11.1}\protected@file@percent }
-\newlabel{fig:simulARMAbiased}{{11.1}{125}{Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS}{figure.11.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Proofs}{132}{section.11.3}\protected@file@percent }
+\newlabel{AppendixProof}{{11.3}{132}{Proofs}{section.11.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11.1}{\ignorespaces Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS.}}{133}{figure.11.1}\protected@file@percent }
+\newlabel{fig:simulARMAbiased}{{11.1}{133}{Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS}{figure.11.1}{}}
 \bibdata{book.bib,packages.bib}
-\@writefile{toc}{\contentsline {section}{\numberline {11.4}Statistical Tables}{127}{section.11.4}\protected@file@percent }
-\newlabel{statistical-tables}{{11.4}{127}{Statistical Tables}{section.11.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11.1}{\ignorespaces Quantiles of the $\symcal {N}(0,1)$ distribution. If $a$ and $b$ are respectively the row and column number; then the corresponding cell gives $\symbb {P}(0<X\le a+b)$, where $X \sim \symcal {N}(0,1)$.}}{128}{table.11.1}\protected@file@percent }
-\newlabel{tab:Normal}{{11.1}{128}{Quantiles of the $\mathcal {N}(0,1)$ distribution. If $a$ and $b$ are respectively the row and column number; then the corresponding cell gives $\mathbb {P}(0<X\le a+b)$, where $X \sim \mathcal {N}(0,1)$}{table.11.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11.2}{\ignorespaces Quantiles of the Student-$t$ distribution. The rows correspond to different degrees of freedom ($\mitnu $, say); the columns correspond to different probabilities ($z$, say). The cell gives $q$ that is s.t. $\symbb {P}(-q<X<q)=z$, with $X \sim t(\mitnu )$.}}{129}{table.11.2}\protected@file@percent }
-\newlabel{tab:Student}{{11.2}{129}{Quantiles of the Student-$t$ distribution. The rows correspond to different degrees of freedom ($\nu $, say); the columns correspond to different probabilities ($z$, say). The cell gives $q$ that is s.t. $\mathbb {P}(-q<X<q)=z$, with $X \sim t(\nu )$}{table.11.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11.3}{\ignorespaces Quantiles of the $\mitchi ^2$ distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.}}{130}{table.11.3}\protected@file@percent }
-\newlabel{tab:Chi2}{{11.3}{130}{Quantiles of the $\chi ^2$ distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities}{table.11.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11.4}{\ignorespaces Quantiles of the $\symcal {F}$ distribution. The columns and rows correspond to different degrees of freedom (resp. $n_1$ and $n_2$). The different panels correspond to different probabilities ($\mitalpha $) The corresponding cell gives $z$ that is s.t. $\symbb {P}(X \le z)=\mitalpha $, with $X \sim \symcal {F}(n_1,n_2)$.}}{131}{table.11.4}\protected@file@percent }
-\newlabel{tab:Fstat}{{11.4}{131}{Quantiles of the $\mathcal {F}$ distribution. The columns and rows correspond to different degrees of freedom (resp. $n_1$ and $n_2$). The different panels correspond to different probabilities ($\alpha $) The corresponding cell gives $z$ that is s.t. $\mathbb {P}(X \le z)=\alpha $, with $X \sim \mathcal {F}(n_1,n_2)$}{table.11.4}{}}
-\gdef \@abspage@last{131}
+\@writefile{toc}{\contentsline {section}{\numberline {11.4}Statistical Tables}{135}{section.11.4}\protected@file@percent }
+\newlabel{statistical-tables}{{11.4}{135}{Statistical Tables}{section.11.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11.1}{\ignorespaces Quantiles of the $\symcal {N}(0,1)$ distribution. If $a$ and $b$ are respectively the row and column number; then the corresponding cell gives $\symbb {P}(0<X\le a+b)$, where $X \sim \symcal {N}(0,1)$.}}{136}{table.11.1}\protected@file@percent }
+\newlabel{tab:Normal}{{11.1}{136}{Quantiles of the $\mathcal {N}(0,1)$ distribution. If $a$ and $b$ are respectively the row and column number; then the corresponding cell gives $\mathbb {P}(0<X\le a+b)$, where $X \sim \mathcal {N}(0,1)$}{table.11.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11.2}{\ignorespaces Quantiles of the Student-$t$ distribution. The rows correspond to different degrees of freedom ($\mitnu $, say); the columns correspond to different probabilities ($z$, say). The cell gives $q$ that is s.t. $\symbb {P}(-q<X<q)=z$, with $X \sim t(\mitnu )$.}}{137}{table.11.2}\protected@file@percent }
+\newlabel{tab:Student}{{11.2}{137}{Quantiles of the Student-$t$ distribution. The rows correspond to different degrees of freedom ($\nu $, say); the columns correspond to different probabilities ($z$, say). The cell gives $q$ that is s.t. $\mathbb {P}(-q<X<q)=z$, with $X \sim t(\nu )$}{table.11.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11.3}{\ignorespaces Quantiles of the $\mitchi ^2$ distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities.}}{138}{table.11.3}\protected@file@percent }
+\newlabel{tab:Chi2}{{11.3}{138}{Quantiles of the $\chi ^2$ distribution. The rows correspond to different degrees of freedom; the columns correspond to different probabilities}{table.11.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11.4}{\ignorespaces Quantiles of the $\symcal {F}$ distribution. The columns and rows correspond to different degrees of freedom (resp. $n_1$ and $n_2$). The different panels correspond to different probabilities ($\mitalpha $) The corresponding cell gives $z$ that is s.t. $\symbb {P}(X \le z)=\mitalpha $, with $X \sim \symcal {F}(n_1,n_2)$.}}{139}{table.11.4}\protected@file@percent }
+\newlabel{tab:Fstat}{{11.4}{139}{Quantiles of the $\mathcal {F}$ distribution. The columns and rows correspond to different degrees of freedom (resp. $n_1$ and $n_2$). The different panels correspond to different probabilities ($\alpha $) The corresponding cell gives $z$ that is s.t. $\mathbb {P}(X \le z)=\alpha $, with $X \sim \mathcal {F}(n_1,n_2)$}{table.11.4}{}}
+\bibcite{AntolinDiaz_RubioRamirez_2018}{{1}{2018}{{Antolín-D\'iaz and Rubio-Ram\'irez}}{{}}}
+\bibcite{Arellano_Bond_1991}{{2}{1991}{{Arellano and Bond}}{{}}}
+\bibcite{Arias_et_al_2018}{{3}{2018}{{Arias et~al.}}{{}}}
+\bibcite{BARSKY2011273}{{4}{2011}{{Barsky and Sims}}{{}}}
+\bibcite{BERNANKE198649}{{5}{1986}{{Bernanke}}{{}}}
+\bibcite{Bernanke_Boivin_Eliasz_2005}{{6}{2005}{{Bernanke et~al.}}{{}}}
+\bibcite{Blanchard_Quah_1989}{{7}{1989}{{Blanchard and Quah}}{{}}}
+\bibcite{Breusch_1978}{{8}{1978}{{Breusch}}{{}}}
+\bibcite{Canova_Cicarelli_2004}{{9}{2004}{{Canova and Ciccarelli}}{{}}}
+\bibcite{Canova_Cicarelli_2009}{{10}{2009}{{Canova and Ciccarelli}}{{}}}
+\bibcite{Canova_Cicarelli_2013}{{11}{2013}{{Canova and Ciccarelli}}{{}}}
+\bibcite{Christiano_Eichenbaum_Evans_1996}{{12}{1996}{{Christiano et~al.}}{{}}}
+\bibcite{NBERc11177}{{13}{2007}{{Christiano et~al.}}{{}}}
+\bibcite{Cochrane_Piazzesi_2002}{{14}{2002}{{Cochrane and Piazzesi}}{{}}}
+\bibcite{Danne_2015}{{15}{2015}{{Danne}}{{}}}
+\bibcite{DEDOLA20051543}{{16}{2005}{{Dedola and Lippi}}{{}}}
+\bibcite{DelNegro_Schorfheide_2010}{{17}{2011}{{del Negro}}{{}}}
+\bibcite{Engle_1982}{{18}{1982}{{Engle}}{{}}}
+\bibcite{Erceg_et_al_2005}{{19}{2005}{{Erceg et~al.}}{{}}}
+\bibcite{Faust_Leeper_1997}{{20}{1997}{{Faust and Leeper}}{{}}}
+\bibcite{Fischer_1977}{{21}{1977}{{Fischer}}{{}}}
+\bibcite{Gali_1999}{{22}{1999}{{Gal\'i}}{{}}}
+\bibcite{Gali_1992}{{23}{1992}{{Galí}}{{}}}
+\bibcite{Gerlach_Smets_1995}{{24}{1995}{{Gerlach and Smets}}{{}}}
+\bibcite{Gertler_Karadi_2015}{{25}{2015}{{Gertler and Karadi}}{{}}}
+\bibcite{Godfrey_1978}{{26}{1978}{{Godfrey}}{{}}}
+\bibcite{Gourieroux_Monfort_Renne_2020}{{27}{2020}{{Gouri\'eroux et~al.}}{{}}}
+\bibcite{Gourieroux_Monfort_Renne_2017}{{28}{2017}{{Gouriéroux et~al.}}{{}}}
+\bibcite{Granger_1969}{{29}{1969}{{Granger}}{{}}}
+\bibcite{Gurkaynak_et_al_2005}{{30}{2005}{{G\"urkaynak et~al.}}{{}}}
+\bibcite{Hamilton_1994}{{31}{1994}{{Hamilton}}{{}}}
+\bibcite{Jarocinski_2021}{{32}{2021}{{Jarocinski}}{{}}}
+\bibcite{Jorda_2005}{{33}{2005}{{Jord\`a}}{{}}}
+\bibcite{Kilian_1998}{{34}{1998}{{Kilian}}{{}}}
+\bibcite{VARetp}{{35}{2022}{{Kim}}{{}}}
+\bibcite{KUTTNER2001523}{{36}{2001}{{Kuttner}}{{}}}
+\bibcite{Lanne_Lutkepohl_2008}{{37}{2008}{{Lanne and L\"utkepohl}}{{}}}
+\bibcite{LANNE2010121}{{38}{2010}{{Lanne et~al.}}{{}}}
+\bibcite{Levchenko_Pandalai-Nayar_2018}{{39}{2018}{{Levchenko and Pandalai-Nayar}}{{}}}
+\bibcite{Litterman_Scheinkman_1991}{{40}{1991}{{Litterman and Scheinkman}}{{}}}
+\bibcite{Lutkepohl_1990}{{41}{1990}{{L\"utkepohl}}{{}}}
+\bibcite{LUTKEPOHL20172}{{42}{2017}{{Lütkepohl and Netšunajev}}{{}}}
+\bibcite{Marcellino_et_al_2006}{{43}{2006}{{Marcellino et~al.}}{{}}}
+\bibcite{McCracken_Ng_2016}{{44}{2016}{{McCracken and Ng}}{{}}}
+\bibcite{Newey_West_1987}{{45}{1987}{{Newey and West}}{{}}}
+\bibcite{NORMANDIN20041217}{{46}{2004}{{Normandin and Phaneuf}}{{}}}
+\bibcite{Piazzesi_Swanson_2008}{{47}{2008}{{Piazzesi and Swanson}}{{}}}
+\bibcite{Ramey_2011}{{48}{2011}{{Ramey}}{{}}}
+\bibcite{Ramey_2016_NBER}{{49}{2016}{{Ramey}}{{}}}
+\bibcite{Rigobon_2003}{{50}{2003}{{Rigobon}}{{}}}
+\bibcite{Romer_Romer_2004}{{51}{2004}{{Romer and Romer}}{{}}}
+\bibcite{RubioRamirez_et_al_2010}{{52}{2010}{{Ruibio-Ram\'irez et~al.}}{{}}}
+\bibcite{Sims_1986}{{53}{1986}{{Sims}}{{}}}
+\bibcite{Stock_Watson_2018}{{54}{2018}{{Stock and Watson}}{{}}}
+\bibcite{Uhlig_2004}{{55}{2004}{{Uhlig}}{{}}}
+\bibcite{Uhlig_2005}{{56}{2005}{{Uhlig}}{{}}}
+\gdef \@abspage@last{144}

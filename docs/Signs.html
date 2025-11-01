@@ -140,7 +140,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <span class="header-section-number">4.2</span> An example<a class="anchor" aria-label="anchor" href="#an-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>A prominent example is <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span>. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.</p>
-<p>According to conventional wisdom, monetary contractions should:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: &lt;em&gt;liquidity puzzle&lt;/em&gt;: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; &lt;em&gt;price puzzle&lt;/em&gt;: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.&lt;/p&gt;"><sup>6</sup></a></p>
+<p>According to conventional wisdom, monetary contractions should:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: &lt;em&gt;liquidity puzzle&lt;/em&gt;: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; &lt;em&gt;price puzzle&lt;/em&gt;: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.&lt;/p&gt;"><sup>8</sup></a></p>
 <ul>
 <li>Raise the federal funds rate,</li>
 <li>Lower prices,</li>
@@ -154,7 +154,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <li>Decreases in the federal funds rate</li>
 </ul>
 <p>What about output? Since is the response of interest, we leave it un-restricted.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
@@ -195,7 +195,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Output</span></span>
 <span><span class="va">IRFs.signs</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">IRFs.signs</span> <span class="co"># all the simulated IRFs</span></span>
 <span><span class="va">nb.rotations</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">xx</span> <span class="co"># total number of rotations</span></span>
@@ -236,10 +236,13 @@ Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approa
 </h2>
 <p>An alternative approach is the so-called <strong>penalty-function approach</strong> (PFA, <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span>, present in <span class="citation">Danne (<a href="references.html#ref-Danne_2015">2015</a>)</span>’s package). This approach relies on a <em>penalty function</em>:
 <span class="math display">\[
-\begin{array}{llll}f(x)&amp;=&amp;x&amp;\text{ if }x\le0\\
-&amp;&amp;100.x&amp;\text{ if }x&gt;0\end{array}
-\]</span>
-which penalizes positive responses and rewards negative responses.</p>
+f(x)=
+\begin{cases}
+x, &amp; \text{if } x \le 0,\\[6pt]
+100x, &amp; \text{if } x &gt; 0.
+\end{cases}
+\]</span></p>
+<p>which penalizes positive responses and rewards negative responses.</p>
 <p>Let <span class="math inline">\(\psi_k^j(q)\)</span> be the impulse response of variable <span class="math inline">\(j\)</span>. The <span class="math inline">\(\psi_k^j(q)\)</span>’s are the elements of <span class="math inline">\(\psi_k(q)=\Psi_kq\)</span>.</p>
 <p>Let <span class="math inline">\(\sigma_j\)</span> be the standard deviation of variable <span class="math inline">\(j\)</span>. Let <span class="math inline">\(\iota_{j,k}=1\)</span> if we restrict the response of variable <span class="math inline">\(j\)</span> at the <span class="math inline">\(k^th\)</span> horizon to be negative, <span class="math inline">\(\iota_{j,k}=-1\)</span> if we restrict it to be positive, and <span class="math inline">\(\iota_{j,k}=0\)</span> if there is no restriction. The total penalty is given by <span class="math display">\[
 \mathbf{P}(q)=\sum_{j=1}^m\sum_{k=0}^Kf\left(\iota_{j,k}\frac{\psi_k^j(q)}{\sigma_j}\right).
@@ -254,7 +257,7 @@ which penalizes positive responses and rewards negative responses.</p>
 <h2>
 <span class="header-section-number">4.4</span> Narrative sign restrictions<a class="anchor" aria-label="anchor" href="#NarrativeSign"><i class="fas fa-link"></i></a>
 </h2>
-<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;6.2&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
+<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;6.2&lt;/a&gt;.&lt;/p&gt;'><sup>9</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
 <p>Suppose we want to impose the restriction that, at dates <span class="math inline">\(\{t_1,\dots,t_J\}\)</span>, the signs of the <span class="math inline">\(j^{th}\)</span> shock are all positive. Then, the narrative sign restrictions are simply imposed by:
 <span class="math display">\[
 \hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) &gt; 0,
@@ -291,7 +294,7 @@ where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of stru
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-10-31.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-11-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

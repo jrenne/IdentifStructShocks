@@ -130,17 +130,17 @@ b_{11}^2+b_{12}^2 &amp; \color{red}{b_{11}b_{21}+b_{12}b_{22}} \\
 </ol>
 <ul>
 <li>It is easy to implement: the appropriate entries of <span class="math inline">\(B\)</span> are set to 0.</li>
-<li>A particular (popular) case is that of the <strong>Cholesky, or recursive approach</strong>.</li>
+<li>A particular (popular) case is that of the <strong>Cholesky, or recursive approach</strong> (Sections <a href="identifStruct.html#Cholesky">2.3</a> and <a href="identifStruct.html#Cholesky1">2.4</a>).</li>
 <li>Examples include <span class="citation">Bernanke (<a href="references.html#ref-BERNANKE198649">1986</a>)</span>, <span class="citation">Sims (<a href="references.html#ref-Sims_1986">1986</a>)</span>, <span class="citation">Galí (<a href="references.html#ref-Gali_1992">1992</a>)</span>, <span class="citation">Ruibio-Ramírez, Waggoner, and Zha (<a href="references.html#ref-RubioRamirez_et_al_2010">2010</a>)</span>.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
-<li>A <strong>long-run restriction (LRR)</strong> prevents a structural shock from having a cumulative impact on one of the endogenous variables.</li>
+<li>A <strong>long-run restriction (LRR)</strong> prevents a structural shock from having a cumulative impact on one of the endogenous variables (Section <a href="identifStruct.html#LRrestr">2.5</a>).</li>
 </ol>
 <ul>
 <li>Additional computations are required to implement this. One needs to compute the cumulative effect of one of the structural shocks <span class="math inline">\(u_{t}\)</span> on one of the endogenous variable.</li>
 <li>Examples include <span class="citation">Blanchard and Quah (<a href="references.html#ref-Blanchard_Quah_1989">1989</a>)</span>, <span class="citation">Faust and Leeper (<a href="references.html#ref-Faust_Leeper_1997">1997</a>)</span>, <span class="citation">Galí (<a href="references.html#ref-Gali_1999">1999</a>)</span>, <span class="citation">Erceg, Guerrieri, and Gust (<a href="references.html#ref-Erceg_et_al_2005">2005</a>)</span>, <span class="citation">Christiano, Eichenbaum, and Vigfusson (<a href="references.html#ref-NBERc11177">2007</a>)</span>.</li>
 </ul>
-<p>The two approaches can be combined (see, e.g., <span class="citation">Gerlach and Smets (<a href="references.html#ref-Gerlach_Smets_1995">1995</a>)</span>).</p>
+<p>As illustrated by Section <a href="identifStruct.html#Mixing">2.6</a>, the two approaches can be combined (see, e.g., <span class="citation">Gerlach and Smets (<a href="references.html#ref-Gerlach_Smets_1995">1995</a>)</span>).</p>
 </div>
 <div id="a-stylized-example-motivating-short-run-restrictions" class="section level2" number="2.2">
 <h2>
@@ -239,8 +239,14 @@ B = \begin{bmatrix}
 \end{bmatrix},
 \]</span>
 then no reordering of the shocks will produce a lower-triangular structure.</p>
-<p>The Cholesky approach can be employed when one is interested in one specific structural shock. This is the case, e.g., of <span class="citation">Christiano, Eichenbaum, and Evans (<a href="references.html#ref-Christiano_Eichenbaum_Evans_1996">1996</a>)</span>. Their identification is based on the following relationship between <span class="math inline">\(\varepsilon_t\)</span> and <span class="math inline">\(\eta_t\)</span>:
-<span class="math display">\[
+<p>The Cholesky approach has been used in the previous chapter, in Example <a href="basics.html#exm:US3varselect">1.6</a> (see Figure <a href="basics.html#fig:US3varIRFs1">1.5</a>).</p>
+</div>
+<div id="Cholesky1" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Using Cholesky to identify a single shock<a class="anchor" aria-label="anchor" href="#Cholesky1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In some cases, the Cholesky approach can be employed when interest centers on a single structural shock. This is the case, for example, in <span class="citation">Christiano, Eichenbaum, and Evans (<a href="references.html#ref-Christiano_Eichenbaum_Evans_1996">1996</a>)</span>. Their identification is based on the following relationship between <span class="math inline">\(\varepsilon_t\)</span> and <span class="math inline">\(\eta_t\)</span>:
+<span class="math display" id="eq:BCEE">\[\begin{equation}
 \left[\begin{array}{c}
 \boldsymbol\varepsilon_{S,t}\\
 \varepsilon_{r,t}\\
@@ -255,11 +261,11 @@ B_{FS} &amp; B_{Fr} &amp; B_{FF}
 \boldsymbol\eta_{S,t}\\
 \eta_{r,t}\\
 \boldsymbol\eta_{F,t}
-\end{array}\right],
-\]</span>
+\end{array}\right],\tag{2.4}
+\end{equation}\]</span>
 where <span class="math inline">\(S\)</span>, <span class="math inline">\(r\)</span> and <span class="math inline">\(F\)</span> respectively correspond to <em>slow-moving variables</em>, the policy variable (short-term rate) and <em>fast-moving variables</em>. While <span class="math inline">\(\eta_{r,t}\)</span> is scalar, <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span> and <span class="math inline">\(\boldsymbol\eta_{F,t}\)</span> may be vectors. The space spanned by <span class="math inline">\(\boldsymbol\varepsilon_{S,t}\)</span> is the same as that spanned by <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span>. As a result, because <span class="math inline">\(\varepsilon_{r,t}\)</span> is a linear combination of <span class="math inline">\(\eta_{r,t}\)</span> and <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span> (which are <span class="math inline">\(\perp\)</span>), it comes that the <span class="math inline">\(B_{rr}\eta_{r,t}\)</span>’s are the (population) residuals in the regression of <span class="math inline">\(\varepsilon_{r,t}\)</span> on <span class="math inline">\(\boldsymbol\varepsilon_{S,t}\)</span>. Because <span class="math inline">\(\mathbb{V}ar(\eta_{r,t})=1\)</span>, <span class="math inline">\(B_{rr}\)</span> is given by the square root of the variance of <span class="math inline">\(B_{rr}\eta_{r,t}\)</span>. <span class="math inline">\(B_{F,r}\)</span> is finally obtained by regressing the components of <span class="math inline">\(\boldsymbol\varepsilon_{F,t}\)</span> on the estimates of <span class="math inline">\(\eta_{r,t}\)</span>.</p>
-<p>An equivalent approach consists in computing the Cholesky decomposition of <span class="math inline">\(BB'\)</span> and the contemporaneous impacts of the monetary policy shock (on the <span class="math inline">\(n\)</span> endogenous variables) are the components of the column of <span class="math inline">\(B\)</span> corresponding to the policy variable.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<p>A critical observation is that all matrices <span class="math inline">\(B\)</span> with the block form in Eq. (<span class="citation">(<a href="#ref-ref"><strong>ref?</strong></a>)</span>(eq:BCEE)) (with <span class="math inline">\(B_{rr}&gt;0\)</span>) and satisfying <span class="math inline">\(\Omega=BB'\)</span> share the same intermediate column (that is, the same <span class="math inline">\(B_{rr}\)</span> and <span class="math inline">\(B_{Fr}\)</span>). One such <span class="math inline">\(B\)</span> is obtained directly from the Cholesky decomposition of <span class="math inline">\(\Omega=BB'\)</span>.</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
@@ -284,9 +290,9 @@ Figure 2.1: Response to a monetary-policy shock. Identification approach of Chri
 </p>
 </div>
 </div>
-<div id="long-run-restrictions" class="section level2" number="2.4">
+<div id="LRrestr" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.4</span> Long-run restrictions<a class="anchor" aria-label="anchor" href="#long-run-restrictions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Long-run restrictions<a class="anchor" aria-label="anchor" href="#LRrestr"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us now turn to <strong>long-run restrictions</strong>. Such a restriction concerns the long-run influence of a shock on an endogenous variable. Let us consider for instance a structural shock that is assumed to have no “long-run influence” on GDP. How to express this? The long-run change in GDP can be expressed as <span class="math inline">\(GDP_{t+h} - GDP_t\)</span>, with <span class="math inline">\(h\)</span> large. Note further that:
 <span class="math display">\[
@@ -296,10 +302,10 @@ Hence, the fact that a given structural shock (<span class="math inline">\(\eta_
 <span class="math display">\[
 \lim_{h\rightarrow\infty}\frac{\partial GDP_{t+h}}{\partial \eta_{i,t}} = \lim_{h\rightarrow\infty} \frac{\partial}{\partial \eta_{i,t}}\left(\sum_{k=1}^h \Delta  GDP_{t+k}\right)= 0.
 \]</span></p>
-<p>This long-run effect can be formulated as a function of <span class="math inline">\(B\)</span> and of the matrices <span class="math inline">\(\Phi_i\)</span> when <span class="math inline">\(y_t\)</span> (including <span class="math inline">\(\Delta GDP_t\)</span>) follows a VAR process.</p>
-<div id="the-var1-case" class="section level3" number="2.4.1">
+<p>As shown in the following sections, this long-run effect can be formulated as a function of <span class="math inline">\(B\)</span> and of the matrices <span class="math inline">\(\Phi_i\)</span> when <span class="math inline">\(y_t\)</span> (including <span class="math inline">\(\Delta GDP_t\)</span>) follows a VAR process.</p>
+<div id="the-var1-case" class="section level3" number="2.5.1">
 <h3>
-<span class="header-section-number">2.4.1</span> The VAR(1) case<a class="anchor" aria-label="anchor" href="#the-var1-case"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5.1</span> The VAR(1) case<a class="anchor" aria-label="anchor" href="#the-var1-case"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us start with the VAR(1) case. We have:
 <span class="math display">\[\begin{eqnarray*}
@@ -316,9 +322,9 @@ which is the Wold representation of <span class="math inline">\(y_t\)</span>.</p
 Therefore, the cumulative impact of <span class="math inline">\(\gamma\)</span> on <span class="math inline">\(\tilde{y}_t\)</span> will be (for <span class="math inline">\(t \ge s\)</span>):
 <span class="math display" id="eq:cumul">\[\begin{eqnarray}
 (\tilde{y}_t - y_t) +  (\tilde{y}_{t-1} - y_{t-1}) + \dots +  (\tilde{y}_s - y_s) &amp;=&amp; \nonumber \\
-(Id + \Phi + \Phi^2 + \dots + \Phi^{t-s}) B \gamma.&amp;&amp; \tag{2.4}
+(Id + \Phi + \Phi^2 + \dots + \Phi^{t-s}) B \gamma.&amp;&amp; \tag{2.5}
 \end{eqnarray}\]</span></p>
-<p>Consider a shock on <span class="math inline">\(\eta_{1,t}\)</span>, with a magnitude of <span class="math inline">\(1\)</span>. This shock corresponds to <span class="math inline">\(\gamma = [1,0,\dots,0]'\)</span>. Given Eq. <a href="identifStruct.html#eq:cumul">(2.4)</a>, the long-run cumulative effect of this shock on the endogenous variables is given by:
+<p>Consider a shock on <span class="math inline">\(\eta_{1,t}\)</span>, with a magnitude of <span class="math inline">\(1\)</span>. This shock corresponds to <span class="math inline">\(\gamma = [1,0,\dots,0]'\)</span>. Given Eq. <a href="identifStruct.html#eq:cumul">(2.5)</a>, the long-run cumulative effect of this shock on the endogenous variables is given by:
 <span class="math display">\[
 \underbrace{\underbrace{(Id+\Phi+\ldots+\Phi^{k}+\ldots)}_{=(Id - \Phi)^{-1}}B}_{=: \Theta}\left[\begin{array}{c}
 1\\
@@ -338,9 +344,9 @@ where <span class="math inline">\(\Theta_{ij}\)</span> is the element <span clas
 \]</span>
 Since <span class="math inline">\(\Omega\)</span> is positive definite and <span class="math inline">\(J\)</span> is invertible, <span class="math inline">\(\Sigma = J\Omega J'\)</span> is positive definite. Take the (unique, with positive diagonal) Cholesky factorization <span class="math inline">\(\Sigma = \Theta \Theta'\)</span> with <span class="math inline">\(\Theta\)</span> lower triangular. Then set <span class="math inline">\(B = J^{-1} \Theta\)</span>. This <span class="math inline">\(B\)</span> satisfies <span class="math inline">\(\Omega = BB'\)</span> and <span class="math inline">\((I - \Phi)^{-1}B = \Theta\)</span> is lower triangular.</p>
 </div>
-<div id="the-varp-case" class="section level3" number="2.4.2">
+<div id="the-varp-case" class="section level3" number="2.5.2">
 <h3>
-<span class="header-section-number">2.4.2</span> The VAR(<span class="math inline">\(p\)</span>) case<a class="anchor" aria-label="anchor" href="#the-varp-case"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5.2</span> The VAR(<span class="math inline">\(p\)</span>) case<a class="anchor" aria-label="anchor" href="#the-varp-case"><i class="fas fa-link"></i></a>
 </h3>
 <p>Several of the developments made above are still valid in the VAR(<span class="math inline">\(p\)</span>) case since a VAR(<span class="math inline">\(p\)</span>) process can be rewritten as a VAR(1) process by augmenting the state vector. More specifically, stack the last <span class="math inline">\(p\)</span> values of vector <span class="math inline">\(y_t\)</span> in vector <span class="math inline">\(y_{t}^{*}=[y_t',\dots,y_{t-p+1}']'\)</span>; Eq. <a href="basics.html#eq:yVAR">(1.1)</a> can then be rewritten in its <strong>companion form</strong>:
 <span class="math display" id="eq:ystarVAR">\[\begin{equation}
@@ -360,7 +366,7 @@ y_{t-1}^{*}+
 \varepsilon_{t}\\
 0_{n \times 1}\\
 \vdots\\
-0_{n \times 1}\end{array}\right]}_{\varepsilon_t^*},\tag{2.5}
+0_{n \times 1}\end{array}\right]}_{\varepsilon_t^*},\tag{2.6}
 \end{equation}\]</span>
 where matrices <span class="math inline">\(\Phi\)</span> and <span class="math inline">\(\Omega^*:= \mathbb{V}ar(\varepsilon_t^*)\)</span> are of dimension <span class="math inline">\(np \times np\)</span>. Matrix <span class="math inline">\(\Phi\)</span> had been introduced in Eq. <a href="basics.html#eq:matrixPHI">(1.9)</a>, and
 <span class="math display">\[
@@ -396,9 +402,9 @@ In particular, the cumulated effect of this shock on <span class="math inline">\
 \]</span>
 Since <span class="math inline">\(\Omega\)</span> is positive definite, <span class="math inline">\(\Sigma = J \Omega J'\)</span> is positive definite. Take the (unique, with positive diagonal) Cholesky factorization <span class="math inline">\(\Sigma = \Theta \Theta'\)</span> with <span class="math inline">\(\Theta\)</span> lower triangular. Then set <span class="math inline">\(B = J^{-1} \Theta\)</span>. This <span class="math inline">\(B\)</span> satisfies <span class="math inline">\(\Omega = B B'\)</span> and <span class="math inline">\(J B = \Theta\)</span> is lower triangular.</p>
 </div>
-<div id="blanchard-and-quah-1989" class="section level3" number="2.4.3">
+<div id="blanchard-and-quah-1989" class="section level3" number="2.5.3">
 <h3>
-<span class="header-section-number">2.4.3</span> Blanchard and Quah (1989)<a class="anchor" aria-label="anchor" href="#blanchard-and-quah-1989"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5.3</span> Blanchard and Quah (1989)<a class="anchor" aria-label="anchor" href="#blanchard-and-quah-1989"><i class="fas fa-link"></i></a>
 </h3>
 <p><span class="citation">Blanchard and Quah (<a href="references.html#ref-Blanchard_Quah_1989">1989</a>)</span> have implemented such long-run restrictions in a small-scale VAR. Two variables are considered: GDP and unemployment. Consequently, the VAR is affected by two types of shocks. Specifically, authors want to identify <strong>supply shocks</strong> (that can have a permanent effect on output) and <strong>demand shocks</strong> (that cannot have a permanent effect on output).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The motivation of the authors regarding their long-run restrictions can be obtained from a traditional Keynesian view of fluctuations. The authors propose a variant of a model from &lt;span class=&quot;citation&quot;&gt;Fischer (&lt;a href=&quot;references.html#ref-Fischer_1977&quot;&gt;1977&lt;/a&gt;)&lt;/span&gt;.
 <!-- \begin{eqnarray} -->
@@ -417,9 +423,9 @@ Since <span class="math inline">\(\Omega\)</span> is positive definite, <span cl
 <!-- \Delta Y_{t} & = & (\varepsilon_{t}^{d}-\varepsilon_{t-1}^{d})+a.(\varepsilon_{t}^{s}-\varepsilon_{t-1}^{s})+\varepsilon_{t}^{s}\\ -->
 <!-- u_{t} & = & -\varepsilon_{t}^{d}-a\varepsilon_{t}^{s} -->
 <!-- \end{eqnarray*} -->
-<!-- Then, it appears that the demand shocks have no long-run cumulative impact on $\Delta Y_{t}$, the GDP growth, i.e. no long-term impact on output $Y_t$. The vector of endogenous variables is $y_t = [\Delta Y_{t} \quad u_{t}]'$ where $\Delta Y_{t}$ denotes the GDP growth. -->&lt;/p&gt;"><sup>5</sup></a></p>
+<!-- Then, it appears that the demand shocks have no long-run cumulative impact on $\Delta Y_{t}$, the GDP growth, i.e. no long-term impact on output $Y_t$. The vector of endogenous variables is $y_t = [\Delta Y_{t} \quad u_{t}]'$ where $\Delta Y_{t}$ denotes the GDP growth. -->&lt;/p&gt;"><sup>7</sup></a></p>
 <p><span class="citation">Blanchard and Quah (<a href="references.html#ref-Blanchard_Quah_1989">1989</a>)</span>’s dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">BQ</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
@@ -434,7 +440,7 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 </p>
 </div>
 <p>Estimate a reduced-form VAR(8) model:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">BQ</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
@@ -442,16 +448,20 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 <span><span class="va">est.VAR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="va">p</span><span class="op">)</span></span>
 <span><span class="va">Omega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">est.VAR</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Let us employ the approach described above:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">est.VAR</span><span class="op">)</span></span>
 <span><span class="va">PHI</span> <span class="op">&lt;-</span> <span class="fu">make.PHI</span><span class="op">(</span><span class="va">Phi</span><span class="op">)</span></span>
 <span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">p</span><span class="op">)</span> <span class="op">-</span> <span class="va">PHI</span></span>
 <span><span class="va">J</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,<span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
 <span><span class="va">Sigma</span> <span class="op">&lt;-</span> <span class="va">J</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">Omega</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
 <span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chol.html">chol</a></span><span class="op">(</span><span class="va">Sigma</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">L</span></span></code></pre></div>
-<p>Now, let us define a loss function (<code>loss</code>) that is equal to zero if (a) <span class="math inline">\(BB'=\Omega\)</span> and (b) the element (1,1) of <span class="math inline">\(\Theta = (Id - \Phi)^{-1} B\)</span> is equal to zero:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">L</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           [,1]       [,2]
+## [1,] 0.1541392 -0.8570365
+## [2,] 0.1921245  0.2396346</code></pre>
+<p>Alternatively, one may adopt a numerical approach by defining a loss function (<code>loss</code>) that equals zero when both conditions are satisfied: (a) <span class="math inline">\(BB' = \Omega\)</span>, and (b) the <span class="math inline">\((1,1)\)</span> element of <span class="math inline">\(\Theta = (I - \Phi)^{-1}B\)</span> is equal to zero.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute (Id - Phi)^{-1}:</span></span>
 <span><span class="va">Phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">est.VAR</span><span class="op">)</span></span>
 <span><span class="va">PHI</span> <span class="op">&lt;-</span> <span class="fu">make.PHI</span><span class="op">(</span><span class="va">Phi</span><span class="op">)</span></span>
@@ -468,13 +478,13 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 <pre><code>## [1]  0.8570358 -0.2396345  0.1541395  0.1921221</code></pre>
 <p>(Note: one can use that type of approach, based on a loss function, to mix short- and long-run restrictions.)</p>
 <p>Figure <a href="identifStruct.html#fig:BQ4">2.3</a> displays the resulting IRFs. Note that, for GDP, we cumulate the GDP growth IRF, so as to have the response of the GDP in level.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">B.hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">res.opt</span><span class="op">$</span><span class="va">par</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Omega</span>,<span class="va">B.hat</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">B.hat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##             Dgdp       unemp                       
 ## Dgdp   0.7582704 -0.17576173  0.7582694 -0.17576173
 ## unemp -0.1757617  0.09433658 -0.1757617  0.09433558</code></pre>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nb.sim</span> <span class="op">&lt;-</span> <span class="fl">40</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>;<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.15</span>,<span class="fl">.95</span>,<span class="fl">.15</span>,<span class="fl">.8</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu">simul.VAR</span><span class="op">(</span>c<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>,<span class="va">Phi</span>,<span class="va">B.hat</span>,<span class="va">nb.sim</span>,y0.star<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">2</span><span class="op">*</span><span class="fl">8</span><span class="op">)</span>,</span>
@@ -491,8 +501,75 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 Figure 2.3: IRF of GDP and unemployment to demand and supply shocks.
 </p>
 </div>
-
 </div>
+</div>
+<div id="Mixing" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Mixing short- and long-run restrictions<a class="anchor" aria-label="anchor" href="#Mixing"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have seen above that the matrix <span class="math inline">\(B\)</span> can be identified by imposing <span class="math inline">\(n(n-1)/2\)</span> restrictions on the short-run or long-run impacts of the shocks. It is also possible to combine short-run and long-run restrictions, provided that their total number still equals <span class="math inline">\(n(n-1)/2\)</span>.</p>
+<p>In practice, such hybrid identification schemes often need to be implemented numerically, as closed-form expressions are not always available. To illustrate, consider a three-variable model including the first difference of log GDP, inflation, and a short-term interest rate. We aim to identify three structural shocks. We assume the existence of a supply shock, which is the only shock with a long-run effect on GDP, and two demand shocks (this provides two restrictions). Among the latter, one is a monetary policy shock, identified by imposing that it has no contemporaneous impact on GDP.</p>
+<p>The following code chunk implements this identification strategy using Canadian data:</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>   <span class="co"># provides 'VARselect' function</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>   <span class="co"># dataset is included here</span></span>
+<span><span class="co"># Make dataset: ----------------------------------------------------------------</span></span>
+<span><span class="va">ctry</span> <span class="op">&lt;-</span> <span class="st">"CAN"</span> <span class="co"># select country in the "international" dataset</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">international</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"date"</span>,</span>
+<span>                         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"GDP_"</span>,<span class="va">ctry</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,</span>
+<span>                         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"CPI_"</span>,<span class="va">ctry</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,</span>
+<span>                         <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"STR_"</span>,<span class="va">ctry</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,<span class="op">]</span> <span class="co"># remove missing data</span></span>
+<span><span class="va">TT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># sample length</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">dy</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">GDP_</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">pi</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">CPI_</span></span>
+<span><span class="va">data</span><span class="op">$</span><span class="va">str</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">STR_</span></span>
+<span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dy"</span>,<span class="st">"pi"</span>,<span class="st">"str"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co"># VAR estimation: --------------------------------------------------------------</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
+<span><span class="va">estVAR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">Y</span>, p <span class="op">=</span> <span class="va">p</span><span class="op">)</span> <span class="co"># estimate the VAR model</span></span>
+<span><span class="va">Phi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">estVAR</span><span class="op">)</span></span>
+<span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">estVAR</span><span class="op">)</span></span>
+<span><span class="va">Omega</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">eps</span><span class="op">)</span> <span class="co"># covariance matrix of OLS residuals</span></span>
+<span><span class="co"># Indentify B using mixed approach: --------------------------------------------</span></span>
+<span><span class="co"># Compute (Id - Phi)^{-1}:</span></span>
+<span><span class="va">PHI</span> <span class="op">&lt;-</span> <span class="fu">make.PHI</span><span class="op">(</span><span class="va">Phi</span><span class="op">)</span></span>
+<span><span class="va">sum.PHI.k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">PHI</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">-</span> <span class="va">PHI</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,<span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span><span class="co"># Define loss function:</span></span>
+<span><span class="va">loss</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">param</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">param</span>,<span class="va">n</span>,<span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">X</span> <span class="op">&lt;-</span> <span class="va">Omega</span> <span class="op">-</span> <span class="va">B</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span></span>
+<span>  <span class="va">Theta</span> <span class="op">&lt;-</span> <span class="va">sum.PHI.k</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,<span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">B</span></span>
+<span>  <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fl">100000</span> <span class="op">*</span> <span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">X</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="va">Theta</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">Theta</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">B</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">res.opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>,<span class="va">loss</span>,method<span class="op">=</span><span class="st">"BFGS"</span>,hessian<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">res.opt</span><span class="op">$</span><span class="va">par</span>,<span class="va">n</span>,<span class="va">n</span><span class="op">)</span></span>
+<span><span class="co"># Make IRFs: -------------------------------------------------------------------</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="co"># number of endogenous variables</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>plt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.3</span>, <span class="fl">.95</span>, <span class="fl">.2</span>, <span class="fl">.75</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>c <span class="op">=</span> <span class="va">c</span>, Phi <span class="op">=</span> <span class="va">Phi</span>, B <span class="op">=</span> <span class="va">B</span><span class="op">)</span></span>
+<span><span class="va">names.var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"log(GDP)"</span>, <span class="st">"Inflation"</span>, <span class="st">"Interest rate"</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">variable</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">shock</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">eta0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">n</span><span class="op">)</span></span>
+<span>    <span class="va">eta0</span><span class="op">[</span><span class="va">shock</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>    <span class="va">res.sim</span> <span class="op">&lt;-</span> <span class="fu">simul.VAR</span><span class="op">(</span>c <span class="op">=</span> <span class="cn">NaN</span>, <span class="va">Phi</span>, <span class="va">B</span>, nb.sim <span class="op">=</span> <span class="fl">60</span>, indic.IRF <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                         u.shock <span class="op">=</span> <span class="va">eta0</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span><span class="op">(</span><span class="va">variable</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span><span class="op">{</span><span class="co"># For GDP, show cumulated growth rates (i.e., log(GDP)):</span></span>
+<span>      <span class="va">irf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">res.sim</span><span class="op">[</span>, <span class="va">variable</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="op">}</span><span class="kw">else</span><span class="op">{</span></span>
+<span>      <span class="va">irf</span> <span class="op">&lt;-</span> <span class="va">res.sim</span><span class="op">[</span>, <span class="va">variable</span><span class="op">]</span></span>
+<span>    <span class="op">}</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">irf</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>         xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">shock</span><span class="op">==</span><span class="fl">1</span>,</span>
+<span>                                  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Resp. of "</span>,</span>
+<span>                                              <span class="va">names.var</span><span class="op">[</span><span class="va">variable</span><span class="op">]</span>,<span class="st">"..."</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span>,</span>
+<span>         main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">variable</span><span class="op">==</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"... to shock η"</span>, <span class="va">shock</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="IdentifStructShocks_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+
 </div>
 </div>
 
@@ -506,13 +583,15 @@ Figure 2.3: IRF of GDP and unemployment to demand and supply shocks.
 <li><a class="nav-link" href="#IdentifPbm"><span class="header-section-number">2.1</span> The identification problem</a></li>
 <li><a class="nav-link" href="#a-stylized-example-motivating-short-run-restrictions"><span class="header-section-number">2.2</span> A stylized example motivating short-run restrictions</a></li>
 <li><a class="nav-link" href="#Cholesky"><span class="header-section-number">2.3</span> Cholesky: a specific short-run-restriction situation</a></li>
+<li><a class="nav-link" href="#Cholesky1"><span class="header-section-number">2.4</span> Using Cholesky to identify a single shock</a></li>
 <li>
-<a class="nav-link" href="#long-run-restrictions"><span class="header-section-number">2.4</span> Long-run restrictions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-var1-case"><span class="header-section-number">2.4.1</span> The VAR(1) case</a></li>
-<li><a class="nav-link" href="#the-varp-case"><span class="header-section-number">2.4.2</span> The VAR(\(p\)) case</a></li>
-<li><a class="nav-link" href="#blanchard-and-quah-1989"><span class="header-section-number">2.4.3</span> Blanchard and Quah (1989)</a></li>
+<a class="nav-link" href="#LRrestr"><span class="header-section-number">2.5</span> Long-run restrictions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-var1-case"><span class="header-section-number">2.5.1</span> The VAR(1) case</a></li>
+<li><a class="nav-link" href="#the-varp-case"><span class="header-section-number">2.5.2</span> The VAR(\(p\)) case</a></li>
+<li><a class="nav-link" href="#blanchard-and-quah-1989"><span class="header-section-number">2.5.3</span> Blanchard and Quah (1989)</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#Mixing"><span class="header-section-number">2.6</span> Mixing short- and long-run restrictions</a></li>
 </ul>
 
       <div class="book-extra">
@@ -529,7 +608,7 @@ Figure 2.3: IRF of GDP and unemployment to demand and supply shocks.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-10-31.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-11-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

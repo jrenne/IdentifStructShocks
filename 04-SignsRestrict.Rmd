@@ -157,10 +157,14 @@ It has to be stressed that the sign restriction approach does not lead to a uniq
 ## The penalty-function approach (PFA)
 
 An alternative approach is the so-called **penalty-function approach** (PFA, @Uhlig_2005, present in @Danne_2015's package). This approach relies on a *penalty function*:
-$$
-\begin{array}{llll}f(x)&=&x&\text{ if }x\le0\\
-&&100.x&\text{ if }x>0\end{array}
-$$
+\[
+f(x)=
+\begin{cases}
+x, & \text{if } x \le 0,\\[6pt]
+100x, & \text{if } x > 0.
+\end{cases}
+\]
+
 which penalizes positive responses and rewards negative responses.
 
 Let $\psi_k^j(q)$ be the impulse response of variable $j$. The $\psi_k^j(q)$'s are the elements of $\psi_k(q)=\Psi_kq$.

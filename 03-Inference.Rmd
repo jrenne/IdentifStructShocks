@@ -7,7 +7,7 @@ output:
 
 Consider the following SVAR model:
 \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]
-with $\varepsilon_t=B\eta_t$, $\Omega_\varepsilon=BB'$.
+where $\varepsilon_t$ is a white noise sequence. This vector rewrites $\varepsilon_t=B\eta_t$ where $\mathbb{V}ar(\eta_t)=I$, which implies $\Omega_\varepsilon=BB'$.
 
 The corresponding infinite MA representation (Eq. \@ref(eq:InfMA), or Wold representation, is:
 $$
@@ -23,9 +23,9 @@ Inference on the VAR coefficients $\{\Phi_j\}_{j=1,...,p}$ is straightforward (s
 
 The main inference methods are the following:
 
-* Monte Carlo method (@Hamilton_1994)
-* Asymptotic normal approximation (@Lutkepohl_1990), or Delta method
-* Bootstrap method (@Kilian_1998)
+* Monte Carlo method (@Hamilton_1994) (Section \@ref(MonteCarlo));
+* Asymptotic normal approximation (@Lutkepohl_1990), or Delta method (Section \@ref(Delta));
+* Bootstrap method (@Kilian_1998) (Sections \@ref(Bootstrap1) and \@ref(BootstrapAfter)).
 
 
 
@@ -99,19 +99,27 @@ lines(median.IRFs.ordering[,5],col="blue",type="l")
 
 ```
 
-## Delta method
+## Delta method {#Delta}
 
-Suppose $\beta$ is a vector of parameters and $\beta$ is an estimator such that
-$$
-\sqrt{T}(\hat\beta-\beta)\overset{d}{\rightarrow}\mathcal{N}(0,\Sigma_\beta),
-$$
-where $d$ denotes convergence in distribution, $N(0,\Sigma_\beta)$ denotes the multivariate normal distribution with mean vector 0 and covariance matrix $\Sigma_\beta$ and $T$ is the size of the sample used for estimation.
+Suppose $\beta$ is a vector of parameters and $\hat\beta$ is an estimator such that
+\[
+\sqrt{T}\,(\hat\beta-\beta)\overset{d}{\longrightarrow}\mathcal{N}(0,\Sigma_\beta),
+\]
+where $\overset{d}{\longrightarrow}$ denotes convergence in distribution, $\mathcal{N}(0,\Sigma_\beta)$ denotes a multivariate normal distribution with mean vector $0$ and covariance matrix $\Sigma_\beta$, and $T$ is the sample size.
 
-Let $\varphi(\beta) = (\varphi_l(\beta),..., \varphi_m(\beta))'$ be a continuously differentiable function with values in $\mathbb{R}^m$, and assume that $\partial \varphi_i/\partial
-\beta' = (\partial \varphi_i/\partial \beta_j)$ is nonzero at $\beta$ for $i = 1,\dots, m$. Then
-$$
-\sqrt{T}(\varphi(\hat\beta)-\varphi(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial \varphi}{\partial \beta'}\Sigma_\beta\frac{\partial \varphi'}{\partial \beta}\right).
-$$
+Let $\varphi(\beta) = (\varphi_1(\beta),\dots,\varphi_m(\beta))'$ be a continuously differentiable function with values in $\mathbb{R}^m$, and assume that $\partial \varphi_i/\partial \beta'$ is nonzero at $\beta$ for $i = 1,\dots,m$. Then, if $\varphi$ is not too nonlinear in a neighborhood of $\beta$, we approximately have
+\[
+\sqrt{T}\,(\varphi(\hat\beta)-\varphi(\beta))
+\overset{d}{\approx}
+\mathcal{N}\!\left(
+0,\;
+\frac{\partial \varphi}{\partial \beta'}
+\Sigma_\beta
+\frac{\partial \varphi'}{\partial \beta}
+\right),
+\]
+where $\frac{\partial \varphi}{\partial \beta'}$ denotes the Jacobian of $\varphi$ with respect to $\beta'$.
+
 Using this property, @Lutkepohl_1990 provides the asymptotic distributions of the $\Psi_j$'s. 
 
 <!-- The following lines of code can be used to get approximate confidence intervals for IRFs.
@@ -148,7 +156,7 @@ Using this property, @Lutkepohl_1990 provides the asymptotic distributions of th
 A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results and the normality assumption. Boostrapping approaches are more robust in small-sample and non-normal situations.
 
 
-## Bootstrap
+## Bootstrap {#Bootstrap1}
 
 IRFs' confidence intervals are intervals where 90\% (or 95\%, 75\%, ...) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions ($T$ observations). We obviously cannot do this, because we have only one sample: $\{y_t\}_{t=1,..,T}$. But we can try to *construct* such samples.
 
@@ -157,7 +165,7 @@ Bootstrapping consists in:
 * re-sampling $N$ times, i.e., constructing $N$ samples of $T$ observations, using the estimated
 VAR coefficients and
 
-a. a sample of residuals from the distribution $N(0,BB')$ (**parametric approach**), or
+a. a sample of residuals from the distribution $\mathcal{N}(0,BB')$ (**parametric approach**), or
 b. a sample of residuals drawn randomly from the set of the actual estimated residuals $\{\hat\varepsilon_t\}_{t=1,..,T}$. (**non-parametric approach**).
 
 * re-estimating the SVAR $N$ times.
@@ -168,7 +176,7 @@ Here is the algorithm for the non-parametric approach:
 $$
 y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
 $$
-with $\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}$, where $\{s_1^{(k)},..,s_T^{(k)}\}$ is a random set from $\{1,..,T\}^T$. (Note: in the parametric approach, we would draw $\hat\varepsilon_{t}^{(k)}$ from the $N(0,BB')$ distribution)
+with $\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}$, where $\{s_1^{(k)},..,s_T^{(k)}\}$ is a random set from $\{1,..,T\}^T$. (Note: in the parametric approach, we would draw $\hat\varepsilon_{t}^{(k)}$ from the $\mathcal{N}(0,BB')$ distribution)
 2. Re-estimate the SVAR and compute the IRFs $\{\widehat{\Psi}_j\}^{(k)}$.
 
 Perform $N$ replications and report the median impulse response (and its confidence intervals).
@@ -204,7 +212,7 @@ median.IRFs.ordering.bootstrap <- res.svar.ordering$all.CI.median
 simulated.IRFs.ordering.bootstrap <- res.svar.ordering$simulated.IRFs
 ```
 
-## Bootstrap-after-bootstrap
+## Bootstrap-after-bootstrap {#BootstrapAfter}
 
 The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the *small sample bias*, stemming, in particular, from small-sample bias associated with OLS coefficient estimates $\{\widehat{\Phi}_j\}_{j=1,..,p}$. 
 

@@ -37,14 +37,14 @@ We then have 3 linearly independent equations but 4 unknowns. Therefore, $B$ is 
 
 1. A **short-run restriction (SRR)** prevents a structural shock from affecting an endogenous variable contemporaneously.
 * It is easy to implement: the appropriate entries of $B$ are set to 0.
-* A particular (popular) case is that of the **Cholesky, or recursive approach**.
+* A particular (popular) case is that of the **Cholesky, or recursive approach** (Sections \@ref(Cholesky) and \@ref(Cholesky1)).
 * Examples include @BERNANKE198649, @Sims_1986, @Gali_1992, @RubioRamirez_et_al_2010.
 
-2. A **long-run restriction (LRR)** prevents a structural shock from having a cumulative impact on one of the endogenous variables. 
+2. A **long-run restriction (LRR)** prevents a structural shock from having a cumulative impact on one of the endogenous variables (Section \@ref(LRrestr)). 
 * Additional computations are required to implement this. One needs to compute the cumulative effect of one of the structural shocks $u_{t}$ on one of the endogenous variable.
 * Examples include @Blanchard_Quah_1989, @Faust_Leeper_1997, @Gali_1999, @Erceg_et_al_2005, @NBERc11177.
 
-The two approaches can be combined (see, e.g., @Gerlach_Smets_1995).
+As illustrated by Section \@ref(Mixing), the two approaches can be combined (see, e.g., @Gerlach_Smets_1995).
 
 
 ## A stylized example motivating short-run restrictions
@@ -144,10 +144,12 @@ B = \begin{bmatrix}
 $$
 then no reordering of the shocks will produce a lower-triangular structure.
 
+The Cholesky approach has been used in the previous chapter, in Example \@ref(exm:US3varselect) (see Figure \@ref(fig:US3varIRFs1)).
 
+## Using Cholesky to identify a single shock {#Cholesky1}
 
-The Cholesky approach can be employed when one is interested in one specific structural shock. This is the case, e.g., of @Christiano_Eichenbaum_Evans_1996. Their identification is based on the following relationship between $\varepsilon_t$ and $\eta_t$:
-$$
+In some cases, the Cholesky approach can be employed when interest centers on a single structural shock. This is the case, for example, in @Christiano_Eichenbaum_Evans_1996. Their identification is based on the following relationship between $\varepsilon_t$ and $\eta_t$:
+\begin{equation}
 \left[\begin{array}{c}
 \boldsymbol\varepsilon_{S,t}\\
 \varepsilon_{r,t}\\
@@ -162,11 +164,11 @@ B_{FS} & B_{Fr} & B_{FF}
 \boldsymbol\eta_{S,t}\\
 \eta_{r,t}\\
 \boldsymbol\eta_{F,t}
-\end{array}\right],
-$$
+\end{array}\right],(\#eq:BCEE)
+\end{equation}
 where $S$, $r$ and $F$ respectively correspond to *slow-moving variables*, the policy variable (short-term rate) and *fast-moving variables*. While $\eta_{r,t}$ is scalar, $\boldsymbol\eta_{S,t}$ and $\boldsymbol\eta_{F,t}$ may be vectors. The space spanned by $\boldsymbol\varepsilon_{S,t}$ is the same as that spanned by $\boldsymbol\eta_{S,t}$. As a result, because $\varepsilon_{r,t}$ is a linear combination of $\eta_{r,t}$ and $\boldsymbol\eta_{S,t}$ (which are $\perp$), it comes that the $B_{rr}\eta_{r,t}$'s are the (population) residuals in the regression of $\varepsilon_{r,t}$ on $\boldsymbol\varepsilon_{S,t}$. Because $\mathbb{V}ar(\eta_{r,t})=1$, $B_{rr}$ is given by the square root of the variance of  $B_{rr}\eta_{r,t}$. $B_{F,r}$ is finally obtained by regressing the components of $\boldsymbol\varepsilon_{F,t}$ on the estimates of $\eta_{r,t}$.
 
-An equivalent approach consists in computing the Cholesky decomposition of $BB'$ and the contemporaneous impacts of the monetary policy shock (on the $n$ endogenous variables) are the components of the column of $B$ corresponding to the policy variable.
+A critical observation is that all matrices $B$ with the block form in Eq. (@ref(eq:BCEE)) (with $B_{rr}>0$) and satisfying $\Omega=BB'$ share the same intermediate column (that is, the same $B_{rr}$ and $B_{Fr}$). One such $B$ is obtained directly from the Cholesky decomposition of $\Omega=BB'$.
 
 
 ```{r CEE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).",warning=FALSE,message=FALSE}
@@ -190,7 +192,7 @@ res.svar.ordering <- svar.ordering(y,p=3,
 ```
 
 
-## Long-run restrictions
+## Long-run restrictions {#LRrestr}
 
 Let us now turn to **long-run restrictions**. Such a restriction concerns the long-run influence of a shock on an endogenous variable. Let us consider for instance a structural shock that is assumed to have no "long-run influence" on GDP. How to express this? The long-run change in GDP can be expressed as $GDP_{t+h} - GDP_t$, with $h$ large. Note further that:
 $$
@@ -201,7 +203,7 @@ $$
 \lim_{h\rightarrow\infty}\frac{\partial GDP_{t+h}}{\partial \eta_{i,t}} = \lim_{h\rightarrow\infty} \frac{\partial}{\partial \eta_{i,t}}\left(\sum_{k=1}^h \Delta  GDP_{t+k}\right)= 0.
 $$
 
-This long-run effect can be formulated as a function of $B$ and of the matrices $\Phi_i$ when $y_t$ (including $\Delta GDP_t$) follows a VAR process.
+As shown in the following sections, this long-run effect can be formulated as a function of $B$ and of the matrices $\Phi_i$ when $y_t$ (including $\Delta GDP_t$) follows a VAR process.
 
 ### The VAR(1) case
 
@@ -361,9 +363,10 @@ J <- solve(A)[1:n,1:n]
 Sigma <- J %*% Omega %*% t(J)
 L <- t(chol(Sigma))
 B <- solve(J) %*% L
+print(B)
 ```
 
-Now, let us define a loss function (`loss`) that is equal to zero if (a) $BB'=\Omega$ and (b) the element (1,1) of $\Theta = (Id - \Phi)^{-1} B$ is equal to zero:
+Alternatively, one may adopt a numerical approach by defining a loss function (`loss`) that equals zero when both conditions are satisfied: (a) $BB' = \Omega$, and (b) the $(1,1)$ element of $\Theta = (I - \Phi)^{-1}B$ is equal to zero.
 
 ```{r BQ3}
 # Compute (Id - Phi)^{-1}:
@@ -399,4 +402,75 @@ Y <- simul.VAR(c=matrix(0,2,1),Phi,B.hat,nb.sim,y0.star=rep(0,2*8),
 plot(cumsum(Y[,1]),type="l",lwd=2,xlab="",ylab="",main="Supply shock on GDP")
 plot(Y[,2],type="l",lwd=2,xlab="",ylab="",main="Supply shock on UNEMP")
 ```
+
+## Mixing short- and long-run restrictions {#Mixing}
+
+We have seen above that the matrix $B$ can be identified by imposing $n(n-1)/2$ restrictions on the short-run or long-run impacts of the shocks. It is also possible to combine short-run and long-run restrictions, provided that their total number still equals $n(n-1)/2$.
+
+In practice, such hybrid identification schemes often need to be implemented numerically, as closed-form expressions are not always available. To illustrate, consider a three-variable model including the first difference of log GDP, inflation, and a short-term interest rate. We aim to identify three structural shocks. We assume the existence of a supply shock, which is the only shock with a long-run effect on GDP, and two demand shocks (this provides two restrictions). Among the latter, one is a monetary policy shock, identified by imposing that it has no contemporaneous impact on GDP.
+
+The following code chunk implements this identification strategy using Canadian data:
+
+
+```{r}
+library(vars)   # provides 'VARselect' function
+library(IdSS)   # dataset is included here
+# Make dataset: ----------------------------------------------------------------
+ctry <- "CAN" # select country in the "international" dataset
+data <- international[,c("date",
+                         paste("GDP_",ctry,sep=""),
+                         paste("CPI_",ctry,sep=""),
+                         paste("STR_",ctry,sep=""))]
+data <- data[complete.cases(data),] # remove missing data
+TT <- dim(data)[1] # sample length
+data$dy <- data$GDP_
+data$pi <- data$CPI_
+data$str <- data$STR_
+Y <- data[c("dy","pi","str")]
+n <- dim(Y)[2]
+# VAR estimation: --------------------------------------------------------------
+p <- 4
+estVAR <- VAR(Y, p = p) # estimate the VAR model
+Phi <- Acoef(estVAR)
+eps <- residuals(estVAR)
+Omega <- var(eps) # covariance matrix of OLS residuals
+# Indentify B using mixed approach: --------------------------------------------
+# Compute (Id - Phi)^{-1}:
+PHI <- make.PHI(Phi)
+sum.PHI.k <- solve(diag(dim(PHI)[1]) - PHI)[1:n,1:n]
+# Define loss function:
+loss <- function(param){
+  B <- matrix(param,n,n)
+  X <- Omega - B %*% t(B)
+  Theta <- sum.PHI.k[1:n,1:n] %*% B
+  loss <- 100000 * ( sum(X^2) + Theta[1,2]^2 + Theta[1,3]^2 + B[1,3]^2)
+  return(loss)
+}
+res.opt <- optim(c(diag(n)),loss,method="BFGS",hessian=FALSE)
+B <- matrix(res.opt$par,n,n)
+# Make IRFs: -------------------------------------------------------------------
+n <- dim(Y)[2] # number of endogenous variables
+par(mfrow = c(n, n))
+par(plt = c(.3, .95, .2, .75))
+Model <- list(c = c, Phi = Phi, B = B)
+names.var <- c("log(GDP)", "Inflation", "Interest rate")
+for (variable in 1:n) {
+  for (shock in 1:n) {
+    eta0 <- rep(0, n)
+    eta0[shock] <- 1
+    res.sim <- simul.VAR(c = NaN, Phi, B, nb.sim = 60, indic.IRF = 1,
+                         u.shock = eta0)
+    if(variable==1){# For GDP, show cumulated growth rates (i.e., log(GDP)):
+      irf <- cumsum(res.sim[, variable])
+    }else{
+      irf <- res.sim[, variable]
+    }
+    plot(irf, type = "l", lwd = 2, las = 1,
+         xlab = "", ylab = ifelse(shock==1,
+                                  paste("Resp. of ",
+                                              names.var[variable],"...",sep=""),""),
+         main = ifelse(variable==1,paste("... to shock η", shock, sep = ""),""))}}
+```
+
+
 

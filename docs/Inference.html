@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Inference | The Identification of Dynamic Structural Shocks</title>
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne">
-<meta name="description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
+<meta name="description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] where \(\varepsilon_t\) is a white noise sequence. This vector rewrites...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Inference | The Identification of Dynamic Structural Shocks">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
+<meta property="og:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] where \(\varepsilon_t\) is a white noise sequence. This vector rewrites...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Inference | The Identification of Dynamic Structural Shocks">
-<meta name="twitter:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] with \(\varepsilon_t=B\eta_t\), \(\Omega_\varepsilon=BB'\). The corresponding infinite MA...">
+<meta name="twitter:description" content="Consider the following SVAR model: \[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\] where \(\varepsilon_t\) is a white noise sequence. This vector rewrites...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -92,7 +92,7 @@
 </h1>
 <p>Consider the following SVAR model:
 <span class="math display">\[y_t = \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + \varepsilon_t\]</span>
-with <span class="math inline">\(\varepsilon_t=B\eta_t\)</span>, <span class="math inline">\(\Omega_\varepsilon=BB'\)</span>.</p>
+where <span class="math inline">\(\varepsilon_t\)</span> is a white noise sequence. This vector rewrites <span class="math inline">\(\varepsilon_t=B\eta_t\)</span> where <span class="math inline">\(\mathbb{V}ar(\eta_t)=I\)</span>, which implies <span class="math inline">\(\Omega_\varepsilon=BB'\)</span>.</p>
 <p>The corresponding infinite MA representation (Eq. <a href="basics.html#eq:InfMA">(1.4)</a>, or Wold representation, is:
 <span class="math display">\[
 y_t = \sum_{h=0}^\infty\Psi_h \eta_{t-h},
@@ -105,9 +105,9 @@ with <span class="math inline">\(\Phi_j=0\)</span> for <span class="math inline"
 <p>Inference on the VAR coefficients <span class="math inline">\(\{\Phi_j\}_{j=1,...,p}\)</span> is straightforward (standard OLS inference). But inference is more complicated regarding IRFs. Indeed, as shown by the previous equation, the (infinite) MA coefficients <span class="math inline">\(\{\Psi_j\}_{j=1,...}\)</span> are non-linear functions of the <span class="math inline">\(\{\Phi_j\}_{j=1,...,p}\)</span> and of <span class="math inline">\(\Omega_\varepsilon\)</span>. An other issue pertain to small sample bias: typically, for persistent processes, auto-regressive parameters are known to be downward biased.</p>
 <p>The main inference methods are the following:</p>
 <ul>
-<li>Monte Carlo method (<span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994">1994</a>)</span>)</li>
-<li>Asymptotic normal approximation (<span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990">1990</a>)</span>), or Delta method</li>
-<li>Bootstrap method (<span class="citation">Kilian (<a href="references.html#ref-Kilian_1998">1998</a>)</span>)</li>
+<li>Monte Carlo method (<span class="citation">Hamilton (<a href="references.html#ref-Hamilton_1994">1994</a>)</span>) (Section <a href="Inference.html#MonteCarlo">3.1</a>);</li>
+<li>Asymptotic normal approximation (<span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990">1990</a>)</span>), or Delta method (Section <a href="Inference.html#Delta">3.2</a>);</li>
+<li>Bootstrap method (<span class="citation">Kilian (<a href="references.html#ref-Kilian_1998">1998</a>)</span>) (Sections <a href="Inference.html#Bootstrap1">3.3</a> and <a href="Inference.html#BootstrapAfter">3.4</a>).</li>
 </ul>
 <div id="MonteCarlo" class="section level2" number="3.1">
 <h2>
@@ -132,7 +132,7 @@ where <span class="math inline">\(\{X^{(i)}\}_{i=1,...,N}\)</span> are <span cla
 </ol>
 <p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
 <p>The following code implements the Monte Carlo method.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
@@ -162,12 +162,12 @@ where <span class="math inline">\(\{X^{(i)}\}_{i=1,...,N}\)</span> are <span cla
 Figure 3.1: IRF associated with a monetary policy shock; Monte Carlo method.
 </p>
 </div>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IRFs.ordering</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">IRFs</span></span>
 <span><span class="va">median.IRFs.ordering</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">all.CI.median</span></span>
 <span><span class="va">simulated.IRFs.ordering</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">simulated.IRFs</span></span></code></pre></div>
 <p>Below we plot the estimated IRFs to a mom^netary policy shock, together with a sample of 50 IRFs simulated with the Monte Carlo method, and the median of all simulated IRFs.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">IRFs.ordering</span><span class="op">[</span>,<span class="fl">5</span><span class="op">]</span>,type<span class="op">=</span><span class="st">"l"</span><span class="op">)</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">)</span><span class="op">{</span></span>
@@ -182,21 +182,28 @@ Figure 3.2: Estimated IRF associated with a monetary policy shock (black line) w
 </p>
 </div>
 </div>
-<div id="delta-method" class="section level2" number="3.2">
+<div id="Delta" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">3.2</span> Delta method<a class="anchor" aria-label="anchor" href="#delta-method"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Delta method<a class="anchor" aria-label="anchor" href="#Delta"><i class="fas fa-link"></i></a>
 </h2>
-<p>Suppose <span class="math inline">\(\beta\)</span> is a vector of parameters and <span class="math inline">\(\beta\)</span> is an estimator such that
+<p>Suppose <span class="math inline">\(\beta\)</span> is a vector of parameters and <span class="math inline">\(\hat\beta\)</span> is an estimator such that
 <span class="math display">\[
-\sqrt{T}(\hat\beta-\beta)\overset{d}{\rightarrow}\mathcal{N}(0,\Sigma_\beta),
+\sqrt{T}\,(\hat\beta-\beta)\overset{d}{\longrightarrow}\mathcal{N}(0,\Sigma_\beta),
 \]</span>
-where <span class="math inline">\(d\)</span> denotes convergence in distribution, <span class="math inline">\(N(0,\Sigma_\beta)\)</span> denotes the multivariate normal distribution with mean vector 0 and covariance matrix <span class="math inline">\(\Sigma_\beta\)</span> and <span class="math inline">\(T\)</span> is the size of the sample used for estimation.</p>
-<p>Let <span class="math inline">\(\varphi(\beta) = (\varphi_l(\beta),..., \varphi_m(\beta))'\)</span> be a continuously differentiable function with values in <span class="math inline">\(\mathbb{R}^m\)</span>, and assume that <span class="math inline">\(\partial \varphi_i/\partial
-\beta' = (\partial \varphi_i/\partial \beta_j)\)</span> is nonzero at <span class="math inline">\(\beta\)</span> for <span class="math inline">\(i = 1,\dots, m\)</span>. Then
+where <span class="math inline">\(\overset{d}{\longrightarrow}\)</span> denotes convergence in distribution, <span class="math inline">\(\mathcal{N}(0,\Sigma_\beta)\)</span> denotes a multivariate normal distribution with mean vector <span class="math inline">\(0\)</span> and covariance matrix <span class="math inline">\(\Sigma_\beta\)</span>, and <span class="math inline">\(T\)</span> is the sample size.</p>
+<p>Let <span class="math inline">\(\varphi(\beta) = (\varphi_1(\beta),\dots,\varphi_m(\beta))'\)</span> be a continuously differentiable function with values in <span class="math inline">\(\mathbb{R}^m\)</span>, and assume that <span class="math inline">\(\partial \varphi_i/\partial \beta'\)</span> is nonzero at <span class="math inline">\(\beta\)</span> for <span class="math inline">\(i = 1,\dots,m\)</span>. Then, if <span class="math inline">\(\varphi\)</span> is not too nonlinear in a neighborhood of <span class="math inline">\(\beta\)</span>, we approximately have
 <span class="math display">\[
-\sqrt{T}(\varphi(\hat\beta)-\varphi(\beta))\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{\partial \varphi}{\partial \beta'}\Sigma_\beta\frac{\partial \varphi'}{\partial \beta}\right).
+\sqrt{T}\,(\varphi(\hat\beta)-\varphi(\beta))
+\overset{d}{\approx}
+\mathcal{N}\!\left(
+0,\;
+\frac{\partial \varphi}{\partial \beta'}
+\Sigma_\beta
+\frac{\partial \varphi'}{\partial \beta}
+\right),
 \]</span>
-Using this property, <span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990">1990</a>)</span> provides the asymptotic distributions of the <span class="math inline">\(\Psi_j\)</span>’s.</p>
+where <span class="math inline">\(\frac{\partial \varphi}{\partial \beta'}\)</span> denotes the Jacobian of <span class="math inline">\(\varphi\)</span> with respect to <span class="math inline">\(\beta'\)</span>.</p>
+<p>Using this property, <span class="citation">Lütkepohl (<a href="references.html#ref-Lutkepohl_1990">1990</a>)</span> provides the asymptotic distributions of the <span class="math inline">\(\Psi_j\)</span>’s.</p>
 <!-- The following lines of code can be used to get approximate confidence intervals for IRFs.
 
 
@@ -227,9 +234,9 @@ Using this property, <span class="citation">Lütkepohl (<a href="references.html
 <!-- ``` -->
 <p>A limit of the last two approaches (Monte Carlo and the Delta method) is that they rely on asymptotic results and the normality assumption. Boostrapping approaches are more robust in small-sample and non-normal situations.</p>
 </div>
-<div id="bootstrap" class="section level2" number="3.3">
+<div id="Bootstrap1" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">3.3</span> Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> Bootstrap<a class="anchor" aria-label="anchor" href="#Bootstrap1"><i class="fas fa-link"></i></a>
 </h2>
 <p>IRFs’ confidence intervals are intervals where 90% (or 95%, 75%, …) of the IRFs would lie, if we were to repeat the estimation a large number of times in similar conditions (<span class="math inline">\(T\)</span> observations). We obviously cannot do this, because we have only one sample: <span class="math inline">\(\{y_t\}_{t=1,..,T}\)</span>. But we can try to <em>construct</em> such samples.</p>
 <p>Bootstrapping consists in:</p>
@@ -238,7 +245,7 @@ Using this property, <span class="citation">Lütkepohl (<a href="references.html
 VAR coefficients and</li>
 </ul>
 <ol style="list-style-type: lower-alpha">
-<li>a sample of residuals from the distribution <span class="math inline">\(N(0,BB')\)</span> (<strong>parametric approach</strong>), or</li>
+<li>a sample of residuals from the distribution <span class="math inline">\(\mathcal{N}(0,BB')\)</span> (<strong>parametric approach</strong>), or</li>
 <li>a sample of residuals drawn randomly from the set of the actual estimated residuals <span class="math inline">\(\{\hat\varepsilon_t\}_{t=1,..,T}\)</span>. (<strong>non-parametric approach</strong>).</li>
 </ol>
 <ul>
@@ -250,12 +257,12 @@ VAR coefficients and</li>
 <span class="math display">\[
 y_t^{(k)}=\widehat{\Phi}_1 y_{t-1}^{(k)} + \dots + \widehat{\Phi}_p y_{t-p}^{(k)} + \hat\varepsilon_t^{(k)},
 \]</span>
-with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\)</span>, where <span class="math inline">\(\{s_1^{(k)},..,s_T^{(k)}\}\)</span> is a random set from <span class="math inline">\(\{1,..,T\}^T\)</span>. (Note: in the parametric approach, we would draw <span class="math inline">\(\hat\varepsilon_{t}^{(k)}\)</span> from the <span class="math inline">\(N(0,BB')\)</span> distribution)</li>
+with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^{(k)}}\)</span>, where <span class="math inline">\(\{s_1^{(k)},..,s_T^{(k)}\}\)</span> is a random set from <span class="math inline">\(\{1,..,T\}^T\)</span>. (Note: in the parametric approach, we would draw <span class="math inline">\(\hat\varepsilon_{t}^{(k)}\)</span> from the <span class="math inline">\(\mathcal{N}(0,BB')\)</span> distribution)</li>
 <li>Re-estimate the SVAR and compute the IRFs <span class="math inline">\(\{\widehat{\Psi}_j\}^{(k)}\)</span>.</li>
 </ol>
 <p>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its confidence intervals).</p>
 <p>The following code implements the bootstrap method.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
@@ -285,18 +292,18 @@ with <span class="math inline">\(\hat\varepsilon_{t}^{(k)}=\hat\varepsilon_{s_t^
 Figure 3.3: IRF associated with a monetary policy shock; bootstrap method.
 </p>
 </div>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IRFs.ordering.bootstrap</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">IRFs</span></span>
 <span><span class="va">median.IRFs.ordering.bootstrap</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">all.CI.median</span></span>
 <span><span class="va">simulated.IRFs.ordering.bootstrap</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">simulated.IRFs</span></span></code></pre></div>
 </div>
-<div id="bootstrap-after-bootstrap" class="section level2" number="3.4">
+<div id="BootstrapAfter" class="section level2" number="3.4">
 <h2>
-<span class="header-section-number">3.4</span> Bootstrap-after-bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap-after-bootstrap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4</span> Bootstrap-after-bootstrap<a class="anchor" aria-label="anchor" href="#BootstrapAfter"><i class="fas fa-link"></i></a>
 </h2>
 <p>The previous simple bootstrapping procedure deals with non-normality and small sample distribution, since we use the actual residuals. However, it does not deal with the <em>small sample bias</em>, stemming, in particular, from small-sample bias associated with OLS coefficient estimates <span class="math inline">\(\{\widehat{\Phi}_j\}_{j=1,..,p}\)</span>.</p>
 <p>The code below illustrates the small sample bias.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Distribution of coefficients stemming from non-parametric bootstrap</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">considered.variables</span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
@@ -319,7 +326,7 @@ Figure 3.4: Estimated and bootstrapped coefficients.
 </div>
 <p>The distribution of the bootstrapped coefficients is not centered around the estimated coefficients.</p>
 <p>In the following code, we perform the VAR estimation and bootstrap inference after generating artificial data. We can then compare the IRFs and confidence intervals to the ``true’’ parameters used to generate the data.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate a small sample</span></span>
 <span><span class="va">est.VAR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">Phi</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/A.html">Acoef</a></span><span class="op">(</span><span class="va">est.VAR</span><span class="op">)</span></span>
@@ -355,11 +362,11 @@ Figure 3.4: Estimated and bootstrapped coefficients.
 Figure 3.5: Simulated IRF associated with a monetary policy shock.
 </p>
 </div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IRFs.small.sample</span> <span class="op">&lt;-</span> <span class="va">res.svar.small.sample</span><span class="op">$</span><span class="va">IRFs</span></span>
 <span><span class="va">median.IRFs.small.sample</span> <span class="op">&lt;-</span> <span class="va">res.svar.small.sample</span><span class="op">$</span><span class="va">all.CI.median</span></span>
 <span><span class="va">simulated.IRFs.small.sample</span> <span class="op">&lt;-</span> <span class="va">res.svar.small.sample</span><span class="op">$</span><span class="va">simulated.IRFs</span></span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># True IRFs</span></span>
 <span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">svar.ordering.2</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
@@ -434,7 +441,7 @@ y_t^{(k)}=\widetilde{\Phi}_1 y_{t-1}^{(k)} + \dots + \widetilde{\Phi}_p y_{t-p}^
 <p>In step 5, check if the largest eigenvalue of <span class="math inline">\(\tilde\Phi\)</span> is of modulus &lt;1.
 If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <span class="math inline">\(\widehat{\Theta}_j^{(i+1)}=\delta_{i+1}\widehat{\Theta}_j^{(i)}\)</span>, with <span class="math inline">\(\delta_{i+1}=\delta_i-0.01\)</span>, starting with <span class="math inline">\(\delta_1=1\)</span> and <span class="math inline">\(\widehat{\Theta}_j^{(1)} =\widehat{\Theta}_j\)</span>, and compute <span class="math inline">\(\widetilde{\Phi}_j^{(i+1)}=\widehat{\Phi}_j-\widehat{\Theta}_j^{(i+1)}\)</span> until the largest eigenvalue of <span class="math inline">\(\tilde\Phi^{(i+1)}\)</span> has modulus &lt;1.</p>
 <p>The following code implements the bootstrap-after-bootrap method.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
 <span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
@@ -464,12 +471,12 @@ If not, shrink the bias: for all <span class="math inline">\(j\)</span>s, set <s
 Figure 3.7: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">IRFs.ordering</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">IRFs</span></span>
 <span><span class="va">median.IRFs.ordering</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">all.CI.median</span></span>
 <span><span class="va">simulated.IRFs.ordering</span> <span class="op">&lt;-</span> <span class="va">res.svar.ordering</span><span class="op">$</span><span class="va">simulated.IRFs</span></span></code></pre></div>
 <p>As an alternative, function <code>VAR.Boot</code> of package <code>VAR.etp</code> (<span class="citation">Kim (<a href="references.html#ref-VARetp">2022</a>)</span>) can be used to operate the bias-correction approach of <span class="citation">Kilian (<a href="references.html#ref-Kilian_1998">1998</a>)</span>:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">VAR.etp</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span> <span class="co">#standard VAR models</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># part of VAR.etp package</span></span>
@@ -478,10 +485,10 @@ Figure 3.7: IRF associated with a monetary policy shock; sign-restriction approa
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="op">(</span><span class="va">corrected</span><span class="op">$</span><span class="va">coef</span><span class="op">+</span><span class="va">corrected</span><span class="op">$</span><span class="va">Bias</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
 <span>      <span class="va">noncorrec</span><span class="op">$</span><span class="va">varresult</span><span class="op">$</span><span class="va">inv</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##         inv(-1)   inc(-1)   con(-1)    inv(-2)    inc(-2)   con(-2)       const
-## [1,] -0.3123421 0.1800449 0.9236354 -0.1391832 0.09059859 0.9886515 -0.01803108
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.11460498 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.11460498 0.9343938 -0.01672199</code></pre>
+<pre><code>##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3208081 0.1546886 1.048479 -0.1451155 0.1356996 0.9721137 -0.02042110
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199</code></pre>
 
 </div>
 </div>
@@ -493,9 +500,9 @@ Figure 3.7: IRF associated with a monetary policy shock; sign-restriction approa
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#Inference"><span class="header-section-number">3</span> Inference</a></li>
 <li><a class="nav-link" href="#MonteCarlo"><span class="header-section-number">3.1</span> Monte Carlo method</a></li>
-<li><a class="nav-link" href="#delta-method"><span class="header-section-number">3.2</span> Delta method</a></li>
-<li><a class="nav-link" href="#bootstrap"><span class="header-section-number">3.3</span> Bootstrap</a></li>
-<li><a class="nav-link" href="#bootstrap-after-bootstrap"><span class="header-section-number">3.4</span> Bootstrap-after-bootstrap</a></li>
+<li><a class="nav-link" href="#Delta"><span class="header-section-number">3.2</span> Delta method</a></li>
+<li><a class="nav-link" href="#Bootstrap1"><span class="header-section-number">3.3</span> Bootstrap</a></li>
+<li><a class="nav-link" href="#BootstrapAfter"><span class="header-section-number">3.4</span> Bootstrap-after-bootstrap</a></li>
 </ul>
 
       <div class="book-extra">
@@ -512,7 +519,7 @@ Figure 3.7: IRF associated with a monetary policy shock; sign-restriction approa
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-10-31.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-11-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

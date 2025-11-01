@@ -16,7 +16,7 @@ SVAR:& y_t &=& c + \Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p} + B \eta_t,
 with $\varepsilon_t = B\eta_t$, where $\{\eta_{t}\}$ is a white noise sequence whose components are mutually and serially independent, and that satisfies $\mathbb{V}ar(\eta_t)=Id$.
 :::
 
-The first line of Eq. \@ref(eq:yVAR) corresponds to the **reduced-form** of the VAR model (**structural form** for the second line). While the **structural shocks** (the components of $\eta_t$) are mutually uncorrelated, this is not the case of the **innovations**, that are the components of $\varepsilon_t$. However, in both cases, vectors $\eta_t$ and $\varepsilon_t$ are serially correlated (through time).
+The first line of Eq. \@ref(eq:yVAR) corresponds to the **reduced-form** of the VAR model (**structural form** for the second line). While the **structural shocks** (the components of $\eta_t$) are mutually uncorrelated, this is not the case of the **innovations**, that are the components of $\varepsilon_t$. However, in both cases, vectors $\eta_t$ and $\varepsilon_t$ are serially uncorrelated (through time).
 
 Notice that $\mathbb{V}ar(\eta_t)=Id$ and  $\varepsilon_t = B\eta_t$ jointly imply that $$
 \Omega :=\mathbb{V}ar(\varepsilon_t)=\mathbb{V}ar(B\eta_t)= B  \mathbb{V}ar(\eta_t) B'=BB'.
@@ -56,7 +56,7 @@ Formally, an IRF is a difference in conditional expectations:
 \end{equation}
 (effect on $y_{i,t+h}$ of a one-unit shock on $\eta_{j,t}$).
 
-IRFs closely relate to the Wold decomposition of $y_t$. Indeed, if the dynamics of process $y_t$ can be described as a VARMA model, and if $y_t$ is covariance stationary (see Def. \@ref(def:covstat)), then $y_t$ admits the following infinite MA representation (or Wold decomposition):
+IRFs closely relate to the Wold decomposition of $y_t$. Indeed, if the dynamics of process $y_t$ can be described as a VARMA model (which includes the case of VAR models), and if $y_t$ is covariance stationary (see Def. \@ref(def:covstat)), then $y_t$ admits the following infinite MA representation (or Wold decomposition):
 \begin{equation}
 \boxed{y_t = \mu + \sum_{i=0}^\infty \Psi_{i} \eta_{t-i}.}
 (\#eq:InfMA)
@@ -64,7 +64,7 @@ IRFs closely relate to the Wold decomposition of $y_t$. Indeed, if the dynamics 
 or, shifted by $h$ periods:
 \begin{eqnarray*}
 y_{t+h} &=& \mu + \sum_{i=0}^\infty \Psi_{i} \eta_{t+h-i}\\
-&=& \mu + \underbrace{\sum_{i=0}^{h-1} \Psi_{i} \eta_{t+h-i}}_{\mbox{Effect of }\eta_{t+1},\dots,\eta_{t+h}} + \underbrace{\Psi_{h} \eta_{t}}_{\mbox{Effect of }\eta_{t}} + \underbrace{\sum_{i=h+1}^\infty \Psi_{i} \eta_{t+h-i}}_{\mbox{Effect of }\eta_{t-1},\eta_{t-2,\dots}}
+&=& \mu + \underbrace{\sum_{i=0}^{h-1} \Psi_{i} \eta_{t+h-i}}_{\mbox{Effect of }\eta_{t+1},\dots,\eta_{t+h}} + \underbrace{\Psi_{h} \eta_{t}}_{\mbox{Effect of }\eta_{t}} + \underbrace{\sum_{i=h+1}^\infty \Psi_{i} \eta_{t+h-i}}_{\mbox{Effect of }\eta_{t-1},\eta_{t-2,\dots}}.
 \end{eqnarray*}
 
 With these notations, we get $\mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) = \mu_i + \Psi_{i,j,h}$, where $\Psi_{i,j,h}$ is the component $(i,j)$ of matrix $\Psi_h$ and $\mu_i$ is the $i^{th}$ entry of vector $\mu$. Since we also have $\mathbb{E}(y_{i,t+h})=\mu_i$, we obtain Eq. \@ref(eq:boxIRFs).
@@ -72,38 +72,40 @@ With these notations, we get $\mathbb{E}(y_{i,t+h}|\eta_{j,t}=1) = \mu_i + \Psi_
 :::{.example #IRFsimpleAR name="IRF of a univariate AR model"}
 To fix ideas, consider a simple univariate AR(1) process:
 \[
-y_t = \phi y_{t-1} + \eta_t, \quad \eta_t \sim \text{i.i.d. } (0,\sigma^2)
+y_t = \phi y_{t-1} + b \eta_t, \quad \eta_t \sim \text{i.i.d. }\mathcal{N}(0,1).
 \]
 
 We assume $|\phi| < 1$ so that the process is covariance stationary.
 
 Iterating forward:
 \[
-y_{t+h} = \phi^h y_t + \sum_{i=0}^{h-1} \phi^i \eta_{t+h-i}.
+y_{t+h} = b \eta_{t+h} + \phi b \eta_{t+h-1} + \dots + \phi^h b \eta_t + \phi^{h+1} y_{t-1}.
 \]
-
-A one-unit shock at time $t$ means $\eta_t = 1$, while all other shocks have expectation zero.
-
-Therefore, the expected response at horizon $h$ is:
+If the $\eta_t$'s are independent, we have $\mathbb{E}(\eta_{t+h}|\eta_t = 1)=0$ if $h \ne 0$ (and 1 otherwise). Therefore:
 \[
-\mathbb{E}(y_{t+h}|\eta_t = 1) - \mathbb{E}(y_{t+h}) = \phi^h.
+\mathbb{E}(y_{t+h}|\eta_t = 1) - \mathbb{E}(y_{t+h}) = \phi^h b.
 \]
-Hence, the **impulse response function (IRF)** at horizon $h$ is simply $\Psi_h = \phi^h$.
+Hence, the **impulse response function (IRF)** at horizon $h$ is simply $\Psi_h = \phi^h b $.
 
-```{r simAR1, fig.align = 'left-aligned', out.width = "90%", fig.cap = "Impulse response functions for an AR(1) process."}
+```{r simAR1, fig.align = 'left-aligned', out.width = "90%", fig.cap = "Impulse response functions for an AR(1) process: $y_t = \\phi y_{t-1} + b \\eta_t$, $\\eta_t \\sim i.i.d. \\mathcal{N}(0,1)$."}
 phi <- .8
-plot(phi^(0:30),type="b",lwd=2,xlab="Periods after shock",ylab="",las=1)
+b <- .5
+plot(phi^(0:30)*b,type="b",lwd=2,xlab="Periods after shock",ylab="",las=1)
+grid()
 ```
 
 :::
 
 
 
-Hence, estimating IRFs amounts to estimating the $\Psi_{h}$'s. In general, there exist three main approaches for that:
+Hence, estimating IRFs amounts to estimating the $\Psi_h$ matrices. In practice, three main approaches are commonly used:
 
-* Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at the first order (linearization). The solution takes the form of Eq. \@ref(eq:InfMA).
-* Directly estimate the $\Psi_{h}$ based on **projection approaches** (see Section \@ref(Projections)).
-* Approximate the infinite MA representation by estimating a parsimonious type of model, e.g. **VAR(MA) models** (see Section \@ref(estimVAR)). Once a (Structural) VARMA representation is obtained, Eq. \@ref(eq:InfMA) is easily deduced using the following proposition:
+* Calibrate and solve a (purely structural) Dynamic Stochastic General Equilibrium (DSGE) model at first order (linear approximation). The resulting solution can be written in the form of Eq. \@ref(eq:InfMA).
+
+* Directly estimate the $\Psi_h$ matrices using **projection methods** (see Section \@ref(Projections)).
+
+* Approximate the infinite moving-average representation by estimating a parsimonious model, such as a **VAR(MA)** model (see Section \@ref(estimVAR)). Once a (structural) VARMA representation is obtained, Eq. \@ref(eq:InfMA) follows immediately from the result stated in the next proposition.
+
 
 :::{.proposition #computPsi name="IRF of an ARMA(p,q) process"}
 If $y_t$ follows the VARMA model described in Def. \@ref(def:SVARMA), then the matrices $\Psi_h$ appearing in Eq. \@ref(eq:InfMA) can be computed recursively as follows:
@@ -321,8 +323,10 @@ Indeed:
 Conditional means and autocovariances can also be deduced from Eq. \@ref(eq:InfMA). For $0 \le h$ and $0 \le h_1 \le h_2$:
 \begin{eqnarray*}
 \mathbb{E}_t(y_{t+h}) &=& \mu + \sum_{k=0}^\infty \Psi_{k+h} \eta_{t-k} \\
-\mathbb{C}ov_t(y_{t+1+h_1},y_{t+1+h_2}) &=& \sum_{k=0}^{h_1} \Psi_{k}\Psi_{k+h_2-h_1}'.
+\mathbb{C}ov_t(y_{t+1+h_1},y_{t+1+h_2}) &=& \sum_{k=0}^{h_1} \Psi_{k}\Psi_{k+h_2-h_1}',
 \end{eqnarray*}
+where $\mathbb{E}_t$ and $\mathbb{C}ov_t$ denote the expectation and covariance conditional on $\{\eta_t,\eta_{t-1},\dots\}$.^[For VAR models, this information set coincides with $\{y_t,y_{t-1},\ldots\}$. For VARMA models, this equivalence holds only if the model is fundamental, meaning that the moving-average operator $\Theta(L)$ is invertible—i.e., $\det(\Theta(z))\neq0$ for all $|z|\le1$, so that the innovations can be recovered from current and past $y_t$.]
+
 
 The previous formula implies in particular that the forecasting error $y_{t+h} - \mathbb{E}_t(y_{t+h})$ has a variance equal to:
 $$
@@ -362,12 +366,7 @@ This section discusses the estimation of VAR models.^[The estimation of VARMA mo
 $$
 y_{t}=c+\Phi(L)y_{t-1}+\varepsilon_{t},
 $$
-with $\Phi(L) = \Phi_1 + \Phi_2 L + \dots + \Phi_p L^{p-1}$.
-
-Consequently:
-$$
-y_{t}\mid y_{t-1},y_{t-2},\ldots,y_{-p+1}\sim \mathcal{N}(c+\Phi_{1}y_{t-1}+\ldots\Phi_{p}y_{t-p},\Omega).
-$$
+with $\Phi(L) = \Phi_1 + \Phi_2 L + \dots + \Phi_p L^{p-1}$, and where the reduced-form shocks ($\varepsilon_{t}$) are white noise shocks.^[That is, these shocks are such that $\mathbb{E}(\varepsilon_{t})=0$, and $\mathbb{C}ov(\varepsilon_{t},\varepsilon_{t-k})=\Omega$ if $k=0$, and a zero matrix if $k \ne 0$.]
 
 Using @Hamilton_1994's notations, denote with $\Pi$ the matrix $\left[\begin{array}{ccccc}
 c & \Phi_{1} & \Phi_{2} & \ldots & \Phi_{p}\end{array}\right]'$ and with $x_{t}$ the vector $\left[\begin{array}{ccccc}
@@ -377,9 +376,15 @@ y_{t}= \Pi'x_{t} + \varepsilon_{t}.
 (\#eq:PIVAR)
 \end{equation}
 
-The previous representation is convenient to discuss the estimation of the VAR model, as parameters are gathered in two matrices only: $\Pi$ and $\Omega$.
+The previous representation is convenient to discuss the estimation of the VAR model, as parameters are gathered in two matrices only: $\Pi$ and $\Omega$ (where $\Omega = \mathbb{V}ar (\varepsilon_t)$).
 
-Let us start with the case where the shocks are Gaussian.
+### Maximum Likelihood Estimation (MLE) when the shocks are Gaussian
+
+Let us start with the case where the shocks are i.i.d. Gaussian. We then have:
+$$
+y_{t}\mid y_{t-1},y_{t-2},\ldots\sim \mathcal{N}(c+\Phi_{1}y_{t-1}+\ldots\Phi_{p}y_{t-p},\Omega).
+$$
+
 
 :::{.proposition #estimVARGaussian name="MLE of a Gaussian VAR"}
 If $y_t$ follows a VAR($p$) (see Definition \@ref(def:SVAR)), and if $\varepsilon_t \sim \,i.i.d.\,\mathcal{N}(0,\Omega)$, then the ML estimate of $\Pi$, denoted by $\hat{\Pi}$ (see Eq. \@ref(eq:PIVAR)), is given by
@@ -407,68 +412,6 @@ The asymptotic distributions of these estimators are the ones resulting from sta
 See Appendix \@ref(AppendixProof).
 :::
 
-As stated by Proposition \@ref(prp:OLSVAR), when the shocks are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. However, since $x_t$ correlates to $\varepsilon_s$ for $s<t$, the OLS estimator $\bv{b}_i$ of $\boldsymbol\beta_i$ is biased in small sample. (That is also the case for the ML estimator.) Indeed, denoting by $\boldsymbol\varepsilon_i$ the $T \times 1$ vector of $\varepsilon_{i,t}$'s, and using the notations of $b_i$ and $\beta_i$ introduced in Proposition \@ref(prp:estimVARGaussian), we have:
-\begin{equation}
-\bv{b}_i = \beta_i + (\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i.
-(\#eq:olsar1)
-\end{equation}
-
-We have non-zero correlation between $x_t$ and $\varepsilon_{i,s}$ for $s<t$ and, therefore, $\mathbb{E}[(\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i] \ne 0$.
-
-However, when $y_t$ is covariance stationary, then $\frac{1}{n}\bv{X}'\bv{X}$ converges to a positive definite matrix $\bv{Q}$, and $\frac{1}{n}X'\boldsymbol\varepsilon_i$ converges to 0. Hence $\bv{b}_i \overset{p}{\rightarrow} \beta_i$. More precisely:
-
-:::{.proposition #OLSVAR name="Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)"}
-If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
-$$
-\sqrt{T}(\bv{b}_i-\beta_i) =  \underbrace{\left[\frac{1}{T}\sum_{t=p}^T x_t x_t' \right]^{-1}}_{\overset{p}{\rightarrow} \bv{Q}^{-1}}
-\underbrace{\sqrt{T} \left[\frac{1}{T}\sum_{t=1}^T x_t\varepsilon_{i,t} \right]}_{\overset{d}{\rightarrow} \mathcal{N}(0,\sigma_i^2\bv{Q})},
-$$
-where $\sigma_i = \mathbb{V}ar(\varepsilon_{i,t})$ and where $\bv{Q} = \mbox{plim }\frac{1}{T}\sum_{t=p}^T x_t x_t'$ is given by:
-\begin{equation}
-\bv{Q} = \left[
-\begin{array}{ccccc}
-1 & \mu' &\mu' & \dots & \mu' \\
-\mu & \gamma_0 + \mu\mu' & \gamma_1 + \mu\mu' & \dots & \gamma_{p-1} + \mu\mu'\\
-\mu & \gamma_1 + \mu\mu' & \gamma_0 + \mu\mu' & \dots & \gamma_{p-2} + \mu\mu'\\
-\vdots &\vdots &\vdots &\dots &\vdots \\
-\mu & \gamma_{p-1} + \mu\mu' & \gamma_{p-2} + \mu\mu' & \dots & \gamma_{0} + \mu\mu'
-\end{array}
-\right],
-(\#eq:Qols)
-\end{equation}
-where $\gamma_j$ is the unconditional autocovariance matrix of order $j$ of $y_t$, i.e., $\gamma_i = \mathbb{C}ov(y_{t},y_{t-j})$.
-:::
-:::{.proof}
-See Appendix \@ref(AppendixProof).
-:::
-
-The following proposition extends the previous proposition and includes covariances between different $\beta_i$'s as well as the asymptotic distribution of the ML estimates of $\Omega$.
-
-:::{.proposition #OLSVAR2 name="Asymptotic distribution of the OLS estimates"}
-If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
-\begin{equation}
-\sqrt{T}\left[
-\begin{array}{c}
-vec(\hat\Pi - \Pi)\\
-vec(\hat\Omega - \Omega)
-\end{array}
-\right]
-\sim \mathcal{N}\left(0,
-\left[
-\begin{array}{cc}
-\Omega \otimes \bv{Q}^{-1} & 0\\
-0 & \Sigma_{22}
-\end{array}
-\right]\right),
-(\#eq:asymptPi)
-\end{equation}
-where the component of $\Sigma_{22}$ corresponding to the covariance between $\hat\sigma_{i,j}$ and $\hat\sigma_{k,l}$ (for $i,j,l,m \in \{1,\dots,n\}^4$) is equal to $\sigma_{i,l}\sigma_{j,m}+\sigma_{i,m}\sigma_{j,l}$.
-:::
-:::{.proof}
-See, e.g., @Hamilton_1994, Appendix of Chapter 11.
-:::
-
-In practice, to use the previous proposition (for instance to implement Monte-Carlo simulations, see Section \@ref(MonteCarlo)), $\Omega$ is replaced with $\hat{\Omega}$, $\bv{Q}$ is replaced with $\hat{\bv{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'$ and $\Sigma$ with the matrix whose components are of the form $\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}$, where the $\hat\sigma_{i,l}$'s are the components of $\hat\Omega$.
 
 The simplicity of the VAR framework and the tractability of its MLE open the way to convenient econometric testing. Let's illustrate this with the likelihood ratio test (see Def. \@ref(def:LR)). The maximum value achieved by the MLE is
 $$
@@ -508,13 +451,11 @@ While adding lags always improves the in-sample fit, it can lead to over-paramet
 The approach above provides an ad-hoc way to select lag length using LR tests (Def. \@ref(def:LR)).
 More systematic procedures rely on information criteria, which balance goodness of fit and model parsimony.
 In the Gaussian case (see Eq. \@ref(eq:optimzedLogL)), common criteria include:
-
 \begin{eqnarray*}
 AIC & = & cst + \log\left|\hat{\Omega}\right| + \frac{2}{T}N \\
 BIC & = & cst + \log\left|\hat{\Omega}\right| + \frac{\log T}{T}N,
 \end{eqnarray*}
-
-where $N = p \times n^2$.
+where $N = p \times n^2$. In these expressions, $\log|\hat{\Omega}|$ captures the model’s goodness of fit (with smaller values indicating better fit), while the last term is a penalty that increases with the number of estimated parameters.
 
 
 :::{.example #US3varselect name="Three-variable VAR model"}
@@ -594,6 +535,146 @@ make_variance_decompo(Phi, B, maxHorizon = 50,
 
 
 
+### Asymptotic distribution of the OLS estimates
+
+As stated by the following proposition, when the shocks $\varepsilon_t$ are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. 
+
+:::{.proposition #OLSVAR name="Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)"}
+If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
+$$
+\sqrt{T}(\bv{b}_i-\beta_i) =  \underbrace{\left[\frac{1}{T}\sum_{t=p}^T x_t x_t' \right]^{-1}}_{\overset{p}{\rightarrow} \bv{Q}^{-1}}
+\underbrace{\sqrt{T} \left[\frac{1}{T}\sum_{t=1}^T x_t\varepsilon_{i,t} \right]}_{\overset{d}{\rightarrow} \mathcal{N}(0,\sigma_i^2\bv{Q})},
+$$
+where $\sigma_i = \mathbb{V}ar(\varepsilon_{i,t})$ and where $\bv{Q} = \mbox{plim }\frac{1}{T}\sum_{t=p}^T x_t x_t'$ is given by:
+\begin{equation}
+\bv{Q} = \left[
+\begin{array}{ccccc}
+1 & \mu' &\mu' & \dots & \mu' \\
+\mu & \gamma_0 + \mu\mu' & \gamma_1 + \mu\mu' & \dots & \gamma_{p-1} + \mu\mu'\\
+\mu & \gamma_1 + \mu\mu' & \gamma_0 + \mu\mu' & \dots & \gamma_{p-2} + \mu\mu'\\
+\vdots &\vdots &\vdots &\dots &\vdots \\
+\mu & \gamma_{p-1} + \mu\mu' & \gamma_{p-2} + \mu\mu' & \dots & \gamma_{0} + \mu\mu'
+\end{array}
+\right],
+(\#eq:Qols)
+\end{equation}
+where $\gamma_j$ is the unconditional autocovariance matrix of order $j$ of $y_t$, i.e., $\gamma_i = \mathbb{C}ov(y_{t},y_{t-j})$.
+:::
+:::{.proof}
+See Appendix \@ref(AppendixProof).
+:::
+
+However, since $x_t$ correlates to $\varepsilon_s$ for $s<t$, the OLS estimator $\bv{b}_i$ of $\boldsymbol\beta_i$ is biased in small sample. (That is also the case for the ML estimator.) Indeed, denoting by $\boldsymbol\varepsilon_i$ the $T \times 1$ vector of $\varepsilon_{i,t}$'s, and using the notations of $b_i$ and $\beta_i$ introduced in Proposition \@ref(prp:estimVARGaussian), we have:
+\begin{equation}
+\bv{b}_i = \beta_i + (\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i.
+(\#eq:olsar1)
+\end{equation}
+
+We have non-zero correlation between $x_t$ and $\varepsilon_{i,s}$ for $s<t$ and, therefore, $\mathbb{E}[(\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i] \ne 0$.
+
+However, as stated by Proposition \@ref(prp:OLSVAR) when $y_t$ is covariance stationary, then $\frac{1}{n}\bv{X}'\bv{X}$ converges to a positive definite matrix $\bv{Q}$, and $\frac{1}{n}X'\boldsymbol\varepsilon_i$ converges to 0. Hence $\bv{b}_i \overset{p}{\rightarrow} \beta_i$.
+
+The next proposition extends Proposition \@ref(prp:OLSVAR) by incorporating the covariances between different $\beta_i$'s and by characterizing the asymptotic distribution of the ML estimator of $\Omega$. In other words, it delivers the full asymptotic distribution of the model parameters. This result is particularly useful for Monte Carlo procedures that require drawing from this asymptotic distribution (see Section \@ref(MonteCarlo)).
+
+:::{.proposition #OLSVAR2 name="Asymptotic distribution of the OLS estimates"}
+If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
+\begin{equation}
+\sqrt{T}\left[
+\begin{array}{c}
+vec(\hat\Pi - \Pi)\\
+vec(\hat\Omega - \Omega)
+\end{array}
+\right]
+\sim \mathcal{N}\left(0,
+\left[
+\begin{array}{cc}
+\Omega \otimes \bv{Q}^{-1} & 0\\
+0 & \Sigma_{22}
+\end{array}
+\right]\right),
+(\#eq:asymptPi)
+\end{equation}
+where the component of $\Sigma_{22}$ corresponding to the covariance between $\hat\sigma_{i,j}$ and $\hat\sigma_{k,l}$ (for $i,j,l,m \in \{1,\dots,n\}^4$) is equal to $\sigma_{i,l}\sigma_{j,m}+\sigma_{i,m}\sigma_{j,l}$.
+:::
+:::{.proof}
+See, e.g., @Hamilton_1994, Appendix of Chapter 11.
+:::
+
+In practice, to use the previous proposition (for instance to implement Monte-Carlo simulations), $\Omega$ is replaced with $\hat{\Omega}$, $\bv{Q}$ is replaced with $\hat{\bv{Q}} = \frac{1}{T}\sum_{t=p}^T x_t x_t'$ and $\Sigma$ with the matrix whose components are of the form $\hat\sigma_{i,l}\hat\sigma_{j,m}+\hat\sigma_{i,m}\hat\sigma_{j,l}$, where the $\hat\sigma_{i,l}$'s are the components of $\hat\Omega$.
+
+
+
+### Specification tests
+
+After estimating a VAR, it is important to check that the model assumptions hold. In particular, we verify:
+
+1. **Stationarity of the data** (often checked before estimation). If the variables are non-stationary and not cointegrated, the asymptotic distributions of the estimates are not valid and standard inference (including likelihood-based tests) breaks down. In practice, one typically inspects unit-root tests or relies on economic knowledge about integration and cointegration properties. $\Rightarrow$ Remedy: transform the data to make them stationary (removing deterministic trends, or using differences), or use Vector Error-Correction Models (VECM).
+
+2. **Absence of residual autocorrelation**. If residuals are serially correlated, the dynamic specification of the VAR is inadequate (e.g., too few lags). This leads to biased estimates of the constant and the $\Phi_i$ matrices and, consequently, biased impulse response functions. $\Rightarrow$ Remedy: increase the lag length or reconsider the model specification (e.g., adding variables, or transforming the variables).
+
+3. **Homoskedasticity**. If residuals exhibit heteroskedasticity, OLS estimates remain consistent under mild conditions, but they are no longer efficient, and standard errors become unreliable in finite samples in particular. If they are based on the asymptotic distribution, confidence intervals for coefficients and impulse responses may be misleading. $\Rightarrow$ Remedy: use heteroskedasticity-robust inference (e.g., bootstrapped inference methods, see Chapter \@ref(Inference)), or adopt models allowing for time-varying volatility (e.g., VAR-GARCH, stochastic-volatility VAR).
+
+4. **Normality of residuals**. Non-normality does not affect consistency of OLS estimates, but it weakens the validity of inference and ML-based tests, especially in small samples. Confidence bands for impulse responses may be distorted under heavy tails or skewness. $\Rightarrow$ Remedy: use bootstrap inference for hypothesis testing and IRFs.
+
+
+:::{.example #BivariateVARCHE name="Bivariate model for Switzerland"}
+
+In this example, we consider a bivariate model capturing the joint dynamics of Swiss inflation and GDP growth rates.
+
+```{r US2varCHE, fig.align='left-aligned', out.width="95%", fig.cap="Inflation and GDP growth rates. Percent change from year ago."}
+First.date <- "1980-01-01"
+Last.date  <- "2025-01-01"
+data <- international[,c("date","CPI_CHE","GDP_CHE")]
+data <- data[(data$date >= First.date) & (data$date <= Last.date), ]
+data <- data[complete.cases(data),]
+Y <- data[,c("CPI_CHE","GDP_CHE")]
+par(mfrow=c(1,1));par(plt=c(.1,.95,.15,.95))
+plot(data$date,data$CPI_CHE,type="l",lwd=2,las=1,ylim=c(-7,11),
+     xlab="",ylab="")
+grid()
+lines(data$date,data$GDP_CHE,lwd=2,col="grey")
+```
+
+```{r}
+library(tseries)
+test.adf.Y1  <- adf.test(Y[,1],k=16)$p.value
+test.adf.Y2  <- adf.test(Y[,2],k=16)$p.value
+test.pp.Y1   <- pp.test(Y[,1])$p.value
+test.pp.Y2   <- pp.test(Y[,2])$p.value
+test.kpss.Y1 <- kpss.test(Y[,1])$p.value
+test.kpss.Y2 <- kpss.test(Y[,2])$p.value
+test.adf  <- c(test.adf.Y1,test.adf.Y2)
+test.pp   <- c(test.pp.Y1,test.pp.Y2)
+test.kpss <- c(test.kpss.Y1,test.kpss.Y2)
+rbind(test.adf,test.pp,test.kpss)
+```
+
+Estimate the model parameters for a given lag choice:
+```{r}
+p <- 2
+estVAR <- VAR(Y, p = p) # estimate the VAR model
+```
+
+Check for residual autocorrelation (Portmanteau test) using the Portmanteau test or the one developed by @Breusch_1978 and @Godfrey_1978 (a high p-value indicates no evidence of serial correlation):
+
+```{r}
+serial.test(estVAR, lags.pt = 20, type = "PT.asymptotic")
+serial.test(estVAR, lags.pt = 20, type = "BG")
+```
+
+Let us now test for heteroskedasticity that would take place in the form of ARCH (see @Engle_1982). For that, we ca use the `arch.test` function (a high p-value suggests no ARCH effects):
+
+```{r}
+arch.test(estVAR, lags.multi = 12, multivariate.only = TRUE)
+```
+
+Normality test can be perform using function `normality.test` (a high p-value suggests residuals are consistent with normality):
+
+```{r}
+normality.test(estVAR)
+```
+:::
+
 ## Block exogeneity and Granger causality {#BlockGranger}
 
 ### Block exogeneity
@@ -630,17 +711,17 @@ Consider a model of the joint dynamics of US and Korean GDP growth and inflation
 ```{r VARdataUSAKOR, fig.align='left-aligned', out.width="95%", fig.cap="GDP log growth rates and inflation rates for the US and Korea. Black lines are for Korea; grey lines are for the US. All series are year-on-year growth rates, expressed in percent."}
 library(IdSS) # this package contains the data
 library(vars) # this package contains standard VAR estimation tools
-names.var <- c("date","GDP_USA","CPI_USA","GDP_KOR","CPI_KOR")
-data <- international[,names.var]
+names.var <- c("GDP_USA","CPI_USA","GDP_KOR","CPI_KOR")
+data <- international[,c("date",names.var)]
 data <- data[complete.cases(data),]
 Y <- data[,c("GDP_USA","CPI_USA","GDP_KOR","CPI_KOR")]
 par(mfrow=c(1,2))
-par(plot=c(.1,.95,.15,.8))
-plot(data$date,data$GDP_KOR,type="l",lwd=2,
-     main="GDP growth rate (y-o-y)",xlab="",ylab="")
+par(plt=c(.15,.95,.15,.8))
+plot(data$date,data$GDP_KOR,type="l",lwd=2,las=1,
+     main="GDP growth rate (y-o-y)",xlab="",ylab="");grid()
 lines(data$date,data$GDP_USA,col="grey",lwd=2,las=1)
-plot(data$date,data$CPI_KOR,type="l",lwd=2,
-     main="Inflation (y-o-y)",xlab="",ylab="")
+plot(data$date,data$CPI_KOR,type="l",lwd=2,las=1,
+     main="Inflation (y-o-y)",xlab="",ylab="");grid()
 lines(data$date,data$CPI_USA,col="grey",lwd=2,las=1)
 ```
 
@@ -781,6 +862,6 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 According to the following lines of code, the output gap Granger-causes inflation, but the reverse is not true:
 
 ```{r granger,message=FALSE}
-grangertest(US3var[,c("y.gdp.gap","infl")],order=3)
-grangertest(US3var[,c("infl","y.gdp.gap")],order=3)
+grangertest(x=as.matrix(US3var[,c("y.gdp.gap","infl")]),order=3)
+grangertest(x=as.matrix(US3var[,c("infl","y.gdp.gap")]),order=3)
 ```
