@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.10.27)  4 NOV 2025 11:05
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.23)  15 DEC 2025 09:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **IdentifStructShocks.tex
 (./IdentifStructShocks.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-10-24>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
@@ -24,7 +24,7 @@ File: bk12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
+Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip51
 For additional information on amsmath, use the `?' option.
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -84,8 +84,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks21
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -98,7 +98,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-10-24 L3 programming layer (loader) 
+Package: expl3 2025-11-06 L3 programming layer (loader) 
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
 \g__graphics_track_int=\count292
@@ -131,7 +131,7 @@ Package: fontspec-xetex 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_tmpb_dim=\dimen159
 \l__fontspec_tmpc_dim=\dimen160
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
 Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
@@ -310,7 +310,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: xetex.def on input line 274.
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2025/09/29 v5.0o Graphics/color driver for xetex
+File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -340,7 +340,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \FrameRule=\dimen163
 \FrameSep=\dimen164
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip55
 \LTright=\skip56
 \LTpre=\skip57
@@ -377,7 +377,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count320
 \@thisrulewidth=\dimen178
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen179
 \ar@mcellbox=\box61
 \extrarowheight=\dimen180
@@ -874,14 +874,10 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 157.
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-[1
+) [1
 
 
-]
-
-[2
+] [2
 
 ] (./IdentifStructShocks.toc
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
@@ -900,13 +896,9 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 8.3991pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 5.99936pt on input line 2.
-
-
 [3])
 \tf@toc=\write4
 \openout4 = `IdentifStructShocks.toc'.
-
-
 
 [4]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
@@ -916,13 +908,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 202--204
 []\TU/lmr/m/n/12 R: []$[][][][][] [] [] [] [][][][] [] [] [][] [][][][][][][] [] [][][] [] [][][] [] [][][][][][][] [] [][][][][][][] [][] [][][][][][][] [] [][] [] [][][]$[] (by Em-
  []
 
-
-
 [5
 
-]
-
-[6
+] [6
 
 ]
 Chapter 1.
@@ -932,50 +920,24 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 5.00046pt on input line 232.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 232.
-
-
-[7]
-
-[8]
+[7] [8]
 Missing character: There is no 𝛹 (U+1D6F9) in font [lmroman12-regular]:mapping=tex-text;!
 Missing character: There is no 𝜙 (U+1D719) in font [lmroman12-regular]:mapping=tex-text;!
 File: IdentifStructShocks_files/figure-latex/simAR1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/simAR1-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/simAR1-1.pdf>
 [9]
 Missing character: There is no η (U+03B7) in font [lmmono12-regular]:!
-
-
 [10]
 File: IdentifStructShocks_files/figure-latex/simVAR2-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/simVAR2-1.pdf>
-
-
-[11]
-
-[12]
+<use IdentifStructShocks_files/figure-latex/simVAR2-1.pdf>
+[11] [12]
 Missing character: There is no η (U+03B7) in font [lmmono12-regular]:!
 File: IdentifStructShocks_files/figure-latex/simVAR-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/simVAR-1.pdf>
-
-
-[13]
-
-[14]
-
-[15]
+<use IdentifStructShocks_files/figure-latex/simVAR-1.pdf>
+[13] [14] [15]
 File: IdentifStructShocks_files/figure-latex/simVAR2vardec-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/simVAR2vardec-1.pdf>
-
-
-[16]
-
-[17]
-
-[18]
-
-[19]
+<use IdentifStructShocks_files/figure-latex/simVAR2vardec-1.pdf>
+[16] [17] [18] [19]
 Overfull \hbox (18.45245pt too wide) in paragraph at lines 720--720
 []\TU/lmtt/m/n/12 ##                  1            2           3          4          5          6[] 
  []
@@ -1025,8 +987,6 @@ Overfull \hbox (12.16493pt too wide) in paragraph at lines 720--720
 []\TU/lmtt/m/n/12 ## FPE(n)  0.61498914  0.60758020  0.64308309  0.6133871  0.5892917  0.6143270[] 
  []
 
-
-
 [20]
 Overfull \hbox (5.99698pt too wide) in paragraph at lines 749--749
 []\TU/lmtt/m/n/12 ##  [1] 0.9485855 0.9485855 0.9180083 0.8539724 0.8539724 0.7683116 0.7683116[] 
@@ -1039,16 +999,10 @@ Overfull \hbox (5.961pt too wide) in paragraph at lines 749--749
 
 Missing character: There is no η (U+03B7) in font [lmmono12-regular]:!
 File: IdentifStructShocks_files/figure-latex/US3varIRFs1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/US3varIRFs1-1.pdf>
-
-
-[21]
-
-[22]
+<use IdentifStructShocks_files/figure-latex/US3varIRFs1-1.pdf>
+[21] [22]
 File: IdentifStructShocks_files/figure-latex/US3varVARdecomp-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/US3varVARdecomp-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/US3varVARdecomp-1.pdf>
 [23]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
 (Font)              scaled to size 12.0pt on input line 829.
@@ -1068,118 +1022,64 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
 (Font)              scaled to size 8.3991pt on input line 829.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
 (Font)              scaled to size 5.99936pt on input line 829.
-
-
 [24]
 File: IdentifStructShocks_files/figure-latex/US2varCHE-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/US2varCHE-1.pdf>
-
-
-[25]
-
-[26]
-
-[27]
-
-[28]
-
-[29]
+<use IdentifStructShocks_files/figure-latex/US2varCHE-1.pdf>
+[25] [26] [27] [28] [29]
 File: IdentifStructShocks_files/figure-latex/VARdataUSAKOR-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/VARdataUSAKOR-1.pdf>
-
-
-[30]
-
-[31]
+<use IdentifStructShocks_files/figure-latex/VARdataUSAKOR-1.pdf>
+[30] [31]
 Missing character: There is no η (U+03B7) in font [lmmono12-regular]:!
 File: IdentifStructShocks_files/figure-latex/IRFblockexog-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/IRFblockexog-1.pdf>
+<use IdentifStructShocks_files/figure-latex/IRFblockexog-1.pdf>
 File: IdentifStructShocks_files/figure-latex/VARdecblockexogUS-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/VARdecblockexogUS-1.pdf>
-
-
-[32]
-
-[33]
-
-[34]
+<use IdentifStructShocks_files/figure-latex/VARdecblockexogUS-1.pdf>
+[32] [33] [34]
 File: IdentifStructShocks_files/figure-latex/VARdecblockexogCH-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/VARdecblockexogCH-1.pdf>
-
-
-[35]
-
-[36]
-
-[37]
-
-[38
+<use IdentifStructShocks_files/figure-latex/VARdecblockexogCH-1.pdf>
+[35] [36] [37] [38
 
 ]
 Chapter 2.
-
-
 [39]
-
-
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 40 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
  []
 
-[40]
-
-[41]
+[40] [41]
 
 Package natbib Warning: Citation `ref' on page 42 undefined on input line 1534.
 
 File: IdentifStructShocks_files/figure-latex/CEE-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/CEE-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/CEE-1.pdf>
 
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 42 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
  []
 
-[42]
-
-[43]
-
-
+[42] [43]
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 44 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
  []
 
-[44]
-
-[45]
+[44] [45]
 File: IdentifStructShocks_files/figure-latex/BQ1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/BQ1-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/BQ1-1.pdf>
 
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 46 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
  []
 
-[46]
-
-[47]
-
-
+[46] [47]
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 48 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
  []
 
 [48]
 File: IdentifStructShocks_files/figure-latex/BQ4-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/BQ4-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/BQ4-1.pdf>
 [49]
 Missing character: There is no η (U+03B7) in font [lmmono12-regular]:!
-
-
 
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 50 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
@@ -1187,83 +1087,51 @@ Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 
 [50]
 File: IdentifStructShocks_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/unnamed-chunk-11-1.pdf>
+<use IdentifStructShocks_files/figure-latex/unnamed-chunk-11-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
 [51]
-
-
 Overfull \hbox (69.11987pt too wide) has occurred while \output is active
 \TU/lmr/m/n/12 52 \TU/lmr/m/sl/12 CHAPTER 2.  IDENTIFICATION PROBLEM AND STANDARD IDENTIFICATION TECHNIQUES
  []
 
 [52]
 Chapter 3.
-
-
 [53
 
-]
-
-[54]
+] [54]
 File: IdentifStructShocks_files/figure-latex/inference1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference1-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/inference1-1.pdf>
 [55]
 File: IdentifStructShocks_files/figure-latex/inference1bis-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference1bis-1.pdf>
+<use IdentifStructShocks_files/figure-latex/inference1bis-1.pdf>
 
 Underfull \vbox (badness 1365) has occurred while \output is active []
 
-
-
-[56]
-
-[57]
+[56] [57]
 File: IdentifStructShocks_files/figure-latex/inference2-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference2-1.pdf>
-
-
-[58]
-
-[59]
+<use IdentifStructShocks_files/figure-latex/inference2-1.pdf>
+[58] [59]
 File: IdentifStructShocks_files/figure-latex/inference3-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference3-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/inference3-1.pdf>
 [60]
 File: IdentifStructShocks_files/figure-latex/inference4-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference4-1.pdf>
-
-
-[61]
-
-[62]
+<use IdentifStructShocks_files/figure-latex/inference4-1.pdf>
+[61] [62]
 File: IdentifStructShocks_files/figure-latex/inference5-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference5-1.pdf>
-
-
-[63]
-
-[64]
+<use IdentifStructShocks_files/figure-latex/inference5-1.pdf>
+[63] [64]
 File: IdentifStructShocks_files/figure-latex/inference6-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/inference6-1.pdf>
-
-
-[65]
-
-[66]
+<use IdentifStructShocks_files/figure-latex/inference6-1.pdf>
+[65] [66]
 Overfull \hbox (30.82483pt too wide) in paragraph at lines 2344--2344
 []\TU/lmtt/m/n/12 ##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const[] 
  []
 
 
-Overfull \hbox (30.69296pt too wide) in paragraph at lines 2344--2344
-[]\TU/lmtt/m/n/12 ## [1,] -0.3316845 0.1309239 0.9763446 -0.1384865 0.1918472 0.9100749 -0.01788486[] 
+Overfull \hbox (30.65697pt too wide) in paragraph at lines 2344--2344
+[]\TU/lmtt/m/n/12 ## [1,] -0.3195006 0.2035416 0.9560309 -0.1520668 0.1486182 0.9269884 -0.01826934[] 
  []
 
 
@@ -1276,125 +1144,61 @@ Overfull \hbox (30.66896pt too wide) in paragraph at lines 2344--2344
 []\TU/lmtt/m/n/12 ## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199[] 
  []
 
-
-
-[67]
-
-[68
+[67] [68
 
 ]
 Chapter 4.
-
-
-[69]
-
-[70]
-
-[71]
+[69] [70] [71]
 File: IdentifStructShocks_files/figure-latex/signrestr1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr1-1.pdf>
+<use IdentifStructShocks_files/figure-latex/signrestr1-1.pdf>
 
 Underfull \vbox (badness 1762) has occurred while \output is active []
 
-
-
-[72]
-
-[73]
-
-[74
+[72] [73] [74
 
 ]
 Chapter 5.
-
-
-[75]
-
-[76]
+[75] [76]
 File: IdentifStructShocks_files/figure-latex/signrestr2-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr2-1.pdf>
+<use IdentifStructShocks_files/figure-latex/signrestr2-1.pdf>
 File: IdentifStructShocks_files/figure-latex/signrestr2-2.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr2-2.pdf>
+<use IdentifStructShocks_files/figure-latex/signrestr2-2.pdf>
 File: IdentifStructShocks_files/figure-latex/signrestr2-3.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr2-3.pdf>
+<use IdentifStructShocks_files/figure-latex/signrestr2-3.pdf>
 File: IdentifStructShocks_files/figure-latex/signrestr2-4.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr2-4.pdf>
+<use IdentifStructShocks_files/figure-latex/signrestr2-4.pdf>
 File: IdentifStructShocks_files/figure-latex/signrestr2-5.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr2-5.pdf>
+<use IdentifStructShocks_files/figure-latex/signrestr2-5.pdf>
 File: IdentifStructShocks_files/figure-latex/signrestr2-6.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/signrestr2-6.pdf>
-
-
-[77]
-
-[78]
-
-[79]
-
-[80]
-
-[81]
-
-[82]
-
-[83]
-
-[84
+<use IdentifStructShocks_files/figure-latex/signrestr2-6.pdf>
+[77] [78] [79] [80] [81] [82] [83] [84
 
 ]
 Chapter 6.
-
-
-[85]
-
-[86]
-
-[87]
+[85] [86] [87]
 File: IdentifStructShocks_files/figure-latex/uhlig-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/uhlig-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/uhlig-1.pdf>
 [88]
 File: IdentifStructShocks_files/figure-latex/levchenko-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/levchenko-1.pdf>
+<use IdentifStructShocks_files/figure-latex/levchenko-1.pdf>
 File: IdentifStructShocks_files/figure-latex/levchenko-2.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/levchenko-2.pdf>
+<use IdentifStructShocks_files/figure-latex/levchenko-2.pdf>
 File: IdentifStructShocks_files/figure-latex/levchenko-3.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/levchenko-3.pdf>
-
-
-[89]
-
-[90]
-
-[91]
-
-[92]
-
-[93]
-
-[94
+<use IdentifStructShocks_files/figure-latex/levchenko-3.pdf>
+[89] [90] [91] [92] [93] [94
 
 ]
 Chapter 7.
 File: images/Figure_A.pdf Graphic file (type pdf)
-<images/Figure_A.pdf>
+<use images/Figure_A.pdf>
 File: IdentifStructShocks_files/figure-latex/preMadeFigureICA2-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/preMadeFigureICA2-1.pdf>
-
-
-[95]
-
-[96]
+<use IdentifStructShocks_files/figure-latex/preMadeFigureICA2-1.pdf>
+[95] [96]
 File: images/Figure_C.pdf Graphic file (type pdf)
-<images/Figure_C.pdf>
-
-
+<use images/Figure_C.pdf>
 [97]
 File: images/Figure_E.pdf Graphic file (type pdf)
-<images/Figure_E.pdf>
-
-
+<use images/Figure_E.pdf>
 [98]
 Overfull \hbox (9.64821pt too wide) in paragraph at lines 3069--3069
 []|\TU/lmr/m/n/12 Gaussian|  
@@ -1415,131 +1219,59 @@ Overfull \hbox (25.89621pt too wide) in paragraph at lines 3072--3072
 []|\TU/lmr/m/n/12 Subgaussian|  
  []
 
-
-
-[99]
-
-[100]
-
-[101]
-
-[102]
+[99] [100] [101] [102]
 File: IdentifStructShocks_files/figure-latex/ICAFigIRF-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/ICAFigIRF-1.pdf>
-
-
-[103]
-
-[104]
-
-[105]
-
-[106
+<use IdentifStructShocks_files/figure-latex/ICAFigIRF-1.pdf>
+[103] [104] [105] [106
 
 ]
 Chapter 8.
-
-
-[107]
-
-[108]
+[107] [108]
 File: IdentifStructShocks_files/figure-latex/CEEJorda-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/CEEJorda-1.pdf>
-
-
+<use IdentifStructShocks_files/figure-latex/CEEJorda-1.pdf>
 [109]
 File: images/GSS2005_HFI.pdf Graphic file (type pdf)
-<images/GSS2005_HFI.pdf>
-
-
-[110]
-
-[111]
+<use images/GSS2005_HFI.pdf>
+[110] [111]
 File: images/RameyFiscalShocks.pdf Graphic file (type pdf)
-<images/RameyFiscalShocks.pdf>
+<use images/RameyFiscalShocks.pdf>
 File: images/RameyFiscalShocksIRF.pdf Graphic file (type pdf)
-<images/RameyFiscalShocksIRF.pdf>
-
-
-[112]
-
-[113]
-
-[114]
+<use images/RameyFiscalShocksIRF.pdf>
+[112] [113] [114]
 File: IdentifStructShocks_files/figure-latex/essaiIV0-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/essaiIV0-1.pdf>
+<use IdentifStructShocks_files/figure-latex/essaiIV0-1.pdf>
 File: IdentifStructShocks_files/figure-latex/essaiIV1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/essaiIV1-1.pdf>
-
-
-[115]
-
-[116]
-
-[117]
+<use IdentifStructShocks_files/figure-latex/essaiIV1-1.pdf>
+[115] [116] [117]
 Underfull \hbox (badness 1248) in paragraph at lines 3591--3593
 \TU/lmr/m/n/12 where $[]$ is the long-run variance of $[][][][]$.[][][] The asymptotic covariance matrix of
  []
 
-
-
-[118]
-
-[119]
-
-[120
+[118] [119] [120
 
 ]
 Chapter 9.
-
-
-[121]
-
-[122]
+[121] [122]
 Chapter 10.
-
-
 [123
 
-]
-
-[124]
+] [124]
 File: IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf>
+<use IdentifStructShocks_files/figure-latex/USydsPCA1-1.pdf>
 
 Underfull \vbox (badness 2285) has occurred while \output is active []
 
-
-
-[125]
-
-[126]
-
-[127]
+[125] [126] [127]
 File: IdentifStructShocks_files/figure-latex/FAVAR-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/FAVAR-1.pdf>
-
-
-[128]
-
-[129]
-
-[130
+<use IdentifStructShocks_files/figure-latex/FAVAR-1.pdf>
+[128] [129] [130
 
 ]
 Chapter 11.
-
-
 [131]
 File: IdentifStructShocks_files/figure-latex/simulARMAbiased-1.pdf Graphic file (type pdf)
-<IdentifStructShocks_files/figure-latex/simulARMAbiased-1.pdf>
-
-
-[132]
-
-[133]
-
-[134]
+<use IdentifStructShocks_files/figure-latex/simulARMAbiased-1.pdf>
+[132] [133] [134]
 Overfull \hbox (58.59424pt too wide) in paragraph at lines 3984--3986
 \TU/lmr/m/n/12 If $[] [] []$, we have $[][][][][][][][][][][] [] [][][][][][][][][][][][][][][][] [][][] [][][][] []$ $[][][][][][][][][][][][][][][][] [][][] [][][][] []
  []
@@ -1554,45 +1286,25 @@ Overfull \hbox (58.83714pt too wide) in paragraph at lines 4175--4228
  [][] 
  []
 
-(./IdentifStructShocks.bbl
+(./IdentifStructShocks.bbl [135] [136] [137] [138] [139] [140
 
-[135]
-
-[136]
-
-[137]
-
-[138]
-
-[139]
-
-[140
-
-]
-
-[141]
-
-[142]
-
-[143])
+] [141] [142] [143])
 
 Package natbib Warning: There were undefined citations.
 
-
-
 [144] (./IdentifStructShocks.aux)
  ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-10-24>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 18983 strings out of 470404
- 362942 string characters out of 5485395
- 978066 words of memory out of 5000000
- 47049 multiletter control sequences out of 15000+600000
+ 18998 strings out of 470195
+ 363124 string characters out of 5477999
+ 982574 words of memory out of 5000000
+ 47272 multiletter control sequences out of 15000+600000
  636697 words of font info for 121 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,13n,114p,1178b,649s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,13n,114p,1178b,664s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on IdentifStructShocks.pdf (144 pages).

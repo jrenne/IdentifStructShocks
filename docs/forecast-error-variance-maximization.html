@@ -168,7 +168,7 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span><span class="va">variable</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># variables for which we want to maximize FEVD</span></span>
 <span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="fl">15</span> <span class="co"># horizon at which the impact of the shock</span></span>
 <span><span class="co"># is normalized to be positive</span></span>
-<span><span class="va">res.svar.fevmax</span> <span class="op">&lt;-</span> <span class="fu">svar.fevmax</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">2</span>,</span>
+<span><span class="va">res.svar.fevmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/svar.fevmax.html">svar.fevmax</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">2</span>,</span>
 <span>                               nb.shocks<span class="op">=</span><span class="fl">1</span>,</span>
 <span>                               <span class="va">names.of.shocks</span>,</span>
 <span>                               <span class="va">H1</span>,</span>
@@ -182,14 +182,14 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span>                               indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co"># Compute variance decomposition:</span></span>
-<span><span class="va">Variance.decomp</span> <span class="op">&lt;-</span> <span class="fu">variance.decomp</span><span class="op">(</span><span class="va">res.svar.fevmax</span><span class="op">$</span><span class="va">simulated.IRFs</span><span class="op">)</span></span>
+<span><span class="va">Variance.decomp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/variance.decomp.html">variance.decomp</a></span><span class="op">(</span><span class="va">res.svar.fevmax</span><span class="op">$</span><span class="va">simulated.IRFs</span><span class="op">)</span></span>
 <span><span class="va">vardecomp</span> <span class="op">&lt;-</span> <span class="va">Variance.decomp</span><span class="op">$</span><span class="va">vardecomp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">20</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co"># mean contribution (across all simulated IRFs)</span></span></code></pre></div>
-<pre><code>## [1] 0.8242815</code></pre>
+<pre><code>## [1] 0.8160607</code></pre>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of 1st shock to variance of second variable, horizon 20.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">10</span>,,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="co"># mean contribution of 1st shock </span></span></code></pre></div>
-<pre><code>## [1] 0.7831959</code></pre>
+<pre><code>## [1] 0.9209341</code></pre>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># to covariance between 1st and 2nd variable, horizon 10.</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
@@ -215,7 +215,7 @@ Figure 6.1: Main GDP shock.
 <span><span class="va">norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">20</span>,<span class="fl">2</span><span class="op">)</span> <span class="co"># horizon at which the impact of the</span></span>
 <span><span class="co"># shock is normalized to be positive</span></span>
 <span><span class="va">res.svar.fevmax</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu">svar.fevmax</span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">2</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/svar.fevmax.html">svar.fevmax</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">2</span>,</span>
 <span>              nb.shocks<span class="op">=</span><span class="fl">3</span>,</span>
 <span>              <span class="va">names.of.shocks</span>,</span>
 <span>              <span class="va">H1</span>,</span>
@@ -241,10 +241,10 @@ Figure 6.3: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 </p>
 </div>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Variance.decomp</span> <span class="op">&lt;-</span> <span class="fu">variance.decomp</span><span class="op">(</span><span class="va">res.svar.fevmax</span><span class="op">$</span><span class="va">simulated.IRFs</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">Variance.decomp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/variance.decomp.html">variance.decomp</a></span><span class="op">(</span><span class="va">res.svar.fevmax</span><span class="op">$</span><span class="va">simulated.IRFs</span><span class="op">)</span></span>
 <span><span class="va">vardecomp</span> <span class="op">&lt;-</span> <span class="va">Variance.decomp</span><span class="op">$</span><span class="va">vardecomp</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vardecomp</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">40</span>,,<span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="co"># mean contribution (across all simulated IRFs)</span></span></code></pre></div>
-<pre><code>## [1] 0.136217</code></pre>
+<pre><code>## [1] 0.1040938</code></pre>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># of 3rd shock to variance of second variable, horizon 40.</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
@@ -253,7 +253,7 @@ Figure 6.3: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 Figure 6.4: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.
 </p>
 </div>
-<p>Sentiment shocks explain 14% of the variance of GDP, against 75% for TFP shocks (including 62% for TFP news shocks).</p>
+<p>Sentiment shocks explain 10% of the variance of GDP, against 78% for TFP shocks (including 68% for TFP news shocks).</p>
 </div>
 <div id="NarrativeHistDecomp" class="section level2" number="6.2">
 <h2>
@@ -292,7 +292,7 @@ Figure 6.4: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-11-04.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-12-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

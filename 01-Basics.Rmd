@@ -353,7 +353,7 @@ Phi <- array(NaN,c(2,2,2)) # (2,2,2) for (n,n,p)
 Phi[,,1] <- matrix(c(.6,0,.2,.5),2,2)
 Phi[,,2] <- matrix(c(-.1,.2,.1,.3),2,2)
 B <- matrix(c(.5,-1,1.5,.8),2,2)
-make_variance_decompo(Phi,B,maxHorizon=30)
+make.variance.decompo(Phi,B,maxHorizon=30)
 
 ```
 
@@ -387,7 +387,7 @@ $$
 
 
 :::{.proposition #estimVARGaussian name="MLE of a Gaussian VAR"}
-If $y_t$ follows a VAR($p$) (see Definition \@ref(def:SVAR)), and if $\varepsilon_t \sim \,i.i.d.\,\mathcal{N}(0,\Omega)$, then the ML estimate of $\Pi$, denoted by $\hat{\Pi}$ (see Eq. \@ref(eq:PIVAR)), is given by
+If $y_t$ follows a covariance-stationary VAR($p$) (see Definition \@ref(def:SVAR)), and if $\varepsilon_t \sim \,i.i.d.\,\mathcal{N}(0,\Omega)$, then the ML estimate of $\Pi$, denoted by $\hat{\Pi}$ (see Eq. \@ref(eq:PIVAR)), is given by
 \begin{equation}
 \hat{\Pi}=\left[\sum_{t=1}^{T}x_{t}x'_{t}\right]^{-1}\left[\sum_{t=1}^{T}y_{t}'x_{t}\right]= (\bv{X}'\bv{X})^{-1}\bv{X}'\bv{y},
 (\#eq:Pi)
@@ -526,7 +526,7 @@ for (variable in 1:n) {
 Finally, we compute the variance decomposition associated with the same model.
 
 ```{r US3varVARdecomp, fig.align='left-aligned', out.width="95%", fig.cap="Variance decomposition for a 3-variable VAR model estimated on U.S. quarterly data."}
-make_variance_decompo(Phi, B, maxHorizon = 50,
+make.variance.decompo(Phi, B, maxHorizon = 50,
                       names.var = c("Inflation", "Real activity",
                                     "Short-term rate"))
 ```
@@ -540,7 +540,7 @@ make_variance_decompo(Phi, B, maxHorizon = 50,
 As stated by the following proposition, when the shocks $\varepsilon_t$ are not Gaussian, then the OLS regressions still provide consistent estimates of the model parameters. 
 
 :::{.proposition #OLSVAR name="Asymptotic distribution of the OLS estimate of VAR coefficients (for one variable)"}
-If $y_t$ follows a VAR model, as defined in Definition \@ref(def:SVAR), we have:
+If $y_t$ follows a (covariance-stationary) VAR model, as defined in Definition \@ref(def:SVAR), we have:
 $$
 \sqrt{T}(\bv{b}_i-\beta_i) =  \underbrace{\left[\frac{1}{T}\sum_{t=p}^T x_t x_t' \right]^{-1}}_{\overset{p}{\rightarrow} \bv{Q}^{-1}}
 \underbrace{\sqrt{T} \left[\frac{1}{T}\sum_{t=1}^T x_t\varepsilon_{i,t} \right]}_{\overset{d}{\rightarrow} \mathcal{N}(0,\sigma_i^2\bv{Q})},
@@ -572,7 +572,7 @@ However, since $x_t$ correlates to $\varepsilon_s$ for $s<t$, the OLS estimator 
 
 We have non-zero correlation between $x_t$ and $\varepsilon_{i,s}$ for $s<t$ and, therefore, $\mathbb{E}[(\bv{X}'\bv{X})^{-1}\bv{X}'\boldsymbol\varepsilon_i] \ne 0$.
 
-However, as stated by Proposition \@ref(prp:OLSVAR) when $y_t$ is covariance stationary, then $\frac{1}{n}\bv{X}'\bv{X}$ converges to a positive definite matrix $\bv{Q}$, and $\frac{1}{n}X'\boldsymbol\varepsilon_i$ converges to 0. Hence $\bv{b}_i \overset{p}{\rightarrow} \beta_i$.
+However, as stated by Proposition \@ref(prp:OLSVAR) when $y_t$ is covariance stationary, then $\frac{1}{n}\bv{X}'\bv{X}$ converges to a positive definite matrix $\bv{Q}$, and $\frac{1}{n}\bv{X}'\boldsymbol\varepsilon_i$ converges to 0. Hence $\bv{b}_i \overset{p}{\rightarrow} \beta_i$.
 
 The next proposition extends Proposition \@ref(prp:OLSVAR) by incorporating the covariances between different $\beta_i$'s and by characterizing the asymptotic distribution of the ML estimator of $\Omega$. In other words, it delivers the full asymptotic distribution of the model parameters. This result is particularly useful for Monte Carlo procedures that require drawing from this asymptotic distribution (see Section \@ref(MonteCarlo)).
 
@@ -810,14 +810,14 @@ for (shock in 1:n) {
 Finally, let us compute the variance decomposition in both models. Let us start with the unrestricted model:
 
 ```{r VARdecblockexogUS, fig.align='left-aligned', out.width="95%", fig.cap="Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)"}
-make_variance_decompo(Phi, B, maxHorizon = 50,
+make.variance.decompo(Phi, B, maxHorizon = 50,
                       names.var = names(Y),mfrow = c(2,2))
 ```
 
 Figure \@ref(fig:VARdecblockexogCH) shows the variance decomposition in the context of the restricted model, that entails block exogeneity:
 
 ```{r VARdecblockexogCH, fig.align='left-aligned', out.width="95%", fig.cap="Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The model is contrained in such a way that Korean variables do not affect US ones. (In other words, in this restricted model, US variables are exogenous.)"}
-make_variance_decompo(Phi_restr, B_restr, maxHorizon = 50,
+make.variance.decompo(Phi_restr, B_restr, maxHorizon = 50,
                       names.var = names(Y),mfrow = c(2,2))
 ```
 
