@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.23)  15 DEC 2025 09:07
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.15)  15 DEC 2025 09:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **IdentifStructShocks.tex
 (./IdentifStructShocks.tex
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-11-06>
+L3 programming layer <2025-11-14>
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
@@ -98,7 +98,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ) (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-11-06 L3 programming layer (loader) 
+Package: expl3 2025-11-14 L3 programming layer (loader) 
 (/Users/jrenne/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
 \g__graphics_track_int=\count292
@@ -1130,8 +1130,8 @@ Overfull \hbox (30.82483pt too wide) in paragraph at lines 2344--2344
  []
 
 
-Overfull \hbox (30.65697pt too wide) in paragraph at lines 2344--2344
-[]\TU/lmtt/m/n/12 ## [1,] -0.3195006 0.2035416 0.9560309 -0.1520668 0.1486182 0.9269884 -0.01826934[] 
+Overfull \hbox (30.75298pt too wide) in paragraph at lines 2344--2344
+[]\TU/lmtt/m/n/12 ## [1,] -0.3235723 0.1288101 0.9927373 -0.1394098 0.1291857 0.9742775 -0.01871140[] 
  []
 
 
@@ -1295,16 +1295,18 @@ Package natbib Warning: There were undefined citations.
 [144] (./IdentifStructShocks.aux)
  ***********
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-11-06>
+L3 programming layer <2025-11-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
  18998 strings out of 470195
  363124 string characters out of 5477999
- 982574 words of memory out of 5000000
+ 982571 words of memory out of 5000000
  47272 multiletter control sequences out of 15000+600000
  636697 words of font info for 121 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  90i,13n,114p,1178b,664s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on IdentifStructShocks.pdf (144 pages).
+
+! fclose: Operation timed out
