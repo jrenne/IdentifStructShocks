@@ -373,7 +373,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <p>In the general case, one can use lags of <span class="math inline">\(y_t\)</span> as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.</p>
 <!-- As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency. -->
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res.LP.IV</span> <span class="op">&lt;-</span> <span class="fu">make.LPIV.irf</span><span class="op">(</span><span class="va">Y</span>,<span class="va">Z</span>,</span>
+<code class="sourceCode R"><span><span class="va">res.LP.IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/make.LPIV.irf.html">make.LPIV.irf</a></span><span class="op">(</span><span class="va">Y</span>,<span class="va">Z</span>,</span>
 <span>                           nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>                           nb.lags.Y.4.control<span class="op">=</span><span class="fl">4</span>,</span>
 <span>                           nb.lags.Z.4.control<span class="op">=</span><span class="fl">4</span>,</span>
@@ -416,7 +416,7 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-12-15.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2026-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

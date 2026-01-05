@@ -279,10 +279,11 @@ where <span class="math inline">\(S\)</span>, <span class="math inline">\(r\)</s
 <span><span class="va">res.svar.ordering</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/svar.ordering.html">svar.ordering</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
 <span>                                   posit.of.shock <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>                                   nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>                                   nb.bootstrap.replications <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>                                   inference <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                                   nb.draws <span class="op">=</span> <span class="fl">100</span>,                  </span>
 <span>                                   confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
 <span>                                   indic.plot <span class="op">=</span> <span class="fl">1</span> <span class="co"># Plots are displayed if = 1.</span></span>
-<span>                                   <span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: left-aligned">
 <span style="display:block;" id="fig:CEE"></span>
 <img src="IdentifStructShocks_files/figure-html/CEE-1.png" alt="Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section)." width="95%"><p class="caption">
@@ -566,7 +567,7 @@ Figure 2.3: IRF of GDP and unemployment to demand and supply shocks.
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">irf</span>, type <span class="op">=</span> <span class="st">"l"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, las <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>         xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">shock</span><span class="op">==</span><span class="fl">1</span>,</span>
 <span>                                  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Resp. of "</span>,</span>
-<span>                                              <span class="va">names.var</span><span class="op">[</span><span class="va">variable</span><span class="op">]</span>,<span class="st">"..."</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span>,</span>
+<span>                                        <span class="va">names.var</span><span class="op">[</span><span class="va">variable</span><span class="op">]</span>,<span class="st">"..."</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span>,</span>
 <span>         main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">variable</span><span class="op">==</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"... to shock η"</span>, <span class="va">shock</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>,<span class="st">""</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">}</span></span></code></pre></div>
 <div class="inline-figure"><img src="IdentifStructShocks_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 
@@ -608,7 +609,7 @@ Figure 2.3: IRF of GDP and unemployment to demand and supply shocks.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2025-12-15.</p>
+    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2026-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -6,11 +6,11 @@ In this section, we show that the non-identification of the structural shocks ($
 
 <!-- In a first part, we focus on non-Gaussian SVAR models; in a second part, we discuss the case of non-Gaussian SVARMA models. -->
 
-We have seen in what precedes that we cannot identify $B$ based on first and second moments only. Since a Gaussian distribution is perfectly determined by the first two moments, it comes that one cannot achieve identification when the structural shocks are Gaussian. That is, even if we observe an infinite number of i.i.d. $B \eta_t$, we cannot recover $B$ is the $\eta_t$'s are Gaussian.
+We have seen in what precedes that we cannot identify $B$ based on first and second moments only. Since a Gaussian distribution is perfectly determined by the first two moments, it comes that one cannot achieve identification when the structural shocks are Gaussian. That is, even if we observe an infinite number of i.i.d. $B \eta_t$, we cannot recover $B$ if the $\eta_t$'s are Gaussian.
 
 Indeed, if $\eta_t \sim \mathcal{N}(0,Id)$, then the distribution of $\varepsilon_t \equiv B \eta_t$ is $\mathcal{N}(0,BB')$. Hence $\Omega = B B'$ is observed (in the population), but for any orthogonal matrix $Q$ (i.e. $QQ'=Id$), we also have $BQ \eta_t \sim \mathcal{N}(0,\Omega)$.
 
-To illustrate, consider the following bivariate Gaussian situations, with $\Theta_1=0$):
+To illustrate, consider the following bivariate Gaussian situations, with $\Theta_1=0$:
 
 $\left[\begin{array}{c}\eta_{1,t}\\ \eta_{2,t}\end{array}\right]\sim \mathcal{N}(0,Id)$, with 
 $B = \left[\begin{array}{cc}

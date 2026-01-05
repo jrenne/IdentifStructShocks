@@ -185,10 +185,11 @@ y <- as.matrix(USmonthly[considered.variables])
 res.svar.ordering <- svar.ordering(y,p=3,
                                    posit.of.shock = 5,
                                    nb.periods.IRF = 20,
-                                   nb.bootstrap.replications = 100,
+                                   inference = 1,
+                                   nb.draws = 100,                  
                                    confidence.interval = 0.90, # expressed in pp.
                                    indic.plot = 1 # Plots are displayed if = 1.
-                                   )
+)
 ```
 
 
@@ -468,7 +469,7 @@ for (variable in 1:n) {
     plot(irf, type = "l", lwd = 2, las = 1,
          xlab = "", ylab = ifelse(shock==1,
                                   paste("Resp. of ",
-                                              names.var[variable],"...",sep=""),""),
+                                        names.var[variable],"...",sep=""),""),
          main = ifelse(variable==1,paste("... to shock η", shock, sep = ""),""))}}
 ```
 

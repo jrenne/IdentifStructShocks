@@ -133,7 +133,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2025-12-15}
+\date{2026-01-04}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1548,10 +1548,11 @@ A critical observation is that all matrices \(B\) with the block form in Eq. (\c
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}} \FunctionTok{svar.ordering}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
                                    \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
                                    \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                                   \AttributeTok{nb.bootstrap.replications =} \DecValTok{100}\NormalTok{,}
+                                   \AttributeTok{inference =} \DecValTok{1}\NormalTok{,}
+                                   \AttributeTok{nb.draws =} \DecValTok{100}\NormalTok{,                  }
                                    \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
                                    \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
-\NormalTok{                                   )}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1854,7 +1855,7 @@ The following code chunk implements this identification strategy using Canadian 
     \FunctionTok{plot}\NormalTok{(irf, }\AttributeTok{type =} \StringTok{"l"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{las =} \DecValTok{1}\NormalTok{,}
          \AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{ylab =} \FunctionTok{ifelse}\NormalTok{(shock}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,}
                                   \FunctionTok{paste}\NormalTok{(}\StringTok{"Resp. of "}\NormalTok{,}
-\NormalTok{                                              names.var[variable],}\StringTok{"..."}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{),}\StringTok{""}\NormalTok{),}
+\NormalTok{                                        names.var[variable],}\StringTok{"..."}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{),}\StringTok{""}\NormalTok{),}
          \AttributeTok{main =} \FunctionTok{ifelse}\NormalTok{(variable}\SpecialCharTok{==}\DecValTok{1}\NormalTok{,}\FunctionTok{paste}\NormalTok{(}\StringTok{"... to shock η"}\NormalTok{, shock, }\AttributeTok{sep =} \StringTok{""}\NormalTok{),}\StringTok{""}\NormalTok{))\}\}}
 \end{Highlighting}
 \end{Shaded}
@@ -1939,15 +1940,15 @@ The following code implements the Monte Carlo method.
 \CommentTok{\# CEE with Monte Carlo}
 \CommentTok{\# ===================================}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
-  \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
-                  \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
-                  \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                  \AttributeTok{inference =} \DecValTok{3}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootst.,}
-                  \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} Monte Carlo,}
-                  \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
-                  \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
-                  \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
-                  \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+  \FunctionTok{svar.ordering}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                \AttributeTok{inference =} \DecValTok{3}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootst.,}
+                \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} Monte Carlo,}
+                \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -2069,15 +2070,15 @@ The following code implements the bootstrap method.
 \CommentTok{\# CEE with bootstrap}
 \CommentTok{\# ===================================}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
-  \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
-                  \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
-                  \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                  \AttributeTok{inference =} \DecValTok{2}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
-                  \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
-                  \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
-                  \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
-                  \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
-                  \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+  \FunctionTok{svar.ordering}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                \AttributeTok{inference =} \DecValTok{2}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
+                \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
+                \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -2149,14 +2150,14 @@ In the following code, we perform the VAR estimation and bootstrap inference aft
 \FunctionTok{colnames}\NormalTok{(small.sample)  }\OtherTok{\textless{}{-}}\NormalTok{ considered.variables}
 \CommentTok{\# Estimate the VAR with the small sample}
 \NormalTok{res.svar.small.sample }\OtherTok{\textless{}{-}}
-  \FunctionTok{svar.ordering.2}\NormalTok{(small.sample,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
-                  \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
-                  \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                  \AttributeTok{inference =} \DecValTok{2}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
-                  \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo}
-                  \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
-                  \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
-                  \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+  \FunctionTok{svar.ordering}\NormalTok{(small.sample,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                \AttributeTok{inference =} \DecValTok{2}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
+                \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo}
+                \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -2177,13 +2178,13 @@ In the following code, we perform the VAR estimation and bootstrap inference aft
 \begin{Highlighting}[]
 \CommentTok{\# True IRFs}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
-  \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
-                  \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
-                  \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                  \AttributeTok{inference =} \DecValTok{0}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
-                  \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
-                  \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
-                  \AttributeTok{indic.plot =} \DecValTok{0} \CommentTok{\# Plots are displayed if = 1.}
+  \FunctionTok{svar.ordering}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                \AttributeTok{inference =} \DecValTok{0}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
+                \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
+                \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                \AttributeTok{indic.plot =} \DecValTok{0} \CommentTok{\# Plots are displayed if = 1.}
 \NormalTok{  )}
 \NormalTok{IRFs.ordering.true }\OtherTok{\textless{}{-}}\NormalTok{ res.svar.ordering}\SpecialCharTok{$}\NormalTok{IRFs}
 
@@ -2296,15 +2297,15 @@ The following code implements the bootstrap-after-bootrap method.
 \CommentTok{\# CEE with bootstrap{-}after{-}bootstrap}
 \CommentTok{\# ===================================}
 \NormalTok{res.svar.ordering }\OtherTok{\textless{}{-}}
-  \FunctionTok{svar.ordering.2}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
-                  \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
-                  \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
-                  \AttributeTok{inference =} \DecValTok{4}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
-                  \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
-                  \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
-                  \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
-                  \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
-                  \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
+  \FunctionTok{svar.ordering}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{3}\NormalTok{,}
+                \AttributeTok{posit.of.shock =} \DecValTok{5}\NormalTok{,}
+                \AttributeTok{nb.periods.IRF =} \DecValTok{20}\NormalTok{,}
+                \AttributeTok{inference =} \DecValTok{4}\NormalTok{,}\CommentTok{\# 0 {-}\textgreater{} no inference, 1 {-}\textgreater{} parametric bootstr.,}
+                \CommentTok{\# 2 \textless{}{-} non{-}parametric bootstrap, 3 \textless{}{-} monte carlo,}
+                \CommentTok{\# 4 \textless{}{-} bootstrap{-}after{-}bootstrap}
+                \AttributeTok{nb.draws =} \DecValTok{200}\NormalTok{,}
+                \AttributeTok{confidence.interval =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# expressed in pp.}
+                \AttributeTok{indic.plot =} \DecValTok{1} \CommentTok{\# Plots are displayed if = 1.}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -2337,10 +2338,10 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 \end{Shaded}
 
 \begin{verbatim}
-##         inv(-1)   inc(-1)   con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3235723 0.1288101 0.9927373 -0.1394098 0.1291857 0.9742775 -0.01871140
-## [2,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
-## [3,] -0.3196310 0.1459888 0.9612190 -0.1605511 0.1146050 0.9343938 -0.01672199
+##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
+## [1,] -0.3327606 0.1316491 1.035245 -0.1365773 0.1250234 0.9750044 -0.01914363
+## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
+## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
 \end{verbatim}
 
 \chapter{Sign restrictions}\label{Signs}
@@ -2792,7 +2793,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.8083239
+## [1] 0.8292467
 \end{verbatim}
 
 \begin{Shaded}
@@ -2803,7 +2804,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1.130134
+## [1] -0.4062247
 \end{verbatim}
 
 \begin{Shaded}
@@ -2816,7 +2817,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/uhlig-1} \caption{Main GDP shock.}\label{fig:uhlig}
 \end{figure}
 
-The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
+The ``main GDP shock'\,' explains 83\% of the variance of GDP at horizon 20.
 
 \citet{BARSKY2011273} exploit this approach to identify a ``TFP news shock'', that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. \citet{Levchenko_Pandalai-Nayar_2018} add a ``sentiment shock'' that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in consumer sentiment. The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a mix of zero and FEVD to identify TFP surprises, TFP news, and sentiment shocks. We adopt a different approach by using FEVD to capture zero restrictions.
 
@@ -2868,7 +2869,7 @@ The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1333172
+## [1] 0.1215335
 \end{verbatim}
 
 \begin{Shaded}
@@ -2881,7 +2882,7 @@ The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-3} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-3}
 \end{figure}
 
-Sentiment shocks explain 13\% of the variance of GDP, against 74\% for TFP shocks (including 60\% for TFP news shocks).
+Sentiment shocks explain 12\% of the variance of GDP, against 78\% for TFP shocks (including 65\% for TFP news shocks).
 
 \section{Restrictions based on narrative historical decomposition}\label{NarrativeHistDecomp}
 
