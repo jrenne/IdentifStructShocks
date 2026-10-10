@@ -89,7 +89,7 @@ where $\xi_t$ is correlated neither to $z_t$, nor to $\eta_{j,t}$, $j\ge2$.
 Define $\rho = \frac{\mathbb{E}(\eta_{1,t}z_t)}{\mathbb{V}ar(z_t)}$ and $\xi_t = \eta_{1,t} - \rho z_t$. It is easily seen that $\xi_t$ satisfies the moment restrictions given above.
 :::
 
-@Ramey_2016_NBER reviews the different approaches employed to construct monetary policy-shocks (the two main approaches are presented in \@ref(exm:HighFreq) and \@ref(exm:RomerRomer) below). She has also collected time series of such shocks, see [her website](https://econweb.ucsd.edu/~vramey/research.html#mon). Several of these shocks are included in the `Ramey` dataset of package `IdSS`.
+@Ramey_2016_NBER reviews the different approaches employed to construct monetary-policy shocks (the two main approaches are presented in \@ref(exm:HighFreq) and \@ref(exm:RomerRomer) below). She has also collected many of these series on [her website](https://econweb.ucsd.edu/~vramey/research.html#mon). To keep the course data redistributable, `IdSS` does not bundle that compilation; the empirical application below uses the public BRW monetary-policy shock released by the Board of Governors.
 
 :::{.example #HighFreq name="Identification of Monetary-Policy Shocks Based on High-Frequency Data"}
 
@@ -103,8 +103,7 @@ In general, changes in $\mathbb{E}_t(i_{t+s})$, for $s>0$, can be affected by al
 
 However, if a MP announcement takes place between $t$ and $t+\epsilon$, then most of $\mathbb{E}_{t+\epsilon}(i_{t+s})-\mathbb{E}_t(i_{t+s})$ is to be attributed to the MP shock (see Figure \@ref(fig:HighFreq), from @Gurkaynak_et_al_2005). Hence, a monthly time series of MP shocks can be obtained by summing, over each month, the changes $i_{t+ \epsilon,h} - i_{t,h}$ associated with a given interest rate (T-bills, futures, swaps) and a given maturity $h$.
 
-See among others: @KUTTNER2001523, @Cochrane_Piazzesi_2002, @Gurkaynak_et_al_2005, @Piazzesi_Swanson_2008, @Gertler_Karadi_2015. The time series named 
-`FF4_TC`, `ED2_TC`, `ED3_TC`, `ED4_TC`, `GS1`, `ff1_vr`, `ff4_vr`, `ed2_vr`, `ff1_gkgreen`, `ff4_gkgreen`, `ed2_gkgreen` in the data frame `Ramey` of package `IdSS` are time series of shocks based on this approach (see [Ramey's website](https://econweb.ucsd.edu/~vramey/research/Ramey_HOM_monetary.zip) for details).
+See among others: @KUTTNER2001523, @Cochrane_Piazzesi_2002, @Gurkaynak_et_al_2005, @Piazzesi_Swanson_2008, @Gertler_Karadi_2015. Replication series associated with these papers remain available from the original authors, notably through [Ramey's monetary-data archive](https://econweb.ucsd.edu/~vramey/research.html#mon), but they are not redistributed by `IdSS`.
 
 
 ```{r HighFreq, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\\% to 1\\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself.", echo=FALSE}
@@ -125,7 +124,7 @@ This gives a measure of intended monetary policy actions not driven by informati
 a. "intentions" are measured as a combination of narrative and quantitative evidence. Sources: (among others) Minutes of FOMC and "Blue Books".
 b. Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve's internal forecasts (inflation, real output and unemployment), "Greenbook's forecasts" -- usually issued 6 days before the FOMC meeting.
 
-The shock measure is the residual series in the linear regression of (a) on (b). The time series `Ramey$rrshock83` and  `Ramey$rrshock83b` (where `Ramey` is a data frame included in package `IdSS`) contain such shocks for the period 1983-2007. (`Ramey$rrshock83b` uses long-horizon Greenbook forecasts.)
+The shock measure is the residual series in the linear regression of (a) on (b). Ramey's data archive contains variants of these shocks for 1983--2007, including one based on long-horizon Greenbook forecasts.
 :::
 
 To create a measure of *news* about future government spending, @Ramey_2011 uses newspaper articles to construct a time series of (unexpected) fiscal shocks:^[Data and replication codes can be found on [her website](https://econweb.ucsd.edu/~vramey/research.html#govt).]
@@ -225,27 +224,27 @@ where $\widehat{\rho}(L)$ and $\sigma^2_{e}$ result from the estimation of an AR
 
 For each simulated sample (of $\tilde{y}_t$ and $\tilde{z}_t$, say), estimate $\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}$ and associated $\widetilde{\Psi}_{i,1,h}$. This provides e.g. a sequence of $N$ estimates of $\Psi_{i,1,h}$, from which quantiles and conf. intervals can be deduced.
 
-In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is `FF4_TC` from the Ramsey's database; they are base on the @Gertler_Karadi_2015 approach, that use 3-month fed funds futures.
+In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary-policy shock. The instrument is the monthly BRW shock of Bu, Rogers, and Wu, distributed by the Board of Governors and included in `USmonthly`.
 
-```{r essaiIV0, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red)."}
+```{r essaiIV0, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Monthly BRW monetary-policy shock over the 1994--2012 estimation sample. The measure is due to Bu, Rogers, and Wu and is distributed by the Board of Governors of the Federal Reserve System."}
 library(vars);library(IdSS)
 data("USmonthly")
-First.date <- "1990-05-01";Last.date <- "2012-6-01"
+First.date <- "1994-01-01";Last.date <- "2012-06-01"
 indic.first <- which(USmonthly$DATES==First.date)
 indic.last  <- which(USmonthly$DATES==Last.date)
 USmonthly   <- USmonthly[indic.first:indic.last,]
-shock.name <- c("FF4_TC","ED2_TC") # "ff1_vr", "rrshock83b"
-indic.shock.name <- which(names(USmonthly)%in%shock.name)
-Z <- as.matrix(USmonthly[,indic.shock.name])
+Z <- as.matrix(USmonthly[,"BRW",drop=FALSE])
 par(plt=c(.1,.95,.1,.95))
 plot(USmonthly$DATES,Z[,1],type="l",xlab="",ylab="",lwd=2)
-lines(USmonthly$DATES,Z[,2],col="red",lwd=2,pch=3,lty=2)
 ```
 
 
 ```{r essaiIV1, warning=FALSE,message=FALSE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Reponses to a monetary-policy shock, SVAR-IV approach."}
 considered.variables <- c("GS1","LIP","LCPI","EBP")
 Y <- as.matrix(USmonthly[,considered.variables])
+keep <- complete.cases(Y,Z)
+Y <- Y[keep,,drop=FALSE]
+Z <- Z[keep,,drop=FALSE]
 n <- length(considered.variables)
 colnames(Y) <- considered.variables
 par(plt=c(.15,.95,.15,.8))
@@ -322,5 +321,4 @@ res.LP.IV <- make.LPIV.irf(Y,Z,
                            indic.plot = 1, # Plots are displayed if = 1.
                            confidence.interval = 0.90)
 ```
-
 

@@ -1,60 +1,60 @@
 \contentsline {chapter}{\numberline {1}VARs and IRFs: the basics}{7}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Definition of VARs (and SVARMA) models}{7}{section.1.1}%
 \contentsline {section}{\numberline {1.2}IRFs in SVARMA}{8}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Covariance-stationary VARMA models}{13}{section.1.3}%
-\contentsline {section}{\numberline {1.4}VAR estimation}{18}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Maximum Likelihood Estimation (MLE) when the shocks are Gaussian}{18}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Asymptotic distribution of the OLS estimates}{23}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Specification tests}{25}{subsection.1.4.3}%
-\contentsline {section}{\numberline {1.5}Block exogeneity and Granger causality}{29}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Block exogeneity}{29}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Granger Causality}{35}{subsection.1.5.2}%
-\contentsline {chapter}{\numberline {2}Identification problem and standard identification techniques}{39}{chapter.2}%
-\contentsline {section}{\numberline {2.1}The identification problem}{39}{section.2.1}%
-\contentsline {section}{\numberline {2.2}A stylized example motivating short-run restrictions}{40}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Cholesky: a specific short-run-restriction situation}{41}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Using Cholesky to identify a single shock}{42}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Long-run restrictions}{44}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}The VAR(1) case}{44}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}The VAR(\(p\)) case}{45}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Blanchard and Quah (1989)}{46}{subsection.2.5.3}%
-\contentsline {section}{\numberline {2.6}Mixing short- and long-run restrictions}{49}{section.2.6}%
-\contentsline {chapter}{\numberline {3}Inference}{53}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Monte Carlo method}{54}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Delta method}{57}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Bootstrap}{57}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Bootstrap-after-bootstrap}{58}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Sign restrictions}{69}{chapter.4}%
-\contentsline {section}{\numberline {4.1}The approach}{69}{section.4.1}%
-\contentsline {section}{\numberline {4.2}An example}{70}{section.4.2}%
-\contentsline {section}{\numberline {4.3}The penalty-function approach (PFA)}{73}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Narrative sign restrictions}{73}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Combining sign and zero restrictions}{75}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Forecast error variance maximization}{85}{chapter.6}%
-\contentsline {section}{\numberline {6.1}The main (unconditional) approach}{85}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Restrictions based on narrative historical decomposition}{89}{section.6.2}%
-\contentsline {chapter}{\numberline {7}Identification based on non-normality of the shocks}{95}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Intuition}{95}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Independent Component Analysis (ICA)}{97}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Pseudo-Maximum Likelihood (PML) approach}{98}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Relation with the Heteroskedasticity Identification}{103}{section.7.4}%
-\contentsline {chapter}{\numberline {8}Local projection methods}{107}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Overview of the approach}{107}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Situation A: Without IV}{107}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Situation B: IV approach}{109}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}Instruments (proxies for structural shocks)}{109}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Situation B.1: SVAR-IV approach}{114}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}Situation B.2: LP-IV}{118}{subsection.8.3.3}%
-\contentsline {chapter}{\numberline {9}Panel VARs}{121}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Without Dynamic interdependence}{121}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}Mean Group Estimator}{122}{subsection.9.1.1}%
-\contentsline {subsection}{\numberline {9.1.2}Shock identification}{122}{subsection.9.1.2}%
-\contentsline {section}{\numberline {9.2}With Dynamic Interdependencies}{122}{section.9.2}%
-\contentsline {chapter}{\numberline {10}Factor-Augmented VAR}{123}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Principal component analysis (PCA)}{123}{section.10.1}%
-\contentsline {section}{\numberline {10.2}FAVAR models}{127}{section.10.2}%
-\contentsline {chapter}{\numberline {11}Appendix}{131}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Definitions and statistical results}{131}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Estimation of VARMA models}{131}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Proofs}{132}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Statistical Tables}{135}{section.11.4}%
+\contentsline {section}{\numberline {1.3}Covariance-stationary VARMA models}{14}{section.1.3}%
+\contentsline {section}{\numberline {1.4}VAR estimation}{17}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Maximum Likelihood Estimation (MLE) when the shocks are Gaussian}{17}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Asymptotic distribution of the OLS estimates}{22}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Specification tests}{24}{subsection.1.4.3}%
+\contentsline {section}{\numberline {1.5}Block exogeneity and Granger causality}{27}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Block exogeneity}{27}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Granger Causality}{30}{subsection.1.5.2}%
+\contentsline {chapter}{\numberline {2}Identification problem and standard identification techniques}{37}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The identification problem}{37}{section.2.1}%
+\contentsline {section}{\numberline {2.2}A stylized example motivating short-run restrictions}{38}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Cholesky: a specific short-run-restriction situation}{38}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Using Cholesky to identify a single shock}{39}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Long-run restrictions}{40}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}The VAR(1) case}{41}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}The VAR(\(p\)) case}{42}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Blanchard and Quah (1989)}{43}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Mixing short- and long-run restrictions}{46}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Inference}{49}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Monte Carlo method}{49}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Delta method}{51}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Bootstrap}{52}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Bootstrap-after-bootstrap}{53}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Sign restrictions}{61}{chapter.4}%
+\contentsline {section}{\numberline {4.1}The approach}{61}{section.4.1}%
+\contentsline {section}{\numberline {4.2}An example}{62}{section.4.2}%
+\contentsline {section}{\numberline {4.3}The penalty-function approach (PFA)}{63}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Narrative sign restrictions}{64}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Combining sign and zero restrictions}{67}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Forecast error variance maximization}{73}{chapter.6}%
+\contentsline {section}{\numberline {6.1}The main (unconditional) approach}{73}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Restrictions based on narrative historical decomposition}{77}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Identification based on non-normality of the shocks}{81}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Intuition}{81}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Independent Component Analysis (ICA)}{83}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Pseudo-Maximum Likelihood (PML) approach}{84}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Relation with the Heteroskedasticity Identification}{89}{section.7.4}%
+\contentsline {chapter}{\numberline {8}Local projection methods}{91}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Overview of the approach}{91}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Situation A: Without IV}{91}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Situation B: IV approach}{92}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Instruments (proxies for structural shocks)}{92}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Situation B.1: SVAR-IV approach}{97}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Situation B.2: LP-IV}{99}{subsection.8.3.3}%
+\contentsline {chapter}{\numberline {9}Panel VARs}{103}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Without Dynamic interdependence}{103}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Mean Group Estimator}{104}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Shock identification}{104}{subsection.9.1.2}%
+\contentsline {section}{\numberline {9.2}With Dynamic Interdependencies}{104}{section.9.2}%
+\contentsline {chapter}{\numberline {10}Factor-Augmented VAR}{105}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Principal component analysis (PCA)}{105}{section.10.1}%
+\contentsline {section}{\numberline {10.2}FAVAR models}{107}{section.10.2}%
+\contentsline {chapter}{\numberline {11}Appendix}{111}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Definitions and statistical results}{111}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Estimation of VARMA models}{111}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Proofs}{112}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Statistical Tables}{114}{section.11.4}%

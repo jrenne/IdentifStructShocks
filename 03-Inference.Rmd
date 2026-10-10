@@ -136,7 +136,7 @@ Using this property, @Lutkepohl_1990 provides the asymptotic distributions of th
 <!--   r <- dim(Matrix.of.Exog)[2] - 1 -->
 <!--   beta <- THETA[(1+p+q+1+1):(1+p+q+1+(r+1))] -->
 
-<!--   irf <- sim.arma(0,phi,beta,sigma=sd(Ramey$ED3_TC,na.rm=TRUE),T=60, -->
+<!--   irf <- sim.arma(0,phi,beta,sigma=sd(USmonthly$BRW,na.rm=TRUE),T=60, -->
 <!--                   y.0=rep(0,length(x$phi)),nb.sim=1,make.IRF=1, -->
 <!--                   X=NaN,beta=NaN) -->
 <!--   return(irf)} -->
@@ -384,4 +384,3 @@ rbind(corrected$coef[1,],
       (corrected$coef+corrected$Bias)[1,],
       noncorrec$varresult$inv$coefficients)
 ```
-

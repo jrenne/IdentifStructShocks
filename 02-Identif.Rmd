@@ -168,7 +168,7 @@ B_{FS} & B_{Fr} & B_{FF}
 \end{equation}
 where $S$, $r$ and $F$ respectively correspond to *slow-moving variables*, the policy variable (short-term rate) and *fast-moving variables*. While $\eta_{r,t}$ is scalar, $\boldsymbol\eta_{S,t}$ and $\boldsymbol\eta_{F,t}$ may be vectors. The space spanned by $\boldsymbol\varepsilon_{S,t}$ is the same as that spanned by $\boldsymbol\eta_{S,t}$. As a result, because $\varepsilon_{r,t}$ is a linear combination of $\eta_{r,t}$ and $\boldsymbol\eta_{S,t}$ (which are $\perp$), it comes that the $B_{rr}\eta_{r,t}$'s are the (population) residuals in the regression of $\varepsilon_{r,t}$ on $\boldsymbol\varepsilon_{S,t}$. Because $\mathbb{V}ar(\eta_{r,t})=1$, $B_{rr}$ is given by the square root of the variance of  $B_{rr}\eta_{r,t}$. $B_{F,r}$ is finally obtained by regressing the components of $\boldsymbol\varepsilon_{F,t}$ on the estimates of $\eta_{r,t}$.
 
-A critical observation is that all matrices $B$ with the block form in Eq. (@ref(eq:BCEE)) (with $B_{rr}>0$) and satisfying $\Omega=BB'$ share the same intermediate column (that is, the same $B_{rr}$ and $B_{Fr}$). One such $B$ is obtained directly from the Cholesky decomposition of $\Omega=BB'$.
+A critical observation is that all matrices $B$ with the block form in Eq. (\@ref(eq:BCEE)) (with $B_{rr}>0$) and satisfying $\Omega=BB'$ share the same intermediate column (that is, the same $B_{rr}$ and $B_{Fr}$). One such $B$ is obtained directly from the Cholesky decomposition of $\Omega=BB'$.
 
 
 ```{r CEE, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Response to a monetary-policy shock. Identification approach of Christiano, Eichenbaum and Evans (1996). Confidence intervals are obtained by boostrapping the estimated VAR model (see inference section).",warning=FALSE,message=FALSE}
@@ -331,15 +331,15 @@ Since $\Omega$ is positive definite, $\Sigma = J \Omega J'$ is positive definite
 <!-- \end{eqnarray*} -->
 <!-- Then, it appears that the demand shocks have no long-run cumulative impact on $\Delta Y_{t}$, the GDP growth, i.e. no long-term impact on output $Y_t$. The vector of endogenous variables is $y_t = [\Delta Y_{t} \quad u_{t}]'$ where $\Delta Y_{t}$ denotes the GDP growth. -->
 
-@Blanchard_Quah_1989's dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:
+The original dataset of @Blanchard_Quah_1989 is quarterly and their VAR features eight lags. For this teaching application, `IdSS` provides an open reconstruction over 1948 Q2--1987 Q4 based on public BEA real-GNP and BLS unemployment series, transformed in the same spirit as the original variables.
 
-```{r BQ1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP."}
+```{r BQ1, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Open reconstruction of the quarterly U.S. variables used in the Blanchard--Quah long-run-restriction example: (a) demeaned real-GNP log growth and (b) linearly detrended unemployment. Sample: 1948 Q2--1987 Q4. Sources: U.S. Bureau of Economic Analysis and Bureau of Labor Statistics via FRED."}
 library(IdSS)
 data(BQ)
 par(mfrow=c(1,2))
-plot(BQ$Date,BQ$Dgdp,type="l",main="GDP quarterly growth rate",
+plot(BQ$Date,BQ$Dgdp,type="l",main="(a) Quarterly real-GNP growth",
      xlab="",ylab="",lwd=2)
-plot(BQ$Date,BQ$unemp,type="l",ylim=c(-3,6),main="Unemployment rate (gap)",
+plot(BQ$Date,BQ$unemp,type="l",ylim=c(-3,6),main="(b) Unemployment-rate gap",
      xlab="",ylab="",lwd=2)
 ```
 
@@ -472,6 +472,3 @@ for (variable in 1:n) {
                                         names.var[variable],"...",sep=""),""),
          main = ifelse(variable==1,paste("... to shock η", shock, sep = ""),""))}}
 ```
-
-
-

@@ -67,17 +67,16 @@ The following code identifies a ``main GDP shock'' using Uhlig's method.
 
 ```{r uhlig, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Main GDP shock.",warning=FALSE,message=FALSE}
 library(IdSS)
-library(readxl)
 library(vars)
 library(Matrix)
 # Declare data:
-TFP   <- levpan$tfp_lev
-GDP   <- levpan$lngdpcap
-E12   <- levpan$e12m
-CONS  <- levpan$lnconcap
-HOURS <- levpan$lnhrscap
-y <- cbind(TFP,GDP,E12,CONS,HOURS)
-names.of.variables <- c("TFP","GDP","E12","Consumption","Hours")
+TFP         <- USsentiment$tfp
+GDP         <- USsentiment$ln_gdp_pc
+EXPECTATION <- USsentiment$expectation
+CONS        <- USsentiment$ln_consumption_pc
+HOURS       <- USsentiment$ln_hours_pc
+y <- cbind(TFP,GDP,EXPECTATION,CONS,HOURS)
+names.of.variables <- c("TFP","GDP","GDP expectation","Consumption","Hours")
 colnames(y)  <- names.of.variables
 names.of.shocks <- c("Main GDP shock")
 #define horizons for FEVM
@@ -110,9 +109,9 @@ mean(vardecomp[1,2,10,,1]) # mean contribution of 1st shock
 
 The ``main GDP shock'' explains `r round(100*mean(vardecomp[2,2,20,,1]))`\% of the variance of GDP at horizon 20.
 
-@BARSKY2011273 exploit this approach to identify a "TFP news shock", that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. @Levchenko_Pandalai-Nayar_2018 add a "sentiment shock" that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in consumer sentiment. The following code replicates @Levchenko_Pandalai-Nayar_2018. They use a mix of zero and FEVD to identify TFP surprises, TFP news, and sentiment shocks. We adopt a different approach by using FEVD to capture zero restrictions.
+@BARSKY2011273 exploit this approach to identify a "TFP news shock", that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. @Levchenko_Pandalai-Nayar_2018 add a "sentiment shock" that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in expectations or sentiment. The following code provides a teaching reconstruction inspired by their application. It uses the independently reconstructed `USsentiment` dataset: current-vintage public U.S. macroeconomic series, Fernald's utilization-adjusted TFP, and a one-quarter-ahead Greenbook/Tealbook real-GDP-growth forecast. It is therefore close to, but not an exact replication of, the authors' estimates. As above, FEVD maximization is used to impose the zero restrictions.
 
-```{r levchenko, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.",warning=FALSE,message=FALSE}
+```{r levchenko, fig.align = 'left-aligned', out.width = "95%", fig.cap = "Impulse responses in a teaching reconstruction of the Levchenko and Pandalai-Nayar (2020) identification: TFP surprise, TFP news, and sentiment shocks identified through FEVD maximization and zero restrictions.",warning=FALSE,message=FALSE}
 names.of.shocks <- c("TFP surprise","TFP news","Sentiment")
 #define horizons for FEVM
 H1 <- array(0,c(1,3))
@@ -126,6 +125,7 @@ H2[1,3] <- 2
 variable <- c(1,1,3) # variables for which we want to maximize FEVD
 norm <- c(1,20,2) # horizon at which the impact of the
 # shock is normalized to be positive
+set.seed(4817)
 res.svar.fevmax <-
   svar.fevmax(y,p=2,
               nb.shocks=3,
@@ -146,7 +146,7 @@ mean(vardecomp[2,2,40,,3])# mean contribution (across all simulated IRFs)
 # of 3rd shock to variance of second variable, horizon 40.
 ```
 
-Sentiment shocks explain `r round(100*mean(vardecomp[2,2,40,,3]))`\% of the variance of GDP, against `r round(100*(mean(vardecomp[2,2,40,,2]+vardecomp[2,2,40,,3])))`\% for TFP shocks (including `r round(100*(mean(vardecomp[2,2,40,,2])))`\% for TFP news shocks).
+Sentiment shocks explain `r round(100*mean(vardecomp[2,2,40,,3]))`\% of the variance of GDP at horizon 40. TFP-news shocks explain `r round(100*mean(vardecomp[2,2,40,,2]))`\%, and the two shocks jointly explain `r round(100*mean(vardecomp[2,2,40,,2]+vardecomp[2,2,40,,3]))`\%.
 
 ## Restrictions based on narrative historical decomposition {#NarrativeHistDecomp}
 
@@ -154,5 +154,3 @@ A related approach, introduced by @AntolinDiaz_RubioRamirez_2018, consists in im
 
 * Type A: A given shock is the most important (least important) driver of the unexpected change in a variable during some periods. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the absolute value of the contribution of any other structural shock.
 * Type B: A given shock is the overwhelming (negligible) driver of the unexpected change in a given variable during the period. For these periods, the absolute value of its contribution to the unexpected change in a variable is larger (smaller) than the sum of the absolute value of the contributions of all other structural shocks.
-
-

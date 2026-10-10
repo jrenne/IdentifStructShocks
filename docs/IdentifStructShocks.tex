@@ -981,17 +981,6 @@ In this example, we consider a bivariate model capturing the joint dynamics of S
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tseries)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Registered S3 method overwritten by 'quantmod':
-##   method            from
-##   as.zoo.data.frame zoo
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{test.adf.Y1  }\OtherTok{\textless{}{-}} \FunctionTok{adf.test}\NormalTok{(Y[,}\DecValTok{1}\NormalTok{],}\AttributeTok{k=}\DecValTok{16}\NormalTok{)}\SpecialCharTok{$}\NormalTok{p.value}
 \NormalTok{test.adf.Y2  }\OtherTok{\textless{}{-}} \FunctionTok{adf.test}\NormalTok{(Y[,}\DecValTok{2}\NormalTok{],}\AttributeTok{k=}\DecValTok{16}\NormalTok{)}\SpecialCharTok{$}\NormalTok{p.value}
 \NormalTok{test.pp.Y1   }\OtherTok{\textless{}{-}} \FunctionTok{pp.test}\NormalTok{(Y[,}\DecValTok{1}\NormalTok{])}\SpecialCharTok{$}\NormalTok{p.value}
@@ -1603,7 +1592,7 @@ B_{FS} & B_{Fr} & B_{FF}
 \end{equation}
 where \(S\), \(r\) and \(F\) respectively correspond to \emph{slow-moving variables}, the policy variable (short-term rate) and \emph{fast-moving variables}. While \(\eta_{r,t}\) is scalar, \(\boldsymbol\eta_{S,t}\) and \(\boldsymbol\eta_{F,t}\) may be vectors. The space spanned by \(\boldsymbol\varepsilon_{S,t}\) is the same as that spanned by \(\boldsymbol\eta_{S,t}\). As a result, because \(\varepsilon_{r,t}\) is a linear combination of \(\eta_{r,t}\) and \(\boldsymbol\eta_{S,t}\) (which are \(\perp\)), it comes that the \(B_{rr}\eta_{r,t}\)'s are the (population) residuals in the regression of \(\varepsilon_{r,t}\) on \(\boldsymbol\varepsilon_{S,t}\). Because \(\mathbb{V}ar(\eta_{r,t})=1\), \(B_{rr}\) is given by the square root of the variance of \(B_{rr}\eta_{r,t}\). \(B_{F,r}\) is finally obtained by regressing the components of \(\boldsymbol\varepsilon_{F,t}\) on the estimates of \(\eta_{r,t}\).
 
-A critical observation is that all matrices \(B\) with the block form in Eq. (\citet{ref}(eq:BCEE)) (with \(B_{rr}>0\)) and satisfying \(\Omega=BB'\) share the same intermediate column (that is, the same \(B_{rr}\) and \(B_{Fr}\)). One such \(B\) is obtained directly from the Cholesky decomposition of \(\Omega=BB'\).
+A critical observation is that all matrices \(B\) with the block form in Eq. (\eqref{eq:BCEE}) (with \(B_{rr}>0\)) and satisfying \(\Omega=BB'\) share the same intermediate column (that is, the same \(B_{rr}\) and \(B_{Fr}\)). One such \(B\) is obtained directly from the Cholesky decomposition of \(\Omega=BB'\).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1750,22 +1739,22 @@ Since \(\Omega\) is positive definite, \(\Sigma = J \Omega J'\) is positive defi
 \citet{Blanchard_Quah_1989} have implemented such long-run restrictions in a small-scale VAR. Two variables are considered: GDP and unemployment. Consequently, the VAR is affected by two types of shocks. Specifically, authors want to identify \textbf{supply shocks} (that can have a permanent effect on output) and \textbf{demand shocks} (that cannot have a permanent effect on output).\footnote{The motivation of the authors regarding their long-run restrictions can be obtained from a traditional Keynesian view of fluctuations. The authors propose a variant of a model from \citet{Fischer_1977}.
 }
 
-\citet{Blanchard_Quah_1989}'s dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:
+The original dataset of \citet{Blanchard_Quah_1989} is quarterly and their VAR features eight lags. For this teaching application, \texttt{IdSS} provides an open reconstruction over 1948 Q2--1987 Q4 based on public BEA real-GNP and BLS unemployment series, transformed in the same spirit as the original variables.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{data}\NormalTok{(BQ)}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(BQ}\SpecialCharTok{$}\NormalTok{Date,BQ}\SpecialCharTok{$}\NormalTok{Dgdp,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{main=}\StringTok{"GDP quarterly growth rate"}\NormalTok{,}
+\FunctionTok{plot}\NormalTok{(BQ}\SpecialCharTok{$}\NormalTok{Date,BQ}\SpecialCharTok{$}\NormalTok{Dgdp,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{main=}\StringTok{"(a) Quarterly real{-}GNP growth"}\NormalTok{,}
      \AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
-\FunctionTok{plot}\NormalTok{(BQ}\SpecialCharTok{$}\NormalTok{Date,BQ}\SpecialCharTok{$}\NormalTok{unemp,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{),}\AttributeTok{main=}\StringTok{"Unemployment rate (gap)"}\NormalTok{,}
+\FunctionTok{plot}\NormalTok{(BQ}\SpecialCharTok{$}\NormalTok{Date,BQ}\SpecialCharTok{$}\NormalTok{unemp,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{),}\AttributeTok{main=}\StringTok{"(b) Unemployment{-}rate gap"}\NormalTok{,}
      \AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/BQ1-1} \caption{These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP.}\label{fig:BQ1}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/BQ1-1} \caption{Open reconstruction of the quarterly U.S. variables used in the Blanchard--Quah long-run-restriction example: (a) demeaned real-GNP log growth and (b) linearly detrended unemployment. Sample: 1948 Q2--1987 Q4. Sources: U.S. Bureau of Economic Analysis and Bureau of Labor Statistics via FRED.}\label{fig:BQ1}
 \end{figure}
 
 Estimate a reduced-form VAR(8) model:
@@ -1798,8 +1787,8 @@ Let us employ the approach described above:
 
 \begin{verbatim}
 ##           [,1]       [,2]
-## [1,] 0.1541392 -0.8570365
-## [2,] 0.1921245  0.2396346
+## [1,] 0.1606729 -0.8790664
+## [2,] 0.1765941  0.2270600
 \end{verbatim}
 
 Alternatively, one may adopt a numerical approach by defining a loss function (\texttt{loss}) that equals zero when both conditions are satisfied: (a) \(BB' = \Omega\), and (b) the \((1,1)\) element of \(\Theta = (I - \Phi)^{-1}B\) is equal to zero.
@@ -1823,7 +1812,7 @@ Alternatively, one may adopt a numerical approach by defining a loss function (\
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  0.8570358 -0.2396345  0.1541395  0.1921221
+## [1]  0.8790657 -0.2270598  0.1606735  0.1765915
 \end{verbatim}
 
 (Note: one can use that type of approach, based on a loss function, to mix short- and long-run restrictions.)
@@ -1839,8 +1828,8 @@ Figure \ref{fig:BQ4} displays the resulting IRFs. Note that, for GDP, we cumulat
 
 \begin{verbatim}
 ##             Dgdp       unemp                       
-## Dgdp   0.7582704 -0.17576173  0.7582694 -0.17576173
-## unemp -0.1757617  0.09433658 -0.1757617  0.09433558
+## Dgdp   0.7985735 -0.17122692  0.7985725 -0.17122692
+## unemp -0.1712269  0.08274171 -0.1712269  0.08274071
 \end{verbatim}
 
 \begin{Shaded}
@@ -2411,7 +2400,7 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 
 \begin{verbatim}
 ##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3080293 0.1486471 1.001483 -0.1375947 0.1025075 0.9501390 -0.01850417
+## [1,] -0.3184766 0.2125678 1.009006 -0.1318676 0.1582916 0.9424703 -0.02099901
 ## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
 ## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
 \end{verbatim}
@@ -2825,17 +2814,16 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(IdSS)}
-\FunctionTok{library}\NormalTok{(readxl)}
 \FunctionTok{library}\NormalTok{(vars)}
 \FunctionTok{library}\NormalTok{(Matrix)}
 \CommentTok{\# Declare data:}
-\NormalTok{TFP   }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{tfp\_lev}
-\NormalTok{GDP   }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{lngdpcap}
-\NormalTok{E12   }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{e12m}
-\NormalTok{CONS  }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{lnconcap}
-\NormalTok{HOURS }\OtherTok{\textless{}{-}}\NormalTok{ levpan}\SpecialCharTok{$}\NormalTok{lnhrscap}
-\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(TFP,GDP,E12,CONS,HOURS)}
-\NormalTok{names.of.variables }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"TFP"}\NormalTok{,}\StringTok{"GDP"}\NormalTok{,}\StringTok{"E12"}\NormalTok{,}\StringTok{"Consumption"}\NormalTok{,}\StringTok{"Hours"}\NormalTok{)}
+\NormalTok{TFP         }\OtherTok{\textless{}{-}}\NormalTok{ USsentiment}\SpecialCharTok{$}\NormalTok{tfp}
+\NormalTok{GDP         }\OtherTok{\textless{}{-}}\NormalTok{ USsentiment}\SpecialCharTok{$}\NormalTok{ln\_gdp\_pc}
+\NormalTok{EXPECTATION }\OtherTok{\textless{}{-}}\NormalTok{ USsentiment}\SpecialCharTok{$}\NormalTok{expectation}
+\NormalTok{CONS        }\OtherTok{\textless{}{-}}\NormalTok{ USsentiment}\SpecialCharTok{$}\NormalTok{ln\_consumption\_pc}
+\NormalTok{HOURS       }\OtherTok{\textless{}{-}}\NormalTok{ USsentiment}\SpecialCharTok{$}\NormalTok{ln\_hours\_pc}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(TFP,GDP,EXPECTATION,CONS,HOURS)}
+\NormalTok{names.of.variables }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"TFP"}\NormalTok{,}\StringTok{"GDP"}\NormalTok{,}\StringTok{"GDP expectation"}\NormalTok{,}\StringTok{"Consumption"}\NormalTok{,}\StringTok{"Hours"}\NormalTok{)}
 \FunctionTok{colnames}\NormalTok{(y)  }\OtherTok{\textless{}{-}}\NormalTok{ names.of.variables}
 \NormalTok{names.of.shocks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Main GDP shock"}\NormalTok{)}
 \CommentTok{\#define horizons for FEVM}
@@ -2865,7 +2853,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.8137611
+## [1] 0.80297
 \end{verbatim}
 
 \begin{Shaded}
@@ -2876,7 +2864,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.8031916
+## [1] 0.9415735
 \end{verbatim}
 
 \begin{Shaded}
@@ -2889,9 +2877,9 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/uhlig-1} \caption{Main GDP shock.}\label{fig:uhlig}
 \end{figure}
 
-The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
+The ``main GDP shock'\,' explains 80\% of the variance of GDP at horizon 20.
 
-\citet{BARSKY2011273} exploit this approach to identify a ``TFP news shock'', that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. \citet{Levchenko_Pandalai-Nayar_2018} add a ``sentiment shock'' that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in consumer sentiment. The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a mix of zero and FEVD to identify TFP surprises, TFP news, and sentiment shocks. We adopt a different approach by using FEVD to capture zero restrictions.
+\citet{BARSKY2011273} exploit this approach to identify a ``TFP news shock'', that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. \citet{Levchenko_Pandalai-Nayar_2018} add a ``sentiment shock'' that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in expectations or sentiment. The following code provides a teaching reconstruction inspired by their application. It uses the independently reconstructed \texttt{USsentiment} dataset: current-vintage public U.S. macroeconomic series, Fernald's utilization-adjusted TFP, and a one-quarter-ahead Greenbook/Tealbook real-GDP-growth forecast. It is therefore close to, but not an exact replication of, the authors' estimates. As above, FEVD maximization is used to impose the zero restrictions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2908,6 +2896,7 @@ The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 \NormalTok{variable }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{) }\CommentTok{\# variables for which we want to maximize FEVD}
 \NormalTok{norm }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{2}\NormalTok{) }\CommentTok{\# horizon at which the impact of the}
 \CommentTok{\# shock is normalized to be positive}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{4817}\NormalTok{)}
 \NormalTok{res.svar.fevmax }\OtherTok{\textless{}{-}}
   \FunctionTok{svar.fevmax}\NormalTok{(y,}\AttributeTok{p=}\DecValTok{2}\NormalTok{,}
               \AttributeTok{nb.shocks=}\DecValTok{3}\NormalTok{,}
@@ -2926,10 +2915,10 @@ The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-1} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-1}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-1} \caption{Impulse responses in a teaching reconstruction of the Levchenko and Pandalai-Nayar (2020) identification: TFP surprise, TFP news, and sentiment shocks identified through FEVD maximization and zero restrictions.}\label{fig:levchenko-1}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-2} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-2}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-2} \caption{Impulse responses in a teaching reconstruction of the Levchenko and Pandalai-Nayar (2020) identification: TFP surprise, TFP news, and sentiment shocks identified through FEVD maximization and zero restrictions.}\label{fig:levchenko-2}
 \end{figure}
 
 \begin{Shaded}
@@ -2941,7 +2930,7 @@ The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1063626
+## [1] 0.09992346
 \end{verbatim}
 
 \begin{Shaded}
@@ -2951,10 +2940,10 @@ The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-3} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-3}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-3} \caption{Impulse responses in a teaching reconstruction of the Levchenko and Pandalai-Nayar (2020) identification: TFP surprise, TFP news, and sentiment shocks identified through FEVD maximization and zero restrictions.}\label{fig:levchenko-3}
 \end{figure}
 
-Sentiment shocks explain 11\% of the variance of GDP, against 76\% for TFP shocks (including 65\% for TFP news shocks).
+Sentiment shocks explain 10\% of the variance of GDP at horizon 40. TFP-news shocks explain 60\%, and the two shocks jointly explain 70\%.
 
 \section{Restrictions based on narrative historical decomposition}\label{NarrativeHistDecomp}
 
@@ -3431,7 +3420,7 @@ where \(\xi_t\) is correlated neither to \(z_t\), nor to \(\eta_{j,t}\), \(j\ge2
 Define \(\rho = \frac{\mathbb{E}(\eta_{1,t}z_t)}{\mathbb{V}ar(z_t)}\) and \(\xi_t = \eta_{1,t} - \rho z_t\). It is easily seen that \(\xi_t\) satisfies the moment restrictions given above.
 \end{proof}
 
-\citet{Ramey_2016_NBER} reviews the different approaches employed to construct monetary policy-shocks (the two main approaches are presented in \ref{exm:HighFreq} and \ref{exm:RomerRomer} below). She has also collected time series of such shocks, see \href{https://econweb.ucsd.edu/~vramey/research.html\#mon}{her website}. Several of these shocks are included in the \texttt{Ramey} dataset of package \texttt{IdSS}.
+\citet{Ramey_2016_NBER} reviews the different approaches employed to construct monetary-policy shocks (the two main approaches are presented in \ref{exm:HighFreq} and \ref{exm:RomerRomer} below). She has also collected many of these series on \href{https://econweb.ucsd.edu/~vramey/research.html\#mon}{her website}. To keep the course data redistributable, \texttt{IdSS} does not bundle that compilation; the empirical application below uses the public BRW monetary-policy shock released by the Board of Governors.
 
 \begin{example}[Identification of Monetary-Policy Shocks Based on High-Frequency Data]
 \protect\hypertarget{exm:HighFreq}{}\label{exm:HighFreq}
@@ -3446,8 +3435,7 @@ In general, changes in \(\mathbb{E}_t(i_{t+s})\), for \(s>0\), can be affected b
 
 However, if a MP announcement takes place between \(t\) and \(t+\epsilon\), then most of \(\mathbb{E}_{t+\epsilon}(i_{t+s})-\mathbb{E}_t(i_{t+s})\) is to be attributed to the MP shock (see Figure \ref{fig:HighFreq}, from \citet{Gurkaynak_et_al_2005}). Hence, a monthly time series of MP shocks can be obtained by summing, over each month, the changes \(i_{t+ \epsilon,h} - i_{t,h}\) associated with a given interest rate (T-bills, futures, swaps) and a given maturity \(h\).
 
-See among others: \citet{KUTTNER2001523}, \citet{Cochrane_Piazzesi_2002}, \citet{Gurkaynak_et_al_2005}, \citet{Piazzesi_Swanson_2008}, \citet{Gertler_Karadi_2015}. The time series named
-\texttt{FF4\_TC}, \texttt{ED2\_TC}, \texttt{ED3\_TC}, \texttt{ED4\_TC}, \texttt{GS1}, \texttt{ff1\_vr}, \texttt{ff4\_vr}, \texttt{ed2\_vr}, \texttt{ff1\_gkgreen}, \texttt{ff4\_gkgreen}, \texttt{ed2\_gkgreen} in the data frame \texttt{Ramey} of package \texttt{IdSS} are time series of shocks based on this approach (see \href{https://econweb.ucsd.edu/~vramey/research/Ramey_HOM_monetary.zip}{Ramey's website} for details).
+See among others: \citet{KUTTNER2001523}, \citet{Cochrane_Piazzesi_2002}, \citet{Gurkaynak_et_al_2005}, \citet{Piazzesi_Swanson_2008}, \citet{Gertler_Karadi_2015}. Replication series associated with these papers remain available from the original authors, notably through \href{https://econweb.ucsd.edu/~vramey/research.html\#mon}{Ramey's monetary-data archive}, but they are not redistributed by \texttt{IdSS}.
 
 \begin{figure}
 \includegraphics[width=0.95\linewidth]{images/GSS2005_HFI} \caption{Source: Gurkaynak, Sack and Swanson (2005). Transaction rates of Federal funds futures on June 25, 2003, day on which a regularly scheduled FOMC meeting was scheduled. At 2:15 p.m., the FOMC announced that it was lowering its target for the federal funds rate from 1.25\% to 1\%, while many market participants were expecting a 50 bp cut. This shows that (i) financial markets seem to fully adjust to the policy action within just a few minutes and (ii) the federal funds rate surprise is not necessarily in the same direction as the federal funds rate action itself.}\label{fig:HighFreq}
@@ -3478,7 +3466,7 @@ This gives a measure of intended monetary policy actions not driven by informati
   Controls = variables spanning the information the Federal Reserve has about future developments. Data: Federal Reserve's internal forecasts (inflation, real output and unemployment), ``Greenbook's forecasts'' -- usually issued 6 days before the FOMC meeting.
 \end{enumerate}
 
-The shock measure is the residual series in the linear regression of (a) on (b). The time series \texttt{Ramey\$rrshock83} and \texttt{Ramey\$rrshock83b} (where \texttt{Ramey} is a data frame included in package \texttt{IdSS}) contain such shocks for the period 1983-2007. (\texttt{Ramey\$rrshock83b} uses long-horizon Greenbook forecasts.)
+The shock measure is the residual series in the linear regression of (a) on (b). Ramey's data archive contains variants of these shocks for 1983--2007, including one based on long-horizon Greenbook forecasts.
 \end{example}
 
 To create a measure of \emph{news} about future government spending, \citet{Ramey_2011} uses newspaper articles to construct a time series of (unexpected) fiscal shocks:\footnote{Data and replication codes can be found on \href{https://econweb.ucsd.edu/~vramey/research.html\#govt}{her website}.}
@@ -3581,33 +3569,33 @@ where \(\widehat{\rho}(L)\) and \(\sigma^2_{e}\) result from the estimation of a
 
 For each simulated sample (of \(\tilde{y}_t\) and \(\tilde{z}_t\), say), estimate \(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\) and associated \(\widetilde{\Psi}_{i,1,h}\). This provides e.g.~a sequence of \(N\) estimates of \(\Psi_{i,1,h}\), from which quantiles and conf. intervals can be deduced.
 
-In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is \texttt{FF4\_TC} from the Ramsey's database; they are base on the \citet{Gertler_Karadi_2015} approach, that use 3-month fed funds futures.
+In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary-policy shock. The instrument is the monthly BRW shock of Bu, Rogers, and Wu, distributed by the Board of Governors and included in \texttt{USmonthly}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(vars);}\FunctionTok{library}\NormalTok{(IdSS)}
 \FunctionTok{data}\NormalTok{(}\StringTok{"USmonthly"}\NormalTok{)}
-\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1990{-}05{-}01"}\NormalTok{;Last.date }\OtherTok{\textless{}{-}} \StringTok{"2012{-}6{-}01"}
+\NormalTok{First.date }\OtherTok{\textless{}{-}} \StringTok{"1994{-}01{-}01"}\NormalTok{;Last.date }\OtherTok{\textless{}{-}} \StringTok{"2012{-}06{-}01"}
 \NormalTok{indic.first }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{First.date)}
 \NormalTok{indic.last  }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES}\SpecialCharTok{==}\NormalTok{Last.date)}
 \NormalTok{USmonthly   }\OtherTok{\textless{}{-}}\NormalTok{ USmonthly[indic.first}\SpecialCharTok{:}\NormalTok{indic.last,]}
-\NormalTok{shock.name }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"FF4\_TC"}\NormalTok{,}\StringTok{"ED2\_TC"}\NormalTok{) }\CommentTok{\# "ff1\_vr", "rrshock83b"}
-\NormalTok{indic.shock.name }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(}\FunctionTok{names}\NormalTok{(USmonthly)}\SpecialCharTok{\%in\%}\NormalTok{shock.name)}
-\NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[,indic.shock.name])}
+\NormalTok{Z }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[,}\StringTok{"BRW"}\NormalTok{,}\AttributeTok{drop=}\ConstantTok{FALSE}\NormalTok{])}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{plt=}\FunctionTok{c}\NormalTok{(.}\DecValTok{1}\NormalTok{,.}\DecValTok{95}\NormalTok{,.}\DecValTok{1}\NormalTok{,.}\DecValTok{95}\NormalTok{))}
 \FunctionTok{plot}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES,Z[,}\DecValTok{1}\NormalTok{],}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{xlab=}\StringTok{""}\NormalTok{,}\AttributeTok{ylab=}\StringTok{""}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{)}
-\FunctionTok{lines}\NormalTok{(USmonthly}\SpecialCharTok{$}\NormalTok{DATES,Z[,}\DecValTok{2}\NormalTok{],}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{lwd=}\DecValTok{2}\NormalTok{,}\AttributeTok{pch=}\DecValTok{3}\NormalTok{,}\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/essaiIV0-1} \caption{Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red).}\label{fig:essaiIV0}
+\includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/essaiIV0-1} \caption{Monthly BRW monetary-policy shock over the 1994--2012 estimation sample. The measure is due to Bu, Rogers, and Wu and is distributed by the Board of Governors of the Federal Reserve System.}\label{fig:essaiIV0}
 \end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{considered.variables }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"GS1"}\NormalTok{,}\StringTok{"LIP"}\NormalTok{,}\StringTok{"LCPI"}\NormalTok{,}\StringTok{"EBP"}\NormalTok{)}
 \NormalTok{Y }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(USmonthly[,considered.variables])}
+\NormalTok{keep }\OtherTok{\textless{}{-}} \FunctionTok{complete.cases}\NormalTok{(Y,Z)}
+\NormalTok{Y }\OtherTok{\textless{}{-}}\NormalTok{ Y[keep,,drop}\OtherTok{=}\ConstantTok{FALSE}\NormalTok{]}
+\NormalTok{Z }\OtherTok{\textless{}{-}}\NormalTok{ Z[keep,,drop}\OtherTok{=}\ConstantTok{FALSE}\NormalTok{]}
 \NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(considered.variables)}
 \FunctionTok{colnames}\NormalTok{(Y) }\OtherTok{\textless{}{-}}\NormalTok{ considered.variables}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{plt=}\FunctionTok{c}\NormalTok{(.}\DecValTok{15}\NormalTok{,.}\DecValTok{95}\NormalTok{,.}\DecValTok{15}\NormalTok{,.}\DecValTok{8}\NormalTok{))}

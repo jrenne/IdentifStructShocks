@@ -440,7 +440,7 @@ B_{FS} &amp; B_{Fr} &amp; B_{FF}
 \end{array}\right],\tag{2.4}
 \end{equation}\]</span>
 where <span class="math inline">\(S\)</span>, <span class="math inline">\(r\)</span> and <span class="math inline">\(F\)</span> respectively correspond to <em>slow-moving variables</em>, the policy variable (short-term rate) and <em>fast-moving variables</em>. While <span class="math inline">\(\eta_{r,t}\)</span> is scalar, <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span> and <span class="math inline">\(\boldsymbol\eta_{F,t}\)</span> may be vectors. The space spanned by <span class="math inline">\(\boldsymbol\varepsilon_{S,t}\)</span> is the same as that spanned by <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span>. As a result, because <span class="math inline">\(\varepsilon_{r,t}\)</span> is a linear combination of <span class="math inline">\(\eta_{r,t}\)</span> and <span class="math inline">\(\boldsymbol\eta_{S,t}\)</span> (which are <span class="math inline">\(\perp\)</span>), it comes that the <span class="math inline">\(B_{rr}\eta_{r,t}\)</span>’s are the (population) residuals in the regression of <span class="math inline">\(\varepsilon_{r,t}\)</span> on <span class="math inline">\(\boldsymbol\varepsilon_{S,t}\)</span>. Because <span class="math inline">\(\mathbb{V}ar(\eta_{r,t})=1\)</span>, <span class="math inline">\(B_{rr}\)</span> is given by the square root of the variance of <span class="math inline">\(B_{rr}\eta_{r,t}\)</span>. <span class="math inline">\(B_{F,r}\)</span> is finally obtained by regressing the components of <span class="math inline">\(\boldsymbol\varepsilon_{F,t}\)</span> on the estimates of <span class="math inline">\(\eta_{r,t}\)</span>.</p>
-<p>A critical observation is that all matrices <span class="math inline">\(B\)</span> with the block form in Eq. (<span class="citation">(<a href="#ref-ref"><strong>ref?</strong></a>)</span>(eq:BCEE)) (with <span class="math inline">\(B_{rr}&gt;0\)</span>) and satisfying <span class="math inline">\(\Omega=BB&#39;\)</span> share the same intermediate column (that is, the same <span class="math inline">\(B_{rr}\)</span> and <span class="math inline">\(B_{Fr}\)</span>). One such <span class="math inline">\(B\)</span> is obtained directly from the Cholesky decomposition of <span class="math inline">\(\Omega=BB&#39;\)</span>.</p>
+<p>A critical observation is that all matrices <span class="math inline">\(B\)</span> with the block form in Eq. (<a href="identifStruct.html#eq:BCEE">(2.4)</a>) (with <span class="math inline">\(B_{rr}&gt;0\)</span>) and satisfying <span class="math inline">\(\Omega=BB&#39;\)</span> share the same intermediate column (that is, the same <span class="math inline">\(B_{rr}\)</span> and <span class="math inline">\(B_{Fr}\)</span>). One such <span class="math inline">\(B\)</span> is obtained directly from the Cholesky decomposition of <span class="math inline">\(\Omega=BB&#39;\)</span>.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="identifStruct.html#cb48-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb48-2"><a href="identifStruct.html#cb48-2" tabindex="-1"></a><span class="fu">library</span>(vars)</span>
@@ -577,20 +577,20 @@ Since <span class="math inline">\(\Omega\)</span> is positive definite, <span cl
 <div id="blanchard-and-quah-1989" class="section level3 hasAnchor" number="2.5.3">
 <h3><span class="header-section-number">2.5.3</span> Blanchard and Quah (1989)<a href="identifStruct.html#blanchard-and-quah-1989" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="citation">Blanchard and Quah (<a href="#ref-Blanchard_Quah_1989">1989</a>)</span> have implemented such long-run restrictions in a small-scale VAR. Two variables are considered: GDP and unemployment. Consequently, the VAR is affected by two types of shocks. Specifically, authors want to identify <strong>supply shocks</strong> (that can have a permanent effect on output) and <strong>demand shocks</strong> (that cannot have a permanent effect on output).<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
-<p><span class="citation">Blanchard and Quah (<a href="#ref-Blanchard_Quah_1989">1989</a>)</span>’s dataset is quarterly, spanning the period from 1950:2 to 1987:4. Their VAR features 8 lags. Here are the data they use:</p>
+<p>The original dataset of <span class="citation">Blanchard and Quah (<a href="#ref-Blanchard_Quah_1989">1989</a>)</span> is quarterly and their VAR features eight lags. For this teaching application, <code>IdSS</code> provides an open reconstruction over 1948 Q2–1987 Q4 based on public BEA real-GNP and BLS unemployment series, transformed in the same spirit as the original variables.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="identifStruct.html#cb49-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb49-2"><a href="identifStruct.html#cb49-2" tabindex="-1"></a><span class="fu">data</span>(BQ)</span>
 <span id="cb49-3"><a href="identifStruct.html#cb49-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb49-4"><a href="identifStruct.html#cb49-4" tabindex="-1"></a><span class="fu">plot</span>(BQ<span class="sc">$</span>Date,BQ<span class="sc">$</span>Dgdp,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">main=</span><span class="st">&quot;GDP quarterly growth rate&quot;</span>,</span>
+<span id="cb49-4"><a href="identifStruct.html#cb49-4" tabindex="-1"></a><span class="fu">plot</span>(BQ<span class="sc">$</span>Date,BQ<span class="sc">$</span>Dgdp,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">main=</span><span class="st">&quot;(a) Quarterly real-GNP growth&quot;</span>,</span>
 <span id="cb49-5"><a href="identifStruct.html#cb49-5" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb49-6"><a href="identifStruct.html#cb49-6" tabindex="-1"></a><span class="fu">plot</span>(BQ<span class="sc">$</span>Date,BQ<span class="sc">$</span>unemp,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">6</span>),<span class="at">main=</span><span class="st">&quot;Unemployment rate (gap)&quot;</span>,</span>
+<span id="cb49-6"><a href="identifStruct.html#cb49-6" tabindex="-1"></a><span class="fu">plot</span>(BQ<span class="sc">$</span>Date,BQ<span class="sc">$</span>unemp,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">6</span>),<span class="at">main=</span><span class="st">&quot;(b) Unemployment-rate gap&quot;</span>,</span>
 <span id="cb49-7"><a href="identifStruct.html#cb49-7" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 </details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:BQ1"></span>
-<img src="IdentifStructShocks_files/figure-html/BQ1-1.png" alt="These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP." width="95%" />
+<img src="IdentifStructShocks_files/figure-html/BQ1-1.png" alt="Open reconstruction of the quarterly U.S. variables used in the Blanchard--Quah long-run-restriction example: (a) demeaned real-GNP log growth and (b) linearly detrended unemployment. Sample: 1948 Q2--1987 Q4. Sources: U.S. Bureau of Economic Analysis and Bureau of Labor Statistics via FRED." width="95%" />
 <p class="caption">
-Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are calculated as the first differences of the logarithm of GDP.
+Figure 2.2: Open reconstruction of the quarterly U.S. variables used in the Blanchard–Quah long-run-restriction example: (a) demeaned real-GNP log growth and (b) linearly detrended unemployment. Sample: 1948 Q2–1987 Q4. Sources: U.S. Bureau of Economic Analysis and Bureau of Labor Statistics via FRED.
 </p>
 </div>
 <p>Estimate a reduced-form VAR(8) model:</p>
@@ -614,8 +614,8 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 <span id="cb51-8"><a href="identifStruct.html#cb51-8" tabindex="-1"></a><span class="fu">print</span>(B)</span></code></pre></div>
 </details>
 <pre><code>##           [,1]       [,2]
-## [1,] 0.1541392 -0.8570365
-## [2,] 0.1921245  0.2396346</code></pre>
+## [1,] 0.1606729 -0.8790664
+## [2,] 0.1765941  0.2270600</code></pre>
 <p>Alternatively, one may adopt a numerical approach by defining a loss function (<code>loss</code>) that equals zero when both conditions are satisfied: (a) <span class="math inline">\(BB&#39; = \Omega\)</span>, and (b) the <span class="math inline">\((1,1)\)</span> element of <span class="math inline">\(\Theta = (I - \Phi)^{-1}B\)</span> is equal to zero.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="identifStruct.html#cb53-1" tabindex="-1"></a><span class="co"># Compute (Id - Phi)^{-1}:</span></span>
@@ -632,7 +632,7 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 <span id="cb53-12"><a href="identifStruct.html#cb53-12" tabindex="-1"></a>res.opt <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>),loss,<span class="at">method=</span><span class="st">&quot;BFGS&quot;</span>,<span class="at">hessian=</span><span class="cn">FALSE</span>)</span>
 <span id="cb53-13"><a href="identifStruct.html#cb53-13" tabindex="-1"></a><span class="fu">print</span>(res.opt<span class="sc">$</span>par)</span></code></pre></div>
 </details>
-<pre><code>## [1]  0.8570358 -0.2396345  0.1541395  0.1921221</code></pre>
+<pre><code>## [1]  0.8790657 -0.2270598  0.1606735  0.1765915</code></pre>
 <p>(Note: one can use that type of approach, based on a loss function, to mix short- and long-run restrictions.)</p>
 <p>Figure <a href="identifStruct.html#fig:BQ4">2.3</a> displays the resulting IRFs. Note that, for GDP, we cumulate the GDP growth IRF, so as to have the response of the GDP in level.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -640,8 +640,8 @@ Figure 2.2: These data come from Blanchard and Quah (1989). GDP growth rates are
 <span id="cb55-2"><a href="identifStruct.html#cb55-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cbind</span>(Omega,B.hat <span class="sc">%*%</span> <span class="fu">t</span>(B.hat)))</span></code></pre></div>
 </details>
 <pre><code>##             Dgdp       unemp                       
-## Dgdp   0.7582704 -0.17576173  0.7582694 -0.17576173
-## unemp -0.1757617  0.09433658 -0.1757617  0.09433558</code></pre>
+## Dgdp   0.7985735 -0.17122692  0.7985725 -0.17122692
+## unemp -0.1712269  0.08274171 -0.1712269  0.08274071</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="identifStruct.html#cb57-1" tabindex="-1"></a>nb.sim <span class="ot">&lt;-</span> <span class="dv">40</span></span>
 <span id="cb57-2"><a href="identifStruct.html#cb57-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>));<span class="fu">par</span>(<span class="at">plt=</span><span class="fu">c</span>(.<span class="dv">15</span>,.<span class="dv">95</span>,.<span class="dv">15</span>,.<span class="dv">8</span>))</span>
