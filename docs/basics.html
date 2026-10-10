@@ -530,12 +530,19 @@ For <span class="math inline">\(y_t\)</span> to be covariance-stationary (and er
 \end{equation}\]</span>
 where <span class="math inline">\(\|A\|\)</span> denotes a norm of the matrix <span class="math inline">\(A\)</span> (e.g. <span class="math inline">\(\|A\|=\sqrt{tr(AA&#39;)}\)</span>). This notably implies that if <span class="math inline">\(y_t\)</span> is stationary (and ergodic for the mean), then <span class="math inline">\(\|\Psi_h\|\rightarrow 0\)</span> when <span class="math inline">\(h\)</span> gets large.</p>
 <p>What should be satisfied by <span class="math inline">\(\Phi_k\)</span>’s and <span class="math inline">\(\Theta_k\)</span>’s for a VARMA-based process (Eq. <a href="basics.html#eq:yVARMA">(1.2)</a>) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
-<span class="math display" id="eq:VARMA2">\[\begin{eqnarray}
-y_t &amp;=&amp; c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{{\color{blue}\mbox{AR component}}} +  \\
-&amp;&amp;\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{{\color{red}\mbox{MA component}}} \nonumber\\
-&amp;\Leftrightarrow&amp; \underbrace{ {\color{blue}(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= {\color{blue}\Phi(L)}}y_t = c +  \underbrace{ {\color{red}(I + \Theta_1 L + \ldots + \Theta_q L^q)}}_{={\color{red}\Theta(L)}} B \eta_{t}. \nonumber
+<span class="math display" id="eq:VARMA2">\[\begin{equation}
+\begin{aligned}
+y_t
+&amp;= c
++ \underbrace{\Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p}}_{\text{AR component}} \\
+&amp;\quad
++ \underbrace{B\eta_t + \Theta_1 B\eta_{t-1} + \dots + \Theta_q B\eta_{t-q}}_{\text{MA component}}, \\
+\underbrace{(I - \Phi_1 L - \dots - \Phi_p L^p)}_{\Phi(L)}y_t
+&amp;= c
++ \underbrace{(I + \Theta_1 L + \dots + \Theta_q L^q)}_{\Theta(L)}B\eta_t.
+\end{aligned}
 \tag{1.8}
-\end{eqnarray}\]</span></p>
+\end{equation}\]</span></p>
 <p>Process <span class="math inline">\(y_t\)</span> is stationary iff the roots of <span class="math inline">\(\det(\Phi(z))=0\)</span> are strictly outside the unit circle or, equivalently, iff the eigenvalues of
 <span class="math display" id="eq:matrixPHI">\[\begin{equation}
 \underbrace{\Phi}_{np \times np} = \left[\begin{array}{cccc}

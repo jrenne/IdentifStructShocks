@@ -284,12 +284,19 @@ For $y_t$ to be covariance-stationary (and ergodic for the mean), it has to be t
 where $\|A\|$ denotes a norm of the matrix $A$ (e.g. $\|A\|=\sqrt{tr(AA')}$). This notably implies that if $y_t$ is stationary (and ergodic for the mean), then $\|\Psi_h\|\rightarrow 0$ when $h$ gets large.
 
 What should be satisfied by $\Phi_k$'s and $\Theta_k$'s for a VARMA-based process (Eq. \@ref(eq:yVARMA)) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
-\begin{eqnarray}
-y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{{\color{blue}\mbox{AR component}}} +  \\
-&&\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{{\color{red}\mbox{MA component}}} \nonumber\\
-&\Leftrightarrow& \underbrace{ {\color{blue}(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= {\color{blue}\Phi(L)}}y_t = c +  \underbrace{ {\color{red}(I + \Theta_1 L + \ldots + \Theta_q L^q)}}_{={\color{red}\Theta(L)}} B \eta_{t}. \nonumber
+\begin{equation}
+\begin{aligned}
+y_t
+&= c
+ + \underbrace{\Phi_1 y_{t-1} + \dots + \Phi_p y_{t-p}}_{\text{AR component}} \\
+&\quad
+ + \underbrace{B\eta_t + \Theta_1 B\eta_{t-1} + \dots + \Theta_q B\eta_{t-q}}_{\text{MA component}}, \\
+\underbrace{(I - \Phi_1 L - \dots - \Phi_p L^p)}_{\Phi(L)}y_t
+&= c
+ + \underbrace{(I + \Theta_1 L + \dots + \Theta_q L^q)}_{\Theta(L)}B\eta_t.
+\end{aligned}
 (\#eq:VARMA2)
-\end{eqnarray}
+\end{equation}
 
 Process $y_t$ is stationary iff the roots of $\det(\Phi(z))=0$ are strictly outside the unit circle or, equivalently, iff the eigenvalues of 
 \begin{equation}

@@ -370,12 +370,12 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span id="cb76-35"><a href="forecast-error-variance-maximization.html#cb76-35" tabindex="-1"></a>vardecomp <span class="ot">&lt;-</span> Variance.decomp<span class="sc">$</span>vardecomp</span>
 <span id="cb76-36"><a href="forecast-error-variance-maximization.html#cb76-36" tabindex="-1"></a><span class="fu">mean</span>(vardecomp[<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">20</span>,,<span class="dv">1</span>]) <span class="co"># mean contribution (across all simulated IRFs)</span></span></code></pre></div>
 </details>
-<pre><code>## [1] 0.7946948</code></pre>
+<pre><code>## [1] 0.7921881</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="forecast-error-variance-maximization.html#cb78-1" tabindex="-1"></a><span class="co"># of 1st shock to variance of second variable, horizon 20.</span></span>
 <span id="cb78-2"><a href="forecast-error-variance-maximization.html#cb78-2" tabindex="-1"></a><span class="fu">mean</span>(vardecomp[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">10</span>,,<span class="dv">1</span>]) <span class="co"># mean contribution of 1st shock </span></span></code></pre></div>
 </details>
-<pre><code>## [1] 1.373046</code></pre>
+<pre><code>## [1] 1.143194</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="forecast-error-variance-maximization.html#cb80-1" tabindex="-1"></a><span class="co"># to covariance between 1st and 2nd variable, horizon 10.</span></span></code></pre></div>
 </details>
