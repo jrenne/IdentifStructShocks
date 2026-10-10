@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Appendix | The Identification of Dynamic Structural Shocks</title>
-  <meta name="description" content="This course XXX." />
+  <meta name="description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Appendix | The Identification of Dynamic Structural Shocks" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This course XXX." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
+  <meta name="github-repo" content="jrenne/IdentifStructShocks" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 11 Appendix | The Identification of Dynamic Structural Shocks" />
   
-  <meta name="twitter:description" content="This course XXX." />
+  <meta name="twitter:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   
 
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -735,6 +736,7 @@ Under regularity assumptions and under the null hypothesis, the test statistic f
 y_{i,t} = \phi_i y_{t-1} + \varepsilon_{i,t},
 \]</span>
 where <span class="math inline">\(\phi_i\)</span> is the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(\Phi_1\)</span>, and where <span class="math inline">\(\varepsilon_{i,t}\)</span> is a linear combination of <span class="math inline">\(\eta_t\)</span> and <span class="math inline">\(\eta_{t-1}\)</span>. Since <span class="math inline">\(y_{t-1}\)</span> (the regressor) is correlated to <span class="math inline">\(\eta_{t-1}\)</span>, it is also correlated to <span class="math inline">\(\varepsilon_{i,t}\)</span>. The OLS regression of <span class="math inline">\(y_{i,t}\)</span> on <span class="math inline">\(y_{t-1}\)</span> yields a biased estimator of <span class="math inline">\(\phi_i\)</span> (see Figure <a href="append.html#fig:simulARMAbiased">11.1</a>). Hence, SVARMA models cannot be consistently estimated by simple OLS regressions (contrary to VAR models, as we will see in the next section); instrumental-variable approaches can be employed to estimate SVARMA models (using past values of <span class="math inline">\(y_t\)</span> as instruments, see, e.g., <span class="citation">Gouriéroux, Monfort, and Renne (<a href="#ref-Gourieroux_Monfort_Renne_2020">2020</a>)</span>).</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="append.html#cb99-1" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of replications</span></span>
 <span id="cb99-2"><a href="append.html#cb99-2" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># sample length</span></span>
 <span id="cb99-3"><a href="append.html#cb99-3" tabindex="-1"></a>phi <span class="ot">&lt;-</span> .<span class="dv">8</span> <span class="co"># autoregressive parameter</span></span>
@@ -758,6 +760,7 @@ where <span class="math inline">\(\phi_i\)</span> is the <span class="math inlin
 <span id="cb99-21"><a href="append.html#cb99-21" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">density</span>(phi.est.OLS),<span class="at">xlab=</span><span class="st">&quot;OLS estimate of phi&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>,</span>
 <span id="cb99-22"><a href="append.html#cb99-22" tabindex="-1"></a>       <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;theta = &quot;</span>,theta,<span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
 <span id="cb99-23"><a href="append.html#cb99-23" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">v=</span>phi,<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>)}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:simulARMAbiased"></span>
 <img src="IdentifStructShocks_files/figure-html/simulARMAbiased-1.png" alt="Illustration of the bias obtained when estimating the auto-regressive parameters of an ARMA process by (standard) OLS." width="95%" />
 <p class="caption">
@@ -2387,7 +2390,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/11-Appendix.Rmd",
+    "link": "https://github.com/jrenne/IdentifStructShocks/edit/main/11-Appendix.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -2398,7 +2401,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "download": ["IdentifStructShocks.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

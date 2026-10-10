@@ -1,0 +1,140 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+/* Real tables stay visible when the accompanying code is collapsed. */
+.course-table {
+  overflow-x: auto;
+  margin: 1.25em 0 1.75em;
+}
+.course-table:focus-visible { outline: 2px solid #48718a; outline-offset: 3px; }
+.book .book-body .page-wrapper .page-inner section.normal table {
+  display: table;
+  width: auto;
+  max-width: 100%;
+  margin: 1em auto;
+  border-collapse: collapse;
+  font-size: .92em;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.book .book-body .page-wrapper .page-inner section.normal table th,
+.book .book-body .page-wrapper .page-inner section.normal table td {
+  padding: .4em .7em;
+  border: 0;
+}
+.book .book-body .page-wrapper .page-inner section.normal table th {
+  border-top: 1.5px solid #56616b;
+  border-bottom: 1px solid #aeb8c0;
+  background: #f0f3f5;
+}
+.book .book-body .page-wrapper .page-inner section.normal table tr {
+  background: transparent;
+  border: 0;
+}
+.book .book-body .page-wrapper .page-inner section.normal table tbody tr:nth-child(even) {
+  background: #f7f8fa;
+}
+.book .book-body .page-wrapper .page-inner section.normal table tr:last-child {
+  border-bottom: 1.5px solid #56616b;
+}
+.book .book-body .page-wrapper .page-inner section.normal table caption {
+  text-align: left;
+  color: #444;
+  margin-bottom: .6em;
+}
+@media print {
+  .course-table { overflow: visible; }
+}
+
+/* Textbook callouts: style the enclosing div, never just the numbered label. */
+.book .book-body .page-wrapper .page-inner section.normal {
+  --callout-rule: #9aafb9;
+  --definition-fill: #f2f6f8;
+  --result-fill: #f0f5f1;
+  --result-rule: #70917c;
+  --example-fill: #faf6ed;
+  --example-rule: #b39a68;
+  --practice-fill: #edf4f7;
+  --recap-fill: #f3f5f6;
+}
+.book .book-body .page-wrapper .page-inner section.normal :is(
+  div.definition, div.hypothesis, div.proposition, div.theorem,
+  div.example, div.exercisebox, div.practicebox, div.recapbox
+) {
+  box-sizing: border-box;
+  margin: 1.65em 0;
+  padding: 1.05em 1.3em;
+  border: 1px solid var(--callout-rule);
+  border-left-width: 4px;
+  border-radius: 4px;
+  background: var(--definition-fill);
+}
+.book .book-body .page-wrapper .page-inner section.normal :is(div.proposition, div.theorem) {
+  background: var(--result-fill);
+  border-color: var(--result-rule);
+}
+.book .book-body .page-wrapper .page-inner section.normal div.example {
+  background: var(--example-fill);
+  border-color: var(--example-rule);
+}
+.book .book-body .page-wrapper .page-inner section.normal div.exercisebox {
+  background: transparent;
+}
+.book .book-body .page-wrapper .page-inner section.normal div.practicebox {
+  background: var(--practice-fill);
+}
+.book .book-body .page-wrapper .page-inner section.normal div.recapbox {
+  background: var(--recap-fill);
+}
+.book .book-body .page-wrapper .page-inner section.normal :is(
+  span.definition, span.hypothesis, span.proposition, span.theorem,
+  span.example, span.exercise
+) {
+  display: block;
+  margin-bottom: .65em;
+  line-height: 1.5;
+}
+.book .book-body .page-wrapper .page-inner section.normal :is(
+  div.definition, div.hypothesis, div.proposition, div.theorem,
+  div.example, div.exercisebox, div.practicebox, div.recapbox
+) > :first-child { margin-top: 0; }
+.book .book-body .page-wrapper .page-inner section.normal :is(
+  div.definition, div.hypothesis, div.proposition, div.theorem,
+  div.example, div.exercisebox, div.practicebox, div.recapbox
+) > :last-child { margin-bottom: 0; }
+/* Preserve the reader's GitBook colour theme. */
+.book.color-theme-1 .book-body .page-wrapper .page-inner section.normal {
+  --definition-fill: #f3eddf;
+  --result-fill: #edf0e1;
+  --example-fill: #f7edda;
+  --practice-fill: #ecebdf;
+  --recap-fill: #eee8dc;
+}
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.normal {
+  --callout-rule: #6f8996;
+  --definition-fill: #263640;
+  --result-fill: #293b32;
+  --result-rule: #7ca38b;
+  --example-fill: #3b352a;
+  --example-rule: #bba471;
+  --practice-fill: #253945;
+  --recap-fill: #30363d;
+}
+@media (max-width: 600px) {
+  .book .book-body .page-wrapper .page-inner section.normal :is(
+    div.definition, div.hypothesis, div.proposition, div.theorem,
+    div.example, div.exercisebox, div.practicebox, div.recapbox
+  ) { padding: .85em .9em; }
+}

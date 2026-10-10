@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks</title>
-  <meta name="description" content="This course XXX." />
+  <meta name="description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This course XXX." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
+  <meta name="github-repo" content="jrenne/IdentifStructShocks" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 10 Factor-Augmented VAR | The Identification of Dynamic Structural Shocks" />
   
-  <meta name="twitter:description" content="This course XXX." />
+  <meta name="twitter:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   
 
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -329,11 +330,14 @@ X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
 \end{eqnarray*}\]</span></p>
 <p>Let us illustrate PCA on the term structure of yields. The term strucutre of yields (or yield curve) is know to be driven by only a small number of factors (e.g., <span class="citation">Litterman and Scheinkman (<a href="#ref-Litterman_Scheinkman_1991">1991</a>)</span>). One can typically employ PCA to recover such factors. The data used in the example below are taken from the <a href="https://fred.stlouisfed.org">Fred database</a> (tickers: “DGS6MO”,“DGS1”, …). The second plot shows the factor loardings, that indicate that the first factor is a level factor (loadings = black line), the second factor is a slope factor (loadings = blue line), the third factor is a curvature factor (loadings = red line).</p>
 <p>To run a PCA, one simply has to apply function <code>prcomp</code> to a matrix of data:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="FAVAR.html#cb96-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb96-2"><a href="FAVAR.html#cb96-2" tabindex="-1"></a>USyields <span class="ot">&lt;-</span> USyields[<span class="fu">complete.cases</span>(USyields),]</span>
 <span id="cb96-3"><a href="FAVAR.html#cb96-3" tabindex="-1"></a>yds <span class="ot">&lt;-</span> USyields[<span class="fu">c</span>(<span class="st">&quot;Y1&quot;</span>,<span class="st">&quot;Y2&quot;</span>,<span class="st">&quot;Y3&quot;</span>,<span class="st">&quot;Y5&quot;</span>,<span class="st">&quot;Y7&quot;</span>,<span class="st">&quot;Y10&quot;</span>,<span class="st">&quot;Y20&quot;</span>,<span class="st">&quot;Y30&quot;</span>)]</span>
 <span id="cb96-4"><a href="FAVAR.html#cb96-4" tabindex="-1"></a>PCA.yds <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(yds,<span class="at">center=</span><span class="cn">TRUE</span>,<span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</details>
 <p>Let us know visualize some results. The first plot of Figure <a href="FAVAR.html#fig:USydsPCA1">10.1</a> shows the share of total variance explained by the different principal components (PCs). The second plot shows the facotr loadings. The two bottom plots show how yields (in black) are fitted by linear combinations of the first two PCs only.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="FAVAR.html#cb97-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb97-2"><a href="FAVAR.html#cb97-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">plt=</span><span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">95</span>,.<span class="dv">2</span>,.<span class="dv">8</span>))</span>
 <span id="cb97-3"><a href="FAVAR.html#cb97-3" tabindex="-1"></a><span class="fu">barplot</span>(PCA.yds<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">sum</span>(PCA.yds<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>),</span>
@@ -357,6 +361,7 @@ X_{i} &amp; = &amp; \sum_{j}\hat{X}_{i,j}=\sum_{j}p_{ij}F_{j}.
 <span id="cb97-21"><a href="FAVAR.html#cb97-21" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Fit of 10-year yields (2 PCs)&quot;</span>,</span>
 <span id="cb97-22"><a href="FAVAR.html#cb97-22" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Obs (black) / Fitted by 2PCs (dashed blue)&quot;</span>)</span>
 <span id="cb97-23"><a href="FAVAR.html#cb97-23" tabindex="-1"></a><span class="fu">lines</span>(USyields<span class="sc">$</span>date,Y10.hat,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">lty=</span><span class="dv">2</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:USydsPCA1"></span>
 <img src="IdentifStructShocks_files/figure-html/USydsPCA1-1.png" alt="Some PCA results. The dataset contains 8 time series of U.S. interest rates of different maturities." width="672" />
 <p class="caption">
@@ -379,6 +384,7 @@ where the <span class="math inline">\(e_t\)</span> are “small” serially and 
 <p>In their identification procedure, <span class="citation">Bernanke, Boivin, and Eliasz (<a href="#ref-Bernanke_Boivin_Eliasz_2005">2005</a>)</span> exploit the fact that macro-finance variables can be decomposed in two sets—fast-moving and slow-moving variables—and that only the former reacts contemporaneously to monetary-policy shocks. Now, how to estimate the (unobserved) factors <span class="math inline">\(F_t\)</span>? <span class="citation">Bernanke, Boivin, and Eliasz (<a href="#ref-Bernanke_Boivin_Eliasz_2005">2005</a>)</span> note that the first <span class="math inline">\(K+M\)</span> PCA of the whole dataset (<span class="math inline">\(y_t\)</span>), that they denote by <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> should span the same space as <span class="math inline">\(F_t\)</span> and <span class="math inline">\(x_t\)</span>. To get an estimate of <span class="math inline">\(F_t\)</span>, the dependence of <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> in <span class="math inline">\(x_t\)</span> has to be removed. This is done by regressing, by OLS, <span class="math inline">\(\hat{C}(F_t,x_t)\)</span> on <span class="math inline">\(x_t\)</span> and on <span class="math inline">\(\hat{C}^*(F_t)\)</span>, where the latter is an estimate of the common components other than <span class="math inline">\(x_t\)</span>. To proxy for <span class="math inline">\(\hat{C}^*(F_t)\)</span>, <span class="citation">Bernanke, Boivin, and Eliasz (<a href="#ref-Bernanke_Boivin_Eliasz_2005">2005</a>)</span> take principal components from the set of slow-moving variables, that are not comtemporaneously correlated to <span class="math inline">\(x_t\)</span>. Vector <span class="math inline">\(\hat{F}_t\)</span> is then computed as <span class="math inline">\(\hat{C}(F_t,x_t) - b_x x_t\)</span>, where <span class="math inline">\(b_x\)</span> are the coefficients coming from the previous OLS regressions.</p>
 <p>Note that this approach implies that the vectorial space spanned by <span class="math inline">\((\hat{F}_t,x_t)\)</span> is the same as that spanned by <span class="math inline">\(\hat{C}(F_t,x_t)\)</span>.</p>
 <p>Below, we employ this method on the dataset built by <span class="citation">McCracken and Ng (<a href="#ref-McCracken_Ng_2016">2016</a>)</span> —the <a href="https://research.stlouisfed.org/wp/more/2015-012">FRED:MD</a> database— that includes 119 time series.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="FAVAR.html#cb98-1" tabindex="-1"></a><span class="fu">library</span>(BVAR)<span class="co"># contains the fred_md dataset</span></span>
 <span id="cb98-2"><a href="FAVAR.html#cb98-2" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb98-3"><a href="FAVAR.html#cb98-3" tabindex="-1"></a><span class="fu">library</span>(vars)</span>
@@ -419,6 +425,7 @@ where the <span class="math inline">\(e_t\)</span> are “small” serially and 
 <span id="cb98-38"><a href="FAVAR.html#cb98-38" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">cumsum</span>(irf.all[,<span class="fu">which</span>(variables.<span class="fl">2.</span>plot[i]<span class="sc">==</span><span class="fu">names</span>(data))]),<span class="at">lwd=</span><span class="dv">2</span>,</span>
 <span id="cb98-39"><a href="FAVAR.html#cb98-39" tabindex="-1"></a>       <span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;months after shock&quot;</span>,<span class="at">ylab=</span>variables.<span class="fl">2.</span>plot[i])</span>
 <span id="cb98-40"><a href="FAVAR.html#cb98-40" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:FAVAR"></span>
 <img src="IdentifStructShocks_files/figure-html/FAVAR-1.png" alt="Responses of a monetary-policy shock. FAVAR approach of Bernanke, Boivin, and Eliasz (2005). FRED-MD dataset." width="95%" />
 <p class="caption">
@@ -477,7 +484,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/10-FAVAR.Rmd",
+    "link": "https://github.com/jrenne/IdentifStructShocks/edit/main/10-FAVAR.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -488,7 +495,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "download": ["IdentifStructShocks.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Local projection methods | The Identification of Dynamic Structural Shocks</title>
-  <meta name="description" content="This course XXX." />
+  <meta name="description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Local projection methods | The Identification of Dynamic Structural Shocks" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This course XXX." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
+  <meta name="github-repo" content="jrenne/IdentifStructShocks" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 8 Local projection methods | The Identification of Dynamic Structural Shocks" />
   
-  <meta name="twitter:description" content="This course XXX." />
+  <meta name="twitter:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   
 
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -314,6 +315,7 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta&#39;w_t + v_{i,t+h}.
 <p>This is for instance consistent with the case where <span class="math inline">\([\Delta GDP_t, \pi_t,i_t]&#39;\)</span> follows a VAR(1) and the monetary-policy shock does not contemporaneously affect <span class="math inline">\(\Delta GDP_t\)</span> and <span class="math inline">\(\pi_t\)</span>. The IRFs can then be estimated by LP, taking <span class="math inline">\(x_t = i_t\)</span> and <span class="math inline">\(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]&#39;\)</span>.</p>
 <p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}&#39;,\dots,y_{t-p}&#39;]&#39;\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 <p>In the following lines of code, we employ the <span class="citation">Jordà (<a href="#ref-Jorda_2005">2005</a>)</span>’s approach on the same dataset as the one used in Section <a href="identifStruct.html#Cholesky">2.3</a>. (We were then illustrating <span class="citation">Christiano, Eichenbaum, and Evans (<a href="#ref-Christiano_Eichenbaum_Evans_1996">1996</a>)</span>’s methodology.)</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="Projections.html#cb92-1" tabindex="-1"></a><span class="fu">library</span>(IdSS);<span class="fu">library</span>(vars)</span>
 <span id="cb92-2"><a href="Projections.html#cb92-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;USmonthly&quot;</span>)</span>
 <span id="cb92-3"><a href="Projections.html#cb92-3" tabindex="-1"></a><span class="co"># Select sample period:</span></span>
@@ -328,6 +330,7 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta&#39;w_t + v_{i,t+h}.
 <span id="cb92-12"><a href="Projections.html#cb92-12" tabindex="-1"></a>                            <span class="at">nb.lags.endog.var.4.control=</span><span class="dv">3</span>,</span>
 <span id="cb92-13"><a href="Projections.html#cb92-13" tabindex="-1"></a>                            <span class="at">indic.plot =</span> <span class="dv">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
 <span id="cb92-14"><a href="Projections.html#cb92-14" tabindex="-1"></a>                            <span class="at">confidence.interval =</span> <span class="fl">0.90</span>)</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:CEEJorda"></span>
 <img src="IdentifStructShocks_files/figure-html/CEEJorda-1.png" alt="Response to a monetary-policy shock. Identification approach of Jorda (2005)." width="95%" />
 <p class="caption">
@@ -470,6 +473,7 @@ S_{\varepsilon,e}&amp; \sigma^2_{e}
 where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="math inline">\(\sigma^2_{e}\)</span> result from the estimation of an AR process for <span class="math inline">\(z_t\)</span>, and where <span class="math inline">\(\Omega\)</span> and <span class="math inline">\(S_{\varepsilon,e}\)</span> are sample covariances for the VAR/AR residuals.</p>
 <p>For each simulated sample (of <span class="math inline">\(\tilde{y}_t\)</span> and <span class="math inline">\(\tilde{z}_t\)</span>, say), estimate <span class="math inline">\(\{\widetilde{\widehat{\Phi}}_1,\dots,\widetilde{\widehat{\Phi}}_p,\widetilde{\widehat{B}}_1\}\)</span> and associated <span class="math inline">\(\widetilde{\Psi}_{i,1,h}\)</span>. This provides e.g. a sequence of <span class="math inline">\(N\)</span> estimates of <span class="math inline">\(\Psi_{i,1,h}\)</span>, from which quantiles and conf. intervals can be deduced.</p>
 <p>In the following lines of code, we use this approach to estimate the response of macroeconomic variables to a monetary policy shock. The instrument is <code>FF4_TC</code> from the Ramsey’s database; they are base on the <span class="citation">Gertler and Karadi (<a href="#ref-Gertler_Karadi_2015">2015</a>)</span> approach, that use 3-month fed funds futures.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="Projections.html#cb93-1" tabindex="-1"></a><span class="fu">library</span>(vars);<span class="fu">library</span>(IdSS)</span>
 <span id="cb93-2"><a href="Projections.html#cb93-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;USmonthly&quot;</span>)</span>
 <span id="cb93-3"><a href="Projections.html#cb93-3" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1990-05-01&quot;</span>;Last.date <span class="ot">&lt;-</span> <span class="st">&quot;2012-6-01&quot;</span></span>
@@ -482,12 +486,14 @@ where <span class="math inline">\(\widehat{\rho}(L)\)</span> and <span class="ma
 <span id="cb93-10"><a href="Projections.html#cb93-10" tabindex="-1"></a><span class="fu">par</span>(<span class="at">plt=</span><span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">95</span>,.<span class="dv">1</span>,.<span class="dv">95</span>))</span>
 <span id="cb93-11"><a href="Projections.html#cb93-11" tabindex="-1"></a><span class="fu">plot</span>(USmonthly<span class="sc">$</span>DATES,Z[,<span class="dv">1</span>],<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
 <span id="cb93-12"><a href="Projections.html#cb93-12" tabindex="-1"></a><span class="fu">lines</span>(USmonthly<span class="sc">$</span>DATES,Z[,<span class="dv">2</span>],<span class="at">col=</span><span class="st">&quot;red&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">pch=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:essaiIV0"></span>
 <img src="IdentifStructShocks_files/figure-html/essaiIV0-1.png" alt="Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red)." width="95%" />
 <p class="caption">
 Figure 8.5: Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 months) in black (resp. in red).
 </p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="Projections.html#cb94-1" tabindex="-1"></a>considered.variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GS1&quot;</span>,<span class="st">&quot;LIP&quot;</span>,<span class="st">&quot;LCPI&quot;</span>,<span class="st">&quot;EBP&quot;</span>)</span>
 <span id="cb94-2"><a href="Projections.html#cb94-2" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(USmonthly[,considered.variables])</span>
 <span id="cb94-3"><a href="Projections.html#cb94-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(considered.variables)</span>
@@ -500,6 +506,7 @@ Figure 8.5: Gertler-Karadi monthly shocks, fed funds futures 3 months (resp. 6 m
 <span id="cb94-10"><a href="Projections.html#cb94-10" tabindex="-1"></a>          <span class="at">nb.bootstrap.replications =</span> <span class="dv">100</span>, </span>
 <span id="cb94-11"><a href="Projections.html#cb94-11" tabindex="-1"></a>          <span class="at">confidence.interval =</span> <span class="fl">0.90</span>,</span>
 <span id="cb94-12"><a href="Projections.html#cb94-12" tabindex="-1"></a>          <span class="at">indic.plot=</span><span class="dv">1</span>)</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:essaiIV1"></span>
 <img src="IdentifStructShocks_files/figure-html/essaiIV1-1.png" alt="Reponses to a monetary-policy shock, SVAR-IV approach." width="95%" />
 <p class="caption">
@@ -543,12 +550,14 @@ where <span class="math inline">\(\mathbf{S}\)</span> is the long-run variance o
 <p>If <span class="math inline">\(z_t\)</span> is suspected to be correlated to past values of <span class="math inline">\(\eta_{1,t}\)</span> but not to the <span class="math inline">\(\eta_{j,t}\)</span>’s, <span class="math inline">\(j&gt;1\)</span>, then one can add lags of <span class="math inline">\(z_t\)</span> as controls (method e.g. advocated by Ramey, 2016, p.108, considering the instrument by <span class="citation">Gertler and Karadi (<a href="#ref-Gertler_Karadi_2015">2015</a>)</span>).</p>
 <p>In the general case, one can use lags of <span class="math inline">\(y_t\)</span> as controls. Note that, even if (IV.iii) holds, adding controls may reduce the variance of the regression error.</p>
 <!-- As noted by @Stock_Watson_2018, the relevant variance is the long-run variance of the instrument-times-error term. They also recommend (p.926) using leads and lags of $z_t$ to improve efficiency. -->
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="Projections.html#cb95-1" tabindex="-1"></a>res.LP.IV <span class="ot">&lt;-</span> <span class="fu">make.LPIV.irf</span>(Y,Z,</span>
 <span id="cb95-2"><a href="Projections.html#cb95-2" tabindex="-1"></a>                           <span class="at">nb.periods.IRF =</span> <span class="dv">20</span>,</span>
 <span id="cb95-3"><a href="Projections.html#cb95-3" tabindex="-1"></a>                           <span class="at">nb.lags.Y.4.control=</span><span class="dv">4</span>,</span>
 <span id="cb95-4"><a href="Projections.html#cb95-4" tabindex="-1"></a>                           <span class="at">nb.lags.Z.4.control=</span><span class="dv">4</span>,</span>
 <span id="cb95-5"><a href="Projections.html#cb95-5" tabindex="-1"></a>                           <span class="at">indic.plot =</span> <span class="dv">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
 <span id="cb95-6"><a href="Projections.html#cb95-6" tabindex="-1"></a>                           <span class="at">confidence.interval =</span> <span class="fl">0.90</span>)</span></code></pre></div>
+</details>
 
 </div>
 </div>
@@ -642,7 +651,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/08-LocalProj.Rmd",
+    "link": "https://github.com/jrenne/IdentifStructShocks/edit/main/08-LocalProj.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -653,7 +662,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "download": ["IdentifStructShocks.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

@@ -1,0 +1,54 @@
+% Modern PDF typography, initially used by the Basic Statistical Results pilot.
+% XeLaTeX: use Arial when installed, otherwise the portable Helvetica-like Heros.
+\usepackage{fontspec}
+\IfFontExistsTF{Arial}{
+  \setmainfont{Arial}
+  \setsansfont{Arial}
+}{
+  \setmainfont{TeX Gyre Heros}
+  \setsansfont{TeX Gyre Heros}
+}
+% Keep the established mathematical fonts and notation unchanged.
+\usepackage{xcolor}
+\definecolor{TextbookInk}{HTML}{233F50}
+\definecolor{TextbookMuted}{HTML}{60717B}
+% Use standard LaTeX heading hooks; no extra heading package is required.
+\makeatletter
+\@ifundefined{chapter}{}{
+  \def\@makechapterhead#1{%
+    \vspace*{12pt}{\parindent\z@\raggedright\normalfont
+    \ifnum\c@secnumdepth>\m@ne
+      \if@mainmatter
+        {\small\bfseries\color{TextbookMuted}\@chapapp\space\thechapter\par}
+        \vskip10pt
+      \fi
+    \fi
+    {\fontsize{27}{32}\selectfont\bfseries\color{TextbookInk}#1\par}
+    \nobreak\vskip28pt}}
+  \def\@makeschapterhead#1{%
+    \vspace*{12pt}{\parindent\z@\raggedright\normalfont
+    \fontsize{27}{32}\selectfont\bfseries\color{TextbookInk}#1\par
+    \nobreak\vskip28pt}}
+}
+\renewcommand\section{\@startsection{section}{1}{\z@}
+  {-3ex plus -1ex minus -.2ex}{1.3ex plus .2ex}
+  {\normalfont\Large\bfseries\color{TextbookInk}}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}
+  {-2.5ex plus -.8ex minus -.2ex}{1ex plus .2ex}
+  {\normalfont\large\bfseries\color{TextbookInk}}}
+\makeatother
+\usepackage{geometry}
+\geometry{reset,a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm,headheight=14pt,headsep=8mm}
+\linespread{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 1pt minus 1pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{TextbookMuted}Identification of Dynamic Structural Shocks}
+\fancyhead[R]{\small\color{TextbookMuted}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{TextbookMuted}\thepage}\renewcommand{\headrulewidth}{0pt}}
+\usepackage{caption}
+\captionsetup{font={small,sf},labelfont=bf}
+\raggedbottom

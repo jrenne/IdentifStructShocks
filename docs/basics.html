@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks</title>
-  <meta name="description" content="This course XXX." />
+  <meta name="description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This course XXX." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
+  <meta name="github-repo" content="jrenne/IdentifStructShocks" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 1 VARs and IRFs: the basics | The Identification of Dynamic Structural Shocks" />
   
-  <meta name="twitter:description" content="This course XXX." />
+  <meta name="twitter:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   
 
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -349,10 +350,12 @@ If the <span class="math inline">\(\eta_t\)</span>’s are independent, we have 
 \mathbb{E}(y_{t+h}|\eta_t = 1) - \mathbb{E}(y_{t+h}) = \phi^h b.
 \]</span>
 Hence, the <strong>impulse response function (IRF)</strong> at horizon <span class="math inline">\(h\)</span> is simply $_h = ^h b $.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basics.html#cb2-1" tabindex="-1"></a>phi <span class="ot">&lt;-</span> .<span class="dv">8</span></span>
 <span id="cb2-2"><a href="basics.html#cb2-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> .<span class="dv">5</span></span>
 <span id="cb2-3"><a href="basics.html#cb2-3" tabindex="-1"></a><span class="fu">plot</span>(phi<span class="sc">^</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">30</span>)<span class="sc">*</span>b,<span class="at">type=</span><span class="st">&quot;b&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">xlab=</span><span class="st">&quot;Periods after shock&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>,<span class="at">las=</span><span class="dv">1</span>)</span>
 <span id="cb2-4"><a href="basics.html#cb2-4" tabindex="-1"></a><span class="fu">grid</span>()</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:simAR1"></span>
 <img src="IdentifStructShocks_files/figure-html/simAR1-1.png" alt="Impulse response functions for an AR(1) process: $y_t = \phi y_{t-1} + b \eta_t$, $\eta_t \sim i.i.d. \mathcal{N}(0,1)$." width="90%" />
 <p class="caption">
@@ -408,6 +411,7 @@ y_{t-1} +
 \tag{1.5}
 \end{eqnarray}\]</span></p>
 <p>We can use function <code>simul.VARMA</code> of package <code>IdSS</code> to produce IRFs (using <code>indic.IRF=1</code> in the list of arguments):</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="basics.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb3-2"><a href="basics.html#cb3-2" tabindex="-1"></a><span class="co"># ---- Specify model: ----</span></span>
 <span id="cb3-3"><a href="basics.html#cb3-3" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># (2,2,2) for (n,n,p)</span></span>
@@ -434,6 +438,7 @@ y_{t-1} +
 <span id="cb3-24"><a href="basics.html#cb3-24" tabindex="-1"></a>                    <span class="st">&quot; to a 1-unit increase in η&quot;</span>,i,<span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
 <span id="cb3-25"><a href="basics.html#cb3-25" tabindex="-1"></a>    <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>,<span class="at">col=</span><span class="st">&quot;grey&quot;</span>,<span class="at">lty=</span><span class="dv">3</span>)</span>
 <span id="cb3-26"><a href="basics.html#cb3-26" tabindex="-1"></a>  }}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:simVAR2"></span>
 <img src="IdentifStructShocks_files/figure-html/simVAR2-1.png" alt="Impulse response functions (VAR(2) specified above)." width="95%" />
 <p class="caption">
@@ -441,7 +446,9 @@ Figure 1.2: Impulse response functions (VAR(2) specified above).
 </p>
 </div>
 <p>The same type of output would be obtained by using the function <code>simul.VAR</code> of package <code>IdSS</code>:<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basics.html#cb4-1" tabindex="-1"></a>res.sim <span class="ot">&lt;-</span> <span class="fu">simul.VAR</span>(<span class="at">c=</span>c,<span class="at">Phi=</span>Phi,<span class="at">B=</span>B,<span class="at">nb.sim=</span><span class="dv">30</span>,<span class="at">indic.IRF=</span><span class="dv">1</span>,<span class="at">u.shock=</span>eta0)</span></code></pre></div>
+</details>
 </div>
 <div class="example">
 <p><span id="exm:IRFVARMA" class="example"><strong>Example 1.3  (IRFs of an SVARMA model) </strong></span>Consider the following VARMA(1,1) model:
@@ -465,6 +472,7 @@ y_{t-1} +  \\
 \tag{1.6}
 \end{eqnarray}\]</span></p>
 <p>We can use function <code>simul.VARMA</code> of package <code>IdSS</code> to produce IRFs (using <code>indic.IRF=1</code> in the list of arguments):</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="basics.html#cb5-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb5-2"><a href="basics.html#cb5-2" tabindex="-1"></a><span class="co"># ---- Specify model: ----</span></span>
 <span id="cb5-3"><a href="basics.html#cb5-3" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>)) <span class="co"># (2,2,1) for (n,n,p)</span></span>
@@ -493,6 +501,7 @@ y_{t-1} +  \\
 <span id="cb5-26"><a href="basics.html#cb5-26" tabindex="-1"></a>                    <span class="st">&quot; to a 1-unit increase in η&quot;</span>,i,<span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
 <span id="cb5-27"><a href="basics.html#cb5-27" tabindex="-1"></a>    <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>,<span class="at">col=</span><span class="st">&quot;grey&quot;</span>,<span class="at">lty=</span><span class="dv">3</span>)</span>
 <span id="cb5-28"><a href="basics.html#cb5-28" tabindex="-1"></a>  }}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:simVAR"></span>
 <img src="IdentifStructShocks_files/figure-html/simVAR-1.png" alt="Impulse response functions (SVARMA(1,1) specified above)." width="95%" />
 <p class="caption">
@@ -574,11 +583,13 @@ where <span class="math inline">\(\psi_{k,i}\)</span> denotes the <span class="m
 <p>To illustrate, let us use the VAR(2) model proposed above, in Example <a href="basics.html#exm:IRFVAR">1.2</a>. As explained above, the variance decomposition directly results from the knowledge of IRFs (shown in Figure <a href="basics.html#fig:simVAR2">1.2</a>):</p>
 <div class="example">
 <p><span id="exm:IRFVARvardec" class="example"><strong>Example 1.4  (Variance decomposition in the context of a VAR(2) defined.) </strong></span>The chunk below computes, for different horizons, the shares of the variances of the two variables that are accounted for by each of the two components of <span class="math inline">\(\eta_t\)</span> in the context of the model proposed in Example <a href="basics.html#exm:IRFVAR">1.2</a>.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basics.html#cb6-1" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># (2,2,2) for (n,n,p)</span></span>
 <span id="cb6-2"><a href="basics.html#cb6-2" tabindex="-1"></a>Phi[,,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(.<span class="dv">6</span>,<span class="dv">0</span>,.<span class="dv">2</span>,.<span class="dv">5</span>),<span class="dv">2</span>,<span class="dv">2</span>)</span>
 <span id="cb6-3"><a href="basics.html#cb6-3" tabindex="-1"></a>Phi[,,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">1</span>,.<span class="dv">2</span>,.<span class="dv">1</span>,.<span class="dv">3</span>),<span class="dv">2</span>,<span class="dv">2</span>)</span>
 <span id="cb6-4"><a href="basics.html#cb6-4" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(.<span class="dv">5</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="fl">1.5</span>,.<span class="dv">8</span>),<span class="dv">2</span>,<span class="dv">2</span>)</span>
 <span id="cb6-5"><a href="basics.html#cb6-5" tabindex="-1"></a><span class="fu">make.variance.decompo</span>(Phi,B,<span class="at">maxHorizon=</span><span class="dv">30</span>)</span></code></pre></div>
+</details>
 <div class="figure"><span style="display:block;" id="fig:simVAR2vardec"></span>
 <img src="IdentifStructShocks_files/figure-html/simVAR2vardec-1.png" alt="Variance decomposition of a VAR(2) model." width="672" />
 <p class="caption">
@@ -669,6 +680,7 @@ where <span class="math inline">\(N = p \times n^2\)</span>. In these expression
 <div class="example">
 <p><span id="exm:US3varselect" class="example"><strong>Example 1.6  (Three-variable VAR model) </strong></span>The following example illustrates how to estimate and analyze a three-variable VAR model using U.S. quarterly data on inflation, the output gap, and the short-term nominal interest rate.</p>
 <p>We begin by using the <code>VARselect</code> function from the <code>vars</code> package to determine the optimal lag length for the VAR specification.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="basics.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(vars)   <span class="co"># provides &#39;VARselect&#39; function</span></span>
 <span id="cb7-2"><a href="basics.html#cb7-2" tabindex="-1"></a><span class="fu">library</span>(IdSS)   <span class="co"># dataset is included here</span></span>
 <span id="cb7-3"><a href="basics.html#cb7-3" tabindex="-1"></a></span>
@@ -680,6 +692,7 @@ where <span class="math inline">\(N = p \times n^2\)</span>. In these expression
 <span id="cb7-9"><a href="basics.html#cb7-9" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data[<span class="fu">c</span>(<span class="st">&quot;infl&quot;</span>, <span class="st">&quot;y.gdp.gap&quot;</span>, <span class="st">&quot;r&quot;</span>)])</span>
 <span id="cb7-10"><a href="basics.html#cb7-10" tabindex="-1"></a></span>
 <span id="cb7-11"><a href="basics.html#cb7-11" tabindex="-1"></a><span class="fu">VARselect</span>(Y, <span class="at">lag.max =</span> <span class="dv">12</span>)</span></code></pre></div>
+</details>
 <pre><code>## $selection
 ## AIC(n)  HQ(n)  SC(n) FPE(n) 
 ##     11      3      2     11 
@@ -696,6 +709,7 @@ where <span class="math inline">\(N = p \times n^2\)</span>. In these expression
 ## SC(n)   0.55657468  0.68589305  0.88383014  0.9773709  1.0777475  1.2593990
 ## FPE(n)  0.61498914  0.60758020  0.64308309  0.6133871  0.5892917  0.6143270</code></pre>
 <p>Next, we estimate the VAR model including an exogenous variable — the commodity price index.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="basics.html#cb9-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">6</span></span>
 <span id="cb9-2"><a href="basics.html#cb9-2" tabindex="-1"></a>exogen <span class="ot">&lt;-</span> <span class="fu">matrix</span>(data<span class="sc">$</span>commo, <span class="at">ncol =</span> <span class="dv">1</span>); <span class="fu">colnames</span>(exogen) <span class="ot">&lt;-</span> <span class="st">&quot;commo&quot;</span></span>
 <span id="cb9-3"><a href="basics.html#cb9-3" tabindex="-1"></a>estVAR <span class="ot">&lt;-</span> <span class="fu">VAR</span>(Y, <span class="at">p =</span> p, <span class="at">exogen =</span> exogen) <span class="co"># estimate the VAR model</span></span>
@@ -703,14 +717,18 @@ where <span class="math inline">\(N = p \times n^2\)</span>. In these expression
 <span id="cb9-5"><a href="basics.html#cb9-5" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="fu">residuals</span>(estVAR)</span>
 <span id="cb9-6"><a href="basics.html#cb9-6" tabindex="-1"></a>Omega <span class="ot">&lt;-</span> <span class="fu">var</span>(eps) <span class="co"># covariance matrix of OLS residuals</span></span>
 <span id="cb9-7"><a href="basics.html#cb9-7" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">chol</span>(Omega)) <span class="co"># Cholesky decomposition of Omega (lower triangular)</span></span></code></pre></div>
+</details>
 <p>We can now verify whether the estimated VAR is stationary:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="basics.html#cb10-1" tabindex="-1"></a>PHI <span class="ot">&lt;-</span> <span class="fu">make.PHI</span>(Phi) <span class="co"># autoregressive matrix in companion form</span></span>
 <span id="cb10-2"><a href="basics.html#cb10-2" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">abs</span>(<span class="fu">eigen</span>(PHI)<span class="sc">$</span>values)) <span class="co"># eigenvalues must be &lt; 1 for stationarity</span></span></code></pre></div>
+</details>
 <pre><code>##  [1] 0.9485855 0.9485855 0.9180083 0.8539724 0.8539724 0.7683116 0.7683116
 ##  [8] 0.7509592 0.7509592 0.7465920 0.7465920 0.7392400 0.7392400 0.6720905
 ## [15] 0.6720905 0.4474043 0.4474043 0.3904400</code></pre>
 <p>All eigenvalues have moduli smaller than one, confirming that the system is stationary.</p>
 <p>We then compute and display the impulse response functions (IRFs) using the Cholesky identification approach (see Section <a href="identifStruct.html#Cholesky">2.3</a>), where the impact matrix <span class="math inline">\(B\)</span> comes from the Cholesky factorization of <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="basics.html#cb12-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">2</span>] <span class="co"># number of endogenous variables</span></span>
 <span id="cb12-2"><a href="basics.html#cb12-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(n, n))</span>
 <span id="cb12-3"><a href="basics.html#cb12-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">plt =</span> <span class="fu">c</span>(.<span class="dv">3</span>, .<span class="dv">95</span>, .<span class="dv">2</span>, .<span class="dv">8</span>))</span>
@@ -730,6 +748,7 @@ where <span class="math inline">\(N = p \times n^2\)</span>. In these expression
 <span id="cb12-17"><a href="basics.html#cb12-17" tabindex="-1"></a>         <span class="at">main =</span> <span class="fu">ifelse</span>(variable<span class="sc">==</span><span class="dv">1</span>,<span class="fu">paste</span>(<span class="st">&quot;... to shock η&quot;</span>, shock, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),<span class="st">&quot;&quot;</span>)</span>
 <span id="cb12-18"><a href="basics.html#cb12-18" tabindex="-1"></a>         )}</span>
 <span id="cb12-19"><a href="basics.html#cb12-19" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:US3varIRFs1"></span>
 <img src="IdentifStructShocks_files/figure-html/US3varIRFs1-1.png" alt="Impulse response functions for a 3-variable VAR model estimated on U.S. quarterly data." width="95%" />
 <p class="caption">
@@ -737,9 +756,11 @@ Figure 1.5: Impulse response functions for a 3-variable VAR model estimated on U
 </p>
 </div>
 <p>Finally, we compute the variance decomposition associated with the same model.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="basics.html#cb13-1" tabindex="-1"></a><span class="fu">make.variance.decompo</span>(Phi, B, <span class="at">maxHorizon =</span> <span class="dv">50</span>,</span>
 <span id="cb13-2"><a href="basics.html#cb13-2" tabindex="-1"></a>                      <span class="at">names.var =</span> <span class="fu">c</span>(<span class="st">&quot;Inflation&quot;</span>, <span class="st">&quot;Real activity&quot;</span>,</span>
 <span id="cb13-3"><a href="basics.html#cb13-3" tabindex="-1"></a>                                    <span class="st">&quot;Short-term rate&quot;</span>))</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:US3varVARdecomp"></span>
 <img src="IdentifStructShocks_files/figure-html/US3varVARdecomp-1.png" alt="Variance decomposition for a 3-variable VAR model estimated on U.S. quarterly data." width="95%" />
 <p class="caption">
@@ -819,6 +840,7 @@ where the component of <span class="math inline">\(\Sigma_{22}\)</span> correspo
 </ol>
 <div class="example">
 <p><span id="exm:BivariateVARCHE" class="example"><strong>Example 1.7  (Bivariate model for Switzerland) </strong></span>In this example, we consider a bivariate model capturing the joint dynamics of Swiss inflation and GDP growth rates.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="basics.html#cb14-1" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1980-01-01&quot;</span></span>
 <span id="cb14-2"><a href="basics.html#cb14-2" tabindex="-1"></a>Last.date  <span class="ot">&lt;-</span> <span class="st">&quot;2025-01-01&quot;</span></span>
 <span id="cb14-3"><a href="basics.html#cb14-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> international[,<span class="fu">c</span>(<span class="st">&quot;date&quot;</span>,<span class="st">&quot;CPI_CHE&quot;</span>,<span class="st">&quot;GDP_CHE&quot;</span>)]</span>
@@ -830,58 +852,79 @@ where the component of <span class="math inline">\(\Sigma_{22}\)</span> correspo
 <span id="cb14-9"><a href="basics.html#cb14-9" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>)</span>
 <span id="cb14-10"><a href="basics.html#cb14-10" tabindex="-1"></a><span class="fu">grid</span>()</span>
 <span id="cb14-11"><a href="basics.html#cb14-11" tabindex="-1"></a><span class="fu">lines</span>(data<span class="sc">$</span>date,data<span class="sc">$</span>GDP_CHE,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:US2varCHE"></span>
 <img src="IdentifStructShocks_files/figure-html/US2varCHE-1.png" alt="Inflation and GDP growth rates. Percent change from year ago." width="95%" />
 <p class="caption">
 Figure 1.7: Inflation and GDP growth rates. Percent change from year ago.
 </p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="basics.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code></pre></div>
+</details>
 <pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
 ##   method            from
 ##   as.zoo.data.frame zoo</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="basics.html#cb17-1" tabindex="-1"></a>test.adf.Y1  <span class="ot">&lt;-</span> <span class="fu">adf.test</span>(Y[,<span class="dv">1</span>],<span class="at">k=</span><span class="dv">16</span>)<span class="sc">$</span>p.value</span>
 <span id="cb17-2"><a href="basics.html#cb17-2" tabindex="-1"></a>test.adf.Y2  <span class="ot">&lt;-</span> <span class="fu">adf.test</span>(Y[,<span class="dv">2</span>],<span class="at">k=</span><span class="dv">16</span>)<span class="sc">$</span>p.value</span>
 <span id="cb17-3"><a href="basics.html#cb17-3" tabindex="-1"></a>test.pp.Y1   <span class="ot">&lt;-</span> <span class="fu">pp.test</span>(Y[,<span class="dv">1</span>])<span class="sc">$</span>p.value</span>
 <span id="cb17-4"><a href="basics.html#cb17-4" tabindex="-1"></a>test.pp.Y2   <span class="ot">&lt;-</span> <span class="fu">pp.test</span>(Y[,<span class="dv">2</span>])<span class="sc">$</span>p.value</span></code></pre></div>
+</details>
 <pre><code>## Warning in pp.test(Y[, 2]): p-value smaller than printed p-value</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="basics.html#cb19-1" tabindex="-1"></a>test.kpss.Y1 <span class="ot">&lt;-</span> <span class="fu">kpss.test</span>(Y[,<span class="dv">1</span>])<span class="sc">$</span>p.value</span></code></pre></div>
+</details>
 <pre><code>## Warning in kpss.test(Y[, 1]): p-value smaller than printed p-value</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="basics.html#cb21-1" tabindex="-1"></a>test.kpss.Y2 <span class="ot">&lt;-</span> <span class="fu">kpss.test</span>(Y[,<span class="dv">2</span>])<span class="sc">$</span>p.value</span></code></pre></div>
+</details>
 <pre><code>## Warning in kpss.test(Y[, 2]): p-value greater than printed p-value</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="basics.html#cb23-1" tabindex="-1"></a>test.adf  <span class="ot">&lt;-</span> <span class="fu">c</span>(test.adf.Y1,test.adf.Y2)</span>
 <span id="cb23-2"><a href="basics.html#cb23-2" tabindex="-1"></a>test.pp   <span class="ot">&lt;-</span> <span class="fu">c</span>(test.pp.Y1,test.pp.Y2)</span>
 <span id="cb23-3"><a href="basics.html#cb23-3" tabindex="-1"></a>test.kpss <span class="ot">&lt;-</span> <span class="fu">c</span>(test.kpss.Y1,test.kpss.Y2)</span>
 <span id="cb23-4"><a href="basics.html#cb23-4" tabindex="-1"></a><span class="fu">rbind</span>(test.adf,test.pp,test.kpss)</span></code></pre></div>
+</details>
 <pre><code>##                 [,1]       [,2]
 ## test.adf  0.26339041 0.03910545
 ## test.pp   0.06972378 0.01000000
 ## test.kpss 0.01000000 0.10000000</code></pre>
 <p>Estimate the model parameters for a given lag choice:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="basics.html#cb25-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb25-2"><a href="basics.html#cb25-2" tabindex="-1"></a>estVAR <span class="ot">&lt;-</span> <span class="fu">VAR</span>(Y, <span class="at">p =</span> p) <span class="co"># estimate the VAR model</span></span></code></pre></div>
+</details>
 <p>Check for residual autocorrelation (Portmanteau test) using the Portmanteau test or the one developed by <span class="citation">Breusch (<a href="#ref-Breusch_1978">1978</a>)</span> and <span class="citation">Godfrey (<a href="#ref-Godfrey_1978">1978</a>)</span> (a high p-value indicates no evidence of serial correlation):</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="basics.html#cb26-1" tabindex="-1"></a><span class="fu">serial.test</span>(estVAR, <span class="at">lags.pt =</span> <span class="dv">20</span>, <span class="at">type =</span> <span class="st">&quot;PT.asymptotic&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ##  Portmanteau Test (asymptotic)
 ## 
 ## data:  Residuals of VAR object estVAR
 ## Chi-squared = 63.047, df = 72, p-value = 0.7653</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="basics.html#cb28-1" tabindex="-1"></a><span class="fu">serial.test</span>(estVAR, <span class="at">lags.pt =</span> <span class="dv">20</span>, <span class="at">type =</span> <span class="st">&quot;BG&quot;</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ##  Breusch-Godfrey LM test
 ## 
 ## data:  Residuals of VAR object estVAR
 ## Chi-squared = 35.853, df = 20, p-value = 0.016</code></pre>
 <p>Let us now test for heteroskedasticity that would take place in the form of ARCH (see <span class="citation">Engle (<a href="#ref-Engle_1982">1982</a>)</span>). For that, we ca use the <code>arch.test</code> function (a high p-value suggests no ARCH effects):</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="basics.html#cb30-1" tabindex="-1"></a><span class="fu">arch.test</span>(estVAR, <span class="at">lags.multi =</span> <span class="dv">12</span>, <span class="at">multivariate.only =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</details>
 <pre><code>## 
 ##  ARCH (multivariate)
 ## 
 ## data:  Residuals of VAR object estVAR
 ## Chi-squared = 128.59, df = 108, p-value = 0.0861</code></pre>
 <p>Normality test can be perform using function <code>normality.test</code> (a high p-value suggests residuals are consistent with normality):</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="basics.html#cb32-1" tabindex="-1"></a><span class="fu">normality.test</span>(estVAR)</span></code></pre></div>
+</details>
 <pre><code>## $JB
 ## 
 ##  JB-Test (multivariate)
@@ -936,6 +979,7 @@ y^{(2)}_{t-1}
 \]</span>
 This restriction can be tested using a likelihood ratio test (see Def. <a href="append.html#def:LR">11.2</a>). The same logic extends straightforwardly to a VAR(<span class="math inline">\(p\)</span>) model by imposing <span class="math inline">\(\Phi^{(2,1)}_i = 0\)</span> for all <span class="math inline">\(i = 1,\dots,p\)</span>.</p>
 <p>Consider a model of the joint dynamics of US and Korean GDP growth and inflation rates. Figure <a href="basics.html#fig:VARdataUSAKOR">1.8</a> shows the data used in the estimation.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="basics.html#cb34-1" tabindex="-1"></a><span class="fu">library</span>(IdSS) <span class="co"># this package contains the data</span></span>
 <span id="cb34-2"><a href="basics.html#cb34-2" tabindex="-1"></a><span class="fu">library</span>(vars) <span class="co"># this package contains standard VAR estimation tools</span></span>
 <span id="cb34-3"><a href="basics.html#cb34-3" tabindex="-1"></a>names.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GDP_USA&quot;</span>,<span class="st">&quot;CPI_USA&quot;</span>,<span class="st">&quot;GDP_KOR&quot;</span>,<span class="st">&quot;CPI_KOR&quot;</span>)</span>
@@ -950,6 +994,7 @@ This restriction can be tested using a likelihood ratio test (see Def. <a href="
 <span id="cb34-12"><a href="basics.html#cb34-12" tabindex="-1"></a><span class="fu">plot</span>(data<span class="sc">$</span>date,data<span class="sc">$</span>CPI_KOR,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">las=</span><span class="dv">1</span>,</span>
 <span id="cb34-13"><a href="basics.html#cb34-13" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Inflation (y-o-y)&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;&quot;</span>);<span class="fu">grid</span>()</span>
 <span id="cb34-14"><a href="basics.html#cb34-14" tabindex="-1"></a><span class="fu">lines</span>(data<span class="sc">$</span>date,data<span class="sc">$</span>CPI_USA,<span class="at">col=</span><span class="st">&quot;grey&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">las=</span><span class="dv">1</span>)</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:VARdataUSAKOR"></span>
 <img src="IdentifStructShocks_files/figure-html/VARdataUSAKOR-1.png" alt="GDP log growth rates and inflation rates for the US and Korea. Black lines are for Korea; grey lines are for the US. All series are year-on-year growth rates, expressed in percent." width="95%" />
 <p class="caption">
@@ -957,11 +1002,14 @@ Figure 1.8: GDP log growth rates and inflation rates for the US and Korea. Black
 </p>
 </div>
 <p>Let us first estimate an unrestricted VAR(<span class="math inline">\(p\)</span>) model using these data.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="basics.html#cb35-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">4</span></span>
 <span id="cb35-2"><a href="basics.html#cb35-2" tabindex="-1"></a>estVAR <span class="ot">&lt;-</span> <span class="fu">VAR</span>(Y, <span class="at">p =</span> p) <span class="co"># estimate the VAR model</span></span>
 <span id="cb35-3"><a href="basics.html#cb35-3" tabindex="-1"></a>L0 <span class="ot">&lt;-</span> <span class="fu">logLik</span>(estVAR)</span></code></pre></div>
+</details>
 <p>The model log-likelihood is stored in <code>L0</code>.</p>
 <p>Let us now estimate a retricted model:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="basics.html#cb36-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">2</span>]</span>
 <span id="cb36-2"><a href="basics.html#cb36-2" tabindex="-1"></a>restrict <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>,n,<span class="dv">1</span><span class="sc">+</span>p<span class="sc">*</span>n) <span class="co"># &#39;restrict&#39; specifies restrictions; last column = &#39;c&#39;.</span></span>
 <span id="cb36-3"><a href="basics.html#cb36-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){</span>
@@ -969,6 +1017,7 @@ Figure 1.8: GDP log growth rates and inflation rates for the US and Korea. Black
 <span id="cb36-5"><a href="basics.html#cb36-5" tabindex="-1"></a>}</span>
 <span id="cb36-6"><a href="basics.html#cb36-6" tabindex="-1"></a>estVARrestr <span class="ot">&lt;-</span> <span class="fu">restrict</span>(estVAR, <span class="at">method =</span> <span class="st">&quot;man&quot;</span>, <span class="at">resmat =</span> restrict)</span>
 <span id="cb36-7"><a href="basics.html#cb36-7" tabindex="-1"></a>Lrestr <span class="ot">&lt;-</span> <span class="fu">logLik</span>(estVARrestr)</span></code></pre></div>
+</details>
 <p>The model log-likelihood is stored in <code>Lrestr</code>. We can perform a Likelihood Ratio (LR) test to see whether the data call for the exogeneity of the US variables. According to its definition (Def. <a href="append.html#def:LR">11.2</a>), the LR test statistics is given by:
 <span class="math display">\[
 \xi^{LR} =2 \times (\hat{L} - \hat{L}^*),
@@ -978,13 +1027,17 @@ where <span class="math inline">\(\hat{L}\)</span> and <span class="math inline"
 \xi^{LR} \sim \chi^2\left[p\left(\frac{n}{2}\right)^2\right].
 \]</span></p>
 <p>In our context, we can therefore apply the test as follows:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="basics.html#cb37-1" tabindex="-1"></a>LRstat <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(L0 <span class="sc">-</span> Lrestr)</span>
 <span id="cb37-2"><a href="basics.html#cb37-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">length</span>(restrict)<span class="sc">-</span><span class="fu">sum</span>(restrict)</span>
 <span id="cb37-3"><a href="basics.html#cb37-3" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(LRstat,<span class="at">df=</span>df)</span>
 <span id="cb37-4"><a href="basics.html#cb37-4" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">c</span>(pvalue))</span></code></pre></div>
+</details>
 <pre><code>## [1] 0.3977775</code></pre>
 <p>Hence, the test cannot reject the null hypothesis of block exogeneity since the p-value is larger than conventional thresholds. In terms or coding, we could have used, equivalently, the <code>lrtest</code> function to perform this test:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="basics.html#cb39-1" tabindex="-1"></a><span class="fu">lrtest</span>(estVAR,estVARrestr)</span></code></pre></div>
+</details>
 <pre><code>## Likelihood ratio test
 ## 
 ## Model 1: VAR(y = Y, p = p)
@@ -993,6 +1046,7 @@ where <span class="math inline">\(\hat{L}\)</span> and <span class="math inline"
 ## 1  68 -1685.5                      
 ## 2  52 -1693.9 -16 16.813     0.3978</code></pre>
 <p>Let us compare the IRFs in both models (w/ and w/o block exogeneity). In Figure <a href="basics.html#fig:IRFblockexog">1.9</a>, the grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.) Notice that, in the restricted model, the last two shocks (<span class="math inline">\(\eta_{3,t}\)</span> and <span class="math inline">\(\eta_{4,t}\)</span>) do not affect US variables.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="basics.html#cb41-1" tabindex="-1"></a><span class="co"># Unrestricted model:</span></span>
 <span id="cb41-2"><a href="basics.html#cb41-2" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">Acoef</span>(estVAR)</span>
 <span id="cb41-3"><a href="basics.html#cb41-3" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="fu">residuals</span>(estVAR)</span>
@@ -1023,6 +1077,7 @@ where <span class="math inline">\(\hat{L}\)</span> and <span class="math inline"
 <span id="cb41-28"><a href="basics.html#cb41-28" tabindex="-1"></a>    <span class="fu">lines</span>(res.sim_restr[, variable], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,<span class="at">col=</span><span class="st">&quot;grey&quot;</span>)</span>
 <span id="cb41-29"><a href="basics.html#cb41-29" tabindex="-1"></a>  }</span>
 <span id="cb41-30"><a href="basics.html#cb41-30" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:IRFblockexog"></span>
 <img src="IdentifStructShocks_files/figure-html/IRFblockexog-1.png" alt="Impulse response functions in the context of VAR models depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)" width="95%" />
 <p class="caption">
@@ -1030,8 +1085,10 @@ Figure 1.9: Impulse response functions in the context of VAR models depicting th
 </p>
 </div>
 <p>Finally, let us compute the variance decomposition in both models. Let us start with the unrestricted model:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="basics.html#cb42-1" tabindex="-1"></a><span class="fu">make.variance.decompo</span>(Phi, B, <span class="at">maxHorizon =</span> <span class="dv">50</span>,</span>
 <span id="cb42-2"><a href="basics.html#cb42-2" tabindex="-1"></a>                      <span class="at">names.var =</span> <span class="fu">names</span>(Y),<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:VARdecblockexogUS"></span>
 <img src="IdentifStructShocks_files/figure-html/VARdecblockexogUS-1.png" alt="Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The grey lines correspond to a contrained model, where Korean variables do not affect US ones. (In other words, in the restricted model, US variables are exogenous.)" width="95%" />
 <p class="caption">
@@ -1039,8 +1096,10 @@ Figure 1.10: Variance decomposition in the context of a VAR model depicting the 
 </p>
 </div>
 <p>Figure <a href="basics.html#fig:VARdecblockexogCH">1.11</a> shows the variance decomposition in the context of the restricted model, that entails block exogeneity:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="basics.html#cb43-1" tabindex="-1"></a><span class="fu">make.variance.decompo</span>(Phi_restr, B_restr, <span class="at">maxHorizon =</span> <span class="dv">50</span>,</span>
 <span id="cb43-2"><a href="basics.html#cb43-2" tabindex="-1"></a>                      <span class="at">names.var =</span> <span class="fu">names</span>(Y),<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:VARdecblockexogCH"></span>
 <img src="IdentifStructShocks_files/figure-html/VARdecblockexogCH-1.png" alt="Variance decomposition in the context of a VAR model depicting the joint dynamics of US and Korean GDP growth and inflation rates. Structural shocks are identified by using the Cholesky decomposition. The model is contrained in such a way that Korean variables do not affect US ones. (In other words, in this restricted model, US variables are exogenous.)" width="95%" />
 <p class="caption">
@@ -1083,7 +1142,9 @@ F=\frac{(RSS-USS)/p}{USS/(T-2p-1)},
 \]</span>
 where RSS is the Restricted sum of squared residuals and USS is the Unrestricted sum of squared residuals. Under <span class="math inline">\(H_{0}\)</span>, the <span class="math inline">\(F\)</span>-statistic is distributed as <span class="math inline">\(\mathcal{F}(p,T-2p-1)\)</span> (See Table <a href="append.html#tab:Fstat">11.4</a>).<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <p>According to the following lines of code, the output gap Granger-causes inflation, but the reverse is not true:</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="basics.html#cb44-1" tabindex="-1"></a><span class="fu">grangertest</span>(<span class="at">x=</span><span class="fu">as.matrix</span>(US3var[,<span class="fu">c</span>(<span class="st">&quot;y.gdp.gap&quot;</span>,<span class="st">&quot;infl&quot;</span>)]),<span class="at">order=</span><span class="dv">3</span>)</span></code></pre></div>
+</details>
 <pre><code>## Granger causality test
 ## 
 ## Model 1: infl ~ Lags(infl, 1:3) + Lags(y.gdp.gap, 1:3)
@@ -1093,7 +1154,9 @@ where RSS is the Restricted sum of squared residuals and USS is the Unrestricted
 ## 2    217 -3 3.9761 0.008745 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="basics.html#cb46-1" tabindex="-1"></a><span class="fu">grangertest</span>(<span class="at">x=</span><span class="fu">as.matrix</span>(US3var[,<span class="fu">c</span>(<span class="st">&quot;infl&quot;</span>,<span class="st">&quot;y.gdp.gap&quot;</span>)]),<span class="at">order=</span><span class="dv">3</span>)</span></code></pre></div>
+</details>
 <pre><code>## Granger causality test
 ## 
 ## Model 1: y.gdp.gap ~ Lags(y.gdp.gap, 1:3) + Lags(infl, 1:3)
@@ -1171,7 +1234,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/01-Basics.Rmd",
+    "link": "https://github.com/jrenne/IdentifStructShocks/edit/main/01-Basics.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -1182,7 +1245,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "download": ["IdentifStructShocks.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

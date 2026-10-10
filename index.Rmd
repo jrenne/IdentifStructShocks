@@ -5,12 +5,12 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-fontsize: 12pt
+fontsize: 11pt
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "This course XXX."
+github-repo: jrenne/IdentifStructShocks
+description: "A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods."
 css: "my-style.css"
 ---
 

@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks</title>
-  <meta name="description" content="This course XXX." />
+  <meta name="description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This course XXX." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
+  <meta name="github-repo" content="jrenne/IdentifStructShocks" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks" />
   
-  <meta name="twitter:description" content="This course XXX." />
+  <meta name="twitter:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   
 
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -334,6 +335,7 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <li>Decreases in the federal funds rate</li>
 </ul>
 <p>What about output? Since is the response of interest, we leave it un-restricted.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="Signs.html#cb72-1" tabindex="-1"></a><span class="fu">library</span>(IdSS);<span class="fu">library</span>(vars);<span class="fu">library</span>(Matrix)</span>
 <span id="cb72-2"><a href="Signs.html#cb72-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;USmonthly&quot;</span>)</span>
 <span id="cb72-3"><a href="Signs.html#cb72-3" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1965-01-01&quot;</span></span>
@@ -368,18 +370,21 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <span id="cb72-32"><a href="Signs.html#cb72-32" tabindex="-1"></a>             horizon,</span>
 <span id="cb72-33"><a href="Signs.html#cb72-33" tabindex="-1"></a>             <span class="at">recursive =</span><span class="dv">1</span> <span class="co">#  =0 &lt;- draw Q directly, =1 &lt;- draw q recursively</span></span>
 <span id="cb72-34"><a href="Signs.html#cb72-34" tabindex="-1"></a>  )</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:signrestr1"></span>
 <img src="IdentifStructShocks_files/figure-html/signrestr1-1.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%" />
 <p class="caption">
 Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="Signs.html#cb73-1" tabindex="-1"></a><span class="co"># Output</span></span>
 <span id="cb73-2"><a href="Signs.html#cb73-2" tabindex="-1"></a>IRFs.signs <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>IRFs.signs <span class="co"># all the simulated IRFs</span></span>
 <span id="cb73-3"><a href="Signs.html#cb73-3" tabindex="-1"></a>nb.rotations <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>xx <span class="co"># total number of rotations</span></span>
 <span id="cb73-4"><a href="Signs.html#cb73-4" tabindex="-1"></a>all.CI.median <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>all.CI.median <span class="co"># median IRFs for the selected shocks</span></span>
 <span id="cb73-5"><a href="Signs.html#cb73-5" tabindex="-1"></a>all.CI.lower.bounds <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>all.CI.lower.bounds <span class="co"># lower-bound IRFs for the selected shocks</span></span>
 <span id="cb73-6"><a href="Signs.html#cb73-6" tabindex="-1"></a>all.CI.upper.bounds <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>all.CI.upper.bounds <span class="co"># upper-bound IRFs for the selected shocks</span></span></code></pre></div>
+</details>
 <!-- Another approach -->
 <!-- If $B$ satisfies $BB'=\Omega_\varepsilon$, the vectors of $B$ are called **impulse vectors** -->
 <!-- Let $b$ be en impulse vector, there exists a unit-length vector $q$ (i.e. $q'q=1$) so that \[b=Pq\] -->
@@ -499,7 +504,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/04-SignsRestrict.Rmd",
+    "link": "https://github.com/jrenne/IdentifStructShocks/edit/main/04-SignsRestrict.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -510,7 +515,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "download": ["IdentifStructShocks.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

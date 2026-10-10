@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Identification based on non-normality of the shocks | The Identification of Dynamic Structural Shocks</title>
-  <meta name="description" content="This course XXX." />
+  <meta name="description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Identification based on non-normality of the shocks | The Identification of Dynamic Structural Shocks" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This course XXX." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
+  <meta name="github-repo" content="jrenne/IdentifStructShocks" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 7 Identification based on non-normality of the shocks | The Identification of Dynamic Structural Shocks" />
   
-  <meta name="twitter:description" content="This course XXX." />
+  <meta name="twitter:description" content="A course on the identification and estimation of dynamic responses to structural shocks, covering VARs, inference, sign restrictions, external instruments, local projections, and non-Gaussian methods." />
   
 
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -523,6 +524,7 @@ A = (C(A)+Id)^{-1} (C(A)-Id).
 </table>
 <div class="example">
 <p><span id="exm:GMR2017" class="example"><strong>Example 7.1  (Non-Gaussian monetary-policy shocks) </strong></span>We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (<span class="math inline">\(T=224\)</span>). We consider three dependent variables: inflation (<span class="math inline">\(\pi_t\)</span>), economic activity (<span class="math inline">\(z_t\)</span>, the output gap) and the nominal short-term interest rate (<span class="math inline">\(r_t\)</span>). Changes in the log of oil prices are added as an exogenous variable (<span class="math inline">\(x_t\)</span>).</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="NonGaussian.html#cb85-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
 <span id="cb85-2"><a href="NonGaussian.html#cb85-2" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1959-04-01&quot;</span></span>
 <span id="cb85-3"><a href="NonGaussian.html#cb85-3" tabindex="-1"></a>Last.date  <span class="ot">&lt;-</span> <span class="st">&quot;2015-01-01&quot;</span></span>
@@ -532,12 +534,14 @@ A = (C(A)+Id)^{-1} (C(A)-Id).
 <span id="cb85-7"><a href="NonGaussian.html#cb85-7" tabindex="-1"></a>names.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;inflation&quot;</span>,<span class="st">&quot;real activity&quot;</span>,<span class="st">&quot;short-term rate&quot;</span>)</span>
 <span id="cb85-8"><a href="NonGaussian.html#cb85-8" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">1</span>]</span>
 <span id="cb85-9"><a href="NonGaussian.html#cb85-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">2</span>]</span></code></pre></div>
+</details>
 <p>Let us denote by <span class="math inline">\(W_t\)</span> the set of information made of the past values of <span class="math inline">\(y_t= [\pi_t,z_t,r_t]\)</span>, that is <span class="math inline">\(\{y_{t-1},y_{t-2},\dots\}\)</span>, and of exogenous variables <span class="math inline">\(\{x_{t},x_{t-1},\dots\}\)</span>. The reduced-form VAR model reads:
 <span class="math display">\[
 y_t  = \underbrace{\mu + \sum_{i=1}^{p} \Phi_i y_{t-i} + \Theta x_t}_{a(W_t;\theta)} + u_t
 \]</span>
 where the <span class="math inline">\(u_t\)</span>’s are assumed to be serially independent, with zero mean and variance-covariance matrix <span class="math inline">\(\Omega\)</span>.</p>
 <p>Matrices <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Phi_i\)</span>, <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(\Omega\)</span> are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="NonGaussian.html#cb86-1" tabindex="-1"></a>nb.lags <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="co"># number of lags used in the VAR model</span></span>
 <span id="cb86-2"><a href="NonGaussian.html#cb86-2" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb86-3"><a href="NonGaussian.html#cb86-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb.lags){</span>
@@ -557,6 +561,7 @@ where the <span class="math inline">\(u_t\)</span>’s are assumed to be seriall
 <span id="cb86-17"><a href="NonGaussian.html#cb86-17" tabindex="-1"></a>Omega <span class="ot">&lt;-</span> <span class="fu">var</span>(U) <span class="co"># Covariance matrix of the OLS residuals.</span></span>
 <span id="cb86-18"><a href="NonGaussian.html#cb86-18" tabindex="-1"></a>Omeg12 <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">chol</span>(Omega)) <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
 <span id="cb86-19"><a href="NonGaussian.html#cb86-19" tabindex="-1"></a>Eps <span class="ot">&lt;-</span> U <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(Omeg12)) <span class="co"># Recover associated structural shocks</span></span></code></pre></div>
+</details>
 <p>We want to estimate the orthogonal matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(u_t=\Omega^{1/2}C \eta_t\)</span>, where</p>
 <ul>
 <li><span class="math inline">\(\Omega^{1/2}\)</span> results from the Cholesky decomposition of <span class="math inline">\(\Omega\)</span> and</li>
@@ -568,6 +573,7 @@ where the <span class="math inline">\(u_t\)</span>’s are assumed to be seriall
 \]</span>
 By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it comes that the covariance matrix of these residuals is <span class="math inline">\(Id\)</span>.</p>
 <p>The pseudo density functions are distinct and asymmetric mixtures of Gaussian distributions.</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="NonGaussian.html#cb87-1" tabindex="-1"></a>distri <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
 <span id="cb87-2"><a href="NonGaussian.html#cb87-2" tabindex="-1"></a>  <span class="at">type=</span><span class="fu">c</span>(<span class="st">&quot;mixt.gaussian&quot;</span>,<span class="st">&quot;mixt.gaussian&quot;</span>,<span class="st">&quot;mixt.gaussian&quot;</span>),</span>
 <span id="cb87-3"><a href="NonGaussian.html#cb87-3" tabindex="-1"></a>  <span class="at">df=</span><span class="fu">c</span>(<span class="cn">NaN</span>,<span class="cn">NaN</span>,<span class="cn">NaN</span>),</span>
@@ -596,6 +602,7 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 <span id="cb87-26"><a href="NonGaussian.html#cb87-26" tabindex="-1"></a>st.dev <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(V))</span>
 <span id="cb87-27"><a href="NonGaussian.html#cb87-27" tabindex="-1"></a>t.stat <span class="ot">&lt;-</span> <span class="fu">c</span>(C.PML)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(V))</span>
 <span id="cb87-28"><a href="NonGaussian.html#cb87-28" tabindex="-1"></a><span class="fu">cbind</span>(param,st.dev,t.stat) <span class="co"># print results of PML estimation</span></span></code></pre></div>
+</details>
 <pre><code>##             param      st.dev      t.stat
 ##  [1,]  0.94417705 0.040848382  23.1141845
 ##  [2,] -0.32711569 0.118802653  -2.7534376
@@ -608,8 +615,10 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 ##  [9,]  0.99222290 0.007785691 127.4418551</code></pre>
 <p>(Note: it is always useful to combine two optimization algorithms, such as <code>Nelder-Mead</code> and <code>BFGS</code>.)</p>
 <p>We would obtain close results by neglecting commodity prices. In that case, one can simply use the function <code>estim.SVAR.ICA</code> of the <code>IdSS</code> package. Let us compare the <span class="math inline">\(C\)</span> matrix obtained in the two cases (with or without commodity prices):</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="NonGaussian.html#cb89-1" tabindex="-1"></a>ICA.res.no.commo <span class="ot">&lt;-</span> <span class="fu">estim.SVAR.ICA</span>(Y,<span class="at">distri =</span> distri,<span class="at">p=</span><span class="dv">6</span>)</span>
 <span id="cb89-2"><a href="NonGaussian.html#cb89-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(ICA.res.no.commo<span class="sc">$</span>C.PML,<span class="cn">NaN</span>,C.PML),<span class="dv">3</span>)</span></code></pre></div>
+</details>
 <pre><code>##        [,1]  [,2]   [,3] [,4]   [,5]  [,6]   [,7]
 ## [1,]  0.956 0.287 -0.059  NaN  0.944 0.321 -0.075
 ## [2,] -0.292 0.950 -0.108  NaN -0.327 0.940 -0.099
@@ -621,6 +630,7 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 <li><strong>Demand shock</strong> have influences of same signs on economic activity and on inflation.</li>
 </ul>
 <p>Let us compute the IRFs associated with the three structural shocks. (For the sake of comparison, the first line of plots shows the IRFs to a monetary-policy shock obtained from a Cholesky-based approach where the short-term rate is ordered last.)</p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="NonGaussian.html#cb91-1" tabindex="-1"></a>IRF.Chol <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(n,<span class="dv">41</span>,n))</span>
 <span id="cb91-2"><a href="NonGaussian.html#cb91-2" tabindex="-1"></a>IRF.ICA  <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(n,<span class="dv">41</span>,n))</span>
 <span id="cb91-3"><a href="NonGaussian.html#cb91-3" tabindex="-1"></a>PHI <span class="ot">&lt;-</span> <span class="fu">list</span>();<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb.lags){PHI[[i]]<span class="ot">&lt;-</span><span class="fu">array</span>(Phi,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,nb.lags))[,,i]}</span>
@@ -634,6 +644,7 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 <span id="cb91-11"><a href="NonGaussian.html#cb91-11" tabindex="-1"></a>    <span class="fu">t</span>(<span class="fu">simul.VAR</span>(<span class="at">c=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>),<span class="at">Phi=</span>PHI,<span class="at">B=</span>Omeg12<span class="sc">%*%</span>C.PML,<span class="at">nb.sim=</span><span class="dv">41</span>,</span>
 <span id="cb91-12"><a href="NonGaussian.html#cb91-12" tabindex="-1"></a>                <span class="at">y0.star=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span><span class="sc">*</span>nb.lags),<span class="at">indic.IRF =</span> <span class="dv">1</span>,<span class="at">u.shock =</span> u.shock))</span>
 <span id="cb91-13"><a href="NonGaussian.html#cb91-13" tabindex="-1"></a>}</span></code></pre></div>
+</details>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:ICAFigIRF"></span>
 <img src="IdentifStructShocks_files/figure-html/ICAFigIRF-1.png" alt="The first row of plots shows the responses of the three endogenous variables to the monetary policy shock in the context of a Cholesky-idendtified SVAR (ordering: inflation, output gap, interest rate). The next three rows of plots show the repsonses of the endogenous variables to the three structural shocks identified by ICA. The last one (Shock 3) is close to the Cholesky-identified monetary policy shock." width="95%" />
 <p class="caption">
@@ -1056,7 +1067,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/rstudio/bookdown-demo/edit/master/07-NonNormal.Rmd",
+    "link": "https://github.com/jrenne/IdentifStructShocks/edit/main/07-NonNormal.Rmd",
     "text": "Edit"
   },
   "history": {
@@ -1067,7 +1078,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "download": ["IdentifStructShocks.pdf"],
   "search": {
     "engine": "fuse",
     "options": null
