@@ -3,7 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-  12pt,
+  11pt,
 ]{book}
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -120,6 +120,78 @@
 
 \usepackage[a4paper, total={6.5in, 9in}]{geometry}
 
+
+% Tables: width-safe regression output and multi-page statistical tables.
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{caption}
+\captionsetup[table]{font=small,labelfont=bf,skip=6pt}
+\setlength{\LTcapwidth}{\textwidth}
+\usepackage{float}
+
+% Avoid stretching vertical space around tables on sparsely filled pages.
+\raggedbottom
+
+% Keep enough room for a pilot exercise before starting its statement.
+\usepackage{needspace}
+
+% Practice prompts, exercise statements, and chapter recaps.
+\input{pdf-boxes.tex}
+% Modern PDF typography, initially used by the Basic Statistical Results pilot.
+% XeLaTeX: use Arial when installed, otherwise the portable Helvetica-like Heros.
+\usepackage{fontspec}
+\IfFontExistsTF{Arial}{
+  \setmainfont{Arial}
+  \setsansfont{Arial}
+}{
+  \setmainfont{TeX Gyre Heros}
+  \setsansfont{TeX Gyre Heros}
+}
+% Keep the established mathematical fonts and notation unchanged.
+\usepackage{xcolor}
+\definecolor{TextbookInk}{HTML}{233F50}
+\definecolor{TextbookMuted}{HTML}{60717B}
+% Use standard LaTeX heading hooks; no extra heading package is required.
+\makeatletter
+\@ifundefined{chapter}{}{
+  \def\@makechapterhead#1{%
+    \vspace*{12pt}{\parindent\z@\raggedright\normalfont
+    \ifnum\c@secnumdepth>\m@ne
+      \if@mainmatter
+        {\small\bfseries\color{TextbookMuted}\@chapapp\space\thechapter\par}
+        \vskip10pt
+      \fi
+    \fi
+    {\fontsize{27}{32}\selectfont\bfseries\color{TextbookInk}#1\par}
+    \nobreak\vskip28pt}}
+  \def\@makeschapterhead#1{%
+    \vspace*{12pt}{\parindent\z@\raggedright\normalfont
+    \fontsize{27}{32}\selectfont\bfseries\color{TextbookInk}#1\par
+    \nobreak\vskip28pt}}
+}
+\renewcommand\section{\@startsection{section}{1}{\z@}
+  {-3ex plus -1ex minus -.2ex}{1.3ex plus .2ex}
+  {\normalfont\Large\bfseries\color{TextbookInk}}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}
+  {-2.5ex plus -.8ex minus -.2ex}{1ex plus .2ex}
+  {\normalfont\large\bfseries\color{TextbookInk}}}
+\makeatother
+\usepackage{geometry}
+\geometry{reset,a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm,headheight=14pt,headsep=8mm}
+\linespread{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 1pt minus 1pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{TextbookMuted}Identification of Dynamic Structural Shocks}
+\fancyhead[R]{\small\color{TextbookMuted}\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\color{TextbookMuted}\thepage}\renewcommand{\headrulewidth}{0pt}}
+\usepackage{caption}
+\captionsetup{font={small,sf},labelfont=bf}
+\raggedbottom
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 \usepackage{bookmark}
@@ -133,7 +205,7 @@
 
 \title{The Identification of Dynamic Structural Shocks}
 \author{Kenza Benhima and Jean-Paul Renne}
-\date{2026-01-04}
+\date{2026-10-10}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -348,9 +420,9 @@ This is obtained by applying the operator \(\frac{\partial}{\partial \eta_{t}}\)
 Typically, consider the VAR(2) case. The first steps of the algorithm mentioned in the last bullet point are as follows:
 \begin{eqnarray*}
 y_t &=& \Phi_1 {\color{blue}y_{t-1}} + \Phi_2 y_{t-2} + B \eta_t  \\
-&=& \Phi_1 \color{blue}{(\Phi_1 y_{t-2} + \Phi_2 y_{t-3} + B \eta_{t-1})} + \Phi_2 y_{t-2} + B \eta_t  \\
-&=& B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) \color{red}{y_{t-2}} + \Phi_1\Phi_2 y_{t-3}  \\
-&=& B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) \color{red}{(\Phi_1 y_{t-3} + \Phi_2 y_{t-4} + B \eta_{t-2})} + \Phi_1\Phi_2 y_{t-3} \\
+&=& \Phi_1 {\color{blue}(\Phi_1 y_{t-2} + \Phi_2 y_{t-3} + B \eta_{t-1})} + \Phi_2 y_{t-2} + B \eta_t  \\
+&=& B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) {\color{red}y_{t-2}} + \Phi_1\Phi_2 y_{t-3}  \\
+&=& B \eta_t + \Phi_1 B \eta_{t-1} + (\Phi_2 + \Phi_1^2) {\color{red}(\Phi_1 y_{t-3} + \Phi_2 y_{t-4} + B \eta_{t-2})} + \Phi_1\Phi_2 y_{t-3} \\
 &=& \underbrace{B}_{=\Psi_0} \eta_t + \underbrace{\Phi_1 B}_{=\Psi_1} \eta_{t-1} + \underbrace{(\Phi_2 + \Phi_1^2)B}_{=\Psi_2} \eta_{t-2} + f(y_{t-3},y_{t-4}).
 \end{eqnarray*}
 
@@ -504,9 +576,9 @@ where \(\|A\|\) denotes a norm of the matrix \(A\) (e.g.~\(\|A\|=\sqrt{tr(AA')}\
 
 What should be satisfied by \(\Phi_k\)'s and \(\Theta_k\)'s for a VARMA-based process (Eq. \eqref{eq:yVARMA}) to be stationary? The conditions will be similar to that we have in the univariate case. Let us introduce the following notations:
 \begin{eqnarray}
-y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{\color{blue}{\mbox{AR component}}} +  \\
-&&\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{\color{red}{\mbox{MA component}}} \nonumber\\
-&\Leftrightarrow& \underbrace{ \color{blue}{(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= \color{blue}{\Phi(L)}}y_t = c +  \underbrace{ \color{red}{(I + \Theta_1 L + \ldots + \Theta_q L^q)}}_{=\color{red}{\Theta(L)}} B \eta_{t}. \nonumber
+y_t &=& c + \underbrace{\Phi_1 y_{t-1} + \dots +\Phi_p y_{t-p}}_{{\color{blue}\mbox{AR component}}} +  \\
+&&\underbrace{B \eta_t - \Theta_1 B \eta_{t-1} - \dots - \Theta_q B \eta_{t-q}}_{{\color{red}\mbox{MA component}}} \nonumber\\
+&\Leftrightarrow& \underbrace{ {\color{blue}(I - \Phi_1 L - \dots - \Phi_p L^p)}}_{= {\color{blue}\Phi(L)}}y_t = c +  \underbrace{ {\color{red}(I + \Theta_1 L + \ldots + \Theta_q L^q)}}_{={\color{red}\Theta(L)}} B \eta_{t}. \nonumber
 \label{eq:VARMA2}
 \end{eqnarray}
 
@@ -1350,8 +1422,8 @@ b_{12} & b_{22}
 \end{array}
 \right] = \left[
 \begin{array}{cc}
-b_{11}^2+b_{12}^2 & \color{red}{b_{11}b_{21}+b_{12}b_{22}} \\
-\color{red}{b_{11}b_{21}+b_{12}b_{22}} & b_{22}^2 + b_{21}^2
+b_{11}^2+b_{12}^2 & {\color{red}b_{11}b_{21}+b_{12}b_{22}} \\
+{\color{red}b_{11}b_{21}+b_{12}b_{22}} & b_{22}^2 + b_{21}^2
 \end{array}
 \right].
 \end{eqnarray*}
@@ -2339,7 +2411,7 @@ As an alternative, function \texttt{VAR.Boot} of package \texttt{VAR.etp} (\cite
 
 \begin{verbatim}
 ##         inv(-1)   inc(-1)  con(-1)    inv(-2)   inc(-2)   con(-2)       const
-## [1,] -0.3327606 0.1316491 1.035245 -0.1365773 0.1250234 0.9750044 -0.01914363
+## [1,] -0.3080293 0.1486471 1.001483 -0.1375947 0.1025075 0.9501390 -0.01850417
 ## [2,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
 ## [3,] -0.3196310 0.1459888 0.961219 -0.1605511 0.1146050 0.9343938 -0.01672199
 \end{verbatim}
@@ -2579,7 +2651,7 @@ The algorithm is as follows:
   For \(1\le j\le m\), draw \(u_j\in \mathbb{R}^{m+1-j-z_j}\) from a standard normal distribution (\(z_j\) is the number of zero restrictions imposed on the \(j^{th}\) shock) and set \(w_j = u_j/||u_j||\).
 \item
   Define \(Q= \begin{pmatrix}q_1&...&q_m\end{pmatrix}\) recursively by \(q_j = K_jw_j\) for any matrix \(K_j\) whose columns form an orthogonal basis for the null space of the matrix \[M_j =
-  \begin{pmatrix} q_1&...&q_{j-1}&\color{blue}{(Z_jP)'}\end{pmatrix}'.\] (Vector \(q_j\) will then be orthogonal to \(\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}\) and satisfy the zero restriction.)
+  \begin{pmatrix} q_1&...&q_{j-1}&{\color{blue}(Z_jP)'}\end{pmatrix}'.\] (Vector \(q_j\) will then be orthogonal to \(\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}\) and satisfy the zero restriction.)
 \item
   Set \(B=PQ\).
 \item
@@ -2793,7 +2865,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.8292467
+## [1] 0.8137611
 \end{verbatim}
 
 \begin{Shaded}
@@ -2804,7 +2876,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -0.4062247
+## [1] 0.8031916
 \end{verbatim}
 
 \begin{Shaded}
@@ -2817,7 +2889,7 @@ The following code identifies a ``main GDP shock'\,' using Uhlig's method.
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/uhlig-1} \caption{Main GDP shock.}\label{fig:uhlig}
 \end{figure}
 
-The ``main GDP shock'\,' explains 83\% of the variance of GDP at horizon 20.
+The ``main GDP shock'\,' explains 81\% of the variance of GDP at horizon 20.
 
 \citet{BARSKY2011273} exploit this approach to identify a ``TFP news shock'', that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. \citet{Levchenko_Pandalai-Nayar_2018} add a ``sentiment shock'' that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in consumer sentiment. The following code replicates \citet{Levchenko_Pandalai-Nayar_2018}. They use a mix of zero and FEVD to identify TFP surprises, TFP news, and sentiment shocks. We adopt a different approach by using FEVD to capture zero restrictions.
 
@@ -2869,7 +2941,7 @@ The ``main GDP shock'\,' explains 83\% of the variance of GDP at horizon 20.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.1215335
+## [1] 0.1063626
 \end{verbatim}
 
 \begin{Shaded}
@@ -2882,7 +2954,7 @@ The ``main GDP shock'\,' explains 83\% of the variance of GDP at horizon 20.
 \includegraphics[width=0.95\linewidth]{IdentifStructShocks_files/figure-latex/levchenko-3} \caption{Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.}\label{fig:levchenko-3}
 \end{figure}
 
-Sentiment shocks explain 12\% of the variance of GDP, against 78\% for TFP shocks (including 65\% for TFP news shocks).
+Sentiment shocks explain 11\% of the variance of GDP, against 76\% for TFP shocks (including 65\% for TFP news shocks).
 
 \section{Restrictions based on narrative historical decomposition}\label{NarrativeHistDecomp}
 
@@ -2902,11 +2974,11 @@ A related approach, introduced by \citet{AntolinDiaz_RubioRamirez_2018}, consist
 
 In this section, we show that the non-identification of the structural shocks (\(\eta_t\)) is specific to the Gaussian case. We propose consistent estimation approaches for SVAR in the context of non-Gaussian shocks.
 
-We have seen in what precedes that we cannot identify \(B\) based on first and second moments only. Since a Gaussian distribution is perfectly determined by the first two moments, it comes that one cannot achieve identification when the structural shocks are Gaussian. That is, even if we observe an infinite number of i.i.d. \(B \eta_t\), we cannot recover \(B\) is the \(\eta_t\)'s are Gaussian.
+We have seen in what precedes that we cannot identify \(B\) based on first and second moments only. Since a Gaussian distribution is perfectly determined by the first two moments, it comes that one cannot achieve identification when the structural shocks are Gaussian. That is, even if we observe an infinite number of i.i.d. \(B \eta_t\), we cannot recover \(B\) if the \(\eta_t\)'s are Gaussian.
 
 Indeed, if \(\eta_t \sim \mathcal{N}(0,Id)\), then the distribution of \(\varepsilon_t \equiv B \eta_t\) is \(\mathcal{N}(0,BB')\). Hence \(\Omega = B B'\) is observed (in the population), but for any orthogonal matrix \(Q\) (i.e.~\(QQ'=Id\)), we also have \(BQ \eta_t \sim \mathcal{N}(0,\Omega)\).
 
-To illustrate, consider the following bivariate Gaussian situations, with \(\Theta_1=0\)):
+To illustrate, consider the following bivariate Gaussian situations, with \(\Theta_1=0\):
 
 \(\left[\begin{array}{c}\eta_{1,t}\\ \eta_{2,t}\end{array}\right]\sim \mathcal{N}(0,Id)\), with
 \(B = \left[\begin{array}{cc}
@@ -3291,7 +3363,7 @@ Assume that the structural shock of interest (\(\eta_{1,t}\), say) can be consis
 \end{equation}
 where \(\mathbb{E}(x_t|w_t)\) is affine in \(w_t\) and where \(w_t\) is an affine transformation of \(\eta_{2:n,t}\) and of past shocks \(\eta_{t-1},\eta_{t-2},\dots\).
 
-Eq. \eqref{eq:xetaw} implies that, conditional on \(w_t\), the additional knowledge of \(x_t\) is useful only when it comes to forecast something that depends on \(\eta_{1,t}\). Hence, given that \(u_{i,1,t+h}\) (see Eq. \eqref{eq:OLS1}) is independent from \(\eta_{1,t}\) (it depends on \(\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)), it comes that
+Eq. \eqref{eq:xetaw} implies that, conditional on \(w_t\), the additional knowledge of \(x_t\) is useful only when it comes to forecast something that depends on \(\eta_{1,t}\). Hence, given that \(u_{i,1,t+h}\) (see Eq. \eqref{eq:OLS1}) is independent from \(\eta_{1,t}\) (it depends on \(\eta_{t+h},\dots,\eta_{t+1},{\color{blue}\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)), it comes that
 \begin{equation}
 \mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).\label{eq:uuuIV}
 \end{equation}
@@ -3300,7 +3372,7 @@ This is the \emph{conditional mean independence} case.
 Using \eqref{eq:xetaw}, one can rewrite Eq. \eqref{eq:OLS1} as follows:
 \begin{eqnarray*}
 y_{i,t+h} &=& \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
-&=&  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
+&=&  \mu_i + \Psi_{i,1,h}x_t  {\color{blue}-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
 \end{eqnarray*}
 
 Given Eq. \eqref{eq:uuuIV}, it comes that, conditional on \(x_t\) and \(w_t\), the expectation of the blue term is a function of \(w_t\). Assuming this expectation is linear, standard results in the conditional mean independence case imply that the OLS estimator in the regression of \(y_{i,t+h}\) on \(x_t\), controlling for \(w_t\), provides a consistent estimate of \(\Psi_{i,1,h}\):
@@ -3310,7 +3382,7 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 
 This is for instance consistent with the case where \([\Delta GDP_t, \pi_t,i_t]'\) follows a VAR(1) and the monetary-policy shock does not contemporaneously affect \(\Delta GDP_t\) and \(\pi_t\). The IRFs can then be estimated by LP, taking \(x_t = i_t\) and \(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'\).
 
-This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if \(w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\), with \(k\le n\), and \(x_t = y_{k,t}\), then this approach corresponds, for \(h=0\), to the SVAR(\(p\)) Cholesky-based IRF (focusing on the responses to the \(k^{th}\) structural shock). However, the two approaches differ for \(h>0\), because the LP methodology does not assumes a VAR dynamics for \(y_t\).\footnote{This is reminiscent of the distinction betweem direct forecasting---based on regressions of \(y_{t+h}\) on \(\{y_t,y_{t-1},\dots\}\)---and iterated forecasting---based on a recursive model where \(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\), see \citet{Marcellino_et_al_2006}.}
+This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if \(w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'\), with \(k\le n\), and \(x_t = y_{k,t}\), then this approach corresponds, for \(h=0\), to the SVAR(\(p\)) Cholesky-based IRF (focusing on the responses to the \(k^{th}\) structural shock). However, the two approaches differ for \(h>0\), because the LP methodology does not assumes a VAR dynamics for \(y_t\).\footnote{This is reminiscent of the distinction betweem direct forecasting---based on regressions of \(y_{t+h}\) on \(\{y_t,y_{t-1},\dots\}\)---and iterated forecasting---based on a recursive model where \(y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}\), see \citet{Marcellino_et_al_2006}.}
 
 In the following lines of code, we employ the \citet{Jorda_2005}'s approach on the same dataset as the one used in Section \ref{Cholesky}. (We were then illustrating \citet{Christiano_Eichenbaum_Evans_1996}'s methodology.)
 
@@ -3638,10 +3710,10 @@ variance of the shocks may be unit-specific.
 
 A panel VAR, assuming no dynamic interdependence, is of the form:
 \[ y_{it}=c_i+\Phi_i(L)
-\color{red}{y_{it-1}}+\varepsilon_{it}.\]
+{\color{red}y_{it-1}}+\varepsilon_{it}.\]
 
 As a comparison, consider \emph{micro panel data}, in the univariate cae (AR(1) case): \[y_{it}=c_i+{\color{red}\phi} y_{it-1}+\varepsilon_{it}.\] In that kind of context, we usually have no cross-sectional heterogeneity as \(\phi_i=\phi\) for all \(i\). Typically, we have a large cross-sectional dimension \(N\), and a small time dimension \(T\). If one uses a \emph{``Fixed-effect'\,' regression}:
-\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T\color{red}{\varepsilon_{is}},\]
+\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T{\color{red}\varepsilon_{is}},\]
 then one faces the \emph{Nickell bias}: with a lagged dependent variable, the estimator is biased, with a bias of size \(\sim 1/T\). One can then use GMM regressions (\citet{Arellano_Bond_1991}) so as to get unbiased estimates.
 
 \emph{Macro panel data} have a different structure, with typically a moderate cross-sectional dimension \(N\) and a large time dimension \(T\), so that the Nickell bias is negligible (\(\rightarrow 0\) as \(T\rightarrow\infty\)).

@@ -27,8 +27,8 @@ b_{12} & b_{22}
 \end{array}
 \right] = \left[
 \begin{array}{cc}
-b_{11}^2+b_{12}^2 & \color{red}{b_{11}b_{21}+b_{12}b_{22}} \\
-\color{red}{b_{11}b_{21}+b_{12}b_{22}} & b_{22}^2 + b_{21}^2
+b_{11}^2+b_{12}^2 & {\color{red}b_{11}b_{21}+b_{12}b_{22}} \\
+{\color{red}b_{11}b_{21}+b_{12}b_{22}} & b_{22}^2 + b_{21}^2
 \end{array}
 \right].
 \end{eqnarray*}

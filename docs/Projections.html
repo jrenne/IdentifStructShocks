@@ -148,7 +148,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="ecostat-style.css" type="text/css" />
 </head>
 
 <body>
@@ -298,7 +298,7 @@ Running that kind of regression (using instruments for <span class="math inline"
 \eta_{1,t} = x_t - \mathbb{E}(x_t|w_t),\tag{8.2}
 \end{equation}\]</span>
 where <span class="math inline">\(\mathbb{E}(x_t|w_t)\)</span> is affine in <span class="math inline">\(w_t\)</span> and where <span class="math inline">\(w_t\)</span> is an affine transformation of <span class="math inline">\(\eta_{2:n,t}\)</span> and of past shocks <span class="math inline">\(\eta_{t-1},\eta_{t-2},\dots\)</span>.</p>
-<p>Eq. <a href="Projections.html#eq:xetaw">(8.2)</a> implies that, conditional on <span class="math inline">\(w_t\)</span>, the additional knowledge of <span class="math inline">\(x_t\)</span> is useful only when it comes to forecast something that depends on <span class="math inline">\(\eta_{1,t}\)</span>. Hence, given that <span class="math inline">\(u_{i,1,t+h}\)</span> (see Eq. <a href="Projections.html#eq:OLS1">(8.1)</a>) is independent from <span class="math inline">\(\eta_{1,t}\)</span> (it depends on <span class="math inline">\(\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)</span>), it comes that
+<p>Eq. <a href="Projections.html#eq:xetaw">(8.2)</a> implies that, conditional on <span class="math inline">\(w_t\)</span>, the additional knowledge of <span class="math inline">\(x_t\)</span> is useful only when it comes to forecast something that depends on <span class="math inline">\(\eta_{1,t}\)</span>. Hence, given that <span class="math inline">\(u_{i,1,t+h}\)</span> (see Eq. <a href="Projections.html#eq:OLS1">(8.1)</a>) is independent from <span class="math inline">\(\eta_{1,t}\)</span> (it depends on <span class="math inline">\(\eta_{t+h},\dots,\eta_{t+1},{\color{blue}\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots\)</span>), it comes that
 <span class="math display" id="eq:uuuIV">\[\begin{equation}
 \mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).\tag{8.3}
 \end{equation}\]</span>
@@ -306,14 +306,14 @@ This is the <em>conditional mean independence</em> case.</p>
 <p>Using <a href="Projections.html#eq:xetaw">(8.2)</a>, one can rewrite Eq. <a href="Projections.html#eq:OLS1">(8.1)</a> as follows:
 <span class="math display">\[\begin{eqnarray*}
 y_{i,t+h} &amp;=&amp; \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
-&amp;=&amp;  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
+&amp;=&amp;  \mu_i + \Psi_{i,1,h}x_t  {\color{blue}-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
 \end{eqnarray*}\]</span></p>
 <p>Given Eq. <a href="Projections.html#eq:uuuIV">(8.3)</a>, it comes that, conditional on <span class="math inline">\(x_t\)</span> and <span class="math inline">\(w_t\)</span>, the expectation of the blue term is a function of <span class="math inline">\(w_t\)</span>. Assuming this expectation is linear, standard results in the conditional mean independence case imply that the OLS estimator in the regression of <span class="math inline">\(y_{i,t+h}\)</span> on <span class="math inline">\(x_t\)</span>, controlling for <span class="math inline">\(w_t\)</span>, provides a consistent estimate of <span class="math inline">\(\Psi_{i,1,h}\)</span>:
 <span class="math display">\[\begin{equation}
 y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta&#39;w_t + v_{i,t+h}.
 \end{equation}\]</span></p>
 <p>This is for instance consistent with the case where <span class="math inline">\([\Delta GDP_t, \pi_t,i_t]&#39;\)</span> follows a VAR(1) and the monetary-policy shock does not contemporaneously affect <span class="math inline">\(\Delta GDP_t\)</span> and <span class="math inline">\(\pi_t\)</span>. The IRFs can then be estimated by LP, taking <span class="math inline">\(x_t = i_t\)</span> and <span class="math inline">\(w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]&#39;\)</span>.</p>
-<p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}&#39;,\dots,y_{t-p}&#39;]&#39;\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+<p>This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if <span class="math inline">\(w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}&#39;,\dots,y_{t-p}&#39;]&#39;\)</span>, with <span class="math inline">\(k\le n\)</span>, and <span class="math inline">\(x_t = y_{k,t}\)</span>, then this approach corresponds, for <span class="math inline">\(h=0\)</span>, to the SVAR(<span class="math inline">\(p\)</span>) Cholesky-based IRF (focusing on the responses to the <span class="math inline">\(k^{th}\)</span> structural shock). However, the two approaches differ for <span class="math inline">\(h&gt;0\)</span>, because the LP methodology does not assumes a VAR dynamics for <span class="math inline">\(y_t\)</span>.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 <p>In the following lines of code, we employ the <span class="citation">Jordà (<a href="#ref-Jorda_2005">2005</a>)</span>’s approach on the same dataset as the one used in Section <a href="identifStruct.html#Cholesky">2.3</a>. (We were then illustrating <span class="citation">Christiano, Eichenbaum, and Evans (<a href="#ref-Christiano_Eichenbaum_Evans_1996">1996</a>)</span>’s methodology.)</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="Projections.html#cb92-1" tabindex="-1"></a><span class="fu">library</span>(IdSS);<span class="fu">library</span>(vars)</span>

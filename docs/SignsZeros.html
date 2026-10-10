@@ -148,7 +148,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="ecostat-style.css" type="text/css" />
 </head>
 
 <body>
@@ -299,7 +299,7 @@ where <span class="math inline">\(b_j\)</span> is the <span class="math inline">
 <ol style="list-style-type: decimal">
 <li>For <span class="math inline">\(1\le j\le m\)</span>, draw <span class="math inline">\(u_j\in \mathbb{R}^{m+1-j-z_j}\)</span> from a standard normal distribution (<span class="math inline">\(z_j\)</span> is the number of zero restrictions imposed on the <span class="math inline">\(j^{th}\)</span> shock) and set <span class="math inline">\(w_j = u_j/||u_j||\)</span>.</li>
 <li>Define <span class="math inline">\(Q= \begin{pmatrix}q_1&amp;...&amp;q_m\end{pmatrix}\)</span> recursively by <span class="math inline">\(q_j = K_jw_j\)</span> for any matrix <span class="math inline">\(K_j\)</span> whose columns form an orthogonal basis for the null space of the matrix <span class="math display">\[M_j =
-\begin{pmatrix} q_1&amp;...&amp;q_{j-1}&amp;\color{blue}{(Z_jP)&#39;}\end{pmatrix}&#39;.\]</span> (Vector <span class="math inline">\(q_j\)</span> will then be orthogonal to <span class="math inline">\(\begin{pmatrix} q_1&amp;...&amp;q_{j-1}\end{pmatrix}\)</span> and satisfy the zero restriction.)</li>
+\begin{pmatrix} q_1&amp;...&amp;q_{j-1}&amp;{\color{blue}(Z_jP)&#39;}\end{pmatrix}&#39;.\]</span> (Vector <span class="math inline">\(q_j\)</span> will then be orthogonal to <span class="math inline">\(\begin{pmatrix} q_1&amp;...&amp;q_{j-1}\end{pmatrix}\)</span> and satisfy the zero restriction.)</li>
 <li>Set <span class="math inline">\(B=PQ\)</span>.</li>
 <li>Check sign restrictions (<span class="math inline">\(S_jb_j&gt;0\)</span> for all <span class="math inline">\(j\)</span>?).</li>
 </ol>

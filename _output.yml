@@ -1,6 +1,6 @@
 bookdown::gitbook:
   code_folding: hide
-  css: style.css
+  css: ecostat-style.css
   config:
     toc:
       before: |

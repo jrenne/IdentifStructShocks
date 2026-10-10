@@ -148,7 +148,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="ecostat-style.css" type="text/css" />
 </head>
 
 <body>
@@ -371,12 +371,12 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 <span id="cb76-36"><a href="forecast-error-variance-maximization.html#cb76-36" tabindex="-1"></a>vardecomp <span class="ot">&lt;-</span> Variance.decomp<span class="sc">$</span>vardecomp</span>
 <span id="cb76-37"><a href="forecast-error-variance-maximization.html#cb76-37" tabindex="-1"></a><span class="fu">mean</span>(vardecomp[<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">20</span>,,<span class="dv">1</span>]) <span class="co"># mean contribution (across all simulated IRFs)</span></span></code></pre></div>
 </details>
-<pre><code>## [1] 0.8231956</code></pre>
+<pre><code>## [1] 0.8079601</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="forecast-error-variance-maximization.html#cb78-1" tabindex="-1"></a><span class="co"># of 1st shock to variance of second variable, horizon 20.</span></span>
 <span id="cb78-2"><a href="forecast-error-variance-maximization.html#cb78-2" tabindex="-1"></a><span class="fu">mean</span>(vardecomp[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">10</span>,,<span class="dv">1</span>]) <span class="co"># mean contribution of 1st shock </span></span></code></pre></div>
 </details>
-<pre><code>## [1] 0.1389435</code></pre>
+<pre><code>## [1] 2.468714</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="forecast-error-variance-maximization.html#cb80-1" tabindex="-1"></a><span class="co"># to covariance between 1st and 2nd variable, horizon 10.</span></span></code></pre></div>
 </details>
@@ -386,7 +386,7 @@ where <span class="math inline">\(D\)</span> is diagonal matrix whose entries ar
 Figure 6.1: Main GDP shock.
 </p>
 </div>
-<p>The ``main GDP shock’’ explains 82% of the variance of GDP at horizon 20.</p>
+<p>The ``main GDP shock’’ explains 81% of the variance of GDP at horizon 20.</p>
 <p><span class="citation">Barsky and Sims (<a href="#ref-BARSKY2011273">2011</a>)</span> exploit this approach to identify a “TFP news shock”, that they define as the shock (a) that is orthogonal to the innovation in current utilization-adjusted TFP and (b) that best explains variation in future TFP. <span class="citation">Levchenko and Pandalai-Nayar (<a href="#ref-Levchenko_Pandalai-Nayar_2018">2018</a>)</span> add a “sentiment shock” that they define as the shock (a) that is orthogonal to both the innovation in current utilization-adjusted TFP and to the TFP news shock, and (b) that best explains variation in consumer sentiment. The following code replicates <span class="citation">Levchenko and Pandalai-Nayar (<a href="#ref-Levchenko_Pandalai-Nayar_2018">2018</a>)</span>. They use a mix of zero and FEVD to identify TFP surprises, TFP news, and sentiment shocks. We adopt a different approach by using FEVD to capture zero restrictions.</p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="forecast-error-variance-maximization.html#cb81-1" tabindex="-1"></a>names.of.shocks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TFP surprise&quot;</span>,<span class="st">&quot;TFP news&quot;</span>,<span class="st">&quot;Sentiment&quot;</span>)</span>
@@ -434,7 +434,7 @@ Figure 6.3: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 <span id="cb82-2"><a href="forecast-error-variance-maximization.html#cb82-2" tabindex="-1"></a>vardecomp <span class="ot">&lt;-</span> Variance.decomp<span class="sc">$</span>vardecomp</span>
 <span id="cb82-3"><a href="forecast-error-variance-maximization.html#cb82-3" tabindex="-1"></a><span class="fu">mean</span>(vardecomp[<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">40</span>,,<span class="dv">3</span>])<span class="co"># mean contribution (across all simulated IRFs)</span></span></code></pre></div>
 </details>
-<pre><code>## [1] 0.1382302</code></pre>
+<pre><code>## [1] 0.1100148</code></pre>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="forecast-error-variance-maximization.html#cb84-1" tabindex="-1"></a><span class="co"># of 3rd shock to variance of second variable, horizon 40.</span></span></code></pre></div>
 </details>
@@ -444,7 +444,7 @@ Figure 6.3: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero re
 Figure 6.4: Replication of Levchenko and Pandalai-Nayar (2020). FEVD and zero restrictions.
 </p>
 </div>
-<p>Sentiment shocks explain 14% of the variance of GDP, against 74% for TFP shocks (including 60% for TFP news shocks).</p>
+<p>Sentiment shocks explain 11% of the variance of GDP, against 74% for TFP shocks (including 63% for TFP news shocks).</p>
 </div>
 <div id="NarrativeHistDecomp" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Restrictions based on narrative historical decomposition<a href="forecast-error-variance-maximization.html#NarrativeHistDecomp" class="anchor-section" aria-label="Anchor link to header"></a></h2>

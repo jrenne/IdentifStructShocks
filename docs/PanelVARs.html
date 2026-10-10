@@ -148,7 +148,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="ecostat-style.css" type="text/css" />
 </head>
 
 <body>
@@ -301,9 +301,9 @@ variance of the shocks may be unit-specific.</p>
 <h2><span class="header-section-number">9.1</span> Without Dynamic interdependence<a href="PanelVARs.html#without-dynamic-interdependence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A panel VAR, assuming no dynamic interdependence, is of the form:
 <span class="math display">\[ y_{it}=c_i+\Phi_i(L)
-\color{red}{y_{it-1}}+\varepsilon_{it}.\]</span></p>
+{\color{red}y_{it-1}}+\varepsilon_{it}.\]</span></p>
 <p>As a comparison, consider <em>micro panel data</em>, in the univariate cae (AR(1) case): <span class="math display">\[y_{it}=c_i+{\color{red}\phi} y_{it-1}+\varepsilon_{it}.\]</span> In that kind of context, we usually have no cross-sectional heterogeneity as <span class="math inline">\(\phi_i=\phi\)</span> for all <span class="math inline">\(i\)</span>. Typically, we have a large cross-sectional dimension <span class="math inline">\(N\)</span>, and a small time dimension <span class="math inline">\(T\)</span>. If one uses a <em>``Fixed-effect’’ regression</em>:
-<span class="math display">\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T\color{red}{\varepsilon_{is}},\]</span>
+<span class="math display">\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T{\color{red}\varepsilon_{is}},\]</span>
 then one faces the <em>Nickell bias</em>: with a lagged dependent variable, the estimator is biased, with a bias of size <span class="math inline">\(\sim 1/T\)</span>. One can then use GMM regressions (<span class="citation">Arellano and Bond (<a href="#ref-Arellano_Bond_1991">1991</a>)</span>) so as to get unbiased estimates.</p>
 <p><em>Macro panel data</em> have a different structure, with typically a moderate cross-sectional dimension <span class="math inline">\(N\)</span> and a large time dimension <span class="math inline">\(T\)</span>, so that the Nickell bias is negligible (<span class="math inline">\(\rightarrow 0\)</span> as <span class="math inline">\(T\rightarrow\infty\)</span>).</p>
 <div id="mean-group-estimator" class="section level3 hasAnchor" number="9.1.1">

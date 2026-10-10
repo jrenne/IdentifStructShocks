@@ -25,7 +25,7 @@ The algorithm is as follows:
 
 1. For $1\le j\le m$, draw $u_j\in \mathbb{R}^{m+1-j-z_j}$ from a standard normal distribution ($z_j$ is the number of zero restrictions imposed on the $j^{th}$ shock) and set $w_j = u_j/||u_j||$.
 2. Define $Q= \begin{pmatrix}q_1&...&q_m\end{pmatrix}$ recursively by $q_j = K_jw_j$ for any matrix $K_j$ whose columns form an orthogonal basis for the null space of the matrix \[M_j =
-\begin{pmatrix} q_1&...&q_{j-1}&\color{blue}{(Z_jP)'}\end{pmatrix}'.\] (Vector $q_j$ will then be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$ and satisfy the zero restriction.)
+\begin{pmatrix} q_1&...&q_{j-1}&{\color{blue}(Z_jP)'}\end{pmatrix}'.\] (Vector $q_j$ will then be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$ and satisfy the zero restriction.)
 3. Set $B=PQ$.
 4. Check sign restrictions ($S_jb_j>0$ for all $j$?).
 

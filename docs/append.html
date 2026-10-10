@@ -148,7 +148,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="ecostat-style.css" type="text/css" />
 </head>
 
 <body>
@@ -992,23 +992,23 @@ Figure 11.1: Illustration of the bias obtained when estimating the auto-regressi
 <!-- :::{.proof} -->
 <!-- We have: -->
 <!-- \begin{eqnarray} -->
-<!-- \mathbb{E}([y_{t+1} - y^*_{t+1}]^2) &=& \mathbb{E}\left([\color{blue}{\{y_{t+1} - \mathbb{E}(y_{t+1}|x_t)\}} + \color{red}{\{\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}\}}]^2\right)\nonumber\\ -->
-<!-- &=&  \mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right) + \mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)\nonumber\\ -->
-<!-- && + 2\mathbb{E}\left( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right). (\#eq:1) -->
+<!-- \mathbb{E}([y_{t+1} - y^*_{t+1}]^2) &=& \mathbb{E}\left([{\color{blue}\{y_{t+1} - \mathbb{E}(y_{t+1}|x_t)\}} + {\color{red}\{\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}\}}]^2\right)\nonumber\\ -->
+<!-- &=&  \mathbb{E}\left({\color{blue}[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right) + \mathbb{E}\left({\color{red}[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)\nonumber\\ -->
+<!-- && + 2\mathbb{E}\left( {\color{blue}[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}{\color{red} [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right). (\#eq:1) -->
 <!-- \end{eqnarray} -->
 <!-- Let us focus on the last term. We have: -->
 <!-- \begin{eqnarray*} -->
-<!-- &&\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right)\\ -->
-<!-- &=& \mathbb{E}( \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}\color{red}{ \underbrace{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}_{\mbox{function of $x_t$}}}|x_t))\\ -->
-<!-- &=& \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \mathbb{E}( \color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}|x_t))\\ -->
-<!-- &=& \mathbb{E}( \color{red}{ [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \color{blue}{\underbrace{[\mathbb{E}(y_{t+1}|x_t) - \mathbb{E}(y_{t+1}|x_t)]}_{=0}})=0. -->
+<!-- &&\mathbb{E}\left({\color{blue}[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}{\color{red} [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}\right)\\ -->
+<!-- &=& \mathbb{E}( \mathbb{E}( {\color{blue}[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}{\color{red} \underbrace{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}_{\mbox{function of $x_t$}}}|x_t))\\ -->
+<!-- &=& \mathbb{E}( {\color{red} [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} \mathbb{E}( {\color{blue}[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}|x_t))\\ -->
+<!-- &=& \mathbb{E}( {\color{red} [\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]} {\color{blue}\underbrace{[\mathbb{E}(y_{t+1}|x_t) - \mathbb{E}(y_{t+1}|x_t)]}_{=0}})=0. -->
 <!-- \end{eqnarray*} -->
 <!-- Therefore, Eq. \@ref(eq:1) becomes: -->
 <!-- \begin{eqnarray*} -->
 <!-- &&\mathbb{E}([y_{t+1} - y^*_{t+1}]^2) \\ -->
-<!-- &=&  \underbrace{\mathbb{E}\left(\color{blue}{[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right)}_{\mbox{$\ge 0$ and does not depend on $y^*_{t+1}$}} + \underbrace{\mathbb{E}\left(\color{red}{[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)}_{\mbox{$\ge 0$ and depends on $y^*_{t+1}$}}. -->
+<!-- &=&  \underbrace{\mathbb{E}\left({\color{blue}[y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]}^2\right)}_{\mbox{$\ge 0$ and does not depend on $y^*_{t+1}$}} + \underbrace{\mathbb{E}\left({\color{red}[\mathbb{E}(y_{t+1}|x_t)  - y^*_{t+1}]}^2\right)}_{\mbox{$\ge 0$ and depends on $y^*_{t+1}$}}. -->
 <!-- \end{eqnarray*} -->
-<!-- This implies that $\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)$ is always larger than $\color{blue}{\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}$, and is therefore minimized if the second term is equal to zero, that is if $\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}$. -->
+<!-- This implies that $\mathbb{E}([y_{t+1} - y^*_{t+1}]^2)$ is always larger than ${\color{blue}\mathbb{E}([y_{t+1} - \mathbb{E}(y_{t+1}|x_t)]^2)}$, and is therefore minimized if the second term is equal to zero, that is if $\mathbb{E}(y_{t+1}|x_t) = y^*_{t+1}$. -->
 <!-- ::: -->
 <p><strong>Proof of Proposition <a href="basics.html#prp:estimVARGaussian">1.2</a></strong></p>
 <div class="proof">

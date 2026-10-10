@@ -27,10 +27,10 @@ variance of the shocks may be unit-specific.
 
 A panel VAR, assuming no dynamic interdependence, is of the form:
 \[ y_{it}=c_i+\Phi_i(L)
-\color{red}{y_{it-1}}+\varepsilon_{it}.\] 
+{\color{red}y_{it-1}}+\varepsilon_{it}.\] 
 
 As a comparison, consider *micro panel data*, in the univariate cae (AR(1) case): \[y_{it}=c_i+{\color{red}\phi} y_{it-1}+\varepsilon_{it}.\] In that kind of context, we usually have no cross-sectional heterogeneity as $\phi_i=\phi$ for all $i$. Typically, we have a large cross-sectional dimension $N$, and a small time dimension $T$. If one uses a *``Fixed-effect'' regression*:
-\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T\color{red}{\varepsilon_{is}},\]
+\[y_{it}-\frac{1}{T}\sum_{s=1}^Ty_{is}=\phi(y_{it-1}-\frac{1}{T}\sum_{s=1}^Ty_{is})+\varepsilon_{it}-\frac{1}{T}\sum_{s=1}^T{\color{red}\varepsilon_{is}},\]
 then one faces the *Nickell bias*: with a lagged dependent variable, the estimator is biased, with a bias of size $\sim 1/T$. One can then use GMM regressions (@Arellano_Bond_1991) so as to get unbiased estimates.
 
 *Macro panel data* have a different structure, with typically a moderate cross-sectional dimension $N$ and a large time dimension $T$, so that the Nickell bias is negligible ($\rightarrow 0$ as $T\rightarrow\infty$).

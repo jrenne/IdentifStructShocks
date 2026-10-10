@@ -25,7 +25,7 @@ Assume that the structural shock of interest ($\eta_{1,t}$, say) can be consiste
 \end{equation}
 where $\mathbb{E}(x_t|w_t)$ is affine in $w_t$ and where $w_t$ is an affine transformation of $\eta_{2:n,t}$ and of past shocks $\eta_{t-1},\eta_{t-2},\dots$.
 
-Eq. \@ref(eq:xetaw) implies that, conditional on $w_t$, the additional knowledge of $x_t$ is useful only when it comes to forecast something that depends on $\eta_{1,t}$. Hence, given that $u_{i,1,t+h}$ (see Eq. \@ref(eq:OLS1)) is independent from $\eta_{1,t}$ (it depends on  $\eta_{t+h},\dots,\eta_{t+1},\color{blue}{\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots$), it comes that
+Eq. \@ref(eq:xetaw) implies that, conditional on $w_t$, the additional knowledge of $x_t$ is useful only when it comes to forecast something that depends on $\eta_{1,t}$. Hence, given that $u_{i,1,t+h}$ (see Eq. \@ref(eq:OLS1)) is independent from $\eta_{1,t}$ (it depends on  $\eta_{t+h},\dots,\eta_{t+1},{\color{blue}\eta_{2:n,t}},\eta_{t-1},\eta_{t-2},\dots$), it comes that
 \begin{equation}
 \mathbb{E}(u_{i,1,t+h}|x_t,w_t)= \mathbb{E}(u_{i,1,t+h}|w_t).(\#eq:uuuIV)
 \end{equation}
@@ -34,7 +34,7 @@ This is the *conditional mean independence* case.
 Using \@ref(eq:xetaw), one can rewrite Eq. \@ref(eq:OLS1) as follows:
 \begin{eqnarray*}
 y_{i,t+h} &=& \mu_i + \Psi_{i,1,h}\eta_{1,t} + u_{i,1,t+h}\\
-&=&  \mu_i + \Psi_{i,1,h}x_t  \color{blue}{-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
+&=&  \mu_i + \Psi_{i,1,h}x_t  {\color{blue}-\Psi_{i,1,h}\mathbb{E}(x_t|w_t) + u_{i,1,t+h}},
 \end{eqnarray*}
 
 Given Eq. \@ref(eq:uuuIV), it comes that, conditional on $x_t$ and $w_t$, the expectation of the blue term is a function of $w_t$. Assuming this expectation is linear, standard results in the conditional mean independence case imply that the OLS estimator in the regression of $y_{i,t+h}$ on $x_t$, controlling for $w_t$, provides a consistent estimate of $\Psi_{i,1,h}$:
@@ -44,7 +44,7 @@ y_{i,t+h} = \alpha_i + \Psi_{i,1,h}x_t + \beta'w_t + v_{i,t+h}.
 
 This is for instance consistent with the case where $[\Delta GDP_t, \pi_t,i_t]'$ follows a VAR(1) and the monetary-policy shock does not contemporaneously affect $\Delta GDP_t$ and $\pi_t$. The IRFs can then be estimated by LP, taking $x_t = i_t$ and $w_t = [\Delta GDP_t,\pi_t,\Delta GDP_{t-1}, \pi_{t-1},i_{t-1}]'$.
 
-This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if $w_t = [\color{blue}{y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'$, with $k\le n$, and $x_t = y_{k,t}$, then this approach corresponds, for $h=0$, to the SVAR($p$) Cholesky-based IRF (focusing on the responses to the $k^{th}$ structural shock). However, the two approaches differ for $h>0$, because the LP methodology does not assumes a VAR dynamics for $y_t$.[^FootnoteIteratedFcst]
+This approach closely relates to the SVAR Cholesky-based identification approach. Specifically, if $w_t = [{\color{blue}y_{1,t},\dots,y_{k-1,t}}, y_{t-1}',\dots,y_{t-p}']'$, with $k\le n$, and $x_t = y_{k,t}$, then this approach corresponds, for $h=0$, to the SVAR($p$) Cholesky-based IRF (focusing on the responses to the $k^{th}$ structural shock). However, the two approaches differ for $h>0$, because the LP methodology does not assumes a VAR dynamics for $y_t$.[^FootnoteIteratedFcst]
 
 [^FootnoteIteratedFcst]: This is reminiscent of the distinction betweem direct forecasting---based on regressions of $y_{t+h}$ on $\{y_t,y_{t-1},\dots\}$---and iterated forecasting---based on a recursive model where $y_{t+1} = g(y_t,y_{t-1},\dots)+\varepsilon_{t+1}$, see @Marcellino_et_al_2006. 
 
