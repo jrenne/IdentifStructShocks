@@ -23,7 +23,7 @@
 <meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
 
 
-<meta name="date" content="2026-01-04" />
+<meta name="date" content="2026-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -292,7 +292,7 @@ div.csl-indent {
 \cos(\pi/3) &amp; -\sin(\pi/3) \\
 \sin(\pi/3) &amp; \cos(\pi/3)
 \end{array}\right]\)</span> (rotation).</p>
-<p>Figure <a href="NonGaussian.html#fig:preMadeFigureICA">7.1</a> shows that the distributions of <span class="math inline">\(B \eta_t\)</span> and of <span class="math inline">\(BQ\eta_t\)</span> are identical. However, the impulse response functions associated with one of the other impulse matrix (<span class="math inline">\(B\)</span> or <span class="math inline">\(BQ\)</span>) are different. This is illustrated by Figure <a href="NonGaussian.html#fig:preMadeFigureICA2">7.2</a>, that shows the IRFs associated with two identical models (defined by Eq. <a href="#eq:VARMA111">(<strong>??</strong>)</a>), the only difference being the impulse matrix (<span class="math inline">\(B\)</span> or <span class="math inline">\(BQ\)</span>).</p>
+<p>Figure <a href="NonGaussian.html#fig:preMadeFigureICA">7.1</a> shows that the distributions of <span class="math inline">\(B \eta_t\)</span> and of <span class="math inline">\(BQ\eta_t\)</span> are identical. However, the impulse response functions associated with one of the other impulse matrix (<span class="math inline">\(B\)</span> or <span class="math inline">\(BQ\)</span>) are different. This is illustrated by Figure <a href="NonGaussian.html#fig:preMadeFigureICA2">7.2</a>, that shows the IRFs associated with two identical models (defined by Eq. <a href="basics.html#eq:VARMA111">(1.6)</a>), the only difference being the impulse matrix (<span class="math inline">\(B\)</span> or <span class="math inline">\(BQ\)</span>).</p>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:preMadeFigureICA"></span>
 <img src="images/Figure_A.png" alt="This figure compares the distributions of two Gaussian bivariate vectors, $B \eta_t$ and $BQ\eta_t$, where $\eta_{t} \sim \mathcal{N}(0,Id)$ (therefore $\eta_{1,t}$ and $\eta_{2,t}$ are independent), and $Q$  is an orthogonal matrix." width="95%" />
 <p class="caption">
@@ -389,7 +389,7 @@ Figure 7.3: This figure compares the distributions of two Gaussian bivariate vec
 <h2><span class="header-section-number">7.2</span> Independent Component Analysis (ICA)<a href="NonGaussian.html#independent-component-analysis-ica" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!-- Without loss of generality, we can assume that $BB' = Id$ (i.e. $B$ is orthogonal). (If this is not the case, i.e. if $\mathbb{V}ar(\varepsilon_t)=\Omega \ne Id$, then one can pre-multiply the data by $\Omega^{-1/2}$.) -->
 <p>The exercise that consists in identifying non-Gaussian independent shocks out of linear combinations of these shocks is a well-known problem of the signal-processing literature, called <strong>independent component analysis (ICA)</strong>. Let us denote by <span class="math inline">\(C\)</span> the matrix that is such that <span class="math inline">\(C = \Omega^{-1/2}B\)</span>, where <span class="math inline">\(\Omega^{1/2}\)</span> results from the Cholesky decomposition of <span class="math inline">\(\Omega = BB&#39;\)</span> (implying, <span class="math inline">\(\Omega^{1/2}{\Omega^{1/2}}&#39;=\Omega\)</span>). It is easy to check that <span class="math inline">\(C\)</span> is an orthogonal matrix (and we have <span class="math inline">\(B = \Omega^{1/2}C\)</span>).</p>
-<p>The classical ICA problem is as follows: Find <span class="math inline">\(C\)</span> such that <span class="math inline">\(\varepsilon_t = C \eta_t\)</span> (or <span class="math inline">\(\eta_t = C&#39;\varepsilon_t\)</span>) given that:<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>The classical ICA problem is as follows: Find <span class="math inline">\(C\)</span> such that <span class="math inline">\(\varepsilon_t = C \eta_t\)</span> (or <span class="math inline">\(\eta_t = C&#39;\varepsilon_t\)</span>) given that:<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <ol style="list-style-type: lower-roman">
 <li>We observe the <span class="math inline">\(\varepsilon_t\)</span>’s,</li>
 <li>The components of <span class="math inline">\(\eta_t\)</span> are independent,</li>
@@ -430,7 +430,7 @@ The log-likelihood function <a href="NonGaussian.html#eq:pseudolog">(7.1)</a> is
 <span class="math display" id="eq:optimprob">\[\begin{equation}
 \widehat{C_T} = \arg \max_C \sum^T_{t=1} \sum^n_{i=1} \log g_i (c&#39;_i \varepsilon_t),\tag{7.2}
 \end{equation}\]</span>
-<p>The restrictions <span class="math inline">\(C&#39;C = Id\)</span> can be eliminated by parameterizing <span class="math inline">\(C\)</span> in such a way that, whatever the considered parameters, <span class="math inline">\(C\)</span> is orthogonal.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <span class="citation">Gouriéroux, Monfort, and Renne (<a href="#ref-Gourieroux_Monfort_Renne_2017">2017</a>)</span> propose to use, for that, the Cayley’s representation: any orthogonal matrix with no eigenvalue equal to <span class="math inline">\(-1\)</span> can be written as
+<p>The restrictions <span class="math inline">\(C&#39;C = Id\)</span> can be eliminated by parameterizing <span class="math inline">\(C\)</span> in such a way that, whatever the considered parameters, <span class="math inline">\(C\)</span> is orthogonal.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> <span class="citation">Gouriéroux, Monfort, and Renne (<a href="#ref-Gourieroux_Monfort_Renne_2017">2017</a>)</span> propose to use, for that, the Cayley’s representation: any orthogonal matrix with no eigenvalue equal to <span class="math inline">\(-1\)</span> can be written as
 <span class="math display">\[\begin{equation}
 C(A) = (Id+A) (Id-A)^{-1},
 \end{equation}\]</span>
@@ -523,40 +523,40 @@ A = (C(A)+Id)^{-1} (C(A)-Id).
 </table>
 <div class="example">
 <p><span id="exm:GMR2017" class="example"><strong>Example 7.1  (Non-Gaussian monetary-policy shocks) </strong></span>We apply the PML-ICA approach on U.S. data coerving the period 1959:IV to 2015:I at the quarterly frequency (<span class="math inline">\(T=224\)</span>). We consider three dependent variables: inflation (<span class="math inline">\(\pi_t\)</span>), economic activity (<span class="math inline">\(z_t\)</span>, the output gap) and the nominal short-term interest rate (<span class="math inline">\(r_t\)</span>). Changes in the log of oil prices are added as an exogenous variable (<span class="math inline">\(x_t\)</span>).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="NonGaussian.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
-<span id="cb1-2"><a href="NonGaussian.html#cb1-2" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1959-04-01&quot;</span></span>
-<span id="cb1-3"><a href="NonGaussian.html#cb1-3" tabindex="-1"></a>Last.date  <span class="ot">&lt;-</span> <span class="st">&quot;2015-01-01&quot;</span></span>
-<span id="cb1-4"><a href="NonGaussian.html#cb1-4" tabindex="-1"></a>data <span class="ot">&lt;-</span> US3var</span>
-<span id="cb1-5"><a href="NonGaussian.html#cb1-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[(data<span class="sc">$</span>Date<span class="sc">&gt;=</span>First.date)<span class="sc">&amp;</span>(data<span class="sc">$</span>Date<span class="sc">&lt;=</span>Last.date),]</span>
-<span id="cb1-6"><a href="NonGaussian.html#cb1-6" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data[<span class="fu">c</span>(<span class="st">&quot;infl&quot;</span>,<span class="st">&quot;y.gdp.gap&quot;</span>,<span class="st">&quot;r&quot;</span>)])</span>
-<span id="cb1-7"><a href="NonGaussian.html#cb1-7" tabindex="-1"></a>names.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;inflation&quot;</span>,<span class="st">&quot;real activity&quot;</span>,<span class="st">&quot;short-term rate&quot;</span>)</span>
-<span id="cb1-8"><a href="NonGaussian.html#cb1-8" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">1</span>]</span>
-<span id="cb1-9"><a href="NonGaussian.html#cb1-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="NonGaussian.html#cb85-1" tabindex="-1"></a><span class="fu">library</span>(IdSS)</span>
+<span id="cb85-2"><a href="NonGaussian.html#cb85-2" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1959-04-01&quot;</span></span>
+<span id="cb85-3"><a href="NonGaussian.html#cb85-3" tabindex="-1"></a>Last.date  <span class="ot">&lt;-</span> <span class="st">&quot;2015-01-01&quot;</span></span>
+<span id="cb85-4"><a href="NonGaussian.html#cb85-4" tabindex="-1"></a>data <span class="ot">&lt;-</span> US3var</span>
+<span id="cb85-5"><a href="NonGaussian.html#cb85-5" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[(data<span class="sc">$</span>Date<span class="sc">&gt;=</span>First.date)<span class="sc">&amp;</span>(data<span class="sc">$</span>Date<span class="sc">&lt;=</span>Last.date),]</span>
+<span id="cb85-6"><a href="NonGaussian.html#cb85-6" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data[<span class="fu">c</span>(<span class="st">&quot;infl&quot;</span>,<span class="st">&quot;y.gdp.gap&quot;</span>,<span class="st">&quot;r&quot;</span>)])</span>
+<span id="cb85-7"><a href="NonGaussian.html#cb85-7" tabindex="-1"></a>names.var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;inflation&quot;</span>,<span class="st">&quot;real activity&quot;</span>,<span class="st">&quot;short-term rate&quot;</span>)</span>
+<span id="cb85-8"><a href="NonGaussian.html#cb85-8" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">1</span>]</span>
+<span id="cb85-9"><a href="NonGaussian.html#cb85-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(Y)[<span class="dv">2</span>]</span></code></pre></div>
 <p>Let us denote by <span class="math inline">\(W_t\)</span> the set of information made of the past values of <span class="math inline">\(y_t= [\pi_t,z_t,r_t]\)</span>, that is <span class="math inline">\(\{y_{t-1},y_{t-2},\dots\}\)</span>, and of exogenous variables <span class="math inline">\(\{x_{t},x_{t-1},\dots\}\)</span>. The reduced-form VAR model reads:
 <span class="math display">\[
 y_t  = \underbrace{\mu + \sum_{i=1}^{p} \Phi_i y_{t-i} + \Theta x_t}_{a(W_t;\theta)} + u_t
 \]</span>
 where the <span class="math inline">\(u_t\)</span>’s are assumed to be serially independent, with zero mean and variance-covariance matrix <span class="math inline">\(\Omega\)</span>.</p>
 <p>Matrices <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\Phi_i\)</span>, <span class="math inline">\(\Theta\)</span> and <span class="math inline">\(\Omega\)</span> are consistently estimated by OLS. Jarque-Bera tests support the hypothesis of non-normality for all residuals.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="NonGaussian.html#cb2-1" tabindex="-1"></a>nb.lags <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="co"># number of lags used in the VAR model</span></span>
-<span id="cb2-2"><a href="NonGaussian.html#cb2-2" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb2-3"><a href="NonGaussian.html#cb2-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb.lags){</span>
-<span id="cb2-4"><a href="NonGaussian.html#cb2-4" tabindex="-1"></a>  lagged.Y <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">matrix</span>(<span class="cn">NaN</span>,i,n),Y[<span class="dv">1</span><span class="sc">:</span>(T<span class="sc">-</span>i),])</span>
-<span id="cb2-5"><a href="NonGaussian.html#cb2-5" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X,lagged.Y)}</span>
-<span id="cb2-6"><a href="NonGaussian.html#cb2-6" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X,data<span class="sc">$</span>commo) <span class="co"># add exogenous variables</span></span>
-<span id="cb2-7"><a href="NonGaussian.html#cb2-7" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,n,n<span class="sc">*</span>nb.lags);mu <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
-<span id="cb2-8"><a href="NonGaussian.html#cb2-8" tabindex="-1"></a>effect.commo <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
-<span id="cb2-9"><a href="NonGaussian.html#cb2-9" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Eta is the matrix of OLS residuals</span></span>
-<span id="cb2-10"><a href="NonGaussian.html#cb2-10" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
-<span id="cb2-11"><a href="NonGaussian.html#cb2-11" tabindex="-1"></a>  eq <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y[,i] <span class="sc">~</span> X)</span>
-<span id="cb2-12"><a href="NonGaussian.html#cb2-12" tabindex="-1"></a>  Phi[i,] <span class="ot">&lt;-</span> eq<span class="sc">$</span>coef[<span class="dv">2</span><span class="sc">:</span>(<span class="fu">dim</span>(Phi)[<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>)]</span>
-<span id="cb2-13"><a href="NonGaussian.html#cb2-13" tabindex="-1"></a>  mu[i] <span class="ot">&lt;-</span> eq<span class="sc">$</span>coef[<span class="dv">1</span>]</span>
-<span id="cb2-14"><a href="NonGaussian.html#cb2-14" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">cbind</span>(U,eq<span class="sc">$</span>residuals)</span>
-<span id="cb2-15"><a href="NonGaussian.html#cb2-15" tabindex="-1"></a>  effect.commo[i] <span class="ot">&lt;-</span> eq<span class="sc">$</span>coef[<span class="fu">length</span>(eq<span class="sc">$</span>coef)]</span>
-<span id="cb2-16"><a href="NonGaussian.html#cb2-16" tabindex="-1"></a>}</span>
-<span id="cb2-17"><a href="NonGaussian.html#cb2-17" tabindex="-1"></a>Omega <span class="ot">&lt;-</span> <span class="fu">var</span>(U) <span class="co"># Covariance matrix of the OLS residuals.</span></span>
-<span id="cb2-18"><a href="NonGaussian.html#cb2-18" tabindex="-1"></a>Omeg12 <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">chol</span>(Omega)) <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
-<span id="cb2-19"><a href="NonGaussian.html#cb2-19" tabindex="-1"></a>Eps <span class="ot">&lt;-</span> U <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(Omeg12)) <span class="co"># Recover associated structural shocks</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="NonGaussian.html#cb86-1" tabindex="-1"></a>nb.lags <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="co"># number of lags used in the VAR model</span></span>
+<span id="cb86-2"><a href="NonGaussian.html#cb86-2" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb86-3"><a href="NonGaussian.html#cb86-3" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb.lags){</span>
+<span id="cb86-4"><a href="NonGaussian.html#cb86-4" tabindex="-1"></a>  lagged.Y <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">matrix</span>(<span class="cn">NaN</span>,i,n),Y[<span class="dv">1</span><span class="sc">:</span>(T<span class="sc">-</span>i),])</span>
+<span id="cb86-5"><a href="NonGaussian.html#cb86-5" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X,lagged.Y)}</span>
+<span id="cb86-6"><a href="NonGaussian.html#cb86-6" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X,data<span class="sc">$</span>commo) <span class="co"># add exogenous variables</span></span>
+<span id="cb86-7"><a href="NonGaussian.html#cb86-7" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,n,n<span class="sc">*</span>nb.lags);mu <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
+<span id="cb86-8"><a href="NonGaussian.html#cb86-8" tabindex="-1"></a>effect.commo <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
+<span id="cb86-9"><a href="NonGaussian.html#cb86-9" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Eta is the matrix of OLS residuals</span></span>
+<span id="cb86-10"><a href="NonGaussian.html#cb86-10" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb86-11"><a href="NonGaussian.html#cb86-11" tabindex="-1"></a>  eq <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y[,i] <span class="sc">~</span> X)</span>
+<span id="cb86-12"><a href="NonGaussian.html#cb86-12" tabindex="-1"></a>  Phi[i,] <span class="ot">&lt;-</span> eq<span class="sc">$</span>coef[<span class="dv">2</span><span class="sc">:</span>(<span class="fu">dim</span>(Phi)[<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>)]</span>
+<span id="cb86-13"><a href="NonGaussian.html#cb86-13" tabindex="-1"></a>  mu[i] <span class="ot">&lt;-</span> eq<span class="sc">$</span>coef[<span class="dv">1</span>]</span>
+<span id="cb86-14"><a href="NonGaussian.html#cb86-14" tabindex="-1"></a>  U <span class="ot">&lt;-</span> <span class="fu">cbind</span>(U,eq<span class="sc">$</span>residuals)</span>
+<span id="cb86-15"><a href="NonGaussian.html#cb86-15" tabindex="-1"></a>  effect.commo[i] <span class="ot">&lt;-</span> eq<span class="sc">$</span>coef[<span class="fu">length</span>(eq<span class="sc">$</span>coef)]</span>
+<span id="cb86-16"><a href="NonGaussian.html#cb86-16" tabindex="-1"></a>}</span>
+<span id="cb86-17"><a href="NonGaussian.html#cb86-17" tabindex="-1"></a>Omega <span class="ot">&lt;-</span> <span class="fu">var</span>(U) <span class="co"># Covariance matrix of the OLS residuals.</span></span>
+<span id="cb86-18"><a href="NonGaussian.html#cb86-18" tabindex="-1"></a>Omeg12 <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">chol</span>(Omega)) <span class="co"># Cholesky matrix associated with Omega (lower triang.)</span></span>
+<span id="cb86-19"><a href="NonGaussian.html#cb86-19" tabindex="-1"></a>Eps <span class="ot">&lt;-</span> U <span class="sc">%*%</span> <span class="fu">t</span>(<span class="fu">solve</span>(Omeg12)) <span class="co"># Recover associated structural shocks</span></span></code></pre></div>
 <p>We want to estimate the orthogonal matrix <span class="math inline">\(C\)</span> such that <span class="math inline">\(u_t=\Omega^{1/2}C \eta_t\)</span>, where</p>
 <ul>
 <li><span class="math inline">\(\Omega^{1/2}\)</span> results from the Cholesky decomposition of <span class="math inline">\(\Omega\)</span> and</li>
@@ -568,34 +568,34 @@ where the <span class="math inline">\(u_t\)</span>’s are assumed to be seriall
 \]</span>
 By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it comes that the covariance matrix of these residuals is <span class="math inline">\(Id\)</span>.</p>
 <p>The pseudo density functions are distinct and asymmetric mixtures of Gaussian distributions.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="NonGaussian.html#cb3-1" tabindex="-1"></a>distri <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb3-2"><a href="NonGaussian.html#cb3-2" tabindex="-1"></a>  <span class="at">type=</span><span class="fu">c</span>(<span class="st">&quot;mixt.gaussian&quot;</span>,<span class="st">&quot;mixt.gaussian&quot;</span>,<span class="st">&quot;mixt.gaussian&quot;</span>),</span>
-<span id="cb3-3"><a href="NonGaussian.html#cb3-3" tabindex="-1"></a>  <span class="at">df=</span><span class="fu">c</span>(<span class="cn">NaN</span>,<span class="cn">NaN</span>,<span class="cn">NaN</span>),</span>
-<span id="cb3-4"><a href="NonGaussian.html#cb3-4" tabindex="-1"></a>  <span class="at">p=</span><span class="fu">c</span>(<span class="fl">0.5</span>,.<span class="dv">5</span>,.<span class="dv">5</span>),<span class="at">mu=</span><span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">1</span>,.<span class="dv">1</span>),<span class="at">sigma=</span><span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">7</span>,<span class="fl">1.3</span>))</span>
-<span id="cb3-5"><a href="NonGaussian.html#cb3-5" tabindex="-1"></a>AA<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
-<span id="cb3-6"><a href="NonGaussian.html#cb3-6" tabindex="-1"></a>res.optim <span class="ot">&lt;-</span> <span class="fu">optim</span>(AA<span class="fl">.0</span>,func.<span class="fl">2.</span>minimize,</span>
-<span id="cb3-7"><a href="NonGaussian.html#cb3-7" tabindex="-1"></a>                   <span class="at">Y =</span> Eps, <span class="at">distri =</span> distri,</span>
-<span id="cb3-8"><a href="NonGaussian.html#cb3-8" tabindex="-1"></a>                   <span class="at">gr =</span> d.func.<span class="fl">2.</span>minimize,</span>
-<span id="cb3-9"><a href="NonGaussian.html#cb3-9" tabindex="-1"></a>                   <span class="at">method=</span><span class="st">&quot;Nelder-Mead&quot;</span>,</span>
-<span id="cb3-10"><a href="NonGaussian.html#cb3-10" tabindex="-1"></a>                   <span class="at">control=</span><span class="fu">list</span>(<span class="at">trace=</span><span class="cn">FALSE</span>,<span class="at">maxit=</span><span class="dv">1000</span>))</span>
-<span id="cb3-11"><a href="NonGaussian.html#cb3-11" tabindex="-1"></a>AA<span class="fl">.0</span> <span class="ot">&lt;-</span> res.optim<span class="sc">$</span>par</span>
-<span id="cb3-12"><a href="NonGaussian.html#cb3-12" tabindex="-1"></a>res.optim <span class="ot">&lt;-</span> <span class="fu">optim</span>(AA<span class="fl">.0</span>,func.<span class="fl">2.</span>minimize,d.func.<span class="fl">2.</span>minimize,</span>
-<span id="cb3-13"><a href="NonGaussian.html#cb3-13" tabindex="-1"></a>                   <span class="at">Y =</span> Eps, <span class="at">distri =</span> distri,</span>
-<span id="cb3-14"><a href="NonGaussian.html#cb3-14" tabindex="-1"></a>                   <span class="at">method=</span><span class="st">&quot;BFGS&quot;</span>,</span>
-<span id="cb3-15"><a href="NonGaussian.html#cb3-15" tabindex="-1"></a>                   <span class="at">control=</span><span class="fu">list</span>(<span class="at">trace=</span><span class="cn">FALSE</span>))</span>
-<span id="cb3-16"><a href="NonGaussian.html#cb3-16" tabindex="-1"></a>AA.est <span class="ot">&lt;-</span> res.optim<span class="sc">$</span>par</span>
-<span id="cb3-17"><a href="NonGaussian.html#cb3-17" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ncol</span>(Y)</span>
-<span id="cb3-18"><a href="NonGaussian.html#cb3-18" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">make.M</span>(n)</span>
-<span id="cb3-19"><a href="NonGaussian.html#cb3-19" tabindex="-1"></a>A.est <span class="ot">&lt;-</span> <span class="fu">matrix</span>(M <span class="sc">%*%</span> AA.est,n,n)</span>
-<span id="cb3-20"><a href="NonGaussian.html#cb3-20" tabindex="-1"></a>C.PML <span class="ot">&lt;-</span> (<span class="fu">diag</span>(n) <span class="sc">+</span> A.est) <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">diag</span>(n) <span class="sc">-</span> A.est)</span>
-<span id="cb3-21"><a href="NonGaussian.html#cb3-21" tabindex="-1"></a>eta.PML <span class="ot">&lt;-</span> Eps <span class="sc">%*%</span> C.PML <span class="co"># eta.PML are the ICA-estimated structural shocks</span></span>
-<span id="cb3-22"><a href="NonGaussian.html#cb3-22" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="NonGaussian.html#cb3-23" tabindex="-1"></a><span class="co"># Compute asymptotic covariance matrix of C.PML:</span></span>
-<span id="cb3-24"><a href="NonGaussian.html#cb3-24" tabindex="-1"></a>V <span class="ot">&lt;-</span> <span class="fu">make.Asympt.Cov.delta</span>(eta.PML,distri,C.PML)</span>
-<span id="cb3-25"><a href="NonGaussian.html#cb3-25" tabindex="-1"></a>param <span class="ot">&lt;-</span> <span class="fu">c</span>(C.PML)</span>
-<span id="cb3-26"><a href="NonGaussian.html#cb3-26" tabindex="-1"></a>st.dev <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(V))</span>
-<span id="cb3-27"><a href="NonGaussian.html#cb3-27" tabindex="-1"></a>t.stat <span class="ot">&lt;-</span> <span class="fu">c</span>(C.PML)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(V))</span>
-<span id="cb3-28"><a href="NonGaussian.html#cb3-28" tabindex="-1"></a><span class="fu">cbind</span>(param,st.dev,t.stat) <span class="co"># print results of PML estimation</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="NonGaussian.html#cb87-1" tabindex="-1"></a>distri <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb87-2"><a href="NonGaussian.html#cb87-2" tabindex="-1"></a>  <span class="at">type=</span><span class="fu">c</span>(<span class="st">&quot;mixt.gaussian&quot;</span>,<span class="st">&quot;mixt.gaussian&quot;</span>,<span class="st">&quot;mixt.gaussian&quot;</span>),</span>
+<span id="cb87-3"><a href="NonGaussian.html#cb87-3" tabindex="-1"></a>  <span class="at">df=</span><span class="fu">c</span>(<span class="cn">NaN</span>,<span class="cn">NaN</span>,<span class="cn">NaN</span>),</span>
+<span id="cb87-4"><a href="NonGaussian.html#cb87-4" tabindex="-1"></a>  <span class="at">p=</span><span class="fu">c</span>(<span class="fl">0.5</span>,.<span class="dv">5</span>,.<span class="dv">5</span>),<span class="at">mu=</span><span class="fu">c</span>(.<span class="dv">1</span>,.<span class="dv">1</span>,.<span class="dv">1</span>),<span class="at">sigma=</span><span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">7</span>,<span class="fl">1.3</span>))</span>
+<span id="cb87-5"><a href="NonGaussian.html#cb87-5" tabindex="-1"></a>AA<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb87-6"><a href="NonGaussian.html#cb87-6" tabindex="-1"></a>res.optim <span class="ot">&lt;-</span> <span class="fu">optim</span>(AA<span class="fl">.0</span>,func.<span class="fl">2.</span>minimize,</span>
+<span id="cb87-7"><a href="NonGaussian.html#cb87-7" tabindex="-1"></a>                   <span class="at">Y =</span> Eps, <span class="at">distri =</span> distri,</span>
+<span id="cb87-8"><a href="NonGaussian.html#cb87-8" tabindex="-1"></a>                   <span class="at">gr =</span> d.func.<span class="fl">2.</span>minimize,</span>
+<span id="cb87-9"><a href="NonGaussian.html#cb87-9" tabindex="-1"></a>                   <span class="at">method=</span><span class="st">&quot;Nelder-Mead&quot;</span>,</span>
+<span id="cb87-10"><a href="NonGaussian.html#cb87-10" tabindex="-1"></a>                   <span class="at">control=</span><span class="fu">list</span>(<span class="at">trace=</span><span class="cn">FALSE</span>,<span class="at">maxit=</span><span class="dv">1000</span>))</span>
+<span id="cb87-11"><a href="NonGaussian.html#cb87-11" tabindex="-1"></a>AA<span class="fl">.0</span> <span class="ot">&lt;-</span> res.optim<span class="sc">$</span>par</span>
+<span id="cb87-12"><a href="NonGaussian.html#cb87-12" tabindex="-1"></a>res.optim <span class="ot">&lt;-</span> <span class="fu">optim</span>(AA<span class="fl">.0</span>,func.<span class="fl">2.</span>minimize,d.func.<span class="fl">2.</span>minimize,</span>
+<span id="cb87-13"><a href="NonGaussian.html#cb87-13" tabindex="-1"></a>                   <span class="at">Y =</span> Eps, <span class="at">distri =</span> distri,</span>
+<span id="cb87-14"><a href="NonGaussian.html#cb87-14" tabindex="-1"></a>                   <span class="at">method=</span><span class="st">&quot;BFGS&quot;</span>,</span>
+<span id="cb87-15"><a href="NonGaussian.html#cb87-15" tabindex="-1"></a>                   <span class="at">control=</span><span class="fu">list</span>(<span class="at">trace=</span><span class="cn">FALSE</span>))</span>
+<span id="cb87-16"><a href="NonGaussian.html#cb87-16" tabindex="-1"></a>AA.est <span class="ot">&lt;-</span> res.optim<span class="sc">$</span>par</span>
+<span id="cb87-17"><a href="NonGaussian.html#cb87-17" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ncol</span>(Y)</span>
+<span id="cb87-18"><a href="NonGaussian.html#cb87-18" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">make.M</span>(n)</span>
+<span id="cb87-19"><a href="NonGaussian.html#cb87-19" tabindex="-1"></a>A.est <span class="ot">&lt;-</span> <span class="fu">matrix</span>(M <span class="sc">%*%</span> AA.est,n,n)</span>
+<span id="cb87-20"><a href="NonGaussian.html#cb87-20" tabindex="-1"></a>C.PML <span class="ot">&lt;-</span> (<span class="fu">diag</span>(n) <span class="sc">+</span> A.est) <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">diag</span>(n) <span class="sc">-</span> A.est)</span>
+<span id="cb87-21"><a href="NonGaussian.html#cb87-21" tabindex="-1"></a>eta.PML <span class="ot">&lt;-</span> Eps <span class="sc">%*%</span> C.PML <span class="co"># eta.PML are the ICA-estimated structural shocks</span></span>
+<span id="cb87-22"><a href="NonGaussian.html#cb87-22" tabindex="-1"></a></span>
+<span id="cb87-23"><a href="NonGaussian.html#cb87-23" tabindex="-1"></a><span class="co"># Compute asymptotic covariance matrix of C.PML:</span></span>
+<span id="cb87-24"><a href="NonGaussian.html#cb87-24" tabindex="-1"></a>V <span class="ot">&lt;-</span> <span class="fu">make.Asympt.Cov.delta</span>(eta.PML,distri,C.PML)</span>
+<span id="cb87-25"><a href="NonGaussian.html#cb87-25" tabindex="-1"></a>param <span class="ot">&lt;-</span> <span class="fu">c</span>(C.PML)</span>
+<span id="cb87-26"><a href="NonGaussian.html#cb87-26" tabindex="-1"></a>st.dev <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(V))</span>
+<span id="cb87-27"><a href="NonGaussian.html#cb87-27" tabindex="-1"></a>t.stat <span class="ot">&lt;-</span> <span class="fu">c</span>(C.PML)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">diag</span>(V))</span>
+<span id="cb87-28"><a href="NonGaussian.html#cb87-28" tabindex="-1"></a><span class="fu">cbind</span>(param,st.dev,t.stat) <span class="co"># print results of PML estimation</span></span></code></pre></div>
 <pre><code>##             param      st.dev      t.stat
 ##  [1,]  0.94417705 0.040848382  23.1141845
 ##  [2,] -0.32711569 0.118802653  -2.7534376
@@ -608,8 +608,8 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 ##  [9,]  0.99222290 0.007785691 127.4418551</code></pre>
 <p>(Note: it is always useful to combine two optimization algorithms, such as <code>Nelder-Mead</code> and <code>BFGS</code>.)</p>
 <p>We would obtain close results by neglecting commodity prices. In that case, one can simply use the function <code>estim.SVAR.ICA</code> of the <code>IdSS</code> package. Let us compare the <span class="math inline">\(C\)</span> matrix obtained in the two cases (with or without commodity prices):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="NonGaussian.html#cb5-1" tabindex="-1"></a>ICA.res.no.commo <span class="ot">&lt;-</span> <span class="fu">estim.SVAR.ICA</span>(Y,<span class="at">distri =</span> distri,<span class="at">p=</span><span class="dv">6</span>)</span>
-<span id="cb5-2"><a href="NonGaussian.html#cb5-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(ICA.res.no.commo<span class="sc">$</span>C.PML,<span class="cn">NaN</span>,C.PML),<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="NonGaussian.html#cb89-1" tabindex="-1"></a>ICA.res.no.commo <span class="ot">&lt;-</span> <span class="fu">estim.SVAR.ICA</span>(Y,<span class="at">distri =</span> distri,<span class="at">p=</span><span class="dv">6</span>)</span>
+<span id="cb89-2"><a href="NonGaussian.html#cb89-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(ICA.res.no.commo<span class="sc">$</span>C.PML,<span class="cn">NaN</span>,C.PML),<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##        [,1]  [,2]   [,3] [,4]   [,5]  [,6]   [,7]
 ## [1,]  0.956 0.287 -0.059  NaN  0.944 0.321 -0.075
 ## [2,] -0.292 0.950 -0.108  NaN -0.327 0.940 -0.099
@@ -621,19 +621,19 @@ By construction of <span class="math inline">\(\hat\Omega^{-1/2}_T\)</span>, it 
 <li><strong>Demand shock</strong> have influences of same signs on economic activity and on inflation.</li>
 </ul>
 <p>Let us compute the IRFs associated with the three structural shocks. (For the sake of comparison, the first line of plots shows the IRFs to a monetary-policy shock obtained from a Cholesky-based approach where the short-term rate is ordered last.)</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="NonGaussian.html#cb7-1" tabindex="-1"></a>IRF.Chol <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(n,<span class="dv">41</span>,n))</span>
-<span id="cb7-2"><a href="NonGaussian.html#cb7-2" tabindex="-1"></a>IRF.ICA  <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(n,<span class="dv">41</span>,n))</span>
-<span id="cb7-3"><a href="NonGaussian.html#cb7-3" tabindex="-1"></a>PHI <span class="ot">&lt;-</span> <span class="fu">list</span>();<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb.lags){PHI[[i]]<span class="ot">&lt;-</span><span class="fu">array</span>(Phi,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,nb.lags))[,,i]}</span>
-<span id="cb7-4"><a href="NonGaussian.html#cb7-4" tabindex="-1"></a><span class="cf">for</span>(jjjj <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
-<span id="cb7-5"><a href="NonGaussian.html#cb7-5" tabindex="-1"></a>  u.shock <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
-<span id="cb7-6"><a href="NonGaussian.html#cb7-6" tabindex="-1"></a>  u.shock[jjjj] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb7-7"><a href="NonGaussian.html#cb7-7" tabindex="-1"></a>  IRF.Chol[,,jjjj] <span class="ot">&lt;-</span> </span>
-<span id="cb7-8"><a href="NonGaussian.html#cb7-8" tabindex="-1"></a>    <span class="fu">t</span>(<span class="fu">simul.VAR</span>(<span class="at">c=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>),<span class="at">Phi=</span>PHI,<span class="at">B=</span>Omeg12,<span class="at">nb.sim=</span><span class="dv">41</span>,</span>
-<span id="cb7-9"><a href="NonGaussian.html#cb7-9" tabindex="-1"></a>                <span class="at">y0.star=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span><span class="sc">*</span>nb.lags),<span class="at">indic.IRF =</span> <span class="dv">1</span>,<span class="at">u.shock =</span> u.shock))</span>
-<span id="cb7-10"><a href="NonGaussian.html#cb7-10" tabindex="-1"></a>  IRF.ICA[,,jjjj]  <span class="ot">&lt;-</span> </span>
-<span id="cb7-11"><a href="NonGaussian.html#cb7-11" tabindex="-1"></a>    <span class="fu">t</span>(<span class="fu">simul.VAR</span>(<span class="at">c=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>),<span class="at">Phi=</span>PHI,<span class="at">B=</span>Omeg12<span class="sc">%*%</span>C.PML,<span class="at">nb.sim=</span><span class="dv">41</span>,</span>
-<span id="cb7-12"><a href="NonGaussian.html#cb7-12" tabindex="-1"></a>                <span class="at">y0.star=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span><span class="sc">*</span>nb.lags),<span class="at">indic.IRF =</span> <span class="dv">1</span>,<span class="at">u.shock =</span> u.shock))</span>
-<span id="cb7-13"><a href="NonGaussian.html#cb7-13" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="NonGaussian.html#cb91-1" tabindex="-1"></a>IRF.Chol <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(n,<span class="dv">41</span>,n))</span>
+<span id="cb91-2"><a href="NonGaussian.html#cb91-2" tabindex="-1"></a>IRF.ICA  <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NaN</span>,<span class="fu">c</span>(n,<span class="dv">41</span>,n))</span>
+<span id="cb91-3"><a href="NonGaussian.html#cb91-3" tabindex="-1"></a>PHI <span class="ot">&lt;-</span> <span class="fu">list</span>();<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nb.lags){PHI[[i]]<span class="ot">&lt;-</span><span class="fu">array</span>(Phi,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,nb.lags))[,,i]}</span>
+<span id="cb91-4"><a href="NonGaussian.html#cb91-4" tabindex="-1"></a><span class="cf">for</span>(jjjj <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb91-5"><a href="NonGaussian.html#cb91-5" tabindex="-1"></a>  u.shock <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
+<span id="cb91-6"><a href="NonGaussian.html#cb91-6" tabindex="-1"></a>  u.shock[jjjj] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb91-7"><a href="NonGaussian.html#cb91-7" tabindex="-1"></a>  IRF.Chol[,,jjjj] <span class="ot">&lt;-</span> </span>
+<span id="cb91-8"><a href="NonGaussian.html#cb91-8" tabindex="-1"></a>    <span class="fu">t</span>(<span class="fu">simul.VAR</span>(<span class="at">c=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>),<span class="at">Phi=</span>PHI,<span class="at">B=</span>Omeg12,<span class="at">nb.sim=</span><span class="dv">41</span>,</span>
+<span id="cb91-9"><a href="NonGaussian.html#cb91-9" tabindex="-1"></a>                <span class="at">y0.star=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span><span class="sc">*</span>nb.lags),<span class="at">indic.IRF =</span> <span class="dv">1</span>,<span class="at">u.shock =</span> u.shock))</span>
+<span id="cb91-10"><a href="NonGaussian.html#cb91-10" tabindex="-1"></a>  IRF.ICA[,,jjjj]  <span class="ot">&lt;-</span> </span>
+<span id="cb91-11"><a href="NonGaussian.html#cb91-11" tabindex="-1"></a>    <span class="fu">t</span>(<span class="fu">simul.VAR</span>(<span class="at">c=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>),<span class="at">Phi=</span>PHI,<span class="at">B=</span>Omeg12<span class="sc">%*%</span>C.PML,<span class="at">nb.sim=</span><span class="dv">41</span>,</span>
+<span id="cb91-12"><a href="NonGaussian.html#cb91-12" tabindex="-1"></a>                <span class="at">y0.star=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span><span class="sc">*</span>nb.lags),<span class="at">indic.IRF =</span> <span class="dv">1</span>,<span class="at">u.shock =</span> u.shock))</span>
+<span id="cb91-13"><a href="NonGaussian.html#cb91-13" tabindex="-1"></a>}</span></code></pre></div>
 <div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:ICAFigIRF"></span>
 <img src="IdentifStructShocks_files/figure-html/ICAFigIRF-1.png" alt="The first row of plots shows the responses of the three endogenous variables to the monetary policy shock in the context of a Cholesky-idendtified SVAR (ordering: inflation, output gap, interest rate). The next three rows of plots show the repsonses of the endogenous variables to the three structural shocks identified by ICA. The last one (Shock 3) is close to the Cholesky-identified monetary policy shock." width="95%" />
 <p class="caption">
@@ -1014,9 +1014,9 @@ Rigobon, Roberto. 2003. <span>“<span>Identification Through Heteroskedasticity
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>The <span class="math inline">\(\varepsilon_t\)</span>’s that we consider here are <em>standardized</em> VAR residuals, obtained by pre-multiplying the actual VAR residuals by <span class="math inline">\(\Omega^{-1/2}\)</span>.<a href="NonGaussian.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><span class="citation">Jarocinski (<a href="#ref-Jarocinski_2021">2021</a>)</span> develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that <span class="math inline">\(C&#39;C\)</span> is orthogonal.<a href="NonGaussian.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<ol start="12">
+<li id="fn12"><p>The <span class="math inline">\(\varepsilon_t\)</span>’s that we consider here are <em>standardized</em> VAR residuals, obtained by pre-multiplying the actual VAR residuals by <span class="math inline">\(\Omega^{-1/2}\)</span>.<a href="NonGaussian.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p><span class="citation">Jarocinski (<a href="#ref-Jarocinski_2021">2021</a>)</span> develops a ML approach that does not necessitates to parameterize the space of orthogonal matrices as he does not proceed under the assumption that <span class="math inline">\(C&#39;C\)</span> is orthogonal.<a href="NonGaussian.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

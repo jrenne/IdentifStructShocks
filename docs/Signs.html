@@ -1,108 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks</title>
-<meta name="author" content="Kenza Benhima and Jean-Paul Renne">
-<meta name="description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks">
-<meta property="og:type" content="book">
-<meta property="og:description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks">
-<meta name="twitter:description" content="To identifiy the structural shocks, we need to find a matrix \(B\) that satisfies \(\Omega = BB'\) (with \(\Omega = \mathbb{V}ar(\varepsilon_t)\)) and other restrictions. Indeed, as explained...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks</title>
+  <meta name="description" content="This course XXX." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This course XXX." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Sign restrictions | The Identification of Dynamic Structural Shocks" />
+  
+  <meta name="twitter:description" content="This course XXX." />
+  
+
+<meta name="author" content="Kenza Benhima and Jean-Paul Renne" />
+
+
+<meta name="date" content="2026-10-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Inference.html"/>
+<link rel="next" href="SignsZeros.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
 <style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-          margin-bottom: 0em;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
-<link rel="stylesheet" href="my-style.css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">The Identification of Dynamic Structural Shocks</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">The Identification of Dynamic Structural Shocks</a></li>
-<li><a class="" href="basics.html"><span class="header-section-number">1</span> VARs and IRFs: the basics</a></li>
-<li><a class="" href="identifStruct.html"><span class="header-section-number">2</span> Identification problem and standard identification techniques</a></li>
-<li><a class="" href="Inference.html"><span class="header-section-number">3</span> Inference</a></li>
-<li><a class="active" href="Signs.html"><span class="header-section-number">4</span> Sign restrictions</a></li>
-<li><a class="" href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></li>
-<li><a class="" href="forecast-error-variance-maximization.html"><span class="header-section-number">6</span> Forecast error variance maximization</a></li>
-<li><a class="" href="NonGaussian.html"><span class="header-section-number">7</span> Identification based on non-normality of the shocks</a></li>
-<li><a class="" href="Projections.html"><span class="header-section-number">8</span> Local projection methods</a></li>
-<li><a class="" href="PanelVARs.html"><span class="header-section-number">9</span> Panel VARs</a></li>
-<li><a class="" href="FAVAR.html"><span class="header-section-number">10</span> Factor-Augmented VAR</a></li>
-<li><a class="" href="append.html"><span class="header-section-number">11</span> Appendix</a></li>
-<li><a class="" href="references.html">References</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Identification of Structural Shocks</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>1</b> VARs and IRFs: the basics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="basics.html"><a href="basics.html#definition-of-vars-and-svarma-models"><i class="fa fa-check"></i><b>1.1</b> Definition of VARs (and SVARMA) models</a></li>
+<li class="chapter" data-level="1.2" data-path="basics.html"><a href="basics.html#IRFSVARMA"><i class="fa fa-check"></i><b>1.2</b> IRFs in SVARMA</a></li>
+<li class="chapter" data-level="1.3" data-path="basics.html"><a href="basics.html#covariance-stationary-varma-models"><i class="fa fa-check"></i><b>1.3</b> Covariance-stationary VARMA models</a></li>
+<li class="chapter" data-level="1.4" data-path="basics.html"><a href="basics.html#estimVAR"><i class="fa fa-check"></i><b>1.4</b> VAR estimation</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="basics.html"><a href="basics.html#maximum-likelihood-estimation-mle-when-the-shocks-are-gaussian"><i class="fa fa-check"></i><b>1.4.1</b> Maximum Likelihood Estimation (MLE) when the shocks are Gaussian</a></li>
+<li class="chapter" data-level="1.4.2" data-path="basics.html"><a href="basics.html#asymptotic-distribution-of-the-ols-estimates"><i class="fa fa-check"></i><b>1.4.2</b> Asymptotic distribution of the OLS estimates</a></li>
+<li class="chapter" data-level="1.4.3" data-path="basics.html"><a href="basics.html#specification-tests"><i class="fa fa-check"></i><b>1.4.3</b> Specification tests</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="basics.html"><a href="basics.html#BlockGranger"><i class="fa fa-check"></i><b>1.5</b> Block exogeneity and Granger causality</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="basics.html"><a href="basics.html#block-exogeneity"><i class="fa fa-check"></i><b>1.5.1</b> Block exogeneity</a></li>
+<li class="chapter" data-level="1.5.2" data-path="basics.html"><a href="basics.html#granger-causality"><i class="fa fa-check"></i><b>1.5.2</b> Granger Causality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="identifStruct.html"><a href="identifStruct.html"><i class="fa fa-check"></i><b>2</b> Identification problem and standard identification techniques</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="identifStruct.html"><a href="identifStruct.html#IdentifPbm"><i class="fa fa-check"></i><b>2.1</b> The identification problem</a></li>
+<li class="chapter" data-level="2.2" data-path="identifStruct.html"><a href="identifStruct.html#a-stylized-example-motivating-short-run-restrictions"><i class="fa fa-check"></i><b>2.2</b> A stylized example motivating short-run restrictions</a></li>
+<li class="chapter" data-level="2.3" data-path="identifStruct.html"><a href="identifStruct.html#Cholesky"><i class="fa fa-check"></i><b>2.3</b> Cholesky: a specific short-run-restriction situation</a></li>
+<li class="chapter" data-level="2.4" data-path="identifStruct.html"><a href="identifStruct.html#Cholesky1"><i class="fa fa-check"></i><b>2.4</b> Using Cholesky to identify a single shock</a></li>
+<li class="chapter" data-level="2.5" data-path="identifStruct.html"><a href="identifStruct.html#LRrestr"><i class="fa fa-check"></i><b>2.5</b> Long-run restrictions</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="identifStruct.html"><a href="identifStruct.html#the-var1-case"><i class="fa fa-check"></i><b>2.5.1</b> The VAR(1) case</a></li>
+<li class="chapter" data-level="2.5.2" data-path="identifStruct.html"><a href="identifStruct.html#the-varp-case"><i class="fa fa-check"></i><b>2.5.2</b> The VAR(<span class="math inline">\(p\)</span>) case</a></li>
+<li class="chapter" data-level="2.5.3" data-path="identifStruct.html"><a href="identifStruct.html#blanchard-and-quah-1989"><i class="fa fa-check"></i><b>2.5.3</b> Blanchard and Quah (1989)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="identifStruct.html"><a href="identifStruct.html#Mixing"><i class="fa fa-check"></i><b>2.6</b> Mixing short- and long-run restrictions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Inference.html"><a href="Inference.html"><i class="fa fa-check"></i><b>3</b> Inference</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="Inference.html"><a href="Inference.html#MonteCarlo"><i class="fa fa-check"></i><b>3.1</b> Monte Carlo method</a></li>
+<li class="chapter" data-level="3.2" data-path="Inference.html"><a href="Inference.html#Delta"><i class="fa fa-check"></i><b>3.2</b> Delta method</a></li>
+<li class="chapter" data-level="3.3" data-path="Inference.html"><a href="Inference.html#Bootstrap1"><i class="fa fa-check"></i><b>3.3</b> Bootstrap</a></li>
+<li class="chapter" data-level="3.4" data-path="Inference.html"><a href="Inference.html#BootstrapAfter"><i class="fa fa-check"></i><b>3.4</b> Bootstrap-after-bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="Signs.html"><a href="Signs.html"><i class="fa fa-check"></i><b>4</b> Sign restrictions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="Signs.html"><a href="Signs.html#the-approach"><i class="fa fa-check"></i><b>4.1</b> The approach</a></li>
+<li class="chapter" data-level="4.2" data-path="Signs.html"><a href="Signs.html#an-example"><i class="fa fa-check"></i><b>4.2</b> An example</a></li>
+<li class="chapter" data-level="4.3" data-path="Signs.html"><a href="Signs.html#the-penalty-function-approach-pfa"><i class="fa fa-check"></i><b>4.3</b> The penalty-function approach (PFA)</a></li>
+<li class="chapter" data-level="4.4" data-path="Signs.html"><a href="Signs.html#NarrativeSign"><i class="fa fa-check"></i><b>4.4</b> Narrative sign restrictions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="SignsZeros.html"><a href="SignsZeros.html"><i class="fa fa-check"></i><b>5</b> Combining sign and zero restrictions</a></li>
+<li class="chapter" data-level="6" data-path="forecast-error-variance-maximization.html"><a href="forecast-error-variance-maximization.html"><i class="fa fa-check"></i><b>6</b> Forecast error variance maximization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="forecast-error-variance-maximization.html"><a href="forecast-error-variance-maximization.html#the-main-unconditional-approach"><i class="fa fa-check"></i><b>6.1</b> The main (unconditional) approach</a></li>
+<li class="chapter" data-level="6.2" data-path="forecast-error-variance-maximization.html"><a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"><i class="fa fa-check"></i><b>6.2</b> Restrictions based on narrative historical decomposition</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="NonGaussian.html"><a href="NonGaussian.html"><i class="fa fa-check"></i><b>7</b> Identification based on non-normality of the shocks</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="NonGaussian.html"><a href="NonGaussian.html#intuition"><i class="fa fa-check"></i><b>7.1</b> Intuition</a></li>
+<li class="chapter" data-level="7.2" data-path="NonGaussian.html"><a href="NonGaussian.html#independent-component-analysis-ica"><i class="fa fa-check"></i><b>7.2</b> Independent Component Analysis (ICA)</a></li>
+<li class="chapter" data-level="7.3" data-path="NonGaussian.html"><a href="NonGaussian.html#pseudo-maximum-likelihood-pml-approach"><i class="fa fa-check"></i><b>7.3</b> Pseudo-Maximum Likelihood (PML) approach</a></li>
+<li class="chapter" data-level="7.4" data-path="NonGaussian.html"><a href="NonGaussian.html#relation-with-the-heteroskedasticity-identification"><i class="fa fa-check"></i><b>7.4</b> Relation with the Heteroskedasticity Identification</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="Projections.html"><a href="Projections.html"><i class="fa fa-check"></i><b>8</b> Local projection methods</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="Projections.html"><a href="Projections.html#overview-of-the-approach"><i class="fa fa-check"></i><b>8.1</b> Overview of the approach</a></li>
+<li class="chapter" data-level="8.2" data-path="Projections.html"><a href="Projections.html#LPIVww"><i class="fa fa-check"></i><b>8.2</b> Situation A: Without IV</a></li>
+<li class="chapter" data-level="8.3" data-path="Projections.html"><a href="Projections.html#situation-b-iv-approach"><i class="fa fa-check"></i><b>8.3</b> Situation B: IV approach</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="Projections.html"><a href="Projections.html#instruments-proxies-for-structural-shocks"><i class="fa fa-check"></i><b>8.3.1</b> Instruments (proxies for structural shocks)</a></li>
+<li class="chapter" data-level="8.3.2" data-path="Projections.html"><a href="Projections.html#SVARIVa"><i class="fa fa-check"></i><b>8.3.2</b> Situation B.1: SVAR-IV approach</a></li>
+<li class="chapter" data-level="8.3.3" data-path="Projections.html"><a href="Projections.html#LPIVa"><i class="fa fa-check"></i><b>8.3.3</b> Situation B.2: LP-IV</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="PanelVARs.html"><a href="PanelVARs.html"><i class="fa fa-check"></i><b>9</b> Panel VARs</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="PanelVARs.html"><a href="PanelVARs.html#without-dynamic-interdependence"><i class="fa fa-check"></i><b>9.1</b> Without Dynamic interdependence</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="PanelVARs.html"><a href="PanelVARs.html#mean-group-estimator"><i class="fa fa-check"></i><b>9.1.1</b> Mean Group Estimator</a></li>
+<li class="chapter" data-level="9.1.2" data-path="PanelVARs.html"><a href="PanelVARs.html#shock-identification"><i class="fa fa-check"></i><b>9.1.2</b> Shock identification</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="PanelVARs.html"><a href="PanelVARs.html#with-dynamic-interdependencies"><i class="fa fa-check"></i><b>9.2</b> With Dynamic Interdependencies</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="FAVAR.html"><a href="FAVAR.html"><i class="fa fa-check"></i><b>10</b> Factor-Augmented VAR</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="FAVAR.html"><a href="FAVAR.html#PCAapp"><i class="fa fa-check"></i><b>10.1</b> Principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="10.2" data-path="FAVAR.html"><a href="FAVAR.html#favar-models"><i class="fa fa-check"></i><b>10.2</b> FAVAR models</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="append.html"><a href="append.html"><i class="fa fa-check"></i><b>11</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="append.html"><a href="append.html#definitions-and-statistical-results"><i class="fa fa-check"></i><b>11.1</b> Definitions and statistical results</a></li>
+<li class="chapter" data-level="11.2" data-path="append.html"><a href="append.html#AppEstimVARMA"><i class="fa fa-check"></i><b>11.2</b> Estimation of VARMA models</a></li>
+<li class="chapter" data-level="11.3" data-path="append.html"><a href="append.html#AppendixProof"><i class="fa fa-check"></i><b>11.3</b> Proofs</a></li>
+<li class="chapter" data-level="11.4" data-path="append.html"><a href="append.html#statistical-tables"><i class="fa fa-check"></i><b>11.4</b> Statistical Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="Signs" class="section level1" number="4">
-<h1>
-<span class="header-section-number">4</span> Sign restrictions<a class="anchor" aria-label="anchor" href="#Signs"><i class="fas fa-link"></i></a>
-</h1>
-<p>To identifiy the structural shocks, we need to find a matrix <span class="math inline">\(B\)</span> that satisfies <span class="math inline">\(\Omega = BB'\)</span> (with <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>) and other restrictions. Indeed, as explained above, <span class="math inline">\(\Omega = BB'\)</span> is not sufficient to identify <span class="math inline">\(B\)</span> since, if we take any orthogonal matrix <span class="math inline">\(Q\)</span> (see Def. <a href="Signs.html#def:orthogonal">4.1</a>), then <span class="math inline">\(\mathcal{P}=BQ\)</span> also satisfies <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span>.</p>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Identification of Dynamic Structural Shocks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Signs" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Sign restrictions<a href="Signs.html#Signs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>To identifiy the structural shocks, we need to find a matrix <span class="math inline">\(B\)</span> that satisfies <span class="math inline">\(\Omega = BB&#39;\)</span> (with <span class="math inline">\(\Omega = \mathbb{V}ar(\varepsilon_t)\)</span>) and other restrictions. Indeed, as explained above, <span class="math inline">\(\Omega = BB&#39;\)</span> is not sufficient to identify <span class="math inline">\(B\)</span> since, if we take any orthogonal matrix <span class="math inline">\(Q\)</span> (see Def. <a href="Signs.html#def:orthogonal">4.1</a>), then <span class="math inline">\(\mathcal{P}=BQ\)</span> also satisfies <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}&#39;\)</span>.</p>
 <div class="definition">
-<p><span id="def:orthogonal" class="definition"><strong>Definition 4.1  (Orthogonal matrix) </strong></span>An orthogonal matrix <span class="math inline">\(Q\)</span> is a matrix such that <span class="math inline">\(QQ' = I,\)</span> i.e., all columns (rows) of <span class="math inline">\(Q\)</span> are are
+<p><span id="def:orthogonal" class="definition"><strong>Definition 4.1  (Orthogonal matrix) </strong></span>An orthogonal matrix <span class="math inline">\(Q\)</span> is a matrix such that <span class="math inline">\(QQ&#39; = I,\)</span> i.e., all columns (rows) of <span class="math inline">\(Q\)</span> are are
 orthogonal and unit vectors:
-<span class="math display">\[q_i'q_j=0\text{ if }i\neq j\text{ and }q_i'q_j=1\text{ if }i= j,\]</span>
+<span class="math display">\[q_i&#39;q_j=0\text{ if }i\neq j\text{ and }q_i&#39;q_j=1\text{ if }i= j,\]</span>
 where <span class="math inline">\(q_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(Q\)</span>.</p>
 </div>
-<div id="the-approach" class="section level2" number="4.1">
-<h2>
-<span class="header-section-number">4.1</span> The approach<a class="anchor" aria-label="anchor" href="#the-approach"><i class="fas fa-link"></i></a>
-</h2>
-<p>The idea behind the sign-restriction approach is to “draw” random matrices <span class="math inline">\(\mathcal{P}\)</span> that satisfy <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span>, and then to constitute a set of admissible matrices, keeping in this set only the simulated <span class="math inline">\(\mathcal{P}\)</span> matrices that satisfy some predefined sign-based restriction. An example of restriction is “<em>after one year, a contractionary monetary-policy shocks has a negative impact on inflation</em>”.</p>
-<p>As suggested above, if <span class="math inline">\(B\)</span> is any matrix that satisfies <span class="math inline">\(\Omega = BB'\)</span> (for instance, <span class="math inline">\(B\)</span> can be based on the Cholesky decomposition of <span class="math inline">\(\Omega\)</span>), then we also have <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}'\)</span> as soon as <span class="math inline">\(\mathcal{P}=BQ\)</span>, where <span class="math inline">\(Q\)</span> is an orthogonal matrix. Therefore, to draw <span class="math inline">\(\mathcal{P}\)</span> matrices, it suffices to draw in the set of orthogonal matrices.</p>
+<div id="the-approach" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> The approach<a href="Signs.html#the-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The idea behind the sign-restriction approach is to “draw” random matrices <span class="math inline">\(\mathcal{P}\)</span> that satisfy <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}&#39;\)</span>, and then to constitute a set of admissible matrices, keeping in this set only the simulated <span class="math inline">\(\mathcal{P}\)</span> matrices that satisfy some predefined sign-based restriction. An example of restriction is “<em>after one year, a contractionary monetary-policy shocks has a negative impact on inflation</em>”.</p>
+<p>As suggested above, if <span class="math inline">\(B\)</span> is any matrix that satisfies <span class="math inline">\(\Omega = BB&#39;\)</span> (for instance, <span class="math inline">\(B\)</span> can be based on the Cholesky decomposition of <span class="math inline">\(\Omega\)</span>), then we also have <span class="math inline">\(\Omega = \mathcal{P}\mathcal{P}&#39;\)</span> as soon as <span class="math inline">\(\mathcal{P}=BQ\)</span>, where <span class="math inline">\(Q\)</span> is an orthogonal matrix. Therefore, to draw <span class="math inline">\(\mathcal{P}\)</span> matrices, it suffices to draw in the set of orthogonal matrices.</p>
 <p>To fix ideas, consider dimension 2. In that case, the orthogonal matrices are rotation matrices, and the set of orthogonal matrices can be parameterized by the angle <span class="math inline">\(x\)</span>, with:
 <span class="math display">\[
 Q_x=\begin{pmatrix}\cos(x)&amp;\cos\left(x+\frac{\pi}{2}\right)\\
@@ -110,7 +294,7 @@ Q_x=\begin{pmatrix}\cos(x)&amp;\cos\left(x+\frac{\pi}{2}\right)\\
 \sin(x)&amp;\cos(x)\end{pmatrix}.
 \]</span>
 (This is an angle-<span class="math inline">\(x\)</span> counter-clockwise rotation.) Hence, in that case, by drawing <span class="math inline">\(x\)</span> randomly from <span class="math inline">\([0,2\pi]\)</span>, we draw randomly from the set of <span class="math inline">\(2\times2\)</span> rotation matrices. For high-dimensional VAR, we lose this simple geometrical representation, though. It is not always possible to parametrize a rotation matrix (high-dimensional VARs).</p>
-<p>How to proceed, then? <span class="citation">Arias, Rubio-Ramírez, and Waggoner (<a href="references.html#ref-Arias_et_al_2018">2018</a>)</span> provide a procedure. Their approach is based on the so-called <span class="math inline">\(QR\)</span> decomposition: any square matrix <span class="math inline">\(X\)</span> may be decomposed as <span class="math inline">\(X=QR\)</span> where <span class="math inline">\(Q\)</span> is an orthogonal matrix and <span class="math inline">\(R\)</span> is an upper diagonal matrix. With this in mind, they propose a two-step approach:</p>
+<p>How to proceed, then? <span class="citation">Arias, Rubio-Ramírez, and Waggoner (<a href="#ref-Arias_et_al_2018">2018</a>)</span> provide a procedure. Their approach is based on the so-called <span class="math inline">\(QR\)</span> decomposition: any square matrix <span class="math inline">\(X\)</span> may be decomposed as <span class="math inline">\(X=QR\)</span> where <span class="math inline">\(Q\)</span> is an orthogonal matrix and <span class="math inline">\(R\)</span> is an upper diagonal matrix. With this in mind, they propose a two-step approach:</p>
 <ol style="list-style-type: lower-roman">
 <li>Draw a random matrix <span class="math inline">\(X\)</span> by drawing each element from independent standard normal distribution.</li>
 <li>Let <span class="math inline">\(X = QR\)</span> be the <span class="math inline">\(QR\)</span> decomposition of <span class="math inline">\(X\)</span> with the diagonal of <span class="math inline">\(R\)</span> normalized to be
@@ -124,10 +308,8 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <li>Are the sign restrictions satisfied?</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li>
-<strong>Yes</strong>. Store the impulse response in the set of admissible response.</li>
-<li>
-<strong>No</strong>. Discard the impulse response.</li>
+<li><strong>Yes</strong>. Store the impulse response in the set of admissible response.</li>
+<li><strong>No</strong>. Discard the impulse response.</li>
 </ol>
 <ol start="5" style="list-style-type: decimal">
 <li>Perform <span class="math inline">\(N\)</span> replications and report the median impulse response (and its “confidence” intervals).</li>
@@ -135,73 +317,69 @@ positive. The random matrix <span class="math inline">\(Q\)</span> is orthogonal
 <p>Note: to take into account the uncertainty in <span class="math inline">\(B\)</span> and <span class="math inline">\(\Phi\)</span>, you can draw <span class="math inline">\(B\)</span> and <span class="math inline">\(\Phi\)</span> in Steps 2 and 3 using an inference method (see Section <a href="Inference.html#Inference">3</a>).</p>
 <p>The sign-restriction approach method has the advantage of being relatively agnostic. Moreover, it is fairly flexible, as one can impose sign restrictions on any variable, at any horizon.</p>
 </div>
-<div id="an-example" class="section level2" number="4.2">
-<h2>
-<span class="header-section-number">4.2</span> An example<a class="anchor" aria-label="anchor" href="#an-example"><i class="fas fa-link"></i></a>
-</h2>
-<p>A prominent example is <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span>. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.</p>
-<p>According to conventional wisdom, monetary contractions should:<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: &lt;em&gt;liquidity puzzle&lt;/em&gt;: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; &lt;em&gt;price puzzle&lt;/em&gt;: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.&lt;/p&gt;"><sup>8</sup></a></p>
+<div id="an-example" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> An example<a href="Signs.html#an-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A prominent example is <span class="citation">Uhlig (<a href="#ref-Uhlig_2005">2005</a>)</span>. Using US monthly data from 1965.I to 2003.XII, he employs sign restrictions to estimate the effect of monetary policy shocks.</p>
+<p>According to conventional wisdom, monetary contractions should:<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <ul>
 <li>Raise the federal funds rate,</li>
 <li>Lower prices,</li>
 <li>Decrease non-borrowed reserves,</li>
 <li>Reduce real output.</li>
 </ul>
-<p>The restrictions considered by <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span> are as follows: an expansionary monetary policy shock leads to:</p>
+<p>The restrictions considered by <span class="citation">Uhlig (<a href="#ref-Uhlig_2005">2005</a>)</span> are as follows: an expansionary monetary policy shock leads to:</p>
 <ul>
 <li>Increases in prices</li>
 <li>Increase in nonborrowed reserves</li>
 <li>Decreases in the federal funds rate</li>
 </ul>
 <p>What about output? Since is the response of interest, we leave it un-restricted.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">IdSS</span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org">Matrix</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USmonthly"</span><span class="op">)</span></span>
-<span><span class="va">First.date</span> <span class="op">&lt;-</span> <span class="st">"1965-01-01"</span></span>
-<span><span class="va">Last.date</span> <span class="op">&lt;-</span> <span class="st">"1995-06-01"</span></span>
-<span><span class="va">indic.first</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">First.date</span><span class="op">)</span></span>
-<span><span class="va">indic.last</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">$</span><span class="va">DATES</span><span class="op">==</span><span class="va">Last.date</span><span class="op">)</span></span>
-<span><span class="va">USmonthly</span>   <span class="op">&lt;-</span> <span class="va">USmonthly</span><span class="op">[</span><span class="va">indic.first</span><span class="op">:</span><span class="va">indic.last</span>,<span class="op">]</span></span>
-<span><span class="va">considered.variables</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LIP"</span>,<span class="st">"UNEMP"</span>,<span class="st">"LCPI"</span>,<span class="st">"LPCOM"</span>,<span class="st">"FFR"</span>,<span class="st">"NBR"</span>,<span class="st">"TTR"</span>,<span class="st">"M1"</span><span class="op">)</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">considered.variables</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USmonthly</span><span class="op">[</span><span class="va">considered.variables</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">sign.restrictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">horizon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#Define sign restrictions and horizon for restrictions</span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">sign.restrictions</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span>,<span class="va">n</span><span class="op">)</span></span>
-<span>  <span class="va">horizon</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span><span class="op">}</span></span>
-<span><span class="co"># Sign restrictions on shock 1 (monetary shock)</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>  <span class="co"># positive impact on price level</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span> <span class="co"># negative impact on interest rate</span></span>
-<span><span class="va">sign.restrictions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># positive impact on non-borrowed reserves</span></span>
-<span><span class="va">horizon</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span> <span class="co"># from horizon 1 to 5</span></span>
-<span><span class="va">res.svar.signs</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/IdSS/man/svar.signs.html">svar.signs</a></span><span class="op">(</span><span class="va">y</span>,p<span class="op">=</span><span class="fl">3</span>,</span>
-<span>             nb.shocks <span class="op">=</span> <span class="fl">1</span>, <span class="co">#number of identified shocks</span></span>
-<span>             nb.periods.IRF <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>             bootstrap.replications <span class="op">=</span> <span class="fl">1</span>, <span class="co"># = 1 if no bootstrap, = N if bootstrap</span></span>
-<span>             confidence.interval <span class="op">=</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
-<span>             indic.plot <span class="op">=</span> <span class="fl">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
-<span>             nb.draws <span class="op">=</span> <span class="fl">10000</span>, <span class="co"># number of draws</span></span>
-<span>             <span class="va">sign.restrictions</span>,</span>
-<span>             <span class="va">horizon</span>,</span>
-<span>             recursive <span class="op">=</span><span class="fl">1</span> <span class="co">#  =0 &lt;- draw Q directly, =1 &lt;- draw q recursively</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: left-aligned">
-<span style="display:block;" id="fig:signrestr1"></span>
-<img src="IdentifStructShocks_files/figure-html/signrestr1-1.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%"><p class="caption">
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="Signs.html#cb72-1" tabindex="-1"></a><span class="fu">library</span>(IdSS);<span class="fu">library</span>(vars);<span class="fu">library</span>(Matrix)</span>
+<span id="cb72-2"><a href="Signs.html#cb72-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;USmonthly&quot;</span>)</span>
+<span id="cb72-3"><a href="Signs.html#cb72-3" tabindex="-1"></a>First.date <span class="ot">&lt;-</span> <span class="st">&quot;1965-01-01&quot;</span></span>
+<span id="cb72-4"><a href="Signs.html#cb72-4" tabindex="-1"></a>Last.date <span class="ot">&lt;-</span> <span class="st">&quot;1995-06-01&quot;</span></span>
+<span id="cb72-5"><a href="Signs.html#cb72-5" tabindex="-1"></a>indic.first <span class="ot">&lt;-</span> <span class="fu">which</span>(USmonthly<span class="sc">$</span>DATES<span class="sc">==</span>First.date)</span>
+<span id="cb72-6"><a href="Signs.html#cb72-6" tabindex="-1"></a>indic.last  <span class="ot">&lt;-</span> <span class="fu">which</span>(USmonthly<span class="sc">$</span>DATES<span class="sc">==</span>Last.date)</span>
+<span id="cb72-7"><a href="Signs.html#cb72-7" tabindex="-1"></a>USmonthly   <span class="ot">&lt;-</span> USmonthly[indic.first<span class="sc">:</span>indic.last,]</span>
+<span id="cb72-8"><a href="Signs.html#cb72-8" tabindex="-1"></a>considered.variables<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;LIP&quot;</span>,<span class="st">&quot;UNEMP&quot;</span>,<span class="st">&quot;LCPI&quot;</span>,<span class="st">&quot;LPCOM&quot;</span>,<span class="st">&quot;FFR&quot;</span>,<span class="st">&quot;NBR&quot;</span>,<span class="st">&quot;TTR&quot;</span>,<span class="st">&quot;M1&quot;</span>)</span>
+<span id="cb72-9"><a href="Signs.html#cb72-9" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(considered.variables)</span>
+<span id="cb72-10"><a href="Signs.html#cb72-10" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(USmonthly[considered.variables])</span>
+<span id="cb72-11"><a href="Signs.html#cb72-11" tabindex="-1"></a>sign.restrictions <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb72-12"><a href="Signs.html#cb72-12" tabindex="-1"></a>horizon <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb72-13"><a href="Signs.html#cb72-13" tabindex="-1"></a><span class="co">#Define sign restrictions and horizon for restrictions</span></span>
+<span id="cb72-14"><a href="Signs.html#cb72-14" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb72-15"><a href="Signs.html#cb72-15" tabindex="-1"></a>  sign.restrictions[[i]] <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,n,n)</span>
+<span id="cb72-16"><a href="Signs.html#cb72-16" tabindex="-1"></a>  horizon[[i]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb72-17"><a href="Signs.html#cb72-17" tabindex="-1"></a>}</span>
+<span id="cb72-18"><a href="Signs.html#cb72-18" tabindex="-1"></a><span class="co"># Sign restrictions on shock 1 (monetary shock)</span></span>
+<span id="cb72-19"><a href="Signs.html#cb72-19" tabindex="-1"></a>sign.restrictions[[<span class="dv">1</span>]][<span class="dv">1</span>,<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">1</span>  <span class="co"># positive impact on price level</span></span>
+<span id="cb72-20"><a href="Signs.html#cb72-20" tabindex="-1"></a>sign.restrictions[[<span class="dv">1</span>]][<span class="dv">2</span>,<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="co"># negative impact on interest rate</span></span>
+<span id="cb72-21"><a href="Signs.html#cb72-21" tabindex="-1"></a>sign.restrictions[[<span class="dv">1</span>]][<span class="dv">3</span>,<span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># positive impact on non-borrowed reserves</span></span>
+<span id="cb72-22"><a href="Signs.html#cb72-22" tabindex="-1"></a>horizon[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co"># from horizon 1 to 5</span></span>
+<span id="cb72-23"><a href="Signs.html#cb72-23" tabindex="-1"></a>res.svar.signs <span class="ot">&lt;-</span> </span>
+<span id="cb72-24"><a href="Signs.html#cb72-24" tabindex="-1"></a>  <span class="fu">svar.signs</span>(y,<span class="at">p=</span><span class="dv">3</span>,</span>
+<span id="cb72-25"><a href="Signs.html#cb72-25" tabindex="-1"></a>             <span class="at">nb.shocks =</span> <span class="dv">1</span>, <span class="co">#number of identified shocks</span></span>
+<span id="cb72-26"><a href="Signs.html#cb72-26" tabindex="-1"></a>             <span class="at">nb.periods.IRF =</span> <span class="dv">20</span>,</span>
+<span id="cb72-27"><a href="Signs.html#cb72-27" tabindex="-1"></a>             <span class="at">bootstrap.replications =</span> <span class="dv">1</span>, <span class="co"># = 1 if no bootstrap, = N if bootstrap</span></span>
+<span id="cb72-28"><a href="Signs.html#cb72-28" tabindex="-1"></a>             <span class="at">confidence.interval =</span> <span class="fl">0.90</span>, <span class="co"># expressed in pp.</span></span>
+<span id="cb72-29"><a href="Signs.html#cb72-29" tabindex="-1"></a>             <span class="at">indic.plot =</span> <span class="dv">1</span>, <span class="co"># Plots are displayed if = 1.</span></span>
+<span id="cb72-30"><a href="Signs.html#cb72-30" tabindex="-1"></a>             <span class="at">nb.draws =</span> <span class="dv">10000</span>, <span class="co"># number of draws</span></span>
+<span id="cb72-31"><a href="Signs.html#cb72-31" tabindex="-1"></a>             sign.restrictions,</span>
+<span id="cb72-32"><a href="Signs.html#cb72-32" tabindex="-1"></a>             horizon,</span>
+<span id="cb72-33"><a href="Signs.html#cb72-33" tabindex="-1"></a>             <span class="at">recursive =</span><span class="dv">1</span> <span class="co">#  =0 &lt;- draw Q directly, =1 &lt;- draw q recursively</span></span>
+<span id="cb72-34"><a href="Signs.html#cb72-34" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="figure" style="text-align: left-aligned"><span style="display:block;" id="fig:signrestr1"></span>
+<img src="IdentifStructShocks_files/figure-html/signrestr1-1.png" alt="IRF associated with a monetary policy shock; sign-restriction approach." width="95%" />
+<p class="caption">
 Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approach.
 </p>
 </div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Output</span></span>
-<span><span class="va">IRFs.signs</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">IRFs.signs</span> <span class="co"># all the simulated IRFs</span></span>
-<span><span class="va">nb.rotations</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">xx</span> <span class="co"># total number of rotations</span></span>
-<span><span class="va">all.CI.median</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">all.CI.median</span> <span class="co"># median IRFs for the selected shocks</span></span>
-<span><span class="va">all.CI.lower.bounds</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">all.CI.lower.bounds</span> <span class="co"># lower-bound IRFs for the selected shocks</span></span>
-<span><span class="va">all.CI.upper.bounds</span> <span class="op">&lt;-</span> <span class="va">res.svar.signs</span><span class="op">$</span><span class="va">all.CI.upper.bounds</span> <span class="co"># upper-bound IRFs for the selected shocks</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="Signs.html#cb73-1" tabindex="-1"></a><span class="co"># Output</span></span>
+<span id="cb73-2"><a href="Signs.html#cb73-2" tabindex="-1"></a>IRFs.signs <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>IRFs.signs <span class="co"># all the simulated IRFs</span></span>
+<span id="cb73-3"><a href="Signs.html#cb73-3" tabindex="-1"></a>nb.rotations <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>xx <span class="co"># total number of rotations</span></span>
+<span id="cb73-4"><a href="Signs.html#cb73-4" tabindex="-1"></a>all.CI.median <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>all.CI.median <span class="co"># median IRFs for the selected shocks</span></span>
+<span id="cb73-5"><a href="Signs.html#cb73-5" tabindex="-1"></a>all.CI.lower.bounds <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>all.CI.lower.bounds <span class="co"># lower-bound IRFs for the selected shocks</span></span>
+<span id="cb73-6"><a href="Signs.html#cb73-6" tabindex="-1"></a>all.CI.upper.bounds <span class="ot">&lt;-</span> res.svar.signs<span class="sc">$</span>all.CI.upper.bounds <span class="co"># upper-bound IRFs for the selected shocks</span></span></code></pre></div>
 <!-- Another approach -->
 <!-- If $B$ satisfies $BB'=\Omega_\varepsilon$, the vectors of $B$ are called **impulse vectors** -->
 <!-- Let $b$ be en impulse vector, there exists a unit-length vector $q$ (i.e. $q'q=1$) so that \[b=Pq\] -->
@@ -230,11 +408,9 @@ Figure 4.1: IRF associated with a monetary policy shock; sign-restriction approa
 <!-- * Define $\begin{pmatrix}q_1&...&q_l\end{pmatrix}$ recursively by $q_j = K_jw_j$ for any matrix $K_j$ whose columns form an orthogonal basis for the null space of the matrix \[M_j = \begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}'\] ($q_j$ will be orthogonal to $\begin{pmatrix} q_1&...&q_{j-1}\end{pmatrix}$) -->
 <p>It has to be stressed that the sign restriction approach does not lead to a unique IRF, but to a set of admissible IRFs. Accordingly, we say that this approach is set-identified, not point-identified.</p>
 </div>
-<div id="the-penalty-function-approach-pfa" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> The penalty-function approach (PFA)<a class="anchor" aria-label="anchor" href="#the-penalty-function-approach-pfa"><i class="fas fa-link"></i></a>
-</h2>
-<p>An alternative approach is the so-called <strong>penalty-function approach</strong> (PFA, <span class="citation">Uhlig (<a href="references.html#ref-Uhlig_2005">2005</a>)</span>, present in <span class="citation">Danne (<a href="references.html#ref-Danne_2015">2015</a>)</span>’s package). This approach relies on a <em>penalty function</em>:
+<div id="the-penalty-function-approach-pfa" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> The penalty-function approach (PFA)<a href="Signs.html#the-penalty-function-approach-pfa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>An alternative approach is the so-called <strong>penalty-function approach</strong> (PFA, <span class="citation">Uhlig (<a href="#ref-Uhlig_2005">2005</a>)</span>, present in <span class="citation">Danne (<a href="#ref-Danne_2015">2015</a>)</span>’s package). This approach relies on a <em>penalty function</em>:
 <span class="math display">\[
 f(x)=
 \begin{cases}
@@ -250,59 +426,104 @@ x, &amp; \text{if } x \le 0,\\[6pt]
 <p>We are looking for a solution to
 <span class="math display">\[\begin{array}{ll}
 &amp;\min_q \mathbf{P}(q)\\
-\text{s.t. }&amp;q'q=1.\end{array}\]</span></p>
+\text{s.t. }&amp;q&#39;q=1.\end{array}\]</span></p>
 <p>The problem is solved numerically.</p>
 </div>
-<div id="NarrativeSign" class="section level2" number="4.4">
-<h2>
-<span class="header-section-number">4.4</span> Narrative sign restrictions<a class="anchor" aria-label="anchor" href="#NarrativeSign"><i class="fas fa-link"></i></a>
-</h2>
-<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;See also Section &lt;a href="forecast-error-variance-maximization.html#NarrativeHistDecomp"&gt;6.2&lt;/a&gt;.&lt;/p&gt;'><sup>9</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="references.html#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
+<div id="NarrativeSign" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Narrative sign restrictions<a href="Signs.html#NarrativeSign" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A related approach, introduced by <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span>, consists in imposing that, on some specific dates (based on narrative evidence), the signs of some shocks are positive (or negative).<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> For instance, <span class="citation">Antolín-Díaz and Rubio-Ramírez (<a href="#ref-AntolinDiaz_RubioRamirez_2018">2018</a>)</span> argue that one should rule out structural parameters that disagree with the view that “a negative oil supply shock occurred at the outbreak of the Gulf War in August 1990.”</p>
 <p>Suppose we want to impose the restriction that, at dates <span class="math inline">\(\{t_1,\dots,t_J\}\)</span>, the signs of the <span class="math inline">\(j^{th}\)</span> shock are all positive. Then, the narrative sign restrictions are simply imposed by:
 <span class="math display">\[
-\hat{\eta}_{j,t}(B) = e_j'\hat\eta_{t}(B) &gt; 0,
+\hat{\eta}_{j,t}(B) = e_j&#39;\hat\eta_{t}(B) &gt; 0,
 \]</span>
 where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of structural shock associated with a given matrix <span class="math inline">\(B\)</span> (and where <span class="math inline">\(e_j\)</span> is the <span class="math inline">\(j^{th}\)</span> column of the <span class="math inline">\(n \times n\)</span> identity matrix).</p>
 
 </div>
 </div>
-
-  <div class="chapter-nav">
-<div class="prev"><a href="Inference.html"><span class="header-section-number">3</span> Inference</a></div>
-<div class="next"><a href="SignsZeros.html"><span class="header-section-number">5</span> Combining sign and zero restrictions</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#Signs"><span class="header-section-number">4</span> Sign restrictions</a></li>
-<li><a class="nav-link" href="#the-approach"><span class="header-section-number">4.1</span> The approach</a></li>
-<li><a class="nav-link" href="#an-example"><span class="header-section-number">4.2</span> An example</a></li>
-<li><a class="nav-link" href="#the-penalty-function-approach-pfa"><span class="header-section-number">4.3</span> The penalty-function approach (PFA)</a></li>
-<li><a class="nav-link" href="#NarrativeSign"><span class="header-section-number">4.4</span> Narrative sign restrictions</a></li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-AntolinDiaz_RubioRamirez_2018" class="csl-entry">
+Antolín-Díaz, Juan, and Juan F. Rubio-Ramírez. 2018. <span>“Narrative Sign Restrictions for SVARs.”</span> <em>American Economic Review</em> 108 (10): 2802–29. <a href="https://doi.org/10.1257/aer.20161852">https://doi.org/10.1257/aer.20161852</a>.
 </div>
-    </nav>
+<div id="ref-Arias_et_al_2018" class="csl-entry">
+Arias, Jonas E., Juan F. Rubio-Ramírez, and Daniel F. Waggoner. 2018. <span>“Inference Based on Structural Vector Autoregressions Identified with Sign and Zero Restrictions: Theory and Applications.”</span> <em>Econometrica</em> 86 (2): 685–720. https://doi.org/<a href="https://doi.org/10.3982/ECTA14468">https://doi.org/10.3982/ECTA14468</a>.
 </div>
-
+<div id="ref-Danne_2015" class="csl-entry">
+Danne, Christian. 2015. <span>“<span class="nocase">VARsignR: Estimating VARs using sign restrictions in R</span>.”</span> MPRA Paper 68429. University Library of Munich, Germany. <a href="https://ideas.repec.org/p/pra/mprapa/68429.html">https://ideas.repec.org/p/pra/mprapa/68429.html</a>.
 </div>
-</div> <!-- .container -->
+<div id="ref-Uhlig_2005" class="csl-entry">
+———. 2005. <span>“What Are the Effects of Monetary Policy on Output? Results from an Agnostic Identification Procedure.”</span> <em>Journal of Monetary Economics</em> 52 (2): 381–419. https://doi.org/<a href="https://doi.org/10.1016/j.jmoneco.2004.05.007">https://doi.org/10.1016/j.jmoneco.2004.05.007</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>Standard identification schemes often fail to achieve these 4 points. Two puzzles regularly arise: <em>liquidity puzzle</em>: when identifying monetary policy shocks as surprise increases in the stock of money, interest rates tend to go up, not down; <em>price puzzle</em>: after a contractionary monetary policy shock, even with interest rates going up and money supply going down, inflation goes up rather than down.<a href="Signs.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>See also Section <a href="forecast-error-variance-maximization.html#NarrativeHistDecomp">6.2</a>.<a href="Signs.html#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
 
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>The Identification of Dynamic Structural Shocks</strong>" was written by Kenza Benhima and Jean-Paul Renne. It was last built on 2026-01-04.</p>
+          </div>
+        </div>
+      </div>
+<a href="Inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="SignsZeros.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/04-SignsRestrict.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["IdentifStructShocks.pdf", "IdentifStructShocks.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -314,22 +535,7 @@ where <span class="math inline">\(\hat\eta_{t}(B)\)</span> is the vector of stru
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>
